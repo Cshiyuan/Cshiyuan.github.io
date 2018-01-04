@@ -5,20 +5,20 @@
   
 
   
-  <title>git rebase和merge 区别和应用场景 | SHYIUAN&#39;S NOTEBOOK</title>
+  <title>git rebase和merge 区别和应用场景 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git rebase和merge 区别和应用场景">
 <meta property="og:url" content="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/index.html">
-<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:site_name" content="C&#39;s Notebook">
 <meta property="og:description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
 <meta property="og:updated_time" content="2018-01-04T14:00:25.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git rebase和merge 区别和应用场景">
 <meta name="twitter:description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
   
-    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -37,7 +37,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjc0pnzxv002ztg0r2mei3r96" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjc0qbxj8002z3d0rl0upf9h1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -147,7 +147,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
   </div>
 
