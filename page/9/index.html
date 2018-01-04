@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
-<meta property="og:url" content="http://yoursite.com/page/9/index.html">
+<meta property="og:url" content="https://cshiyuan.github.io/page/9/index.html">
 <meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo.</a>
         </h2>
       
     </div>
@@ -54,16 +54,88 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/" class="article-date">
+  <time datetime="2016-07-30T06:20:32.000Z" itemprop="datePublished">2016-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/">CentOS7 安装MongoDB 3.0服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="下载-amp-安装"><a href="#下载-amp-安装" class="headerlink" title="下载&amp;安装"></a>下载&amp;安装</h3><p>MongoDB 3.0 正式版本发布!这标志着 MongoDB 数据库进入了一个全新的发展阶段，提供强大、灵活而且易于管理的数据库管理系统。MongoDB宣称，3.0新版本不只提升7到10倍的写入效率以及增加80%的数据压缩率，还能减少95%的运维成本。<br>MongoDB 3.0主要新特性包括：<br>·可插入式的存储引擎 API<br>·支持 WiredTiger 存储引擎<br>·MMAPv1 提升<br>·复制集全面提升<br>·集群方面的改进<br>·提升了安全性<br>·工具的提升<br>WiredTiger 存储引擎是一项难以置信的技术实现，提供无门闩、非堵塞算法来利用先进的硬件平台(如大容量芯片缓存和线程化架构)来提升性能。通过 WiredTiger，MongoDB 3.0 实现了文档级别的并发控制，因此大幅提升了大并发下的写负载。</p>
+<p>MongoDB 提供了centos yum安装方式。<br>参考：<a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="noopener">http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/</a><br>pdf 手册：<br><a href="http://docs.mongodb.org/manual/MongoDB-manual.pdf" target="_blank" rel="noopener">http://docs.mongodb.org/manual/MongoDB-manual.pdf</a></p>
+<p>vi /etc/yum.repos.d/mongodb-org-3.0.repo</p>
+<pre><code>&lt;span class=&quot;hljs-title&quot;&gt;[mongodb-org-3.0]&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;name=&lt;span class=&quot;hljs-value&quot;&gt;MongoDB Repository&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;baseurl=&lt;span class=&quot;hljs-value&quot;&gt;http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;/x86_64/&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;gpgcheck=&lt;span class=&quot;hljs-value&quot;&gt;&lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;enabled=&lt;span class=&quot;hljs-value&quot;&gt;&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;`&lt;/pre&gt;
+安装mongodb
+&lt;pre class=&quot;prettyprint&quot;&gt;`yum install &lt;span class=&quot;hljs-attribute&quot;&gt;-y&lt;/span&gt; mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;`&lt;/pre&gt;
+安装了所有相关服务。
+&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-attribute&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;...&lt;/span&gt;
+Running transaction
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-shell&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64      &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-tools&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64      &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-mongos&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-server&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;4&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64            &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64           &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-server&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64    &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-mongos&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64    &lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-tools&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;4&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-shell&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;`&lt;/pre&gt;
+配置文件在：/etc/mongod.conf  数据文件在：/var/lib/mongo  日志文件在：/var/log/mongodb  mongodb服务使用
+&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-preprocessor&quot;&gt;#启动&lt;/span&gt;
+service mongod start
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#停止&lt;/span&gt;
+service mongod stop
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#重启&lt;/span&gt;
+service mongod restart
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#增加开机启动&lt;/span&gt;
+chkconfig mongod on
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/" data-id="cjc0argjn000uz50rj0k24wgz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-e8-bd-acoc-e4-b8-adretainassigncopy-e7-9a-84-e5-8c-ba-e5-88-ab-e5-92-8c-e7-94-a8-e6-b3-95" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -163,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/22/e8-bd-acoc-e4-b8-adretainassigncopy-e7-9a-84-e5-8c-ba-e5-88-ab-e5-92-8c-e7-94-a8-e6-b3-95/" data-id="cjc05w0ag003ezl0rivhdil1v" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/22/e8-bd-acoc-e4-b8-adretainassigncopy-e7-9a-84-e5-8c-ba-e5-88-ab-e5-92-8c-e7-94-a8-e6-b3-95/" data-id="cjc0arglq003jz50r4b2w3zj6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/14/web-e5-b7-a5-e4-bd-9c-e6-96-b9-e5-bc-8f-e8-bd-ac-e8-bd-bd-ef-bc-89/" data-id="cjc05w0ds0060zl0riy4n2wu4" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/14/web-e5-b7-a5-e4-bd-9c-e6-96-b9-e5-bc-8f-e8-bd-ac-e8-bd-bd-ef-bc-89/" data-id="cjc0argnc0060z50ruu5228tu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/26/e5-a6-82-e6-ad-a4-e7-9c-9f-e8-af-9a-e7-9a-84-e6-83-85-e8-af-9d-e5-91-80/" data-id="cjc05w0940024zl0rvdvt4phd" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/26/e5-a6-82-e6-ad-a4-e7-9c-9f-e8-af-9a-e7-9a-84-e6-83-85-e8-af-9d-e5-91-80/" data-id="cjc0argkr0025z50rv2ersa2x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -372,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/25/e6-88-91-e4-bb-ac-e6-9b-be-e7-bb-8f-e9-83-bd-e6-98-af-e5-ad-a9-e5-ad-90/" data-id="cjc05w09e002ezl0rdzoahxrs" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/25/e6-88-91-e4-bb-ac-e6-9b-be-e7-bb-8f-e9-83-bd-e6-98-af-e5-ad-a9-e5-ad-90/" data-id="cjc0argl0002hz50rqkokob53" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/23/e8-bf-99-e4-b8-a4-e5-b9-b4-e6-9c-89-e6-84-8f-e8-af-86-e7-9a-84-e5-9c-a8-e6-80-9d-e8-80-83-ef-bc-8c-e6-88-91-e8-a6-81-e6-80-8e-e6-a0-b7-e5-8e-bb-e7-88-b1-e4-b8-80-e4-b8-aa-e4-ba-ba-e3-80-82/" data-id="cjc05w0an003izl0r1grem4q7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/23/e8-bf-99-e4-b8-a4-e5-b9-b4-e6-9c-89-e6-84-8f-e8-af-86-e7-9a-84-e5-9c-a8-e6-80-9d-e8-80-83-ef-bc-8c-e6-88-91-e8-a6-81-e6-80-8e-e6-a0-b7-e5-8e-bb-e7-88-b1-e4-b8-80-e4-b8-aa-e4-ba-ba-e3-80-82/" data-id="cjc0arglm003dz50r1ix5k7tl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/14/e3-80-8a-e4-b8-8a-e7-98-be-e4-ba-94-e7-99-be-e5-b9-b4-ef-bc-9a-e7-83-9f-e3-80-81-e9-85-92-e3-80-81-e5-92-96-e5-95-a1-e5-92-8c-e9-b8-a6-e7-89-87-e7-9a-84-e5-8e-86-e5-8f-b2-ef-bc-8d-e6-88-b4-e7-bb-b4/" data-id="cjc05w082000xzl0rx3n4twee" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/14/e3-80-8a-e4-b8-8a-e7-98-be-e4-ba-94-e7-99-be-e5-b9-b4-ef-bc-9a-e7-83-9f-e3-80-81-e9-85-92-e3-80-81-e5-92-96-e5-95-a1-e5-92-8c-e9-b8-a6-e7-89-87-e7-9a-84-e5-8e-86-e5-8f-b2-ef-bc-8d-e6-88-b4-e7-bb-b4/" data-id="cjc0argjk000pz50rzsq5mbqc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -534,7 +606,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/13/e7-ba-bf-e7-a8-8b-e5-92-8c-e8-bf-9b-e7-a8-8b-e7-9a-84-e5-8c-ba-e5-88-ab-e6-98-af-e4-bb-80-e4-b9-88-ef-bc-9f/" data-id="cjc05w0a10032zl0r9qofgdg2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/13/e7-ba-bf-e7-a8-8b-e5-92-8c-e8-bf-9b-e7-a8-8b-e7-9a-84-e5-8c-ba-e5-88-ab-e6-98-af-e4-bb-80-e4-b9-88-ef-bc-9f/" data-id="cjc0arglh0035z50rl3wxgc4w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/06/e7-bb-99-e5-9c-a8-e5-b0-8f-e9-95-87-e5-ad-90-e9-95-bf-e5-a4-a7-e7-9a-84-e5-ad-a9-e5-ad-90-e4-bb-ac-e3-80-82-ef-bc-8d-ef-bc-8d-e6-b5-b7-e6-bb-a8-e6-a0-88-e9-81-93/" data-id="cjc05w0a30034zl0r14j754lm" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/06/e7-bb-99-e5-9c-a8-e5-b0-8f-e9-95-87-e5-ad-90-e9-95-bf-e5-a4-a7-e7-9a-84-e5-ad-a9-e5-ad-90-e4-bb-ac-e3-80-82-ef-bc-8d-ef-bc-8d-e6-b5-b7-e6-bb-a8-e6-a0-88-e9-81-93/" data-id="cjc0argli0037z50rvtsm92pb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -633,55 +705,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/31/e7-bb-8f-e6-b5-8e-e5-9e-8b-e4-ba-ba-e6-a0-bc/" data-id="cjc05w09z0030zl0rk6xp59lb" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-e5-ae-83-e4-b8-80-e5-ae-9a-e6-9c-9f-e5-be-85-e7-9d-80-e6-88-91-e8-83-bd-e6-87-82-e5-be-97-e4-bb-80-e4-b9-88-e3-80-82" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/31/e5-ae-83-e4-b8-80-e5-ae-9a-e6-9c-9f-e5-be-85-e7-9d-80-e6-88-91-e8-83-bd-e6-87-82-e5-be-97-e4-bb-80-e4-b9-88-e3-80-82/" class="article-date">
-  <time datetime="2016-05-30T16:56:09.000Z" itemprop="datePublished">2016-05-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/生活杂谈/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/31/e5-ae-83-e4-b8-80-e5-ae-9a-e6-9c-9f-e5-be-85-e7-9d-80-e6-88-91-e8-83-bd-e6-87-82-e5-be-97-e4-bb-80-e4-b9-88-e3-80-82/">它一定期待着我能懂得什么。</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>世界上有好多条路，有些可以用眼睛看见，我们管它们叫“非虚构的”；</p>
-<p>有些是要用心才能看见，我们管它们叫“虚构的”。</p>
-<p>懂得用心找到路的人，眼睛往往也特别尖。所以呀，大人们一致认为，心比眼睛更重要。</p>
-<p>为了让小孩子们有一颗会认路的心，大人们发明了一种叫做“童话”的故事。</p>
-<p>童话们长得像一撮撮小火苗，可以照亮路，还可以取暖，小孩子们都喜欢。</p>
-<p>有些路很不好走，要格外小心。</p>
-<p>聪明的大人们于是就把能照亮这些路的童话们做得烫手些。</p>
-<p>这样一来，小孩子们被烫到了，觉得疼，就会哭，就会记住。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/31/e5-ae-83-e4-b8-80-e5-ae-9a-e6-9c-9f-e5-be-85-e7-9d-80-e6-88-91-e8-83-bd-e6-87-82-e5-be-97-e4-bb-80-e4-b9-88-e3-80-82/" data-id="cjc05w0900022zl0rwmufkb3v" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/05/31/e7-bb-8f-e6-b5-8e-e5-9e-8b-e4-ba-ba-e6-a0-bc/" data-id="cjc0arglf0033z50rxfgv5szq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -695,7 +719,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -704,7 +728,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
     </div>
@@ -719,7 +743,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -729,9 +753,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/04/newnotebook/">newnotebook</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/hello-world/">Hello World</a>
@@ -747,10 +775,6 @@
         
           <li>
             <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
           </li>
         
       </ul>

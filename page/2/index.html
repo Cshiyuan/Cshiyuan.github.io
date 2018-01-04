@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="https://cshiyuan.github.io/page/2/index.html">
 <meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo.</a>
         </h2>
       
     </div>
@@ -54,16 +54,115 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Core Foundation 框架详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/25/Core Foundation 框架详解/" class="article-date">
+  <time datetime="2017-04-25T01:50:41.000Z" itemprop="datePublished">2017-04-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/25/Core Foundation 框架详解/">Core Foundation 框架 详解(转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先来说说「Core Foundation」（以下简称CF）的历史吧。当年乔布斯被自己创办的公司驱逐后，成立了「NeXT Computer」,其实做的还是老本行：卖电脑，但依旧不景气。好在NeXTSTEP系统表现还不错，亏损不至于太严重。正好此时苹果的市场份额大跌，急需一个新的操作系统，结果大家都知道了，乔布斯借此收购，重新回到了苹果。</p>
+<p>这里就牵扯到了一个问题，如何让旧有的系统（Mac OS 9）和NeXTSTEP合成为一个新系统？这就需要一个更为底层的核心库可以供Mac Toolbox和OPENSTEP双方调用。CF就这么诞生了。</p>
+<p>CF是由C语言实现的，而不是Objective-C，所以如果用到了CF，就需要手动管理内存，ARC是无能为力的。当然因为CF和Foundation之间的友好关系，它们之间的管理权也是可以移交的，这个后面再说。<br><strong>Core Foundation框架</strong> (CoreFoundation.framework) 是一组C语言接口，它们为iOS应用程序提供基本数据管理和服务功能。下面列举该框架支持进行管理的数据以及可提供的服务：</p>
+<ul>
+<li>群体数据类型 (数组、集合等)</li>
+<li>程序包</li>
+<li>字符串管理</li>
+<li>日期和时间管理</li>
+<li>原始数据块管理</li>
+<li>偏好管理</li>
+<li>URL及数据流操作</li>
+<li>线程和RunLoop</li>
+<li>端口和soket通讯  </li>
+</ul>
+<p>Core Foundation框架和Foundation框架紧密相关，它们为相同功能提供接口，但Foundation框架提供Objective-C接口。如果您将Foundation对象和Core Foundation类型掺杂使用，则可利用两个框架之间的 “toll-free bridging”。所谓的<strong>Toll-free bridging</strong>是说您可以在某个框架的方法或函数同时使用Core Foundatio和Foundation 框架中的某些类型。很多数据类型支持这一特性，其中包括群体和字符串数据类型。每个框架的类和类型描述都会对某个对象是否为 toll-free bridged，应和什么对象桥接进行说明。<br>如需进一步信息，请阅读<a href="http://developer.apple.com/iphone/library/documentation/CoreFoundation/Reference/CoreFoundation_Collection/index.html#/apple_ref/doc/uid/TP40003849" target="_blank" rel="noopener">Core Foundation 框架参考</a>。<br>自 Xcode4.2 开始导入ARC机制后，为了支持对象间的转型，Apple又增加了许多转型用的关键字。这一讲我们就来了解其用法，以及产生的理由。</p>
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>我们先来看一下ARC无效的时候，我们写id类型转void*类型的写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br></pre></td></tr></table></figure>
+<p>反过来，当把void*对象变回id类型时，只是简单地如下来写，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = p;</span><br><span class="line">[obj release];</span><br></pre></td></tr></table></figure>
+<p>但是上面的代码在ARC有效时，就有了下面的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">error: implicit conversion of an Objective-C pointer</span><br><span class="line">to ’void *’ is disallowed with ARC</span><br><span class="line">void *p = obj;</span><br><span class="line">^error: implicit conversion of a non-Objective-C pointer</span><br><span class="line">type ’void *’ to ’id’ is disallowed with ARC</span><br><span class="line">id o = p;</span><br></pre></td></tr></table></figure>
+<h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>为了解决这一问题，我们使用 __bridge 关键字来实现id类型与void*类型的相互转换。看下面的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = (__bridge void *)obj;</span><br><span class="line">id o = (__bridge id)p;</span><br></pre></td></tr></table></figure></p>
+<p>将Objective-C的对象类型用 bridge 转换为 void* 类型和使用 unsafe_unretained 关键字修饰的变量是一样的。被代入对象的所有者需要明确对象生命周期的管理，不要出现异常访问的问题。<br>除过 bridge 以外，还有两个 bridge 相关的类型转换关键字：</p>
+<ul>
+<li>__bridge_retained</li>
+<li>__bridge_transfer</li>
+</ul>
+<p>接下来，我们将看看这两个关键字的区别。</p>
+<h2 id="bridge-retained"><a href="#bridge-retained" class="headerlink" title="__bridge_retained"></a>__bridge_retained</h2><p>先来看使用 __bridge_retained 关键字的例子程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d obj = [[NSObject alloc] init]; </span><br><span class="line">void *p = (__bridge_retained void *)obj;</span><br></pre></td></tr></table></figure>
+<p>从名字上我们应该能理解其意义：类型被转换时，其对象的所有权也将被变换后变量所持有。如果不是ARC代码，类似下面的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br><span class="line">[(id)p retain];</span><br></pre></td></tr></table></figure>
+<p>可以用一个实际的例子验证，对象所有权是否被持有。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void *p = 0;</span><br><span class="line">&#123;</span><br><span class="line"> id obj = [[NSObject alloc] init];</span><br><span class="line"> p = (__bridge_retained void *)obj;</span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;class=%@&quot;, [(__bridge id)p class]);</span><br></pre></td></tr></table></figure>
+<p>出了大括号的范围后，p 仍然指向一个有效的实体。说明他拥有该对象的所有权，该对象没有因为出其定义范围而被销毁。</p>
+<h2 id="bridge-transfer"><a href="#bridge-transfer" class="headerlink" title="__bridge_transfer"></a>__bridge_transfer</h2><p>相反，当想把本来拥有对象所有权的变量，在类型转换后，让其释放原先所有权的时候，需要使用 __bridge_transfer 关键字。文字有点绕口，我们还是来看一段代码吧。</p>
+<p>如果ARC无效的时候，我们可能需要写下面的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (id)p;</span><br><span class="line">[obj retain];</span><br><span class="line">[(id)p release];</span><br></pre></td></tr></table></figure>
+<p>那么ARC有效后，我们可以用下面的代码来替换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (__bridge_transfer id)p;</span><br></pre></td></tr></table></figure>
+<p>可以看出来，bridge_retained 是编译器替我们做了 retain 操作，而 bridge_transfer 是替我们做了 release。</p>
+<h4 id="Toll-Free-bridged"><a href="#Toll-Free-bridged" class="headerlink" title="Toll-Free bridged"></a>Toll-Free bridged</h4><p>在iOS世界，主要有两种对象：Objective-C 对象和 Core Foundation 对象0。Core Foundation 对象主要是有C语言实现的 Core Foundation Framework 的对象，其中也有对象引用计数的概念，只是不是 Cocoa Framework::Foundation Framework 的 retain/release，而是自身的 CFRetain/CFRelease 接口。</p>
+<p>这两种对象间可以互相转换和操作，不使用ARC的时候，单纯的用C原因的类型转换，不需要消耗CPU的资源，所以叫做 Toll-Free bridged。比如 NSArray和CFArrayRef, NSString和CFStringRef，他们虽然属于不同的 Framework，但是具有相同的对象结构，所以可以用标准C的类型转换。</p>
+<p>比如不使用ARC时，我们用下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (CFStringRef)string;</span><br></pre></td></tr></table></figure>
+<p>同样，Core Foundation类型向Objective-C类型转换时，也是简单地用标准C的类型转换即可。<br>但是在ARC有效的情况下，将出现类似下面的编译错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cast of Objective-C pointer type ‘NSString *’ to C pointer type ‘CFStringRef’ (aka ‘const struct __CFString *’) requires a bridged cast</span><br><span class="line">Use __bridge to convert directly (no change in ownership)</span><br><span class="line">Use __bridge_retained to make an ARC object available as a +1 ‘CFStringRef’ (aka ‘const struct __CFString *’)</span><br></pre></td></tr></table></figure>
+<p>错误中已经提示了我们需要怎样做：用 bridge 或者 bridge_retained 来转型，其差别就是变更对象的所有权。<br>正因为Objective-C是ARC管理的对象，而Core Foundation不是ARC管理的对象，所以才要特意这样转换，这与id类型向void*转换是一个概念。也就是说，当这两种类型（有ARC管理，没有ARC管理）在转换时，需要告诉编译器怎样处理对象的所有权。<br>上面的例子，使用 bridge/bridge_retained 后的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge CFStringRef)string;</span><br></pre></td></tr></table></figure>
+<p>只是单纯地执行了类型转换，没有进行所有权的转移，也就是说，当string对象被释放的时候，cfString也不能被使用了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge_retained CFStringRef)string;</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release</span><br></pre></td></tr></table></figure>
+<p>使用 __bridge_retained 可以通过转换目标处（cfString）的 retain 处理，来使所有权转移。即使 string 变量被释放，cfString 还是可以使用具体的对象。只是有一点，由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release。</p>
+<p>实际上，Core Foundation 内部，为了实现Core Foundation对象类型与Objective-C对象类型的相互转换，提供了下面的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CFTypeRef CFBridgingRetain(id X) &#123;</span><br><span class="line"> return (__bridge_retained CFTypeRef)X;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">id CFBridgingRelease(CFTypeRef X) &#123;</span><br><span class="line"> return (__bridge_transfer id)X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，可以用 CFBridgingRetain 替代 __bridge_retained 关键字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = CFBridgingRetain(string);</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以需要主动release。</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由上面的学习我们了解到 ARC 中类型转换的用法，那么我们实际使用中按照怎样的原则或者方法来区分使用呢，下面我总结了几点关键要素。<br>明确被转换类型是否是 ARC 管理的对象Core Foundation 对象类型不在 ARC 管理范畴内<br>Cocoa Framework::Foundation 对象类型（即一般使用到的Objectie-C对象类型）在 ARC 的管理范畴内</p>
+<p>如果不在 ARC 管理范畴内的对象，那么要清楚 release 的责任应该是谁<br>各种对象的生命周期是怎样的</p>
+<p>1. 声明 id obj 的时候，其实是缺省的申明了一个 <strong>strong 修饰的变量，所以编译器自动地加入了 retain 的处理，所以说 </strong>bridge_transfer 关键字只为我们做了 release 处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc0argjh000kz50rsdmyeyta" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -121,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/22/icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86/" data-id="cjc05w0ar003ozl0rw4hzjp57" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/22/icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86/" data-id="cjc0argm5003vz50rg8a17q5j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +353,7 @@ ret
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc05w09t002uzl0rw7zck9gj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc0argl9002vz50rc9fbbrh8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -474,7 +573,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/19/e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6/" data-id="cjc05w0ac003czl0rkb7893mx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6/" data-id="cjc0arglp003hz50ra34n5dc3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,7 +618,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/19/prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios/" data-id="cjc05w0c9004xzl0r2oy080w8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios/" data-id="cjc0argmu0055z50rz48u7cs1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,7 +678,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc05w0dr005yzl0r4k28mdyw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc0argnf0064z50rqyx6vsiz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -633,7 +732,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/15/objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89/" data-id="cjc05w0c0004nzl0rdkwgiyaj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/15/objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89/" data-id="cjc0argmp004vz50r9snam3cp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -675,7 +774,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/14/e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f/" data-id="cjc05w08f001ezl0rwu4wr781" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f/" data-id="cjc0argk6001iz50rbg8mtci2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -983,7 +1082,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/14/e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8/" data-id="cjc05w08i001jzl0rs7a2ufm7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8/" data-id="cjc0argk2001dz50rtiaf6g1b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1134,84 +1233,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/12/e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af/" data-id="cjc05w08k001mzl0rparkb2e0" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/11/e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/" class="article-date">
-  <time datetime="2017-04-11T14:39:35.000Z" itemprop="datePublished">2017-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/">关于Runtime的两个用处（转载）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发人员都知道Runtine是比较底层的东西，平时用得少，但是一旦用起来，威力是巨大的，常常有四两拨千斤的用处。</p>
-<h3 id="Runtime是什么"><a href="#Runtime是什么" class="headerlink" title="Runtime是什么"></a>Runtime是什么</h3><blockquote>
-<p>运行时刻是指一个程序在运行（或者在被执行）的状态。也就是说，当你打开一个程序使它在电脑上运行的时候，那个程序就是处于运行时刻。在一些编程语言中，把某些可以重用的程序或者实例打包或者重建成为“运行库”。这些实例可以在它们运行的时候被连接或者被任何程序调用。</p>
-</blockquote>
-<ul>
-<li>Runtime从字面上理解是运行时的意思，OC是一门动态编程语言，归因于继承和多态，代码的最终实现在运行的时候才最终确定。而Runtime可以通过这种特性，在程序运行前对代码自定义。Runtime是一个开源库，通过这个库，OC中的[target doMethodWith:var1]转换为objc_msgSend(target,@selector(doMethodWith:),var1)，下面就来看看这个转换是怎么发生的。</li>
-<li><strong>注意使用Runtime需要导入objc/runtime.h头文件</strong></li>
-</ul>
-<h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
-<li><p>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</p>
-<p><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">objc_object</span> </span>{<br>  Class isa  OBJC_ISA_AVAILABILITY;<br>};<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">objc_object</span> *id;</span>`<br><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
-</li>
-<li><p>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:<br><pre class="hljs cpp">`  <span class="hljs-keyword">struct</span> objc_class {</pre></p>
-<pre><code>Class isa  OBJC_ISA_AVAILABILITY;
-</code></pre><p>  <span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> !<strong>OBJC2</strong></span></p>
-<pre><code>Class super_class                       OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 父类&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;char&lt;/span&gt; *name                        OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 类名&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;long&lt;/span&gt; version                            OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 类的版本信息，默认为0&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;long&lt;/span&gt; info                               OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 类信息，供运行期使用的一些位标识&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;long&lt;/span&gt; instance_size                      OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 该类的实例变量大小&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;struct&lt;/span&gt; objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 该类的成员变量列表&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;struct&lt;/span&gt; objc_method_list **methodLists   OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 方法列表&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;struct&lt;/span&gt; objc_cache *cache                OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 方法缓存&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;struct&lt;/span&gt; objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  &lt;span class=&quot;hljs-comment&quot;&gt;// 协议列表&lt;/span&gt;
-</code></pre><p>  <span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></p>
-<p>  } OBJC2_UNAVAILABLE;`<br><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>_objc_ivar<em>list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>_objc_method<em>list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br><em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
-</li>
-<li><p>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：<br><div class="image-package"><img src="http://upload-images.jianshu.io/upload_images/3523280-1a77c1c4e00afedf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></div><br><pre class="hljs clean">`#### <span class="hljs-number">2.</span> [target doMethodWith:var1]是怎么运行的</pre></p>
-</li>
-<li><p>首先代码运行时会将[target doMethodWith:var1]编译为objc_msgSend(target,@selector(doMethodWith:),var1)，然后通过target对象结构体中的isa指针寻找到对象的结构体地址。</p>
-</li>
-<li>在寻找到类的结构体后，如果方法doMethodWith:是实例方法，就在类结构体中的methodLists寻找这个方法来执行，如果没有找到，就会通过类的super_class指针到父类的methodLists去寻找，一直向上，如果在根类没有找到，就会crash；如果是类方法，就会通过类结构体中的isa指针找到元类结构体的地址，在元类的methodLists寻找类方法，如果没有找到也会像上面的父类去寻找，最终没有找到也会crash。</li>
-<li>var1是执行doMethodWith:方法需要的参数，不必多说。
-        
-          <p class="article-more-link">
-            <a href="/2017/04/11/e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/11/e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/" data-id="cjc05w08e001czl0r993xxtbg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af/" data-id="cjc0argk8001kz50rym239ei3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1225,7 +1247,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1234,7 +1256,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
     </div>
@@ -1249,7 +1271,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -1259,9 +1281,13 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/04/newnotebook/">newnotebook</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/hello-world/">Hello World</a>
@@ -1277,10 +1303,6 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
           <li>
             <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
           </li>
         
       </ul>
