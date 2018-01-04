@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/Core Foundation 框架详解/">Core Foundation 框架 详解(转）</a>
+      <a class="article-title" href="/2017/04/25/Core Foundation 框架详解/">Core Foundation 框架详解</a>
     </h1>
   
 
@@ -154,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc0argjh000kz50rsdmyeyta" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc0kdb1p000xng0rhsyc67rc" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -164,9 +164,9 @@
 
 
   
-    <article id="post-icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ICMP协议与Ping原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/22/icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86/" class="article-date">
+    <a href="/2017/04/22/ICMP协议与Ping原理/" class="article-date">
   <time datetime="2017-04-22T09:51:05.000Z" itemprop="datePublished">2017-04-22</time>
 </a>
     
@@ -182,7 +182,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/22/icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86/">ICMP协议与Ping原理</a>
+      <a class="article-title" href="/2017/04/22/ICMP协议与Ping原理/">ICMP协议与Ping原理</a>
     </h1>
   
 
@@ -220,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/22/icmp-e5-8d-8f-e8-ae-ae-e4-b8-8eping-e5-8e-9f-e7-90-86/" data-id="cjc0argm5003vz50rg8a17q5j" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjc0kdb1u0013ng0rs3unnz2y" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -230,9 +230,9 @@
 
 
   
-    <article id="post-e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-深入理解iOS开发中的BitCode功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/" class="article-date">
+    <a href="/2017/04/20/深入理解iOS开发中的BitCode功能/" class="article-date">
   <time datetime="2017-04-20T10:22:14.000Z" itemprop="datePublished">2017-04-20</time>
 </a>
     
@@ -248,7 +248,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/">深入理解iOS开发中的BitCode功能 （转）</a>
+      <a class="article-title" href="/2017/04/20/深入理解iOS开发中的BitCode功能/">深入理解iOS开发中的BitCode功能 （转）</a>
     </h1>
   
 
@@ -287,55 +287,10 @@ demo.m :
 &lt;pre class=&quot;hljs bash&quot;&gt;</code>wuqiong:~ apple$ otool <span class="hljs-_">-l</span> test.o |grep bitcode<br>  sectname <strong>bitcode<br>  sectname </strong>bitcode<code>&lt;/pre&gt;
 如果看到输出了2行</code>sectname __bitcode`,就是说明这静态库中的两个目标文件包含了bitcode.</p>
 </li>
-<li><p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:<br><pre class="hljs bash">`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m<br>wuqiong:~ apple$ cat demo.s</pre></p>
-<pre><code>.section    __TEXT,__text,regular,pure_instructions
-.ios_version_min 9, 2
-.globl    _demo
-.align    2
-</code></pre><p>_demo:                                  ; @demo</p>
-<pre><code>.cfi_startproc
-</code></pre><p>; BB<span class="hljs-comment">#0:</span></p>
-<pre><code>stp    x29, x30, [sp, &lt;span class=&quot;hljs-comment&quot;&gt;#-16]!&lt;/span&gt;
-mov     x29, sp
-</code></pre><p>Ltmp0:</p>
-<pre><code>.cfi_def_cfa w29, 16
-</code></pre><p>Ltmp1:</p>
-<pre><code>.cfi_offset w30, -8
-</code></pre><p>Ltmp2:</p>
-<pre><code>.cfi_offset w29, -16
-adrp    x0, L__unnamed_cfstring_@PAGE
-add    x0, x0, L__unnamed_cfstring_@PAGEOFF
-bl    _NSLog
-ldp    x29, x30, [sp], &lt;span class=&quot;hljs-comment&quot;&gt;#16&lt;/span&gt;
-ret
-.cfi_endproc
-
-.section    __TEXT,__cstring,cstring_literals
-</code></pre><p>L_.str:                                 ; @.str</p>
-<pre><code>.asciz    &lt;span class=&quot;hljs-string&quot;&gt;&quot;demo func&quot;&lt;/span&gt;
-
-.section    __DATA,__cfstring
-.align    4                       ; @_unnamed_cfstring_
-</code></pre><p>L__unnamed<em>cfstring</em>:</p>
-<pre><code>.quad    ___CFConstantStringClassReference
-.long    1992                    ; 0x7c8
-.space    4
-.quad    L_.str
-.quad    9                       ; 0x9
-
-.section    __DATA,__objc_imageinfo,regular,no_dead_strip
-</code></pre><p>L_OBJC_IMAGE_INFO:</p>
-<pre><code>.long    0
-.long    0
-</code></pre><p>.subsections_via<em>symbol<code>&lt;/pre&gt;
-然后删除</code>demo.m<code>这个C源代码,仅留下</code>test.m<code>和</code>demo.s<code>:
-&lt;pre class=&quot;hljs bash&quot;&gt;</code>wuqiong:~ apple$ rm demo.m<code>&lt;/pre&gt;
-现在,我们来把</code>test.m<code>这个C源代码和</code>dmeo.s<code>这个汇编源代码来一起带着</code>-fembed-bitcode<code>参数来生成目标代码并打包为一个静态库:
-&lt;pre class=&quot;hljs bash&quot;&gt;</code>wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s<br>wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o<code>&lt;/pre&gt;
-然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:
-&lt;pre class=&quot;hljs bash&quot;&gt;</code>wuqiong:~ apple$ ar -t libTest.a<br>__.SYMDEF SORTED<br>test.o<br>demo.o<br>wuqiong:~ apple$ otool &lt;span class=”hljs-</em>“&gt;-l libTest.a | grep bitcode<br>  sectname __bitcode</p>
+<li><p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:</p>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m</span><br><span class="line">wuqiong:~ apple$ cat demo.s</span><br><span class="line">    .section    __TEXT,__text,regular,pure_instructions</span><br><span class="line">    .ios_version_min 9, 2</span><br><span class="line">    .globl    _demo</span><br><span class="line">    .align    2</span><br><span class="line">_demo:                                  ; @demo</span><br><span class="line">    .cfi_startproc</span><br><span class="line">; BB#0:</span><br><span class="line">    stp    x29, x30, [sp, #-16]!</span><br><span class="line">    mov     x29, sp</span><br><span class="line">Ltmp0:</span><br><span class="line">    .cfi_def_cfa w29, 16</span><br><span class="line">Ltmp1:</span><br><span class="line">    .cfi_offset w30, -8</span><br><span class="line">Ltmp2:</span><br><span class="line">    .cfi_offset w29, -16</span><br><span class="line">    adrp    x0, L__unnamed_cfstring_@PAGE</span><br><span class="line">    add    x0, x0, L__unnamed_cfstring_@PAGEOFF</span><br><span class="line">    bl    _NSLog</span><br><span class="line">    ldp    x29, x30, [sp], #16</span><br><span class="line">    ret</span><br><span class="line">    .cfi_endproc</span><br><span class="line">.section    __TEXT,__cstring,cstring_literals</span><br><span class="line">L_.str:                                 ; @.str</span><br><span class="line">.asciz    &quot;demo func&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__cfstring</span><br><span class="line">.align    4                       ; @_unnamed_cfstring_</span><br><span class="line">L__unnamed_cfstring_:</span><br><span class="line">.quad    __CFConstantStringClassReference</span><br><span class="line">.long    1992                    ; 0x7c8</span><br><span class="line">.space    4</span><br><span class="line">.quad    L.str</span><br><span class="line">.quad    9                       ; 0x9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__objc_imageinfo,regular,no_dead_strip</span><br><span class="line">L_OBJC_IMAGE_INFO:</span><br><span class="line">.long    0</span><br><span class="line">.long    0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ rm demo.m`</span><br><span class="line"></span><br><span class="line">现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s</span><br><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`</span><br><span class="line"></span><br><span class="line">然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ ar -t libTest.a</span><br><span class="line">__.SYMDEF SORTED</span><br><span class="line">test.o</span><br><span class="line">demo.o</span><br><span class="line">wuqiong:~ apple$ otool -l libTest.a | grep bitcode</span><br><span class="line">  sectname __bitcode</span><br></pre></td></tr></table></figure>
 <p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>
 <p>那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.</p>
 <p>目前我们日常的iOS应用开发中,一般不会需要用到汇编层面去优化的代码.所以我们主要关注第三方(开源)C代码,尤其是音视频编码解码这些计算密集型项目代码,关键计算的代码针对特定平台都有对应平台的汇编版本实现,当然也有C的实现,但是默认编译一般都是用的汇编版本,这样就会导致我们在编译这个开源代码的时候哪怕你带了<code>-fembed-bitcode</code>参数也仅仅只是让项目中的部分C代码的目标文件带了bitcode段,而那小数的汇编代码的目标文件一样不带bitcode段,这样编译出这个库交给上层开发者使用的时候,就会出现在打包上传或者真机调试的时候因为Xcode默认开了bitcode功能而链接失败,导致不能真机调试或者不能上传应用到AppStore.</p>
@@ -347,13 +302,13 @@ ret
 <p>由于时间和篇幅原因,关于其他更多详细的信息就不细细道来了.</p>
         
           <p class="article-more-link">
-            <a href="/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/#more">Read More</a>
+            <a href="/2017/04/20/深入理解iOS开发中的BitCode功能/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/20/e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3ios-e5-bc-80-e5-8f-91-e4-b8-ad-e7-9a-84bitcode-e5-8a-9f-e8-83-bd-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc0argl9002vz50rc9fbbrh8" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjc0kdb540057ng0ruorr9ep3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -363,9 +318,9 @@ ret
 
 
   
-    <article id="post-e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-详解 iOS 多图下载的缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/19/e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6/" class="article-date">
+    <a href="/2017/04/19/详解 iOS 多图下载的缓存机制/" class="article-date">
   <time datetime="2017-04-19T05:48:13.000Z" itemprop="datePublished">2017-04-19</time>
 </a>
     
@@ -381,7 +336,7 @@ ret
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6/">详解 iOS 多图下载的缓存机制 （转）</a>
+      <a class="article-title" href="/2017/04/19/详解 iOS 多图下载的缓存机制/">详解 iOS 多图下载的缓存机制 （转）</a>
     </h1>
   
 
@@ -399,165 +354,39 @@ ret
 <p>这里所说的<strong>多图下载</strong>，就是要在tableview的每一个cell里显示一张图片,而且这些图片都需要从网上下载。</p>
 <h1 id="2-容易遇到的问题"><a href="#2-容易遇到的问题" class="headerlink" title="2. 容易遇到的问题"></a>2. 容易遇到的问题</h1><hr>
 <p>如果不知道或不使用<strong>异步操作</strong>和<strong>缓存机制</strong>，那么写出来的代码很可能会是这样：</p>
-<pre><code>cell.textLabel&lt;span class=&quot;hljs-meta&quot;&gt;.text&lt;/span&gt; = app.name&lt;span class=&quot;hljs-comment&quot;&gt;;&lt;/span&gt;
-cell.detailTextLabel&lt;span class=&quot;hljs-meta&quot;&gt;.text&lt;/span&gt; = app.download&lt;span class=&quot;hljs-comment&quot;&gt;;&lt;/span&gt;
-NSData *imageData = [NSData dataWithContentsOfURL:app.url]&lt;span class=&quot;hljs-comment&quot;&gt;;&lt;/span&gt;
-cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hljs-comment&quot;&gt;;&lt;/span&gt;`&lt;/pre&gt;
-这样写有什么后果呢？
-
-#### 后果1：不可避免的卡顿（因为没有异步下载操作）
-
-&gt; dataWithContentsOfURL：是耗时操作，将其放在主线程会造成卡顿。如果图片很多，图片很大，而且网络情况不好的话肯定会卡出翔！
-
-#### 后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）
-
-&gt; 由于没有缓存机制，即使下载完成并显示了当前cell的图片，但是当该cell再一次需要显示的时候还是会下载它所对应的图片：耗费了下载流量，而且还导致重复操作。
-很显然，要达到Tableview滚动的**如丝滑般的享受**必须二者兼得才可以，具体怎么做呢？
-
-# 3\. 解决方案
-
-* * *
-
-#### 1\. 先看一下解决方案的流程图
-
-小码哥将他的解决方案在PPT里用流程图画了出来，笔者觉得很不错，但是颜值略低（毕竟人家是一心搞技术，没时间在意这些外在的东西），笔者理了理思路，自己重新画了一张（好看么？）：
-&lt;div class=&quot;image-package&quot;&gt;
-
-![](http://upload-images.jianshu.io/upload_images/859001-addf3137097c3912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-&lt;div class=&quot;image-caption&quot;&gt;多图下载解决方案流程图&lt;/div&gt;
-&lt;/div&gt;
-要想快速看懂此图，需要先了解该流程所需的所有数据源：
-
-**1\. 图片的URL**：因为每张图片对应的URL都是唯一的，所以我们可以通过它来建立**图片缓存**和**下载操作的缓存**的键，以及拼接**沙盒缓存**的路径字符串。
-**2\. 图片缓存（字典）**：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。
-**3\. 下载操作缓存（字典）**：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。
-**4\. 沙盒缓存(文件路径对应NSData)**：存放于磁盘中，位于Cache文件夹内，路径为“Cache/图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。
-
-#### 2\. 再看一下解决方案的代码
-
-**2.1图片缓存，下载操作缓存，沙盒缓存路径**
-&lt;pre class=&quot;hljs objectivec&quot;&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;/**
- *  存放所有下载完的图片
- */&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;@property&lt;/span&gt; (&lt;span class=&quot;hljs-keyword&quot;&gt;nonatomic&lt;/span&gt;, &lt;span class=&quot;hljs-keyword&quot;&gt;strong&lt;/span&gt;) &lt;span class=&quot;hljs-built_in&quot;&gt;NSMutableDictionary&lt;/span&gt; *images;
-
-&lt;span class=&quot;hljs-comment&quot;&gt;/**
- *  存放所有的下载操作（key是url，value是operation对象）
- */&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;@property&lt;/span&gt; (&lt;span class=&quot;hljs-keyword&quot;&gt;nonatomic&lt;/span&gt;, &lt;span class=&quot;hljs-keyword&quot;&gt;strong&lt;/span&gt;) &lt;span class=&quot;hljs-built_in&quot;&gt;NSMutableDictionary&lt;/span&gt; *operations;
-
-&lt;span class=&quot;hljs-comment&quot;&gt;/**
- *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径
- */&lt;/span&gt;
-&lt;span class=&quot;hljs-meta&quot;&gt;#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]&lt;/span&gt;`&lt;/pre&gt;
-**2.2 图片下载之前的查询缓存部分**：
-&lt;pre class=&quot;hljs objectivec&quot;&gt;`    &lt;span class=&quot;hljs-comment&quot;&gt;// 先从images缓存中取出图片url对应的UIImage&lt;/span&gt;
-    &lt;span class=&quot;hljs-built_in&quot;&gt;UIImage&lt;/span&gt; *image = &lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;.images[app.icon];
-    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (image) { 
-
-        &lt;span class=&quot;hljs-comment&quot;&gt;// 存在：说明图片已经下载成功，并缓存成功）&lt;/span&gt;
-        cell.imageView.image = image;
-
-    } &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; { 
-
-         &lt;span class=&quot;hljs-comment&quot;&gt;// 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片&lt;/span&gt;
-
-         &lt;span class=&quot;hljs-comment&quot;&gt;// 获得url对于的沙盒缓存路径&lt;/span&gt;
-        &lt;span class=&quot;hljs-built_in&quot;&gt;NSString&lt;/span&gt; *file = CachedImageFile(app.icon);
-
-        &lt;span class=&quot;hljs-comment&quot;&gt;// 先从沙盒中取出图片&lt;/span&gt;
-        &lt;span class=&quot;hljs-built_in&quot;&gt;NSData&lt;/span&gt; *data = [&lt;span class=&quot;hljs-built_in&quot;&gt;NSData&lt;/span&gt; dataWithContentsOfFile:file];
-
-        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (data) {
-
-            &lt;span class=&quot;hljs-comment&quot;&gt;//data不为空，说明沙盒中存在这个文件&lt;/span&gt;
-            cell.imageView.image = [&lt;span class=&quot;hljs-built_in&quot;&gt;UIImage&lt;/span&gt; imageWithData:data];
-
-        } &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; {
-
-             &lt;span class=&quot;hljs-comment&quot;&gt;// 反之沙盒中不存在这个文件&lt;/span&gt;
-             &lt;span class=&quot;hljs-comment&quot;&gt;// 在下载之前显示占位图片&lt;/span&gt;
-            cell.imageView.image = [&lt;span class=&quot;hljs-built_in&quot;&gt;UIImage&lt;/span&gt; imageNamed:&lt;span class=&quot;hljs-string&quot;&gt;@&quot;placeholder&quot;&lt;/span&gt;];
-
-            &lt;span class=&quot;hljs-comment&quot;&gt;// 下载图片&lt;/span&gt;
-            [&lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt; download:app.icon indexPath:indexPath];
-        }
-    }`&lt;/pre&gt;
-**2.3 图片的下载部分**：
-&lt;pre class=&quot;hljs objectivec&quot;&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;/**
- *  下载图片
- *
- *  @param imageUrl 图片的url
- */&lt;/span&gt;
-- (&lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;)download:(&lt;span class=&quot;hljs-built_in&quot;&gt;NSString&lt;/span&gt; *)imageUrl indexPath:(&lt;span class=&quot;hljs-built_in&quot;&gt;NSIndexPath&lt;/span&gt; *)indexPath
-{
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 取出当前图片url对应的下载操作（operation对象）&lt;/span&gt;
-    &lt;span class=&quot;hljs-built_in&quot;&gt;NSBlockOperation&lt;/span&gt; *operation = &lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;.operations[imageUrl];
-    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (operation) &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt;;
-
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 创建操作，下载图片&lt;/span&gt;
-    __&lt;span class=&quot;hljs-keyword&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;typeof&lt;/span&gt;(&lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;) appsVc = &lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;;
-    operation = [&lt;span class=&quot;hljs-built_in&quot;&gt;NSBlockOperation&lt;/span&gt; blockOperationWithBlock:^{
-        &lt;span class=&quot;hljs-built_in&quot;&gt;NSURL&lt;/span&gt; *url = [&lt;span class=&quot;hljs-built_in&quot;&gt;NSURL&lt;/span&gt; URLWithString:imageUrl];
-        &lt;span class=&quot;hljs-built_in&quot;&gt;NSData&lt;/span&gt; *data = [&lt;span class=&quot;hljs-built_in&quot;&gt;NSData&lt;/span&gt; dataWithContentsOfURL:url]; &lt;span class=&quot;hljs-comment&quot;&gt;// 下载&lt;/span&gt;
-        &lt;span class=&quot;hljs-built_in&quot;&gt;UIImage&lt;/span&gt; *image = [&lt;span class=&quot;hljs-built_in&quot;&gt;UIImage&lt;/span&gt; imageWithData:data]; &lt;span class=&quot;hljs-comment&quot;&gt;// NSData -&amp;gt; UIImage&lt;/span&gt;
-
-        &lt;span class=&quot;hljs-comment&quot;&gt;// 回到主线程&lt;/span&gt;
-        [[&lt;span class=&quot;hljs-built_in&quot;&gt;NSOperationQueue&lt;/span&gt; mainQueue] addOperationWithBlock:^{
-
-            &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (image) {
-                &lt;span class=&quot;hljs-comment&quot;&gt;// 如果存在图片（下载完成），存放图片到图片缓存字典中&lt;/span&gt;
-                appsVc.images[imageUrl] = image;
-
-                &lt;span class=&quot;hljs-comment&quot;&gt;//将图片存入沙盒中&lt;/span&gt;
-                &lt;span class=&quot;hljs-comment&quot;&gt;//1\. 先将图片转化为NSData&lt;/span&gt;
-                &lt;span class=&quot;hljs-built_in&quot;&gt;NSData&lt;/span&gt; *data = &lt;span class=&quot;hljs-built_in&quot;&gt;UIImagePNGRepresentation&lt;/span&gt;(image);
-
-                &lt;span class=&quot;hljs-comment&quot;&gt;//2\.  再生成缓存路径            &lt;/span&gt;
-                [data writeToFile:CachedImageFile(imageUrl) atomically:&lt;span class=&quot;hljs-literal&quot;&gt;YES&lt;/span&gt;];
-            }
-
-            &lt;span class=&quot;hljs-comment&quot;&gt;// 从字典中移除下载操作 (保证下载失败后，能重新下载)&lt;/span&gt;
-            [appsVc.operations removeObjectForKey:imageUrl];
-
-            &lt;span class=&quot;hljs-comment&quot;&gt;// 刷新当前表格，减少系统开销&lt;/span&gt;
-            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:&lt;span class=&quot;hljs-built_in&quot;&gt;UITableViewRowAnimationNone&lt;/span&gt;];
-        }];
-    }];
-
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 添加下载操作到队列中&lt;/span&gt;
-    [&lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;.queue addOperation:operation];
-
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)&lt;/span&gt;
-    &lt;span class=&quot;hljs-keyword&quot;&gt;self&lt;/span&gt;.operations[imageUrl] = operation;
-}`&lt;/pre&gt;
-
-#### 3\. 有哪些点是值得注意的？
-
-要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。
-
-**3.1 关于图片缓存**：
-很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。
-
-**3.2 关于沙盒缓存**：
-同样地，对于沙盒缓存也是一个道理：有图就将其转化为NSData，写入磁盘，并对应唯一的路径，没有图就不写。所以即使是要下载相同的图片，因为当前url对应的沙盒路径已经存在文件了，所以直接拿就可以了，不会再下载。
-
-但是！
-下载操作缓存是不同的！
-
-**3.3 关于下载操作缓存**
-我们需要在下载回调完成后，立即将当前的下载操作从下载操作缓存中删去！
-因为要避免下载失败后，无法再次下载的情况的发生！
-
-为什么呢？
-注意一下将下载操作加入到下载操作缓存的时机：
-是在**下载开始的那一刻**而不是**下载成功的那一刻**！
-
-如果在下载开始的那一刻加入到缓存中的话，这个缓存信息就包括两个情况：下载成功和下载失败：
-</code></pre><ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cell.textLabel.text = app.name;</span><br><span class="line">cell.detailTextLabel.text = app.download;</span><br><span class="line">NSData *imageData = [NSData dataWithContentsOfURL:app.url];</span><br><span class="line">cell.imageView.image = [UIImage imageWithData:imageData];</span><br></pre></td></tr></table></figure>
+<p>这样写有什么后果呢？</p>
+<h4 id="后果1：不可避免的卡顿（因为没有异步下载操作）"><a href="#后果1：不可避免的卡顿（因为没有异步下载操作）" class="headerlink" title="后果1：不可避免的卡顿（因为没有异步下载操作）"></a>后果1：不可避免的卡顿（因为没有异步下载操作）</h4><blockquote>
+<p>dataWithContentsOfURL：是耗时操作，将其放在主线程会造成卡顿。如果图片很多，图片很大，而且网络情况不好的话肯定会卡出翔！</p>
+</blockquote>
+<h4 id="后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）"><a href="#后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）" class="headerlink" title="后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）"></a>后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）</h4><blockquote>
+<p>由于没有缓存机制，即使下载完成并显示了当前cell的图片，但是当该cell再一次需要显示的时候还是会下载它所对应的图片：耗费了下载流量，而且还导致重复操作。<br>很显然，要达到Tableview滚动的<strong>如丝滑般的享受</strong>必须二者兼得才可以，具体怎么做呢？</p>
+</blockquote>
+<h1 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3. 解决方案"></a>3. 解决方案</h1><hr>
+<h4 id="1-先看一下解决方案的流程图"><a href="#1-先看一下解决方案的流程图" class="headerlink" title="1. 先看一下解决方案的流程图"></a>1. 先看一下解决方案的流程图</h4><p>小码哥将他的解决方案在PPT里用流程图画了出来，笔者觉得很不错，但是颜值略低（毕竟人家是一心搞技术，没时间在意这些外在的东西），笔者理了理思路，自己重新画了一张（好看么？）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/859001-addf3137097c3912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>要想快速看懂此图，需要先了解该流程所需的所有数据源：</p>
+<p><strong>1. 图片的URL</strong>：因为每张图片对应的URL都是唯一的，所以我们可以通过它来建立<strong>图片缓存</strong>和<strong>下载操作的缓存</strong>的键，以及拼接<strong>沙盒缓存</strong>的路径字符串。  </p>
+<p> <strong>2. 图片缓存（字典）</strong>：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。  </p>
+<p><strong>3. 下载操作缓存（字典）</strong>：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。  </p>
+<p><strong>4. 沙盒缓存(文件路径对应NSData)</strong>：存放于磁盘中，位于Cache文件夹内，路径为“Cache/图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。</p>
+<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  存放所有下载完的图片</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *images;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  存放所有的下载操作（key是url，value是operation对象）</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *operations;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径</span><br><span class="line"> */</span><br><span class="line">#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]</span><br></pre></td></tr></table></figure>
+<p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 先从images缓存中取出图片url对应的UIImage</span><br><span class="line">    UIImage *image = self.images[app.icon];</span><br><span class="line">    if (image) &#123; </span><br><span class="line"></span><br><span class="line">        // 存在：说明图片已经下载成功，并缓存成功）</span><br><span class="line">        cell.imageView.image = image;</span><br><span class="line"></span><br><span class="line">    &#125; else &#123; </span><br><span class="line"></span><br><span class="line">         // 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片</span><br><span class="line"></span><br><span class="line">         // 获得url对于的沙盒缓存路径</span><br><span class="line">        NSString *file = CachedImageFile(app.icon);</span><br><span class="line"></span><br><span class="line">        // 先从沙盒中取出图片</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfFile:file];</span><br><span class="line"></span><br><span class="line">        if (data) &#123;</span><br><span class="line"></span><br><span class="line">            //data不为空，说明沙盒中存在这个文件</span><br><span class="line">            cell.imageView.image = [UIImage imageWithData:data];</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">             // 反之沙盒中不存在这个文件</span><br><span class="line">             // 在下载之前显示占位图片</span><br><span class="line">            cell.imageView.image = [UIImage imageNamed:@&quot;placeholder&quot;];</span><br><span class="line"></span><br><span class="line">            // 下载图片</span><br><span class="line">            [self download:app.icon indexPath:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.3 图片的下载部分</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  下载图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageUrl 图片的url</span><br><span class="line"> */</span><br><span class="line">- (void)download:(NSString *)imageUrl indexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    // 取出当前图片url对应的下载操作（operation对象）</span><br><span class="line">    NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line">    if (operation) return;</span><br><span class="line"></span><br><span class="line">    // 创建操作，下载图片</span><br><span class="line">    __weak typeof(self) appsVc = self;</span><br><span class="line">    operation = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">        NSURL *url = [NSURL URLWithString:imageUrl];</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfURL:url]; // 下载</span><br><span class="line">        UIImage *image = [UIImage imageWithData:data]; // NSData -&gt; UIImage</span><br><span class="line"></span><br><span class="line">        // 回到主线程</span><br><span class="line">        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">            if (image) &#123;</span><br><span class="line">                // 如果存在图片（下载完成），存放图片到图片缓存字典中</span><br><span class="line">                appsVc.images[imageUrl] = image;</span><br><span class="line"></span><br><span class="line">                //将图片存入沙盒中</span><br><span class="line">                //1. 先将图片转化为NSData</span><br><span class="line">                NSData *data = UIImagePNGRepresentation(image);</span><br><span class="line"></span><br><span class="line">                //2.  再生成缓存路径            </span><br><span class="line">                [data writeToFile:CachedImageFile(imageUrl) atomically:YES];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 从字典中移除下载操作 (保证下载失败后，能重新下载)</span><br><span class="line">            [appsVc.operations removeObjectForKey:imageUrl];</span><br><span class="line"></span><br><span class="line">            // 刷新当前表格，减少系统开销</span><br><span class="line">            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    // 添加下载操作到队列中</span><br><span class="line">    [self.queue addOperation:operation];</span><br><span class="line"></span><br><span class="line">    // 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)</span><br><span class="line">    self.operations[imageUrl] = operation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-有哪些点是值得注意的？"><a href="#3-有哪些点是值得注意的？" class="headerlink" title="3. 有哪些点是值得注意的？"></a>3. 有哪些点是值得注意的？</h4><p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
+<p><strong>3.1 关于图片缓存</strong>：<br>很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。</p>
+<p><strong>3.2 关于沙盒缓存</strong>：<br>同样地，对于沙盒缓存也是一个道理：有图就将其转化为NSData，写入磁盘，并对应唯一的路径，没有图就不写。所以即使是要下载相同的图片，因为当前url对应的沙盒路径已经存在文件了，所以直接拿就可以了，不会再下载。</p>
+<p>但是！<br>    下载操作缓存是不同的！</p>
+<p><strong>3.3 关于下载操作缓存</strong><br>我们需要在下载回调完成后，立即将当前的下载操作从下载操作缓存中删去！<br>    因为要避免下载失败后，无法再次下载的情况的发生！</p>
+<p>为什么呢？<br>注意一下将下载操作加入到下载操作缓存的时机：<br>是在<strong>下载开始的那一刻</strong>而不是<strong>下载成功的那一刻</strong>！</p>
+<p>如果在下载开始的那一刻加入到缓存中的话，这个缓存信息就包括两个情况：下载成功和下载失败：</p>
+<ul>
 <li>如果未来下载成功了，那么我们就不会来到判断当前下载操作是否在下载操作缓存这一步，在这之前直接就可以拿图去用了，下载操作是否存在下载操作缓存里并没有什么影响。</li>
-<li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>忘了那段代码了么？回看一下代码（看我多好）：<br><pre class="hljs objectivec">`<span class="hljs-built_in">NSBlockOperation</span> *operation = <span class="hljs-keyword">self</span>.operations[imageUrl];<br> <span class="hljs-keyword">if</span> (operation) <span class="hljs-keyword">return</span>;<span class="hljs-comment">//转身就走，毫不留情</span></pre></li>
+<li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>忘了那段代码了么？回看一下代码（看我多好）：</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line"> if (operation) return;//转身就走，毫不留情</span><br></pre></td></tr></table></figure>
 <p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>
 <h1 id="4-最后的话"><a href="#4-最后的话" class="headerlink" title="4. 最后的话"></a>4. 最后的话</h1><hr>
 <p>异步+缓存这两个机制双剑合璧的话会对程序新能带来很大的改观。这应该app开发进阶的必经之路。</p>
@@ -573,7 +402,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/e8-af-a6-e8-a7-a3-ios-e5-a4-9a-e5-9b-be-e4-b8-8b-e8-bd-bd-e7-9a-84-e7-bc-93-e5-ad-98-e6-9c-ba-e5-88-b6/" data-id="cjc0arglp003hz50ra34n5dc3" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjc0kdb5l005png0r4wygre5t" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -583,9 +412,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/19/prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios/" class="article-date">
+    <a href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" class="article-date">
   <time datetime="2017-04-19T04:03:56.000Z" itemprop="datePublished">2017-04-19</time>
 </a>
     
@@ -601,7 +430,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios/">Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS</a>
+      <a class="article-title" href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/">Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS</a>
     </h1>
   
 
@@ -618,7 +447,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/prototype-e6-91-98-e6-8a-84-e8-87-aa-pro-objective-c-design-patterns-for-ios/" data-id="cjc0argmu0055z50rz48u7cs1" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjc0kdb2f001yng0rb6gpbze7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -628,9 +457,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Wi-Fi定位原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/" class="article-date">
+    <a href="/2017/04/18/Wi-Fi定位原理/" class="article-date">
   <time datetime="2017-04-18T11:05:51.000Z" itemprop="datePublished">2017-04-18</time>
 </a>
     
@@ -646,7 +475,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/">Wi-Fi定位原理（转）</a>
+      <a class="article-title" href="/2017/04/18/Wi-Fi定位原理/">Wi-Fi定位原理</a>
     </h1>
   
 
@@ -672,13 +501,13 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <p>&nbsp;</p>
         
           <p class="article-more-link">
-            <a href="/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/#more">Read More</a>
+            <a href="/2017/04/18/Wi-Fi定位原理/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/18/wi-fi-e5-ae-9a-e4-bd-8d-e5-8e-9f-e7-90-86-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc0argnf0064z50rqyx6vsiz" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjc0kdb32002png0rxngn3khz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -688,9 +517,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Objective-C限定词 (摘抄自Objective-C程序设计第六版）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/15/objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89/" class="article-date">
+    <a href="/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" class="article-date">
   <time datetime="2017-04-15T07:18:51.000Z" itemprop="datePublished">2017-04-15</time>
 </a>
     
@@ -706,7 +535,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/15/objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89/">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</a>
+      <a class="article-title" href="/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</a>
     </h1>
   
 
@@ -717,22 +546,17 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         <h2 id="long"><a href="#long" class="headerlink" title="long"></a>long</h2><div>如果直接把限定词long放在int声明之前，那么所声明的整型变量在某些计算机上具有扩展的值域。一个long int声明的例子为：</div><br><pre> <wbr> <wbr>  <wbr> long int factorial;</pre><br><div> <wbr> <wbr>  <wbr> 这条语句将变量factorial声明为long的整型变量，也就是长整型。就象float和double变量一样，long变量的具体精度是由具体的计算机系统决定的。</div><br><div>在许多系统上，int与long int具有相同的值域，而且任何一个都能存储4个字节(1个字节8位)，32位宽(2,147,483,647)的整型值。long在限定整型的时候，实际相当于双精度的short，什么是short?</div><br><div></div><br><div><br><div>long int类型的常量值可通过在整型常量末尾添加字母L(大小写均可)来形成。单数字和L之间不允许由空格。因为小写的L和数字1容易混淆，建议有用到这种情况，都用大写。下面是个简单的例子：</div><br><div></div><br><pre> <wbr> <wbr>  <wbr> long int numberOfPoints = 131071100L;</pre><br><div></div><br><div> <wbr> <wbr>  <wbr> 将变量numberOfPoints声明为长整型，而且初值为131,071,100。</div><br><div> <wbr> <wbr>  <wbr> 要用NSLog显示long int的值，使用字母l做为修饰符并放在整型格式符号i，o和x之前。例如“%lx”表示十六进制格式显示值。</div><br><div></div><br><div> <wbr> <wbr>  <wbr> 当然，我们同样可以把 long 标识符放在double声明之前。范例如下：</div><br><div></div><br><div> <wbr> <wbr>  <wbr> long double US_deficit_2004;</div><br><div></div><br><div> <wbr> <wbr>  <wbr> long double常量可写成其尾部带有字母l或L的浮点常量，例如：1.234e+7L</div><br><div> <wbr> <wbr>  <wbr> 要显示long double的值，需要使用修饰符L。因此，%Lf用浮点计数法显示long double的值，%Le用科学计数法显示同样的值，而%Lg将告诉NSLog在%Lf和%Le之间任选一个使用。</div><br></div><br><div></div>
 
 <hr>
-<hr>
-<h2 id="long-long"><a href="#long-long" class="headerlink" title="long long"></a><strong>long long</strong></h2><div> <wbr> <wbr>  <wbr> 双长整型相当于双精度long，可以用如下形式使用：</div><br><div></div><br><pre> <wbr> <wbr>  <wbr> long long int maxAllowedStorage;</pre><br><div></div><br><div> <wbr> <wbr>  <wbr> 这条语句把指定的变量声明为具有特定扩展精度的双长整型变量，该扩展精度保证变量至少8个字节，具有64位的宽度。NSLog字符串不使用单个字母l，而使用两个l来显示long long的整数，例如“%lli”。</div><br><div></div><br><div><br><br><em> </em> <em>
+<h2 id="long-long"><a href="#long-long" class="headerlink" title="long long"></a><strong>long long</strong></h2><div> <wbr> <wbr>  <wbr> 双长整型相当于双精度long，可以用如下形式使用：</div><br><div></div><br><pre> <wbr> <wbr>  <wbr> long long int maxAllowedStorage;</pre><br><div></div><br><div> <wbr> <wbr>  <wbr> 这条语句把指定的变量声明为具有特定扩展精度的双长整型变量，该扩展精度保证变量至少8个字节，具有64位的宽度。NSLog字符串不使用单个字母l，而使用两个l来显示long long的整数，例如“%lli”。</div><br><div></div><br><div><br><br><em> </em> <em><br><br><br></em></div><br><div><br><br>## <strong> short</strong><br><br><div>把限定词short放在int声明之前时，它告诉Objective-C编译器要声明的特定变量用来存储相当小的整数。之所以使用short变量，主要原因是对节约内存空间的考虑，当程序员需要大量内存而可用的内存量又十分有限时，比如iPhone开发的时候，就可用short变量来解决这个问题。</div><br><div>在某些计算机上，short int占用的内存空间是常规int变量所占空间的一半。在任何情况下，确保分配给short int的空间数量不少于2个字节，16位。</div><br><div></div><br><div><strong>注意</strong>，在Objective-C中，没有其他方法可显式地编写short int型常量。要显示short int变量，可将字母h放在任何普通的整型转换符之前，如：%hi，%ho或%hx。换句话说，可用任何整型转换符号来显示short int，因为当它作为参数传递给NSLog例程时，可转换成整数。</div><br></div><br><div>
 
-</em> <em> </em><br><br></div><br><div><br><br>## <strong> short</strong><br><br><div>把限定词short放在int声明之前时，它告诉Objective-C编译器要声明的特定变量用来存储相当小的整数。之所以使用short变量，主要原因是对节约内存空间的考虑，当程序员需要大量内存而可用的内存量又十分有限时，比如iPhone开发的时候，就可用short变量来解决这个问题。</div><br><div>在某些计算机上，short int占用的内存空间是常规int变量所占空间的一半。在任何情况下，确保分配给short int的空间数量不少于2个字节，16位。</div><br><div></div><br><div><strong>注意</strong>，在Objective-C中，没有其他方法可显式地编写short int型常量。要显示short int变量，可将字母h放在任何普通的整型转换符之前，如：%hi，%ho或%hx。换句话说，可用任何整型转换符号来显示short int，因为当它作为参数传递给NSLog例程时，可转换成整数。</div><br></div><br><div><br><br><em> </em> <em>
+ <em> </em><br><br><br></div><br><div><br><br>## <strong>unsigned</strong><br><br><div>顾名思义，这个最终限定词就是无符号，可放在int变量之前，当整数变量只用来存储正数的情况下使用最终限定符。以下语句</div><br><div></div><br><div>unsigned int counter;</div><br><div></div><br><div>向编译器声明：变量counter只用来保存正值。</div><br><div>通过限制整型变量的使用，使它专门存储正整数，可以扩展整型变量的精度。</div><br><div>一般unsigned int可简写为uint。</div><br><div>通过将字母u(或U)放在常量之后，可产生unsigned int常量，例如:0x00ffu</div><br><div>编写整型常量时，可将字母u(或U)和l(或L)组合起来使用，例如30000UL，告诉编译器将常量20000看作unsigned long。</div><br><div><br><br><em> </em> <em><br><br><br></em></div><br></div><br><div><br><br>## <strong> <wbr> <wbr>  <wbr> 简写</strong><br><br><div> <wbr> <wbr>  <wbr> 将变量声明为long int，short int或unsigned int类型时，关键字int 可以省略。因此unsigned变量counter可等价地声明为以下形式：</div><br><div></div><br><div> <wbr> <wbr>  <wbr> unsigned counter;</div><br><div></div><br><div> <wbr> <wbr>  <wbr> 同时可将char变量声明为unsigned。</div><br><div>
 
-</em> <em> </em><br><br></div><br><div><br><br>## <strong>unsigned</strong><br><br><div>顾名思义，这个最终限定词就是无符号，可放在int变量之前，当整数变量只用来存储正数的情况下使用最终限定符。以下语句</div><br><div></div><br><div>unsigned int counter;</div><br><div></div><br><div>向编译器声明：变量counter只用来保存正值。</div><br><div>通过限制整型变量的使用，使它专门存储正整数，可以扩展整型变量的精度。</div><br><div>一般unsigned int可简写为uint。</div><br><div>通过将字母u(或U)放在常量之后，可产生unsigned int常量，例如:0x00ffu</div><br><div>编写整型常量时，可将字母u(或U)和l(或L)组合起来使用，例如30000UL，告诉编译器将常量20000看作unsigned long。</div><br><div><br><br><em> </em> <em>
-
-</em> <em> </em><br><br></div><br></div><br><div><br><br>## <strong> <wbr> <wbr>  <wbr> 简写</strong><br><br><div> <wbr> <wbr>  <wbr> 将变量声明为long int，short int或unsigned int类型时，关键字int 可以省略。因此unsigned变量counter可等价地声明为以下形式：</div><br><div></div><br><div> <wbr> <wbr>  <wbr> unsigned counter;</div><br><div></div><br><div> <wbr> <wbr>  <wbr> 同时可将char变量声明为unsigned。</div><br><div><br><br><em> </em> <em>
-
-</em> <em> </em><br><br></div>
+ <em> </em><br><br><br></div>
 
 <h2 id="signed"><a href="#signed" class="headerlink" title="    signed"></a><wbr> <wbr>  <wbr> <strong>signed</strong></h2><div> <wbr> <wbr>  <wbr> signed限定词可明确地告诉编译器特定变量是有符号的。它主要用在char声明前面，这个就比较复杂，此处按下不表。</div><br></div><br><div></div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/15/objective-c-e9-99-90-e5-ae-9a-e8-af-8d-e6-91-98-e6-8a-84-e8-87-aaobjective-c-e7-a8-8b-e5-ba-8f-e8-ae-be-e8-ae-a1-e7-ac-ac-e5-85-ad-e7-89-88-ef-bc-89/" data-id="cjc0argmp004vz50r9snam3cp" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjc0kdb2c001ung0r4g11fn7x" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -742,9 +566,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-内部排序和外部排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/14/e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f/" class="article-date">
+    <a href="/2017/04/14/内部排序和外部排序/" class="article-date">
   <time datetime="2017-04-14T08:22:10.000Z" itemprop="datePublished">2017-04-14</time>
 </a>
     
@@ -760,7 +584,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f/">内部排序和外部排序</a>
+      <a class="article-title" href="/2017/04/14/内部排序和外部排序/">内部排序和外部排序</a>
     </h1>
   
 
@@ -768,13 +592,27 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
     
     <div class="article-entry" itemprop="articleBody">
       
-        <div class="lemma-summary"><br><br>## <strong>外排序</strong><br><br><div class="para"><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8" target="_blank" rel="noopener">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6" target="_blank" rel="noopener">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。</div><br></div><br><div class="configModuleBanner"></div><br><div class="para">外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</div><br><div class="para"><br><br><em> </em> <em>
+        <h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a><strong>外排序</strong></h2><p><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8" target="_blank" rel="noopener">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6" target="_blank" rel="noopener">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。<br>外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</p>
+<hr>
+<h2 id="内部排序"><a href="#内部排序" class="headerlink" title="内部排序"></a>内部排序</h2><p>内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</p>
+<p>排序是计算机程序设计中的一种重要操作，其功能是对一个<a href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0" target="_blank" rel="noopener">数据元素</a>集合或序列重新排列成一个按数据元素某个相知有序的序列。排序分为两类：内排序和外排序。</p>
+<p>其中<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>的是目前排序方法中被认为是最好的方法</p>
+<p><a href="http://baike.baidu.com/item/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">内部排序方法</a>：</p>
+<ul>
+<li>1.<a href="http://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">插入排序</a>（<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>）；</li>
+<li>2.<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>；</li>
+<li>3.<a href="http://baike.baidu.com/item/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">选择排序</a>（<a href="http://baike.baidu.com/item/%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">简单选择排序</a>）；</li>
+<li>4.<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a></li>
+<li>5.<a href="http://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">冒泡排序</a>；</li>
+<li>6.<a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>；</li>
+<li>7.<a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>是对<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>方法的改进。</li>
+<li>8.<a href="http://baike.baidu.com/item/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">堆排序</a>；</li>
+</ul>
 
-</em> <em> </em><br><br><div class="lemma-summary"><br><br>## 内部排序<br><br><div class="para">内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</div><br></div><br><div class="configModuleBanner"></div><br><div class="para">排序是计算机程序设计中的一种重要操作，其功能是对一个<a href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0" target="_blank" rel="noopener">数据元素</a>集合或序列重新排列成一个按数据元素某个相知有序的序列。排序分为两类：内排序和外排序。</div><br><div class="para">其中<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>的是目前排序方法中被认为是最好的方法。</div><br><div class="para"><a href="http://baike.baidu.com/item/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">内部排序方法</a>：</div><br><div class="para">1.<a href="http://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">插入排序</a>（<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>）；</div><br><div class="para">2.<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>；</div><br><div class="para">3.<a href="http://baike.baidu.com/item/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">选择排序</a>（<a href="http://baike.baidu.com/item/%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">简单选择排序</a>）；</div><br><div class="para">4.<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a><sup>[1]<span style="background-color: #d5d5d5;">；</span></sup></div><br><div class="para">5.<a href="http://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">冒泡排序</a>；</div><br><div class="para">6.<a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>；</div><br><div class="para"><a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>是对<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>方法的改进。</div><br><div class="para">7.<a href="http://baike.baidu.com/item/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">堆排序</a>；</div><br></div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/e5-86-85-e9-83-a8-e6-8e-92-e5-ba-8f-e5-92-8c-e5-a4-96-e9-83-a8-e6-8e-92-e5-ba-8f/" data-id="cjc0argk6001iz50rbg8mtci2" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc0kdb470045ng0rnc1zsial" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -784,9 +622,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-哈希排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/14/e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8/" class="article-date">
+    <a href="/2017/04/14/哈希排序/" class="article-date">
   <time datetime="2017-04-14T06:54:31.000Z" itemprop="datePublished">2017-04-14</time>
 </a>
     
@@ -802,7 +640,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8/">哈希排序（转）</a>
+      <a class="article-title" href="/2017/04/14/哈希排序/">哈希排序</a>
     </h1>
   
 
@@ -884,21 +722,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <h1 id="第三部分、最快的Hash表算法"><a href="#第三部分、最快的Hash表算法" class="headerlink" title="第三部分、最快的Hash表算法"></a><a name="t14"></a>第三部分、最快的Hash表算法</h1><p>接下来，咱们来具体分析一下一个最快的Hasb表算法。</p>
 <p>我们由一个简单的问题逐步入手：有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它，你会怎么做？有一个方法最简单，老老实实从头查到尾，一个一个比较，直到找到为止，我想只要学过程序设计的人都能把这样一个程序作出来，但要是有程序员把这样的程序交给用户，我只能用无语来评价，或许它真的能工作，但…也只能如此了。</p>
 <p>最合适的算法自然是使用HashTable（哈希表），先介绍介绍其中的基本知识，所谓Hash，一般是一个整数，通过某种算法，可以把一个字符串”压缩” 成一个整数。当然，无论如何，一个32位整数是无法对应回一个字符串的，但在程序中，两个字符串计算出的Hash值相等的可能非常小，下面看看在MPQ中的Hash算法：</p>
-<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a><a name="t15"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_1" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_1" data-mce-fragment="1"></div><br></div><br></div>
-
+<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1.  prepareCryptTable()</span><br><span class="line">2.  &#123;</span><br><span class="line">3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;</span><br><span class="line">4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )</span><br><span class="line">6.  &#123;</span><br><span class="line">7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )</span><br><span class="line">8.  &#123;</span><br><span class="line">9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;</span><br><span class="line">10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;</span><br><span class="line">13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">15.  temp2 = (seed &amp;amp; 0xFFFF);</span><br><span class="line">16.17.  cryptTable[index2] = ( temp1 | temp2 );</span><br><span class="line">18.  &#125;</span><br><span class="line">19.  &#125;</span><br><span class="line">20.  &#125;</span><br></pre></td></tr></table></figure>
+<p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</p>
 <ol>
-<li><span class="keyword">void</span> prepareCryptTable()</li>
-<li>{</li>
-<li>unsigned <span class="datatypes">long</span> seed = 0x00100001, index1 = 0, index2 = 0, i;<br>4.5.  <span class="keyword">for</span>( index1 = 0; index1 &lt; 0x100; index1++ )</li>
-<li>{</li>
-<li><span class="keyword">for</span>( index2 = index1, i = 0; i &lt; 5; i++, index2 += 0x100 )</li>
-<li>{</li>
-<li>unsigned <span class="datatypes">long</span> temp1, temp2;<br>10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
-<li>temp1 = (seed &amp; 0xFFFF) &lt;&lt; 0x10;<br>13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
-<li>temp2 = (seed &amp; 0xFFFF);<br>16.17.  cryptTable[index2] = ( temp1 | temp2 );</li>
-<li>}</li>
-<li>}</li>
-<li>}<br>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</li>
 <li>{</li>
 <li>unsigned <span class="datatypes">char</span> <em>key  = (unsigned <span class="datatypes">char</span> </em>)lpszFileName;</li>
 <li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
@@ -909,8 +735,8 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
 <li>}</li>
 <li><span class="keyword">return</span> seed1;</li>
-<li>}<br></li></ol></div>
-
+<li>}<br></li>
+</ol>
 <p>## </p>
 <p>Blizzard的这个算法是非常高效的，被称为”One-Way Hash”( A one-way hash is a an algorithm that isconstructed in such a way that deriving the original string (set of strings,actually) is virtually impossible)。举个例子，字符串”unitneutralacritter.grp”通过这个算法得到的结果是0xA26067F3。</p>
 <p>是不是把第一个算法改进一下，改成逐个比较字符串的Hash值就可以了呢，答案是，远远不够，要想得到最快的算法，就不能进行逐个的比较，通常是构造一个哈希表(Hash Table)来解决问题，哈希表是一个大数组，这个数组的容量根据程序的要求来定义，例如1024，每一个Hash值通过取模运算 (mod) 对应到数组中的一个位置，这样，只要比较这个字符串的哈希值对应的位置有没有被占用，就可以得到最后的结果了，想想这是什么速度？是的，是最快的O(1)，现在仔细看看这个算法吧：</p>
@@ -1082,7 +908,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/e5-85-b3-e4-ba-8ehash-e5-9c-a8-e5-a4-a7-e9-87-8f-e6-95-b0-e6-8d-ae-e6-9f-a5-e6-89-be-e4-b8-ad-e7-9a-84-e5-ba-94-e7-94-a8/" data-id="cjc0argk2001dz50rtiaf6g1b" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc0kdb4l004jng0rr8i4iknl" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1092,9 +918,9 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
 
   
-    <article id="post-e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-加密安全大补药" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/12/e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af/" class="article-date">
+    <a href="/2017/04/12/加密安全大补药/" class="article-date">
   <time datetime="2017-04-12T09:55:53.000Z" itemprop="datePublished">2017-04-12</time>
 </a>
     
@@ -1110,7 +936,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/12/e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af/">加密安全大补药</a>
+      <a class="article-title" href="/2017/04/12/加密安全大补药/">加密安全大补药</a>
     </h1>
   
 
@@ -1124,28 +950,22 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <li>用 base64 编码的结果有非常明显的特点，末尾有 = 。</li>
 </ul>
 <hr>
-<hr>
 <h2 id="对称算法"><a href="#对称算法" class="headerlink" title="对称算法"></a>对称算法</h2><ul>
 <li>算法公开、计算量小、加密速度快、加密效率高，可以对大数据进行加密。</li>
 <li>双方使用相同钥匙，安全性得不到保证。秘钥的安全性非常重要，普遍采用的方法是使用 RSA 的加密算法加密给对称加密算法的秘钥进行加密。</li>
 <li>对称加密的速度比公钥加密快很多，在很多场合都需要对称加密。</li>
 <li><p>加密方法：</p>
 <ul>
-<li><p>DES ：数据加密标准。</p>
-<pre><code>*   是一种分组数据加密技术，先将数据分成固定长度的小数据块，之后进行加密。
-</code></pre><ul>
-<li><p>速度较快，适用于大量数据加密。</p>
-</li>
-<li><p>3DES：使用三组密钥做三次加密。</p>
-<ul>
-<li>是一种基于 DES 的加密算法，使用 3 个不同密钥对同一个分组数据块进行 3 次加密，如此以使得密文强度更高。</li>
+<li>DES ：数据加密标准。<ul>
+<li>是一种分组数据加密技术，先将数据分成固定长度的小数据块，之后进行加密。</li>
+<li>速度较快，适用于大量数据加密。</li>
 </ul>
 </li>
+<li>3DES：使用三组密钥做三次加密。<pre><code>*   是一种基于 DES 的加密算法，使用 3 个不同密钥对同一个分组数据块进行 3 次加密，如此以使得密文强度更高。
+</code></pre></li>
 <li><p>AES ：高级加密标准。</p>
 <ul>
 <li>是美国联邦政府采用的一种区块加密标准。</li>
-</ul>
-</li>
 <li>相较于 DES 和 3DES 算法而言，AES 算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准。</li>
 </ul>
 </li>
@@ -1155,12 +975,13 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <ul>
 <li>ECB ：电子代码本，就是说每个块都是独立加密的。</li>
 <li><p>CBC ：密码块链，使用一个密钥和一个初始化向量(IV)对数据执行加密转换。</p>
-<pre><code>*   CBC 加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧。
-</code></pre></li>
+<ul>
+<li>CBC 加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧。</li>
 </ul>
 </li>
 </ul>
-<hr>
+</li>
+</ul>
 <hr>
 <h2 id="非对称算法"><a href="#非对称算法" class="headerlink" title="非对称算法"></a>非对称算法</h2><ul>
 <li><a href="http://baike.baidu.com/link?url=bcaM-sDHmaRhphKXH6Em2p4E7s-Hz1j4b83k1MIbx9ZQwyhN2_mYcgShu_83RXarBvmyc3kKYodI4wyv5nC1KELF_-y4iZRh9O50cRb0x83tR3HksYvEWrHOOkEa4q8hMBzUm2GApByXXzx5uzs7G_" target="_blank" rel="noopener">非对称算法</a>是指加密和解密使用不同密钥的算法，又称公钥加密。</li>
@@ -1170,15 +991,14 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <li><p>加密方法：</p>
 <ul>
 <li><p>RSA ：</p>
-<pre><code>*   由于 RSA 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取数据本身的加密解密使用对称加密算法(AES/DES3)，用 RSA 算法加密并传输对称算法所需的秘钥。
-</code></pre><ul>
+<ul>
+<li>由于 RSA 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取数据本身的加密解密使用对称加密算法(AES/DES3)，用 RSA 算法加密并传输对称算法所需的秘钥。</li>
 <li>RSA 算法还在身份认证（或称鉴权）以及数字签名方面得到广泛的使用。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<hr>
 <hr>
 <h2 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h2><ul>
 <li><a href="http://baike.baidu.com/link?url=hlbEtGdEcEkX1VfiwsRiY-Bc73pEV582oBP1T7Trz-yrv0rVLPjidtfVyqwzuR3qRn3jHQaxw_OJjK0U_p6vCTwGHKZQAy1s-wzxt50QCNFxy22BhiB79a8yIgoq1i5z" target="_blank" rel="noopener">散列算法</a>又称散列函数，哈希(HASH)函数，该函数将数据打乱混合，重新创建一个叫做散列值的指纹。</li>
@@ -1188,38 +1008,45 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 <li><p>加密方法：</p>
 <ul>
 <li><p><a href="http://baike.baidu.com/link?url=LvNy7xajWfhabxkF4KcV9wvgzpi-vtT6HS8jv_6PtiwzS_Zlzj6vuNVzrflB_YdvuMYpL4Qzxsd6w9_81ght0a" target="_blank" rel="noopener">MD5</a> ：加密结果只有 32 个字符，因为数据长度不够，现在国外基本上已经不怎么用了，国内用的很普遍。</p>
-<pre><code>*   MD5 不能反算，但 MD5 已经被[破解](http://baike.baidu.com/subview/350813/7544439.htm)了，用碰撞算法，可以将两个不同的文件生成出相同的 MD5 结果。
-</code></pre><ul>
+<ul>
+<li>MD5 不能反算，但 MD5 已经被<a href="http://baike.baidu.com/subview/350813/7544439.htm" target="_blank" rel="noopener">破解</a>了，用碰撞算法，可以将两个不同的文件生成出相同的 MD5 结果。</li>
 <li>MD5 在线加密解密网站 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</li>
 <li><p>终端命令：</p>
-<pre><code>$ echo -n hello | openssl md5
-</code></pre><p>$ echo -n hello | openssl sha1<br>$ echo -n hello | openssl sha -sha256<br>$ echo -n hello | openssl sha -sha512</p>
-<pre><code>*   MD5 常用加密方式：
-
-    *   直接使用 MD5 加密：
-
-            *   在 [http://cmd5.com](http://cmd5.com/) 上很容易被破解。
-
-        *   MD5 + 盐 加密：
-
-            *   早期方案。关于盐，随机添加的字符串，要够长，够复杂。
-*   在 [http://cmd5.com](http://cmd5.com/) 不易被破解。
-
-        *   MD5 + [HMAC](http://baike.baidu.com/link?url=vM2-KyRMPACgiSLWZjWbVrqnzGnCyPpLXnmzN6syxOSrli35VNaTARd93qZpfDEzf6PI9fSWUKUBE_DED41s8q) 加密：
-
-            *   HMAC 是一个结合了散列函数的加密算法。给定一个 &quot;密钥&quot;，分别作两次加密和散列，密钥强度要求不那么高。国外用的比较多，国内还可以。
-*   在 [http://cmd5.com](http://cmd5.com/) 无法破解。
-
-        *   MD5 + HMAC + 时间戳 加密：
-
-            *   相同的加密算法+相同的密码明文，每分钟的结果是不一样的。只有每次都不一样，黑客才不好猜。加时间戳，需要客户端和服务器端采用相同的加密算法。
-*   在 [http://cmd5.com](http://cmd5.com/) 无法破解。
-*   用户注册时发送 pwd.hmac 密码给服务器记录。关于用户第一次的密码安全，被黑客拦截到的几率非常非常低，增加附加安全手段，如 IP 辅助，手机绑定等。![sign3](http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200229534-756739925.png)
-*   用户登录时发送经过时间戳加密的密码给服务器端，服务器端根据用户名从数据库中取出记录的 pwd.hmac 密码，加上当前时间（时分）计算一次时间戳密码，加上当前时间（时(分－1)）计算一次时间戳密码，分别与用户发过来的密码进行比对，只要有一个相同，便认为用户是合法的。![sign4](http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200235081-321804614.png)
-</code></pre></li>
-<li><p>SHA1 ：理论上已经被破解</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ echo -n hello | openssl md5  </span><br><span class="line">$ echo -n hello | openssl sha1</span><br><span class="line">$ echo -n hello | openssl sha -sha256</span><br><span class="line">$ echo -n hello | openssl sha -sha512</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MD5 常用加密方式：</p>
+<ul>
+<li>直接使用 MD5 加密：</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 上很容易被破解。</li>
+</ul>
+</li>
+<li><p>MD5 + 盐 加密：</p>
+<ul>
+<li>早期方案。关于盐，随机添加的字符串，要够长，够复杂。</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 不易被破解。</li>
+</ul>
+</li>
+<li><p>MD5 + HMAC加密：</p>
+<ul>
+<li>HMAC 是一个结合了散列函数的加密算法。给定一个 “密钥”，分别作两次加密和散列，密钥强度要求不那么高。国外用的比较多，国内还可以。</li>
+<li><p>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</p>
+</li>
+<li><p>MD5 + HMAC + 时间戳 加密：</p>
+<ul>
+<li>相同的加密算法+相同的密码明文，每分钟的结果是不一样的。只有每次都不一样，黑客才不好猜。加时间戳，需要客户端和服务器端采用相同的加密算法。</li>
+</ul>
+</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</li>
+<li>用户注册时发送 pwd.hmac 密码给服务器记录。关于用户第一次的密码安全，被黑客拦截到的几率非常非常低，增加附加安全手段，如 IP 辅助，手机绑定等。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200229534-756739925.png" alt="sign3"><ul>
+<li>用户登录时发送经过时间戳加密的密码给服务器端，服务器端根据用户名从数据库中取出记录的 pwd.hmac 密码，加上当前时间（时分）计算一次时间戳密码，加上当前时间（时(分－1)）计算一次时间戳密码，分别与用户发过来的密码进行比对，只要有一个相同，便认为用户是合法的。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200235081-321804614.png" alt="sign4"></li>
+</ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p>SHA1 ：理论上已经被破解</p>
 </li>
 <li>SHA256：美国国家安全局、苹果等在使用的</li>
 <li>SHA512：</li>
@@ -1227,13 +1054,12 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 </li>
 </ul>
 <hr>
-<hr>
 <h2 id="iOS-上-非对称加密算法"><a href="#iOS-上-非对称加密算法" class="headerlink" title="iOS 上 非对称加密算法"></a>iOS 上 非对称加密算法</h2><p>在 iOS 中使用 RSA 加密解密，需要用到 .der 和 .p12 后缀格式的文件，其中 .der 格式的文件存放的是公钥（Public key）用于加密，.p12 格式的文件存放的是私钥（Private key）用于解密. 首先需要先生成这些文件，然后再将文件导入工程使用。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/e5-8a-a0-e5-af-86-e5-ae-89-e5-85-a8-e5-a4-a7-e8-a1-a5-e8-8d-af/" data-id="cjc0argk8001kz50rym239ei3" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc0kdb450041ng0rtcl9gpyn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1247,7 +1073,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -1256,7 +1082,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
     </div>
@@ -1271,7 +1097,7 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -1281,28 +1107,28 @@ cell.imageView.image = [UIImage imageWithData:imageData]&lt;span class=&quot;hlj
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2018/01/04/newnotebook/">newnotebook</a>
-          </li>
         
           <li>
             <a href="/2018/01/04/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+            <a href="/2018/01/04/newnotebook/">newnotebook</a>
           </li>
         
           <li>
-            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+            <a href="/2017/09/14/Javascript深入笔记/">Javascript深入笔记</a>
           </li>
         
           <li>
-            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+            <a href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
           </li>
         
       </ul>

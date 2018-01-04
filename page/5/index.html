@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -65,9 +65,57 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-ipa-e7-9a-84-e7-bb-84-e6-88-90" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-POST git-receive-pack (chunked)问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/13/ipa-e7-9a-84-e7-bb-84-e6-88-90/" class="article-date">
+    <a href="/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" class="article-date">
+  <time datetime="2017-03-17T08:55:41.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/POST git-receive-pack (chunked)问题解决方法/">POST git-receive-pack (chunked)问题解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">出现</span> POST git-receive-pack <span class="s1">(</span>chunked<span class="s1">)</span> <span class="s1">的原因就是</span> <span class="s1">当使用</span> HTTPS <span class="s1">提交到</span> Git <span class="s1">上时使用不检查加密要是东西过多将导致提交停止</span></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><hr>
+<h3 id="方案1-gt-使用-Git-提交代码"><a href="#方案1-gt-使用-Git-提交代码" class="headerlink" title="方案1&gt;  使用 Git 提交代码"></a><span class="s1">方案</span>1&gt;  <span class="s1">使用</span> Git <span class="s1">提交代码</span></h3><p><span class="s1">进入到要提交的代码的目录，里面包含</span> .git <span class="s1">文件夹，输入指令</span> git config http.postBuffer 524288000</p>
+<hr>
+<h3 id="方案2-gt-使用-SourceTreee-提交代码"><a href="#方案2-gt-使用-SourceTreee-提交代码" class="headerlink" title="方案2&gt; 使用 SourceTreee 提交代码"></a><span class="s1">方案</span>2&gt; <span class="s1">使用</span> SourceTreee <span class="s1">提交代码</span></h3><p>如图按照顺序依次点击在最后一步增加</p>
+<p><span class="s1">[</span>http<span class="s1">]</span></p>
+<pre><code>postBuffer = 524288000
+</code></pre><p>再次提交将会成功<span class="s2"> </span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc0kdb2e001wng0rxx4sr0q1" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ipa的组成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/ipa的组成/" class="article-date">
   <time datetime="2017-03-13T08:21:19.000Z" itemprop="datePublished">2017-03-13</time>
 </a>
     
@@ -83,7 +131,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/13/ipa-e7-9a-84-e7-bb-84-e6-88-90/">ipa的组成</a>
+      <a class="article-title" href="/2017/03/13/ipa的组成/">ipa的组成</a>
     </h1>
   
 
@@ -109,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa-e7-9a-84-e7-bb-84-e6-88-90/" data-id="cjc0argmc0045z50r0bs5ifhs" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc0kdb3c0033ng0rhorhsu1z" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -119,9 +167,9 @@
 
 
   
-    <article id="post-e9-9d-9e-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e7-ae-97-e6-b3-95-ef-bc-88-e8-bf-99-e7-a7-8d-e4-b8-9c-e8-a5-bf-e7-ae-80-e7-9b-b4-e6-98-af-e7-a7-91-e6-99-ae-e8-88-ac-e7-9a-84-e5-ad-98-e5-9c-a8-ef-bc-8c" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-非对称加密算法和摘要算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/12/e9-9d-9e-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e7-ae-97-e6-b3-95-ef-bc-88-e8-bf-99-e7-a7-8d-e4-b8-9c-e8-a5-bf-e7-ae-80-e7-9b-b4-e6-98-af-e7-a7-91-e6-99-ae-e8-88-ac-e7-9a-84-e5-ad-98-e5-9c-a8-ef-bc-8c/" class="article-date">
+    <a href="/2017/03/12/非对称加密算法和摘要算法/" class="article-date">
   <time datetime="2017-03-12T11:43:39.000Z" itemprop="datePublished">2017-03-12</time>
 </a>
     
@@ -137,7 +185,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/12/e9-9d-9e-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e7-ae-97-e6-b3-95-ef-bc-88-e8-bf-99-e7-a7-8d-e4-b8-9c-e8-a5-bf-e7-ae-80-e7-9b-b4-e6-98-af-e7-a7-91-e6-99-ae-e8-88-ac-e7-9a-84-e5-ad-98-e5-9c-a8-ef-bc-8c/">非对称加密算法和摘要算法（这种东西简直是科普般的存在，为什么软工没开课）</a>
+      <a class="article-title" href="/2017/03/12/非对称加密算法和摘要算法/">非对称加密算法和摘要算法</a>
     </h1>
   
 
@@ -145,17 +193,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h3><div class="para">如果用户想得到一份属于自己的证书，他应先向 CA 提出申请。在 CA 判明申请者的身份后，便为他分配一个公钥，并且 CA 将该公钥与申请者的身份信息绑在一起，并为之签字后，便形成证书发给申请者。</div><br><div class="para">如果一个用户想鉴别另一个证书的真伪，他就用 CA 的公钥对那个证书上的签字进行验证，一旦验证通过，该证书就被认为是有效的。证书实际是由证书签证机关（CA）签发的对用户的公钥的认证。</div><br><div class="para">证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。</div><br><div class="para"><br><br><em> </em> *<br><br></div>
+        <h3 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h3><p>非对称加密算法和摘要算法</p>
+<div class="para">如果用户想得到一份属于自己的证书，他应先向 CA 提出申请。在 CA 判明申请者的身份后，便为他分配一个公钥，并且 CA 将该公钥与申请者的身份信息绑在一起，并为之签字后，便形成证书发给申请者。</div><br><div class="para">如果一个用户想鉴别另一个证书的真伪，他就用 CA 的公钥对那个证书上的签字进行验证，一旦验证通过，该证书就被认为是有效的。证书实际是由证书签证机关（CA）签发的对用户的公钥的认证。</div><br><div class="para">证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。</div><br><div class="para"><br><br><em> </em> *<br><br></div>
 
 <hr>
-<h3 id="其实直接查看维基百科上面的解释就够了："><a href="#其实直接查看维基百科上面的解释就够了：" class="headerlink" title="其实直接查看维基百科上面的解释就够了："></a>其实直接查看维基百科上面的解释就够了：</h3><div class="para"></div><br><div class="para"><strong>公开密钥加密</strong>（<span class="LangWithName">英语：<span lang="en" xml:lang="en"><strong>public-key cryptography</strong></span></span>，又译为<strong>公开密钥加密</strong>），也称为<strong>非对称加密</strong>（asymmetric cryptography），一种<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8" title="密码学" target="_blank" rel="noopener">密码学</a><a href="https://zh.wikipedia.org/wiki/%E6%BC%94%E7%AE%97%E6%B3%95" title="算法" target="_blank" rel="noopener">算法</a>类型，在这种密码学方法中，需要一对密钥，一个是私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。</div><br><div class="para"><br><br>如果加密密钥是公开的，这用于客户给私钥所有者上传加密的数据，这被称作为<strong>公开密钥加密</strong>（狭义）。例如，网络银行的客户发给银行网站的账户操作的加密数据。<br><br>如果解密密钥是公开的，用私钥加密的信息，可以用公钥对其解密，用于客户验证持有私钥一方发布的数据或文件是完整准确的，接收者由此可知这条信息确实来自于拥有私钥的某人，这被称作<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D" title="数字签名" target="_blank" rel="noopener">数字签名</a></strong>，公钥的形式就是<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" title="数字证书" target="_blank" rel="noopener">数字证书</a>。例如，从网上下载的安装程序，一般都带有程序制作者的数字签名，可以证明该程序的确是该作者（公司）发布的而不是第三方伪造的且未被篡改过（身份认证/验证）。<br><br>常见的公钥加密算法有：<a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" title="RSA加密算法" target="_blank" rel="noopener">RSA</a>、<a href="https://zh.wikipedia.org/w/index.php?title=ElGamal&amp;action=edit&amp;redlink=1" title="ElGamal（页面不存在）" target="_blank" rel="noopener">ElGamal</a>、<a href="https://zh.wikipedia.org/w/index.php?title=%E8%83%8C%E5%8C%85%E7%AE%97%E6%B3%95&amp;action=edit&amp;redlink=1" title="背包算法（页面不存在）" target="_blank" rel="noopener">背包算法</a>、<a href="https://zh.wikipedia.org/w/index.php?title=Rabin&amp;action=edit&amp;redlink=1" title="Rabin（页面不存在）" target="_blank" rel="noopener">Rabin</a>（RSA的特例）、<a href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2%EF%BC%8D%E8%B5%AB%E5%B0%94%E6%9B%BC%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE" title="迪菲－赫尔曼密钥交换协议" target="_blank" rel="noopener">迪菲－赫尔曼密钥交换协议</a>中的公钥加密算法、<a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95" title="椭圆曲线加密算法" target="_blank" rel="noopener">椭圆曲线加密算法</a>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Elliptic Curve Cryptography, ECC</span></span>）。使用最广泛的是<a href="https://zh.wikipedia.org/wiki/RSA%E7%AE%97%E6%B3%95" title="RSA算法" target="_blank" rel="noopener">RSA算法</a>（由发明者Rivest、Shmir和Adleman姓氏首字母缩写而来）是著名的公开秘钥加密算法，ElGamal是另一种常用的非对称加密算法。<br><br><em> </em> <em>
+<h3 id="其实直接查看维基百科上面的解释就够了："><a href="#其实直接查看维基百科上面的解释就够了：" class="headerlink" title="其实直接查看维基百科上面的解释就够了："></a>其实直接查看维基百科上面的解释就够了：</h3><p><strong>公开密钥加密</strong>英语：<strong>public-key cryptography</strong>，又译为<strong>公开密钥加密</strong>），也称为<strong>非对称加密</strong>（asymmetric cryptography），一种<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8" title="密码学" target="_blank" rel="noopener">密码学</a><a href="https://zh.wikipedia.org/wiki/%E6%BC%94%E7%AE%97%E6%B3%95" title="算法" target="_blank" rel="noopener">算法</a>类型，在这种密码学方法中，需要一对密钥，一个是私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。</p>
+<div class="para"><br><br>如果加密密钥是公开的，这用于客户给私钥所有者上传加密的数据，这被称作为<strong>公开密钥加密</strong>（狭义）。例如，网络银行的客户发给银行网站的账户操作的加密数据。<br><br>如果解密密钥是公开的，用私钥加密的信息，可以用公钥对其解密，用于客户验证持有私钥一方发布的数据或文件是完整准确的，接收者由此可知这条信息确实来自于拥有私钥的某人，这被称作<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D" title="数字签名" target="_blank" rel="noopener">数字签名</a></strong>，公钥的形式就是<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" title="数字证书" target="_blank" rel="noopener">数字证书</a>。例如，从网上下载的安装程序，一般都带有程序制作者的数字签名，可以证明该程序的确是该作者（公司）发布的而不是第三方伪造的且未被篡改过（身份认证/验证）。<br><br>常见的公钥加密算法有：<a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" title="RSA加密算法" target="_blank" rel="noopener">RSA</a>、<a href="https://zh.wikipedia.org/w/index.php?title=ElGamal&amp;action=edit&amp;redlink=1" title="ElGamal（页面不存在）" target="_blank" rel="noopener">ElGamal</a>、<a href="https://zh.wikipedia.org/w/index.php?title=%E8%83%8C%E5%8C%85%E7%AE%97%E6%B3%95&amp;action=edit&amp;redlink=1" title="背包算法（页面不存在）" target="_blank" rel="noopener">背包算法</a>、<a href="https://zh.wikipedia.org/w/index.php?title=Rabin&amp;action=edit&amp;redlink=1" title="Rabin（页面不存在）" target="_blank" rel="noopener">Rabin</a>（RSA的特例）、<a href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2%EF%BC%8D%E8%B5%AB%E5%B0%94%E6%9B%BC%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE" title="迪菲－赫尔曼密钥交换协议" target="_blank" rel="noopener">迪菲－赫尔曼密钥交换协议</a>中的公钥加密算法、<a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95" title="椭圆曲线加密算法" target="_blank" rel="noopener">椭圆曲线加密算法</a>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Elliptic Curve Cryptography, ECC</span></span>）。使用最广泛的是<a href="https://zh.wikipedia.org/wiki/RSA%E7%AE%97%E6%B3%95" title="RSA算法" target="_blank" rel="noopener">RSA算法</a>（由发明者Rivest、Shmir和Adleman姓氏首字母缩写而来）是著名的公开秘钥加密算法，ElGamal是另一种常用的非对称加密算法。<br><br><em> </em> <em>
 
 </em> <em> </em><br><br>##<br><br>### 摘要算法<br><br>另一个神奇的算法就是摘要算法。摘要算法是指，可以将任意长度的文本，通过一个算法，得到一个固定长度的文本。这里文本不一定只是文本，可以是字节数据。所以摘要算法试图将世间万物，变成一个固定长度的东西。摘要算法具有以下重要特性：<br><br><em>   只要源文本不同，计算得到的结果，必然不同
 </em>   无法从结果反推出源（那是当然的，不然就能量不守恒了）<br>典型的摘要算法，比如大名鼎鼎的<code>MD5</code>和<code>SHA</code>。摘要算法主要用于比对信息源是否一致，因为只要源发生变化，得到的摘要必然不同；而且通常结果要比源短很多，所以称为“摘要”。<br><br>## 数字签名<br><br>理解了非对称加密和摘要算法，来看一下数字签名。实际上数字签名就是两者结合。假设，我们有一段授权文本，需要发布，为了防止中途篡改文本内容，保证文本的完整性，以及文本是由指定的权限狗发的。首先，先将文本内容通过摘要算法，得到摘要，再用权限狗的私钥对摘要进行加密得到密文，将源文本、密文、和私钥对应的公钥一并发布即可。那么如何验证呢？<br><br>验证方首先查看公钥是否是权限狗的，然后用公钥对密文进行解密得到摘要，将文本用同样的摘要算法得到摘要，两个摘要进行比对，如果相等那么一切正常。这个过程只要有一步出问题就视为无效。<br><br><img src="http://pchou.qiniudn.com/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D.jpg" alt=""><br><br>数字签名可以快速验证文本的完整性和合法性，已广泛应用于各个领域。理解了数字签名以后，我们进一步来看什么是数字证书。<br><br></div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/e9-9d-9e-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e7-ae-97-e6-b3-95-ef-bc-88-e8-bf-99-e7-a7-8d-e4-b8-9c-e8-a5-bf-e7-ae-80-e7-9b-b4-e6-98-af-e7-a7-91-e6-99-ae-e8-88-ac-e7-9a-84-e5-ad-98-e5-9c-a8-ef-bc-8c/" data-id="cjc0arglz003nz50rz0muubrp" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc0kdb5o005vng0rsqjlqjo8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -165,9 +215,9 @@
 
 
   
-    <article id="post-url-schemes" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-URL Schemes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/12/url-schemes/" class="article-date">
+    <a href="/2017/03/12/URL Schemes/" class="article-date">
   <time datetime="2017-03-12T09:30:55.000Z" itemprop="datePublished">2017-03-12</time>
 </a>
     
@@ -183,7 +233,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/12/url-schemes/">URL Schemes</a>
+      <a class="article-title" href="/2017/03/12/URL Schemes/">URL Schemes</a>
     </h1>
   
 
@@ -249,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/url-schemes/" data-id="cjc0argnb005yz50rrb67g6y9" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc0kdb2y002lng0rj9qko10n" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -259,9 +309,9 @@
 
 
   
-    <article id="post-ssh-secure-shell-ef-bc-88-e5-ae-89-e5-85-a8-e5-a4-96-e5-a3-b3-e5-8d-8f-e8-ae-ae-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SSH——Secure SHell（安全外壳协议）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/12/ssh-secure-shell-ef-bc-88-e5-ae-89-e5-85-a8-e5-a4-96-e5-a3-b3-e5-8d-8f-e8-ae-ae-ef-bc-89/" class="article-date">
+    <a href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/" class="article-date">
   <time datetime="2017-03-12T07:56:04.000Z" itemprop="datePublished">2017-03-12</time>
 </a>
     
@@ -277,7 +327,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/12/ssh-secure-shell-ef-bc-88-e5-ae-89-e5-85-a8-e5-a4-96-e5-a3-b3-e5-8d-8f-e8-ae-ae-ef-bc-89/">SSH——Secure SHell（安全外壳协议）</a>
+      <a class="article-title" href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/">SSH——Secure SHell（安全外壳协议）</a>
     </h1>
   
 
@@ -299,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/ssh-secure-shell-ef-bc-88-e5-ae-89-e5-85-a8-e5-a4-96-e5-a3-b3-e5-8d-8f-e8-ae-ae-ef-bc-89/" data-id="cjc0argn9005uz50rjmvrdf7a" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc0kdb2s002bng0rmlptjipb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -309,9 +359,9 @@
 
 
   
-    <article id="post-e5-b0-8f-e4-bb-a3-e7-a0-81-e5-90-88-e9-9b-86" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-小代码合集" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/11/e5-b0-8f-e4-bb-a3-e7-a0-81-e5-90-88-e9-9b-86/" class="article-date">
+    <a href="/2017/03/11/小代码合集/" class="article-date">
   <time datetime="2017-03-10T17:57:43.000Z" itemprop="datePublished">2017-03-11</time>
 </a>
     
@@ -327,7 +377,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/11/e5-b0-8f-e4-bb-a3-e7-a0-81-e5-90-88-e9-9b-86/">小代码合集</a>
+      <a class="article-title" href="/2017/03/11/小代码合集/">小代码合集</a>
     </h1>
   
 
@@ -335,76 +385,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="解决block中self的引用"><a href="#解决block中self的引用" class="headerlink" title="解决block中self的引用"></a>解决block中self的引用</h3><p>__weak typeof(self) weakSelf = self</p>
+        <h3 id="解决block中self的引用"><a href="#解决block中self的引用" class="headerlink" title="解决block中self的引用"></a>解决block中self的引用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self</span><br></pre></td></tr></table></figure>
 <hr>
 <hr>
-<h3 id="iOS获得屏幕大小"><a href="#iOS获得屏幕大小" class="headerlink" title="iOS获得屏幕大小"></a>iOS获得屏幕大小</h3><p>宽度:<br>UIScreen mainScreen] bounds].size.width</p>
-<p>高度:<br>UIScreen mainScreen] bounds].size.height</p>
-<p>可以将屏幕大小定义成一个宏:</p>
-<p>#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</p>
-<p>#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</p>
-<hr>
+<h3 id="iOS获得屏幕大小"><a href="#iOS获得屏幕大小" class="headerlink" title="iOS获得屏幕大小"></a>iOS获得屏幕大小</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//宽度:</span><br><span class="line">UIScreen mainScreen] bounds].size.width</span><br><span class="line"></span><br><span class="line">//高度:</span><br><span class="line">UIScreen mainScreen] bounds].size.height</span><br><span class="line"></span><br><span class="line">//可以将屏幕大小定义成一个宏:</span><br><span class="line">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span><br><span class="line"></span><br><span class="line">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="延时执行可以尝试NSTimer方法"><a href="#延时执行可以尝试NSTimer方法" class="headerlink" title="延时执行可以尝试NSTimer方法"></a>延时执行可以尝试NSTimer方法</h3><p>例子：UIAlertViewController自动消失</p>
-<p>UIAlertController *alert = [UIAlertController alertControllerWithTitle:@”提示” message:@”没有上一部了” preferredStyle:UIAlertControllerStyleAlert];</p>
-<p>[self presentViewController:alert animated:NO completion:nil];</p>
-<p>[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];</p>
-<ul>
-<li>(void)creatAlert:(NSTimer *)timer{</li>
-</ul>
-<p>UIAlertController *alert = [timer userInfo];</p>
-<p>[alert dismissViewControllerAnimated:YES completion:nil];</p>
-<p>alert = nil;</p>
-<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">[self presentViewController:alert animated:NO completion:nil];</span><br><span class="line"></span><br><span class="line">[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];</span><br><span class="line"></span><br><span class="line">- (void)creatAlert:(NSTimer *)timer &#123;</span><br><span class="line"></span><br><span class="line">    UIAlertController *alert = [timer userInfo];</span><br><span class="line"></span><br><span class="line">    [alert dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    alert = nil;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
+<h3 id="定制statusBar部分"><a href="#定制statusBar部分" class="headerlink" title="定制statusBar部分"></a><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(UIStatusBarStyle)preferredStatusBarStyle</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    return UIStatusBarStyleLightContent;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="定制statusBar部分"><a href="#定制statusBar部分" class="headerlink" title="定制statusBar部分"></a><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3><p><span class="s1">-(</span><span class="s3">UIStatusBarStyle</span><span class="s1">)preferredStatusBarStyle</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s5">return</span> <span class="s1">UIStatusBarStyleLightContent</span><span class="s4">;</span></p>
-<p><span class="s1">}</span></p>
+<h2 id="NSString-和-NSNumber"><a href="#NSString-和-NSNumber" class="headerlink" title="   NSString 和 NSNumber "></a><span class="s1">   NSString 和 NSNumber </span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSString *str = @&quot;120&quot;.</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];</span><br><span class="line"></span><br><span class="line">NSNumber *numTemp = [numberFormatter numberFromString:str];</span><br></pre></td></tr></table></figure>
 <hr>
-<hr>
-<h2 id="NSString-和-NSNumber"><a href="#NSString-和-NSNumber" class="headerlink" title="   NSString 和 NSNumber "></a><span class="s1">   NSString 和 NSNumber </span></h2><pre class="p1"><span class="s1">    NSString *str = @"120". </span>
-
-<span class="s1">    NSNumberFormatter</span><span class="s2"> *numberFormatter = [[</span><span class="s1">NSNumberFormatter</span> <span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];</span>
-
-<span class="s2">    [numberFormatter </span><span class="s1">setNumberStyle</span><span class="s2">:</span><span class="s1">NSNumberFormatterDecimalStyle</span><span class="s2">];</span>
-
-<span class="s1">    </span><span class="s4">NSNumber</span><span class="s1"> *numTemp = [numberFormatter </span><span class="s3">numberFromString</span><span class="s1">:str]</span><span class="s1">;</span></pre>
-<div>
-
-* * *
-
-* * *
-
-<span class="s1">
-</span>
-
-</div>
-<pre class="p3"><span class="s1">    NSNumber *num = [NSNumber numberWithInt:2] ;
-</span>
-
-<span class="s1">   NSNumberFormatter</span><span class="s2"> *numberFormatter = [[</span><span class="s1">NSNumberFormatter</span><span class="s2"> </span><span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];</span>
-
-   NSString* str = [numberFormatter <span class="s2">stringFromNumber</span>:num];</pre>
-
-<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSNumber *num = [NSNumber numberWithInt:2] ;</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">NSString* str = [numberFormatter stringFromNumber:num];</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="UINavigationController先pop再push，push操作将无效。"><a href="#UINavigationController先pop再push，push操作将无效。" class="headerlink" title="UINavigationController先pop再push，push操作将无效。"></a>UINavigationController<span class="s1">先</span>pop<span class="s1">再</span>push<span class="s1">，</span>push<span class="s1">操作将无效。</span></h2><p>解决方案是：</p>
 <p>1. <span class="s1">从</span>self.navigationController.viewControllers<span class="s1">中拿出需要保留的</span>View Controller<span class="s1">放到一个数组中</span></p>
 <p>2. <span class="s1">向数组中添加需要</span>push<span class="s1">的</span>View Controller</p>
 <p>3. <span class="s1">调用</span>[self.navigationController setViewControllers:array animated:YES]</p>
-<pre class="p1"><span class="keyword">InvestmentViewController</span> *investmentList = [[InvestmentViewController<span class="vars"> alloc</span>]<span class="vars"> init</span>];
-investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <span class="keyword">YES</span>;
-<span class="keyword">NSMutableArray</span> *arrView = [NSMutableArray<span class="vars"> arrayWithArray</span>:<span class="keyword">self</span><span class="xcodeconstants">.navigationController</span><span class="xcodeconstants">.viewControllers</span>];
-<span class="keyword">int</span> index = (<span class="keyword">int</span>)[arrView<span class="vars"> indexOfObject</span>:<span class="keyword">self</span>];
-[arrView<span class="vars"> removeObjectAtIndex</span>:index];
-[arrView<span class="vars"> addObject</span>:investmentList];
-[<span class="keyword">self</span><span class="xcodeconstants">.navigationController</span><span class="vars"> setViewControllers</span>:arrView<span class="vars"> animated</span>:<span class="keyword">YES</span>];</pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];</span><br><span class="line">investmentList.hidesBottomBarWhenPushed = YES;</span><br><span class="line">NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];</span><br><span class="line">int index = (int)[arrView indexOfObject:self];</span><br><span class="line">[arrView removeObjectAtIndex:index];</span><br><span class="line">[arrView addObject:investmentList];</span><br><span class="line">[self.navigationController setViewControllers:arrView animated:YES];</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/e5-b0-8f-e4-bb-a3-e7-a0-81-e5-90-88-e9-9b-86/" data-id="cjc0argku0029z50r58yazxbl" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc0kdb4n004lng0rt8ez8znu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -414,9 +418,9 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 
 
   
-    <article id="post-interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Interface Builde（nib和xib的深究）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/10/interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89/" class="article-date">
+    <a href="/2017/03/10/Interface Builde（nib和xib的深究）/" class="article-date">
   <time datetime="2017-03-10T14:31:10.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
     
@@ -432,7 +436,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89/">Interface Builde（nib和xib的深究）</a>
+      <a class="article-title" href="/2017/03/10/Interface Builde（nib和xib的深究）/">Interface Builde（nib和xib的深究）</a>
     </h1>
   
 
@@ -443,22 +447,20 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         <p>iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。</p>
 <p>xib<span class="s1">和</span>nib<span class="s1">都是</span>Interface Builder<span class="s1">的图形界面设计文档。</span></p>
 <hr>
-<hr>
 <h3 id="nib和xib的历史"><a href="#nib和xib的历史" class="headerlink" title="nib和xib的历史"></a>nib和xib的历史</h3><p>nib<span class="s1">这个名字来自于</span>NeXTSTEP<span class="s1">系统，在</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之前，一直使用</span>nib<span class="s1">作为</span>Interface Builder<span class="s1">的图形文档，</span>nib<span class="s1">的发展经过了</span>nib2.0<span class="s1">, </span>nib3.0<span class="s1">，到</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之后，带有</span>NeXTSTEP<span class="s1">标志的</span>nib<span class="s1">被换成了</span>xib</p>
-<hr>
 <hr>
 <h3 id="nib和xib的异同"><a href="#nib和xib的异同" class="headerlink" title="nib和xib的异同"></a>nib和xib的异同</h3><p>xib是一个XML格式的纯文本文件，nib是一个二进制文件。xib比nib有一个很明显的优势。</p>
 <p>可以进行diff操作。</p>
 <p>不管是xib还是nib，<span class="s1">Xcode</span>编译后都将得到一个供程序运行时使用的经过编译的二进制<span class="s1">nib</span>文件。现在最新版本的<span class="s1">Xcode</span>在创建项目时，已经默认使用<span class="s1">xib</span>格式的文档了。</p>
         
           <p class="article-more-link">
-            <a href="/2017/03/10/interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89/#more">Read More</a>
+            <a href="/2017/03/10/Interface Builde（nib和xib的深究）/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89/" data-id="cjc0argm6003xz50rr42h558y" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc0kdb1z001ang0rp2zgbj4e" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -468,9 +470,9 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 
 
   
-    <article id="post-e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-周记总结 2017-3-10记下" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/" class="article-date">
+    <a href="/2017/03/10/周记总结 2017-3-10记下/" class="article-date">
   <time datetime="2017-03-10T14:07:52.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
     
@@ -486,7 +488,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/">周记总结 2017-3-10记下</a>
+      <a class="article-title" href="/2017/03/10/周记总结 2017-3-10记下/">周记总结 2017-3-10记下</a>
     </h1>
   
 
@@ -494,40 +496,31 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><span class="s1">一、本周工作总结</span></p>
-<ol>
+        <ol>
 <li><span class="s1">熟悉Socket.IO原理。</span></li>
 <li><span class="s3">看书《</span><span class="s1">Objective-C高级编程：iOS与OS X多线程和内存管理》</span></li>
 <li><span class="s1">了解iOS的方方面面</span></li>
 </ol>
-<p><span class="s1">二、工作心得</span></p>
-<hr>
 <hr>
 <h3 id="关于是否要releases-dispatch-queues："><a href="#关于是否要releases-dispatch-queues：" class="headerlink" title="关于是否要releases dispatch queues："></a>关于是否要releases dispatch queues<span class="s1">：</span></h3><p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
 <p>You need to use dispatch_retain and dispatch_release on your queue. ARC does not manage them.</p>
 <p><strong>If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</strong></p>
-<p>ARC will manage your queue for you. You do not need to <span class="s1">(</span>and cannot<span class="s1">)</span> use dispatch_retain or dispatch_release if ARC is enabled.</p>
+<p>ARC will manage your queue for you. You do not need to (and cannot) use dispatch_retain or dispatch_release if ARC is enabled.</p>
 <p>（简单的说就是在iOS6.0之后，ARC会帮忙我们管理线程队列（GCD）不需要我们去retain或者release了。</p>
 <hr>
-<hr>
-<h3 id="数据模型属性采用的基本策略"><a href="#数据模型属性采用的基本策略" class="headerlink" title="数据模型属性采用的基本策略"></a>数据模型属性采用的基本策略</h3><p>除了基本类型需要用<span class="s1">assign</span>，字符串需要用<span class="s1">copy</span>，其他对象类型都需要用<span class="s1">strong</span></p>
-<p>（考虑到循环引用问题时strong和weak从中选择）</p>
-<hr>
+<h3 id="数据模型属性采用的基本策略"><a href="#数据模型属性采用的基本策略" class="headerlink" title="数据模型属性采用的基本策略"></a>数据模型属性采用的基本策略</h3><p>除了基本类型需要用assign，字符串需要用copy，其他对象类型都需要用strong<br>（考虑到循环引用问题时strong和weak从中选择）</p>
 <hr>
 <h3 id="iOS应用到内部储存结构"><a href="#iOS应用到内部储存结构" class="headerlink" title="iOS应用到内部储存结构"></a>iOS应用到内部储存结构</h3><ul>
-<li><span class="s2"><strong>Documents</strong> </span>：保存应用运行时生成的需要持久化的数据，<span class="s2">iTunes</span>同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
-<li><span class="s2"><strong>Library/Caches</strong> : </span>保存应用运行时生成的需要持久化的数据，<span class="s2">iTunes</span>同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
-<li><span class="s2"><strong>Library/Preference</strong> : </span>保存应用的所有偏好设置，<span class="s2">iOS</span>的<span class="s2">Settings</span>(设置)应用会在该目录中查找应用的设置信息。<span class="s2">iTunes</span>同步设备时会备份该目录</li>
-<li><span class="s2"><strong>tmp</strong> : </span>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。<span class="s2">iTunes</span>同步设备时不会备份该目录</li>
+<li><strong>Documents</strong>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
+<li><strong>Library/Caches</strong> : 保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
+<li><strong>Library/Preference</strong> :保存应用的所有偏好设置，iOS的 Setting(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</li>
+<li><strong>tmp</strong> :保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录</li>
 </ul>
 <hr>
-<hr>
-<h3 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO "></a><span class="s1">Socket.IO </span></h3><p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时<span class="s1">app</span>功能,模糊化各种传输机制。</p>
-<hr>
+<h3 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a>Socket.IO</h3><p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时功能,模糊化各种传输机制。</p>
 <hr>
 <h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
 <p>Global Dispatch Queue<span class="s1">是所有应用程序都能够使用</span>Concurrent Dispatch Queue</p>
-<hr>
 <hr>
 <h3 id="IBOutlet"><a href="#IBOutlet" class="headerlink" title="IBOutlet"></a>IBOutlet</h3><p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
 <p>Interface Builder<span class="s2">则是根据</span>IBOutlet<span class="s2">来寻找可以在</span>Builder<span class="s2">里操作的成员变量。</span></p>
@@ -556,22 +549,21 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 <hr>
 <h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
 <p>其实最好可以用代码来查看一下</p>
-<p>CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];<br>NSLog(@”statusbar height: %f”, rectOfStatusbar.size.height);   // 高度       CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;<br>NSLog(@”navigationbar height: %f”, rectOfNavigationbar.size.height);   // 高度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];</span><br><span class="line">NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 </span><br><span class="line">CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;</span><br><span class="line">NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度</span><br></pre></td></tr></table></figure>
 <hr>
 <hr>
-<h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong><span class="s1">和</span><strong>id</strong><span class="s1">的异同</span></h3><p><span class="s1">instancetype</span>的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
-<p><span class="s1"><strong>1</strong></span>、相同点</p>
+<h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong>和<strong>id</strong>的异同</h3><p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
+<p><strong>1</strong>、相同点</p>
 <p>都可以作为方法的返回类型</p>
-<p><span class="s1"><strong>2</strong></span>、不同点</p>
-<p>①<span class="s1">instancetype</span>可以返回和方法所在类相同类型的对象，<span class="s1">id</span>只能返回未知类型的对象；</p>
-<p>②<span class="s1">instancetype</span>只能作为返回值，不能像<span class="s1">id</span>那样作为参数，比如下面的写法：</p>
-<hr>
+<p><strong>2</strong>、不同点</p>
+<p>① instancetype&lt;可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象；</p>
+<p>② instancetype只能作为返回值，不能像id那样作为参数，比如下面的写法：</p>
 <hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/" data-id="cjc0argkl001zz50rslf0nvyt" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjc0kdb4f004bng0r0qywiusi" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -581,9 +573,9 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 
 
   
-    <article id="post-e7-bc-96-e8-af-91-e5-9e-8b-e4-b8-8e-e8-a7-a3-e9-87-8a-e5-9e-8b-e3-80-81-e5-8a-a8-e6-80-81-e8-af-ad-e8-a8-80-e4-b8-8e-e9-9d-99-e6-80-81-e8-af-ad-e8-a8-80-e3-80-81" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编译型与解释型、动态语言与静态语言" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/20/e7-bc-96-e8-af-91-e5-9e-8b-e4-b8-8e-e8-a7-a3-e9-87-8a-e5-9e-8b-e3-80-81-e5-8a-a8-e6-80-81-e8-af-ad-e8-a8-80-e4-b8-8e-e9-9d-99-e6-80-81-e8-af-ad-e8-a8-80-e3-80-81/" class="article-date">
+    <a href="/2017/02/20/编译型与解释型、动态语言与静态语言/" class="article-date">
   <time datetime="2017-02-20T13:46:15.000Z" itemprop="datePublished">2017-02-20</time>
 </a>
     
@@ -599,7 +591,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/20/e7-bc-96-e8-af-91-e5-9e-8b-e4-b8-8e-e8-a7-a3-e9-87-8a-e5-9e-8b-e3-80-81-e5-8a-a8-e6-80-81-e8-af-ad-e8-a8-80-e4-b8-8e-e9-9d-99-e6-80-81-e8-af-ad-e8-a8-80-e3-80-81/">编译型与解释型、动态语言与静态语言、</a>
+      <a class="article-title" href="/2017/02/20/编译型与解释型、动态语言与静态语言/">编译型与解释型、动态语言与静态语言、</a>
     </h1>
   
 
@@ -619,7 +611,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/e7-bc-96-e8-af-91-e5-9e-8b-e4-b8-8e-e8-a7-a3-e9-87-8a-e5-9e-8b-e3-80-81-e5-8a-a8-e6-80-81-e8-af-ad-e8-a8-80-e4-b8-8e-e9-9d-99-e6-80-81-e8-af-ad-e8-a8-80-e3-80-81/" data-id="cjc0arglj0039z50rfst7y8n0" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjc0kdb5d005jng0r7rqectlk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -629,9 +621,9 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 
 
   
-    <article id="post-java-e5-92-8cc-e7-9a-84-e5-8c-ba-e5-88-ab" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java和C  的区别（转载）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/11/java-e5-92-8cc-e7-9a-84-e5-8c-ba-e5-88-ab/" class="article-date">
+    <a href="/2017/02/11/Java和C  的区别（转载）/" class="article-date">
   <time datetime="2017-02-11T14:40:32.000Z" itemprop="datePublished">2017-02-11</time>
 </a>
     
@@ -647,7 +639,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/java-e5-92-8cc-e7-9a-84-e5-8c-ba-e5-88-ab/">Java和C++的区别（转载）</a>
+      <a class="article-title" href="/2017/02/11/Java和C  的区别（转载）/">Java和C++的区别（转载）</a>
     </h1>
   
 
@@ -658,64 +650,13 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
         <div id="article_content" class="article_content"><br><div><br><br>　　1.<u><a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>没有显式指针</u>，而在C++中却可以用。<br><br>2.Java是<u>主动多态的</u>，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。<br><br>3.Java是<u>隐式继承的</u>，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能谈到实例化的对象。这时，Java看上去是强制面向对象。C++却把话都说明白了，你继承谁就继承谁，继承多个都可以，你什么都不说那么就不继承。但是C++当中，不继承不代表不能被继承，实际上C++禁止这么做。原因前面已经说过了，C++是被动多态的。你不用virtual去修饰基类的成员函数，程序执行时函数调用就不会自动调到派生类。<br><br>4.Java<u>有接口</u>，C++中却没有。这不是说C++不好，只是C++没有明确提出这样一个概念。C++中定义一个抽象类，把成员函数设为常量，并改成纯虚函数，数据域也设成常量，那么<u>在C++中这样的抽象类就是接口</u>。你可以说它不是，因为C++中没有接口，但是我要说明的是，C++可以做出一个接口来。<br><br>5.Java是<u>单根继承</u>（Single inheritance）的，但是允许一个类实现多个接口。<u>C++却支持多继承</u>，尽管很少有人去用它。<br><br>6.Java和C++最显著的区别体现在对象的处理上。Java中，对象变量在内部被当作指针处理。Java文献指出将对象变量作为引用，不过它们与C++中的引用并不完全相同。所谓引用，就是一个介于指针和变量之间的东西。<br><br>7.<u>Java中所有的函数都与类相关，没有全局变量和非成员函数，而C++却支持这些</u>。从这个角度上讲，C++又是强制面向对象的。因为C++当中可以没有类，即使没有类，程序依然执行得好好的，并且在程序设计的功能很少的时候，我就喜欢这么干。偶尔面向过程编程，又有什么不好呢？<br><br>8.C++中，你使用的动态内存怎么用就怎么还，Java中你不用管，<u>Java包含一个垃圾收集系统</u>，作为运行时库的一部分。它会监视正在运行的程序，当内存不足的时候自动去回收它，当然你也可以干预这个过程，不过如无必要，你不必惦记这件事，Java总会把你的硬件想象得比较好，不到万不得已不回收动态内存，这也解决了C++程序的内存泄漏问题，虽然这是程序员自己的不负责任。<br><br>9.Java有很紧凑的<u>异常处理机制</u>，而C++稍微显得草率了一些。但是这并不代表C++异常处理机制不强大，因为Java只能抛出Throwable子类的异常，C++却什么都可以。<br><div>　　10.Java标准库又是Java庞大的体现，涵盖了国际化、网络化、数学、声音、Web应用和服务以及数据库等。你可以说Java语言在JSP、JavaScipt、网络编程、分布计算交易管理应用、Java ME应用、Web应用上风光无限，说Java是一门小巧的语言，但是Java的小巧也主要就小巧这些方面。</div><br></div><br></div><br><div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1491922184681"></div><br>
         
           <p class="article-more-link">
-            <a href="/2017/02/11/java-e5-92-8cc-e7-9a-84-e5-8c-ba-e5-88-ab/#more">Read More</a>
+            <a href="/2017/02/11/Java和C  的区别（转载）/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/java-e5-92-8cc-e7-9a-84-e5-8c-ba-e5-88-ab/" data-id="cjc0argmd0047z50r42powkkj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-oauth-ef-bc-88-e7-ac-94-e8-ae-b0-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/11/oauth-ef-bc-88-e7-ac-94-e8-ae-b0-ef-bc-89/" class="article-date">
-  <time datetime="2017-02-11T05:36:09.000Z" itemprop="datePublished">2017-02-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/oauth-ef-bc-88-e7-ac-94-e8-ae-b0-ef-bc-89/">OAuth （笔记）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span class="s1">三、</span><strong>OAuth</strong><span class="s1">的思路</span></p>
-<p><span class="s2">OAuth</span>在<span class="s2">“</span>客户端<span class="s2">“</span>与<span class="s2">“</span>服务提供商<span class="s2">“</span>之间，设置了一个授权层（<span class="s2">authorization layer</span>）。<span class="s2">“</span>客户端<span class="s2">“</span>不能直接登录<span class="s2">“</span>服务提供商<span class="s2">“</span>，只能登录授权层，以此将用户与客户端区分开来。<span class="s2">“</span>客户端<span class="s2">“</span>登录授权层所用的令牌（<span class="s2">token</span>），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。</p>
-<p><span class="s2">“</span>客户端<span class="s2">“</span>登录授权层以后，<span class="s2">“</span>服务提供商<span class="s2">“</span>根据令牌的权限范围和有效期，向<span class="s2">“</span>客户端<span class="s2">“</span>开放用户储存的资料。</p>
-<p>五、客户端的授权模式</p>
-<p><span class="s3">客户端必须得到用户的授权（</span>authorization grant<span class="s3">），才能获得令牌（</span>access token<span class="s3">）。</span>OAuth 2.0<span class="s3">定义了四种授权方式。</span></p>
-<ul>
-<li><span class="s3">授权码模式（</span>authorization code<span class="s3">）</span></li>
-<li><span class="s3">简化模式（</span>implicit<span class="s3">）</span></li>
-<li><span class="s3">密码模式（</span>resource owner password credentials<span class="s3">）</span></li>
-<li><span class="s3">客户端模式（</span>client credentials<span class="s3">）</span></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/oauth-ef-bc-88-e7-ac-94-e8-ae-b0-ef-bc-89/" data-id="cjc0argml004nz50rjzsezt4z" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjc0kdb22001fng0rvfnun8y0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -729,7 +670,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -738,7 +679,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
     </div>
@@ -753,7 +694,7 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -763,28 +704,28 @@ investmentList<span class="xcodeconstants">.hidesBottomBarWhenPushed</span> = <s
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2018/01/04/newnotebook/">newnotebook</a>
-          </li>
         
           <li>
             <a href="/2018/01/04/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+            <a href="/2018/01/04/newnotebook/">newnotebook</a>
           </li>
         
           <li>
-            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+            <a href="/2017/09/14/Javascript深入笔记/">Javascript深入笔记</a>
           </li>
         
           <li>
-            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+            <a href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
           </li>
         
       </ul>
