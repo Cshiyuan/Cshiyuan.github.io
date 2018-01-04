@@ -10,11 +10,11 @@
   <meta name="description" content="在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有「名称(name)」或「选择子(selector)」,可以接受参数。而且可能还有返回值。  动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。  在OC中，如果要向某对象传递消息，那就会使用动态绑定机制来决定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="objc_msgSend和消息传递机制（大补）">
-<meta property="og:url" content="https://cshiyuan.github.io/2017/03/22/objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e/index.html">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/index.html">
 <meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
 <meta property="og:description" content="在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有「名称(name)」或「选择子(selector)」,可以接受参数。而且可能还有返回值。  动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。  在OC中，如果要向某对象传递消息，那就会使用动态绑定机制来决定">
 <meta property="og:image" content="http://img.blog.csdn.net/20140807214718411">
-<meta property="og:updated_time" content="2018-01-04T13:54:38.326Z">
+<meta property="og:updated_time" content="2018-01-04T16:17:49.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="objc_msgSend和消息传递机制（大补）">
 <meta name="twitter:description" content="在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有「名称(name)」或「选择子(selector)」,可以接受参数。而且可能还有返回值。  动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。  在OC中，如果要向某对象传递消息，那就会使用动态绑定机制来决定">
@@ -69,9 +69,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-objc_msgSend和消息传递机制（大补）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/22/objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e/" class="article-date">
+    <a href="/2017/03/22/objc_msgSend和消息传递机制（大补）/" class="article-date">
   <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
 </a>
     
@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e/" data-id="cjc0mwgye00371n0rczb6h0br" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjc0p9546003b970rooamlwh0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -173,7 +173,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/遇到过的问题/">遇到过的问题</a></li></ul>
     </div>
   </div>
 
