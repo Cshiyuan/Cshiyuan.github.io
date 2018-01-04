@@ -7,16 +7,16 @@
   
   <title>摘抄Effective Objective-C 2.0 (1) | SHYIUAN&#39;S NOTEBOOK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： 123NSString stackString;// error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出">
+  <meta name="description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： NSString stackString;  // error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="摘抄Effective Objective-C 2.0 (1)">
 <meta property="og:url" content="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /index.html">
 <meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
-<meta property="og:description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： 123NSString stackString;// error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出">
+<meta property="og:description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： NSString stackString;  // error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出来">
 <meta property="og:updated_time" content="2018-01-04T13:59:11.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="摘抄Effective Objective-C 2.0 (1)">
-<meta name="twitter:description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： 123NSString stackString;// error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出">
+<meta name="twitter:description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： NSString stackString;  // error: interface type cannot be statically allocated Objective-C将堆内存管理抽象出来">
   
     <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
   
@@ -24,11 +24,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -94,8 +94,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Objective-C的对象总是使用指针的原因"><a href="#Objective-C的对象总是使用指针的原因" class="headerlink" title="Objective-C的对象总是使用指针的原因"></a><span class="s1">Objective-C</span>的对象总是使用指针的原因</h3><p>因为对象所占用的内存总是分配在“堆空间 (<span class="s1">heap space</span>) ”中，而绝对不会分配在“栈(<span class="s1">stack</span>)上。不能在栈中分配<span class="s1">Objective-C</span>对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString stackString;</span><br><span class="line"></span><br><span class="line">// error: interface type cannot be statically allocated</span><br></pre></td></tr></table></figure>
-<p><span class="s1">Objective-C</span>将堆内存管理抽象出来了。不需要用<span class="s1">malloc</span>及<span class="s1">free</span>来分配或释放对象所占内存。<span class="s1">Objective-C</span>运行期环境把这部分工作抽象为一套内存管理架构，名叫“引用计数”</p>
+<pre><code>NSString stackString;
+
+// error: interface type cannot be statically allocated
+</code></pre><p><span class="s1">Objective-C</span>将堆内存管理抽象出来了。不需要用<span class="s1">malloc</span>及<span class="s1">free</span>来分配或释放对象所占内存。<span class="s1">Objective-C</span>运行期环境把这部分工作抽象为一套内存管理架构，名叫“引用计数”</p>
 <p>在<span class="s1">Objective-C</span>代码中，有时会遇到定义里不含<span class="s1">*</span>的变量，它们可能会使用“栈空间”这些变量所保存的不是<span class="s1">Objective</span>对象。比如<span class="s1">CoreGraphics</span>框架中的<span class="s1">CGRect</span>。这是一个结构体。与创建结构体相比，创建对象还需要额外开销，例如分配以及释放堆内存等。</p>
 <hr>
 <p><span class="s2">“<strong>向前声明(</strong></span><strong>forward declaring</strong><span class="s2"><strong>)</strong>”</span> <span class="s2">在编译一个使用了</span>EOCPerson<span class="s2">类等文件时，不需要知道</span>EOCEmployer<span class="s2">类等全部细节，只需要知道有一个类名叫</span>EOCEmployer<span class="s2">就好。</span></p>
@@ -106,25 +108,49 @@
 <p>其中：</p>
 <p>“<span class="s1">arrayWIthObjects:</span>”方法会依次处理各个参数，直到发现<span class="s1">nil</span>为止。如果在插入数组的时候，存在<span class="s1">nil</span>。方法会提前终止。</p>
 <p>多用类型常量，少用<span class="s1">#define</span>预处理指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static const NSTimeInterval kAnimationDuration = 0.3;</span><br></pre></td></tr></table></figure>
-<p>常用的命名方法是：若常量局限于某“编译单元”（<span class="s1">translation unit</span>，也就是“实现文件”，<span class="s1">implementation file</span>）之内，则在前面加字母<span class="s1">k</span>；</p>
+<pre><code>static const NSTimeInterval kAnimationDuration = 0.3;
+</code></pre><p>常用的命名方法是：若常量局限于某“编译单元”（<span class="s1">translation unit</span>，也就是“实现文件”，<span class="s1">implementation file</span>）之内，则在前面加字母<span class="s1">k</span>；</p>
 <p>若常量在类之外可见，则通常以类名为前缀。变量一定要同时用<span class="s1">static </span>与<span class="s1">const</span>来声明。</p>
 <hr>
 <p><strong>编译器每收到一个编译单元，就会输出一份“目标文件”（<span class="s1">object file</span>）。</strong>在<span class="s1">Objective-C</span>的语境下，“编译单元”一词通常指每个类的实现文件（以<span class="s1">.m</span>为后缀名）。假若声明此变量时不加<span class="s1">static</span>，则编译器会为它创建一个“外部符号”（<span class="s1">external symbol</span>）。</p>
 <hr>
 <p><span class="Apple-converted-space">  </span>全局符号表（<span class="s1">global symbol table</span>）中，以便可以在定义该常量的编译单元外使用。因此，其定义方式与上例演示的<span class="s1">static const</span>有所不同。应该这样子定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// In the header file</span><br><span class="line"></span><br><span class="line">extern NSString *const EOCStringConstant;</span><br><span class="line"></span><br><span class="line">// In the implementation file</span><br><span class="line"></span><br><span class="line">NSString *const EOCStringConstant = @“VALUE”;</span><br></pre></td></tr></table></figure>
-<p>编译器看到头文件中的<span class="s1">extern</span>关键字，就能明白如何在引入此头文件的代码中处理该常量了。这个关键字是要告诉编译器，在全局符号表中将会有一个名叫<span class="s1">EOCStringConstant</span>的符号。也就是说，编译器无须查看其定义，即允许代码使用此常量。因为它真的，当链接成二进制文件之后，肯定能找到这个常量。</p>
+<pre><code>// In the header file
+
+extern NSString *const EOCStringConstant;
+
+// In the implementation file
+
+NSString *const EOCStringConstant = @“VALUE”;
+</code></pre><p>编译器看到头文件中的<span class="s1">extern</span>关键字，就能明白如何在引入此头文件的代码中处理该常量了。这个关键字是要告诉编译器，在全局符号表中将会有一个名叫<span class="s1">EOCStringConstant</span>的符号。也就是说，编译器无须查看其定义，即允许代码使用此常量。因为它真的，当链接成二进制文件之后，肯定能找到这个常量。</p>
 <p>注意<span class="s1">const</span>修饰符在常量类型中的位置。常量定义应从右至左解读，所以在本例中，<span class="s1">EOCStringConstant</span>就是“一个常量，而这个常量是指针，指向<span class="s1">NSString</span>对象”。</p>
 <hr>
 <p><span class="s1">Foundation</span>框架中定义了一些辅助的宏，用这些宏来定义枚举类型时，也可以指定用于保存枚举值的底层数据类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, EOCConnectionState) &#123;</span><br><span class="line"></span><br><span class="line">   EOCConectionStateDisconnected,</span><br><span class="line"></span><br><span class="line">   EOCConectionStateConnecting,</span><br><span class="line"></span><br><span class="line">   EOCConnectionStateConnected,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) &#123;</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>typedef NS_ENUM(NSUInteger, EOCConnectionState) {
 
+   EOCConectionStateDisconnected,
+
+   EOCConectionStateConnecting,
+
+   EOCConnectionStateConnected,
+
+};
+</code></pre><pre><code>typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) {
+
+  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,
+
+  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,
+
+  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,
+
+  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,
+
+};
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc0kdb4w004zng0rymozvun7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc0m2a2m0054ad0rn1gtgqwo" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -225,6 +251,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

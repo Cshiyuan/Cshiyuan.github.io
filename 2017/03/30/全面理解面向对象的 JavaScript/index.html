@@ -26,11 +26,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -115,18 +115,60 @@
 <hr>
 <h3 id="彻底理解原型链-prototype-chain"><a href="#彻底理解原型链-prototype-chain" class="headerlink" title="彻底理解原型链 (prototype chain)"></a>彻底理解原型链 (prototype chain)</h3><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（**</strong>implicit reference<strong>**）</strong>，这个引用称之为<strong>原型（**</strong>prototype<strong>**）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（**</strong>prototype chain<strong>**）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个<strong><strong>proto</strong> 属性</strong>来实现对原型的<strong>隐式引用</strong>。  程序清单4说明了这一点。  </p>
 <p><strong>清单 4. 对象的 <strong>proto</strong> 属性和隐式引用</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person( name ) &#123; this.name = name; &#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( p.__proto__ === Person.prototype );</span><br><span class="line"></span><br><span class="line">// 原型本身是一个 Object 对象，所以他的隐式引用指向了</span><br><span class="line"></span><br><span class="line">// Object 构造器的 prototype 属性 , 故而打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.prototype.__proto__ === Object.prototype );</span><br><span class="line"></span><br><span class="line">// 构造器 Person 本身是一个函数对象，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.__proto__ === Function.prototype );</span><br></pre></td></tr></table></figure>
-<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
+<pre><code>function Person( name ) { this.name = name; }
+
+var p = new Person();
+
+// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
+
+console.log( p.__proto__ === Person.prototype );
+
+// 原型本身是一个 Object 对象，所以他的隐式引用指向了
+
+// Object 构造器的 prototype 属性 , 故而打印 true
+
+console.log( Person.prototype.__proto__ === Object.prototype );
+
+// 构造器 Person 本身是一个函数对象，所以此处打印 true
+
+console.log( Person.__proto__ === Function.prototype );
+</code></pre><p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
 <p><strong>图 1. 原型链中的属性隐藏机制</strong><br><img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
 <p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，  </p>
 <p>程序清单5.是利用原型链实现继承的简单例子。<br><strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 声明 Animal 对象构造器 </span><br><span class="line">function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，</span><br><span class="line">// 亦可直接理解为指定 Animal 对象的原型 </span><br><span class="line">Animal.prototype = &#123;</span><br><span class="line">    name: &quot;animal&quot;,</span><br><span class="line">    weight: 0, eat:</span><br><span class="line">    function () &#123; </span><br><span class="line">        alert(&quot;Animal is eating!&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 声明 Mammal 对象构造器 </span><br><span class="line">function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 </span><br><span class="line">    this.name = &quot;mammal&quot;;</span><br><span class="line">&#125; </span><br><span class="line">// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 </span><br><span class="line">Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 </span><br><span class="line">function Horse(height, weight) &#123;</span><br><span class="line">    this.name = &quot;horse&quot;;</span><br><span class="line">    this.height = height;</span><br><span class="line">    this.weight = weight;</span><br><span class="line">&#125;</span><br><span class="line">// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 </span><br><span class="line">Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 </span><br><span class="line">Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 </span><br><span class="line">var horse = new Horse(100, 300);</span><br><span class="line">console.log(horse.__proto__ === Horse.prototype);</span><br><span class="line">console.log(Horse.prototype.__proto__ === Mammal.prototype);</span><br><span class="line">console.log(Mammal.prototype.__proto__ === Animal.prototype);</span><br></pre></td></tr></table></figure>
-<p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
+<pre><code>// 声明 Animal 对象构造器 
+function Animal() { } //将 Animal 的 prototype 属性指向一个对象，
+// 亦可直接理解为指定 Animal 对象的原型 
+Animal.prototype = {
+    name: &quot;animal&quot;,
+    weight: 0, eat:
+    function () { 
+        alert(&quot;Animal is eating!&quot;); 
+    }
+} // 声明 Mammal 对象构造器 
+function Mammal() { // 指定 Mammal 对象的原型为一个 Animal 对象。 
+    this.name = &quot;mammal&quot;;
+} 
+// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
+Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 
+function Horse(height, weight) {
+    this.name = &quot;horse&quot;;
+    this.height = height;
+    this.weight = weight;
+}
+// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
+Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
+Horse.prototype.eat = function () { alert(&quot;Horse is eating grass!&quot;); } // 验证并理解原型链 
+var horse = new Horse(100, 300);
+console.log(horse.__proto__ === Horse.prototype);
+console.log(Horse.prototype.__proto__ === Mammal.prototype);
+console.log(Mammal.prototype.__proto__ === Animal.prototype);
+</code></pre><p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc0kdb41003ung0rkerfmqja" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc0m2a1a003pad0rsjczar3p" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -227,6 +269,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

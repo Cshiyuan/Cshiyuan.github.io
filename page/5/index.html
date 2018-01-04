@@ -20,11 +20,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc0kdb2e001wng0rxx4sr0q1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc0m29zq001tad0rgpsks8ly" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -157,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc0kdb3c0033ng0rhorhsu1z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc0m2a0s0033ad0rzowm2aok" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -205,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc0kdb5o005vng0rsqjlqjo8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc0m2a3a005wad0ryhpy7lol" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -299,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc0kdb2y002lng0rj9qko10n" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc0m2a0c002lad0r7jt4njia" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -349,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc0kdb2s002bng0rmlptjipb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc0m2a06002dad0rl1fq160i" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -385,30 +385,75 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="解决block中self的引用"><a href="#解决block中self的引用" class="headerlink" title="解决block中self的引用"></a>解决block中self的引用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self</span><br></pre></td></tr></table></figure>
+        <h3 id="解决block中self的引用"><a href="#解决block中self的引用" class="headerlink" title="解决block中self的引用"></a>解决block中self的引用</h3><pre><code>__weak typeof(self) weakSelf = self
+</code></pre><hr>
 <hr>
-<hr>
-<h3 id="iOS获得屏幕大小"><a href="#iOS获得屏幕大小" class="headerlink" title="iOS获得屏幕大小"></a>iOS获得屏幕大小</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//宽度:</span><br><span class="line">UIScreen mainScreen] bounds].size.width</span><br><span class="line"></span><br><span class="line">//高度:</span><br><span class="line">UIScreen mainScreen] bounds].size.height</span><br><span class="line"></span><br><span class="line">//可以将屏幕大小定义成一个宏:</span><br><span class="line">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span><br><span class="line"></span><br><span class="line">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span><br></pre></td></tr></table></figure>
-<hr>
+<h3 id="iOS获得屏幕大小"><a href="#iOS获得屏幕大小" class="headerlink" title="iOS获得屏幕大小"></a>iOS获得屏幕大小</h3><pre><code>//宽度:
+UIScreen mainScreen] bounds].size.width
+
+//高度:
+UIScreen mainScreen] bounds].size.height
+
+//可以将屏幕大小定义成一个宏:
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+</code></pre><hr>
 <h3 id="延时执行可以尝试NSTimer方法"><a href="#延时执行可以尝试NSTimer方法" class="headerlink" title="延时执行可以尝试NSTimer方法"></a>延时执行可以尝试NSTimer方法</h3><p>例子：UIAlertViewController自动消失</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">[self presentViewController:alert animated:NO completion:nil];</span><br><span class="line"></span><br><span class="line">[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];</span><br><span class="line"></span><br><span class="line">- (void)creatAlert:(NSTimer *)timer &#123;</span><br><span class="line"></span><br><span class="line">    UIAlertController *alert = [timer userInfo];</span><br><span class="line"></span><br><span class="line">    [alert dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    alert = nil;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="定制statusBar部分"><a href="#定制statusBar部分" class="headerlink" title="定制statusBar部分"></a><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(UIStatusBarStyle)preferredStatusBarStyle</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    return UIStatusBarStyleLightContent;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="NSString-和-NSNumber"><a href="#NSString-和-NSNumber" class="headerlink" title="   NSString 和 NSNumber "></a><span class="s1">   NSString 和 NSNumber </span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSString *str = @&quot;120&quot;.</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];</span><br><span class="line"></span><br><span class="line">NSNumber *numTemp = [numberFormatter numberFromString:str];</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSNumber *num = [NSNumber numberWithInt:2] ;</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">NSString* str = [numberFormatter stringFromNumber:num];</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];
+
+[self presentViewController:alert animated:NO completion:nil];
+
+[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];
+
+- (void)creatAlert:(NSTimer *)timer {
+
+    UIAlertController *alert = [timer userInfo];
+
+    [alert dismissViewControllerAnimated:YES completion:nil];
+
+    alert = nil;
+
+}
+</code></pre><hr>
+<h3 id="定制statusBar部分"><a href="#定制statusBar部分" class="headerlink" title="定制statusBar部分"></a><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3><pre><code>-(UIStatusBarStyle)preferredStatusBarStyle
+
+{
+
+    return UIStatusBarStyleLightContent;
+
+}
+</code></pre><hr>
+<h2 id="NSString-和-NSNumber"><a href="#NSString-和-NSNumber" class="headerlink" title="   NSString 和 NSNumber "></a><span class="s1">   NSString 和 NSNumber </span></h2><pre><code>NSString *str = @&quot;120&quot;.
+
+NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
+NSNumber *numTemp = [numberFormatter numberFromString:str];
+</code></pre><hr>
+<pre><code>NSNumber *num = [NSNumber numberWithInt:2] ;
+
+NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+NSString* str = [numberFormatter stringFromNumber:num];
+</code></pre><hr>
 <h2 id="UINavigationController先pop再push，push操作将无效。"><a href="#UINavigationController先pop再push，push操作将无效。" class="headerlink" title="UINavigationController先pop再push，push操作将无效。"></a>UINavigationController<span class="s1">先</span>pop<span class="s1">再</span>push<span class="s1">，</span>push<span class="s1">操作将无效。</span></h2><p>解决方案是：</p>
 <p>1. <span class="s1">从</span>self.navigationController.viewControllers<span class="s1">中拿出需要保留的</span>View Controller<span class="s1">放到一个数组中</span></p>
 <p>2. <span class="s1">向数组中添加需要</span>push<span class="s1">的</span>View Controller</p>
 <p>3. <span class="s1">调用</span>[self.navigationController setViewControllers:array animated:YES]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];</span><br><span class="line">investmentList.hidesBottomBarWhenPushed = YES;</span><br><span class="line">NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];</span><br><span class="line">int index = (int)[arrView indexOfObject:self];</span><br><span class="line">[arrView removeObjectAtIndex:index];</span><br><span class="line">[arrView addObject:investmentList];</span><br><span class="line">[self.navigationController setViewControllers:arrView animated:YES];</span><br></pre></td></tr></table></figure>
-
+<pre><code>InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];
+investmentList.hidesBottomBarWhenPushed = YES;
+NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+int index = (int)[arrView indexOfObject:self];
+[arrView removeObjectAtIndex:index];
+[arrView addObject:investmentList];
+[self.navigationController setViewControllers:arrView animated:YES];
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc0kdb4n004lng0rt8ez8znu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc0m2a28004kad0rryoe3vqk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -460,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc0kdb1z001ang0rp2zgbj4e" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc0m29z20011ad0rbkj7amhu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -549,8 +594,11 @@
 <hr>
 <h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
 <p>其实最好可以用代码来查看一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];</span><br><span class="line">NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 </span><br><span class="line">CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;</span><br><span class="line">NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
+NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 
+CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;
+NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度
+</code></pre><hr>
 <hr>
 <h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong>和<strong>id</strong>的异同</h3><p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
 <p><strong>1</strong>、相同点</p>
@@ -563,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjc0kdb4f004bng0r0qywiusi" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjc0m2a24004ead0rvs6f22ez" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -611,7 +659,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjc0kdb5d005jng0r7rqectlk" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjc0m2a32005iad0r3etbjjtf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -656,7 +704,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjc0kdb22001fng0rvfnun8y0" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjc0m29zd001fad0rk6szcw6v" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -745,6 +793,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

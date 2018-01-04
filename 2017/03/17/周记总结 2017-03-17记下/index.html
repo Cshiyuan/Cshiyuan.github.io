@@ -24,11 +24,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -97,10 +97,36 @@
 <h3 id="UITableViewCell左侧会有默认15像素的空白"><a href="#UITableViewCell左侧会有默认15像素的空白" class="headerlink" title="UITableViewCell左侧会有默认15像素的空白"></a>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白</span></h3><p><span class="s1">在iOS</span>7<span class="s1">中，</span>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白。这时候，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">能将空白去掉。</span></p>
 <p><span class="s1">但是在</span>ios8<span class="s1">中，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">已经不起作用了。下面是解决办法</span></p>
 <p>首先在<span class="s2">viewDidLoad</span>方法加入以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+
+}
+
+if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+
+}
+</code></pre><p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
+<pre><code>– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+
+    }
+
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+
+    }
+
+}
+</code></pre><hr>
 <h3 id="封装View注意事项"><a href="#封装View注意事项" class="headerlink" title="封装View注意事项"></a>封装View注意事项</h3><p><span class="s1">封装</span>view<span class="s1">的时候要注意在</span>-<span class="s1">(</span>void<span class="s1">)</span>layoutSubviews<span class="s1">中重写子视图的</span>frame</p>
 <hr>
 <h3 id="Block的书写格式"><a href="#Block的书写格式" class="headerlink" title=" Block的书写格式"></a><span class="s2"> Block的书写格式</span></h3><p><span class="s2">Block</span>的格式<span class="s2">:  ^ + </span>返回值类型(可以省略)<span class="s2"> + </span>(参数)(如果没有参数,可以省略)<span class="s2"> + {</span>表达式<span class="s2">}</span></p>
@@ -112,8 +138,16 @@
 <h3 id="关于OC在浮点数-f说明"><a href="#关于OC在浮点数-f说明" class="headerlink" title="关于OC在浮点数.f说明"></a>关于OC在浮点数.f说明</h3><p><span class="s1">1.</span>如果是赋给<span class="s1">CGFloat</span>类型，则加不加<span class="s1">f</span>后缀都是一样的。</p>
 <p><span class="s1">2.</span>如果是赋给<span class="s1">double</span>或<span class="s1">float</span>类型，就要考虑精度的问题。不加<span class="s1">f</span>后缀的话类型为<span class="s1">double</span>，<span class="s1">8</span>字节，加<span class="s1">f</span>后缀的话类型为<span class="s1">float</span>，<span class="s1">4</span>字节。</p>
 <hr>
-<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (AccountManager *)sharedManager</span><br><span class="line">&#123;</span><br><span class="line">        static AccountManager *sharedAccountManagerInstance = nil;</span><br><span class="line">        static dispatch_once_t predicate;</span><br><span class="line">        dispatch_once(&amp;predicate, ^&#123;</span><br><span class="line">                sharedAccountManagerInstance = [[self alloc] init];</span><br><span class="line">        &#125;);</span><br><span class="line">    return sharedAccountManagerInstance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><pre><code>+ (AccountManager *)sharedManager
+{
+        static AccountManager *sharedAccountManagerInstance = nil;
+        static dispatch_once_t predicate;
+        dispatch_once(&amp;predicate, ^{
+                sharedAccountManagerInstance = [[self alloc] init];
+        });
+    return sharedAccountManagerInstance;
+}
+</code></pre><hr>
 <h3 id="Block会复制到堆的情况"><a href="#Block会复制到堆的情况" class="headerlink" title="Block会复制到堆的情况"></a><span class="s1">Block</span>会复制到堆的情况</h3><p>1.<span class="s1">调用</span>Block<span class="s1">的</span>copy<span class="s1">实例方法</span></p>
 <p><span class="s2">2.Block</span>作为函数返回值时</p>
 <p>3.<span class="s1">将</span>Block<span class="s1">赋值给附有</span>_strong<span class="s1">修饰符</span>id<span class="s1">类型的类或</span>Block<span class="s1">类成员变量时</span></p>
@@ -127,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc0kdb4h004dng0rbp2aegkr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc0m2a23004cad0rivxboc7a" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -228,6 +262,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

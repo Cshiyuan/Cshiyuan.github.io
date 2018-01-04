@@ -27,11 +27,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -165,8 +165,11 @@
 <li>MD5 在线加密解密网站 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</li>
 <li><p>终端命令：</p>
 </li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ echo -n hello | openssl md5  </span><br><span class="line">$ echo -n hello | openssl sha1</span><br><span class="line">$ echo -n hello | openssl sha -sha256</span><br><span class="line">$ echo -n hello | openssl sha -sha512</span><br></pre></td></tr></table></figure>
-</li>
+<li><pre><code>  $ echo -n hello | openssl md5  
+  $ echo -n hello | openssl sha1
+  $ echo -n hello | openssl sha -sha256
+  $ echo -n hello | openssl sha -sha512
+</code></pre></li>
 <li><p>MD5 常用加密方式：</p>
 <ul>
 <li>直接使用 MD5 加密：</li>
@@ -211,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc0kdb450041ng0rtcl9gpyn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc0m2a1p0046ad0rj7u54ct5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -312,6 +315,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

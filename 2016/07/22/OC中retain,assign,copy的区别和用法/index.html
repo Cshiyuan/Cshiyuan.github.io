@@ -7,16 +7,16 @@
   
   <title>OC中retain,assign,copy的区别和用法 | SHYIUAN&#39;S NOTEBOOK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： 123456789101112131415161718192021222324252627282930313233343536373839404142434">
+  <meta name="description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： //  //  ViewController.m  //  weak与assgin的区别  //  //  Created by bihongbo on 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OC中retain,assign,copy的区别和用法">
 <meta property="og:url" content="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/index.html">
 <meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
-<meta property="og:description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： 123456789101112131415161718192021222324252627282930313233343536373839404142434">
+<meta property="og:description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： //  //  ViewController.m  //  weak与assgin的区别  //  //  Created by bihongbo on 1">
 <meta property="og:updated_time" content="2018-01-04T14:00:06.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OC中retain,assign,copy的区别和用法">
-<meta name="twitter:description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： 123456789101112131415161718192021222324252627282930313233343536373839404142434">
+<meta name="twitter:description" content="我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。 可能不太好理解下面我写了一个演示程序。 OC： //  //  ViewController.m  //  weak与assgin的区别  //  //  Created by bihongbo on 1">
   
     <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
   
@@ -24,11 +24,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -96,8 +96,56 @@
         <p>我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。</p>
 <p>可能不太好理解下面我写了一个演示程序。</p>
 <p>OC：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line"></span><br><span class="line">//  ViewController.m</span><br><span class="line"></span><br><span class="line">//  weak与assgin的区别</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">//  Created by bihongbo on 15/3/19.</span><br><span class="line"></span><br><span class="line">//  Copyright (c) 2015年 毕洪博. All rights reserved.</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#import “ViewController.h”</span><br><span class="line"></span><br><span class="line">@interface ViewController ()</span><br><span class="line"></span><br><span class="line">@property (nonatomic,weak) id      weakPoint;</span><br><span class="line"></span><br><span class="line">@property (nonatomic,assign) id    assignPoint;</span><br><span class="line"></span><br><span class="line">@property (nonatomic,strong) id    strongPoint;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">– (void)viewDidLoad &#123;</span><br><span class="line"></span><br><span class="line">[super viewDidLoad];</span><br><span class="line"></span><br><span class="line">self.strongPoint = [NSDate date];</span><br><span class="line"></span><br><span class="line">NSLog(@”strong属性：%@”,self.strongPoint);</span><br><span class="line"></span><br><span class="line">self.weakPoint = self.strongPoint;</span><br><span class="line"></span><br><span class="line">self.assignPoint = self.strongPoint;</span><br><span class="line"></span><br><span class="line">self.strongPoint = nil;</span><br><span class="line"></span><br><span class="line">NSLog(@”weak属性：%@”,self.weakPoint);</span><br><span class="line"></span><br><span class="line">//    NSLog(@”assign属性：%@”,self.assignPoint);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>当程序中的注释被打开时，运行程序有可能会崩溃（有时候不崩溃，你可能需要多运行几次），这是因为当assign指针所指向的内存被释放（释放并不等于抹除，只是引用计数为0），不会自动赋值nil，这样再引用self.assignPoint就会导致野指针操作，如果这个操作发生时内存还没有改变内容，依旧可以输出正确的结果，而如果发生时内存内容被改变了，就会crash。</p>
+<pre><code>//
+
+//  ViewController.m
+
+//  weak与assgin的区别
+
+//
+
+//  Created by bihongbo on 15/3/19.
+
+//  Copyright (c) 2015年 毕洪博. All rights reserved.
+
+//
+
+#import “ViewController.h”
+
+@interface ViewController ()
+
+@property (nonatomic,weak) id      weakPoint;
+
+@property (nonatomic,assign) id    assignPoint;
+
+@property (nonatomic,strong) id    strongPoint;
+
+@end
+
+@implementation ViewController
+
+– (void)viewDidLoad {
+
+[super viewDidLoad];
+
+self.strongPoint = [NSDate date];
+
+NSLog(@”strong属性：%@”,self.strongPoint);
+
+self.weakPoint = self.strongPoint;
+
+self.assignPoint = self.strongPoint;
+
+self.strongPoint = nil;
+
+NSLog(@”weak属性：%@”,self.weakPoint);
+
+//    NSLog(@”assign属性：%@”,self.assignPoint);
+
+}
+
+@end
+</code></pre><p>当程序中的注释被打开时，运行程序有可能会崩溃（有时候不崩溃，你可能需要多运行几次），这是因为当assign指针所指向的内存被释放（释放并不等于抹除，只是引用计数为0），不会自动赋值nil，这样再引用self.assignPoint就会导致野指针操作，如果这个操作发生时内存还没有改变内容，依旧可以输出正确的结果，而如果发生时内存内容被改变了，就会crash。</p>
 <p><strong>结论：在ARC模式下编程时，指针变量一定要用weak修饰，只有基本数据类型和结构体需要用assgin，例如delegate，一定要用weak修饰。</strong></p>
 <h2 id="看一送一："><a href="#看一送一：" class="headerlink" title="看一送一："></a><strong>看一送一：</strong></h2><p><strong>《iOS中assign，copy，retain之间的区别以及weak和strong的区别》</strong></p>
 <p><strong>• copy: 用于希望保持一份传入值的拷贝，而不是值自身的情况，即把原来的对象完整的赋值到另外一地方，重新加载一内存区，一个地方变了不影响另一个地方的对象。
@@ -138,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjc0kdb28001ong0rfxjoco0o" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjc0m29zk001pad0r7p5igwoy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -239,6 +287,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

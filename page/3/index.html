@@ -20,11 +20,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -102,13 +102,31 @@
 <h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
 <li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct objc_object &#123;</span><br><span class="line">  Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct objc_object *id;</span><br></pre></td></tr></table></figure>
-<p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
+<pre><code>struct objc_object {
+  Class isa  OBJC_ISA_AVAILABILITY;
+};
+typedef struct objc_object *id;
+</code></pre><p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
 <ul>
 <li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">struct objc_class &#123;</span><br><span class="line">      Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line"></span><br><span class="line">  #if !__OBJC2__</span><br><span class="line">      Class super_class                       OBJC2_UNAVAILABLE;  // 父类</span><br><span class="line">      const char *name                        OBJC2_UNAVAILABLE;  // 类名</span><br><span class="line">      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0</span><br><span class="line">      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识</span><br><span class="line">      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小</span><br><span class="line">      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表</span><br><span class="line">      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表</span><br><span class="line">      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存</span><br><span class="line">      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表</span><br><span class="line">  #endif</span><br><span class="line"></span><br><span class="line">  &#125; OBJC2_UNAVAILABLE;</span><br></pre></td></tr></table></figure>
-<p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    _objc_ivar<em>list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    _objc_method<em>list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
+<pre><code>struct objc_class {
+      Class isa  OBJC_ISA_AVAILABILITY;
+
+  #if !__OBJC2__
+      Class super_class                       OBJC2_UNAVAILABLE;  // 父类
+      const char *name                        OBJC2_UNAVAILABLE;  // 类名
+      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0
+      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识
+      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小
+      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表
+      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表
+      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存
+      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表
+  #endif
+
+  } OBJC2_UNAVAILABLE;
+</code></pre><p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    _objc_ivar<em>list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    _objc_method<em>list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
 <ul>
 <li>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：</li>
 <li><img src="http://upload-images.jianshu.io/upload_images/3523280-1a77c1c4e00afedf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
@@ -122,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc0kdb43003xng0rn6bsdmjj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc0m2a1k0040ad0r1lh2ygs9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -162,8 +180,30 @@
 <p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
 <p>（C++中基类指针只有调用虚函数才会体现出多态性，不然基类指针会被限制）</p>
 <hr>
-<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;const int %lx&quot;, &amp;constA);         // const int 7fff5fbff6ec</span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;a);                    // int 7fff5fbff6e8 </span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;b);                    // int 7fff5fbff6e4</span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;c);                    // int 7fff5fbff6e0</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staA);          // static int 100002330</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staB);          // static int 100002334</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staC);          // static int 100002338</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array1);          // NSArray* 7fff5fbff6d8</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array2);          // NSArray* 7fff5fbff6d0</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array3);          // NSArray* 7fff5fbff6c8</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str);            // NSString* 7fff5fbff6b8</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str1);           // NSString* 7fff5fbff6b0</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str2);           // NSString* 7fff5fbff6a8</span><br><span class="line">NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayA); // static NSArray* 100002340</span><br><span class="line">NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayB); // static NSArray* 100002348</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array1);            // NSArray 1002032a0</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array2);            // NSArray 1002013f0</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array3);            // NSArray 1002035c0</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str);              // NSString 100002080</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str1);             // NSString 100002080</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str2);             // NSString 1000020a0</span><br><span class="line">NSLog(@&quot;static NSArray %lx&quot;, stArrayA);   // static NSArray 1002035f0</span><br><span class="line">NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   // static NSArray 1002013d0</span><br></pre></td></tr></table></figure>
-<p>分析一下打印结果，可以得出：</p>
+<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><pre><code>NSLog(@&quot;const int %lx&quot;, &amp;constA);         // const int 7fff5fbff6ec
+NSLog(@&quot;int %lx&quot;, &amp;a);                    // int 7fff5fbff6e8 
+NSLog(@&quot;int %lx&quot;, &amp;b);                    // int 7fff5fbff6e4
+NSLog(@&quot;int %lx&quot;, &amp;c);                    // int 7fff5fbff6e0
+NSLog(@&quot;static int %lx&quot;, &amp;staA);          // static int 100002330
+NSLog(@&quot;static int %lx&quot;, &amp;staB);          // static int 100002334
+NSLog(@&quot;static int %lx&quot;, &amp;staC);          // static int 100002338
+NSLog(@&quot;NSArray* %lx&quot;, &amp;array1);          // NSArray* 7fff5fbff6d8
+NSLog(@&quot;NSArray* %lx&quot;, &amp;array2);          // NSArray* 7fff5fbff6d0
+NSLog(@&quot;NSArray* %lx&quot;, &amp;array3);          // NSArray* 7fff5fbff6c8
+NSLog(@&quot;NSString* %lx&quot;, &amp;str);            // NSString* 7fff5fbff6b8
+NSLog(@&quot;NSString* %lx&quot;, &amp;str1);           // NSString* 7fff5fbff6b0
+NSLog(@&quot;NSString* %lx&quot;, &amp;str2);           // NSString* 7fff5fbff6a8
+NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayA); // static NSArray* 100002340
+NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayB); // static NSArray* 100002348
+NSLog(@&quot;NSArray %lx&quot;, array1);            // NSArray 1002032a0
+NSLog(@&quot;NSArray %lx&quot;, array2);            // NSArray 1002013f0
+NSLog(@&quot;NSArray %lx&quot;, array3);            // NSArray 1002035c0
+NSLog(@&quot;NSString %lx&quot;, str);              // NSString 100002080
+NSLog(@&quot;NSString %lx&quot;, str1);             // NSString 100002080
+NSLog(@&quot;NSString %lx&quot;, str2);             // NSString 1000020a0
+NSLog(@&quot;static NSArray %lx&quot;, stArrayA);   // static NSArray 1002035f0
+NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   // static NSArray 1002013d0
+</code></pre><p>分析一下打印结果，可以得出：</p>
 <ol>
 <li>局部的常量和变量（包括指针）存于高地址，连续声明的变量地址会紧挨在一起，地址从高地址向低地址扩展。这一部分就是<strong>栈</strong>。</li>
 <li>对象存储于低地址，而且连续声明的对象地址不连续。这一部分就是<strong>堆</strong>，其实堆内存是由类似链表的结构串起来的，每一个空闲内存块地址并不一定连续，所以会出现这样的现象。</li>
@@ -181,8 +221,9 @@
 <h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>优点：非对称加密与对称加密相比，其安全性更好：对称加密的通信双方使用相同的秘钥，如果一方的秘钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对秘钥，一个用来加密，一个用来解密，而且公钥是公开的，秘钥是自己保存的，不需要像对称加密那样在通信之前要先同步秘钥；<br>缺点：非对称加密的缺点是加密和解密花费时间长、速度慢，只适合对少量数据进行加密。</p>
 <hr>
 <h2 id="Objective-C中的浅拷贝和深拷贝"><a href="#Objective-C中的浅拷贝和深拷贝" class="headerlink" title="Objective-C中的浅拷贝和深拷贝"></a>Objective-C中的浅拷贝和深拷贝</h2><p>浅拷贝就是对内存地址的复制，让目标对象指针和源对象指向同一片内存空间。如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char* str = (char*)malloc(100);</span><br><span class="line">char* str2 = str;</span><br></pre></td></tr></table></figure>
-<p>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。</p>
+<pre><code>char* str = (char*)malloc(100);
+char* str2 = str;
+</code></pre><p>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。</p>
 <p><strong>iOS 里面的浅拷贝：</strong></p>
 <p>在 iOS 里面， 使用retain 关键字进行引用计数，就是一种更加保险的浅拷贝。他既让几个指针共用同一片内存空间，又可以在release 由于计数的存在，不会轻易的销毁内存，达到更加简单使用的目的。</p>
 <p><strong>深拷贝：</strong></p>
@@ -191,22 +232,43 @@
 <p>copy 是创建一个新对象，retain 是创建一个指针，引用对象计数加一。 copy属性标识两个对象内容相同，新的对象retain count为1, 与旧有对象引用计数无关，旧有对象没有变化。copy减少对象对上下文的依赖。</p>
 <p><strong>iOS里的深拷贝：</strong></p>
 <p>iOS提供了copy和mutableCopy方法，顾名思义，copy就是复制了一个imutable的对象，而mutableCopy就是复制了一个mutable的对象。以下将举几个例子来说明。<br>这里指的是NSString, NSNumber等等一类的对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = @”dddd&quot;;</span><br><span class="line">NSString *stringCopy = [string copy];</span><br><span class="line">NSMutableString *stringDCopy = [string mutableCopy];</span><br><span class="line">[stringMCopy appendString:@&quot;!!&quot;];</span><br></pre></td></tr></table></figure>
-<p>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。</p>
+<pre><code>NSString *string = @”dddd&quot;;
+NSString *stringCopy = [string copy];
+NSMutableString *stringDCopy = [string mutableCopy];
+[stringMCopy appendString:@&quot;!!&quot;];
+</code></pre><p>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。</p>
 <p><strong>拷贝构造：</strong></p>
 <p>当然在 ios 中并不是所有的对象都支持copy，mutableCopy，遵守NSCopying协议的类可以发送copy消息，遵守NSMutableCopying协议的类才可以发送mutableCopy消息。</p>
 <p>假如发送了一个没有遵守上诉两协议而发送copy或者 mutableCopy,那么就会发生异常。但是默认的ios类并没有遵守这两个协议。如果想自定义一下copy 那么就必须遵守NSCopying,并且实现 copyWithZone: 方法，如果想自定义一下mutableCopy 那么就必须遵守NSMutableCopying,并且实现 mutableCopyWithZone: 方法。</p>
 <p>如果是我们定义的对象，那么我们自己要实现NSCopying , NSMutableCopying这样就能调用copy和mutablecopy了。举个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@interface MyObj : NSObject&lt;NSCopying, NSMutableCopying&gt; &#123;</span><br><span class="line">    NSMutableString *_name;</span><br><span class="line">    NSString * _imutableStr ;</span><br><span class="line">    int _age;</span><br><span class="line">&#125;     </span><br><span class="line">@property (nonatomic, retain) NSMutableString *name;</span><br><span class="line">@property (nonatomic, retain) NSString *imutableStr;</span><br><span class="line">@property (nonatomic) int age;</span><br></pre></td></tr></table></figure>
-<p>copy拷贝构造：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;</span><br><span class="line">    MyObj *copy = [[[self class] allocWithZone :zone] init];</span><br><span class="line">    copy-&gt;name = [_name copy];</span><br><span class="line">    copy-&gt;imutableStr = [_imutableStr copy];</span><br><span class="line">    copy-&gt;age = age;</span><br><span class="line">    return copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>mutableCopy拷贝构造：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone&#123;</span><br><span class="line">    MyObj *copy = NSCopyObject(self, 0, zone);</span><br><span class="line">    copy-&gt;name = [_name mutableCopy];</span><br><span class="line">    copy-&gt;age = age;</span><br><span class="line">    return copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>@interface MyObj : NSObject&lt;NSCopying, NSMutableCopying&gt; {
+    NSMutableString *_name;
+    NSString * _imutableStr ;
+    int _age;
+}     
+@property (nonatomic, retain) NSMutableString *name;
+@property (nonatomic, retain) NSString *imutableStr;
+@property (nonatomic) int age;
+</code></pre><p>copy拷贝构造：</p>
+<pre><code>- (id)copyWithZone:(NSZone *)zone {
+    MyObj *copy = [[[self class] allocWithZone :zone] init];
+    copy-&gt;name = [_name copy];
+    copy-&gt;imutableStr = [_imutableStr copy];
+    copy-&gt;age = age;
+    return copy;
+}
+</code></pre><p>mutableCopy拷贝构造：</p>
+<pre><code>- (id)mutableCopyWithZone:(NSZone *)zone{
+    MyObj *copy = NSCopyObject(self, 0, zone);
+    copy-&gt;name = [_name mutableCopy];
+    copy-&gt;age = age;
+    return copy;
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc0kdb520055ng0rooazti87" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc0m2a2l0052ad0rkrlc8dzk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -286,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc0kdb3d0035ng0r4hffplo6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc0m2a0v0037ad0r50jtwso4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -336,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc0kdb2m0026ng0rk8nvyn4c" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc0m2a010028ad0rykpq9bs5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -374,32 +436,48 @@
       
         <h2 id="匿名函数lambda"><a href="#匿名函数lambda" class="headerlink" title="匿名函数lambda"></a>匿名函数lambda</h2><p>当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。</p>
 <p>在Python中，对匿名函数提供了有限支持。还是以<code>map()</code>函数为例，计算f(x)=x<sup>2</sup>时，除了定义一个<code>f(x)</code>的函数外，还可以直接传入匿名函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre></td></tr></table></figure>
-<p>通过对比可以看出，匿名函数<code>lambda x: x * x</code>实际上就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">    return x * x</span><br></pre></td></tr></table></figure>
-<p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。</p>
+<pre><code>&gt;&gt;&gt; map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+[1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre><p>通过对比可以看出，匿名函数<code>lambda x: x * x</code>实际上就是：</p>
+<pre><code>def f(x):
+    return x * x
+</code></pre><p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。</p>
 <p>匿名函数有个限制，就是只能有一个表达式，不用写<code>return</code>，返回值就是该表达式的结果。</p>
 <hr>
 <h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>本质上，decorator就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的decorator，可以定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def log(func):</span><br><span class="line">    def wrapper(*args, **kw):</span><br><span class="line">        print &apos;call %s():&apos; % func.__name__</span><br><span class="line">        return func(*args, **kw)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure>
-<p>观察上面的<code>log</code>，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@log</span><br><span class="line">def now():</span><br><span class="line">    print &apos;2013-12-25&apos;</span><br></pre></td></tr></table></figure>
-<p>调用<code>now()</code>函数，不仅会运行<code>now()</code>函数本身，还会在运行<code>now()</code>函数前打印一行日志：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">call now():</span><br><span class="line">2013-12-25</span><br></pre></td></tr></table></figure>
-<p>把<code>@log</code>放到<code>now()</code>函数的定义处，相当于执行了语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now = log(now)</span><br></pre></td></tr></table></figure>
-<p>在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持</p>
+<pre><code>def log(func):
+    def wrapper(*args, **kw):
+        print &#39;call %s():&#39; % func.__name__
+        return func(*args, **kw)
+    return wrapper
+</code></pre><p>观察上面的<code>log</code>，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：</p>
+<pre><code>@log
+def now():
+    print &#39;2013-12-25&#39;
+</code></pre><p>调用<code>now()</code>函数，不仅会运行<code>now()</code>函数本身，还会在运行<code>now()</code>函数前打印一行日志：</p>
+<pre><code>&gt;&gt;&gt; now()
+call now():
+2013-12-25
+</code></pre><p>把<code>@log</code>放到<code>now()</code>函数的定义处，相当于执行了语句：</p>
+<pre><code>now = log(now)
+</code></pre><p>在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持</p>
 <p>Python的decorator可以用函数实现，也可以用类实现。</p>
 <p>decorator可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。</p>
 <p>请编写一个decorator，能在函数调用的前后打印出<code>&#39;begin call&#39;</code>和<code>&#39;end call&#39;</code>的日志。</p>
 <p>再思考一下能否写出一个<code>@log</code>的decorator，使它既支持：</p>
 <hr>
 <h2 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h2><p><code>functools.partial</code>就是帮助我们创建一个偏函数的，不需要我们自己定义<code>int2()</code>，可以直接使用下面的代码创建一个新的函数<code>int2</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import functools</span><br><span class="line">&gt;&gt;&gt; int2 = functools.partial(int, base=2)</span><br><span class="line">&gt;&gt;&gt; int2(&apos;1000000&apos;)</span><br><span class="line">64</span><br><span class="line">&gt;&gt;&gt; int2(&apos;1010101&apos;)</span><br><span class="line">85</span><br></pre></td></tr></table></figure>
-<p>所以，简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</p>
+<pre><code>&gt;&gt;&gt; import functools
+&gt;&gt;&gt; int2 = functools.partial(int, base=2)
+&gt;&gt;&gt; int2(&#39;1000000&#39;)
+64
+&gt;&gt;&gt; int2(&#39;1010101&#39;)
+85
+</code></pre><p>所以，简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</p>
 <p>注意到上面的新的<code>int2</code>函数，仅仅是把<code>base</code>参数重新设定默认值为<code>2</code>，但也可以在函数调用时传入其他值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int2(&apos;1000000&apos;, base=10)</span><br><span class="line">1000000</span><br></pre></td></tr></table></figure>
-<p>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</p>
+<pre><code>&gt;&gt;&gt; int2(&#39;1000000&#39;, base=10)
+1000000
+</code></pre><p>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</p>
 <hr>
 <h2 id="类-因为有面向对象经验-说关键点就好了）"><a href="#类-因为有面向对象经验-说关键点就好了）" class="headerlink" title="类(因为有面向对象经验,说关键点就好了）"></a>类(因为有面向对象经验,说关键点就好了）</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化函数模板,不用定义成员变量,直接用self来定义就好了.</p>
 <p>初始化函数规定的名称是<strong>init</strong></p>
@@ -407,24 +485,42 @@
 <p>有了<code>__init__</code>方法，在创建实例的时候，就不能传入空的参数了，必须传入与<code>__init__</code>方法匹配的参数，但<code>self</code>不需要传，Python解释器自己会把实例变量传进去</p>
 <h3 id="私有成员的实现方法"><a href="#私有成员的实现方法" class="headerlink" title="私有成员的实现方法"></a>私有成员的实现方法</h3><p>实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问，所以，我们把Student类改一改：</p>
 <p>（吐槽一下，想起OC）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__score = score</span><br><span class="line"></span><br><span class="line">    def print_score(self):</span><br><span class="line">        print &apos;%s: %s&apos; % (self.__name, self.__score)</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>class Student(object):
+
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print &#39;%s: %s&#39; % (self.__name, self.__score)
+</code></pre><hr>
 <h2 id="slots"><a href="#slots" class="headerlink" title="slots"></a><strong>slots</strong></h2><p>限制类的成员变量的数量。</p>
 <p>达到限制的目的，Python允许在定义class的时候，定义一个特殊的<code>__slots__</code>变量，来限制该class能添加的属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     __slots__ = (&apos;name&apos;, &apos;age&apos;) # 用tuple定义允许绑定的属性名称</span><br></pre></td></tr></table></figure>
-<p>这样子绑定别的变量就会报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object has no attribute &apos;score&apos;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>&gt;&gt;&gt; class Student(object):
+...     __slots__ = (&#39;name&#39;, &#39;age&#39;) # 用tuple定义允许绑定的属性名称
+</code></pre><p>这样子绑定别的变量就会报错</p>
+<pre><code>object has no attribute &#39;score&#39;
+</code></pre><hr>
 <h2 id="enumerate函数"><a href="#enumerate函数" class="headerlink" title="enumerate函数"></a>enumerate函数</h2><p>如果要对list实现类似Java那样的下标循环怎么办？Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对，这样就可以在<code>for</code>循环中同时迭代索引和元素本身：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i, value in enumerate([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]):</span><br><span class="line">...     print(i, value)</span><br><span class="line">...</span><br><span class="line">0 A</span><br><span class="line">1 B</span><br><span class="line">2 C</span><br></pre></td></tr></table></figure>
-<p>上面的<code>for</code>循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:</span><br><span class="line">...     print(x, y)</span><br><span class="line">...</span><br><span class="line">1 1</span><br><span class="line">2 4</span><br><span class="line">3 9</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
+<pre><code>&gt;&gt;&gt; for i, value in enumerate([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]):
+...     print(i, value)
+...
+0 A
+1 B
+2 C
+</code></pre><p>上面的<code>for</code>循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：</p>
+<pre><code>&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:
+...     print(x, y)
+...
+1 1
+2 4
+3 9
+</code></pre><p>&nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc0kdb2k0024ng0r24png1ca" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc0m2a000026ad0r2xiz0ipx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -463,11 +559,22 @@
         <h2 id="尾递归优化解决递归调用栈溢出"><a href="#尾递归优化解决递归调用栈溢出" class="headerlink" title="尾递归优化解决递归调用栈溢出"></a><strong>尾递归</strong>优化解决递归调用栈溢出</h2><p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
 <p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
 <p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fact(n):</span><br><span class="line">    return fact_iter(n, 1)</span><br><span class="line"></span><br><span class="line">def fact_iter(num, product):</span><br><span class="line">    if num == 1:</span><br><span class="line">        return product</span><br><span class="line">    return fact_iter(num - 1, num * product)</span><br></pre></td></tr></table></figure>
-<p>可以看到，<code>return fact_iter(num - 1, num * product)</code>仅返回递归函数本身，<code>num - 1</code>和<code>num * product</code>在函数调用前就会被计算，不影响函数调用。</p>
+<pre><code>def fact(n):
+    return fact_iter(n, 1)
+
+def fact_iter(num, product):
+    if num == 1:
+        return product
+    return fact_iter(num - 1, num * product)
+</code></pre><p>可以看到，<code>return fact_iter(num - 1, num * product)</code>仅返回递归函数本身，<code>num - 1</code>和<code>num * product</code>在函数调用前就会被计算，不影响函数调用。</p>
 <p><code>fact(5)</code>对应的<code>fact_iter(5, 1)</code>的调用如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">===&gt; fact_iter(5, 1)</span><br><span class="line">===&gt; fact_iter(4, 5)</span><br><span class="line">===&gt; fact_iter(3, 20)</span><br><span class="line">===&gt; fact_iter(2, 60)</span><br><span class="line">===&gt; fact_iter(1, 120)</span><br><span class="line">===&gt; 120</span><br></pre></td></tr></table></figure>
-<p>尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。</p>
+<pre><code>===&gt; fact_iter(5, 1)
+===&gt; fact_iter(4, 5)
+===&gt; fact_iter(3, 20)
+===&gt; fact_iter(2, 60)
+===&gt; fact_iter(1, 120)
+===&gt; 120
+</code></pre><p>尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。</p>
 <p>遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的<code>fact(n)</code>函数改成尾递归方式，也会导致栈溢出。</p>
 <p>使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。</p>
 <p>针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。</p>
@@ -475,21 +582,34 @@
 <hr>
 <h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>取前3个元素，应该怎么做？</p>
 <p>笨办法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [L[0], L[1], L[2]]</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure>
-<p>之所以是笨办法是因为扩展一下，取前N个元素就没辙了。</p>
+<pre><code>&gt;&gt;&gt; [L[0], L[1], L[2]]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>之所以是笨办法是因为扩展一下，取前N个元素就没辙了。</p>
 <p>取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = []</span><br><span class="line">&gt;&gt;&gt; n = 3</span><br><span class="line">&gt;&gt;&gt; for i in range(n):</span><br><span class="line">...     r.append(L[i])</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure>
-<p>对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。</p>
+<pre><code>&gt;&gt;&gt; r = []
+&gt;&gt;&gt; n = 3
+&gt;&gt;&gt; for i in range(n):
+...     r.append(L[i])
+... 
+&gt;&gt;&gt; r
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。</p>
 <p>对应上面的问题，取前3个元素，用一行代码就可以完成切片：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[0:3]</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure>
-<p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。</p>
+<pre><code>&gt;&gt;&gt; L[0:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。</p>
 <p>如果第一个索引是<code>0</code>，还可以省略：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[:3]</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure>
-<p>也可以从索引1开始，取出2个元素出来：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[1:3]</span><br><span class="line">[&apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure>
-<p>类似的，既然Python支持<code>L[-1]</code>取倒数第一个元素，那么它同样支持倒数切片，试试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[-2:]</span><br><span class="line">[&apos;Bob&apos;, &apos;Jack&apos;]</span><br><span class="line">&gt;&gt;&gt; L[-2:-1]</span><br><span class="line">[&apos;Bob&apos;]</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>&gt;&gt;&gt; L[:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>也可以从索引1开始，取出2个元素出来：</p>
+<pre><code>&gt;&gt;&gt; L[1:3]
+[&#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>类似的，既然Python支持<code>L[-1]</code>取倒数第一个元素，那么它同样支持倒数切片，试试：</p>
+<pre><code>&gt;&gt;&gt; L[-2:]
+[&#39;Bob&#39;, &#39;Jack&#39;]
+&gt;&gt;&gt; L[-2:-1]
+[&#39;Bob&#39;]
+</code></pre><hr>
 <h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。</p>
 <p>而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。</p>
 <p>我们首先要搞明白计算机（Computer）和计算（Compute）的概念。</p>
@@ -501,31 +621,44 @@
 <p>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</p>
 <hr>
 <h2 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h2><h3 id="变量可以指向函数"><a href="#变量可以指向函数" class="headerlink" title="变量可以指向函数"></a>变量可以指向函数</h3><p>以Python内置的求绝对值的函数<code>abs()</code>为例，调用该函数用以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
-<p>但是，如果只写<code>abs</code>呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure>
-<p>可见，<code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。</p>
+<pre><code>&gt;&gt;&gt; abs(-10)
+10
+</code></pre><p>但是，如果只写<code>abs</code>呢？</p>
+<pre><code>&gt;&gt;&gt; abs
+&lt;built-in function abs&gt;
+</code></pre><p>可见，<code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。</p>
 <hr>
 <h2 id="map-reduce"><a href="#map-reduce" class="headerlink" title="map/reduce"></a>map/reduce</h2><p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
 <p>举例说明，比如我们有一个函数f(x)=x<sup>2</sup>，要把这个函数作用在一个list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code>上，就可以用<code>map()</code>实现如下：</p>
 <p><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</span><br></pre></td></tr></table></figure>
-<p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def add(x, y):</span><br><span class="line">...     return x + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
-<p>当然求和运算可以直接用Python内建函数<code>sum()</code>，没必要动用<code>reduce</code>。</p>
+<pre><code>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+</code></pre><p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def add(x, y):
+...     return x + y
+...
+&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])
+25
+</code></pre><p>当然求和运算可以直接用Python内建函数<code>sum()</code>，没必要动用<code>reduce</code>。</p>
 <p>但是如果要把序列<code>[1, 3, 5, 7, 9]</code>变换成整数<code>13579</code>，<code>reduce</code>就可以派上用场：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def fn(x, y):</span><br><span class="line">...     return x * 10 + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])</span><br><span class="line">13579</span><br></pre></td></tr></table></figure>
-<p>这个例子本身没多大用处，但是，如果考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def fn(x, y):
+...     return x * 10 + y
+...
+&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])
+13579
+</code></pre><p>这个例子本身没多大用处，但是，如果考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
 <hr>
 <h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><p>】列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
 <p>举个例子，要生成list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>可以用<code>range(1, 11)</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; range(1, 11)</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>&gt;&gt;&gt; range(1, 11)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre><hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc0kdb2i0022ng0r1t3srpus" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc0m29zx0022ad0rp49506bj" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -563,41 +696,82 @@
       
         <p>&nbsp;</p>
 <h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = b&apos;ABC&apos;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;Hello, %s&apos; % &apos;world&apos;</span><br><span class="line">&apos;Hello, world&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;Hi, %s, you have $%d.&apos; % (&apos;Michael&apos;, 1000000)</span><br><span class="line">&apos;Hi, Michael, you have $1000000.&apos;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>x = b&#39;ABC&#39;
+</code></pre><hr>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39;
+&#39;Hello, world&#39;
+&gt;&gt;&gt; &#39;Hi, %s, you have $%d.&#39; % (&#39;Michael&#39;, 1000000)
+&#39;Hi, Michael, you have $1000000.&#39;
+</code></pre><hr>
 <h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
 <p>比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用<code>if</code>语句实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">age = 20</span><br><span class="line">if age &gt;= 18:</span><br><span class="line">    print(&apos;your age is&apos;, age)</span><br><span class="line">    print(&apos;adult&apos;)</span><br></pre></td></tr></table></figure>
-<p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
+<pre><code>age = 20
+if age &gt;= 18:
+    print(&#39;your age is&#39;, age)
+    print(&#39;adult&#39;)
+</code></pre><p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
 <hr>
 <h2 id="elif于else-if"><a href="#elif于else-if" class="headerlink" title="elif于else if"></a>elif于else if</h2><p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if &lt;条件判断1&gt;:</span><br><span class="line">    &lt;执行1&gt;</span><br><span class="line">elif &lt;条件判断2&gt;:</span><br><span class="line">    &lt;执行2&gt;</span><br><span class="line">elif &lt;条件判断3&gt;:</span><br><span class="line">    &lt;执行3&gt;</span><br><span class="line">else:</span><br><span class="line">    &lt;执行4&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>if &lt;条件判断1&gt;:
+    &lt;执行1&gt;
+elif &lt;条件判断2&gt;:
+    &lt;执行2&gt;
+elif &lt;条件判断3&gt;:
+    &lt;执行3&gt;
+else:
+    &lt;执行4&gt;
+</code></pre><hr>
+<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><pre><code>Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()
+</code></pre><p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
 <hr>
-<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()</span><br></pre></td></tr></table></figure>
-<p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
-<hr>
-<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">for name in names: </span><br><span class="line">     print(name)</span><br></pre></td></tr></table></figure>
-<p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(5))</span><br><span class="line">[0, 1, 2, 3, 4]</span><br></pre></td></tr></table></figure>
-<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum = 0</span><br><span class="line">n = 99</span><br><span class="line">while n &gt; 0:</span><br><span class="line">    sum = sum + n</span><br><span class="line">    n = n - 2</span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
-<p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
+<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><pre><code>names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
+for name in names: 
+     print(name)
+</code></pre><p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
+<pre><code>&gt;&gt;&gt; list(range(5))
+[0, 1, 2, 3, 4]
+</code></pre><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
+<pre><code>sum = 0
+n = 99
+while n &gt; 0:
+    sum = sum + n
+    n = n - 2
+print(sum)
+</code></pre><p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
 <h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure>
-<p>上面的代码可以打印出1~100。</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre><p>上面的代码可以打印出1~100。</p>
 <p>如果要提前结束循环，可以用<code>break</code>语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    if n &gt; 10: # 当n = 11时，条件满足，执行break语句</span><br><span class="line">        break # break语句会结束当前循环</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    if n &gt; 10: # 当n = 11时，条件满足，执行break语句
+        break # break语句会结束当前循环
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre><p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
 <h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
-<p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    if n % 2 == 0: # 如果n是偶数，执行continue语句</span><br><span class="line">        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    print(n)
+</code></pre><p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    if n % 2 == 0: # 如果n是偶数，执行continue语句
+        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
+    print(n)
+</code></pre><p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
 <hr>
-<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;Michael&apos;: 95, &apos;Bob&apos;: 75, &apos;Tracy&apos;: 85&#125;</span><br><span class="line">&gt;&gt;&gt; d[&apos;Michael&apos;]</span><br><span class="line">95</span><br></pre></td></tr></table></figure>
-<p>和list比较，dict有以下几个特点：</p>
+<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><pre><code>&gt;&gt;&gt; d = {&#39;Michael&#39;: 95, &#39;Bob&#39;: 75, &#39;Tracy&#39;: 85}
+&gt;&gt;&gt; d[&#39;Michael&#39;]
+95
+</code></pre><p>和list比较，dict有以下几个特点：</p>
 <ol>
 <li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
 <li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
@@ -608,57 +782,99 @@
 </ol>
 <h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s
+{1, 2, 3}
+</code></pre><hr>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
 <p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def my_abs(x):</span><br><span class="line">    if x &gt;= 0:</span><br><span class="line">        return x</span><br><span class="line">    else:</span><br><span class="line">        return -x</span><br></pre></td></tr></table></figure>
-<p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
+<pre><code>def my_abs(x):
+    if x &gt;= 0:
+        return x
+    else:
+        return -x
+</code></pre><p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
 <p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
 <p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
 <p><code>return None</code>可以简写为<code>return</code></p>
 <h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def nop():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
-<p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
+<pre><code>def nop():
+    pass
+</code></pre><p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
 <p><code>pass</code>还可以用在其他语句里，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if age &gt;= 18:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
-<p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
+<pre><code>if age &gt;= 18:
+    pass
+</code></pre><p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
 <h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>设置默认参数时，有几点要注意：</p>
 <p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
 <p>二是如何设置默认参数。</p>
 <p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
 <p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
 <p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def add_end(L=None):</span><br><span class="line">    if L is None:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(&apos;END&apos;)</span><br><span class="line">    return L</span><br></pre></td></tr></table></figure>
-<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<pre><code>def add_end(L=None):
+    if L is None:
+        L = []
+    L.append(&#39;END&#39;)
+    return L
+</code></pre><h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
 <p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
 <p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
-<p>但是调用的时候，需要先组装出一个list或tuple：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc([1, 2, 3])</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc((1, 3, 5, 7))</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
-<p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2, 3)</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc(1, 3, 5, 7)</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
-<p>所以，我们把函数的参数改为可变参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(*numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
-<p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2)</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; calc()</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-<p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
-<p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(*nums)</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
-<p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
+<pre><code>def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre><p>但是调用的时候，需要先组装出一个list或tuple：</p>
+<pre><code>&gt;&gt;&gt; calc([1, 2, 3])
+14
+&gt;&gt;&gt; calc((1, 3, 5, 7))
+84
+</code></pre><p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
+<pre><code>&gt;&gt;&gt; calc(1, 2, 3)
+14
+&gt;&gt;&gt; calc(1, 3, 5, 7)
+84
+</code></pre><p>所以，我们把函数的参数改为可变参数：</p>
+<pre><code>def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre><p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
+<pre><code>&gt;&gt;&gt; calc(1, 2)
+5
+&gt;&gt;&gt; calc()
+0
+</code></pre><p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])
+14
+</code></pre><p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
+</code></pre><p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
 <h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, **kw):</span><br><span class="line">    print(&apos;name:&apos;, name, &apos;age:&apos;, age, &apos;other:&apos;, kw)</span><br></pre></td></tr></table></figure>
-<p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&apos;Michael&apos;, 30)</span><br><span class="line">name: Michael age: 30 other: &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>也可以传入任意个数的关键字参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&apos;Bob&apos;, 35, city=&apos;Beijing&apos;)</span><br><span class="line">name: Bob age: 35 other: &#123;&apos;city&apos;: &apos;Beijing&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&apos;Adam&apos;, 45, gender=&apos;M&apos;, job=&apos;Engineer&apos;)</span><br><span class="line">name: Adam age: 45 other: &#123;&apos;gender&apos;: &apos;M&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br></pre></td></tr></table></figure>
-<p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
+<pre><code>def person(name, age, **kw):
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
+</code></pre><p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
+<pre><code>&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
+name: Michael age: 30 other: {}
+</code></pre><p>也可以传入任意个数的关键字参数：</p>
+<pre><code>&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+name: Bob age: 35 other: {&#39;city&#39;: &#39;Beijing&#39;}
+&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
+name: Adam age: 45 other: {&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
 <p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&apos;Jack&apos;, 24, city=extra[&apos;city&apos;], job=extra[&apos;job&apos;])</span><br><span class="line">name: Jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，上面复杂的调用可以用简化的写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&apos;Jack&apos;, 24, **extra)</span><br><span class="line">name: Jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br></pre></td></tr></table></figure>
-<p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
+<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p>当然，上面复杂的调用可以用简化的写法：</p>
+<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
 <p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。</p>
 <p>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！</p>
 <p>要注意定义可变参数和关键字参数的语法：</p>
@@ -674,7 +890,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc0kdb2h0020ng0rchw16dh5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc0m29zy0024ad0riz9uz13v" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -711,14 +927,23 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">download_delay = 1</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &apos;User-Agent&apos;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>download_delay = 1
+
+headers = {
+    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;
+ }
+</code></pre><hr>
 <p>scrapy的输出有时候太多了，挡住了视线。</p>
 <p>可以在setting中设置LOG_LEVEL</p>
 <hr>
 <p>突然发现，原来GitHub的API有访问限制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">403 reponse</span><br><span class="line">&#123;</span><br><span class="line">&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. </span><br><span class="line">(But here&apos;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,</span><br><span class="line">&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>详情：<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a></p>
+<pre><code>403 reponse
+{
+&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. 
+(But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,
+&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;
+}
+</code></pre><p>详情：<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a></p>
 <h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><blockquote>
 <p>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that the Search API has custom rate limit rules.</p>
 </blockquote>
@@ -727,18 +952,22 @@
 <h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
 <p>pyCharm是一个强大的pythonIDE</p>
 <p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line">execute()</span><br></pre></td></tr></table></figure>
-<p>所以当运行scrapy crawler spider时，其实与指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider</span><br></pre></td></tr></table></figure>
-<p>的效果是一样的</p>
+<pre><code>#!/usr/bin/python
+
+from scrapy.cmdline import execute
+execute()
+</code></pre><p>所以当运行scrapy crawler spider时，其实与指令：</p>
+<pre><code>python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider
+</code></pre><p>的效果是一样的</p>
 <p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
 <p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
 <p>Name可以随便填</p>
 <p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
 <hr>
 <h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MySpider(CrawlSpider):</span><br><span class="line">    handle_httpstatus_list = [403]</span><br></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>class MySpider(CrawlSpider):
+    handle_httpstatus_list = [403]
+</code></pre><blockquote>
 <p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br> <a href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes" target="_blank" rel="noopener">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
 </blockquote>
 <p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
@@ -749,7 +978,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc0kdb2t002dng0rexe76j2b" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc0m2a08002fad0r2gysaz6x" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -791,8 +1020,17 @@
 <p><strong>1.新建项目（Project）</strong><br>在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
 <p><div class="codetitle">代码如下:</div></p>
 <p><div id="code37356" class="codebody"><br>scrapy startproject tutorial</div><br>其中，tutorial为项目名称。<br>可以看到将会创建一个tutorial文件夹，目录结构如下：<br>代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tutorial/</span><br><span class="line">scrapy.cfg</span><br><span class="line">tutorial/</span><br><span class="line">__init__.py</span><br><span class="line">items.py</span><br><span class="line">pipelines.py</span><br><span class="line">settings.py</span><br><span class="line">spiders/</span><br><span class="line">__init__.py</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>下面来简单介绍一下各个文件的作用：</p>
+<pre><code>tutorial/
+scrapy.cfg
+tutorial/
+__init__.py
+items.py
+pipelines.py
+settings.py
+spiders/
+__init__.py
+...
+</code></pre><p>下面来简单介绍一下各个文件的作用：</p>
 <ul>
 <li>scrapy.cfg：项目的配置文件</li>
 <li>tutorial/：项目的Python模块，将会从这里引用代码</li>
@@ -803,16 +1041,41 @@
 </ul>
 <p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
 <p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Define here the models for your scraped items</span><br><span class="line">#</span><br><span class="line"># See documentation in:</span><br><span class="line"># http://doc.scrapy.org/en/latest/topics/items.html</span><br><span class="line">from scrapy.item import Item, Field</span><br><span class="line"></span><br><span class="line">class TutorialItem(Item):</span><br><span class="line"># define the fields for your item here like:</span><br><span class="line"># name = Field()</span><br><span class="line">pass</span><br><span class="line"></span><br><span class="line">class DmozItem(Item):</span><br><span class="line">title = Field()</span><br><span class="line">link = Field()</span><br><span class="line">desc = Field()</span><br></pre></td></tr></table></figure>
-<p><strong>3.制作爬虫（Spider）</strong></p>
+<pre><code># Define here the models for your scraped items
+#
+# See documentation in:
+# http://doc.scrapy.org/en/latest/topics/items.html
+from scrapy.item import Item, Field
+
+class TutorialItem(Item):
+# define the fields for your item here like:
+# name = Field()
+pass
+
+class DmozItem(Item):
+title = Field()
+link = Field()
+desc = Field()
+</code></pre><p><strong>3.制作爬虫（Spider）</strong></p>
 <p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br><strong>3.1爬
 </strong>Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
 <p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
 <p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from scrapy.spider import Spider</span><br><span class="line">class DmozSpider(Spider):</span><br><span class="line">name = “dmoz”</span><br><span class="line">allowed_domains = [“dmoz.org”]</span><br><span class="line">start_urls = [</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">def parse(self, response):</span><br><span class="line">filename = response.url.split(“/”)[-2]</span><br><span class="line">open(filename, ‘wb’).write(response.body)</span><br></pre></td></tr></table></figure>
-<p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl dmoz</span><br></pre></td></tr></table></figure>
-<p>运行结果如图：</p>
+<pre><code>from scrapy.spider import Spider
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+filename = response.url.split(“/”)[-2]
+open(filename, ‘wb’).write(response.body)
+</code></pre><p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
+<pre><code>scrapy crawl dmoz
+</code></pre><p>运行结果如图：</p>
 <p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg" alt=""></p>
 <p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
 <p><div class="codetitle">代码如下:</div></p>
@@ -873,8 +1136,30 @@
 <p>3.5使用Item<br>接下来我们来看一看如何使用Item。<br>前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
 <p><div class="codetitle">代码如下:</div></p>
 <p><div id="code83545" class="codebody"><br>&gt;&gt;&gt; item = DmozItem()<br>&gt;&gt;&gt; item[‘title’] = ‘Example title’<br>&gt;&gt;&gt; item[‘title’]<br>‘Example title’</div><br>作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:<br>代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from scrapy.spider import Spider</span><br><span class="line">from scrapy.selector import Selector</span><br><span class="line">from tutorial.items import DmozItem</span><br><span class="line"></span><br><span class="line">class DmozSpider(Spider):</span><br><span class="line">name = “dmoz”</span><br><span class="line">allowed_domains = [“dmoz.org”]</span><br><span class="line">start_urls = [</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">def parse(self, response):</span><br><span class="line">sel = Selector(response)</span><br><span class="line">sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)</span><br><span class="line">items = []</span><br><span class="line">for site in sites:</span><br><span class="line">item = DmozItem()</span><br><span class="line">item[‘title’] = site.xpath(‘a/text()’).extract()</span><br><span class="line">item[‘link’] = site.xpath(‘a/@href’).extract()</span><br><span class="line">item[‘desc’] = site.xpath(‘text()’).extract()</span><br><span class="line">items.append(item)</span><br><span class="line">return items</span><br></pre></td></tr></table></figure>
-<p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
+<pre><code>from scrapy.spider import Spider
+from scrapy.selector import Selector
+from tutorial.items import DmozItem
+
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+sel = Selector(response)
+sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)
+items = []
+for site in sites:
+item = DmozItem()
+item[‘title’] = site.xpath(‘a/text()’).extract()
+item[‘link’] = site.xpath(‘a/@href’).extract()
+item[‘desc’] = site.xpath(‘text()’).extract()
+items.append(item)
+return items
+</code></pre><p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
 <p><div id="code89953" class="codebody"><br>scrapy crawl dmoz -o items.json -t json</div><br>-o 后面是导出文件名，-t 后面是导出类型。<br>然后来看一下导出的结果，用文本编辑器打开json文件即可（为了方便显示，在item中删去了除了title之外的属性）：</p>
 <p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg" alt=""></p>
 <p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>这个我们以后再慢慢玩^_^</p>
@@ -883,7 +1168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc0kdb2u002fng0rjehk4ya4" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc0m2a0b002jad0r2csy9tmi" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -961,7 +1246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc0kdb2o0028ng0ri3c5hxm8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc0m2a04002aad0rdzy05enu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1050,6 +1335,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

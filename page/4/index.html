@@ -20,11 +20,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc0kdb3p003dng0rgom9tpqh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc0m2a13003fad0rs15df4ek" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -184,18 +184,60 @@
 <hr>
 <h3 id="彻底理解原型链-prototype-chain"><a href="#彻底理解原型链-prototype-chain" class="headerlink" title="彻底理解原型链 (prototype chain)"></a>彻底理解原型链 (prototype chain)</h3><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（**</strong>implicit reference<strong>**）</strong>，这个引用称之为<strong>原型（**</strong>prototype<strong>**）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（**</strong>prototype chain<strong>**）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个<strong><strong>proto</strong> 属性</strong>来实现对原型的<strong>隐式引用</strong>。  程序清单4说明了这一点。  </p>
 <p><strong>清单 4. 对象的 <strong>proto</strong> 属性和隐式引用</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person( name ) &#123; this.name = name; &#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( p.__proto__ === Person.prototype );</span><br><span class="line"></span><br><span class="line">// 原型本身是一个 Object 对象，所以他的隐式引用指向了</span><br><span class="line"></span><br><span class="line">// Object 构造器的 prototype 属性 , 故而打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.prototype.__proto__ === Object.prototype );</span><br><span class="line"></span><br><span class="line">// 构造器 Person 本身是一个函数对象，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.__proto__ === Function.prototype );</span><br></pre></td></tr></table></figure>
-<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
+<pre><code>function Person( name ) { this.name = name; }
+
+var p = new Person();
+
+// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
+
+console.log( p.__proto__ === Person.prototype );
+
+// 原型本身是一个 Object 对象，所以他的隐式引用指向了
+
+// Object 构造器的 prototype 属性 , 故而打印 true
+
+console.log( Person.prototype.__proto__ === Object.prototype );
+
+// 构造器 Person 本身是一个函数对象，所以此处打印 true
+
+console.log( Person.__proto__ === Function.prototype );
+</code></pre><p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
 <p><strong>图 1. 原型链中的属性隐藏机制</strong><br><img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
 <p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，  </p>
 <p>程序清单5.是利用原型链实现继承的简单例子。<br><strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 声明 Animal 对象构造器 </span><br><span class="line">function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，</span><br><span class="line">// 亦可直接理解为指定 Animal 对象的原型 </span><br><span class="line">Animal.prototype = &#123;</span><br><span class="line">    name: &quot;animal&quot;,</span><br><span class="line">    weight: 0, eat:</span><br><span class="line">    function () &#123; </span><br><span class="line">        alert(&quot;Animal is eating!&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 声明 Mammal 对象构造器 </span><br><span class="line">function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 </span><br><span class="line">    this.name = &quot;mammal&quot;;</span><br><span class="line">&#125; </span><br><span class="line">// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 </span><br><span class="line">Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 </span><br><span class="line">function Horse(height, weight) &#123;</span><br><span class="line">    this.name = &quot;horse&quot;;</span><br><span class="line">    this.height = height;</span><br><span class="line">    this.weight = weight;</span><br><span class="line">&#125;</span><br><span class="line">// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 </span><br><span class="line">Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 </span><br><span class="line">Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 </span><br><span class="line">var horse = new Horse(100, 300);</span><br><span class="line">console.log(horse.__proto__ === Horse.prototype);</span><br><span class="line">console.log(Horse.prototype.__proto__ === Mammal.prototype);</span><br><span class="line">console.log(Mammal.prototype.__proto__ === Animal.prototype);</span><br></pre></td></tr></table></figure>
-<p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
+<pre><code>// 声明 Animal 对象构造器 
+function Animal() { } //将 Animal 的 prototype 属性指向一个对象，
+// 亦可直接理解为指定 Animal 对象的原型 
+Animal.prototype = {
+    name: &quot;animal&quot;,
+    weight: 0, eat:
+    function () { 
+        alert(&quot;Animal is eating!&quot;); 
+    }
+} // 声明 Mammal 对象构造器 
+function Mammal() { // 指定 Mammal 对象的原型为一个 Animal 对象。 
+    this.name = &quot;mammal&quot;;
+} 
+// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
+Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 
+function Horse(height, weight) {
+    this.name = &quot;horse&quot;;
+    this.height = height;
+    this.weight = weight;
+}
+// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
+Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
+Horse.prototype.eat = function () { alert(&quot;Horse is eating grass!&quot;); } // 验证并理解原型链 
+var horse = new Horse(100, 300);
+console.log(horse.__proto__ === Horse.prototype);
+console.log(Horse.prototype.__proto__ === Mammal.prototype);
+console.log(Mammal.prototype.__proto__ === Animal.prototype);
+</code></pre><p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc0kdb41003ung0rkerfmqja" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc0m2a1a003pad0rsjczar3p" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -236,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc0kdb3z003sng0rwf7anwfl" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc0m2a1e003wad0rptw5lclw" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -288,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc0kdb1i000kng0rpq19nvz6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc0m29yk000iad0rsm5qzsrw" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -342,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc0kdb1g000ing0ramybwx9y" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc0m29ym000kad0rigk9wen7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -379,33 +421,78 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Nullability"><a href="#Nullability" class="headerlink" title="Nullability"></a>Nullability</h2><p>常规用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, strong, nonnull) Sark *sark;</span><br><span class="line">@property (nonatomic, copy, readonly, nullable) NSArray *friends;</span><br><span class="line">+ (nullable NSString *)friendWithName:(nonnull NSString *)name;</span><br></pre></td></tr></table></figure>
-<p>修饰变量，前面需要加双下划线，比如 block 内用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;</span><br></pre></td></tr></table></figure>
-<p>setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (null_resettable, nonatomic, strong) UIView *view;</span><br></pre></td></tr></table></figure>
-<p>宏的用法（包在宏里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">@interface Sark : NSObject</span><br><span class="line">@property (nonatomic, copy, nullable) NSString *workingCompany;</span><br><span class="line">@property (nonatomic, copy) NSArray *friends;</span><br><span class="line">- (nullable NSString *)gayFriend;</span><br><span class="line">@end</span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
-<p>Nullability 主要作用是在编译器层面提供了空值的类型检查，在类型不符时给出 warning，方便开发者第一时间发现潜在问题。</p>
+<pre><code>@property (nonatomic, strong, nonnull) Sark *sark;
+@property (nonatomic, copy, readonly, nullable) NSArray *friends;
++ (nullable NSString *)friendWithName:(nonnull NSString *)name;
+</code></pre><p>修饰变量，前面需要加双下划线，比如 block 内用法：</p>
+<pre><code>- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;
+</code></pre><p>setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。</p>
+<pre><code>@property (null_resettable, nonatomic, strong) UIView *view;
+</code></pre><p>宏的用法（包在宏里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行）：</p>
+<pre><code>NS_ASSUME_NONNULL_BEGIN
+@interface Sark : NSObject
+@property (nonatomic, copy, nullable) NSString *workingCompany;
+@property (nonatomic, copy) NSArray *friends;
+- (nullable NSString *)gayFriend;
+@end
+NS_ASSUME_NONNULL_END
+</code></pre><p>Nullability 主要作用是在编译器层面提供了空值的类型检查，在类型不符时给出 warning，方便开发者第一时间发现潜在问题。</p>
 <hr>
 <h2 id="kindof"><a href="#kindof" class="headerlink" title="__kindof"></a>__kindof</h2><p>主要作用还是编译器层面的类型检查</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//UIView 的写法</span><br><span class="line">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;</span><br><span class="line">// UITableView 的写法</span><br><span class="line">- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;</span><br></pre></td></tr></table></figure>
-<p>参考:<br><a href="http://blog.csdn.net/lizhongfu2013/article/details/47375649" target="_blank" rel="noopener">iOS开发~Objective-C新特性</a><br><a href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/" target="_blank" rel="noopener">2015 Objective-C 新特性</a></p>
-<h2 id="轻量级的泛型"><a href="#轻量级的泛型" class="headerlink" title="轻量级的泛型"></a>轻量级的泛型</h2><h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];</span><br><span class="line">NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @&#123;@&quot;a&quot;: @1, @&quot;b&quot;: @2&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface Stack&lt;ObjectType&gt; : NSObject</span><br><span class="line">- (void)pushObject:(ObjectType)object;</span><br><span class="line">- (ObjectType)popObject;</span><br><span class="line">@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>还可以增加限制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 只接受 NSNumber * 的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject</span><br><span class="line">// 只接受满足 NSCopying 协议的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject</span><br></pre></td></tr></table></figure>
-<h3 id="covariant-amp-amp-contravariant"><a href="#covariant-amp-amp-contravariant" class="headerlink" title="covariant &amp;&amp; contravariant"></a>covariant &amp;&amp; contravariant</h3><ul>
+<pre><code>//UIView 的写法
+@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+// UITableView 的写法
+- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre><p>参考:<br><a href="http://blog.csdn.net/lizhongfu2013/article/details/47375649" target="_blank" rel="noopener">iOS开发~Objective-C新特性</a><br><a href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/" target="_blank" rel="noopener">2015 Objective-C 新特性</a></p>
+<h2 id="轻量级的泛型"><a href="#轻量级的泛型" class="headerlink" title="轻量级的泛型"></a>轻量级的泛型</h2><h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><pre><code>NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];
+NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&quot;b&quot;: @2};
+</code></pre><h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><pre><code>@interface Stack&lt;ObjectType&gt; : NSObject
+- (void)pushObject:(ObjectType)object;
+- (ObjectType)popObject;
+@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
+@end
+</code></pre><p>还可以增加限制</p>
+<pre><code>// 只接受 NSNumber * 的泛型
+@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
+// 只接受满足 NSCopying 协议的泛型
+@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject
+</code></pre><h3 id="covariant-amp-amp-contravariant"><a href="#covariant-amp-amp-contravariant" class="headerlink" title="covariant &amp;&amp; contravariant"></a>covariant &amp;&amp; contravariant</h3><ul>
 <li>__covariant : 子类型可以强转到父类型（里氏替换原则）</li>
 <li>__contravariant : 父类型可以强转到子类型（WTF?）<br>参考 NSArray 和 NSMutableArray 的定义</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// NSArray</span><br><span class="line">@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;</span><br><span class="line">@property (readonly) NSUInteger count;</span><br><span class="line">- (ObjectType)objectAtIndex:(NSUInteger)index;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// NSMutableArray</span><br><span class="line">@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)addObject:(ObjectType)anObject;</span><br><span class="line">- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;</span><br><span class="line">- (void)removeLastObject;</span><br><span class="line">- (void)removeObjectAtIndex:(NSUInteger)index;</span><br><span class="line">- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
+<pre><code>// NSArray
+@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;
+@property (readonly) NSUInteger count;
+- (ObjectType)objectAtIndex:(NSUInteger)index;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+
+
+// NSMutableArray
+@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;
+
+
+- (void)addObject:(ObjectType)anObject;
+- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
+- (void)removeLastObject;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+</code></pre><p>&nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc0kdb2b001sng0r2ps97kzl" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc0m29zs001wad0rg1k4t75c" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -471,8 +558,8 @@
 
 <h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
 <p>此步骤会调用下列方法转发消息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)forwardInvocation:(NSInvocation*)invocation</span><br></pre></td></tr></table></figure>
-<p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
+</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
 <p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
 <h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
 <p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
@@ -482,7 +569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc0kdb3l0039ng0rpxnczlr6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc0m2a0y003bad0r9kags3ff" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -548,8 +635,8 @@
 
 <h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
 <p>此步骤会调用下列方法转发消息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)forwardInvocation:(NSInvocation*)invocation</span><br></pre></td></tr></table></figure>
-<p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
+</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
 <p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
 <h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
 <p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
@@ -559,7 +646,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e/" data-id="cjc0kdb3f0037ng0rcqhjcyt7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc-msgsend-e5-92-8c-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-92-e6-9c-ba-e5-88-b6-e/" data-id="cjc0m2a0x0039ad0rzm8aytrz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -596,14 +683,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import UIKit/UIKit.h</span><br><span class="line">int main(int argc, char *argv[])  </span><br><span class="line">&#123;  </span><br><span class="line">    @autoreleasepool &#123;       </span><br><span class="line">        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
+<pre><code>#import UIKit/UIKit.h
+int main(int argc, char *argv[])  
+{  
+    @autoreleasepool {       
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  
+    }  
+}
+</code></pre><p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
 <p>上面实例代码中有一个很重要的函数<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIApplicationMain" target="_blank" rel="noopener">UIApplicationMain</a>，它主要是创建App的几个核心对象来处理以下过程：<br>从可用Storyboard文件加载用户界面；<br>调用AppDelegate自定义代码来做一些初始化设置；<br>将App放入Main Run Loop环境中来响应和处理与用户交互产生的事件。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc0kdb44003zng0r3nafjbjy" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc0m2a1n0044ad0ri4is5tgh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -643,10 +736,36 @@
 <h3 id="UITableViewCell左侧会有默认15像素的空白"><a href="#UITableViewCell左侧会有默认15像素的空白" class="headerlink" title="UITableViewCell左侧会有默认15像素的空白"></a>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白</span></h3><p><span class="s1">在iOS</span>7<span class="s1">中，</span>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白。这时候，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">能将空白去掉。</span></p>
 <p><span class="s1">但是在</span>ios8<span class="s1">中，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">已经不起作用了。下面是解决办法</span></p>
 <p>首先在<span class="s2">viewDidLoad</span>方法加入以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+
+}
+
+if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+
+}
+</code></pre><p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
+<pre><code>– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+
+    }
+
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+
+    }
+
+}
+</code></pre><hr>
 <h3 id="封装View注意事项"><a href="#封装View注意事项" class="headerlink" title="封装View注意事项"></a>封装View注意事项</h3><p><span class="s1">封装</span>view<span class="s1">的时候要注意在</span>-<span class="s1">(</span>void<span class="s1">)</span>layoutSubviews<span class="s1">中重写子视图的</span>frame</p>
 <hr>
 <h3 id="Block的书写格式"><a href="#Block的书写格式" class="headerlink" title=" Block的书写格式"></a><span class="s2"> Block的书写格式</span></h3><p><span class="s2">Block</span>的格式<span class="s2">:  ^ + </span>返回值类型(可以省略)<span class="s2"> + </span>(参数)(如果没有参数,可以省略)<span class="s2"> + {</span>表达式<span class="s2">}</span></p>
@@ -658,8 +777,16 @@
 <h3 id="关于OC在浮点数-f说明"><a href="#关于OC在浮点数-f说明" class="headerlink" title="关于OC在浮点数.f说明"></a>关于OC在浮点数.f说明</h3><p><span class="s1">1.</span>如果是赋给<span class="s1">CGFloat</span>类型，则加不加<span class="s1">f</span>后缀都是一样的。</p>
 <p><span class="s1">2.</span>如果是赋给<span class="s1">double</span>或<span class="s1">float</span>类型，就要考虑精度的问题。不加<span class="s1">f</span>后缀的话类型为<span class="s1">double</span>，<span class="s1">8</span>字节，加<span class="s1">f</span>后缀的话类型为<span class="s1">float</span>，<span class="s1">4</span>字节。</p>
 <hr>
-<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (AccountManager *)sharedManager</span><br><span class="line">&#123;</span><br><span class="line">        static AccountManager *sharedAccountManagerInstance = nil;</span><br><span class="line">        static dispatch_once_t predicate;</span><br><span class="line">        dispatch_once(&amp;predicate, ^&#123;</span><br><span class="line">                sharedAccountManagerInstance = [[self alloc] init];</span><br><span class="line">        &#125;);</span><br><span class="line">    return sharedAccountManagerInstance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><pre><code>+ (AccountManager *)sharedManager
+{
+        static AccountManager *sharedAccountManagerInstance = nil;
+        static dispatch_once_t predicate;
+        dispatch_once(&amp;predicate, ^{
+                sharedAccountManagerInstance = [[self alloc] init];
+        });
+    return sharedAccountManagerInstance;
+}
+</code></pre><hr>
 <h3 id="Block会复制到堆的情况"><a href="#Block会复制到堆的情况" class="headerlink" title="Block会复制到堆的情况"></a><span class="s1">Block</span>会复制到堆的情况</h3><p>1.<span class="s1">调用</span>Block<span class="s1">的</span>copy<span class="s1">实例方法</span></p>
 <p><span class="s2">2.Block</span>作为函数返回值时</p>
 <p>3.<span class="s1">将</span>Block<span class="s1">赋值给附有</span>_strong<span class="s1">修饰符</span>id<span class="s1">类型的类或</span>Block<span class="s1">类成员变量时</span></p>
@@ -673,7 +800,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc0kdb4h004dng0rbp2aegkr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc0m2a23004cad0rivxboc7a" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -762,6 +889,10 @@
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   

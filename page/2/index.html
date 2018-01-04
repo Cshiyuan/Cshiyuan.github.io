@@ -20,11 +20,11 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
 <body>
   <div id="container">
     <div id="wrap">
@@ -107,54 +107,92 @@
 </ul>
 <p>Core Foundation框架和Foundation框架紧密相关，它们为相同功能提供接口，但Foundation框架提供Objective-C接口。如果您将Foundation对象和Core Foundation类型掺杂使用，则可利用两个框架之间的 “toll-free bridging”。所谓的<strong>Toll-free bridging</strong>是说您可以在某个框架的方法或函数同时使用Core Foundatio和Foundation 框架中的某些类型。很多数据类型支持这一特性，其中包括群体和字符串数据类型。每个框架的类和类型描述都会对某个对象是否为 toll-free bridged，应和什么对象桥接进行说明。<br>如需进一步信息，请阅读<a href="http://developer.apple.com/iphone/library/documentation/CoreFoundation/Reference/CoreFoundation_Collection/index.html#/apple_ref/doc/uid/TP40003849" target="_blank" rel="noopener">Core Foundation 框架参考</a>。<br>自 Xcode4.2 开始导入ARC机制后，为了支持对象间的转型，Apple又增加了许多转型用的关键字。这一讲我们就来了解其用法，以及产生的理由。</p>
 <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>我们先来看一下ARC无效的时候，我们写id类型转void*类型的写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br></pre></td></tr></table></figure>
-<p>反过来，当把void*对象变回id类型时，只是简单地如下来写，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = p;</span><br><span class="line">[obj release];</span><br></pre></td></tr></table></figure>
-<p>但是上面的代码在ARC有效时，就有了下面的错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">error: implicit conversion of an Objective-C pointer</span><br><span class="line">to ’void *’ is disallowed with ARC</span><br><span class="line">void *p = obj;</span><br><span class="line">^error: implicit conversion of a non-Objective-C pointer</span><br><span class="line">type ’void *’ to ’id’ is disallowed with ARC</span><br><span class="line">id o = p;</span><br></pre></td></tr></table></figure>
-<h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>为了解决这一问题，我们使用 __bridge 关键字来实现id类型与void*类型的相互转换。看下面的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = (__bridge void *)obj;</span><br><span class="line">id o = (__bridge id)p;</span><br></pre></td></tr></table></figure></p>
-<p>将Objective-C的对象类型用 bridge 转换为 void* 类型和使用 unsafe_unretained 关键字修饰的变量是一样的。被代入对象的所有者需要明确对象生命周期的管理，不要出现异常访问的问题。<br>除过 bridge 以外，还有两个 bridge 相关的类型转换关键字：</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = obj;
+</code></pre><p>反过来，当把void*对象变回id类型时，只是简单地如下来写，</p>
+<pre><code>id obj = p;
+[obj release];
+</code></pre><p>但是上面的代码在ARC有效时，就有了下面的错误：</p>
+<pre><code> error: implicit conversion of an Objective-C pointer
+ to ’void *’ is disallowed with ARC
+ void *p = obj;
+ ^error: implicit conversion of a non-Objective-C pointer
+ type ’void *’ to ’id’ is disallowed with ARC
+ id o = p;
+</code></pre><h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>为了解决这一问题，我们使用 __bridge 关键字来实现id类型与void*类型的相互转换。看下面的例子。</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = (__bridge void *)obj;
+id o = (__bridge id)p;
+</code></pre><p>将Objective-C的对象类型用 bridge 转换为 void* 类型和使用 unsafe_unretained 关键字修饰的变量是一样的。被代入对象的所有者需要明确对象生命周期的管理，不要出现异常访问的问题。<br>除过 bridge 以外，还有两个 bridge 相关的类型转换关键字：</p>
 <ul>
 <li>__bridge_retained</li>
 <li>__bridge_transfer</li>
 </ul>
 <p>接下来，我们将看看这两个关键字的区别。</p>
 <h2 id="bridge-retained"><a href="#bridge-retained" class="headerlink" title="__bridge_retained"></a>__bridge_retained</h2><p>先来看使用 __bridge_retained 关键字的例子程序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d obj = [[NSObject alloc] init]; </span><br><span class="line">void *p = (__bridge_retained void *)obj;</span><br></pre></td></tr></table></figure>
-<p>从名字上我们应该能理解其意义：类型被转换时，其对象的所有权也将被变换后变量所持有。如果不是ARC代码，类似下面的实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br><span class="line">[(id)p retain];</span><br></pre></td></tr></table></figure>
-<p>可以用一个实际的例子验证，对象所有权是否被持有。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void *p = 0;</span><br><span class="line">&#123;</span><br><span class="line"> id obj = [[NSObject alloc] init];</span><br><span class="line"> p = (__bridge_retained void *)obj;</span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;class=%@&quot;, [(__bridge id)p class]);</span><br></pre></td></tr></table></figure>
-<p>出了大括号的范围后，p 仍然指向一个有效的实体。说明他拥有该对象的所有权，该对象没有因为出其定义范围而被销毁。</p>
+<pre><code>d obj = [[NSObject alloc] init]; 
+void *p = (__bridge_retained void *)obj;
+</code></pre><p>从名字上我们应该能理解其意义：类型被转换时，其对象的所有权也将被变换后变量所持有。如果不是ARC代码，类似下面的实现：</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = obj;
+[(id)p retain];
+</code></pre><p>可以用一个实际的例子验证，对象所有权是否被持有。</p>
+<pre><code>void *p = 0;
+{
+ id obj = [[NSObject alloc] init];
+ p = (__bridge_retained void *)obj;
+}
+NSLog(@&quot;class=%@&quot;, [(__bridge id)p class]);
+</code></pre><p>出了大括号的范围后，p 仍然指向一个有效的实体。说明他拥有该对象的所有权，该对象没有因为出其定义范围而被销毁。</p>
 <h2 id="bridge-transfer"><a href="#bridge-transfer" class="headerlink" title="__bridge_transfer"></a>__bridge_transfer</h2><p>相反，当想把本来拥有对象所有权的变量，在类型转换后，让其释放原先所有权的时候，需要使用 __bridge_transfer 关键字。文字有点绕口，我们还是来看一段代码吧。</p>
 <p>如果ARC无效的时候，我们可能需要写下面的代码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (id)p;</span><br><span class="line">[obj retain];</span><br><span class="line">[(id)p release];</span><br></pre></td></tr></table></figure>
-<p>那么ARC有效后，我们可以用下面的代码来替换：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (__bridge_transfer id)p;</span><br></pre></td></tr></table></figure>
-<p>可以看出来，bridge_retained 是编译器替我们做了 retain 操作，而 bridge_transfer 是替我们做了 release。</p>
+<pre><code>// p 变量原先持有对象的所有权
+id obj = (id)p;
+[obj retain];
+[(id)p release];
+</code></pre><p>那么ARC有效后，我们可以用下面的代码来替换：</p>
+<pre><code>// p 变量原先持有对象的所有权
+id obj = (__bridge_transfer id)p;
+</code></pre><p>可以看出来，bridge_retained 是编译器替我们做了 retain 操作，而 bridge_transfer 是替我们做了 release。</p>
 <h4 id="Toll-Free-bridged"><a href="#Toll-Free-bridged" class="headerlink" title="Toll-Free bridged"></a>Toll-Free bridged</h4><p>在iOS世界，主要有两种对象：Objective-C 对象和 Core Foundation 对象0。Core Foundation 对象主要是有C语言实现的 Core Foundation Framework 的对象，其中也有对象引用计数的概念，只是不是 Cocoa Framework::Foundation Framework 的 retain/release，而是自身的 CFRetain/CFRelease 接口。</p>
 <p>这两种对象间可以互相转换和操作，不使用ARC的时候，单纯的用C原因的类型转换，不需要消耗CPU的资源，所以叫做 Toll-Free bridged。比如 NSArray和CFArrayRef, NSString和CFStringRef，他们虽然属于不同的 Framework，但是具有相同的对象结构，所以可以用标准C的类型转换。</p>
 <p>比如不使用ARC时，我们用下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (CFStringRef)string;</span><br></pre></td></tr></table></figure>
-<p>同样，Core Foundation类型向Objective-C类型转换时，也是简单地用标准C的类型转换即可。<br>但是在ARC有效的情况下，将出现类似下面的编译错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cast of Objective-C pointer type ‘NSString *’ to C pointer type ‘CFStringRef’ (aka ‘const struct __CFString *’) requires a bridged cast</span><br><span class="line">Use __bridge to convert directly (no change in ownership)</span><br><span class="line">Use __bridge_retained to make an ARC object available as a +1 ‘CFStringRef’ (aka ‘const struct __CFString *’)</span><br></pre></td></tr></table></figure>
-<p>错误中已经提示了我们需要怎样做：用 bridge 或者 bridge_retained 来转型，其差别就是变更对象的所有权。<br>正因为Objective-C是ARC管理的对象，而Core Foundation不是ARC管理的对象，所以才要特意这样转换，这与id类型向void*转换是一个概念。也就是说，当这两种类型（有ARC管理，没有ARC管理）在转换时，需要告诉编译器怎样处理对象的所有权。<br>上面的例子，使用 bridge/bridge_retained 后的代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge CFStringRef)string;</span><br></pre></td></tr></table></figure>
-<p>只是单纯地执行了类型转换，没有进行所有权的转移，也就是说，当string对象被释放的时候，cfString也不能被使用了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge_retained CFStringRef)string;</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release</span><br></pre></td></tr></table></figure>
-<p>使用 __bridge_retained 可以通过转换目标处（cfString）的 retain 处理，来使所有权转移。即使 string 变量被释放，cfString 还是可以使用具体的对象。只是有一点，由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release。</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (CFStringRef)string;
+</code></pre><p>同样，Core Foundation类型向Objective-C类型转换时，也是简单地用标准C的类型转换即可。<br>但是在ARC有效的情况下，将出现类似下面的编译错误：</p>
+<pre><code> Cast of Objective-C pointer type ‘NSString *’ to C pointer type ‘CFStringRef’ (aka ‘const struct __CFString *’) requires a bridged cast
+ Use __bridge to convert directly (no change in ownership)
+ Use __bridge_retained to make an ARC object available as a +1 ‘CFStringRef’ (aka ‘const struct __CFString *’)
+</code></pre><p>错误中已经提示了我们需要怎样做：用 bridge 或者 bridge_retained 来转型，其差别就是变更对象的所有权。<br>正因为Objective-C是ARC管理的对象，而Core Foundation不是ARC管理的对象，所以才要特意这样转换，这与id类型向void*转换是一个概念。也就是说，当这两种类型（有ARC管理，没有ARC管理）在转换时，需要告诉编译器怎样处理对象的所有权。<br>上面的例子，使用 bridge/bridge_retained 后的代码如下：</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (__bridge CFStringRef)string;
+</code></pre><p>只是单纯地执行了类型转换，没有进行所有权的转移，也就是说，当string对象被释放的时候，cfString也不能被使用了。</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (__bridge_retained CFStringRef)string;
+...
+CFRelease(cfString); // 由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release
+</code></pre><p>使用 __bridge_retained 可以通过转换目标处（cfString）的 retain 处理，来使所有权转移。即使 string 变量被释放，cfString 还是可以使用具体的对象。只是有一点，由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release。</p>
 <p>实际上，Core Foundation 内部，为了实现Core Foundation对象类型与Objective-C对象类型的相互转换，提供了下面的函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CFTypeRef CFBridgingRetain(id X) &#123;</span><br><span class="line"> return (__bridge_retained CFTypeRef)X;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">id CFBridgingRelease(CFTypeRef X) &#123;</span><br><span class="line"> return (__bridge_transfer id)X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>所以，可以用 CFBridgingRetain 替代 __bridge_retained 关键字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = CFBridgingRetain(string);</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以需要主动release。</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由上面的学习我们了解到 ARC 中类型转换的用法，那么我们实际使用中按照怎样的原则或者方法来区分使用呢，下面我总结了几点关键要素。<br>明确被转换类型是否是 ARC 管理的对象Core Foundation 对象类型不在 ARC 管理范畴内<br>Cocoa Framework::Foundation 对象类型（即一般使用到的Objectie-C对象类型）在 ARC 的管理范畴内</p>
+<pre><code>CFTypeRef CFBridgingRetain(id X) {
+ return (__bridge_retained CFTypeRef)X;
+}
+
+id CFBridgingRelease(CFTypeRef X) {
+ return (__bridge_transfer id)X;
+}
+</code></pre><p>所以，可以用 CFBridgingRetain 替代 __bridge_retained 关键字：</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = CFBridgingRetain(string);
+...
+CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以需要主动release。
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由上面的学习我们了解到 ARC 中类型转换的用法，那么我们实际使用中按照怎样的原则或者方法来区分使用呢，下面我总结了几点关键要素。<br>明确被转换类型是否是 ARC 管理的对象Core Foundation 对象类型不在 ARC 管理范畴内<br>Cocoa Framework::Foundation 对象类型（即一般使用到的Objectie-C对象类型）在 ARC 的管理范畴内</p>
 <p>如果不在 ARC 管理范畴内的对象，那么要清楚 release 的责任应该是谁<br>各种对象的生命周期是怎样的</p>
 <p>1. 声明 id obj 的时候，其实是缺省的申明了一个 <strong>strong 修饰的变量，所以编译器自动地加入了 retain 的处理，所以说 </strong>bridge_transfer 关键字只为我们做了 release 处理。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc0kdb1p000xng0rhsyc67rc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc0m29yz000xad0r1ol3o02h" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -220,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjc0kdb1u0013ng0rs3unnz2y" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjc0m29z30014ad0romlee2ww" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -290,8 +328,71 @@ demo.m :
 <li><p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m</span><br><span class="line">wuqiong:~ apple$ cat demo.s</span><br><span class="line">    .section    __TEXT,__text,regular,pure_instructions</span><br><span class="line">    .ios_version_min 9, 2</span><br><span class="line">    .globl    _demo</span><br><span class="line">    .align    2</span><br><span class="line">_demo:                                  ; @demo</span><br><span class="line">    .cfi_startproc</span><br><span class="line">; BB#0:</span><br><span class="line">    stp    x29, x30, [sp, #-16]!</span><br><span class="line">    mov     x29, sp</span><br><span class="line">Ltmp0:</span><br><span class="line">    .cfi_def_cfa w29, 16</span><br><span class="line">Ltmp1:</span><br><span class="line">    .cfi_offset w30, -8</span><br><span class="line">Ltmp2:</span><br><span class="line">    .cfi_offset w29, -16</span><br><span class="line">    adrp    x0, L__unnamed_cfstring_@PAGE</span><br><span class="line">    add    x0, x0, L__unnamed_cfstring_@PAGEOFF</span><br><span class="line">    bl    _NSLog</span><br><span class="line">    ldp    x29, x30, [sp], #16</span><br><span class="line">    ret</span><br><span class="line">    .cfi_endproc</span><br><span class="line">.section    __TEXT,__cstring,cstring_literals</span><br><span class="line">L_.str:                                 ; @.str</span><br><span class="line">.asciz    &quot;demo func&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__cfstring</span><br><span class="line">.align    4                       ; @_unnamed_cfstring_</span><br><span class="line">L__unnamed_cfstring_:</span><br><span class="line">.quad    __CFConstantStringClassReference</span><br><span class="line">.long    1992                    ; 0x7c8</span><br><span class="line">.space    4</span><br><span class="line">.quad    L.str</span><br><span class="line">.quad    9                       ; 0x9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__objc_imageinfo,regular,no_dead_strip</span><br><span class="line">L_OBJC_IMAGE_INFO:</span><br><span class="line">.long    0</span><br><span class="line">.long    0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ rm demo.m`</span><br><span class="line"></span><br><span class="line">现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s</span><br><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`</span><br><span class="line"></span><br><span class="line">然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ ar -t libTest.a</span><br><span class="line">__.SYMDEF SORTED</span><br><span class="line">test.o</span><br><span class="line">demo.o</span><br><span class="line">wuqiong:~ apple$ otool -l libTest.a | grep bitcode</span><br><span class="line">  sectname __bitcode</span><br></pre></td></tr></table></figure>
-<p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>
+<pre><code>wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m
+wuqiong:~ apple$ cat demo.s
+    .section    __TEXT,__text,regular,pure_instructions
+    .ios_version_min 9, 2
+    .globl    _demo
+    .align    2
+_demo:                                  ; @demo
+    .cfi_startproc
+; BB#0:
+    stp    x29, x30, [sp, #-16]!
+    mov     x29, sp
+Ltmp0:
+    .cfi_def_cfa w29, 16
+Ltmp1:
+    .cfi_offset w30, -8
+Ltmp2:
+    .cfi_offset w29, -16
+    adrp    x0, L__unnamed_cfstring_@PAGE
+    add    x0, x0, L__unnamed_cfstring_@PAGEOFF
+    bl    _NSLog
+    ldp    x29, x30, [sp], #16
+    ret
+    .cfi_endproc
+.section    __TEXT,__cstring,cstring_literals
+L_.str:                                 ; @.str
+.asciz    &quot;demo func&quot;
+
+
+.section    __DATA,__cfstring
+.align    4                       ; @_unnamed_cfstring_
+L__unnamed_cfstring_:
+.quad    __CFConstantStringClassReference
+.long    1992                    ; 0x7c8
+.space    4
+.quad    L.str
+.quad    9                       ; 0x9
+
+
+.section    __DATA,__objc_imageinfo,regular,no_dead_strip
+L_OBJC_IMAGE_INFO:
+.long    0
+.long    0
+
+
+.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:
+
+
+`wuqiong:~ apple$ rm demo.m`
+
+现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:
+
+
+`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
+wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`
+
+然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:
+
+
+`wuqiong:~ apple$ ar -t libTest.a
+__.SYMDEF SORTED
+test.o
+demo.o
+wuqiong:~ apple$ otool -l libTest.a | grep bitcode
+  sectname __bitcode
+</code></pre><p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>
 <p>那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.</p>
 <p>目前我们日常的iOS应用开发中,一般不会需要用到汇编层面去优化的代码.所以我们主要关注第三方(开源)C代码,尤其是音视频编码解码这些计算密集型项目代码,关键计算的代码针对特定平台都有对应平台的汇编版本实现,当然也有C的实现,但是默认编译一般都是用的汇编版本,这样就会导致我们在编译这个开源代码的时候哪怕你带了<code>-fembed-bitcode</code>参数也仅仅只是让项目中的部分C代码的目标文件带了bitcode段,而那小数的汇编代码的目标文件一样不带bitcode段,这样编译出这个库交给上层开发者使用的时候,就会出现在打包上传或者真机调试的时候因为Xcode默认开了bitcode功能而链接失败,导致不能真机调试或者不能上传应用到AppStore.</p>
 <h2 id="此文之初衷"><a href="#此文之初衷" class="headerlink" title="此文之初衷"></a>此文之初衷</h2><p>最近在辅导我戴维营战友们做手机音视频直播的App,调试的时候手机采集音视频,视频用h264编码,音频采用aac编码,通过RTMP协议往斗鱼直播频道发布媒体流,项目需要用<code>FFMPEG</code>和<code>libx264</code>两个开源项目,在编译为iOS框架库提供给学生用的时候,他们遇到了bitcode的问题,虽然可以采取直接关闭bitcode来避免错误,但是战友的求知欲必须满足,格物致知,必须让其知其究竟.</p>
@@ -308,7 +409,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjc0kdb540057ng0ruorr9ep3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjc0m2a2s0058ad0rzhfwobyp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -354,8 +455,11 @@ demo.m :
 <p>这里所说的<strong>多图下载</strong>，就是要在tableview的每一个cell里显示一张图片,而且这些图片都需要从网上下载。</p>
 <h1 id="2-容易遇到的问题"><a href="#2-容易遇到的问题" class="headerlink" title="2. 容易遇到的问题"></a>2. 容易遇到的问题</h1><hr>
 <p>如果不知道或不使用<strong>异步操作</strong>和<strong>缓存机制</strong>，那么写出来的代码很可能会是这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cell.textLabel.text = app.name;</span><br><span class="line">cell.detailTextLabel.text = app.download;</span><br><span class="line">NSData *imageData = [NSData dataWithContentsOfURL:app.url];</span><br><span class="line">cell.imageView.image = [UIImage imageWithData:imageData];</span><br></pre></td></tr></table></figure>
-<p>这样写有什么后果呢？</p>
+<pre><code>cell.textLabel.text = app.name;
+cell.detailTextLabel.text = app.download;
+NSData *imageData = [NSData dataWithContentsOfURL:app.url];
+cell.imageView.image = [UIImage imageWithData:imageData];
+</code></pre><p>这样写有什么后果呢？</p>
 <h4 id="后果1：不可避免的卡顿（因为没有异步下载操作）"><a href="#后果1：不可避免的卡顿（因为没有异步下载操作）" class="headerlink" title="后果1：不可避免的卡顿（因为没有异步下载操作）"></a>后果1：不可避免的卡顿（因为没有异步下载操作）</h4><blockquote>
 <p>dataWithContentsOfURL：是耗时操作，将其放在主线程会造成卡顿。如果图片很多，图片很大，而且网络情况不好的话肯定会卡出翔！</p>
 </blockquote>
@@ -370,12 +474,102 @@ demo.m :
 <p> <strong>2. 图片缓存（字典）</strong>：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。  </p>
 <p><strong>3. 下载操作缓存（字典）</strong>：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。  </p>
 <p><strong>4. 沙盒缓存(文件路径对应NSData)</strong>：存放于磁盘中，位于Cache文件夹内，路径为“Cache/图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。</p>
-<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  存放所有下载完的图片</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *images;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  存放所有的下载操作（key是url，value是operation对象）</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *operations;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径</span><br><span class="line"> */</span><br><span class="line">#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]</span><br></pre></td></tr></table></figure>
-<p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 先从images缓存中取出图片url对应的UIImage</span><br><span class="line">    UIImage *image = self.images[app.icon];</span><br><span class="line">    if (image) &#123; </span><br><span class="line"></span><br><span class="line">        // 存在：说明图片已经下载成功，并缓存成功）</span><br><span class="line">        cell.imageView.image = image;</span><br><span class="line"></span><br><span class="line">    &#125; else &#123; </span><br><span class="line"></span><br><span class="line">         // 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片</span><br><span class="line"></span><br><span class="line">         // 获得url对于的沙盒缓存路径</span><br><span class="line">        NSString *file = CachedImageFile(app.icon);</span><br><span class="line"></span><br><span class="line">        // 先从沙盒中取出图片</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfFile:file];</span><br><span class="line"></span><br><span class="line">        if (data) &#123;</span><br><span class="line"></span><br><span class="line">            //data不为空，说明沙盒中存在这个文件</span><br><span class="line">            cell.imageView.image = [UIImage imageWithData:data];</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">             // 反之沙盒中不存在这个文件</span><br><span class="line">             // 在下载之前显示占位图片</span><br><span class="line">            cell.imageView.image = [UIImage imageNamed:@&quot;placeholder&quot;];</span><br><span class="line"></span><br><span class="line">            // 下载图片</span><br><span class="line">            [self download:app.icon indexPath:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>2.3 图片的下载部分</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  下载图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageUrl 图片的url</span><br><span class="line"> */</span><br><span class="line">- (void)download:(NSString *)imageUrl indexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    // 取出当前图片url对应的下载操作（operation对象）</span><br><span class="line">    NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line">    if (operation) return;</span><br><span class="line"></span><br><span class="line">    // 创建操作，下载图片</span><br><span class="line">    __weak typeof(self) appsVc = self;</span><br><span class="line">    operation = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">        NSURL *url = [NSURL URLWithString:imageUrl];</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfURL:url]; // 下载</span><br><span class="line">        UIImage *image = [UIImage imageWithData:data]; // NSData -&gt; UIImage</span><br><span class="line"></span><br><span class="line">        // 回到主线程</span><br><span class="line">        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">            if (image) &#123;</span><br><span class="line">                // 如果存在图片（下载完成），存放图片到图片缓存字典中</span><br><span class="line">                appsVc.images[imageUrl] = image;</span><br><span class="line"></span><br><span class="line">                //将图片存入沙盒中</span><br><span class="line">                //1. 先将图片转化为NSData</span><br><span class="line">                NSData *data = UIImagePNGRepresentation(image);</span><br><span class="line"></span><br><span class="line">                //2.  再生成缓存路径            </span><br><span class="line">                [data writeToFile:CachedImageFile(imageUrl) atomically:YES];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 从字典中移除下载操作 (保证下载失败后，能重新下载)</span><br><span class="line">            [appsVc.operations removeObjectForKey:imageUrl];</span><br><span class="line"></span><br><span class="line">            // 刷新当前表格，减少系统开销</span><br><span class="line">            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    // 添加下载操作到队列中</span><br><span class="line">    [self.queue addOperation:operation];</span><br><span class="line"></span><br><span class="line">    // 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)</span><br><span class="line">    self.operations[imageUrl] = operation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-有哪些点是值得注意的？"><a href="#3-有哪些点是值得注意的？" class="headerlink" title="3. 有哪些点是值得注意的？"></a>3. 有哪些点是值得注意的？</h4><p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
+<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><pre><code>/**
+ *  存放所有下载完的图片
+ */
+@property (nonatomic, strong) NSMutableDictionary *images;
+
+/**
+ *  存放所有的下载操作（key是url，value是operation对象）
+ */
+@property (nonatomic, strong) NSMutableDictionary *operations;
+
+/**
+ *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径
+ */
+#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]
+</code></pre><p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
+<pre><code>// 先从images缓存中取出图片url对应的UIImage
+    UIImage *image = self.images[app.icon];
+    if (image) { 
+
+        // 存在：说明图片已经下载成功，并缓存成功）
+        cell.imageView.image = image;
+
+    } else { 
+
+         // 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片
+
+         // 获得url对于的沙盒缓存路径
+        NSString *file = CachedImageFile(app.icon);
+
+        // 先从沙盒中取出图片
+        NSData *data = [NSData dataWithContentsOfFile:file];
+
+        if (data) {
+
+            //data不为空，说明沙盒中存在这个文件
+            cell.imageView.image = [UIImage imageWithData:data];
+
+        } else {
+
+             // 反之沙盒中不存在这个文件
+             // 在下载之前显示占位图片
+            cell.imageView.image = [UIImage imageNamed:@&quot;placeholder&quot;];
+
+            // 下载图片
+            [self download:app.icon indexPath:indexPath];
+        }
+    }
+</code></pre><p><strong>2.3 图片的下载部分</strong>：</p>
+<pre><code>/**
+ *  下载图片
+ *
+ *  @param imageUrl 图片的url
+ */
+- (void)download:(NSString *)imageUrl indexPath:(NSIndexPath *)indexPath
+{
+    // 取出当前图片url对应的下载操作（operation对象）
+    NSBlockOperation *operation = self.operations[imageUrl];
+    if (operation) return;
+
+    // 创建操作，下载图片
+    __weak typeof(self) appsVc = self;
+    operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSURL *url = [NSURL URLWithString:imageUrl];
+        NSData *data = [NSData dataWithContentsOfURL:url]; // 下载
+        UIImage *image = [UIImage imageWithData:data]; // NSData -&gt; UIImage
+
+        // 回到主线程
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+            if (image) {
+                // 如果存在图片（下载完成），存放图片到图片缓存字典中
+                appsVc.images[imageUrl] = image;
+
+                //将图片存入沙盒中
+                //1. 先将图片转化为NSData
+                NSData *data = UIImagePNGRepresentation(image);
+
+                //2.  再生成缓存路径            
+                [data writeToFile:CachedImageFile(imageUrl) atomically:YES];
+            }
+
+            // 从字典中移除下载操作 (保证下载失败后，能重新下载)
+            [appsVc.operations removeObjectForKey:imageUrl];
+
+            // 刷新当前表格，减少系统开销
+            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    }];
+
+    // 添加下载操作到队列中
+    [self.queue addOperation:operation];
+
+    // 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)
+    self.operations[imageUrl] = operation;
+}
+</code></pre><h4 id="3-有哪些点是值得注意的？"><a href="#3-有哪些点是值得注意的？" class="headerlink" title="3. 有哪些点是值得注意的？"></a>3. 有哪些点是值得注意的？</h4><p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
 <p><strong>3.1 关于图片缓存</strong>：<br>很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。</p>
 <p><strong>3.2 关于沙盒缓存</strong>：<br>同样地，对于沙盒缓存也是一个道理：有图就将其转化为NSData，写入磁盘，并对应唯一的路径，没有图就不写。所以即使是要下载相同的图片，因为当前url对应的沙盒路径已经存在文件了，所以直接拿就可以了，不会再下载。</p>
 <p>但是！<br>    下载操作缓存是不同的！</p>
@@ -386,8 +580,9 @@ demo.m :
 <li>如果未来下载成功了，那么我们就不会来到判断当前下载操作是否在下载操作缓存这一步，在这之前直接就可以拿图去用了，下载操作是否存在下载操作缓存里并没有什么影响。</li>
 <li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>忘了那段代码了么？回看一下代码（看我多好）：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line"> if (operation) return;//转身就走，毫不留情</span><br></pre></td></tr></table></figure>
-<p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>
+<pre><code>NSBlockOperation *operation = self.operations[imageUrl];
+ if (operation) return;//转身就走，毫不留情
+</code></pre><p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>
 <h1 id="4-最后的话"><a href="#4-最后的话" class="headerlink" title="4. 最后的话"></a>4. 最后的话</h1><hr>
 <p>异步+缓存这两个机制双剑合璧的话会对程序新能带来很大的改观。这应该app开发进阶的必经之路。</p>
 <p>小码哥讲述的这套流程还算比较完整的了，更重要的还是学习其中的思想：</p>
@@ -402,7 +597,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjc0kdb5l005png0r4wygre5t" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjc0m2a39005uad0roikg44x6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -447,7 +642,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjc0kdb2f001yng0rb6gpbze7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjc0m29zv0020ad0rq6zisfve" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -507,7 +702,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjc0kdb32002png0rxngn3khz" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjc0m2a0i002tad0r2c8948xn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -556,7 +751,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjc0kdb2c001ung0r4g11fn7x" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjc0m29zn001rad0rh95zhkqf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -612,7 +807,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc0kdb470045ng0rnc1zsial" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc0m2a1l0042ad0rn686o97l" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -722,8 +917,23 @@ demo.m :
 <h1 id="第三部分、最快的Hash表算法"><a href="#第三部分、最快的Hash表算法" class="headerlink" title="第三部分、最快的Hash表算法"></a><a name="t14"></a>第三部分、最快的Hash表算法</h1><p>接下来，咱们来具体分析一下一个最快的Hasb表算法。</p>
 <p>我们由一个简单的问题逐步入手：有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它，你会怎么做？有一个方法最简单，老老实实从头查到尾，一个一个比较，直到找到为止，我想只要学过程序设计的人都能把这样一个程序作出来，但要是有程序员把这样的程序交给用户，我只能用无语来评价，或许它真的能工作，但…也只能如此了。</p>
 <p>最合适的算法自然是使用HashTable（哈希表），先介绍介绍其中的基本知识，所谓Hash，一般是一个整数，通过某种算法，可以把一个字符串”压缩” 成一个整数。当然，无论如何，一个32位整数是无法对应回一个字符串的，但在程序中，两个字符串计算出的Hash值相等的可能非常小，下面看看在MPQ中的Hash算法：</p>
-<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1.  prepareCryptTable()</span><br><span class="line">2.  &#123;</span><br><span class="line">3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;</span><br><span class="line">4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )</span><br><span class="line">6.  &#123;</span><br><span class="line">7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )</span><br><span class="line">8.  &#123;</span><br><span class="line">9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;</span><br><span class="line">10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;</span><br><span class="line">13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">15.  temp2 = (seed &amp;amp; 0xFFFF);</span><br><span class="line">16.17.  cryptTable[index2] = ( temp1 | temp2 );</span><br><span class="line">18.  &#125;</span><br><span class="line">19.  &#125;</span><br><span class="line">20.  &#125;</span><br></pre></td></tr></table></figure>
-<p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</p>
+<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><pre><code>1.  prepareCryptTable()
+2.  {
+3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;
+4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )
+6.  {
+7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )
+8.  {
+9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;
+10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;
+12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;
+13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;
+15.  temp2 = (seed &amp;amp; 0xFFFF);
+16.17.  cryptTable[index2] = ( temp1 | temp2 );
+18.  }
+19.  }
+20.  }
+</code></pre><p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</p>
 <ol>
 <li>{</li>
 <li>unsigned <span class="datatypes">char</span> <em>key  = (unsigned <span class="datatypes">char</span> </em>)lpszFileName;</li>
@@ -908,7 +1118,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc0kdb4l004jng0rr8i4iknl" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc0m2a29004mad0rgmof65tz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1013,8 +1223,11 @@ demo.m :
 <li>MD5 在线加密解密网站 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</li>
 <li><p>终端命令：</p>
 </li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ echo -n hello | openssl md5  </span><br><span class="line">$ echo -n hello | openssl sha1</span><br><span class="line">$ echo -n hello | openssl sha -sha256</span><br><span class="line">$ echo -n hello | openssl sha -sha512</span><br></pre></td></tr></table></figure>
-</li>
+<li><pre><code>  $ echo -n hello | openssl md5  
+  $ echo -n hello | openssl sha1
+  $ echo -n hello | openssl sha -sha256
+  $ echo -n hello | openssl sha -sha512
+</code></pre></li>
 <li><p>MD5 常用加密方式：</p>
 <ul>
 <li>直接使用 MD5 加密：</li>
@@ -1059,7 +1272,7 @@ demo.m :
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc0kdb450041ng0rtcl9gpyn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc0m2a1p0046ad0rj7u54ct5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1148,6 +1361,10 @@ demo.m :
     </div>
   </div>
 </footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
     </div>
     <nav id="mobile-nav">
   
