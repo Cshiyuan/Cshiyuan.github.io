@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>周记总结 2017-3-10记下 | SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、本周工作总结  熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面  二、工作心得   关于是否要releases dispatch queues：If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="周记总结 2017-3-10记下">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:description" content="一、本周工作总结  熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面  二、工作心得   关于是否要releases dispatch queues：If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispat">
+<meta property="og:updated_time" content="2018-01-04T07:19:37.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="周记总结 2017-3-10记下">
+<meta name="twitter:description" content="一、本周工作总结  熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面  二、工作心得   关于是否要releases dispatch queues：If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispat">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/" class="article-date">
+  <time datetime="2017-03-10T14:07:52.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      周记总结 2017-3-10记下
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">一、本周工作总结</span></p>
+<ol>
+<li><span class="s1">熟悉Socket.IO原理。</span></li>
+<li><span class="s3">看书《</span><span class="s1">Objective-C高级编程：iOS与OS X多线程和内存管理》</span></li>
+<li><span class="s1">了解iOS的方方面面</span></li>
+</ol>
+<p><span class="s1">二、工作心得</span></p>
+<hr>
+<hr>
+<h3 id="关于是否要releases-dispatch-queues："><a href="#关于是否要releases-dispatch-queues：" class="headerlink" title="关于是否要releases dispatch queues："></a>关于是否要releases dispatch queues<span class="s1">：</span></h3><p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
+<p>You need to use dispatch_retain and dispatch_release on your queue. ARC does not manage them.</p>
+<p><strong>If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</strong></p>
+<p>ARC will manage your queue for you. You do not need to <span class="s1">(</span>and cannot<span class="s1">)</span> use dispatch_retain or dispatch_release if ARC is enabled.</p>
+<p>（简单的说就是在iOS6.0之后，ARC会帮忙我们管理线程队列（GCD）不需要我们去retain或者release了。</p>
+<hr>
+<hr>
+<h3 id="数据模型属性采用的基本策略"><a href="#数据模型属性采用的基本策略" class="headerlink" title="数据模型属性采用的基本策略"></a>数据模型属性采用的基本策略</h3><p>除了基本类型需要用<span class="s1">assign</span>，字符串需要用<span class="s1">copy</span>，其他对象类型都需要用<span class="s1">strong</span></p>
+<p>（考虑到循环引用问题时strong和weak从中选择）</p>
+<hr>
+<hr>
+<h3 id="iOS应用到内部储存结构"><a href="#iOS应用到内部储存结构" class="headerlink" title="iOS应用到内部储存结构"></a>iOS应用到内部储存结构</h3><ul>
+<li><span class="s2"><strong>Documents</strong> </span>：保存应用运行时生成的需要持久化的数据，<span class="s2">iTunes</span>同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
+<li><span class="s2"><strong>Library/Caches</strong> : </span>保存应用运行时生成的需要持久化的数据，<span class="s2">iTunes</span>同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
+<li><span class="s2"><strong>Library/Preference</strong> : </span>保存应用的所有偏好设置，<span class="s2">iOS</span>的<span class="s2">Settings</span>(设置)应用会在该目录中查找应用的设置信息。<span class="s2">iTunes</span>同步设备时会备份该目录</li>
+<li><span class="s2"><strong>tmp</strong> : </span>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。<span class="s2">iTunes</span>同步设备时不会备份该目录</li>
+</ul>
+<hr>
+<hr>
+<h3 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO "></a><span class="s1">Socket.IO </span></h3><p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时<span class="s1">app</span>功能,模糊化各种传输机制。</p>
+<hr>
+<hr>
+<h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
+<p>Global Dispatch Queue<span class="s1">是所有应用程序都能够使用</span>Concurrent Dispatch Queue</p>
+<hr>
+<hr>
+<h3 id="IBOutlet"><a href="#IBOutlet" class="headerlink" title="IBOutlet"></a>IBOutlet</h3><p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
+<p>Interface Builder<span class="s2">则是根据</span>IBOutlet<span class="s2">来寻找可以在</span>Builder<span class="s2">里操作的成员变量。</span></p>
+<p>IBAction<span class="s2">也是。。。（相当于</span>void<span class="s2">）</span></p>
+<p><span class="s2">（</span>The type qualifier IBAction<span class="s2">,</span> which is used in place of the void return type<span class="s2">,</span> flags the declared method as an action so that Interface Builder is aware of it.For an action method to appear in Interface Builder<span class="s2">,</span> you first must declare it in a header file of the class whose instance is to receive the action message.<span class="s2">）</span></p>
+<hr>
+<hr>
+<h3 id="关于设置StatusBarStyle的相关方法"><a href="#关于设置StatusBarStyle的相关方法" class="headerlink" title="关于设置StatusBarStyle的相关方法"></a>关于设置StatusBarStyle的相关方法</h3><p><span class="s1">定制</span>statusBar<span class="s1">的前景部分。</span></p>
+<ul>
+<li><ul>
+<li><span class="s1">(</span>UIStatusBarStyle<span class="s1">)</span>preferredStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li><ul>
+<li><span class="s1">(</span>UIViewController *<span class="s1">)</span>childViewControllerForStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li><ul>
+<li><span class="s1">(</span>void<span class="s1">)</span>setNeedsStatusBarAppearanceUpdate</li>
+</ul>
+</li>
+<li><span class="s1">默认的黑色（</span><strong>UIStatusBarStyleDefault</strong><span class="s1">）</span></li>
+<li><span class="s1">白色（</span><strong>UIStatusBarStyleLightContent</strong><span class="s1">）</span></li>
+</ul>
+<hr>
+<hr>
+<h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
+<p>其实最好可以用代码来查看一下</p>
+<p>CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];<br>NSLog(@”statusbar height: %f”, rectOfStatusbar.size.height);   // 高度       CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;<br>NSLog(@”navigationbar height: %f”, rectOfNavigationbar.size.height);   // 高度</p>
+<hr>
+<hr>
+<h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong><span class="s1">和</span><strong>id</strong><span class="s1">的异同</span></h3><p><span class="s1">instancetype</span>的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
+<p><span class="s1"><strong>1</strong></span>、相同点</p>
+<p>都可以作为方法的返回类型</p>
+<p><span class="s1"><strong>2</strong></span>、不同点</p>
+<p>①<span class="s1">instancetype</span>可以返回和方法所在类相同类型的对象，<span class="s1">id</span>只能返回未知类型的对象；</p>
+<p>②<span class="s1">instancetype</span>只能作为返回值，不能像<span class="s1">id</span>那样作为参数，比如下面的写法：</p>
+<hr>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/10/e5-91-a8-e8-ae-b0-e6-80-bb-e7-bb-93-2017-3-10-e8-ae-b0-e4-b8-8b/" data-id="cjc05w08u001wzl0ryri7lrdl" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/10/interface-builde-ef-bc-88nib-e5-92-8cxib-e7-9a-84-e6-b7-b1-e7-a9-b6-ef-bc-89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Interface Builde（nib和xib的深究）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/20/e7-bc-96-e8-af-91-e5-9e-8b-e4-b8-8e-e8-a7-a3-e9-87-8a-e5-9e-8b-e3-80-81-e5-8a-a8-e6-80-81-e8-af-ad-e8-a8-80-e4-b8-8e-e9-9d-99-e6-80-81-e8-af-ad-e8-a8-80-e3-80-81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">编译型与解释型、动态语言与静态语言、</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

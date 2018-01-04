@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python3 学习笔记 （1） | SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;nbsp; bytes类型数据和utf-8编码和各种字符串编码Python对bytes类型的数据用带b前缀的单引号或双引号表示： &amp;lt;span class=&amp;quot;setting&amp;quot;&amp;gt;x = &amp;lt;span class=&amp;quot;value&amp;quot;&amp;gt;b&amp;apos;ABC&amp;apos;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt; `&amp;lt;/pre&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习笔记 （1）">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:description" content="&amp;nbsp; bytes类型数据和utf-8编码和各种字符串编码Python对bytes类型的数据用带b前缀的单引号或双引号表示： &amp;lt;span class=&amp;quot;setting&amp;quot;&amp;gt;x = &amp;lt;span class=&amp;quot;value&amp;quot;&amp;gt;b&amp;apos;ABC&amp;apos;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt; `&amp;lt;/pre&amp;gt;">
+<meta property="og:updated_time" content="2018-01-04T07:19:37.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习笔记 （1）">
+<meta name="twitter:description" content="&amp;nbsp; bytes类型数据和utf-8编码和各种字符串编码Python对bytes类型的数据用带b前缀的单引号或双引号表示： &amp;lt;span class=&amp;quot;setting&amp;quot;&amp;gt;x = &amp;lt;span class=&amp;quot;value&amp;quot;&amp;gt;b&amp;apos;ABC&amp;apos;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt; `&amp;lt;/pre&amp;gt;">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/" class="article-date">
+  <time datetime="2017-04-01T07:06:15.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python3 学习笔记 （1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
+<pre><code>&lt;span class=&quot;setting&quot;&gt;x = &lt;span class=&quot;value&quot;&gt;b&apos;ABC&apos;&lt;/span&gt;&lt;/span&gt;
+`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## 字符串格式化
+
+在Python中，采用的格式化方式和C语言是一致的，用`%`实现，举例如下：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&apos;Hello, %s&apos;&lt;/span&gt; % &lt;span class=&quot;string&quot;&gt;&apos;world&apos;&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;&apos;Hello, world&apos;&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&apos;Hi, %s, you have $%d.&apos;&lt;/span&gt; % (&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1000000&lt;/span&gt;)
+&lt;span class=&quot;string&quot;&gt;&apos;Hi, Michael, you have $1000000.&apos;&lt;/span&gt;
+`&lt;/pre&gt;
+你可能猜到了，`%`运算符就是用来格式化字符串的。在字符串内部，`%s`表示用字符串替换，`%d`表示用整数替换，有几个`%?`占位符，后面就跟几个变量或者值，顺序要对应好。如果只有一个`%?`，括号可以省略。
+
+* * *
+
+* * *
+
+## 条件判断
+
+计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。
+
+比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用`if`语句实现：
+&lt;pre&gt;`age = &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; age &amp;gt;= &lt;span class=&quot;number&quot;&gt;18&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;your age is&apos;&lt;/span&gt;, age)
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;adult&apos;&lt;/span&gt;)
+`&lt;/pre&gt;
+根据Python的缩进规则，如果`if`语句判断是`True`，就把缩进的两行print语句执行了，否则，什么也不做。
+
+* * *
+
+* * *
+
+## elif于else if
+
+`elif`是`else if`的缩写，完全可以有多个`elif`，所以`if`语句的完整形式就是：
+&lt;pre&gt;`if &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断1&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行1&lt;/span&gt;&amp;gt;&lt;/span&gt;
+elif &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断2&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行2&lt;/span&gt;&amp;gt;&lt;/span&gt;
+elif &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断3&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行3&lt;/span&gt;&amp;gt;&lt;/span&gt;
+else:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行4&lt;/span&gt;&amp;gt;
+&lt;/span&gt;`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## `int()将string转为整数`
+
+Traceback (most recent call last): File &quot;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;stdin&lt;/span&gt;&amp;gt;&lt;/span&gt;&quot;, line 1, in &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;module&lt;/span&gt;&amp;gt;&lt;/span&gt; TypeError: unorderable types: str() &amp;gt; int()
+
+这是因为`input()`返回的数据类型是`str`，`str`不能直接和整数比较，必须先把`str`转换成整数。Python提供了`int()`函数来完成这件事情
+
+* * *
+
+* * *
+
+##  循环的两种方式 老样子的break和continue
+
+### for...in循环
+
+&lt;pre&gt;names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]
+for name in names: 
+     print(name)&lt;/pre&gt;
+如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：
+&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; list(range(5))
+[0, 1, 2, 3, 4]&lt;/pre&gt;
+
+### while循环
+
+只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：
+&lt;pre&gt;`sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+n = &lt;span class=&quot;number&quot;&gt;99&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    sum = sum + n
+    n = n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(sum)
+`&lt;/pre&gt;
+在循环内部变量`n`不断自减，直到变为`-1`时，不再满足while条件，循环退出。
+&lt;div class=&quot;x-wiki-content&quot;&gt;
+
+### break
+
+在循环中，`break`语句可以提前退出循环。例如，本来要循环打印1～100的数字：
+&lt;pre&gt;`n = 1
+while n &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;100:&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt;)
+    &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; = &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; + &lt;span class=&quot;attribute&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&apos;&lt;span class=&quot;attribute&quot;&gt;END&lt;/span&gt;&apos;)
+&lt;/span&gt;`&lt;/pre&gt;
+上面的代码可以打印出1~100。
+
+如果要提前结束循环，可以用`break`语句：
+&lt;pre&gt;`n = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;: &lt;span class=&quot;comment&quot;&gt;# 当n = 11时，条件满足，执行break语句&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;# break语句会结束当前循环&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(n)
+    n = n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;END&apos;&lt;/span&gt;)
+`&lt;/pre&gt;
+执行上面的代码可以看到，打印出1~10后，紧接着打印`END`，程序结束。
+
+可见`break`的作用是提前结束循环。
+
+### continue
+
+在循环过程中，也可以通过`continue`语句，跳过当前的这次循环，直接开始下一次循环。
+&lt;pre&gt;`n = 0
+while n &lt;span class=&quot;tag&quot;&gt;&amp;lt; &lt;span class=&quot;attribute&quot;&gt;10:&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; = &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; + &lt;span class=&quot;attribute&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt;)
+&lt;/span&gt;`&lt;/pre&gt;
+上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用`continue`语句跳过某些循环：
+&lt;pre&gt;`n = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;lt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;:
+    n = n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;: &lt;span class=&quot;comment&quot;&gt;# 如果n是偶数，执行continue语句&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;# continue语句会直接继续下一轮循环，后续的print()语句不会执行&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(n)
+`&lt;/pre&gt;
+执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。
+
+可见`continue`的作用是提前结束本轮循环，并直接开始下一轮循环。
+
+&lt;/div&gt;
+
+* * *
+
+* * *
+
+## 使用dict和set
+
+### dict
+
+&lt;div class=&quot;x-wiki-info&quot;&gt;
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;d = {&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;95&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Bob&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;75&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Tracy&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;85&lt;/span&gt;}
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;d[&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;]
+&lt;span class=&quot;number&quot;&gt;95&lt;/span&gt;`&lt;/pre&gt;
+和list比较，dict有以下几个特点：
+</code></pre><ol>
+<li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
+<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
+</li>
+<li><p>查找和插入的时间随着元素的增加而增加；</p>
+</li>
+<li><p>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<p>要创建一个set，需要提供一个list作为输入集合：<br><pre><code>&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;s = set([&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;])
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;s
+{&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;}</code></pre><br></p>
+<div class="x-wiki-content">
+
+<hr>
+<hr>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
+<p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">my_abs</span><span class="params">(x)</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; x &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x
+&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; -x
+</code></pre><p><code>&lt;/pre&gt;
+请自行测试并调用</code>my_abs`看看返回结果是否正确。</p>
+<p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
+<p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
+<p><code>return None</code>可以简写为<code>return</code></p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">nop</span><span class="params">()</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;
+</code></pre><p><code>&lt;/pre&gt;</code>pass<code>语句什么都不做，那有什么用？实际上</code>pass<code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个</code>pass`，让代码能运行起来。</p>
+<p><code>pass</code>还可以用在其他语句里，比如：<br><pre>`<span class="keyword">if</span> age &gt;= <span class="number">18</span>:</pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;
+</code></pre><p><code>&lt;/pre&gt;
+缺少了</code>pass`，代码运行就会有语法错误。</p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p></p></div><p></p>
+<div class="x-wiki-content">
+
+<p>设置默认参数时，有几点要注意：</p>
+<p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
+<p>二是如何设置默认参数。</p>
+<p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
+<p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L=None)</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; L &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;None&lt;/span&gt;:
+    L = []
+L.append(&lt;span class=&quot;string&quot;&gt;&apos;END&apos;&lt;/span&gt;)
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; L`&lt;/pre&gt;
+</code></pre><p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
+<p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(numbers)</span>:</span></pre></p>
+<pre><code>sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; n &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; numbers:
+    sum = sum + n * n
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sum
+</code></pre><p><code>&lt;/pre&gt;
+但是调用的时候，需要先组装出一个list或tuple：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])<br><span class="number">14</span><br><span class="prompt">&gt;&gt;&gt; </span>calc((<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>))<br><span class="number">84</span><br><code>&lt;/pre&gt;
+如果利用可变参数，调用函数的方式可以简化成这样：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)<br><span class="number">14</span><br><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>)<br><span class="number">84</span><br><code>&lt;/pre&gt;
+所以，我们把函数的参数改为可变参数：
+&lt;pre&gt;</code><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(*numbers)</span>:</span></p>
+<pre><code>sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; n &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; numbers:
+    sum = sum + n * n
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sum
+</code></pre><p><code>&lt;/pre&gt;
+定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个</code><em><code>号。在函数内部，参数</code>numbers<code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>)<br><span class="number">5</span><br><span class="prompt">&gt;&gt;&gt; </span>calc()<br><span class="number">0</span><br><code>&lt;/pre&gt;
+如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><span class="prompt">&gt;&gt;&gt; </span>calc(nums[<span class="number">0</span>], nums[<span class="number">1</span>], nums[<span class="number">2</span>])<br><span class="number">14</span><br><code>&lt;/pre&gt;
+这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个</code></em><code>号，把list或tuple的元素变成可变参数传进去：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><span class="prompt">&gt;&gt;&gt; </span>calc(<em>nums)<br><span class="number">14</span><br><code>&lt;/pre&gt;</code></em>nums<code>表示把</code>nums`这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, **kw)</span>:</span></pre></p>
+<pre><code>print(&lt;span class=&quot;string&quot;&gt;&apos;name:&apos;&lt;/span&gt;, name, &lt;span class=&quot;string&quot;&gt;&apos;age:&apos;&lt;/span&gt;, age, &lt;span class=&quot;string&quot;&gt;&apos;other:&apos;&lt;/span&gt;, kw)
+</code></pre><p><code>&lt;/pre&gt;
+函数</code>person<code>除了必选参数</code>name<code>和</code>age<code>外，还接受关键字参数</code>kw<code>。在调用该函数时，可以只传入必选参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Michael’</span>, <span class="number">30</span>)<br>name: Michael age: <span class="number">30</span> other: {}<br><code>&lt;/pre&gt;
+也可以传入任意个数的关键字参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Bob’</span>, <span class="number">35</span>, city=<span class="string">‘Beijing’</span>)<br>name: Bob age: <span class="number">35</span> other: {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>}<br><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Adam’</span>, <span class="number">45</span>, gender=<span class="string">‘M’</span>, job=<span class="string">‘Engineer’</span>)<br>name: Adam age: <span class="number">45</span> other: {<span class="string">‘gender’</span>: <span class="string">‘M’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}<br><code>&lt;/pre&gt;
+关键字参数有什么用？它可以扩展函数的功能。比如，在</code>person<code>函数里，我们保证能接收到</code>name<code>和</code>age`这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
+<p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：<br><pre><code>&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;extra = {&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Engineer&#39;&lt;/span&gt;}
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;person(&lt;span class=&quot;string&quot;&gt;&#39;Jack&#39;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;, city=extra[&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;], job=extra[&lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;])
+name: Jack age: &lt;span class=&quot;number&quot;&gt;24&lt;/span&gt; other: {&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Engineer&#39;&lt;/span&gt;}</code></pre><br>当然，上面复杂的调用可以用简化的写法：<br><pre>`<span class="prompt">&gt;&gt;&gt; </span>extra = {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}<br><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Jack’</span>, <span class="number">24</span>, **extra)<br>name: Jack age: <span class="number">24</span> other: {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}</pre></p>
+</div></li>
+</ol>
+<p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
+<p></p>
+<div class="x-wiki-content"><br><br>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。<br><br>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！<br><br>要注意定义可变参数和关键字参数的语法：<br><br><code>*args</code>是可变参数，args接收的是一个tuple；<br><br><code>**kw</code>是关键字参数，kw接收的是一个dict。<br><br>以及调用函数时如何传入可变参数和关键字参数的语法：<br><br>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；<br><br>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**{&#39;a&#39;: 1, &#39;b&#39;: 2})</code>。<br><br>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。<br><br>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。<br><br>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/" data-id="cjc05w0cd0051zl0r8pi4l42k" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Python3 学习笔记 （2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/31/scrapy-e7-88-acgithub-e6-97-a5-e8-ae-b0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Scrapy爬GitHub 日记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

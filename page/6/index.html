@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-e5-8a-a8-e6-80-81-e5-ba-93-e4-b8-8e-e9-9d-99-e6-80-81-e5-ba-93-e4-bc-98-e7-bc-ba-e7-82-b9-e6-af-94-e8-be-83-e8-bd-ac-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/e5-8a-a8-e6-80-81-e5-ba-93-e4-b8-8e-e9-9d-99-e6-80-81-e5-ba-93-e4-bc-98-e7-bc-ba-e7-82-b9-e6-af-94-e8-be-83-e8-bd-ac-ef-bc-89/" class="article-date">
+  <time datetime="2017-01-14T09:56:13.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/e5-8a-a8-e6-80-81-e5-ba-93-e4-b8-8e-e9-9d-99-e6-80-81-e5-ba-93-e4-bc-98-e7-bc-ba-e7-82-b9-e6-af-94-e8-be-83-e8-bd-ac-ef-bc-89/">动态库与静态库优缺点比较 ( 转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="Ma_Ti"><br><br># 动态库与静态库优缺点比较<br><br></div><br><div class="Ma_Bo"><br><br>     我们在编写一个<a href="http://lib.csdn.net/base/c" title="C语言知识库" target="_blank" rel="noopener">C语言</a>程序的时候，经常会遇到好多重复或常用的部分，如果每次都重新编写固然是可以的，不过那样会大大降低工作效率，并且影响代码的可读性，更不利于后期的代码维护。我们可以把他们制作成相应的功能函数，使用时直接调用就会很方便，还可以进行后期的功能升级。例如我要在一段代码中多次交换两个变量的值，我可以在代码中多次写入<br><pre>i=x;<br> x=y;<br> y=i;</pre><br><pre>不过这样未免有点麻烦我们可以编写一个change_two_int()函数进行简化。<br> 定义如下函数：<br> void change_two_int(int <em>a，int </em>b)<br> {<br>      int c;<br>      c=<em>a;
+      </em>a=<em>b;
+      </em>b=c;<br> }<br> 这样每次要进行交换时只需调用 change_two_int(&amp;x , &amp;y);即可，是否方便了许多？</pre><br>那么我们要讨论的和这些有什么关系呢？库通俗的说就是把这些常用函数的目标文件打包在一起，提供相应函数的接口，便于程序员使用。库是别人写好的现有的，成熟的，可以复用的代码，我们只需要知道其接口如何定义，便可以自如使用。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。比如我们常使用的printf函数，就是c标准库提供的函数。我们在使用时只需要包含相应的头文件就可以使用（非静态编译还要有相应的库文件）。而不用关心printf函数具体是如何实现的，这样就大大提高了程序员编写代码的效率。从使用方法上分库大体上可以分为两类：静态库和共享库。在windows中静态库是以 .lib 为后缀的文件，共享库是以 .dll 为后缀的文件。在<a href="http://lib.csdn.net/base/linux" title="Linux知识库" target="_blank" rel="noopener">Linux</a>中静态库是以 .a 为后缀的文件，共享库是以 .so为后缀的文件。<br>以linux下的静态库和动态库为例我们研究一下，首先我们看一下他们的生成方式<br><br>静态库：<br>首先将源文件编译成目标文件：gcc –c a.c b.c<br>生成静态库：ar –rc libstatic.a a.o b.o<br><br>共享库：<br>同静态库一样编译成目标文件：gcc –c a.c b.c<br>生成共享库：gcc –fPIC –shared –o libshared.so a.o b.o<br><br>由此可见静态库和动态库都是对目标文件的处理，也可以说库文件已经是机器码文件了，静态库和共享库的加载过程有很大的区别。<br><br>静态库的链接方法：<br>gcc –o staticcode –L. –lstatic main.c –static(默认库在当前文件夹)<br><br>共享库的链接方法：<br>gcc –o sharedcode  -L. –lshared main.c(默认库在当前文件夹)<br><br>当程序与静态库连接时，库中目标文件所含的所有将被程序使用的函数的机器码被copy到最终的可执行文件中。这就会导致最终生成的可执行代码量相对变多，相当于编译器将代码补充完整了，这样运行起来相对就快些。不过会有个缺点: 占用磁盘和内存空间. 静态库会被添加到和它连接的每个程序中, 而且这些程序运行时, 都会被加载到内存中. 无形中又多消耗了更多的内存空间.<br><br>与共享库连接的可执行文件只包含它需要的函数的引用表，而不是所有的函数代码，只有在程序执行时, 那些需要的函数代码才被拷贝到内存中。这样就使可执行文件比较小, 节省磁盘空间，更进一步，<a href="http://lib.csdn.net/base/operatingsystem" title="操作系统知识库" target="_blank" rel="noopener">操作系统</a>使用虚拟内存，使得一份共享库驻留在内存中被多个程序使用，也同时节约了内存。不过由于运行时要去链接库会花费一定的时间，执行速度相对会慢一些，总的来说静态库是牺牲了空间效率，换取了时间效率，共享库是牺牲了时间效率换取了空间效率，没有好与坏的区别，只看具体需要了。<br><br>另外，.一个程序编好后，有时需要做一些修改和优化，如果我们要修改的刚好是库函数的话，在接口不变的前提下，使用共享库的程序只需要将共享库重新编译就可以了，而使用静态库的程序则需要将静态库重新编译好后，将程序再重新编译一便。<br><br>&nbsp;<br><br><strong>总结:</strong><br><br>&nbsp;<br><br><strong>一、库的类型</strong><br><br>## <a name="t1"></a>(一) 在windows中<br><br>.dll 动态库<br><br>.lib 静态库<br><br>库即为源代码的二进制文件<br><br>## <a name="t2"></a>(二) 在linux中<br><br>.so 动态库<br><br>.a      静态库<br><br>&nbsp;<br><br>## <a name="t3"></a>(三) 静态库和动态库的优缺点<br><br>我们通常把一些公用函数制作成函数库，供其它程序使用。<br><br>函数库分为静态库和动态库两种。<br><br>静态库在程序编译时会被连接到目标代码中，程序运行时将不再需要该静态库。<br><br>动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入，因此在程序运行时还需要动态库存在<br><br>&nbsp;<br><br>### <a name="t4"></a>1.什么是库<br><br>在windows平台和linux平台下都大量存在着库。<br><br>本质上来说库是一种可执行代码的二进制形式，可以被操作系统载入内存执行。<br><br>由于windows和linux的本质不同，因此二者库的二进制是不兼容的。<br><br>本文仅限于介绍linux下的库<br><br>&nbsp;<br><br>### <a name="t5"></a>2.库的种类<br><br>linux下的库有两种：静态库和共享库（动态库）。<br><br>二者的不同点在于代码被载入的时刻不同。<br><br>静态库的代码在编译过程中已经被载入可执行程序，因此体积较大。<br><br>共享库的代码是在可执行程序运行时才载入内存的，在编译过程中仅简单的引用，因此代码体积较小。<br><br>&nbsp;<br><br>### <a name="t6"></a>3.库存在的意义<br><br>库是别人写好的现有的，成熟的，可以复用的代码，你可以使用但要记得遵守许可协议。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。共享库的好处是，不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例。<br><br>&nbsp;<br><br>### <a name="t7"></a>4.库文件是如何产生的在linux下<br><br>静态库的后缀是.a，它的产生分两步<br><br>Step 1.由源文件编译生成一堆.o，每个.o里都包含这个编译单元的符号表<br><br>Step 2.ar命令将很多.o转换成.a，成文静态库<br><br>动态库的后缀是.so，它由gcc加特定参数编译产生。<br><br>例如:<br><br>$ gcc -fPIC -c <em>.c $ gcc -shared -Wl,-soname, libfoo.so.1 -olibfoo.so.1.0 </em>.<br><br>&nbsp;<br><br>### <a name="t8"></a>5.库文件是如何命名的，有没有什么规范<br><br>在linux下，库文件一般放在/usr/lib和/lib下，<br><br>静态库的名字一般为libxxxx.a，其中xxxx是该lib的名称<br><br>动态库的名字一般为libxxxx.so.major.minor，xxxx是该lib的名称，major是主版本号， minor是副版本号<br><br>&nbsp;<br><br>### <a name="t9"></a>6.如何知道一个可执行程序依赖哪些库<br><br>ldd命令可以查看一个可执行程序依赖的共享库，<br><br>例如# ldd /bin/lnlibc.so.6<br><pre>=&gt; /lib/libc.so.6 (0×40021000)/lib/ld-linux.so.2<br><br>=&gt; /lib/ld- linux.so.2 (0×40000000)</pre><br>可以看到ln命令依赖于libc库和ld-linux库<br><br>&nbsp;<br><br>### <a name="t10"></a>7.可执行程序在执行的时候如何定位共享库文件<br><br>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径<br><br>此时就需要系统动态载入器(dynamiclinker/loader)<br><br>对于elf格式的可执行程序，是由ld-linux.so<em>来完成的<br><br>它先后搜索elf文件的 DT_RPATH段—环境变量LD_LIBRARY_PATH—/etc/ld.so.cache文件列表—/lib/,/usr/lib目录<br><br>找到库文件后将其载入内存<br><br>&nbsp;<br><br>### <a name="t11"></a>8.在新安装一个库之后如何让系统能够找到他<br><br>如果安装在/lib或者/usr/lib下，那么ld默认能够找到，无需其他操作。<br><br>如果安装在其他目录，需要将其添加到/etc/ld.so.cache文件中，步骤如下<br><br>1.编辑/etc/ld.so.conf文件，加入库文件所在目录的路径<br><br>2.运行ldconfig，该命令会重建/etc/ld.so.cache文件<br><br>&nbsp;<br><br>############################################################<br><br>&nbsp;<br><br>linux中编译静态库(.a)和动态库(.so)的基本方法<br><br>&nbsp;<br><br>## <a name="t12"></a>(四) 静态库<br><br>&nbsp;<br><br>在linux环境中, 使用ar命令创建静态库文件.如下是命令的选项:<br><br>d —–从指定的静态库文件中删除文件<br><br>m —–把文件移动到指定的静态库文件中<br><br>p —–把静态库文件中指定的文件输出到标准输出<br><br>q —–快速地把文件追加到静态库文件中<br><br>r —–把文件插入到静态库文件中<br><br>t —–显示静态库文件中文件的列表<br><br>x —–从静态库文件中提取文件<br><br>还有多个修饰符修改以上基本选项,详细请man ar 以下列出三个:<br><br>a —–把新的目标文件(</em>.o)添加到静态库文件中现有文件之后<br><br>b—–<strong><strong><strong><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></strong></strong></strong>之前<br><br>v —–使用详细模式<br><br>ar 命令的命令行格式如下:<br><br>ar[-]{dmpqrtx}[abcfilNoPsSuvV] [membername] [count] archive files…<br><br>参数archive定义库的名称, files是库文件中包含的目标文件的清单, 用空格分隔每个文件.<br><br>&nbsp;<br><br>比如创建一个静态库文件的命令如下:<br><br>ar r libapue.a error.oerrorlog.o lockreg.o<br><br>这样就了libapue.a静态库文件, 可以用 t 选项显示包含在库中的文件<br><br>创建库文件之后,可以创建这个静态库文件的索引来帮助提高和库连接的其他程序的编译速度：<br><br>使用ranlib程序创建库的索引,索引存放在库文件内部.<br><br>ranlib libapue.a<br><br>&nbsp;<br><br>用nm程序显示存档文件的索引,它可以显示目标文件的符号<br><br>nm libapue.a | more<br><br>如果是显示目标文件的符号:<br><br>nm error.o | more<br><br>如何使用呢?如下所示:<br><br>gcc -o test test.c libapue.a<br><br>这样就可以在test.c中调用在libapue.a中的函数了.<br><br>&nbsp;<br><br>&nbsp;<br><br>## <a name="t13"></a>(五) 动态库<br><br>&nbsp;<br><br>### <a name="t14"></a>1.创建共享库<br><br><pre>gcc -shared -o libapue.soerror.o errorlog.o</pre><br>这样就创建了共享库!<br><br>### <a name="t15"></a>2.编译共享库<br><br>假设共享库位于当前目录(即跟程序文件相同的目录中)<br><pre>gcc -o test -L. -lapue test.c</pre><br>这样就编译出了不包含函数代码可执行文件了,但是但你运行时会发现linux动态加载器找不到libapue.so文件.<br><br>可以用ldd 命令查看可执行文件依赖什么共享库:<br><br>ldd test<br><br>如何才能让动态加载器发现库文件呢?有两种方法可以解决:<br><br>1.环境变量<br><br>exportLD_LIBRARY_PATH=”$LD_LIBRARY_PATH:.”<br><br>2.修改/etc/ld.so.conf文件.<br><br>&nbsp;<br><br>一般应用程序的库文件不与系统库文件放在同一个目录下,一般把应用程序的共享库文件放在/usr/local/lib下,新建一个属于自己的目录apue,然后把刚才libapue.so复制过去就行了<br><br>同时在/etc/ld.so.conf中新增一行:<br><br>/usr/local/lib/apue<br><br>&nbsp;<br><br>以后在编译程序时加上编译选项:<br><br>-L /usr/local/lib/apue -lapue<br><br>&nbsp;<br><br>/*<br><br>参数的配置通过mangcc可以看到<br><br>-llibrary<br><br>连接名为 library 的 库文件.<br><br>连接器 在 标准搜索目录 中 寻找 这个 库文件, 库文件 的 真正 名 字<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/14/e5-8a-a8-e6-80-81-e5-ba-93-e4-b8-8e-e9-9d-99-e6-80-81-e5-ba-93-e4-bc-98-e7-bc-ba-e7-82-b9-e6-af-94-e8-be-83-e8-bd-ac-ef-bc-89/" data-id="cjc05w08q001szl0rfo5errga" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e6-83-b0-e6-80-a7-e5-8a-a0-e8-bd-bd-ef-bc-88lazyload-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/e6-83-b0-e6-80-a7-e5-8a-a0-e8-bd-bd-ef-bc-88lazyload-ef-bc-89/" class="article-date">
+  <time datetime="2017-01-14T03:56:00.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/e6-83-b0-e6-80-a7-e5-8a-a0-e8-bd-bd-ef-bc-88lazyload-ef-bc-89/">惰性加载（lazyload）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>维基百科的解释</p>
+<p><strong>惰性加载</strong>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Lazy loading、Infinite Scroll</span></span>，又称<strong>延迟加载</strong><sup id="cite_ref-1" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-1" target="_blank" rel="noopener">[1]</a></sup>、<strong>懒加载</strong><sup id="cite_ref-2" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-2" target="_blank" rel="noopener">[2]</a></sup><sup id="cite_ref-3" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-3" target="_blank" rel="noopener">[3]</a></sup>、<strong>无限滚动</strong><sup id="cite_ref-TechOrange_4-0" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4" target="_blank" rel="noopener">[4]</a></sup>、<strong>瀑布流</strong><sup id="cite_ref-TechOrange_4-1" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4" target="_blank" rel="noopener">[4]</a></sup>），是一种<a href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="noopener">设计模式</a> “设计模式 (计算机)”)，被运用在<a href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E8%A8%AD%E8%A8%88" title="软件设计" target="_blank" rel="noopener">软件设计</a>和<a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88" title="网页设计" target="_blank" rel="noopener">网页设计</a>当中<sup id="cite_ref-5" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-5" target="_blank" rel="noopener">[5]</a></sup>，对于网页界面，其特征为用户通过鼠标，<span class="ilh-all" data-orig-title="捲動" data-lang-code="en" data-lang-name="英语" data-foreign-title="Scrolling"><span class="ilh-page"><a href="https://zh.wikipedia.org/w/index.php?title=%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" title="%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">滚动</a></span></span>浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如<a href="https://zh.wikipedia.org/wiki/Google%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2" title="Google图片搜索" target="_blank" rel="noopener">Google图片搜索</a>、<a href="https://zh.wikipedia.org/wiki/Google%2B" title="Google+" target="_blank" rel="noopener">Google+</a>、<a href="https://zh.wikipedia.org/wiki/Facebook" title="Facebook" target="_blank" rel="noopener">Facebook</a>、<a href="https://zh.wikipedia.org/wiki/Twitter" title="Twitter" target="_blank" rel="noopener">Twitter</a>、<a href="https://zh.wikipedia.org/wiki/Pinterest" title="Pinterest" target="_blank" rel="noopener">Pinterest</a><sup id="cite_ref-6" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-6" target="_blank" rel="noopener">[6]</a></sup>和维基百科的<a href="https://zh.wikipedia.org/wiki/Wikipedia:Flow" title="Wikipedia:Flow" target="_blank" rel="noopener">Flow</a>讨论系统。也有结合无限滚动和多<a href="https://zh.wikipedia.org/wiki/%E9%A0%81" title="页" target="_blank" rel="noopener">页</a>，两著特性的网页设计<sup id="cite_ref-7" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-7" target="_blank" rel="noopener">[7]</a></sup>。</p>
+<p>而对于数据结构而言，惰性加载是指从一个数据对象通过方法获得里面的一个属性对象时，这个对应对象实际并没有随其父数据对象创建时一起保存在运行空间中，而是在其读取方法第一次被调用时才从其他数据源中加载到运行空间中，这样可以避免过早地导入过大的数据对象但并没有使用的空间占用浪费。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/14/e6-83-b0-e6-80-a7-e5-8a-a0-e8-bd-bd-ef-bc-88lazyload-ef-bc-89/" data-id="cjc05w0990028zl0r9os7s46t" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-cookiesession-e6-9c-ba-e5-88-b6-e8-af-a6-e8-a7-a3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/10/cookiesession-e6-9c-ba-e5-88-b6-e8-af-a6-e8-a7-a3/" class="article-date">
+  <time datetime="2017-01-10T09:01:57.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/cookiesession-e6-9c-ba-e5-88-b6-e8-af-a6-e8-a7-a3/">Cookie/Session机制详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话。</p>
+<p>其中 Cookie和Session就是一种跟踪技术，Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。</p>
+<hr>
+<hr>
+<h3 id="什么是Cookie（实际上是一小段文本信息）"><a href="#什么是Cookie（实际上是一小段文本信息）" class="headerlink" title="什么是Cookie（实际上是一小段文本信息）"></a><strong>什么是Cookie（实际上是一小段文本信息）</strong></h3><p>Cookie意为“甜饼”，是由W3C组织提出，最早由Netscape社区发展的一种机制。目前Cookie已经成为标准，所有的主流浏览器如IE、Netscape、Firefox、Opera等都支持Cookie。</p>
+<p>由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理。</p>
+<p>Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
+<hr>
+<hr>
+<h3 id="什么是Session（key-value的属性对）"><a href="#什么是Session（key-value的属性对）" class="headerlink" title="什么是Session（key-value的属性对）"></a><strong>什么是Session（key-value的属性对）</strong></h3><p>Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</p>
+<p>如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
+<h3 id="Session对浏览器的要求"><a href="#Session对浏览器的要求" class="headerlink" title="Session对浏览器的要求"></a><strong>Session对浏览器的要求</strong></h3><p>虽然Session保存在服务器，对客户端是透明的，它的正常运行仍然需要客户端浏览器的支持。这是因为Session需要使用Cookie作为识别标志。HTTP协议是无状态的，Session不能依据HTTP连接来判断是否为同一客户，因此服务器向客户端浏览器发送一个名为JSESSIONID的Cookie，它的值为该Session的id（也就是HttpSession.getId()的返回值）。Session依据该Cookie来识别是否为同一用户。</p>
+<p>该Cookie为服务器自动生成的，它的maxAge属性一般为–1，表示仅当前浏览器内有效，并且各浏览器窗口间不共享，关闭浏览器就会失效。</p>
+<p>因此同一机器的两个浏览器窗口访问服务器时，会生成两个不同的Session。但是由浏览器窗口内的链接、脚本等打开的新窗口（也就是说不是双击桌面浏览器图标等打开的窗口）除外。这类子窗口会共享父窗口的Cookie，因此会共享一个Session。</p>
+<p>注意：新开的浏览器窗口会生成新的Session，但子窗口除外。子窗口会共用父窗口的Session。例如，在链接上右击，在弹出的快捷菜单中选择“在新窗口中打开”时，子窗口便可以访问父窗口的Session。</p>
+<p>如果客户端浏览器将Cookie功能禁用，或者不支持Cookie怎么办？例如，绝大多数的手机浏览器都不支持Cookie。Java Web提供了另一种解决方案：URL地址重写。</p>
+<h3 id="URL地址重写"><a href="#URL地址重写" class="headerlink" title="URL地址重写"></a><strong>URL地址重写</strong></h3><p>URL地址重写是对客户端不支持Cookie的解决方案。URL地址重写的原理是将该用户Session的id信息重写到URL地址中。服务器能够解析重写后的URL获取Session的id。这样即使客户端不支持Cookie，也可以使用Session来记录用户状态。</p>
+<h3 id="SESSION劫持"><a href="#SESSION劫持" class="headerlink" title="SESSION劫持"></a>SESSION劫持</h3><p>Session hijack即会话劫持是一种比较严重的安全威胁，也是一种广泛存在的威胁，在session技术中，客户端和服务端通过传送session的标识符来维护会话，但这个标识符很容易就能被嗅探到，从而被其他人利用，这属于一种中间人攻击。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/10/cookiesession-e6-9c-ba-e5-88-b6-e8-af-a6-e8-a7-a3/" data-id="cjc05w07z000szl0rcgfe7qoj" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-85-b3-e4-ba-8e-e8-8b-b9-e6-9e-9c-e5-bc-80-e5-8f-91-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-ef-bc-88-e6-80-9d-e8-b7-af-e6-95-b4-e7-90-86-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/12/e5-85-b3-e4-ba-8e-e8-8b-b9-e6-9e-9c-e5-bc-80-e5-8f-91-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-ef-bc-88-e6-80-9d-e8-b7-af-e6-95-b4-e7-90-86-ef-bc-89/" class="article-date">
+  <time datetime="2016-11-12T07:50:21.000Z" itemprop="datePublished">2016-11-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/12/e5-85-b3-e4-ba-8e-e8-8b-b9-e6-9e-9c-e5-bc-80-e5-8f-91-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-ef-bc-88-e6-80-9d-e8-b7-af-e6-95-b4-e7-90-86-ef-bc-89/">关于苹果开发的一些基础知识（思路整理）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>App ID（**</strong>bundle identifier）**</p>
+<p>在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。</p>
+<p>App ID 字符串通常以<strong>反域名</strong>（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix/Seed），一般不超过 255 个 ASCII 字符。</p>
+<hr>
+<hr>
+<h3 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h3><p><strong>Bundle简单地讲，就是一个内部结构按照标准规则组织的特殊目录。也就是说，Bundle本质上是一个目录。</strong></p>
+<p>我们开发的每一个应用，本质上是遵守着Application类型规则的一个特殊目录。</p>
+<hr>
+<hr>
+<h3 id="UDID"><a href="#UDID" class="headerlink" title="UDID"></a>UDID</h3><p>UDID是一种iOS设备的特殊识别码。除序号之外,每台iOS装置都另有一组独一无二的号码,我们就称之为识别码( Unique Device Identifier, UDID )。</p>
+<hr>
+<hr>
+<h3 id="开发证书（-Certificates）"><a href="#开发证书（-Certificates）" class="headerlink" title="开发证书（**Certificates）**"></a><strong>开发证书（**</strong>Certificates）**</h3><h4 id="1-证书的概念"><a href="#1-证书的概念" class="headerlink" title="1.证书的概念"></a><strong>1.证书的概念</strong></h4><p><strong>证书</strong>是由公证处或认证机关开具的证明资格或权力的<em>证件</em>，它是表明（或帮助断定）事理的一个<em>凭证</em>。证件或凭证的尾部通常会烙印<em>公章</em>。</p>
+<p>每个中国人一生可能需要70多个证件，含15种身份证明。证件中“必需的”有30到40个。将这些证件按时间顺序铺开，那就是一个天朝子民的一生——持<strong>准生证</strong>许可落地，以户籍证明入籍，以身份证认证身份，持结婚证以合法同居，最终以<strong>死亡证</strong>明注销。</p>
+<h4 id="2-数字证书的概念"><a href="#2-数字证书的概念" class="headerlink" title="2.数字证书的概念"></a>2.数字证书的概念</h4><p><strong><em>数字证书</em></strong>就是互联网通讯中<strong>标志</strong>通讯各方<em><strong>身份信息</strong></em>的一串数字，提供了一种在 Internet 上验证通信<strong>实体身份</strong>的方式，其作用类似于司机的驾驶执照或日常生活中的身份证。它是由一个由权威机构——<strong>CA机构（CA = _C_ertificate _A_uthority）</strong>，又称为数字证书授权中心（数字证书认证机构）颁发（发行）的，人们可以在网上用它来识别对方的身份。</p>
+<ul>
+<li>数字证书是一个经 CA 数字签名的包含公开密钥拥有者信息以及公开密钥的文件。最简单的证书包含一个公开密钥、名称以及 CA 的数字签名。</li>
+<li>数字证书还有一个重要的特征就是<strong>时效性</strong>：只在特定的时间段内有效。<div>
+
+</div></li>
+</ul>
+<p>数字证书中的<strong>公开密钥</strong>（公钥）相当于公章。</p>
+<p>证书的信任链条是环环相扣的，根证书就是一开始就被信任的证书，是<u>信任链的<strong>起始点</strong></u>。</p>
+<p>在天朝子民的一生中，户籍证明可理解为等效的<strong>根证书</strong>：有了户籍证明，才能办理身份证；有了上流的身份证，才能办理下游居住证、结婚证、计划生育证、驾驶执照等认证。</p>
+<hr>
+<p></p>
+<hr>
+<h4 id="3-iOS（开发）证书"><a href="#3-iOS（开发）证书" class="headerlink" title="3.iOS（开发）证书"></a>3.iOS（开发）证书</h4><p>iOS 证书是用来证明 iOS App 内容（bundle with executable and resources）的合法性和完整性的<strong>数字证书</strong>。对于想安装到真机或发布到 AppStore 的应用程序（App），只有经过<strong>签名验证</strong>（Signature Validated）才能确保来源可信，并且保证 App 内容是完整、未经篡改的。</p>
+<p>iOS 证书分为两类：Development 和 Production（Distribution）。</p>
+<ul>
+<li>Development 证书用来开发和调试应用程序：A <span class="newTerm"><strong><em>development certificate</em></strong></span> identifies you, as a team member, in a development provisioning profile that allows apps signed by you to <strong><em>launch </em></strong>on devices.</li>
+<li>Production 主要用来分发应用程序（根据证书种类有不同作用）：A <span class="newTerm"><em><strong>distribution certificate</strong></em></span> identifies your team or organization in a distribution provisioning profile and allows you to _<strong>submit  </strong>_your app to the store. Only a team agent or an admin can create a distribution certificate.<br>普通个人开发账号最多可注册 iOS Development/Distribution 证书各2个，用户可在网站上删除（Revoke）已注册的 Certificate。</li>
+</ul>
+<h3 id="申请证书（CSR：Certificate-Signing-Request）"><a href="#申请证书（CSR：Certificate-Signing-Request）" class="headerlink" title="申请证书（CSR：Certificate Signing Request）"></a>申请证书（CSR：Certificate Signing Request）</h3><p><strong>私钥 private key </strong>始终保存在 Mac OS 的 Keychain Access 中，用于签名（CodeSign）本机对外发布的 App；<strong>公钥 </strong><em><strong>public key </strong></em>一般随证书（随Provisioning Profile，随 App 安装）散布出去，对 App 签名进行校验认证。用户必须妥善保存本地 Keychain 中的 private key，以防伪冒。</p>
+<ul>
+<li>Keep a secure backup of your public-private key pair. If the private key is lost, you’ll have to create an <em><strong>entirely new</strong></em> identity to sign code.</li>
+<li>Worse, if someone else has your private key, that person may be able to <strong><em>impersonate </em></strong>you.<br>在 Apple 开发网站上传包含公钥的 CSR 文件作为换取证书的凭证（Upload CSR file to generate your certificate），有点类似为github账号添加SSH公钥到服务器上进行授权。</li>
+</ul>
+<p>Apple Developer 开发证书颁发机构 WWDRCA<em> </em>将使用<strong>其 </strong>private key 对 CSR 中的 public key 和一些身份信息进行加密签名生成<strong>数字证书</strong>（ios_development.cer）并记录在案（Apple Member Center）。</p>
+<hr>
+<hr>
+<h3 id="供应配置文件（Provisioning-Profiles）"><a href="#供应配置文件（Provisioning-Profiles）" class="headerlink" title="供应配置文件（Provisioning Profiles）"></a><strong>供应配置文件（</strong>Provisioning Profiles<strong>）</strong></h3><p>Provisioning Profile 文件包含了上述的所有内容：<strong>证书、App ID 和 设备 ID</strong>。</p>
+<p><img src="http://img.blog.csdn.net/20150126225313444" alt=""></p>
+<p>一个 Provisioning Profile 对应一个 Explicit App ID 或 Wildcard App ID（一组相同 Prefix/Seed 的 App IDs）。在网站上手动创建一个 Provisioning Profile 时，需要依次指定 App ID（单选）、证书（Certificates，可多选）和设备（Devices，可多选）。用户可在网站上删除（Delete）已注册的 Provisioning Profiles。</p>
+<p>Provisioning Profile 决定 Xcode 用哪个证书（公钥）/私钥组合（Key Pair/Signing Identity）来<strong>签署</strong>应用程序（Signing Product），并将在应用程序打包时嵌入到 .ipa 包里。安装应用程序时，Provisioning Profile 文件被拷贝到 iOS 设备中，运行该 iOS App 的设备通过它来认证安装的程序。</p>
+<p>如果要打包到真机上运行一个APP，一般要经历以下三步：</p>
+<ul>
+<li>首先，需要指明它的 App ID，并且验证 Bundle ID 是否与其一致；</li>
+<li>其次，需要证书对应的私钥来进行签名，用于标识这个 APP 是合法、安全、完整的；</li>
+<li>然后，如果是真机调试，需要确认这台设备是否授权运行该 APP。</li>
+</ul>
+<p>Provisioning Profile 把这些信息全部打包在一起，方便我们在调试和发布程序打包时使用。这样，只要在不同的情况下选择不同的 Provisioning Profile 文件就可以了。</p>
+<p>如上所述，在一台设备上运行应用程序的过程如下：</p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/16185213-ea355ff0690b497a80ed5fd2dd5e62cf.png" alt=""></p>
+<p>&nbsp;</p>
+<p>Provisioning Profile 也分为 Development 和 Distribution 两类，有效期同 Certificate 一样。Distribution 版本的 ProvisioningProfile 主要用于提交 App Store 审核，其中不指定开发测试的Devices（0，unlimited）。App ID 为 Wildcard App ID（*）。App Store 审核通过上架后，允许所有 iOS 设备（Deployment Target）上安装运行该App。</p>
+<p>Xcode 将全部供应配置文件（包括用户手动下载安装的和 Xcode 自动创建的 Team Provisioning Profile）放在目录 ~/Library/MobileDevice/Provisioning</p>
+<hr>
+<hr>
+<h3 id="开发组供应配置文件（Team-Provisioning-Profiles）"><a href="#开发组供应配置文件（Team-Provisioning-Profiles）" class="headerlink" title="开发组供应配置文件（Team Provisioning Profiles）"></a><strong>开发组供应配置文件（</strong>Team Provisioning Profiles<strong>）</strong></h3><h4 id="1-Team-Provisioning-Profile的概念"><a href="#1-Team-Provisioning-Profile的概念" class="headerlink" title="1.Team Provisioning Profile的概念"></a>1.Team Provisioning Profile的概念</h4><p>每个 Apple 开发者账号都对应一个唯一的 <strong>Team ID，</strong>Xcode3.2.3 预发布版本中加入了 Team Provisioning Profile 这项新功能。</p>
+<p>在 Xcode 中添加 Apple Developer Account 时，它将与 Apple Member Center 后台勾兑<strong>自动生成 </strong>iOS Team Provisioning Profile（Managed by Xcode）。</p>
+<p><img src="http://img.blog.csdn.net/20150113233612875" alt=""></p>
+<p>Team Provisioning Profile 包含一个为 Xcode iOS Wildcard App ID(<em>) 生成的 iOS Team Provisioning Profile:</em>（匹配所有应用程序），账户里所有的 Development Certificates 和 Devices 都可以使用它在这个 team 注册的所有设备上调试应用程序（不管bundle identifier是什么）。同时，它还会为开发者自己创建的 Wildcard/Explicit App IDs 创建对应的 iOS Team Provisioning Profile。</p>
+<p><img src="http://img.blog.csdn.net/20150126225425594" alt=""></p>
+<h4 id="2-Team-Provisioning-Profile-生成-更新时机"><a href="#2-Team-Provisioning-Profile-生成-更新时机" class="headerlink" title="2.Team Provisioning Profile 生成/更新时机"></a><a name="t16"></a>2.Team Provisioning Profile 生成/更新时机</h4><ul>
+<li>Add an Apple ID account to Xcode</li>
+<li>Fix issue “No Provisioning Profiles with a valid signing identity” in Xcode</li>
+<li>Assign Your App to a Team in Xcode project settings of General|Identity</li>
+<li>Register new device on the apple development website or Xcode detected new device connected<br>利用 Xcode 生成和管理的 iOS Team Provisioning Profile 来进行开发非常方便，可以不需要上网站手动生成下载 Provisioning Profile。</li>
+</ul>
+<p>Team Provisioning Profile 同 Provisioning Profile，只不过是由 Xcode 自动生成的，也<strong>被配置到</strong>【XcodeTarget|Build Settings|Code Signing|Provisioning Profile】下，同时需要在【XcodeTarget|General|Identity】下指定 Team 账号 ID。</p>
+<hr>
+<hr>
+<h3 id="证书与签名（-Certificate-amp-Signature）"><a href="#证书与签名（-Certificate-amp-Signature）" class="headerlink" title="证书与签名（**Certificate&amp; Signature）**"></a><strong><a href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/CodeSigningGuide.pdf" target="_blank" rel="noopener">证书与签名</a>（**</strong>Certificate&amp; Signature）**</h3><h2 id="1-Code-Signing-Identity"><a href="#1-Code-Signing-Identity" class="headerlink" title="1.Code Signing Identity"></a>1.Code Signing Identity</h2><p><img src="http://img.blog.csdn.net/20150126225508120" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20150113233322156" alt=""></p>
+<p><span class="s1">Xcode 中配置的 Code Signing Identity（entitlements、certificate）必须与 Provisioning Profile 匹配，并且配置的 Certificate 必须在本机 Keychain Access 中存在对应 Public／Private Key Pair，否则编译会报错。</span></p>
+<p>Xcode 所在的 Mac 设备（系统）使用 CA 证书（WWDRCA.cer）来判断 Code Signing Identity 中 Certificate 的合法性：</p>
+<ul>
+<li>若用 WWDRCA 公钥能成功解密出证书并得到公钥（Public Key）和内容摘要（Signature），证明此证书确乃 AppleWWDRCA 颁布，即证书来源可信；</li>
+<li>再对证书本身使用哈希算法计算摘要，若与上一步得到的摘要一致，则证明此证书未被篡改过，即证书完整。</li>
+</ul>
+<hr>
+<hr>
+<h3 id="开发-真机调试流程"><a href="#开发-真机调试流程" class="headerlink" title="开发/真机调试流程"></a><strong>开发/真机调试流程</strong></h3><p>根据上面的介绍，可以知道进行Development主要有以下几个步骤：</p>
+<ul>
+<li>申请证书</li>
+<li>加入设备</li>
+<li>生成Provisioning Profile</li>
+<li>设置Xcode Code Sign Identifer<br>事实上第三步通常是不需要的，因为我们通常都是用Xcode生成和管理的iOS Team Provisioning Profile来进行开发，因为它非常方便，所以不需要自己手动生成Provisioning Profile。</li>
+</ul>
+<p>iOS Team Provisioning Profile是第一次使用Xcode添加设备时，Xcode自动生成的，它包含了Xcode生成的一个Wildcard App ID（*，匹配所有应用程序），账户里面所有的Devices和所有Development Certificates，如下图所示。因此，team中的所有成员都可以使用这个iOS Team Provisioning Profile在team中的所有设备上调试所有的应用程序。并且当有新设备添加进来时，Xcode会更新这个文件。</p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/19100011-967bd3326acb49db98412f0c70d7fe41.png" alt=""></p>
+<p><strong>发布流程</strong></p>
+<p>网上有很多关于发布App Store的流程，我就不缀述了，不过根据上面的概念介绍，不管是App Store、In-House还是Ad-Hoc，打包流程都是差不多的，都包括了以下几个关键步骤：</p>
+<ul>
+<li>创建发布证书</li>
+<li>创建App ID</li>
+<li>创建对应的Provisioning Profile文件</li>
+<li>设备Bundle ID和App ID一致</li>
+<li>设置Xcode Code Sign Identifer，选择合适的Profile和证书进行签名，打包<br>&nbsp;</li>
+</ul>
+<p>参考网址：</p>
+<p><a href="http://blog.csdn.net/phunxm/article/details/42685597" target="_blank" rel="noopener">http://blog.csdn.net/phunxm/article/details/42685597</a></p>
+<p><a href="http://www.cnblogs.com/cywin888/p/3263027.html" target="_blank" rel="noopener">http://www.cnblogs.com/cywin888/p/3263027.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/12/e5-85-b3-e4-ba-8e-e8-8b-b9-e6-9e-9c-e5-bc-80-e5-8f-91-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-ef-bc-88-e6-80-9d-e8-b7-af-e6-95-b4-e7-90-86-ef-bc-89/" data-id="cjc05w08a0017zl0rp45l19pg" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-http-e7-ac-94-e8-ae-b0-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/http-e7-ac-94-e8-ae-b0-ef-bc-89/" class="article-date">
+  <time datetime="2016-10-28T05:41:06.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/28/http-e7-ac-94-e8-ae-b0-ef-bc-89/">HTTP (笔记）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="HTTP协议是无状态的"><a href="#HTTP协议是无状态的" class="headerlink" title="HTTP协议是无状态的"></a>HTTP协议是无状态的<a name="statelesshttp"></a></h1><p>http协议是无状态的，同一个客户端的这次请求和上次请求是没有对应关系，对http服务器来说，它并不知道这两个请求来自同一个客户端。 为了解决这个问题， Web程序引入了Cookie机制来维护状态.</p>
+<hr>
+<hr>
+<h1 id="打开一个网页需要浏览器发送很多次Request"><a href="#打开一个网页需要浏览器发送很多次Request" class="headerlink" title="打开一个网页需要浏览器发送很多次Request"></a>打开一个网页需要浏览器发送很多次Request<a name="ManyRequest"></a></h1><p>1. 当你在浏览器输入URL <a href="http://www.cnblogs.com" target="_blank" rel="noopener">http://www.cnblogs.com</a> 的时候，浏览器发送一个Request去获取 <a href="http://www.cnblogs.com" target="_blank" rel="noopener">http://www.cnblogs.com</a> 的html.  服务器把Response发送回给浏览器.</p>
+<p>2. 浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如图片，CSS文件，JS文件。</p>
+<p>3. 浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。</p>
+<p>4. 等所有的文件都下载成功后。 网页就被显示出来了。</p>
+<h1 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码<a name="statecode"></a></h1><p>Response 消息中的第一行叫做状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。</p>
+<p>状态码用来告诉HTTP客户端,HTTP服务器是否产生了预期的Response.</p>
+<p>HTTP/1.1中定义了5类状态码， 状态码由三位数字组成，第一个数字定义了响应的类别</p>
+<p>1XX  提示信息 - 表示请求已被成功接收，继续处理</p>
+<p>2XX  成功 - 表示请求已被成功接收，理解，接受</p>
+<p>3XX  重定向 - 要完成请求必须进行更进一步的处理</p>
+<p>4XX  客户端错误 -  请求有语法错误或请求无法实现</p>
+<p>5XX  服务器端错误 -   服务器未能实现合法的请求</p>
+<hr>
+<hr>
+<h1 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a>HTTP工作原理</h1><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<h6 id="1、客户端连接到Web服务器"><a href="#1、客户端连接到Web服务器" class="headerlink" title="1、客户端连接到Web服务器"></a>1、客户端连接到Web服务器</h6><p>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a href="http://www.oakcms.cn./" target="_blank" rel="noopener">http://www.oakcms.cn。</a></p>
+<h6 id="2、发送HTTP请求"><a href="#2、发送HTTP请求" class="headerlink" title="2、发送HTTP请求"></a>2、发送HTTP请求</h6><p>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<h6 id="3、服务器接受请求并返回HTTP响应"><a href="#3、服务器接受请求并返回HTTP响应" class="headerlink" title="3、服务器接受请求并返回HTTP响应"></a>3、服务器接受请求并返回HTTP响应</h6><p>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<h6 id="4、释放连接TCP连接"><a href="#4、释放连接TCP连接" class="headerlink" title="4、释放连接TCP连接"></a>4、释放连接<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a></h6><p>若connection 模式为close，则服务器主动关闭<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>，客户端被动关闭连接，释放<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<h6 id="5、客户端浏览器解析HTML内容"><a href="#5、客户端浏览器解析HTML内容" class="headerlink" title="5、客户端浏览器解析HTML内容"></a>5、客户端浏览器解析HTML内容</h6><p>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<p>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：</p>
+<p>1、浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;</p>
+<p>2、解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;</p>
+<p>3、浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 <a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP 三次握手</a>的第三个报文的数据发送给服务器;</p>
+<p>4、服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;</p>
+<p>5、释放 <a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;</p>
+<p>6、浏览器将该 html 文本并显示内容;</p>
+<hr>
+<hr>
+<h2 id="GET和POST的数据大小"><a href="#GET和POST的数据大小" class="headerlink" title="GET和POST的数据大小"></a>GET和POST的数据大小</h2><p>2、传输数据的大小：首先声明：HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。</p>
+<p>而在实际开发中存在的限制主要有：</p>
+<p><strong>GET</strong>:特定浏览器和服务器对URL长度有限制，例如 IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系 统的支持。</p>
+<p>因此对于GET提交时，传输数据就会受到URL长度的 限制。</p>
+<p><strong>POST</strong>:由于不是通过URL传值，理论上数据不受 限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/28/http-e7-ac-94-e8-ae-b0-ef-bc-89/" data-id="cjc05w0b5003szl0ryjge2tdm" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-os-x" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/17/os-x/" class="article-date">
+  <time datetime="2016-10-17T15:07:01.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/os-x/">OS X</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>defaults write com.apple.finder AppleShowAllFiles -boolean true ;<br>killall Finder</li>
+<li>defaults write com.apple.finder AppleShowAllFiles -boolean false ;<br>killall Finder<br>每个系统都要定期做些维护工作，这不仅是为了提高系统的运行速度也是为了使系统性能发挥到最大，节省可用的磁盘空间。</li>
+</ol>
+<p>现在我向大家介绍几个维护系统的方法。</p>
+<p><strong>修复磁盘权限：</strong></p>
+<p>在[应用程序]目录下有一个[实用程序]的目录下找到磁盘工具，选中你想修复权限的磁盘后分别有两个选择，一个是校验当前的权限，另一个就是修复权限。修复权限可以让系统把磁盘中的所有文件复原它们正确的权限配置，不至于在使用中出现因为权限问题而不能进行操作的情况，也是为了防止恶意程序对系统进行修改。</p>
+<p><strong>修复磁盘：</strong></p>
+<p>如果你使用的是一个文件系统已经损伤了的硬盘的话，那就要注意了，不过不用太担心，用修复磁盘工具可以解决这个问题。 　　找到你的Mac OS X的系统光盘，用它直接启动电脑，之后运行磁盘工具，选择你要修复的磁盘，就可以修复了，很多诸如死机之类的问题往往修复磁盘就能够彻底解决了。为了使数据安全，一定要经常备份重要数据。由磁盘的S.M.A.R.T.状态可以知道当前硬盘的状态，最好每星期检查一次。</p>
+<p><strong>主动维护：</strong></p>
+<p>Mac OS X系统默认在每天凌晨3点后去做定期的系统维护，主要是清除没用的日志和缓存，当然也会备份重要的系统文件。但是如果这段时间里把系统关闭或者休眠，定期维护作业就无法进行了。这样并不会使系统出问题，不过维护可以使硬盘空出更多的可用空间。</p>
+<p>其实完全可以来选择主动维护方式来手动做这些维护，要做这些维护请执行以下命令，要顺着往下做才行。</p>
+<p>sudo periodic daily</p>
+<p>sudo periodic weekly</p>
+<p>sudo periodic monthly</p>
+<p><strong>更新加固：</strong></p>
+<p>如果有时系统在做过更新操作或其它操作之后非常的慢请在终端（Terminal）中执行以下命令：</p>
+<p>sudo update_prebinding -root / -force</p>
+<p>回车后，输入管理员密码回车，等运行结束出现$符时，立即重启系统。</p>
+<p>以上几个维护方法，最好每月都能做一次，当然，出现问题时不要急着去重装系统，做一下以上操作也许会很快解决的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/17/os-x/" data-id="cjc05w0c2004pzl0rwbdymywd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e6-95-b0-e7-bb-84-e5-92-8c-e9-93-be-e8-a1-a8-e7-9a-84-e5-8c-ba-e5-88-ab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/15/e6-95-b0-e7-bb-84-e5-92-8c-e9-93-be-e8-a1-a8-e7-9a-84-e5-8c-ba-e5-88-ab/" class="article-date">
+  <time datetime="2016-10-15T15:03:58.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/e6-95-b0-e7-bb-84-e5-92-8c-e9-93-be-e8-a1-a8-e7-9a-84-e5-8c-ba-e5-88-ab/">数组和链表的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><div>数组是将元素在内存中连续存放，由于每个元素占用内存相同，可以通过下标迅速访问数组中任何元素。但是如果要在数组中增加一个元素，需要移动大量元素，在内存中空出一个元素的空间，然后将要增加的元素放在其中。同样的道理，如果想删除一个元素，同样需要移动大量元素去填掉被移动的元素。如果应用需要快速访问数据，很少或不插入和删除元素，就应该用数组。</div></li>
+<li><div>链表恰好相反，链表中的元素在内存中不是顺序存储的，而是通过存在元素中的指针联系到一起。比如：上一个元素有个指针指到下一个元素，以此类推，直到最后一个元素。如果要访问链表中一个元素，需要从第一个元素开始，一直找到需要的元素位置。但是增加和删除一个元素对于链表数据结构就非常简单了，只要修改元素中的指针就可以了。如果应用需要经常插入和删除元素你就需要用链表数据结构了。</div><br><strong><em>C++语言中可以用数组处理一组数据类型相同的数据，但不允许动态定义数组的大小，即在使用数组之前必须确定数组的大小。而在实际应用中，用户使用数组之前有时无法准确确定数组的大小，只能将数组定义成足够大小，这样数组中有些空间可能不被使用，从而造成内存空间的浪费。*</em></strong>链表是一种常见的数据组织形式，它采用动态分配内存的形式实现。需要时可以用new分配内存空间，不需要时用delete将已分配的空间释放，不会造成内存空间的浪费。**<br>(1) 从逻辑结构角度来看<br>a, 数组必须事先定义固定的长度（元素个数），不能适应数据动态地增减的情况。当数据增加时，可能超出原先定义的元素个数；当数据减少时，造成内存浪费。<br>b,链表动态地进行存储分配，可以适应数据动态地增减的情况，且可以方便地插入、删除数据项。（数组中插入、删除数据项时，需要移动其它数据项）<br>(2)从内存存储角度来看<br>a,(静态)数组从栈中分配空间, 对于程序员方便快速,但自由度小。<br>b, 链表从堆中分配空间, 自由度大但申请管理比较麻烦.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/15/e6-95-b0-e7-bb-84-e5-92-8c-e9-93-be-e8-a1-a8-e7-9a-84-e5-8c-ba-e5-88-ab/" data-id="cjc05w09o002ozl0rldpuh95i" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-9d-9a-e5-ae-88" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/15/e5-9d-9a-e5-ae-88/" class="article-date">
+  <time datetime="2016-10-15T05:53:57.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/e5-9d-9a-e5-ae-88/">坚守</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/15/e5-9d-9a-e5-ae-88/" data-id="cjc05w08w0020zl0r0n5y5fe8" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shadowsocksr-trashed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/shadowsocksr-trashed/" class="article-date">
+  <time datetime="2016-10-04T08:10:32.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/shadowsocksr-trashed/">ShadowsocksR安装  采用chacha20加密net-speeder和配置参数优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>安装服务端的时候推荐启用 chacha20 加密（逼格高），默认的 aes-256-cfb 加密速度较慢，当然你也可以启用最快的 CR4-MD5 加密算法，就是加密弱一些。另外，建议启用搬瓦工的 IPv6 并在 shadowsocksR 配置启用IPv6，走代理的时候就能访问一些只有在 IPv6 下才能访问的网站。</p>
+<p>ChaCha20加密（chacha20 依赖 libsodium，以下是编译安装 libsodium 的方法：）</p>
+<ol>
+<li><span class="crayon-e">yum </span><span class="crayon-e">install </span><span class="crayon-e">gcc </span><span class="crayon-v">gcc</span><span class="crayon-o">-</span><span class="crayon-v">c</span><span class="crayon-o">++</span></li>
+<li><div id="crayon-57f47f4d45635393547283-1" class="crayon-line"><span class="crayon-e">wget </span><span class="crayon-v">https</span><span class="crayon-o">:</span><span class="crayon-c">//download.libsodium.org/libsodium/releases/LATEST.tar.gz</span></div><br><div id="crayon-57f47f4d45635393547283-2" class="crayon-line"></div></li>
+<li><div id="crayon-57f47f4d45635393547283-2" class="crayon-line"><span class="crayon-e">tar </span><span class="crayon-e">zxf </span><span class="crayon-v">LATEST</span><span class="crayon-sy">.</span><span class="crayon-v">tar</span><span class="crayon-sy">.</span><span class="crayon-e">gz</span></div><br><div id="crayon-57f47f4d45635393547283-3" class="crayon-line"></div></li>
+<li><div id="crayon-57f47f4d45635393547283-3" class="crayon-line"><span class="crayon-e">cd </span><span class="crayon-e ">libsodium*</span></div><br><div id="crayon-57f47f4d45635393547283-4" class="crayon-line"></div></li>
+<li><div id="crayon-57f47f4d45635393547283-4" class="crayon-line"><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-e">configure</span></div><br><div id="crayon-57f47f4d45635393547283-5" class="crayon-line"></div></li>
+<li><div id="crayon-57f47f4d45635393547283-5" class="crayon-line"><span class="crayon-v">make</span> <span class="crayon-o">&amp;&amp;</span> <span class="crayon-e">make </span><span class="crayon-e">install</span></div><br><div id="crayon-57f47f4d45635393547283-7" class="crayon-line"></div></li>
+<li><div id="crayon-57f47f4d45635393547283-7" class="crayon-line"><span class="crayon-v">echo</span> <span class="crayon-o">/</span><span class="crayon-v">usr</span><span class="crayon-o">/</span><span class="crayon-v">local</span><span class="crayon-o">/</span><span class="crayon-v">lib</span> <span class="crayon-o">&gt;</span> <span class="crayon-o">/</span><span class="crayon-v">etc</span><span class="crayon-o">/</span><span class="crayon-v">ld</span><span class="crayon-sy">.</span><span class="crayon-v">so</span><span class="crayon-sy">.</span><span class="crayon-v">conf</span><span class="crayon-sy">.</span><span class="crayon-v">d</span><span class="crayon-o">/</span><span class="crayon-v">usr_local_lib</span><span class="crayon-sy">.</span><span class="crayon-e">conf</span></div><br><div id="crayon-57f47f4d45635393547283-8" class="crayon-line"></div></li>
+<li><p><div id="crayon-57f47f4d45635393547283-8" class="crayon-line"><span class="crayon-v">ldconfig</span></div><br>使用shell脚本安装ShadowsocksR</p>
+</li>
+<li><p><span class="crayon-v">wget</span> <span class="crayon-o">–</span><span class="crayon-v">no</span><span class="crayon-o">-</span><span class="crayon-v">check</span><span class="crayon-o">-</span><span class="crayon-e">certificate </span><span class="crayon-v">https</span><span class="crayon-o">:</span><span class="crayon-c">//raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh</span></p>
+</li>
+<li><span class="crayon-v">chmod</span> <span class="crayon-o">+</span><span class="crayon-i">x</span> <span class="crayon-v">shadowsocksR</span><span class="crayon-sy">.</span><span class="crayon-i">sh</span></li>
+<li><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">shadowsocksR</span><span class="crayon-sy">.</span><span class="crayon-i">sh</span> <span class="crayon-cn">2</span><span class="crayon-o">&gt;</span><span class="crayon-o">&amp;</span><span class="crayon-cn">1</span> <span class="crayon-o">|</span> <span class="crayon-e">tee </span><span class="crayon-v">shadowsocksR</span><span class="crayon-sy">.</span><span class="crayon-v">log</span><br><em><strong>到此为止就安装完毕了</strong></em></li>
+</ol>
+<p><strong>接下来优化</strong></p>
+<p>修改配置文件：<code>vi /etc/shadowsocks.json</code> (按<code>i</code>编辑，按<code>Ctrl+C</code>退出编辑，<code>:x</code>保存并退出)</p>
+<p>将<span class="crayon-h"> method字段修改为 </span><strong><span class="crayon-s">“method”</span><span class="crayon-o">:</span> <span class="crayon-s">“chacha20”  （修改加密方式)</span></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>维护常用的几个命令</strong><br>启动：<code>/etc/init.d/shadowsocks start</code><br>停止：<code>/etc/init.d/shadowsocks stop</code><br>重启：<code>/etc/init.d/shadowsocks restart</code><br>状态：<code>/etc/init.d/shadowsocks status</code><br>卸载：需要root用户权限，运行<code>./shadowsocks.sh uninstall</code><br>更新：<code>pip install -U shadowsocks</code></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>安装Net-Speeder</strong></p>
+<p>Net-Speeder是一个linux软件，主要目的是为了解决丢包问题，实现TCP双倍发送，也就是同一份数据包发送两份。这样的话在服务器带宽充足情况下，丢包率会平方级降低。网络传输速度也会有所提升。</p>
+<p>&nbsp;</p>
+<p><strong>安装方式</strong></p>
+<ul>
+<li>第一步，下载wget <a href="https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh" target="_blank" rel="noopener">https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh</a></li>
+<li><p>第二部，编译并安装<br>bash net_speeder-installer.sh</p>
+</li>
+<li><p>第三部，端口加速<br>nohup /usr/local/net_speeder/net_speeder venet0 “ip” &gt;/dev/null 2&gt;&amp;1 &amp;</p>
+</li>
+<li><p><span class="crayon-c">加入自启动</span><br><span class="crayon-r">           echo</span> <span class="crayon-s">“nohup /usr/local/net_speeder/net_speeder venet0 “</span><span class="crayon-i">ip</span><span class="crayon-s">“ &gt;/dev/null 2&gt;&amp;1 &amp;”</span> <span class="crayon-o">&gt;&gt;</span> <span class="crayon-o">/</span><span class="crayon-v">etc</span><span class="crayon-o">/</span><span class="crayon-v">rc</span><span class="crayon-e">.local</span></p>
+</li>
+</ul>
+<p><strong>参数优化.(参照这里：<a href="https://shadowsocks.org/en/config/advanced.html" target="_blank" rel="noopener">https://shadowsocks.org/en/config/advanced.html</a>)</strong></p>
+<p>首先将服务器内核升级到3.5或更高。</p>
+<div id="crayon-57f47f4d45658006139842" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-plain-wrap"></div><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d45658006139842-1">1</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d45658006139842-1" class="crayon-line"><span class="crayon-v">vi</span> <span class="crayon-o">/</span><span class="crayon-v">etc</span><span class="crayon-o">/</span><span class="crayon-v">security</span><span class="crayon-o">/</span><span class="crayon-v">limits</span><span class="crayon-sy">.</span><span class="crayon-v">conf</span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>添加两行：<br><div id="crayon-57f47f4d4565d420720905" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-plain-wrap"></div><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d4565d420720905-1">1</div><br><div class="crayon-num" data-line="crayon-57f47f4d4565d420720905-2">2</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d4565d420720905-1" class="crayon-line"><span class="crayon-o"><em></em></span> <span class="crayon-e">soft </span><span class="crayon-i">nofile</span> <span class="crayon-cn">51200</span></div><br><div id="crayon-57f47f4d4565d420720905-2" class="crayon-line"><span class="crayon-o"></span> <span class="crayon-e">hard </span><span class="crayon-i">nofile</span> <span class="crayon-cn">51200</span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>设置ulimit：<br><div id="crayon-57f47f4d45661530417009" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-plain-wrap"></div><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d45661530417009-1">1</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d45661530417009-1" class="crayon-line"><span class="crayon-v">ulimit</span> <span class="crayon-o">-</span><span class="crayon-i">n</span> <span class="crayon-cn">51200</span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>然后编辑 sysctl.conf<br><div id="crayon-57f47f4d45665810080029" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-plain-wrap"></div><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d45665810080029-1">1</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d45665810080029-1" class="crayon-line"><span class="crayon-o">/</span><span class="crayon-v">etc</span><span class="crayon-o">/</span><span class="crayon-v">sysctl</span><span class="crayon-sy">.</span><span class="crayon-v">conf</span></div><br></div></td><br></tr><br></tbody><br></table><br>&nbsp;<br><br></div><br></div><br><div id="crayon-57f47f4d45669518505011" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-1">1</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-2">2</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-3">3</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-4">4</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-5">5</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-6">6</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-7">7</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-8">8</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-9">9</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-10">10</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-11">11</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-12">12</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-13">13</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-14">14</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-15">15</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-16">16</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-17">17</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-18">18</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-19">19</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-20">20</div><br><div class="crayon-num" data-line="crayon-57f47f4d45669518505011-21">21</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d45669518505011-1" class="crayon-line"><span class="crayon-v">fs</span><span class="crayon-sy">.</span><span class="crayon-v">file</span><span class="crayon-o">-</span><span class="crayon-v">max</span> <span class="crayon-o">=</span> <span class="crayon-cn">51200</span></div><br><div id="crayon-57f47f4d45669518505011-2" class="crayon-line"></div><br><div id="crayon-57f47f4d45669518505011-3" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">core</span><span class="crayon-sy">.</span><span class="crayon-v">rmem_max</span> <span class="crayon-o">=</span> <span class="crayon-cn">67108864</span></div><br><div id="crayon-57f47f4d45669518505011-4" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">core</span><span class="crayon-sy">.</span><span class="crayon-v">wmem_max</span> <span class="crayon-o">=</span> <span class="crayon-cn">67108864</span></div><br><div id="crayon-57f47f4d45669518505011-5" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">core</span><span class="crayon-sy">.</span><span class="crayon-v">netdev_max_backlog</span> <span class="crayon-o">=</span> <span class="crayon-cn">250000</span></div><br><div id="crayon-57f47f4d45669518505011-6" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">core</span><span class="crayon-sy">.</span><span class="crayon-v">somaxconn</span> <span class="crayon-o">=</span> <span class="crayon-cn">4096</span></div><br><div id="crayon-57f47f4d45669518505011-7" class="crayon-line"></div><br><div id="crayon-57f47f4d45669518505011-8" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_syncookies</span> <span class="crayon-o">=</span> <span class="crayon-cn">1</span></div><br><div id="crayon-57f47f4d45669518505011-9" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_tw_reuse</span> <span class="crayon-o">=</span> <span class="crayon-cn">1</span></div><br><div id="crayon-57f47f4d45669518505011-10" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_tw_recycle</span> <span class="crayon-o">=</span> <span class="crayon-cn">0</span></div><br><div id="crayon-57f47f4d45669518505011-11" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_fin_timeout</span> <span class="crayon-o">=</span> <span class="crayon-cn">30</span></div><br><div id="crayon-57f47f4d45669518505011-12" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_keepalive_time</span> <span class="crayon-o">=</span> <span class="crayon-cn">1200</span></div><br><div id="crayon-57f47f4d45669518505011-13" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">ip_local_port_range</span> <span class="crayon-o">=</span> <span class="crayon-cn">10000</span> <span class="crayon-cn">65000</span></div><br><div id="crayon-57f47f4d45669518505011-14" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_max_syn_backlog</span> <span class="crayon-o">=</span> <span class="crayon-cn">8192</span></div><br><div id="crayon-57f47f4d45669518505011-15" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_max_tw_buckets</span> <span class="crayon-o">=</span> <span class="crayon-cn">5000</span></div><br><div id="crayon-57f47f4d45669518505011-16" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_fastopen</span> <span class="crayon-o">=</span> <span class="crayon-cn">3</span></div><br><div id="crayon-57f47f4d45669518505011-17" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_mem</span> <span class="crayon-o">=</span> <span class="crayon-cn">25600</span> <span class="crayon-cn">51200</span> <span class="crayon-cn">102400</span></div><br><div id="crayon-57f47f4d45669518505011-18" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_rmem</span> <span class="crayon-o">=</span> <span class="crayon-cn">4096</span> <span class="crayon-cn">87380</span> <span class="crayon-cn">67108864</span></div><br><div id="crayon-57f47f4d45669518505011-19" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_wmem</span> <span class="crayon-o">=</span> <span class="crayon-cn">4096</span> <span class="crayon-cn">65536</span> <span class="crayon-cn">67108864</span></div><br><div id="crayon-57f47f4d45669518505011-20" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_mtu_probing</span> <span class="crayon-o">=</span> <span class="crayon-cn">1</span></div><br><div id="crayon-57f47f4d45669518505011-21" class="crayon-line"><span class="crayon-v">net</span><span class="crayon-sy">.</span><span class="crayon-v">ipv4</span><span class="crayon-sy">.</span><span class="crayon-v">tcp_congestion_control</span> <span class="crayon-o">=</span> <span class="crayon-v">hybla</span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>加载配置：<br><div id="crayon-57f47f4d4566e046290406" class="crayon-syntax crayon-theme-github crayon-font-consolas crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" no-popup minimize scroll-always disable-anim wrap"><br><div class="crayon-plain-wrap"></div><br><div class="crayon-main"><br><table class="crayon-table"><br><tbody><br><tr class="crayon-row"><br><td class="crayon-nums " data-settings="show"><br><div class="crayon-nums-content"><br><div class="crayon-num" data-line="crayon-57f47f4d4566e046290406-1">1</div><br></div></td><br><td class="crayon-code"><br><div class="crayon-pre"><br><div id="crayon-57f47f4d4566e046290406-1" class="crayon-line"><span class="crayon-v">sysctl</span> <span class="crayon-o">-</span><span class="crayon-v">p</span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/shadowsocksr-trashed/" data-id="cjc05w0dc005izl0rdfpd4408" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-xcode-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/xcode-8/" class="article-date">
+  <time datetime="2016-09-26T14:35:34.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/xcode-8/">Xcode 8</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对函数注释的快捷键是option + command + /</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/26/xcode-8/" data-id="cjc05w0dm005uzl0r6dqzdmyw" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

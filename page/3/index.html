@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/" class="article-date">
+  <time datetime="2017-04-11T13:16:35.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/">查缺补漏  2017.04.11</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="C-与多态性与虚函数"><a href="#C-与多态性与虚函数" class="headerlink" title="C++与多态性与虚函数"></a>C++与多态性与虚函数</h2><p>多态与非多态的实质区别就是函数地址是<strong>早绑定</strong>还是<strong>晚绑定</strong>。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。<br>那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不论传递过来的究竟是那个类的对象，函数都能够通过同一个接口调用到适应各自对象的实现方法。</p>
+<p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
+<p>（C++中基类指针只有调用虚函数才会体现出多态性，不然基类指针会被限制）</p>
+<hr>
+<hr>
+<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><pre><code>&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;const int %lx&quot;&lt;/span&gt;, &amp;amp;constA);         &lt;span class=&quot;hljs-comment&quot;&gt;// const int 7fff5fbff6ec&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;a);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e8 &lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;b);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e4&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;c);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staA);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002330&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staB);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002334&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staC);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002338&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array1);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6d8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array2);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6d0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array3);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6c8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6b8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str1);           &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6b0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str2);           &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6a8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;stArrayA); &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray* 100002340&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;stArrayB); &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray* 100002348&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array1);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002032a0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array2);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002013f0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array3);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002035c0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str);              &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 100002080&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str1);             &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 100002080&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str2);             &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 1000020a0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray %lx&quot;&lt;/span&gt;, stArrayA);   &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray 1002035f0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray %lx&quot;&lt;/span&gt;, stArrayB);   &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray 1002013d0&lt;/span&gt;
+</code></pre><p>分析一下打印结果，可以得出：</p>
+<ol>
+<li>局部的常量和变量（包括指针）存于高地址，连续声明的变量地址会紧挨在一起，地址从高地址向低地址扩展。这一部分就是<strong>栈</strong>。</li>
+<li>对象存储于低地址，而且连续声明的对象地址不连续。这一部分就是<strong>堆</strong>，其实堆内存是由类似链表的结构串起来的，每一个空闲内存块地址并不一定连续，所以会出现这样的现象。</li>
+<li>静态的变量会存储于低地址，比堆空间地址还低，静态的对象只有指针存储在静态区，分配给对象的空间在堆中。</li>
+<li>表示字符串的类<code>NSString</code>的对象存储在比静态区地址还要低一些的地址中，变量<code>str</code>与<code>str1</code>的值相同，所以共享字符串地址。</li>
+</ol>
+<hr>
+<hr>
+<h2 id="栈区、堆区、文字常量区、静态-全局区和代码区"><a href="#栈区、堆区、文字常量区、静态-全局区和代码区" class="headerlink" title="栈区、堆区、文字常量区、静态/全局区和代码区"></a>栈区、堆区、文字常量区、静态/全局区和代码区</h2><p><strong>栈区</strong>：一般存储局部变量和常量，包括函数的参数，由编译器分配和释放。存取速度较快，但存储的数据一般生命周期较短。</p>
+<p><strong>堆区</strong>：一般存储对象，由程序员分配和释放，如果程序员不释放，则由操作系统释放。当然，如果使用的高级语言有垃圾回收机制，则大多数情况下程序员也不用担心内存空间的释放问题了。</p>
+<p><strong>文字常量区</strong>：存放字符串。为了节省内存空间，编译器一般会将字符串常量存储在文字常量区，在给字符串变量赋值时先在文字常量区寻找，如果有相同字符串，则共享该字符串地址，如果没有，则在常量区中添加该字符串，并将地址传给变量。</p>
+<p><strong>静态/全局区</strong>：存放静态变量和全局变量，程序结束后由系统释放。</p>
+<p><strong>代码区</strong>：存放函数体的二进制代码。</p>
+<hr>
+<hr>
+<h2 id="对称加密与非对称加密算法"><a href="#对称加密与非对称加密算法" class="headerlink" title="对称加密与非对称加密算法"></a>对称加密与非对称加密算法</h2><h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称加密算法的特点是算法公开、计算量小、加密速度快、加密效率高。不足之处是，交易双方都使用同样钥匙，安全性得不到保证。此外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一钥匙，这会使得发收信双方所拥有的钥匙数量呈几何级数增长，密钥管理成为用户的负担。</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>优点：非对称加密与对称加密相比，其安全性更好：对称加密的通信双方使用相同的秘钥，如果一方的秘钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对秘钥，一个用来加密，一个用来解密，而且公钥是公开的，秘钥是自己保存的，不需要像对称加密那样在通信之前要先同步秘钥；<br>缺点：非对称加密的缺点是加密和解密花费时间长、速度慢，只适合对少量数据进行加密。</p>
+<hr>
+<hr>
+<h2 id="Objective-C中的浅拷贝和深拷贝"><a href="#Objective-C中的浅拷贝和深拷贝" class="headerlink" title="Objective-C中的浅拷贝和深拷贝"></a>Objective-C中的浅拷贝和深拷贝</h2><p>浅拷贝就是对内存地址的复制，让目标对象指针和源对象指向同一片内存空间。如：</p>
+<div><br><div id="highlighter_85863" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>char* str = (char*)malloc(100);</code></div><br><div class="line number2 index1 alt1"><code>char* str2 = str;</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。<br><br><strong>iOS 里面的浅拷贝：</strong><br><br>在 iOS 里面， 使用retain 关键字进行引用计数，就是一种更加保险的浅拷贝。他既让几个指针共用同一片内存空间，又可以在release 由于计数的存在，不会轻易的销毁内存，达到更加简单使用的目的。<br><br><strong>深拷贝：</strong><br><br>深拷贝是指拷贝对象的具体内容，而内存地址是自主分配的，拷贝结束之后，两个对象虽然存的值是相同的，但是内存地址不一样，两个对象也互不影响，互不干涉。<br><br>copy 与 retain 的区别：<br><br>copy 是创建一个新对象，retain 是创建一个指针，引用对象计数加一。 copy属性标识两个对象内容相同，新的对象retain count为1, 与旧有对象引用计数无关，旧有对象没有变化。copy减少对象对上下文的依赖。<br><br><strong>iOS里的深拷贝：</strong><br><br>iOS提供了copy和mutableCopy方法，顾名思义，copy就是复制了一个imutable的对象，而mutableCopy就是复制了一个mutable的对象。以下将举几个例子来说明。<br>这里指的是NSString, NSNumber等等一类的对象。<br><div><br><div id="highlighter_780358" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>NSString *string = @”dddd&quot;;</code></div><br><div class="line number2 index1 alt1"><code>NSString *stringCopy = [string copy];</code></div><br><div class="line number3 index2 alt2"><code>NSMutableString *stringDCopy = [string mutableCopy];</code></div><br><div class="line number4 index3 alt1"><code>[stringMCopy appendString:@``&quot;!!&quot;``];</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。<br><br><strong>拷贝构造：</strong><br><br>当然在 ios 中并不是所有的对象都支持copy，mutableCopy，遵守NSCopying协议的类可以发送copy消息，遵守NSMutableCopying协议的类才可以发送mutableCopy消息。<br><br>假如发送了一个没有遵守上诉两协议而发送copy或者 mutableCopy,那么就会发生异常。但是默认的ios类并没有遵守这两个协议。如果想自定义一下copy 那么就必须遵守NSCopying,并且实现 copyWithZone: 方法，如果想自定义一下mutableCopy 那么就必须遵守NSMutableCopying,并且实现 mutableCopyWithZone: 方法。<br><br>如果是我们定义的对象，那么我们自己要实现NSCopying , NSMutableCopying这样就能调用copy和mutablecopy了。举个例子：<br><div><br><div id="highlighter_746770" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div><br><div class="line number7 index6 alt2">7</div><br><div class="line number8 index7 alt1">8</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>@interface MyObj : NSObject&amp;lt;NSCopying, NSMutableCopying&amp;gt;{</code></div><br><div class="line number2 index1 alt1"><code>``NSMutableString *_name;</code></div><br><div class="line number3 index2 alt2"><code>``NSString * _imutableStr ;</code></div><br><div class="line number4 index3 alt1"><code>``int _age;</code></div><br><div class="line number5 index4 alt2"><code>}</code></div><br><div class="line number6 index5 alt1"><code>@property (nonatomic, retain) NSMutableString *name;</code></div><br><div class="line number7 index6 alt2"><code>@property (nonatomic, retain) NSString *imutableStr;</code></div><br><div class="line number8 index7 alt1"><code>@property (nonatomic) int age;</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>copy拷贝构造：<br><div><br><div id="highlighter_552732" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div><br><div class="line number7 index6 alt2">7</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>- (id)copyWithZone:(NSZone *)zone{</code></div><br><div class="line number2 index1 alt1"><code>``MyObj *copy = [[[self class] allocWithZone :zone] init];</code></div><br><div class="line number3 index2 alt2"><code>``copy-&amp;gt;name = [_name copy];</code></div><br><div class="line number4 index3 alt1"><code>``copy-&amp;gt;imutableStr = [_imutableStr copy];</code></div><br><div class="line number5 index4 alt2"><code>``copy-&amp;gt;age = age;</code></div><br><div class="line number6 index5 alt1"><code>``return</code> <code>copy;</code></div><br><div class="line number7 index6 alt2"><code>}</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>mutableCopy拷贝构造：<br><div><br><div id="highlighter_212141" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>- (id)mutableCopyWithZone:(NSZone *)zone{</code></div><br><div class="line number2 index1 alt1"><code>``MyObj *copy = NSCopyObject(self, 0, zone);</code></div><br><div class="line number3 index2 alt2"><code>``copy-&amp;gt;name = [_name mutableCopy];</code></div><br><div class="line number4 index3 alt1"><code>``copy-&amp;gt;age = age;</code></div><br><div class="line number5 index4 alt2"><code>``return</code> <code>copy;</code></div><br><div class="line number6 index5 alt1"><code>}</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/" data-id="cjc05w09q002qzl0rzqypf6y7" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-node-js-express-e6-a1-86-e6-9e-b6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/06/node-js-express-e6-a1-86-e6-9e-b6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89/" class="article-date">
+  <time datetime="2017-04-06T09:37:31.000Z" itemprop="datePublished">2017-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/node-js-express-e6-a1-86-e6-9e-b6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89/">node.js express框架笔记（1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><p>Express 应用使用回调函数的参数： <strong>request</strong> 和 <strong>response</strong> 对象来处理请求和响应的数据。</p>
+<p><pre class="prettyprint prettyprinted"><span class="pln">app</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="str">‘/‘</span><span class="pun">,</span> <span class="kwd">function</span> <span class="pun">(</span><span class="pln">req</span><span class="pun">,</span><span class="pln"> res</span><span class="pun">)</span> <span class="pun">{</span><br>   <span class="com">// –</span><br><span class="pun">})</span></pre><br><strong>request</strong> 和 <strong>response</strong> 对象的具体介绍：</p>
+<p><strong>Request 对象</strong> - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属性有：</p>
+<ol>
+<li>req.app：当callback为外部文件时，用req.app访问express的实例</li>
+<li>req.baseUrl：获取路由当前安装的URL路径</li>
+<li>req.body / req.cookies：获得「请求主体」/ Cookies</li>
+<li>req.fresh / req.stale：判断请求是否还「新鲜」</li>
+<li>req.hostname / req.ip：获取主机名和IP地址</li>
+<li>req.originalUrl：获取原始请求URL</li>
+<li>req.params：获取路由的parameters</li>
+<li>req.path：获取请求路径</li>
+<li>req.protocol：获取协议类型</li>
+<li>req.query：获取URL的查询参数串</li>
+<li>req.route：获取当前匹配的路由</li>
+<li>req.subdomains：获取子域名</li>
+<li>req.accepts()：检查可接受的请求的文档类型</li>
+<li>req.acceptsCharsets / req.acceptsEncodings / req.acceptsLanguages：返回指定字符集的第一个可接受字符编码</li>
+<li>req.get()：获取指定的HTTP请求头</li>
+<li><p>req.is()：判断请求头Content-Type的MIME类型<br><strong>Response 对象</strong> - response 对象表示 HTTP 响应，即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：</p>
+</li>
+<li><p>res.app：同req.app一样</p>
+</li>
+<li>res.append()：追加指定HTTP头</li>
+<li>res.set()在res.append()后将重置之前设置的头</li>
+<li>res.cookie(name，value [，option])：设置Cookie</li>
+<li>opition: domain / expires / httpOnly / maxAge / path / secure / signed</li>
+<li>res.clearCookie()：清除Cookie</li>
+<li>res.download()：传送指定路径的文件</li>
+<li>res.get()：返回指定的HTTP头</li>
+<li>res.json()：传送JSON响应</li>
+<li>res.jsonp()：传送JSONP响应</li>
+<li>res.location()：只设置响应的Location HTTP头，不设置状态码或者close response</li>
+<li>res.redirect()：设置响应的Location HTTP头，并且设置状态码302</li>
+<li>res.send()：传送HTTP响应</li>
+<li>res.sendFile(path [，options] [，fn])：传送指定路径的文件 -会自动根据文件extension设定Content-Type</li>
+<li>res.set()：设置HTTP头，传入object可以一次设置多个头</li>
+<li>res.status()：设置HTTP状态码</li>
+<li>res.type()：设置Content-Type的MIME类型</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/06/node-js-express-e6-a1-86-e6-9e-b6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89/" data-id="cjc05w0bv004gzl0rze8sfxuo" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python-e5-91-bd-e5-90-8d-e8-a7-84-e5-88-99-e8-bd-ac-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/python-e5-91-bd-e5-90-8d-e8-a7-84-e5-88-99-e8-bd-ac-ef-bc-89/" class="article-date">
+  <time datetime="2017-04-04T14:45:26.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/04/python-e5-91-bd-e5-90-8d-e8-a7-84-e5-88-99-e8-bd-ac-ef-bc-89/">Python命名规则(转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>模块名：</strong><br>小写字母，单词之间用_分割<br>参考<a href="http://lib.csdn.net/base/python" title="Python知识库" target="_blank" rel="noopener">Python</a>：logging</p>
+<p><strong>包名:</strong><br>小写字母，单词之间用_分割<br>参考python：logging</p>
+<p><strong>类名：</strong><br>单词首字母大写<br>参考：python class LogRecord(object):</p>
+<p><strong>普通变量：</strong><br>小写字母，单词之间用_分割<br>参考：exc_info</p>
+<p><strong>实例变量：</strong><br>以<em>开头，小写字母，单词之间用</em>分割<br>参考:_exc_info<br>以一个下划线开头的标识符(_xxx)，不能访问的类属性，但可通过类提供的接口进行访问，<br>不会被语句 “from module import *” 语句加载</p>
+<p><strong>私有实例变量：</strong><br>以<strong>开头（2个下划线），小写字母，单词之间用_分割<br>参考:</strong>private_var<br>外部访问会报错</p>
+<p><strong>专有变量：</strong><br><strong>开头，</strong>结尾，一般为python的自有变量，不要以这种方式命名<br>参考:<strong>doc</strong><br>是系统定义的，具有特殊意义的标识符</p>
+<p><strong>普通函数：</strong><br>小写字母，单词之间用_分割：<br>参考:get_name()</p>
+<p><strong>私有函数</strong>：<br>以<strong>开头（2个下划线），小写字母，单词之间用分割<br>参考:</strong>get_name()<br>外部访问会报错</p>
+<p><strong>注意：</strong><br><em>单下划线开头：弱“内部使用”标识，如：”from M import *”，将不导入所有以下划线开头的对象，包括包、模块、成员<br>单下划线结尾</em>：只是为了避免与python关键字的命名冲突<br>_<em>双下划线开头：模块内的成员，表示私有成员，外部无法直接调用<br>包和模块：模块应该使用尽可能短的、全小写命名，可以在模块命名时使用下划线以增强可读性。同样包的命名也应该是这样的，虽然其并不鼓励下划线。<br>以上这些主要是考虑模块名是与文件夹相对应的，因此需要考虑文件系统的一些命名规则的，比如Unix系统对大小写敏感，而过长的文件名会影响其在Windows/Mac/Dos等系统中的正常使用。<br>类：几乎毫无例外的，类名都使用首字母大写开头(Pascal命名风格)的规范。使用</em>单下划线开头的类名为内部使用，上面说的from M import *默认不被告导入的情况。<br>异常：因为异常也是一个类，所以遵守类的命名规则。此外，如果异常实际上指代一个错误的话，应该使用“Error”做后缀</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/04/python-e5-91-bd-e5-90-8d-e8-a7-84-e5-88-99-e8-bd-ac-ef-bc-89/" data-id="cjc05w0cb004zzl0rf2us26ld" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-883-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-883-ef-bc-89/" class="article-date">
+  <time datetime="2017-04-04T06:59:47.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/04/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-883-ef-bc-89/">Python3 学习笔记 （3）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="匿名函数-lt-span-class-quot-tag-quot-gt-lambda-lt-span-gt"><a href="#匿名函数-lt-span-class-quot-tag-quot-gt-lambda-lt-span-gt" class="headerlink" title="匿名函数&lt;span class=&quot;tag&quot;&gt;lambda&lt;/span&gt;"></a>匿名函数<code>&lt;span class=&quot;tag&quot;&gt;lambda&lt;/span&gt;</code></h2><div class="x-wiki-content">
+
+<p>当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。</p>
+<p>在Python中，对匿名函数提供了有限支持。还是以<code>map()</code>函数为例，计算f(x)=x<sup>2</sup>时，除了定义一个<code>f(x)</code>的函数外，还可以直接传入匿名函数：</p>
+<pre><code>&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;map&lt;/span&gt;(&lt;span class=&quot;tag&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;x&lt;/span&gt;: &lt;span class=&quot;tag&quot;&gt;x&lt;/span&gt; * &lt;span class=&quot;tag&quot;&gt;x&lt;/span&gt;, &lt;span class=&quot;attr_selector&quot;&gt;[1, 2, 3, 4, 5, 6, 7, 8, 9]&lt;/span&gt;)
+&lt;span class=&quot;attr_selector&quot;&gt;[1, 4, 9, 16, 25, 36, 49, 64, 81]&lt;/span&gt;
+`&lt;/pre&gt;
+通过对比可以看出，匿名函数`lambda x: x * x`实际上就是：
+&lt;pre&gt;`&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x * x
+`&lt;/pre&gt;
+关键字`lambda`表示匿名函数，冒号前面的`x`表示函数参数。
+
+匿名函数有个限制，就是只能有一个表达式，不用写`return`，返回值就是该表达式的结果。
+
+* * *
+
+* * *
+
+## 装饰器
+
+&lt;/div&gt;
+质上，decorator就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的decorator，可以定义如下：
+&lt;pre&gt;`&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(func)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;wrapper&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(*args, **kw)&lt;/span&gt;:&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&apos;call %s():&apos;&lt;/span&gt; % func.__name__
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; func(*args, **kw)
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; wrapper
+`&lt;/pre&gt;
+观察上面的`log`，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：
+&lt;pre&gt;`&lt;span class=&quot;decorator&quot;&gt;@log&lt;/span&gt;
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&apos;2013-12-25&apos;&lt;/span&gt;
+`&lt;/pre&gt;
+调用`now()`函数，不仅会运行`now()`函数本身，还会在运行`now()`函数前打印一行日志：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; now()
+&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;call&lt;/span&gt; now():
+&lt;span class=&quot;number&quot;&gt;2013&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;12&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;25&lt;/span&gt;
+&lt;/span&gt;`&lt;/pre&gt;
+把`@log`放到`now()`函数的定义处，相当于执行了语句：
+&lt;pre&gt;`&lt;span class=&quot;setting&quot;&gt;now = &lt;span class=&quot;value&quot;&gt;log(now)
+&lt;/span&gt;&lt;/span&gt;`&lt;/pre&gt;
+在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持
+
+。Python的decorator可以用函数实现，也可以用类实现。
+
+decorator可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。
+
+请编写一个decorator，能在函数调用的前后打印出`&apos;begin call&apos;`和`&apos;end call&apos;`的日志。
+
+再思考一下能否写出一个`@log`的decorator，使它既支持：
+
+* * *
+
+* * *
+
+## 偏函数
+
+`functools.partial`就是帮助我们创建一个偏函数的，不需要我们自己定义`int2()`，可以直接使用下面的代码创建一个新的函数`int2`：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; functools
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;int2 = functools.partial(int, base=&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;int2(&lt;span class=&quot;string&quot;&gt;&apos;1000000&apos;&lt;/span&gt;)
+&lt;span class=&quot;number&quot;&gt;64&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;int2(&lt;span class=&quot;string&quot;&gt;&apos;1010101&apos;&lt;/span&gt;)
+&lt;span class=&quot;number&quot;&gt;85&lt;/span&gt;
+`&lt;/pre&gt;
+所以，简单总结`functools.partial`的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。
+
+注意到上面的新的`int2`函数，仅仅是把`base`参数重新设定默认值为`2`，但也可以在函数调用时传入其他值：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;int2(&lt;span class=&quot;string&quot;&gt;&apos;1000000&apos;&lt;/span&gt;, base=&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)
+&lt;span class=&quot;number&quot;&gt;1000000
+
+当函数的参数个数太多，需要简化时，使用&lt;code&gt;functools.partial`可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## `&lt;span class=&quot;number&quot;&gt;
+类(因为有面向对象经验,说关键点就好了)&lt;/span&gt;`
+
+### 初始化
+
+初始化函数模板,不用定义成员变量,直接用self来定义就好了.
+
+初始化函数规定的名称是__init__
+
+注意到`__init__`方法的第一个参数永远是`self`，表示创建的实例本身，因此，在`__init__`方法内部，就可以把各种属性绑定到`self`，因为`self`就指向创建的实例本身。
+
+有了`__init__`方法，在创建实例的时候，就不能传入空的参数了，必须传入与`__init__`方法匹配的参数，但`self`不需要传，Python解释器自己会把实例变量传进去
+
+### 私有成员的实现方法
+
+实例的变量名如果以`__`开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问，所以，我们把Student类改一改：
+
+（吐槽一下，想起OC）
+&lt;pre&gt;`&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(object)&lt;/span&gt;:&lt;/span&gt;
+
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, name, score)&lt;/span&gt;:&lt;/span&gt;
+        self.__name = name
+        self.__score = score
+
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;print_score&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&apos;%s: %s&apos;&lt;/span&gt; % (self.__name, self.__score)
+`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## __slots__
+
+&lt;pre&gt;`限制类的成员变量的数量。
+`&lt;/pre&gt;
+达到限制的目的，Python允许在定义class的时候，定义一个特殊的`__slots__`变量，来限制该class能添加的属性：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(object)&lt;/span&gt;:&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    __slots__ = (&lt;span class=&quot;string&quot;&gt;&apos;name&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;age&apos;&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;# 用tuple定义允许绑定的属性名称&lt;/span&gt;
+
+这样子绑定别的变量就会报错`&lt;/pre&gt;
+&lt;pre&gt;` object has no attribute &lt;span class=&quot;string&quot;&gt;&apos;score&apos;
+&lt;/span&gt;`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## ` &lt;code&gt;enumerate`函数&lt;/code&gt;
+
+如果要对list实现类似Java那样的下标循环怎么办？Python内置的`enumerate`函数可以把一个list变成索引-元素对，这样就可以在`for`循环中同时迭代索引和元素本身：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i, value &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; enumerate([&lt;span class=&quot;string&quot;&gt;&apos;A&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;B&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;C&apos;&lt;/span&gt;]):
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    print(i, value)
+...
+&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; A
+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; B
+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; C
+`&lt;/pre&gt;
+上面的`for`循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; x, y &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; [(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), (&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;), (&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;)]:
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    print(x, y)
+...
+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;
+</code></pre><p>&nbsp;</p>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/04/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-883-ef-bc-89/" data-id="cjc05w0cf0054zl0ryk3n8l9i" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/" class="article-date">
+  <time datetime="2017-04-01T15:25:04.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/">Python3 学习笔记 （2）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="尾递归优化解决递归调用栈溢出"><a href="#尾递归优化解决递归调用栈溢出" class="headerlink" title="尾递归优化解决递归调用栈溢出"></a><strong>尾递归</strong>优化解决递归调用栈溢出</h2><p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
+<p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
+<pre><code>&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(n)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fact_iter(n, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fact_iter&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(num, product)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; num == &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; product
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fact_iter(num - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, num * product)
+`&lt;/pre&gt;
+可以看到，`return fact_iter(num - 1, num * product)`仅返回递归函数本身，`num - 1`和`num * product`在函数调用前就会被计算，不影响函数调用。
+
+`fact(5)`对应的`fact_iter(5, 1)`的调用如下：
+&lt;pre&gt;`===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;60&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;120&lt;/span&gt;)
+===&amp;gt; &lt;span class=&quot;number&quot;&gt;120&lt;/span&gt;
+`&lt;/pre&gt;
+尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。
+
+遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的`fact(n)`函数改成尾递归方式，也会导致栈溢出。
+
+使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。
+
+针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。
+
+Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。
+
+* * *
+
+* * *
+
+## 切片
+
+取前3个元素，应该怎么做？
+
+笨办法：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;attr_selector&quot;&gt;[L[0]&lt;/span&gt;, &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[1]&lt;/span&gt;, &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[2]&lt;/span&gt;]
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+之所以是笨办法是因为扩展一下，取前N个元素就没辙了。
+
+取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;r = []
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;n = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(n):
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    r.append(L[i])
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;r
+[&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Sarah&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Tracy&apos;&lt;/span&gt;]
+`&lt;/pre&gt;
+对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。
+
+对应上面的问题，取前3个元素，用一行代码就可以完成切片：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[0:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+`L[0:3]`表示，从索引`0`开始取，直到索引`3`为止，但不包括索引`3`。即索引`0`，`1`，`2`，正好是3个元素。
+
+如果第一个索引是`0`，还可以省略：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+也可以从索引1开始，取出2个元素出来：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[1:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+类似的，既然Python支持`L[-1]`取倒数第一个元素，那么它同样支持倒数切片，试试：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[-2:]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Bob&apos;, &apos;Jack&apos;]&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[-2:-1]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Bob&apos;]&lt;/span&gt;`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+&lt;div class=&quot;uk-container x-container&quot;&gt;
+
+##  函数式编程
+
+函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。
+
+而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。
+
+我们首先要搞明白计算机（Computer）和计算（Compute）的概念。
+
+在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。
+
+而计算则指数学意义上的计算，越是抽象的计算，离计算机硬件越远。
+
+对应到编程语言，就是越低级的语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。
+
+函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出，因此，这种函数是有副作用的。
+
+函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！
+
+Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
+
+&lt;/div&gt;
+
+* * *
+
+* * *
+
+## 函数名也是变量
+
+### 变量可以指向函数
+
+以Python内置的求绝对值的函数`abs()`为例，调用该函数用以下代码：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;abs(-&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)
+&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;
+`&lt;/pre&gt;
+但是，如果只写`abs`呢？
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; abs
+&amp;lt;built-&lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;abs&lt;/span&gt;&amp;gt;
+&lt;/span&gt;`&lt;/pre&gt;
+可见，`abs(-10)`是函数调用，而`abs`是函数本身。
+
+* * *
+
+* * *
+
+## map/reduce
+
+我们先看map。`map()`函数接收两个参数，一个是函数，一个是`Iterable`，`map`将传入的函数依次作用到序列的每个元素，并把结果作为新的`Iterator`返回。
+
+举例说明，比如我们有一个函数f(x)=x&lt;sup&gt;2&lt;/sup&gt;，要把这个函数作用在一个list `[1, 2, 3, 4, 5, 6, 7, 8, 9]`上，就可以用`map()`实现如下：
+
+&amp;nbsp;
+
+`reduce`把一个函数作用在一个序列`[x1, x2, x3, ...]`上，这个函数必须接收两个参数，`reduce`把结果继续和序列的下一个元素做累积计算，其效果就是：
+&lt;pre&gt;`reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+`&lt;/pre&gt;
+比方说对一个序列求和，就可以用`reduce`实现：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; functools &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; reduce
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt;:&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x + y
+...
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;reduce(add, [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;])
+&lt;span class=&quot;number&quot;&gt;25&lt;/span&gt;
+`&lt;/pre&gt;
+当然求和运算可以直接用Python内建函数`sum()`，没必要动用`reduce`。
+
+但是如果要把序列`[1, 3, 5, 7, 9]`变换成整数`13579`，`reduce`就可以派上用场：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; functools &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; reduce
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt;:&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x * &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; + y
+...
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;reduce(fn, [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;])
+&lt;span class=&quot;number&quot;&gt;13579&lt;/span&gt;
+`&lt;/pre&gt;
+这个例子本身没多大用处，但是，如果考虑到字符串`str`也是一个序列，对上面的例子稍加改动，配合`map()`，我们就可以写出把`str`转换为`int`的函数：
+
+* * *
+
+* * *
+
+## 列表生成式
+
+列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。
+
+举个例子，要生成list `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`可以用`range(1, 11)`：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;range&lt;/span&gt;(1, 11)
+&lt;span class=&quot;attr_selector&quot;&gt;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&lt;/span&gt;
+</code></pre><hr>
+<hr>
+<pre></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/" data-id="cjc05w0ck0058zl0ruv0x9n9t" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/" class="article-date">
+  <time datetime="2017-04-01T07:06:15.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">Python3 学习笔记 （1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
+<pre><code>&lt;span class=&quot;setting&quot;&gt;x = &lt;span class=&quot;value&quot;&gt;b&apos;ABC&apos;&lt;/span&gt;&lt;/span&gt;
+`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## 字符串格式化
+
+在Python中，采用的格式化方式和C语言是一致的，用`%`实现，举例如下：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&apos;Hello, %s&apos;&lt;/span&gt; % &lt;span class=&quot;string&quot;&gt;&apos;world&apos;&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;&apos;Hello, world&apos;&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&apos;Hi, %s, you have $%d.&apos;&lt;/span&gt; % (&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1000000&lt;/span&gt;)
+&lt;span class=&quot;string&quot;&gt;&apos;Hi, Michael, you have $1000000.&apos;&lt;/span&gt;
+`&lt;/pre&gt;
+你可能猜到了，`%`运算符就是用来格式化字符串的。在字符串内部，`%s`表示用字符串替换，`%d`表示用整数替换，有几个`%?`占位符，后面就跟几个变量或者值，顺序要对应好。如果只有一个`%?`，括号可以省略。
+
+* * *
+
+* * *
+
+## 条件判断
+
+计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。
+
+比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用`if`语句实现：
+&lt;pre&gt;`age = &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; age &amp;gt;= &lt;span class=&quot;number&quot;&gt;18&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;your age is&apos;&lt;/span&gt;, age)
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;adult&apos;&lt;/span&gt;)
+`&lt;/pre&gt;
+根据Python的缩进规则，如果`if`语句判断是`True`，就把缩进的两行print语句执行了，否则，什么也不做。
+
+* * *
+
+* * *
+
+## elif于else if
+
+`elif`是`else if`的缩写，完全可以有多个`elif`，所以`if`语句的完整形式就是：
+&lt;pre&gt;`if &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断1&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行1&lt;/span&gt;&amp;gt;&lt;/span&gt;
+elif &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断2&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行2&lt;/span&gt;&amp;gt;&lt;/span&gt;
+elif &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;条件判断3&lt;/span&gt;&amp;gt;&lt;/span&gt;:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行3&lt;/span&gt;&amp;gt;&lt;/span&gt;
+else:
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;执行4&lt;/span&gt;&amp;gt;
+&lt;/span&gt;`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+## `int()将string转为整数`
+
+Traceback (most recent call last): File &quot;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;stdin&lt;/span&gt;&amp;gt;&lt;/span&gt;&quot;, line 1, in &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;module&lt;/span&gt;&amp;gt;&lt;/span&gt; TypeError: unorderable types: str() &amp;gt; int()
+
+这是因为`input()`返回的数据类型是`str`，`str`不能直接和整数比较，必须先把`str`转换成整数。Python提供了`int()`函数来完成这件事情
+
+* * *
+
+* * *
+
+##  循环的两种方式 老样子的break和continue
+
+### for...in循环
+
+&lt;pre&gt;names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]
+for name in names: 
+     print(name)&lt;/pre&gt;
+如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：
+&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; list(range(5))
+[0, 1, 2, 3, 4]&lt;/pre&gt;
+
+### while循环
+
+只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：
+&lt;pre&gt;`sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+n = &lt;span class=&quot;number&quot;&gt;99&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    sum = sum + n
+    n = n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(sum)
+`&lt;/pre&gt;
+在循环内部变量`n`不断自减，直到变为`-1`时，不再满足while条件，循环退出。
+&lt;div class=&quot;x-wiki-content&quot;&gt;
+
+### break
+
+在循环中，`break`语句可以提前退出循环。例如，本来要循环打印1～100的数字：
+&lt;pre&gt;`n = 1
+while n &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;100:&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt;)
+    &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; = &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; + &lt;span class=&quot;attribute&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&apos;&lt;span class=&quot;attribute&quot;&gt;END&lt;/span&gt;&apos;)
+&lt;/span&gt;`&lt;/pre&gt;
+上面的代码可以打印出1~100。
+
+如果要提前结束循环，可以用`break`语句：
+&lt;pre&gt;`n = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;: &lt;span class=&quot;comment&quot;&gt;# 当n = 11时，条件满足，执行break语句&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;# break语句会结束当前循环&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(n)
+    n = n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&apos;END&apos;&lt;/span&gt;)
+`&lt;/pre&gt;
+执行上面的代码可以看到，打印出1~10后，紧接着打印`END`，程序结束。
+
+可见`break`的作用是提前结束循环。
+
+### continue
+
+在循环过程中，也可以通过`continue`语句，跳过当前的这次循环，直接开始下一次循环。
+&lt;pre&gt;`n = 0
+while n &lt;span class=&quot;tag&quot;&gt;&amp;lt; &lt;span class=&quot;attribute&quot;&gt;10:&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; = &lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt; + &lt;span class=&quot;attribute&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;attribute&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;n&lt;/span&gt;)
+&lt;/span&gt;`&lt;/pre&gt;
+上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用`continue`语句跳过某些循环：
+&lt;pre&gt;`n = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;lt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;:
+    n = n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;: &lt;span class=&quot;comment&quot;&gt;# 如果n是偶数，执行continue语句&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;# continue语句会直接继续下一轮循环，后续的print()语句不会执行&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt;(n)
+`&lt;/pre&gt;
+执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。
+
+可见`continue`的作用是提前结束本轮循环，并直接开始下一轮循环。
+
+&lt;/div&gt;
+
+* * *
+
+* * *
+
+## 使用dict和set
+
+### dict
+
+&lt;div class=&quot;x-wiki-info&quot;&gt;
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;d = {&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;95&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Bob&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;75&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Tracy&apos;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;85&lt;/span&gt;}
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;d[&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;]
+&lt;span class=&quot;number&quot;&gt;95&lt;/span&gt;`&lt;/pre&gt;
+和list比较，dict有以下几个特点：
+</code></pre><ol>
+<li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
+<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
+</li>
+<li><p>查找和插入的时间随着元素的增加而增加；</p>
+</li>
+<li><p>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<p>要创建一个set，需要提供一个list作为输入集合：<br><pre><code>&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;s = set([&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;])
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;s
+{&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;}</code></pre><br></p>
+<div class="x-wiki-content">
+
+<hr>
+<hr>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
+<p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">my_abs</span><span class="params">(x)</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; x &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x
+&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; -x
+</code></pre><p><code>&lt;/pre&gt;
+请自行测试并调用</code>my_abs`看看返回结果是否正确。</p>
+<p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
+<p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
+<p><code>return None</code>可以简写为<code>return</code></p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">nop</span><span class="params">()</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;
+</code></pre><p><code>&lt;/pre&gt;</code>pass<code>语句什么都不做，那有什么用？实际上</code>pass<code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个</code>pass`，让代码能运行起来。</p>
+<p><code>pass</code>还可以用在其他语句里，比如：<br><pre>`<span class="keyword">if</span> age &gt;= <span class="number">18</span>:</pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;
+</code></pre><p><code>&lt;/pre&gt;
+缺少了</code>pass`，代码运行就会有语法错误。</p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p></p></div><p></p>
+<div class="x-wiki-content">
+
+<p>设置默认参数时，有几点要注意：</p>
+<p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
+<p>二是如何设置默认参数。</p>
+<p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
+<p></p></div><p></p>
+<div class="x-wiki-content">
+
+<p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
+<p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L=None)</span>:</span></pre></p>
+<pre><code>&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; L &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;None&lt;/span&gt;:
+    L = []
+L.append(&lt;span class=&quot;string&quot;&gt;&apos;END&apos;&lt;/span&gt;)
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; L`&lt;/pre&gt;
+</code></pre><p></p></div><p></p>
+<div class="x-wiki-content">
+
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
+<p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(numbers)</span>:</span></pre></p>
+<pre><code>sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; n &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; numbers:
+    sum = sum + n * n
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sum
+</code></pre><p><code>&lt;/pre&gt;
+但是调用的时候，需要先组装出一个list或tuple：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])<br><span class="number">14</span><br><span class="prompt">&gt;&gt;&gt; </span>calc((<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>))<br><span class="number">84</span><br><code>&lt;/pre&gt;
+如果利用可变参数，调用函数的方式可以简化成这样：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)<br><span class="number">14</span><br><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>)<br><span class="number">84</span><br><code>&lt;/pre&gt;
+所以，我们把函数的参数改为可变参数：
+&lt;pre&gt;</code><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(*numbers)</span>:</span></p>
+<pre><code>sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; n &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; numbers:
+    sum = sum + n * n
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sum
+</code></pre><p><code>&lt;/pre&gt;
+定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个</code><em><code>号。在函数内部，参数</code>numbers<code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>)<br><span class="number">5</span><br><span class="prompt">&gt;&gt;&gt; </span>calc()<br><span class="number">0</span><br><code>&lt;/pre&gt;
+如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><span class="prompt">&gt;&gt;&gt; </span>calc(nums[<span class="number">0</span>], nums[<span class="number">1</span>], nums[<span class="number">2</span>])<br><span class="number">14</span><br><code>&lt;/pre&gt;
+这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个</code></em><code>号，把list或tuple的元素变成可变参数传进去：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><span class="prompt">&gt;&gt;&gt; </span>calc(<em>nums)<br><span class="number">14</span><br><code>&lt;/pre&gt;</code></em>nums<code>表示把</code>nums`这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：<br><pre>`<span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, **kw)</span>:</span></pre></p>
+<pre><code>print(&lt;span class=&quot;string&quot;&gt;&apos;name:&apos;&lt;/span&gt;, name, &lt;span class=&quot;string&quot;&gt;&apos;age:&apos;&lt;/span&gt;, age, &lt;span class=&quot;string&quot;&gt;&apos;other:&apos;&lt;/span&gt;, kw)
+</code></pre><p><code>&lt;/pre&gt;
+函数</code>person<code>除了必选参数</code>name<code>和</code>age<code>外，还接受关键字参数</code>kw<code>。在调用该函数时，可以只传入必选参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Michael’</span>, <span class="number">30</span>)<br>name: Michael age: <span class="number">30</span> other: {}<br><code>&lt;/pre&gt;
+也可以传入任意个数的关键字参数：
+&lt;pre&gt;</code><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Bob’</span>, <span class="number">35</span>, city=<span class="string">‘Beijing’</span>)<br>name: Bob age: <span class="number">35</span> other: {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>}<br><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Adam’</span>, <span class="number">45</span>, gender=<span class="string">‘M’</span>, job=<span class="string">‘Engineer’</span>)<br>name: Adam age: <span class="number">45</span> other: {<span class="string">‘gender’</span>: <span class="string">‘M’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}<br><code>&lt;/pre&gt;
+关键字参数有什么用？它可以扩展函数的功能。比如，在</code>person<code>函数里，我们保证能接收到</code>name<code>和</code>age`这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
+<p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：<br><pre><code>&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;extra = {&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Engineer&#39;&lt;/span&gt;}
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;person(&lt;span class=&quot;string&quot;&gt;&#39;Jack&#39;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;, city=extra[&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;], job=extra[&lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;])
+name: Jack age: &lt;span class=&quot;number&quot;&gt;24&lt;/span&gt; other: {&lt;span class=&quot;string&quot;&gt;&#39;city&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;job&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;Engineer&#39;&lt;/span&gt;}</code></pre><br>当然，上面复杂的调用可以用简化的写法：<br><pre>`<span class="prompt">&gt;&gt;&gt; </span>extra = {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}<br><span class="prompt">&gt;&gt;&gt; </span>person(<span class="string">‘Jack’</span>, <span class="number">24</span>, **extra)<br>name: Jack age: <span class="number">24</span> other: {<span class="string">‘city’</span>: <span class="string">‘Beijing’</span>, <span class="string">‘job’</span>: <span class="string">‘Engineer’</span>}</pre></p>
+</div></li>
+</ol>
+<p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
+<p></p>
+<div class="x-wiki-content"><br><br>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。<br><br>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！<br><br>要注意定义可变参数和关键字参数的语法：<br><br><code>*args</code>是可变参数，args接收的是一个tuple；<br><br><code>**kw</code>是关键字参数，kw接收的是一个dict。<br><br>以及调用函数时如何传入可变参数和关键字参数的语法：<br><br>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；<br><br>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**{&#39;a&#39;: 1, &#39;b&#39;: 2})</code>。<br><br>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。<br><br>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。<br><br>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/" data-id="cjc05w0cd0051zl0r8pi4l42k" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-scrapy-e7-88-acgithub-e6-97-a5-e8-ae-b0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/31/scrapy-e7-88-acgithub-e6-97-a5-e8-ae-b0/" class="article-date">
+  <time datetime="2017-03-31T12:19:32.000Z" itemprop="datePublished">2017-03-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/scrapy-e7-88-acgithub-e6-97-a5-e8-ae-b0/">Scrapy爬GitHub 日记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
+<pre> download_delay = 1
+
+headers = {
+ 'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) 
+AppleWebKit/537.36 (KHTML, like Gecko) 
+Chrome/57.0.2987.133 Safari/537.36"
+ }</pre>
+
+<hr>
+<hr>
+<p>scrapy的输出有时候太多了，挡住了视线。</p>
+<p>可以在setting中设置LOG_LEVEL</p>
+<hr>
+<hr>
+<p>突然发现，原来GitHub的API有访问限制。</p>
+<p><pre>403 reponse<br>{“message”:”API rate limit exceeded for 58.248.16.36.<br>(But here’s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)”,<br>“documentation_url”:”<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a>“<br>}</pre></p>
+<p><br>详情：<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a></p>
+<h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><p><pre>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that <a href="https://developer.github.com/v3/search/#rate-limit" target="_blank" rel="noopener">the Search API has custom rate limit rules</a>.</pre><br>认证的可以一个小时5000 requests。非认证的一个小时60 requests，差远了。。。</p>
+<hr>
+<hr>
+<h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
+<p>pyCharm是一个强大的pythonIDE</p>
+<p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
+<pre><code>&lt;span class=&quot;hljs-meta&quot;&gt;#!/usr/bin/python&lt;/span&gt;
+
+&lt;span class=&quot;hljs-title&quot;&gt;from&lt;/span&gt; scrapy.cmdline &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; execute
+&lt;span class=&quot;hljs-title&quot;&gt;execute&lt;/span&gt;()`&lt;/pre&gt;
+所以当运行scrapy crawler spider时，其实与指令：
+&lt;pre class=&quot;brush:python;toolbar: true; auto-links: false; hljs groovy&quot;&gt;`  python &lt;span class=&quot;hljs-regexp&quot;&gt;/Library/&lt;/span&gt;Python&lt;span class=&quot;hljs-regexp&quot;&gt;/2.7/&lt;/span&gt;site-packages&lt;span class=&quot;hljs-regexp&quot;&gt;/scrapy/&lt;/span&gt;cmdline.py crawl spider
+</code></pre><p>的效果是一样的</p>
+<p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
+<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
+<p>Name可以随便填</p>
+<p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
+<hr>
+<hr>
+<h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
+<p><pre><span class="k">class</span> <span class="nc">MySpider</span><span class="p">(</span><span class="n">CrawlSpider</span><span class="p">):</span><br>    <span class="n">handle_httpstatus_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">403</span><span class="p">]</span></pre><br>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br><a href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes" target="_blank" rel="noopener">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a><br>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
+<hr>
+<hr>
+<h2 id="split-函数和GitHub-API中的API调用限制"><a href="#split-函数和GitHub-API中的API调用限制" class="headerlink" title="split()函数和GitHub API中的API调用限制"></a>split()函数和GitHub API中的API调用限制</h2><p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
+<p>不是单单查看client_id和client_secret决定的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/31/scrapy-e7-88-acgithub-e6-97-a5-e8-ae-b0/" data-id="cjc05w0cm005czl0ryjtk59ii" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-scrapy-e7-ae-80-e5-8d-95-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/31/scrapy-e7-ae-80-e5-8d-95-e6-96-b9-e6-b3-95/" class="article-date">
+  <time datetime="2017-03-31T05:21:13.000Z" itemprop="datePublished">2017-03-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/scrapy-e7-ae-80-e5-8d-95-e6-96-b9-e6-b3-95/">Scrapy简单方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网络爬虫，是在网上进行数据抓取的程序，使用它能够抓取特定网页的HTML数据。虽然我们利用一些库开发一个爬虫程序，但是使用框架可以大大提高效率，缩短开发时间。Scrapy是一个使用<a href="http://lib.csdn.net/base/python" title="Python知识库" target="_blank" rel="noopener">Python</a>编写的，轻量级的，简单轻巧，并且使用起来非常的方便。使用Scrapy可以很方便的完成网上数据的采集工作，它为我们完成了大量的工作，而不需要自己费大力气去开发。</p>
+<p>首先先要回答一个问题。<br>问：把网站装进爬虫里，总共分几步？<br>答案很简单，四步：<br>新建项目 (Project)：新建一个新的爬虫项目<br>明确目标（Items）：明确你想要抓取的目标<br>制作爬虫（Spider）：制作爬虫开始爬取网页<br>存储内容（Pipeline）：设计管道存储爬取内容</p>
+<p>好的，基本流程既然确定了，那接下来就一步一步的完成就可以了。</p>
+<p><strong>1.新建项目（Project）</strong><br>在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code37356" class="codebody"><br>scrapy startproject tutorial</div><br>其中，tutorial为项目名称。<br>可以看到将会创建一个tutorial文件夹，目录结构如下：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code29070" class="codebody"><br>tutorial/<br>scrapy.cfg<br>tutorial/<br><strong>init</strong>.py<br>items.py<br>pipelines.py<br>settings.py<br>spiders/<br><strong>init</strong>.py<br>…</div><br>下面来简单介绍一下各个文件的作用：<br>scrapy.cfg：项目的配置文件<br>tutorial/：项目的Python模块，将会从这里引用代码<br>tutorial/items.py：项目的items文件<br>tutorial/pipelines.py：项目的pipelines文件<br>tutorial/settings.py：项目的设置文件<br>tutorial/spiders/：存储爬虫的目录</p>
+<p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
+<p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code7043" class="codebody"></div></p>
+<h1 id="Define-here-the-models-for-your-scraped-items"><a href="#Define-here-the-models-for-your-scraped-items" class="headerlink" title="Define here the models for your scraped items"></a>Define here the models for your scraped items</h1><p>#</p>
+<h1 id="See-documentation-in"><a href="#See-documentation-in" class="headerlink" title="See documentation in:"></a>See documentation in:</h1><h1 id="http-doc-scrapy-org-en-latest-topics-items-html"><a href="#http-doc-scrapy-org-en-latest-topics-items-html" class="headerlink" title="http://doc.scrapy.org/en/latest/topics/items.html"></a><a href="http://doc.scrapy.org/en/latest/topics/items.html" target="_blank" rel="noopener">http://doc.scrapy.org/en/latest/topics/items.html</a></h1><p>from scrapy.item import Item, Field</p>
+<p>class TutorialItem(Item):</p>
+<h1 id="define-the-fields-for-your-item-here-like"><a href="#define-the-fields-for-your-item-here-like" class="headerlink" title="define the fields for your item here like:"></a>define the fields for your item here like:</h1><h1 id="name-Field"><a href="#name-Field" class="headerlink" title="name = Field()"></a>name = Field()</h1><p>pass</p>
+<p>class DmozItem(Item):<br>title = Field()<br>link = Field()<br>desc = Field()<br>刚开始看起来可能会有些看不懂，但是定义这些item能让你用其他组件的时候知道你的 items到底是什么。<br>可以把Item简单的理解成封装好的类对象。</p>
+<p><strong>3.制作爬虫（Spider）</strong></p>
+<p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br><strong>3.1爬
+</strong>Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
+<p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
+<p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code46564" class="codebody"><br>from scrapy.spider import Spider</div></p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>filename = response.url.split(“/“)[-2]<br>open(filename, ‘wb’).write(response.body)<br>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code28002" class="codebody"><br>scrapy crawl dmoz</div><br>运行结果如图：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg" alt=""></p>
+<p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code10248" class="codebody"><br>import sys<br>sys.setdefaultencoding(‘gb2312’)</div><br>再次运行，OK，问题解决了，看一下结果：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119434W5-1.jpg" alt=""></p>
+<p>最后一句INFO: Closing spider (finished)表明爬虫已经成功运行并且自行关闭了。<br>包含 [dmoz]的行 ，那对应着我们的爬虫运行的结果。<br>可以看到start_urls中定义的每个URL都有日志行。<br>还记得我们的start_urls吗？<br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books</a><br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources</a><br>因为这些URL是起始页面，所以他们没有引用(referrers)，所以在它们的每行末尾你会看到 (referer: &lt;None&gt;)。<br>在parse 方法的作用下，两个文件被创建：分别是 Books 和 Resources，这两个文件中有URL的页面内容。</p>
+<p>那么在刚刚的电闪雷鸣之中到底发生了什么呢？<br>首先，Scrapy为爬虫的 start_urls属性中的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数。<br>然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。</p>
+<p><strong>3.2取</strong><br>爬取整个网页完毕，接下来的就是的取过程了。<br>光存储一整个网页还是不够用的。<br>在基础的爬虫里，这一步可以用正则表达式来抓。<br>在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。<br>如果你想了解更多selectors和其他机制你可以查阅资料：点我点我</p>
+<p>这是一些XPath表达式的例子和他们的含义<br>/html/head/title: 选择HTML文档&lt;head&gt;元素下面的&lt;title&gt; 标签。<br>/html/head/title/text(): 选择前面提到的&lt;title&gt; 元素下面的文本内容<br>//td: 选择所有 &lt;td&gt; 元素<br>//div[@class=”mine”]: 选择所有包含 class=”mine” 属性的div 标签元素<br>以上只是几个使用XPath的简单例子，但是实际上XPath非常强大。<br>可以参照W3C教程：点我点我。</p>
+<p>为了方便使用XPaths，Scrapy提供XPathSelector 类，有两种可以选择，HtmlXPathSelector(HTML数据解析)和XmlXPathSelector(XML数据解析)。<br>必须通过一个 Response 对象对他们进行实例化操作。<br>你会发现Selector对象展示了文档的节点结构。因此，第一个实例化的selector必与根节点或者是整个目录有关 。<br>在Scrapy里面，Selectors 有四种基础的方法（点击查看API文档）：<br>xpath()：返回一系列的selectors，每一个select表示一个xpath参数表达式选择的节点<br>css()：返回一系列的selectors，每一个select表示一个css参数表达式选择的节点<br>extract()：返回一个unicode字符串，为选中的数据<br>re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</p>
+<p>3.3xpath实验<br>下面我们在Shell里面尝试一下Selector的用法。<br>实验的网址：<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></p>
+<p>熟悉完了实验的小白鼠，接下来就是用Shell爬取网页了。<br>进入到项目的顶层目录，也就是第一层tutorial文件夹下，在cmd中输入：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code36951" class="codebody"><br>scrapy shell <a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></div><br>回车后可以看到如下的内容：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/21194340K-3.jpg" alt=""></p>
+<p>在Shell载入后，你将获得response回应，存储在本地变量 response中。<br>所以如果你输入response.body，你将会看到response的body部分，也就是抓取到的页面内容：</p>
+<p>或者输入response.headers 来查看它的 header部分：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943GH-5.jpg" alt=""></p>
+<p>现在就像是一大堆沙子握在手里，里面藏着我们想要的金子，所以下一步，就是用筛子摇两下，把杂质出去，选出关键的内容。<br>selector就是这样一个筛子。<br>在旧的版本中，Shell实例化两种selectors，一个是解析HTML的 hxs 变量，一个是解析XML 的 xxs 变量。<br>而现在的Shell为我们准备好的selector对象，sel，可以根据返回的数据类型自动选择最佳的解析方案(XML or HTML)。<br>然后我们来捣弄一下！~<br>要彻底搞清楚这个问题，首先先要知道，抓到的页面到底是个什么样子。<br>比如，我们要抓取网页的标题，也就是&lt;title&gt;这个标签：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432L4-6.png" alt=""></p>
+<p>可以输入：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code56841" class="codebody"><br>sel.xpath(‘//title’)</div><br>结果就是：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119435a0-7.png" alt=""></p>
+<p>这样就能把这个标签取出来了，用extract()和text()还可以进一步做处理。<br>备注：简单的罗列一下有用的xpath路径表达式：<br>表达式 描述<br>nodename 选取此节点的所有子节点。<br>/ 从根节点选取。<br>// 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。<br>. 选取当前节点。<br>.. 选取当前节点的父节点。<br>@ 选取属性。<br>全部的实验结果如下，In[i]表示第i次实验的输入，Out[i]表示第i次结果的输出（建议大家参照：W3C教程）：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code23729" class="codebody"><br>In [1]: sel.xpath(‘//title’)<br>Out[1]: [&lt;Selector xpath=’//title’ data=u’&lt;title&gt;Open Directory - Computers: Progr’&gt;]</div></p>
+<p>In [2]: sel.xpath(‘//title’).extract()<br>Out[2]: [u’&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;/title&gt;’]</p>
+<p>In [3]: sel.xpath(‘//title/text()’)<br>Out[3]: [&lt;Selector xpath=’//title/text()’ data=u’Open Directory - Computers: Programming:’&gt;]</p>
+<p>In [4]: sel.xpath(‘//title/text()’).extract()<br>Out[4]: [u’Open Directory - Computers: Programming: Languages: Python: Books’]</p>
+<p>In [5]: sel.xpath(‘//title/text()’).re(‘(\w+):’)<br>Out[5]: [u’Computers’, u’Programming’, u’Languages’, u’Python’]<br>当然title这个标签对我们来说没有太多的价值，下面我们就来真正抓取一些有意义的东西。<br>使用火狐的审查元素我们可以清楚地看到，我们需要的东西如下：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432254-8.png" alt=""></p>
+<p>我们可以用如下代码来抓取这个&lt;li&gt;标签：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code23065" class="codebody"><br>sel.xpath(‘//ul/li’)</div><br>从&lt;li&gt;标签中，可以这样获取网站的描述：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code98498" class="codebody"><br>sel.xpath(‘//ul/li/text()’).extract()</div><br>可以这样获取网站的标题：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code72200" class="codebody"><br>sel.xpath(‘//ul/li/a/text()’).extract()</div><br>可以这样获取网站的超链接：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code24538" class="codebody"><br>sel.xpath(<a>‘//ul/li/a/@href’).extract</a>()</div><br>当然，前面的这些例子是直接获取属性的方法。<br>我们注意到xpath返回了一个对象列表，<br>那么我们也可以直接调用这个列表中对象的属性挖掘更深的节点<br>（参考：Nesting selectors andWorking with relative XPaths in the Selectors）：<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title, link, desc</p>
+<p>3.4xpath实战<br>我们用shell做了这么久的实战，最后我们可以把前面学习到的内容应用到dmoz_spider这个爬虫中。<br>在原爬虫的parse函数中做如下修改：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code67523" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>注意，我们从scrapy.selector中导入了Selector类，并且实例化了一个新的Selector对象。这样我们就可以像Shell中一样操作xpath了。<br>我们来试着输入一下命令运行爬虫（在tutorial根目录里面）：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code91685" class="codebody"><br>scrapy crawl dmoz</div><br>运行结果如下：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119431b3-9.jpg" alt=""></p>
+<p>果然，成功的抓到了所有的标题。但是好像不太对啊，怎么Top，Python这种导航栏也抓取出来了呢？<br>我们只需要红圈中的内容：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943H08-10.jpg" alt=""></p>
+<p>看来是我们的xpath语句有点问题，没有仅仅把我们需要的项目名称抓取出来，也抓了一些无辜的但是xpath语法相同的元素。<br>审查元素我们发现我们需要的&lt;ul&gt;具有class=’directory-url’的属性，<br>那么只要把xpath语句改成sel.xpath(‘//ul[@class=”directory-url”]/li’)即可<br>将xpath语句做如下调整：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code19197" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>成功抓出了所有的标题，绝对没有滥杀无辜：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943C96-11.jpg" alt=""></p>
+<p>3.5使用Item<br>接下来我们来看一看如何使用Item。<br>前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code83545" class="codebody"><br>&gt;&gt;&gt; item = DmozItem()<br>&gt;&gt;&gt; item[‘title’] = ‘Example title’<br>&gt;&gt;&gt; item[‘title’]<br>‘Example title’</div><br>作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code17061" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
+<p>from tutorial.items import DmozItem</p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)<br>items = []<br>for site in sites:<br>item = DmozItem()<br>item[‘title’] = site.xpath(‘a/text()’).extract()<br>item[‘link’] = site.xpath(<a>‘a/@href’).extract</a>()<br>item[‘desc’] = site.xpath(‘text()’).extract()<br>items.append(item)<br>return items<br>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code89953" class="codebody"><br>scrapy crawl dmoz -o items.json -t json</div><br>-o 后面是导出文件名，-t 后面是导出类型。<br>然后来看一下导出的结果，用文本编辑器打开json文件即可（为了方便显示，在item中删去了除了title之外的属性）：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg" alt=""></p>
+<p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>这个我们以后再慢慢玩^_^</p>
+<p>以上便是python爬虫框架Scrapy制作爬虫抓取网站内容的全部过程了，非常的详尽吧，希望能够对大家有所帮助，有需要的话也可以和我联系，一起进步</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/31/scrapy-e7-ae-80-e5-8d-95-e6-96-b9-e6-b3-95/" data-id="cjc05w0db005gzl0rsh60psss" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sip-e6-9c-ba-e5-88-b6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/sip-e6-9c-ba-e5-88-b6/" class="article-date">
+  <time datetime="2017-03-30T07:42:44.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/30/sip-e6-9c-ba-e5-88-b6/">SIP机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为最新的OSX有SIP机制，安装的时候命令加上user<br>pip install –user 命令<br>即可！</p>
+<p><div id="article_content" class="article_content"></div></p>
+<div class="markdown_views">
+
+<h3 id="关闭SIP"><a href="#关闭SIP" class="headerlink" title="关闭SIP"></a>关闭SIP</h3><ul>
+<li>重启电脑，按住Command+R(直到出现苹果标志)进入Recovery Mode(恢复模式)</li>
+<li>左上角菜单里找到实用工具 -&gt; 终端</li>
+<li>输入<code>$ csrutil disable</code>回车</li>
+<li>重启Mac即可</li>
+<li><p>如果想重新启动SIP机制重复上述步骤改用<code>$ csrutil enable</code>即可<br>查看SIP状态：</p>
+<p><span class="hljs-variable">$ </span>csrutil status</p>
+</li>
+<li><p>1</p>
+</li>
+<li><p>1<br><code>System Integrity Protection status: enabled.</code></p>
+</li>
+</ul>
+<p></p></div><br><p></p>
+<p><div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1490859913277"></div></p>
+<p><div id="digg"></div><br>&nbsp;</p>
+<h2 id="二、初识SIP"><a href="#二、初识SIP" class="headerlink" title="二、初识SIP"></a>二、初识SIP</h2><p>刚升级完系统之后，我在进行一个操作的时候，遇到了一些问题，主要就是提示系统权限不足，但当我提升到sudo以后，还是提示：Operation not permitted，当时我就挺郁闷，啥情况，我sudo失败了？后面google了一下，才发现，原来OSX EI Capitan中增加了一个SIP功能，不管你是不是su，都会阻止你在系统目录下进行操作……</p>
+<p><strong>当时唯一的想法就是，这个东西能关不？怎么关？还是Google……找到了如下的方法：</strong></p>
+<blockquote>
+<p>(1)重启OSX系统，然后按住Command+R</p>
+<p>(2)出现界面之后，选择Utilities menu中Terminal</p>
+<p>(3)在Terminal中输入csrutil disable关闭SIP(csrutil enable打开SIP)</p>
+<p>(4)重启reboot OSX<br>这个方法在我之前介绍《OSX内核调试技术分享》这篇文章中也提到过（<a href="http://www.freebuf.com/articles/system/90049.html" target="_blank" rel="noopener">链接</a>），其实网上关闭SIP也都是这个，千篇一律吧（网上的文章一大抄，呵呵），如果大家对OSX安全不感兴趣，只想解结这个问题，那到这里就可以了，但作为一个安全研究员，对各种安全系统研究是我们的兴趣和职责所在，如果你对SIP感兴趣，可以继续望下看！</p>
+</blockquote>
+<h2 id="三、SIP工作原理"><a href="#三、SIP工作原理" class="headerlink" title="三、SIP工作原理"></a>三、SIP工作原理</h2><p>SIP全名System Integrity Protection（系统完整性保护），它是为了保护系统进程，文件，文档不被其它进程修改，不管是否为root user，SIP技术主要分为文件系统保护，运行时保护，内核扩展签名,文件系统保护主要是通过沙盒机制限制root权限，运行时保护，主要就是保护关键进程无法被进程代码注入，挂调试器以及内核调试等，内核扩展签名，所有的第三方kext必须被安装到/Library/Extensions，并强制使用签名。</p>
+<p>Apple提供的官方文档中，我们可以找到OSX SIP的工作原理（<a href="http://devstreaming.apple.com/videos/wwdc/2015/706nu20qkag/706/706_security_and_your_apps.pdf" target="_blank" rel="noopener">下载地址</a>）。文档中说明了苹果的新OSX系统，采用了如下的OSX Security Model：</p>
+<p><a href="http://image.3001.net/images/20160229/14567401573597.png" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567401573597.png!small" alt="sip1.png"></a></p>
+<p>这种安全模式削减了之前root权限，同时通过沙箱默认保护系统，提供不能被根自动入侵的配置机制，我们可以通过命令行工具，查看被保护的目录，如图：</p>
+<p><a href="http://image.3001.net/images/20160229/14567401708438.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567401708438.jpg!small" alt="sip2.jpg"></a></p>
+<p>从图中可以看出标志有restricted的为系统限制目录，这些目录是在系统启动的时候，通过OSX新的安全模型被定义的，之后不管用户是否使用root权限都无法对这些目录进行操作，查看目录中的文件信息，也可以看到文件同样被标记为restricted，如下图：</p>
+<p><a href="http://image.3001.net/images/20160229/14567402442881.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567402442881.jpg!small" alt="sip2.5.jpg"></a></p>
+<p>SIP同时也保护驱动程序，我们之前使用第三方驱动的时候，可以通过kext-dev-mode=1来加载第三方驱动程序，SIP强制要求我们把第三方驱动程序放到/Library/Extensions目录下，并且停用了kext-dev-modeboot-arg这个启动项，我们可以查看这个目录下的kext，发现没有restricted，但是系统目录下的kext是被restricted的，具体有哪些目录和文件或驱动被保护，从/System/Library/Sandbox目录中，我们可以看到rootless.conf，这是rootless的配置文件，主要用于说明哪些目录，程序，以及符号链接被保护，如下图所示：</p>
+<p><a href="http://image.3001.net/images/20160229/14567402045169.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567402045169.jpg!small" alt="sip3.jpg"></a></p>
+<p>这个文件说明了OSX系统中被SIP保护的整体配置信息，其实SIP机制就是苹果通过分层的安全机制，在底层设置一个rootless配置文件，然后在系统中，对配置文件中的信息增加一个限制标志项，这种标志信息不可复制，系统默认配置的，存在这个标志的信息，苹果统一通过底层沙箱进行保护，不用去额外权限大小，这样也削减了root在OSX中的权限大小</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/30/sip-e6-9c-ba-e5-88-b6/" data-id="cjc05w0de005kzl0rbukef2xv" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rpm-e5-92-8cyum-e8-af-a6-e8-a7-a3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/rpm-e5-92-8cyum-e8-af-a6-e8-a7-a3/" class="article-date">
+  <time datetime="2017-03-30T06:19:59.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/30/rpm-e5-92-8cyum-e8-af-a6-e8-a7-a3/">rpm和yum详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux中软件的安装"><a href="#Linux中软件的安装" class="headerlink" title="Linux中软件的安装"></a><strong>Linux中软件的安装</strong></h2><p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
+<p>不论是通过那种途径安装软件都具有一下4个特点：</p>
+<p>1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征</p>
+<p>2.都具有二进制的程序主体</p>
+<p>3.都自带库文件，供程序主体进行调用</p>
+<p>4.都带有帮助文件，对程序的使用方法进行说明</p>
+<p>软件的安装路径：</p>
+<p>除了自行下载源码编译安装的软件可以自定义安装路径之外，rpm包的安装都是按照自身预设的安装路径进行安装。主要有以下几类：</p>
+<p>1./：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
+<p>2./usr：此目录下一般情况下是提供基本服务的软件</p>
+<p>3./usr/local：此目录下一般情况下是用户自行安装的第三方软件</p>
+<p>系统相关：</p>
+<p>配置文件路径：/etc</p>
+<p>二进制文件路径：/bin 、/sbin</p>
+<p>库文件路径：/lib</p>
+<p>系统提供功能服务相关</p>
+<p>配置文件路径：/etc</p>
+<p>二进制文件路径：/usr/bin   /usr/sbin</p>
+<p>库文件：/usr/lib</p>
+<p>第三方软件：</p>
+<p>配置文件路径/usr/local/etc</p>
+<p>二进制文件路径：/usr/local/bin  /usr/local/sbin</p>
+<p>库文件：/usr/local/lib</p>
+<p>说明文件主要都存放在/usr/share/man和/usr/local/share/man</p>
+<p>RPM(RedhatPackage Manager)是由redhat公司提供的软件包管理器 ,可以实现软件包的安装、查询、卸载、升级以及校验等但是rpm不能很好的解决软件之间的依赖关系</p>
+<p>&nbsp;</p>
+<hr>
+<hr>
+<h2 id="使用yum软件升级器进行安装"><a href="#使用yum软件升级器进行安装" class="headerlink" title="使用yum软件升级器进行安装"></a><strong>使用yum软件升级器进行安装</strong></h2><p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp://   http:// file:///在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
+<p>yum库文件的配置:</p>
+<p>通过/etc/yum.conf 和 /etc/yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
+<p>yum的配置文件 /etc/yum.conf</p>
+<p>yumrepository仓库的配置文件/etc/yum.repos.d/*.repo</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/30/rpm-e5-92-8cyum-e8-af-a6-e8-a7-a3/" data-id="cjc05w0cl005azl0rwktow3lx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

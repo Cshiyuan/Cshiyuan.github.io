@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python3 学习笔记 （2） | SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="尾递归优化解决递归调用栈溢出解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习笔记 （2）">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:description" content="尾递归优化解决递归调用栈溢出解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
+<meta property="og:updated_time" content="2018-01-04T07:19:37.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习笔记 （2）">
+<meta name="twitter:description" content="尾递归优化解决递归调用栈溢出解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/" class="article-date">
+  <time datetime="2017-04-01T15:25:04.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python3 学习笔记 （2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="尾递归优化解决递归调用栈溢出"><a href="#尾递归优化解决递归调用栈溢出" class="headerlink" title="尾递归优化解决递归调用栈溢出"></a><strong>尾递归</strong>优化解决递归调用栈溢出</h2><p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
+<p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
+<pre><code>&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(n)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fact_iter(n, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fact_iter&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(num, product)&lt;/span&gt;:&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; num == &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; product
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fact_iter(num - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, num * product)
+`&lt;/pre&gt;
+可以看到，`return fact_iter(num - 1, num * product)`仅返回递归函数本身，`num - 1`和`num * product`在函数调用前就会被计算，不影响函数调用。
+
+`fact(5)`对应的`fact_iter(5, 1)`的调用如下：
+&lt;pre&gt;`===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;60&lt;/span&gt;)
+===&amp;gt; fact_iter(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;120&lt;/span&gt;)
+===&amp;gt; &lt;span class=&quot;number&quot;&gt;120&lt;/span&gt;
+`&lt;/pre&gt;
+尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。
+
+遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的`fact(n)`函数改成尾递归方式，也会导致栈溢出。
+
+使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。
+
+针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。
+
+Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。
+
+* * *
+
+* * *
+
+## 切片
+
+取前3个元素，应该怎么做？
+
+笨办法：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;attr_selector&quot;&gt;[L[0]&lt;/span&gt;, &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[1]&lt;/span&gt;, &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[2]&lt;/span&gt;]
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+之所以是笨办法是因为扩展一下，取前N个元素就没辙了。
+
+取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;r = []
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;n = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(n):
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    r.append(L[i])
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;r
+[&lt;span class=&quot;string&quot;&gt;&apos;Michael&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Sarah&apos;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&apos;Tracy&apos;&lt;/span&gt;]
+`&lt;/pre&gt;
+对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。
+
+对应上面的问题，取前3个元素，用一行代码就可以完成切片：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[0:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+`L[0:3]`表示，从索引`0`开始取，直到索引`3`为止，但不包括索引`3`。即索引`0`，`1`，`2`，正好是3个元素。
+
+如果第一个索引是`0`，还可以省略：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+也可以从索引1开始，取出2个元素出来：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[1:3]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Sarah&apos;, &apos;Tracy&apos;]&lt;/span&gt;
+`&lt;/pre&gt;
+类似的，既然Python支持`L[-1]`取倒数第一个元素，那么它同样支持倒数切片，试试：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[-2:]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Bob&apos;, &apos;Jack&apos;]&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;attr_selector&quot;&gt;[-2:-1]&lt;/span&gt;
+&lt;span class=&quot;attr_selector&quot;&gt;[&apos;Bob&apos;]&lt;/span&gt;`&lt;/pre&gt;
+
+* * *
+
+* * *
+
+&lt;div class=&quot;uk-container x-container&quot;&gt;
+
+##  函数式编程
+
+函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。
+
+而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。
+
+我们首先要搞明白计算机（Computer）和计算（Compute）的概念。
+
+在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。
+
+而计算则指数学意义上的计算，越是抽象的计算，离计算机硬件越远。
+
+对应到编程语言，就是越低级的语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。
+
+函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出，因此，这种函数是有副作用的。
+
+函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！
+
+Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
+
+&lt;/div&gt;
+
+* * *
+
+* * *
+
+## 函数名也是变量
+
+### 变量可以指向函数
+
+以Python内置的求绝对值的函数`abs()`为例，调用该函数用以下代码：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;abs(-&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)
+&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;
+`&lt;/pre&gt;
+但是，如果只写`abs`呢？
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; abs
+&amp;lt;built-&lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;abs&lt;/span&gt;&amp;gt;
+&lt;/span&gt;`&lt;/pre&gt;
+可见，`abs(-10)`是函数调用，而`abs`是函数本身。
+
+* * *
+
+* * *
+
+## map/reduce
+
+我们先看map。`map()`函数接收两个参数，一个是函数，一个是`Iterable`，`map`将传入的函数依次作用到序列的每个元素，并把结果作为新的`Iterator`返回。
+
+举例说明，比如我们有一个函数f(x)=x&lt;sup&gt;2&lt;/sup&gt;，要把这个函数作用在一个list `[1, 2, 3, 4, 5, 6, 7, 8, 9]`上，就可以用`map()`实现如下：
+
+&amp;nbsp;
+
+`reduce`把一个函数作用在一个序列`[x1, x2, x3, ...]`上，这个函数必须接收两个参数，`reduce`把结果继续和序列的下一个元素做累积计算，其效果就是：
+&lt;pre&gt;`reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+`&lt;/pre&gt;
+比方说对一个序列求和，就可以用`reduce`实现：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; functools &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; reduce
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt;:&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x + y
+...
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;reduce(add, [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;])
+&lt;span class=&quot;number&quot;&gt;25&lt;/span&gt;
+`&lt;/pre&gt;
+当然求和运算可以直接用Python内建函数`sum()`，没必要动用`reduce`。
+
+但是如果要把序列`[1, 3, 5, 7, 9]`变换成整数`13579`，`reduce`就可以派上用场：
+&lt;pre&gt;`&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; functools &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; reduce
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x, y)&lt;/span&gt;:&lt;/span&gt;
+&lt;span class=&quot;prompt&quot;&gt;... &lt;/span&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x * &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; + y
+...
+&lt;span class=&quot;prompt&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;reduce(fn, [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;])
+&lt;span class=&quot;number&quot;&gt;13579&lt;/span&gt;
+`&lt;/pre&gt;
+这个例子本身没多大用处，但是，如果考虑到字符串`str`也是一个序列，对上面的例子稍加改动，配合`map()`，我们就可以写出把`str`转换为`int`的函数：
+
+* * *
+
+* * *
+
+## 列表生成式
+
+列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。
+
+举个例子，要生成list `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`可以用`range(1, 11)`：
+&lt;pre&gt;`&amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;tag&quot;&gt;range&lt;/span&gt;(1, 11)
+&lt;span class=&quot;attr_selector&quot;&gt;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&lt;/span&gt;
+</code></pre><hr>
+<hr>
+<pre></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/01/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-882-ef-bc-89/" data-id="cjc05w0ck0058zl0ruv0x9n9t" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/04/python3-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-ef-bc-883-ef-bc-89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Python3 学习笔记 （3）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/01/python-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Python3 学习笔记 （1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

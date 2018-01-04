@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>查缺补漏  2017.04.11 | SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++与多态性与虚函数多态与非多态的实质区别就是函数地址是早绑定还是晚绑定。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查缺补漏  2017.04.11">
+<meta property="og:url" content="http://yoursite.com/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:description" content="C++与多态性与虚函数多态与非多态的实质区别就是函数地址是早绑定还是晚绑定。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不">
+<meta property="og:updated_time" content="2018-01-04T07:19:37.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="查缺补漏  2017.04.11">
+<meta name="twitter:description" content="C++与多态性与虚函数多态与非多态的实质区别就是函数地址是早绑定还是晚绑定。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/" class="article-date">
+  <time datetime="2017-04-11T13:16:35.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      查缺补漏  2017.04.11
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="C-与多态性与虚函数"><a href="#C-与多态性与虚函数" class="headerlink" title="C++与多态性与虚函数"></a>C++与多态性与虚函数</h2><p>多态与非多态的实质区别就是函数地址是<strong>早绑定</strong>还是<strong>晚绑定</strong>。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。<br>那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不论传递过来的究竟是那个类的对象，函数都能够通过同一个接口调用到适应各自对象的实现方法。</p>
+<p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
+<p>（C++中基类指针只有调用虚函数才会体现出多态性，不然基类指针会被限制）</p>
+<hr>
+<hr>
+<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><pre><code>&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;const int %lx&quot;&lt;/span&gt;, &amp;amp;constA);         &lt;span class=&quot;hljs-comment&quot;&gt;// const int 7fff5fbff6ec&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;a);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e8 &lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;b);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e4&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;int %lx&quot;&lt;/span&gt;, &amp;amp;c);                    &lt;span class=&quot;hljs-comment&quot;&gt;// int 7fff5fbff6e0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staA);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002330&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staB);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002334&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static int %lx&quot;&lt;/span&gt;, &amp;amp;staC);          &lt;span class=&quot;hljs-comment&quot;&gt;// static int 100002338&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array1);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6d8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array2);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6d0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;array3);          &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray* 7fff5fbff6c8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6b8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str1);           &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6b0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString* %lx&quot;&lt;/span&gt;, &amp;amp;str2);           &lt;span class=&quot;hljs-comment&quot;&gt;// NSString* 7fff5fbff6a8&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;stArrayA); &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray* 100002340&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray* %lx&quot;&lt;/span&gt;, &amp;amp;stArrayB); &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray* 100002348&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array1);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002032a0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array2);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002013f0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSArray %lx&quot;&lt;/span&gt;, array3);            &lt;span class=&quot;hljs-comment&quot;&gt;// NSArray 1002035c0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str);              &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 100002080&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str1);             &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 100002080&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;NSString %lx&quot;&lt;/span&gt;, str2);             &lt;span class=&quot;hljs-comment&quot;&gt;// NSString 1000020a0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray %lx&quot;&lt;/span&gt;, stArrayA);   &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray 1002035f0&lt;/span&gt;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;hljs-string&quot;&gt;&quot;static NSArray %lx&quot;&lt;/span&gt;, stArrayB);   &lt;span class=&quot;hljs-comment&quot;&gt;// static NSArray 1002013d0&lt;/span&gt;
+</code></pre><p>分析一下打印结果，可以得出：</p>
+<ol>
+<li>局部的常量和变量（包括指针）存于高地址，连续声明的变量地址会紧挨在一起，地址从高地址向低地址扩展。这一部分就是<strong>栈</strong>。</li>
+<li>对象存储于低地址，而且连续声明的对象地址不连续。这一部分就是<strong>堆</strong>，其实堆内存是由类似链表的结构串起来的，每一个空闲内存块地址并不一定连续，所以会出现这样的现象。</li>
+<li>静态的变量会存储于低地址，比堆空间地址还低，静态的对象只有指针存储在静态区，分配给对象的空间在堆中。</li>
+<li>表示字符串的类<code>NSString</code>的对象存储在比静态区地址还要低一些的地址中，变量<code>str</code>与<code>str1</code>的值相同，所以共享字符串地址。</li>
+</ol>
+<hr>
+<hr>
+<h2 id="栈区、堆区、文字常量区、静态-全局区和代码区"><a href="#栈区、堆区、文字常量区、静态-全局区和代码区" class="headerlink" title="栈区、堆区、文字常量区、静态/全局区和代码区"></a>栈区、堆区、文字常量区、静态/全局区和代码区</h2><p><strong>栈区</strong>：一般存储局部变量和常量，包括函数的参数，由编译器分配和释放。存取速度较快，但存储的数据一般生命周期较短。</p>
+<p><strong>堆区</strong>：一般存储对象，由程序员分配和释放，如果程序员不释放，则由操作系统释放。当然，如果使用的高级语言有垃圾回收机制，则大多数情况下程序员也不用担心内存空间的释放问题了。</p>
+<p><strong>文字常量区</strong>：存放字符串。为了节省内存空间，编译器一般会将字符串常量存储在文字常量区，在给字符串变量赋值时先在文字常量区寻找，如果有相同字符串，则共享该字符串地址，如果没有，则在常量区中添加该字符串，并将地址传给变量。</p>
+<p><strong>静态/全局区</strong>：存放静态变量和全局变量，程序结束后由系统释放。</p>
+<p><strong>代码区</strong>：存放函数体的二进制代码。</p>
+<hr>
+<hr>
+<h2 id="对称加密与非对称加密算法"><a href="#对称加密与非对称加密算法" class="headerlink" title="对称加密与非对称加密算法"></a>对称加密与非对称加密算法</h2><h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称加密算法的特点是算法公开、计算量小、加密速度快、加密效率高。不足之处是，交易双方都使用同样钥匙，安全性得不到保证。此外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一钥匙，这会使得发收信双方所拥有的钥匙数量呈几何级数增长，密钥管理成为用户的负担。</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>优点：非对称加密与对称加密相比，其安全性更好：对称加密的通信双方使用相同的秘钥，如果一方的秘钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对秘钥，一个用来加密，一个用来解密，而且公钥是公开的，秘钥是自己保存的，不需要像对称加密那样在通信之前要先同步秘钥；<br>缺点：非对称加密的缺点是加密和解密花费时间长、速度慢，只适合对少量数据进行加密。</p>
+<hr>
+<hr>
+<h2 id="Objective-C中的浅拷贝和深拷贝"><a href="#Objective-C中的浅拷贝和深拷贝" class="headerlink" title="Objective-C中的浅拷贝和深拷贝"></a>Objective-C中的浅拷贝和深拷贝</h2><p>浅拷贝就是对内存地址的复制，让目标对象指针和源对象指向同一片内存空间。如：</p>
+<div><br><div id="highlighter_85863" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>char* str = (char*)malloc(100);</code></div><br><div class="line number2 index1 alt1"><code>char* str2 = str;</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。<br><br><strong>iOS 里面的浅拷贝：</strong><br><br>在 iOS 里面， 使用retain 关键字进行引用计数，就是一种更加保险的浅拷贝。他既让几个指针共用同一片内存空间，又可以在release 由于计数的存在，不会轻易的销毁内存，达到更加简单使用的目的。<br><br><strong>深拷贝：</strong><br><br>深拷贝是指拷贝对象的具体内容，而内存地址是自主分配的，拷贝结束之后，两个对象虽然存的值是相同的，但是内存地址不一样，两个对象也互不影响，互不干涉。<br><br>copy 与 retain 的区别：<br><br>copy 是创建一个新对象，retain 是创建一个指针，引用对象计数加一。 copy属性标识两个对象内容相同，新的对象retain count为1, 与旧有对象引用计数无关，旧有对象没有变化。copy减少对象对上下文的依赖。<br><br><strong>iOS里的深拷贝：</strong><br><br>iOS提供了copy和mutableCopy方法，顾名思义，copy就是复制了一个imutable的对象，而mutableCopy就是复制了一个mutable的对象。以下将举几个例子来说明。<br>这里指的是NSString, NSNumber等等一类的对象。<br><div><br><div id="highlighter_780358" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>NSString *string = @”dddd&quot;;</code></div><br><div class="line number2 index1 alt1"><code>NSString *stringCopy = [string copy];</code></div><br><div class="line number3 index2 alt2"><code>NSMutableString *stringDCopy = [string mutableCopy];</code></div><br><div class="line number4 index3 alt1"><code>[stringMCopy appendString:@``&quot;!!&quot;``];</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。<br><br><strong>拷贝构造：</strong><br><br>当然在 ios 中并不是所有的对象都支持copy，mutableCopy，遵守NSCopying协议的类可以发送copy消息，遵守NSMutableCopying协议的类才可以发送mutableCopy消息。<br><br>假如发送了一个没有遵守上诉两协议而发送copy或者 mutableCopy,那么就会发生异常。但是默认的ios类并没有遵守这两个协议。如果想自定义一下copy 那么就必须遵守NSCopying,并且实现 copyWithZone: 方法，如果想自定义一下mutableCopy 那么就必须遵守NSMutableCopying,并且实现 mutableCopyWithZone: 方法。<br><br>如果是我们定义的对象，那么我们自己要实现NSCopying , NSMutableCopying这样就能调用copy和mutablecopy了。举个例子：<br><div><br><div id="highlighter_746770" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div><br><div class="line number7 index6 alt2">7</div><br><div class="line number8 index7 alt1">8</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>@interface MyObj : NSObject&amp;lt;NSCopying, NSMutableCopying&amp;gt;{</code></div><br><div class="line number2 index1 alt1"><code>``NSMutableString *_name;</code></div><br><div class="line number3 index2 alt2"><code>``NSString * _imutableStr ;</code></div><br><div class="line number4 index3 alt1"><code>``int _age;</code></div><br><div class="line number5 index4 alt2"><code>}</code></div><br><div class="line number6 index5 alt1"><code>@property (nonatomic, retain) NSMutableString *name;</code></div><br><div class="line number7 index6 alt2"><code>@property (nonatomic, retain) NSString *imutableStr;</code></div><br><div class="line number8 index7 alt1"><code>@property (nonatomic) int age;</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>copy拷贝构造：<br><div><br><div id="highlighter_552732" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div><br><div class="line number7 index6 alt2">7</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>- (id)copyWithZone:(NSZone *)zone{</code></div><br><div class="line number2 index1 alt1"><code>``MyObj *copy = [[[self class] allocWithZone :zone] init];</code></div><br><div class="line number3 index2 alt2"><code>``copy-&amp;gt;name = [_name copy];</code></div><br><div class="line number4 index3 alt1"><code>``copy-&amp;gt;imutableStr = [_imutableStr copy];</code></div><br><div class="line number5 index4 alt2"><code>``copy-&amp;gt;age = age;</code></div><br><div class="line number6 index5 alt1"><code>``return</code> <code>copy;</code></div><br><div class="line number7 index6 alt2"><code>}</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br>mutableCopy拷贝构造：<br><div><br><div id="highlighter_212141" class="syntaxhighlighter  js"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br><div class="line number6 index5 alt1">6</div></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code>- (id)mutableCopyWithZone:(NSZone *)zone{</code></div><br><div class="line number2 index1 alt1"><code>``MyObj *copy = NSCopyObject(self, 0, zone);</code></div><br><div class="line number3 index2 alt2"><code>``copy-&amp;gt;name = [_name mutableCopy];</code></div><br><div class="line number4 index3 alt1"><code>``copy-&amp;gt;age = age;</code></div><br><div class="line number5 index4 alt2"><code>``return</code> <code>copy;</code></div><br><div class="line number6 index5 alt1"><code>}</code></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/11/e6-9f-a5-e7-bc-ba-e8-a1-a5-e6-bc-8f-2017-04-11/" data-id="cjc05w09q002qzl0rzqypf6y7" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/11/e5-85-b3-e4-ba-8eruntime-e7-9a-84-e4-b8-a4-e4-b8-aa-e7-94-a8-e5-a4-84-ef-bc-88-e8-bd-ac-e8-bd-bd-ef-bc-89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          关于Runtime的两个用处（转载）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/06/node-js-express-e6-a1-86-e6-9e-b6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">node.js express框架笔记（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

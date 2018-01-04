@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:url" content="http://yoursite.com/page/8/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-e7-90-86-e8-a7-a3restful-e6-9e-b6-e6-9e-84" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/e7-90-86-e8-a7-a3restful-e6-9e-b6-e6-9e-84/" class="article-date">
+  <time datetime="2016-08-27T06:33:01.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/e7-90-86-e8-a7-a3restful-e6-9e-b6-e6-9e-84/">理解RESTful架构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Representational State Transfer的缩写。我对这个词组的翻译是”表现层状态转化”。</p>
+<p>如果一个架构符合REST原则，就称它为RESTful架构。</p>
+<p><strong>要理解RESTful架构，最好的方法就是去理解Representational State Transfer这个词组到底是什么意思，它的每一个词代表了什么涵义。</strong>如果你把这个名称搞懂了，也就不难体会REST是一种什么样的设计。</p>
+<p><strong>三、资源（Resources）</strong></p>
+<p>REST的名称”表现层状态转化”中，省略了主语。”表现层”其实指的是”资源”（Resources）的”表现层”。</p>
+<p><strong>所谓”资源”，就是网络上的一个实体，或者说是网络上的一个具体信息。</strong>它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
+<p>所谓”上网”，就是与互联网上一系列的”资源”互动，调用它的URI。</p>
+<p><strong>四、表现层（Representation）</strong></p>
+<p>“资源”是一种信息实体，它可以有多种外在表现形式。<strong>我们把”资源”具体呈现出来的形式，叫做它的”表现层”（Representation）。</strong></p>
+<p>比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</p>
+<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的”.html”后缀名是不必要的，因为这个后缀名表示格式，属于”表现层”范畴，而URI应该只代表”资源”的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对”表现层”的描述。</p>
+<p><strong>五、状态转化（State Transfer）</strong></p>
+<p>访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。</p>
+<p>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，<strong>如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</strong></p>
+<p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：<strong>GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</strong></p>
+<p><strong>六、综述</strong></p>
+<p>综合上面的解释，我们总结一下什么是RESTful架构：</p>
+<p>（1）每一个URI代表一种资源；</p>
+<p>（2）客户端和服务器之间，传递这种资源的某种表现层；</p>
+<p>（3）客户端通过四个HTTP动词，对服务器端资源进行操作，实现”表现层状态转化”。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/27/e7-90-86-e8-a7-a3restful-e6-9e-b6-e6-9e-84/" data-id="cjc05w09s002szl0rlxt468tb" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e6-88-91-e7-9a-84-e5-9d-8f-e4-b9-a0-e6-83-af" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/20/e6-88-91-e7-9a-84-e5-9d-8f-e4-b9-a0-e6-83-af/" class="article-date">
+  <time datetime="2016-08-20T14:50:17.000Z" itemprop="datePublished">2016-08-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/生活杂谈/">生活杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/20/e6-88-91-e7-9a-84-e5-9d-8f-e4-b9-a0-e6-83-af/">我的坏习惯</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://www.mr-c.lanyunxin.com/wp-content/uploads/2016/05/佩特拉之夜.jpg" alt="佩特拉之夜"></p>
+<p>&nbsp;</p>
+<p>最近老是被人叫早睡觉，早睡觉。我也深知这有多不好。唉。我想我不吸烟，不喝酒，不赌博。或许倒是有个不过凌晨不睡觉的习惯。。。我是典型不能在soical中获得能量的类型。</p>
+<p>我给大家讲一个最莫名奇妙的一次熬夜吧。那一次大概是九点多，十点多的时候开始看一部电影。看到12点左右，看完了，挺好看的。然后心情就久久不能平息。然后就想着，哎呀，这个隐上来了就再看一部吧。再看完就两点左右嘛，但是关键那是部烂片。看部烂片怎么能睡着呢。那就再找一部口碑好一点的老电影来洗洗眼再睡吧吧。那看完就四点多了，那就想，天都快亮了。那就再看一部再睡吧。结果就一晚上看了几部电影。。。就莫名熬了个夜，就去海边看了个日出。再回来床上睡了。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/20/e6-88-91-e7-9a-84-e5-9d-8f-e4-b9-a0-e6-83-af/" data-id="cjc05w09l002kzl0rc1oyw9vq" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-8f-aa-e6-83-b3-e8-ae-b0-e5-bd-95" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/17/e5-8f-aa-e6-83-b3-e8-ae-b0-e5-bd-95/" class="article-date">
+  <time datetime="2016-08-16T16:11:56.000Z" itemprop="datePublished">2016-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/17/e5-8f-aa-e6-83-b3-e8-ae-b0-e5-bd-95/">游走记忆的时间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面的文字都是我乱写的思绪，将不会有如何文章的框架和逻辑的脉路。</p>
+<p>话说，其实真正的思绪，本就不具有任何的脉路，思绪总是时而兴起，时而断断续续。</p>
+<p>星星点点的沙子，哗哗哗的流过一搬。</p>
+<p>&nbsp;</p>
+<p>真的，当你身处一段感情中。我们总是会不知所措，出于本能，我们总是会尽我们所能去保护自己。</p>
+<p>当然，我所指的身处一段感情，是你真的用了心进去。</p>
+<p>我也真的发现那种，无力感，那种自欺欺人。就是你拼尽了全力。人家也是我行我素。</p>
+<p>其实我只记得我第一次看后会无期，映像最深的是那一句台词，“喜欢就会放肆，但爱就是克制。”</p>
+<p>一次一次的，看着他人本我的放肆，自我的克制。你的潜意识不断的告诉你，ta不爱你。可是看起来，总是你在这段感情里，不大气，他看起来更潇洒，更本真。可是他那么的真，那么的坦率。可是那样子，真的是爱你的表现吗？我们的大脑一次又一次的忽略那些他不爱你的行为。自我的欺骗，或许有时候他会突然在你的坚持中真的爱上你。但大部分的时候，我们不过是精疲力尽，遍体鳞伤，最后惨兮兮的走人。</p>
+<p>我很清楚，那种不在乎的潇洒，和那种在乎的心如刀绞。忍字，刀下一颗心，忍的意思大概就是拿把刀，把自己心上开几个口子。所以，真的，离开时别犯贱，人家会觉得你很烦。他不会可怜你的。话说他也没义务去可怜你。</p>
+<p>可是我们大部分人，真的爱ta了，真的没什么办法。因为所有道理我都知道，我知道ta不爱我，我知道ta会恨恨的一次次又伤我的心，可我爱ta。理智和幻想，我们总希望我们的理智推理出错了，我们甚至自己去寻找那些证明，自己来反驳“ta不爱你”这个论点。人真是惨兮兮的生物啊。我也不例外。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/17/e5-8f-aa-e6-83-b3-e8-ae-b0-e5-bd-95/" data-id="cjc05w08h001hzl0r6zttr4d9" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-90-84-e7-a7-8d-e5-bf-ab-e6-8d-b7-e9-94-ae" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/13/e5-90-84-e7-a7-8d-e5-bf-ab-e6-8d-b7-e9-94-ae/" class="article-date">
+  <time datetime="2016-08-13T07:15:00.000Z" itemprop="datePublished">2016-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/13/e5-90-84-e7-a7-8d-e5-bf-ab-e6-8d-b7-e9-94-ae/">各种快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="VS-："><a href="#VS-：" class="headerlink" title="VS ："></a>VS ：</h1><p><strong>15. 格式化：</strong></p>
+<p><strong>Ctrl+K，Ctrl+F </strong></p>
+<p><strong>16.注释/取消注释
+</strong>1）注释：组合键“Ctrl+K+C”；<br>2）取消注释：组合键“Ctrl+K+U”。<br><strong>17.全屏显示/退出全屏显示 </strong><br>使用组合键“ SHIFT + ALT + ENTER ”。<br>18.定义与引用<br>1）转跳到定义：F12；<br>2）查找所有引用：使用组合键“Shift+F12”。<br>19.查找和替换<br>1）查找：使用组合键“Ctrl+F”；<br>2）替换：使用组合键“Ctrl+H”。<br>20.大小写转换<br>1）转小写：使用组合键“Ctrl+ U”；<br>2）转大写：使用组合键“CTRL + SHIFT + U”。<br><strong>21.调试相关 </strong><br>1）调试（启动）：F5；<br>2）调试（重新启动）：使用组合键“Ctrl+Shift+F5”；<br>3）调试（开始执行不调试）：使用组合键“Ctrl+F5”；<br>4）调试（逐语句）：F11；<br>5）调试（逐过程）：F10；<br>6）设置断点：F9。</p>
+<h1 id="vscode"><a href="#vscode" class="headerlink" title="vscode:"></a>vscode:</h1><p>1 .shift+alt+f 格式化</p>
+<h1 id="PhpStorm"><a href="#PhpStorm" class="headerlink" title="PhpStorm:"></a>PhpStorm:</h1><p>1.control+alt+L 格式化</p>
+<p>2.Mac版：</p>
+<p>全局搜索（command + shift + F）</p>
+<p>显示类中的方法 （command + 7）</p>
+<p>函数追踪 （command +鼠标点击）</p>
+<p>单行注释/取消（command + /）</p>
+<p>输入行号跳到某一行（command + l）</p>
+<p>列出打开的文件（command + e）</p>
+<p>删除当前行（command + x）</p>
+<p>复制当前行（command + d）</p>
+<p>跳到变量申明处（command + b）</p>
+<p>格式化代码（command + option + l）</p>
+<p>关闭当前窗口 （command + w）</p>
+<p>项目刷新 （command + option + y）</p>
+<p>多行注释（command + option + /）</p>
+<p>查找//@todo标签（command + 6）</p>
+<p>列出左侧文件（command + 1）</p>
+<p>切换大小写（command + shift + u）</p>
+<p>复制（command + c）</p>
+<p>粘贴（command + v）</p>
+<p>撤销（command + z）</p>
+<p><strong>显示行号</strong></p>
+<p>IDE settings-&gt;Editor-&gt;General-&gt;Appearance-&gt;Show Line Number</p>
+<p><strong>换肤</strong></p>
+<p>IDE settings-&gt;Editor-&gt;Colors &amp; Fonts 下拉框选择即可。</p>
+<p><strong>设置字体大小</strong></p>
+<p>IDE settings-&gt;Editor-&gt;Colors &amp; Fonts-&gt;font 设置即可。</p>
+<p><strong>配置文件头默认注释</strong></p>
+<p>IDE settings-&gt;Editor-&gt;File and Code Templates-&gt;PHP File Header。</p>
+<p><strong>设置注释不顶格</strong></p>
+<p>IDE settings-&gt;Editor-&gt;Code Style-&gt;PHP 去掉勾 Line comment at first column。</p>
+<p><strong>去掉右上角游览器</strong></p>
+<p>IDE settings-&gt;tools -&gt;WebBrowsers  去掉选中即可。</p>
+<p>PHPStorm + CodeSniffer</p>
+<p><strong>设置</strong></p>
+<p>IDE settings-&gt;Languages &amp; Frameworks-&gt;PHP-&gt;CodeSniffer-&gt; 配置即可。</p>
+<p><strong>选择编码规范</strong></p>
+<p>IDE settings-&gt;Editor-&gt;Inspections-&gt;PHP-&gt;PHP Code Sniffer validation(打钩) -&gt;Coding Standard 选择规范（PEAR）</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/13/e5-90-84-e7-a7-8d-e5-bf-ab-e6-8d-b7-e9-94-ae/" data-id="cjc05w08n001qzl0rrip0r7kk" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-82-85-e5-9b-ad-e6-85-a7-e6-90-85-e7-bf-bb-e7-9a-84-e4-b8-80-e5-9c-ba-e8-b5-84-e6-9c-ac-e5-a4-a7-e6-88-8f-ef-bc-88-e8-bd-ac-ef-bc-89" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/13/e5-82-85-e5-9b-ad-e6-85-a7-e6-90-85-e7-bf-bb-e7-9a-84-e4-b8-80-e5-9c-ba-e8-b5-84-e6-9c-ac-e5-a4-a7-e6-88-8f-ef-bc-88-e8-bd-ac-ef-bc-89/" class="article-date">
+  <time datetime="2016-08-13T05:38:39.000Z" itemprop="datePublished">2016-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/生活杂谈/">生活杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/13/e5-82-85-e5-9b-ad-e6-85-a7-e6-90-85-e7-bf-bb-e7-9a-84-e4-b8-80-e5-9c-ba-e8-b5-84-e6-9c-ac-e5-a4-a7-e6-88-8f-ef-bc-88-e8-bd-ac-ef-bc-89/">傅园慧搅翻的一场资本大戏（转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://www.mr-c.lanyunxin.com/wp-content/uploads/2016/08/傅园慧.jpg" alt="傅园慧"></p>
+<p><span class="s1">        一段视频逗全球。傅园慧红了，只是因为在采访中多逗了个乐。</span></p>
+<p><span class="s1">　　北京时间8月8日，里约奥运会女子100米仰泳半决赛后，20岁的傅园慧突然走红。她在赛后接受采访的视频成为全球点击量最高的视频之一，不仅占领了国内所有视频网站首页，甚至在YouTube也创造了奇迹。傅园慧的实名认证微博当天增粉400万。</span></p>
+<p><span class="s1">　　随后，以表情包和“洪荒之力”为代表的“傅园慧”衍生品广泛流传。刊登了傅园慧“表情包”的北京某纸质媒体，当日销量刷新近年峰值。8月10日晚，傅园慧做客国内一家直播网站，在线围观人数超过千万人。</span></p>
+<p><span class="s1">　　傅园慧在奥运赛场披荆斩棘之余，不经意间动用了“洪荒之力”，随即搅翻了一场资本大戏。</span></p>
+<p><span class="s1"><strong>　　自带流量</strong></span></p>
+<p><span class="s1">　　“傅园慧现在已经成为里约奥运会缔造出来的全球第一IP。”国广东方海外事业部负责新媒体营销的杨女士在接受《华夏时报》记者采访时，明确做出了上述判断。</span></p>
+<p><span class="s1">　　根据杨女士提供的统计数据显示，自8月9日到8月11日3天时间，傅园慧在全球主流视频网站YouTube上的视频总访问量已经超过1000万。</span></p>
+<p><span class="s1">　　“仅从YouTube这个平台近3天的表现来看，只有刚刚创造了奥林匹克历史性21枚金牌的菲尔普斯一人，能够超越傅园慧视频的点击量。菲尔普斯的前十名视频总计是820万，而傅园慧的中英文综合条目是510万，他们将第三名甩得很远。但如果将数以亿计的国内网站带动的流量加在一起，傅园慧在互联网上的综合影响力肯定会超过菲尔普斯，成为全球第一。”杨女士称。</span></p>
+<p><span class="s1">　　杨女士表示，傅园慧的现象级表现在互联网圈被称为“自带流量”，这是“网红”的标准属性。“所谓的自带流量，就是你只要把她的名字放在那里，就会有超过一定数量级的人去看，不需要任何其他因素。就像我们常常形容某影星就是票房保证一样，现在‘傅园慧’这3个字就是流量保证，而且在过去的3天里，她几乎超越了所有人，成为最具流量保障的名字。”</span></p>
+<p><span class="s1">　　傅园慧的“流量保障力”很快得到进一步验证。8月10日她在映客直播完成了自己的首次个人直播秀，官方统计显示，在线观看人数峰值达到1093万，刷新映客直播历史纪录。一小时的直播过程，她共获得超过318万映票（直播平台内代币），折合成人民币超过20万元。</span></p>
+<p><span class="s1">　　傅园慧的突然走红让赞助商收获了意外之喜，在傅走红第二天，其微博上便贴出了某矿泉水品牌的广告。作为国家游泳队的官方赞助商，该矿泉水品牌在奥运会前已经开始在各种平台刊登广告，展开奥运营销攻势。但在此前的广告中主角一直是叶诗文等名将，傅园慧排在女子团队的末尾。而在傅园慧爆红后，她已经成为该品牌在互联网传播中的主角。</span></p>
+<p><span class="s1"><strong>　　非典型网红</strong></span></p>
+<p><span class="s1">　　自带流量的傅园慧冲刷着网络，互联网思维模式下的传播者纷纷抢滩这个新生的网络IP，希望通过她的名字为自己带来更多的流量，甚至她的表情、她的言词、她的“洪荒之力”都成为衍生品，人们乐此不疲地消费着关于傅园慧的一切。傅园慧的名字成了人人窥视的宝藏，商家、媒体、明星……甚至每个普通人，都希望与她产生关联。</span></p>
+<p><span class="s1">　　“在当今的互联网时代，有两样东西是最值钱的，一个是流量，另一个就是将流量变现的能力。有了这两样东西，在互联网里赚钱就像做‘一加一等于二’的运算一样简单。”杨女士表示，“傅园慧变成了新的网红，而她背后的流量就是商家窥视的宝贵财富。”</span></p>
+<p><span class="s1">　　杨女士表示，在她的意识中，中国的网红始于芙蓉姐姐，但那时的网红带有强烈的负面信息，同一时期中国的互联网变现能力也有限，因此除了话题没有创造出太多的价值。</span></p>
+<p><span class="s1">　　网红起步于微商，但盛于直播，互联网的真人直播平台提供的虚拟消费品，简单粗暴地解决了流量变现的难题，让网红不再需要现实商品，而实现流量的直接变现，因此让网络直播形成了独立的商业闭环，网红也找到了属于自己的产业化可能性。</span></p>
+<p><span class="s1">　　结果却是，网红泛滥于资本，许多创业者热衷于对“转化工具”的研究，但他们缺少网红身上的流量。因此，资本一边向潜藏着转化功能的互联网产品砸出巨资，另一边又将各种形态的网红招致麾下，让流量与产品强行对接。一些人在对接过程中得道升仙，一些人在对接过程中则头破血流。</span></p>
+<p><span class="s1">　　“现在的网红市场其实是非常混乱的。什么人都想做网红，因为在很多人眼中，有流量就可能有资本投你，所以很多人甚至不择手段地去吸引流量，造成了很多负面影响。在这种复杂的市场环境下，傅园慧的出现就显得非常珍贵。”杨女士对本报记者表示，“她虽然不是奥运冠军，但她是一个乐观向上的运动员，自带健康和拼搏精神的光环，另外她是因为自己的真实而被人喜欢的，你几乎看不到她的缺点。更可贵的是，她并不是冠军选手，也就不存在成绩下滑带来的投资风险，所以对商家而言，她是一个非常优质的网红。”</span></p>
+<p><span class="s1">　　但杨女士同样表示，“在某种程度上，以女主播为主的直播网红更像是艺人这个职业。而傅园慧是典型的职业运动员，她的职业追求应该是运动成绩。不管是什么原因，一旦他们失去了运动成绩，她‘红’的成色就会受到影响。”本届里约奥运会，傅园慧的队友宁泽涛，作为体育圈上一代网红，已经为此付出了代价。</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/13/e5-82-85-e5-9b-ad-e6-85-a7-e6-90-85-e7-bf-bb-e7-9a-84-e4-b8-80-e5-9c-ba-e8-b5-84-e6-9c-ac-e5-a4-a7-e6-88-8f-ef-bc-88-e8-bd-ac-ef-bc-89/" data-id="cjc05w0870012zl0ri55cb0rk" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows10-runtime-broker-e8-bf-9b-e7-a8-8b-e7-9a-84cpu-e5-8d-a0-e7-94-a8-e8-bf-87-e9-ab-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95-e3-80-82-ef-bc-88-e4-ba-b2-e6-b5-8b-e6-88-90-e5-8a-9f-e8-a7-a3-e5-86-b3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/windows10-runtime-broker-e8-bf-9b-e7-a8-8b-e7-9a-84cpu-e5-8d-a0-e7-94-a8-e8-bf-87-e9-ab-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95-e3-80-82-ef-bc-88-e4-ba-b2-e6-b5-8b-e6-88-90-e5-8a-9f-e8-a7-a3-e5-86-b3/" class="article-date">
+  <time datetime="2016-08-11T17:27:57.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/12/windows10-runtime-broker-e8-bf-9b-e7-a8-8b-e7-9a-84cpu-e5-8d-a0-e7-94-a8-e8-bf-87-e9-ab-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95-e3-80-82-ef-bc-88-e4-ba-b2-e6-b5-8b-e6-88-90-e5-8a-9f-e8-a7-a3-e5-86-b3/">windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、关闭onedrive，不赘言<br>2、关闭自动更新，选择提醒和延迟<br>3、锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片<br>4、设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了<br>5、开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭<br>6、 运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBroker,改变”Start”的值:00000003 为 值:00000004.<br>7、放一张全新的图片到我的电脑-图片里，然后把这张图片设置成桌面。——关于这点，我怀疑我就是昨晚这个操作之后，进程才回复正常的，前半部分操作是有人提到的，后半部分操作是我心血来潮的，有兴趣大家可以试试，只放图片，不改桌面。不过我个人心里也是担心，使用windows的主题图片群是否对此有影响。</p>
+<p>&nbsp;</p>
+<p>上面是我找到的有关方法，但是其实最重要的是！！</p>
+<p><strong>设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”</strong></p>
+<p>这点是最TM重要的了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/12/windows10-runtime-broker-e8-bf-9b-e7-a8-8b-e7-9a-84cpu-e5-8d-a0-e7-94-a8-e8-bf-87-e9-ab-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95-e3-80-82-ef-bc-88-e4-ba-b2-e6-b5-8b-e6-88-90-e5-8a-9f-e8-a7-a3-e5-86-b3/" data-id="cjc05w0dl005szl0rabl9b3ux" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-a-summary-of-recent-work-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/07/a-summary-of-recent-work-2/" class="article-date">
+  <time datetime="2016-08-06T17:28:06.000Z" itemprop="datePublished">2016-08-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/07/a-summary-of-recent-work-2/">A summary of recent work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<h2 id="字符集和校对规则"><a href="#字符集和校对规则" class="headerlink" title="字符集和校对规则"></a><strong>字符集</strong>和<strong>校对规则</strong></h2><p>如果跟数据库打交道，初期会很好奇，为什么大部分的数据库都设置utf8_general_ci为校对规则。</p>
+<p>我们都知道一般这样子设置比较好，但这到底是啥。</p>
+<p>其实主要是两个概念</p>
+<p><strong>字符集</strong>和<strong>校对规则</strong><br><strong>字符集是一套符号和编码。校对规则是在字符集内用于比较字符的一套规则。</strong></p>
+<p><strong>详细说明</strong></p>
+<p>字符集(charset)：是一套符号和编码。<br>校对规则(collation)：是在字符集内用于比较字符的一套规则，比如定义’A’&lt;’B’这样的关系的规则。不同collation可以实现不同的比较规则，如’A’=’a’在有的规则中成立，而有的不成立；进而说，就是有的规则区分大小写，而有的无视。 每个字符集有一个或多个校对规则，并且每个校对规则只能属于一个字符集。</p>
+<h2 id="Mac查看附近WiFi信道及路由器信道的选择"><a href="#Mac查看附近WiFi信道及路由器信道的选择" class="headerlink" title="Mac查看附近WiFi信道及路由器信道的选择"></a>Mac查看附近WiFi信道及路由器信道的选择</h2><p>首先打开终端，输入</p>
+<p>sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport</p>
+<p>创建一个象征链接。</p>
+<p>之后提示输入管理员密码，直接输入你的密码。</p>
+<p>&nbsp;</p>
+<p>再输入 <wbr></p>
+<p>airport -s</p>
+<p>回车确定后便可查看到周边无线网络状况。</p>
+<p>然后根据你周边无线设备的信道情况，调整你的无线信道。</p>
+<p>这里注意，不要过分的依赖路由器的自动选择，路由器没有那么智能。还有如果你也使用的是MacBook Air，那么不要将信道设置为13，你的本本会搜索不到的！</p>
+<p>&nbsp;</p>
+<h2 id="javascript怎么清空一个div里面的内容"><a href="#javascript怎么清空一个div里面的内容" class="headerlink" title="javascript怎么清空一个div里面的内容"></a>javascript怎么清空一个div里面的内容</h2><ol>
+<li>document.getElementById(‘examplediv’).innerHTML = “”;<br>2. $(‘#examplediv’).html(“”);</li>
+</ol>
+<p>&nbsp;</p>
+<h2 id="软件版本号规范与命名原则"><a href="#软件版本号规范与命名原则" class="headerlink" title="软件版本号规范与命名原则"></a>软件版本号规范与命名原则</h2><p><strong>1. 软件版本阶段说明</strong></p>
+<ul>
+<li>Alpha版: 此版本表示该软件在此阶段主要是以实现软件功能为主，通常只在软件开发者内部交流，一般而言，该版本软件的Bug较多，需要继续修改。</li>
+<li>Beta版: 该版本相对于α版已有了很大的改进，消除了严重的错误，但还是存在着一些缺陷，需要经过多次测试来进一步消除，此版本主要的修改对像是软件的UI。</li>
+<li>RC版: 该版本已经相当成熟了，基本上不存在导致错误的BUG，与即将发行的正式版相差无几。</li>
+<li>Release版: 该版本意味“最终版本”，在前面版本的一系列测试版之后，终归会有一个正式版本，是最终交付用户使用的一个版本。该版本有时也称为标准版。一般情况下，Release不会以单词形式出现在软件封面上，取而代之的是符号(R)。</li>
+</ul>
+<p><strong>2. 版本命名规范</strong></p>
+<p><strong>软件版本号由四部分组成：</strong></p>
+<p><strong>第一个1为主版本号</strong></p>
+<p><strong>第二个1为子版本号</strong></p>
+<p><strong>第三个1为阶段版本号</strong></p>
+<p><strong>第四部分为日期版本号加希腊字母版本号</strong></p>
+<p><strong>希腊字母版本号共有5种，分别为：base、alpha、beta、RC、release。例如：1.1.1.051021_beta</strong></p>
+<p>常规：完全的版本号定义，分三项：：&lt;主版本号&gt;.&lt;次版本号&gt;.&lt;修订版本号&gt;，如 1.0.0</p>
+<p><strong>3. 版本号定修改规则</strong></p>
+<ul>
+<li>主版本号(1)：当功能模块有较大的变动，比如增加多个模块或者整体架构发生变化。此版本号由项目决定是否修改。</li>
+<li>子版本号(1)：当功能有一定的增加或变化，比如增加了对权限控制、增加自定义视图等功能。此版本号由项目决定是否修改。</li>
+<li>阶段版本号(1)：一般是 Bug 修复或是一些小的变动，要经常发布修订版，时间间隔不限，修复一个严重的bug即可发布一个修订版。此版本号由项目经理决定是否修改。</li>
+<li>日期版本号(051021):用于记录修改项目的当前日期，每天对项目的修改都需要更改日期版本号。此版本号由开发人员决定是否修改。</li>
+<li>希腊字母版本号(beta):此版本号用于标注当前版本的软件处于哪个开发阶段，当软件进入到另一个阶段时需要修改此版本号。此版本号由项目决定是否修改。</li>
+</ul>
+<p><strong>4. 文件命名规范</strong></p>
+<p>文件名称由四部分组成：第一部分为项目名称，第二部分为文件的描述，第三部分为当前软件的版本号，第四部分为文件阶段标识加文件后缀，例如：项目外 包平台测试报告1.1.1.051021_beta_b.xls，此文件为项目外包平台的测试报告文档，版本号为：1.1.1.051021_beta。</p>
+<p>如果是同一版本同一阶段的文件修改过两次以上，则在阶段标识后面加以数字标识，每次修改数字加1，项目外包平台测试报告1.1.1.051021_beta_b1.xls。</p>
+<p>当有多人同时提交同一份文件时，可以在阶段标识的后面加入人名或缩写来区别，例如：项目外包平台测试报告 1.1.1.051021_beta_b_LiuQi.xls。当此文件再次提交时也可以在人名或人名缩写的后面加入序号来区别，例如：项目外包平台测试 报告1.1.1.051021_beta_b_LiuQi2.xls。</p>
+<p><strong>5. 版本号的阶段标识</strong></p>
+<p>软件的每个版本中包括11个阶段，详细阶段描述如下：</p>
+<p>阶段名称                            阶段标识<br>需求控制                               a<br>设计阶段                               b<br>编码阶段                               c<br>单元测试                               d<br>单元测试修改                       e<br>集成测试                               f<br>集成测试修改                       g<br>系统测试                               h<br>系统测试修改                       i<br>验收测试                               j<br>验收测试修改                       k</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/07/a-summary-of-recent-work-2/" data-id="cjc05w07q000izl0r25wkutki" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-a-summary-of-recent-work" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/a-summary-of-recent-work/" class="article-date">
+  <time datetime="2016-08-05T09:31:01.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/05/a-summary-of-recent-work/">A summary of recent work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CDN（Content-Delivery-Network，内容分发网络）"><a href="#CDN（Content-Delivery-Network，内容分发网络）" class="headerlink" title="CDN（Content Delivery Network，内容分发网络）"></a><strong>CDN（Content Delivery Network，内容分发网络）</strong></h2><p>通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。<br>解决目前互联网业务在网络层面可能存在的问题：</p>
+<ol>
+<li>业务服务器接入互联网的带宽有限。</li>
+<li>不同运营商之间的互联问题使得业务要考虑多运营商分布问题。</li>
+<li>地域问题导致用户到服务器的物理距离会比较远，传输时延非常高。<br>CDN帮助用户解决互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，业务只需简单接入即可完成访问加速，无需关注复杂多变的网络状况。</li>
+</ol>
+<p>使用CDN后的http请求处理流程如下图：</p>
+<p><img src="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png" alt=""></p>
+<p><strong>总结：需要通过DNS解析，将域名CNAME到CDN服务商的提供的CNAME域名。放弃原来的A记录解析，全部交由CNAME域名的CDN节点来处理。CDN节点会主动或者被动的从源拉取资源。**</strong>当节点存储所请求资源就将资源返回，否则返回源服务器请求。**</p>
+<p><strong>吐槽：腾讯的CDN和阿里的CDN差太大，阿里把腾讯甩好几条街。</strong></p>
+<h2 id="MYSQL5-6内存占用过高"><a href="#MYSQL5-6内存占用过高" class="headerlink" title="MYSQL5.6内存占用过高"></a><strong>MYSQL5.6内存占用过高</strong></h2><p>距离MySQL 5.6正式发布已经有比较长的时间了，目前Oracle官网上的最新GA版本MySQL server也为5.6。但reizhi在安装配置后却发现其内存占用居高不下，无论如何调整cache甚至禁用InnoDB都不能解决。由于VPS仅有1GB内存，在开启常用的Web服务之后，无力再为MySQL提供400MB以上的物理内存。</p>
+<p>通过网络爬文，MySQL 5.6相比于前代GA版本性能提升显著，但默认缓存设置对于小型站点并不合理。通过修改my.ini文件中的performance_schema_max_table_instances参数，能够有效降低内存占用。</p>
+<p>修改参数：</p>
+<p><pre class="prettyprint">performance_schema_max_table_instances=400<br>table_definition_cache=400<br>table_open_cache=256</pre><br>保存之后重新启动MySQL服务，其内存占用即可从400MB以上降低至40MB左右。</p>
+<p><img src="http://roov.org/wp-content/uploads/2013/12/20131225225414_75247.jpg" alt=""></p>
+<h2 id="PHP-FPM内存占用过大的优化方法。"><a href="#PHP-FPM内存占用过大的优化方法。" class="headerlink" title="PHP-FPM内存占用过大的优化方法。"></a><strong>PHP-FPM内存占用过大的优化方法。</strong></h2><p><strong>总结或多或少都有内存泄漏的问题</strong></p>
+<div><br><br>php-fpm优化方法<br><br>php-fpm存在两种方式，一种是直接开启指定数量的php-fpm进程，不再增加或者减少；<br>另一种则是开始时开启一定数量的php-fpm进程，当请求量变大时，动态的增加php-fpm进程数到上限，当空闲时自动释放空闲的进程数到一个下限。<br>这两种不同的执行方式，可以根据服务器的实际需求来进行调整。<br><br>要用到的一些参数，分别是pm、pm.max_children、pm.start_servers、pm.min_spare_servers和pm.max_spare_servers。<br><br>pm表示使用那种方式，有两个值可以选择，就是static（静态）或者dynamic（动态）。<br><br>下面4个参数的意思分别为：<br><div><strong>pm.max_children：</strong>静态方式下开启的php-fpm进程数量，在动态方式下他限定php-fpm的最大进程数（这里要注意pm.max_spare_servers的值只能小于等于pm.max_children）<br><strong>pm.start_servers：</strong>动态方式下的起始php-fpm进程数量。<br><strong>pm.min_spare_servers：</strong>动态方式空闲状态下的最小php-fpm进程数量。<br><strong>pm.max_spare_servers：</strong>动态方式空闲状态下的最大php-fpm进程数量。</div><br><strong>如果dm设置为static，那么其实只有pm.max_children这个参数生效。</strong>系统会开启设置的数量个php-fpm进程。<br><br><strong>如果dm设置为dynamic，4个参数都生效。</strong>系统会在php-fpm运行开始时启动pm.start_servers个php-fpm进程，然后根据系统的需求动态在pm.min_spare_servers和pm.max_spare_servers之间调整php-fpm进程数。<br><br>那么，对于服务器，选择哪种执行方式比较好呢？事实上，跟Apache一样，运行的PHP程序在执行完成后，或多或少会有内存泄露的问题。这也是为什么开始时一个php-fpm进程只占用3M左右内存，运行一段时间后就会上升到20-30M的原因了。<br><br>所以，动态方式因为会结束掉多余的进程，可以回收释放一些内存，所以推荐在内存较少的服务器或者VPS上使用。具体最大数量根据 内存/20M 得到。<br>比如说512M的VPS，建议pm.max_spare_servers设置为20（512*0.8/20）。至于pm.min_spare_servers，则建议根据服务器的负载情况来设置，比较合适的值在5~10之间。<br><br>然后对于比较大内存的服务器来说，设置为静态的话会提高效率。<br>因为频繁开关php-fpm进程也会有时滞，所以内存够大的情况下开静态效果会更好。数量也可以根据 内存/30M 得到。<br>比如说2GB内存的服务器，可以设置为50；4GB内存可以设置为100等。<br><br>比如，如果是512M的vps，设置的参数如下：<br><div>代码示例:</div><br><div id="c_VPKcKpCW">pm=dynamic<br>pm.max_children=20<br>pm.start_servers=5<br>pm.min_spare_servers=5<br>pm.max_spare_servers=20</div><br>可以最大的节省内存并提高执行效率。<br><div><br><br>&nbsp;<br><br></div>
+
+<h2 id="Nginx设置alias别名目录访问phpmyadmin"><a href="#Nginx设置alias别名目录访问phpmyadmin" class="headerlink" title="Nginx设置alias别名目录访问phpmyadmin"></a><strong>Nginx设置alias别名目录访问phpmyadmin</strong></h2><h3 id="1-修改nginx配置文件"><a href="#1-修改nginx配置文件" class="headerlink" title="1.修改nginx配置文件"></a>1.修改nginx配置文件</h3><p><strong>cp /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.confbak</strong>  #备份配置文件</p>
+<p><strong>vi /usr/local/nginx/conf/nginx.conf</strong>  #修改配置文件，在 <strong> （推荐使用nano 命令，反正我是比较习惯用nano来修改。）</strong></p>
+<p>server {<br>listen       80;<br>server_name  localhost;</p>
+<p>#charset koi8-r;</p>
+<p>#access_log  logs/host.access.log  main;</p>
+<p>location / {<br>root   html;<br>index index.php  index.html index.htm;<br>}</p>
+<p>下面添加以下内容：(见粗体字，可以仿造改用）</p>
+<p>location <strong>/phpmyadmin</strong> {<br>alias <strong>/home/phpmyadmin;</strong><br>index index.php;<br>}</p>
+<p>location ~<strong> /phpmyadmin/.</strong>+.php$ {<br>if ($fastcgi_script_name ~<strong> /phpmyadmin/</strong>(.+.php.<em>)$) {<br>set $valid_fastcgi_script_name $1;<br>}<br>include fastcgi_params;<br>fastcgi_pass   127.0.0.1:9000;<br>fastcgi_index  index.php;<br>fastcgi_param SCRIPT_FILENAME <em>*/home/phpmyadmin/</em></em>$valid_fastcgi_script_name;<br>}</p>
+<p>:wq!   #保存，退出</p>
+<h3 id="2、设置-home-phpmyadmin目录权限"><a href="#2、设置-home-phpmyadmin目录权限" class="headerlink" title="2、设置/home/phpmyadmin目录权限"></a><strong>2、设置/home/phpmyadmin目录权限</strong></h3><p><strong>chown www.www /home/phpmyadmin -R  #修改目录所有者为www账号</strong></p>
+<p><strong>service nginx restart   #重启nginx</strong></p>
+<p><strong>service php-fpm restart    #重启php-fpm</strong></p>
+<p>&nbsp;</p>
+<p></p></div><p></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/05/a-summary-of-recent-work/" data-id="cjc05w07s000lzl0ro55tu7fu" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-perfect-is-the-enemy-of-good" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/perfect-is-the-enemy-of-good/" class="article-date">
+  <time datetime="2016-08-05T05:57:37.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/05/perfect-is-the-enemy-of-good/">Perfect is the enemy of good</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://www.mr-c.lanyunxin.com/wp-content/uploads/2016/08/Diamond-diamond_macle1.jpg" alt="Diamond-diamond_macle1">The meaning of<strong> “The perfect is the enemy<br>of the good”</strong> is that one might never complete a task if one has decided not to stop until it is perfect: completing the project well is made impossible by striving to complete it perfectly. Closely related is the Nirvana fallacy, in which people never even begin an important task because they feel reaching perfection is too hard.</p>
+<p>Earlier, Aristotle, Confucius and other classical philosophers propounded the related principle of the golden mean, which counsels against extremism in general.</p>
+<p>The Pareto principle or 80–20 rule is a 20th-century analogue. For example, it commonly takes 20% of the full-time to complete 80% of a task, while to complete the last 20% of a task takes 80% of the effort. Achieving absolute perfection may be impossible and so, as increasing effort results in diminishing returns, further activity becomes increasingly inefficient.</p>
+<p>Robert Watson-Watt, who developed early warning radar in Britain to counter the rapid growth of the Luftwaffe, propounded a “cult of the imperfect”, which he described as, “Give them the third best to go on with; the second best comes too late, the best never comes.”</p>
+<p>Economist George Stigler said that “If you never miss a plane, you’re spending too much time at the airport.”</p>
+<p><strong>Gold plating</strong> in software engineering, or project management, or time management in general, is the error of continuing to work on a project or task well past the point where the extra effort is worth the value it adds (if any). After having met the requirements, the developer works on further enhancing the product, thinking the customer will be delighted to see additional or more polished features, rather than what was asked for or expected. The customer might be disappointed in the results, and the extra effort by the developer might be futile.<sup id="cite_ref-5" class="reference"></sup></p>
+<p>Gold plating is also considered a bad project management practice for different project management best practices and methodologies such as: Project Management Body of Knowledge (PMBoK) and PRINCE2. In this case, ‘gold plating’ means the addition of any feature not considered in the original scope plan (PMBoK) or business case (PRINCE2) at any point of the project since it introduces a new source of risks to the original planning i.e. additional testing, documentation, costs, timelines, etc. However, gold plating does not prevent new features from being added to the project; they can be added at any time as long as they follow the official change procedure and the impact of the change in all the areas of the project is taken into consideration.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/05/perfect-is-the-enemy-of-good/" data-id="cjc05w0c4004rzl0rpxrreba1" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/" class="article-date">
+  <time datetime="2016-07-30T06:20:32.000Z" itemprop="datePublished">2016-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/">CentOS7 安装MongoDB 3.0服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="下载-amp-安装"><a href="#下载-amp-安装" class="headerlink" title="下载&amp;安装"></a>下载&amp;安装</h3><p>MongoDB 3.0 正式版本发布!这标志着 MongoDB 数据库进入了一个全新的发展阶段，提供强大、灵活而且易于管理的数据库管理系统。MongoDB宣称，3.0新版本不只提升7到10倍的写入效率以及增加80%的数据压缩率，还能减少95%的运维成本。<br>MongoDB 3.0主要新特性包括：<br>·可插入式的存储引擎 API<br>·支持 WiredTiger 存储引擎<br>·MMAPv1 提升<br>·复制集全面提升<br>·集群方面的改进<br>·提升了安全性<br>·工具的提升<br>WiredTiger 存储引擎是一项难以置信的技术实现，提供无门闩、非堵塞算法来利用先进的硬件平台(如大容量芯片缓存和线程化架构)来提升性能。通过 WiredTiger，MongoDB 3.0 实现了文档级别的并发控制，因此大幅提升了大并发下的写负载。</p>
+<p>MongoDB 提供了centos yum安装方式。<br>参考：<a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="noopener">http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/</a><br>pdf 手册：<br><a href="http://docs.mongodb.org/manual/MongoDB-manual.pdf" target="_blank" rel="noopener">http://docs.mongodb.org/manual/MongoDB-manual.pdf</a></p>
+<p>vi /etc/yum.repos.d/mongodb-org-3.0.repo</p>
+<pre><code>&lt;span class=&quot;hljs-title&quot;&gt;[mongodb-org-3.0]&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;name=&lt;span class=&quot;hljs-value&quot;&gt;MongoDB Repository&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;baseurl=&lt;span class=&quot;hljs-value&quot;&gt;http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;/x86_64/&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;gpgcheck=&lt;span class=&quot;hljs-value&quot;&gt;&lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-setting&quot;&gt;enabled=&lt;span class=&quot;hljs-value&quot;&gt;&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;`&lt;/pre&gt;
+安装mongodb
+&lt;pre class=&quot;prettyprint&quot;&gt;`yum install &lt;span class=&quot;hljs-attribute&quot;&gt;-y&lt;/span&gt; mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;`&lt;/pre&gt;
+安装了所有相关服务。
+&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-attribute&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;...&lt;/span&gt;
+Running transaction
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-shell&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64      &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-tools&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64      &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-mongos&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-server&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;4&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Installing : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64            &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64           &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-server&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64    &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-mongos&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64    &lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-tools&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;4&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; 
+  Verifying  : mongodb&lt;span class=&quot;hljs-attribute&quot;&gt;-org&lt;/span&gt;&lt;span class=&quot;hljs-attribute&quot;&gt;-shell&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;hljs-subst&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;hljs-number&quot;&gt;1.&lt;/span&gt;el7&lt;span class=&quot;hljs-built_in&quot;&gt;.&lt;/span&gt;x86_64     &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;/&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;`&lt;/pre&gt;
+配置文件在：/etc/mongod.conf  数据文件在：/var/lib/mongo  日志文件在：/var/log/mongodb  mongodb服务使用
+&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-preprocessor&quot;&gt;#启动&lt;/span&gt;
+service mongod start
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#停止&lt;/span&gt;
+service mongod stop
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#重启&lt;/span&gt;
+service mongod restart
+&lt;span class=&quot;hljs-preprocessor&quot;&gt;#增加开机启动&lt;/span&gt;
+chkconfig mongod on
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/30/centos7-e5-ae-89-e8-a3-85mongodb-3-0-e6-9c-8d-e5-8a-a1-e5-99-a8/" data-id="cjc05w07v000nzl0rukmw7z0y" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

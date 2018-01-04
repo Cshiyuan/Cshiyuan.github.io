@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SHYIUAN&#39;S NOTEBOOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SHYIUAN&#39;S NOTEBOOK">
+<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+<meta property="og:site_name" content="SHYIUAN&#39;S NOTEBOOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHYIUAN&#39;S NOTEBOOK">
+  
+    <link rel="alternate" href="/atom.xml" title="SHYIUAN&#39;S NOTEBOOK" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SHYIUAN&#39;S NOTEBOOK</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my notebook.hexo migrate wordpress &lt;source&gt;</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-e5-bc-ba-e5-bc-95-e7-94-a8-e4-b8-8e-e5-bc-b1-e5-bc-95-e7-94-a8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/25/e5-bc-ba-e5-bc-95-e7-94-a8-e4-b8-8e-e5-bc-b1-e5-bc-95-e7-94-a8/" class="article-date">
+  <time datetime="2016-09-25T08:19:22.000Z" itemprop="datePublished">2016-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/25/e5-bc-ba-e5-bc-95-e7-94-a8-e4-b8-8e-e5-bc-b1-e5-bc-95-e7-94-a8/">强引用与弱引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div><span style="color: #fd1748;">默认情况下，一个指针都会使用 <strong>strong 属性，表明这是一个强引用。这意味着，只要引用存在，对象就不能被销毁。这是一种所期望的行为：当所有（强）引用都去除时，对象才能被收集和释放。</strong></span></div><br><div><span style="color: #fd1748;"> </span></div><br><div><span style="color: #fd1748;">不过， 有时我们却希望禁用这种行为：一些集合类不应该增加其元素的引用，因为这会引起对象无法释放。在这种情况下，我们需要使用弱引用（不用担心，内置的集合类 就是这么干的），使用 weak 关键字。NSHashTable 就是一个例子。当被引用的对象消失时，弱引用会自动设置为 nil。Cocoa 的 Notification Center 就是这么一个例子，虽然这已经超出纯 Objective-C 的语言范畴 <wbr></span></div><br><div><span style="color: #fd1748;"> </span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">自己更深理解：</span></div><br><div><span style="color: #2d3efe;">1.(weak与strong)不同的是：当一个对象不再有strong类型的指针指向它的时候，它就会被释放，即使改对象还有_weak类型的指针指向它；</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> <wbr> 2.一旦最后一个指向该对象的strong类型的指针离开，这个对象将被释放，如果这个时候还有weak指针指向该对象，则会清除掉所有剩余的weak指针</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">类比为自己的思想：</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr></span></div><br><div><span style="color: #2d3efe;"> <wbr> 一个对象类比为一条狗，  <wbr>释放对象 类比为 狗要跑掉</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">逻辑：</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr>strong类型的指针就像是栓住的狗，只要你用 绳子拴住狗，那么狗就不会跑掉.</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr>类比 一个对象 new过以后，不会自动的释放</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>如果有5个人都牵着这一条狗(5条绳子栓一只狗) 类比为 5个strong类型指针指向一个对象.</span></div><br><div><span style="color: #2d3efe;">除非5个绳子都脱落，否则狗是不会跑掉的，类比，5个strong指针都=nil，则该对象释放</span></div><br><div></div><br><div></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/25/e5-bc-ba-e5-bc-95-e7-94-a8-e4-b8-8e-e5-bc-b1-e5-bc-95-e7-94-a8/" data-id="cjc05w09b002azl0rdjeiiqt5" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/25/e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/" class="article-date">
+  <time datetime="2016-09-25T06:07:35.000Z" itemprop="datePublished">2016-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/25/e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/">设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在某些人看来学习设计模式没有什么意义，因为在实际工作中基本用不上，因此没有什么学习的必要。但是在我看来，学习设计模式非常有必要，暂且不论在实际工作中能否用得上，理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
+<h2 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a><a href="https://github.com/leichunfeng/DesignPatterns-Objective-C#设计模式的基本原则" target="_blank" rel="noopener"></a>设计模式的基本原则</h2><p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
+<ul>
+<li><strong>单一职责原则（SRP）</strong>，就一个类而言，应该仅有一个引起它变化的原因。</li>
+<li><strong>开放-封闭原则（OCP）</strong>，是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
+<li><strong>依赖倒转原则（DIP）</strong>，A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
+<li><strong>里氏代换原则（LSP）</strong>，子类型必须能够替换掉它们的父类型。</li>
+<li><strong>迪米特法则（LoD）</strong>，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
+<li><strong>合成/聚合复用原则（CARP）</strong>，尽量使用合成/聚合，尽量不要使用类继承。<br>注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</li>
+</ul>
+<h2 id="常用的-23-种设计模式"><a href="#常用的-23-种设计模式" class="headerlink" title="常用的 23 种设计模式"></a><a href="https://github.com/leichunfeng/DesignPatterns-Objective-C#常用的-23-种设计模式" target="_blank" rel="noopener"></a>常用的 23 种设计模式</h2><p>不管是 .NET 中的 C# 语言，还是 Java、VB.NET、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
+<ol>
+<li><strong>策略模式（Strategy）</strong>，它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
+<li><strong>装饰模式（Decorator）</strong>，动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
+<li><strong>代理模式（Proxy）</strong>，为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li><strong>工厂方法模式（Factory Method）</strong>，定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li><strong>原型模式（Prototype）</strong>，用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
+<li><strong>模板方法模式（Template Method）</strong>，定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
+<li><strong>外观模式（Facade）</strong>，为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
+<li><strong>建造者模式（Builder）</strong>，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+<li><strong>观察者模式（Observer）</strong>，定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
+<li><strong>抽象工厂模式（Abstract Factory）</strong>，提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
+<li><strong>状态模式（State）</strong>，当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
+<li><strong>适配器模式（Adapter）</strong>，将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
+<li><strong>备忘录模式（Memento）</strong>，在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
+<li><strong>组合模式（Composite）</strong>，将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
+<li><strong>迭代器模式（Iterator）</strong>，提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
+<li><strong>单例模式（Singleton）</strong>，保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+<li><strong>桥接模式（Bridge）</strong>，将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
+<li><strong>命令模式（Command）</strong>，将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
+<li><strong>职责链模式（Chain of Responsibility）</strong>，使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
+<li><strong>中介者模式（Mediator）</strong>，用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
+<li><strong>享元模式（Flyweight）</strong>，运用共享技术有效地支持大量细粒度的对象。</li>
+<li><strong>解释器模式（Interpreter）</strong>，给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
+<li><strong>访问者模式（Visitor）</strong>，表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ol>
+<p>## </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/25/e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/" data-id="cjc05w0a9003azl0r80xtnmhn" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac-e5-8d-b8-e8-bd-bd-e5-90-84-e7-a7-8d-e8-bd-af-e4-bb-b6-e7-9a-84-e7-9b-ae-e5-bd-95-e5-9c-b0-e5-9d-80" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/21/mac-e5-8d-b8-e8-bd-bd-e5-90-84-e7-a7-8d-e8-bd-af-e4-bb-b6-e7-9a-84-e7-9b-ae-e5-bd-95-e5-9c-b0-e5-9d-80/" class="article-date">
+  <time datetime="2016-09-21T14:41:49.000Z" itemprop="datePublished">2016-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/21/mac-e5-8d-b8-e8-bd-bd-e5-90-84-e7-a7-8d-e8-bd-af-e4-bb-b6-e7-9a-84-e7-9b-ae-e5-bd-95-e5-9c-b0-e5-9d-80/">Mac卸载各种软件的目录地址</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Config: ~/Library/Preferences/</li>
+<li>System: ~/Library/Caches/</li>
+<li>Plugins: ~/Library/Application Support/</li>
+<li>Logs: ~/Library/Logs/</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/21/mac-e5-8d-b8-e8-bd-bd-e5-90-84-e7-a7-8d-e8-bd-af-e4-bb-b6-e7-9a-84-e7-9b-ae-e5-bd-95-e5-9c-b0-e5-9d-80/" data-id="cjc05w0bn0046zl0rug2prl3f" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ios-e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/08/ios-e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/" class="article-date">
+  <time datetime="2016-09-07T16:48:40.000Z" itemprop="datePublished">2016-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/08/ios-e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/">iOS设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="经典观察者模式"><a href="#经典观察者模式" class="headerlink" title="经典观察者模式"></a>经典观察者模式</h2><p>经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做出相应的一些动作。在文章一开始举的例子就是典型观察者模式的应用。</p>
+<p>而在IOS开发中我们可能会接触到的经典观察者模式的实现方式，有这么几种：NSNotificationCenter、KVO、Delegate等</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/08/ios-e8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f/" data-id="cjc05w0bk0042zl0rj9sypc3z" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-rebase-e5-92-8cmerge-e5-8c-ba-e5-88-ab-e5-92-8c-e5-ba-94-e7-94-a8-e5-9c-ba-e6-99-af" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/06/git-rebase-e5-92-8cmerge-e5-8c-ba-e5-88-ab-e5-92-8c-e5-ba-94-e7-94-a8-e5-9c-ba-e6-99-af/" class="article-date">
+  <time datetime="2016-09-06T13:52:27.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/git-rebase-e5-92-8cmerge-e5-8c-ba-e5-88-ab-e5-92-8c-e5-ba-94-e7-94-a8-e5-9c-ba-e6-99-af/">git rebase和merge 区别和应用场景</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景：</p>
+<p>1，控制产品OEM。</p>
+<p>基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？</p>
+<p>如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每多一个新的OEM就多拷贝一份代码，那如果发现公用模块里面有个BUG，难道你要每个版本的源代码都要修改？万一改错地方了，或者哪个版本的忘记改了，又是一件麻烦事。</p>
+<p>这个时候我们就可以考虑使用branch功能，在第一个OEM的基础上分支出第二个OEM，第三个OEM完全取决于和哪个版本更像，就在那个版本的基础上做新的分支，有新的OEM特性需求，就切换到那个分支上修改，放心，所有的的单独分支上的代码看起来都是独立的，不会影响其他版本。</p>
+<p>2，多人协作长时间开发功能模块</p>
+<p>如果你在一个团队中，那几乎很难做到每天都能按期完成某个模块功能，并且测试通过。那团队成员又必须每日下班前把自己的代码保存一下，万一机器故障了之类的还能有代码备份机制。如果提交了不能工作的代码，别人又获取到了，那其他人的事情就做不下去了。所以，branch另外一个适用场景就是为team单独成员开辟个人工作区域，单元测试无误之后再把成员的工作代码合并到主分支中，既能达到个人代码备份的目的，又能不影响其他人的工作。</p>
+<p>其实上面所说的就是rebase和merge的不同适用场景。</p>
+<p>在场景1的情况下，如果修改了某个公用代码的BUG，这个时候就应该是把所有的OEM版本分支rebase到这个修复BUG的分支上来，在rebase过程中，Git会要你手动解决代码上的冲突，你需要做的就是把修复BUG的代码放到目标分支代码里面去。rebase的结果是：所有的分支依然存在</p>
+<p>在场景2的情况下，因为成员的代码开发工作已经完成了，也不需要再保留这个分支了，所以我们可以把这个成员分支merge到主分支上，当然冲突在所难免，手工解决的工作肯定逃不掉，但是利大于弊不是吗。merge以后，分支就不存在了，但是在Git的所有分支历史中还能看到身影。</p>
+<p>根据适用场景不同，采用不同的分支合并策略，让你团队的代码保持生命力吧。</p>
+<p>&nbsp;</p>
+<h1 id="git-stash和git-stash-pop"><a href="#git-stash和git-stash-pop" class="headerlink" title="git stash和git stash pop"></a><span class="link_title">git stash和git stash pop</span></h1><p>git stash 可用来暂存当前正在进行的工作， 比如想pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。<br>基础命令：<br><strong>$git stash<br>$do some work<br>$git stash pop</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/06/git-rebase-e5-92-8cmerge-e5-8c-ba-e5-88-ab-e5-92-8c-e5-ba-94-e7-94-a8-e5-9c-ba-e6-99-af/" data-id="cjc05w0at003qzl0ry1wbgmks" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e7-9c-bc-e7-9d-9b-e6-98-af-e4-b8-aa-e7-ad-9b-e5-ad-90" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/06/e7-9c-bc-e7-9d-9b-e6-98-af-e4-b8-aa-e7-ad-9b-e5-ad-90/" class="article-date">
+  <time datetime="2016-09-05T16:30:55.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/e7-9c-bc-e7-9d-9b-e6-98-af-e4-b8-aa-e7-ad-9b-e5-ad-90/">眼睛是个筛子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="http://www.mr-c.lanyunxin.com/wp-content/uploads/2016/06/沙丁风暴.jpg" alt="沙丁风暴"></p>
+<p><span style="line-height: 1.5;">其实我经常，</span><span class="s1" style="line-height: 1.5;">发现身边某个阶级的年轻人真的对其他阶级一无所知，可能是精英主义教育让他们失去了对社会的观察和接触的机会吧。</span></p>
+<p><span class="s1">我挺失望的。因为年轻人往往站在某个高度去评价别的阶级。缺少同理心和包容心。让人很难过。</span></p>
+<p><span class="s1"><strong>其实「眼睛是个筛子，经历得越多，筛孔越大，能入眼的就越多」</strong>。</span></p>
+<p><span class="s1">当越来越多的个体能够悲悯，后人的书中大概就不会再出现这种句子了——</span></p>
+<p><strong><span class="s1">「呼兰河城里凡是一有跳井投河的，或是上吊的，那看热闹的人就特别多，我不知道中国别的地方是否这样，但在我的家乡确是这样的。」</span></strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/06/e7-9c-bc-e7-9d-9b-e6-98-af-e4-b8-aa-e7-ad-9b-e5-ad-90/" data-id="cjc05w09v002wzl0rdavch6fn" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e6-88-91-e6-9c-80-e5-a5-bd-e7-9a-84-e4-bd-9c-e5-93-81-e6-98-af-e6-88-91-e7-9a-84-e7-94-9f-e6-b4-bb-ef-bc-8d-e6-9d-9c-e5-b0-9a" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/05/e6-88-91-e6-9c-80-e5-a5-bd-e7-9a-84-e4-bd-9c-e5-93-81-e6-98-af-e6-88-91-e7-9a-84-e7-94-9f-e6-b4-bb-ef-bc-8d-e6-9d-9c-e5-b0-9a/" class="article-date">
+  <time datetime="2016-09-05T14:47:13.000Z" itemprop="datePublished">2016-09-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/e6-88-91-e6-9c-80-e5-a5-bd-e7-9a-84-e4-bd-9c-e5-93-81-e6-98-af-e6-88-91-e7-9a-84-e7-94-9f-e6-b4-bb-ef-bc-8d-e6-9d-9c-e5-b0-9a/">我最好的作品是我的生活－杜尚</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">又遇到了书里的句子——</span></p>
+<p><span class="s1">「一个彻底的怀疑者、叛逆者，不必是个剑拔弩张的人，不必是一个处处起争执的人，他完全可以把他的对立表现得不动声色，乃至温润如玉，但同时却在最细微的方面都不对流俗作妥协。」</span></p>
+<p>&nbsp;</p>
+<p><span class="s1">涉身时能看到的鲜活世界当然是我选择躲避时所看不到的。<strong>这个时代迅速地就让我感到困惑和疲惫</strong>。</span></p>
+<p><span class="s1">这个时代仿佛越来越钝感了，什么都得加大剂量。你拍别人肩膀人家已经懒得搭理你了，非得抽人一巴掌人家才会有反应。只吃得下浓油赤酱丰腴味，却品不出清淡薄盐本蔬香。现在追求的都是即时的性滚烫，一抹若有似无的微笑已经勾不起心跳。</span></p>
+<p><span class="s1">疲惫，是因为我在跟着什么东西跑，我们以前从来不喜欢跑，更不喜欢跟着谁跑，但我这样一跑起来，好像就自动背负上了某种竞争的期望——除了跑赢前面一个人、再前面一个人，仿佛没别的选择了似的。</span></p>
+<p>&nbsp;</p>
+<p><span class="s1">当你旗帜鲜明地反对某个概念的时候，其实恰恰说明你被它束缚之深。「挣脱」不是自由，不必卷入外物的纷争才是自由。他们在吵吵嚷嚷「jump out of the box」，但其实他们要 jump out 的那个 box 你还根本没进去过啊。要对自己有点自信，不要轻易地就被带跑偏了。</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/05/e6-88-91-e6-9c-80-e5-a5-bd-e7-9a-84-e4-bd-9c-e5-93-81-e6-98-af-e6-88-91-e7-9a-84-e7-94-9f-e6-b4-bb-ef-bc-8d-e6-9d-9c-e5-b0-9a/" data-id="cjc05w09f002gzl0r3n8cq2jd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-orm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/31/orm/" class="article-date">
+  <time datetime="2016-08-31T05:25:03.000Z" itemprop="datePublished">2016-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/31/orm/">ORM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、ORM简介<br>对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>这种方案存在以下不足：<br>1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。</p>
+<p>ORM提供了实现持久化层的另一种模式，它采用映射元数据来描述对象关系的映射，使得ORM中间件能在任何一个应用的业务逻辑层和数据库层之间充当桥梁。Java典型的ORM中间件有:Hibernate,ibatis,speedframework。<br>ORM的方法论基于三个核心原则：<br>· 简单：以最基本的形式建模数据。<br>· 传达性：数据库结构被任何人都能理解的语言文档化。<br>· 精确性：基于数据模型创建正确标准化了的结构。</p>
+<p>二、ORM的概念<br>让我们从O/R开始。字母O起源于”对象”(Object),而R则来自于”关系”(Relational)。几乎所有的程序里面，都存在对象和关系数据库。在业务逻辑层和用户界面层中，我们是面向对象的。当对象信息发生变化的时候，我们需要把对象的信息保存在关系数据库中。<br>当你开发一个应用程序的时候(不使用O/R Mapping),你可能会写不少数据访问层的代码，用来从数据库保存，删除，读取对象信息，等等。你在DAL中写了很多的方法来读取对象数据，改变状态对象等等任务。而这些代码写起来总是重复的。</p>
+<p>ORM解决的主要问题是对象关系的映射。域模型和关系模型分别是建立在概念模型的基础上的。域模型是面向对象的，而关系模型是面向关系的。一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录，类的每个属性对应表的每个字段。<br>ORM技术特点：<br>1.提高了开发效率。由于ORM可以自动对Entity对象与数据库中的Table进行字段与属性的映射，所以我们实际可能已经不需要一个专用的、庞大的数据访问层。<br>2.ORM提供了对数据库的映射，不用sql直接编码，能够像操作对象一样从数据库获取数据。</p>
+<p>三、ORM的优缺点<br>ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。</p>
+<p>在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/31/orm/" data-id="cjc05w0c7004vzl0r16bwluur" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e5-8e-9f-e6-9d-a5-e6-9c-89-e4-ba-9b-e4-b8-9c-e8-a5-bf-e5-be-88-e6-9c-89-e8-b6-a3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/28/e5-8e-9f-e6-9d-a5-e6-9c-89-e4-ba-9b-e4-b8-9c-e8-a5-bf-e5-be-88-e6-9c-89-e8-b6-a3/" class="article-date">
+  <time datetime="2016-08-27T16:53:36.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/生活杂谈/">生活杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/28/e5-8e-9f-e6-9d-a5-e6-9c-89-e4-ba-9b-e4-b8-9c-e8-a5-bf-e5-be-88-e6-9c-89-e8-b6-a3/">原来有些东西很有趣</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<hr>
+<p>今天无聊跟着爸妈听了听以前的歌曲。</p>
+<p>觉得居然出了奇的好听。回想起来，有很多事情大概对于我们自己的想法早已根深蒂固，其实如果我们从新去认识。这个世界会不会很不一样。</p>
+<hr>
+<p>以前觉得光怪陆离，极其简单的梵高的星空。现在看起来有一种说不出的心情。</p>
+<p>以前觉得老土的老歌，原来如此声声好听。比如，月亮代表我的心。</p>
+<p>以前觉得那些书呆子都是智障，现在才发现努力的品质是多么耀眼。</p>
+<p>以前觉得爸妈很凶，像是永远不会老。现在觉得他们很慈祥。很爱我。</p>
+<p>以前觉得死亡离我们特别远，现在觉得死亡离我们特别近。</p>
+<p>以前觉得长得好看就是无敌，现在觉得外貌如果没有品格陪衬就是个屁</p>
+<p>以前觉得自己很丑，现在觉得其实压根没有人在乎你长什么样。</p>
+<p>以前觉得上了大学脱离了无聊的应试教育，才发现大学有着更加纯粹的应试形式。</p>
+<p>以前觉得世界好坏分明，现在觉得不过角度不同。</p>
+<p>以前特别向往爱情，现在觉得遇见这种东西跟买彩票差不多。</p>
+<p>以前觉得感情轰轰烈烈，才发现喜欢真的只不过放肆，而爱你的人是会为你克制。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/28/e5-8e-9f-e6-9d-a5-e6-9c-89-e4-ba-9b-e4-b8-9c-e8-a5-bf-e5-be-88-e6-9c-89-e8-b6-a3/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/28/e5-8e-9f-e6-9d-a5-e6-9c-89-e4-ba-9b-e4-b8-9c-e8-a5-bf-e5-be-88-e6-9c-89-e8-b6-a3/" data-id="cjc05w08m001ozl0r5rndo914" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e9-97-b2-e8-b0-88" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/28/e9-97-b2-e8-b0-88/" class="article-date">
+  <time datetime="2016-08-27T16:37:56.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>►<a class="article-category-link" href="/categories/未分类/生活杂谈/">生活杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/28/e9-97-b2-e8-b0-88/">闲谈</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我觉得嘛。一个闲云野鹤的年轻人，你要拿什么去哄骗他的未来。</p>
+<p>这么多年，思考很多。从对于自身，从不控制，到控制，再到不控制。</p>
+<p>从年轻的偏激，再到追求对所有认知的深刻，可最后发现深刻到最后。</p>
+<p>还是回到原点，深刻是不必须的。深刻的根本仍旧是浅显。</p>
+<p>认识到这点，大概是从辩证法在生活中的极其平庸性开始发现的。</p>
+<p>因为辩证法对于一切的东西，总是动不动就有利有弊的。</p>
+<p>但是如果一个人对于东西的看法总是尝试用辩证法去看待。</p>
+<p>那么看法就会变得很平面化和无趣。或者说，你会发现，辩证法是垃圾，最不出彩的看法了。</p>
+<p>所以我病态的爱着我的病态。那些我不合理，不理性的部分。</p>
+<ul>
+<li><p>恋爱就是一边decode彼此，一边encode一个只有彼此能懂的世界吧</p>
+</li>
+<li><p>我们永远无法了解一个人经历了什么，因为每个人生来都是孤独的，所以不恶意揣测，尊重个人选择。</p>
+</li>
+<li><p>允许自己有错，承认自身的人性缺点，才更容易控制自己的本身缺点，比如嫉妒，愤怒，偏见，懒惰。</p>
+</li>
+<li><p>不要去听什么乱七八糟的人生谏言。要有自己的东西。鸡汤都是垃圾。</p>
+</li>
+<li><p>只有当你接受你将孤独终老这一事实后，你才能找到另一个孤独的灵魂一起携手前行。</p>
+</li>
+<li><p>有些事情，不是你都明白了，什么都懂了。而是说你不明白的事情你不想明白了。之前你每件事你都想明白，每个人你都想仔细把他看透，到底怎么回事。甚至你想去理解这个时代，这个社会。但其实我们明白不了，我们连自己最爱的人坐对面，你都不可能全明白。有些事情不明白就是生活的慌张，后来等老了才发现，那慌张就是青春。不慌张，青春就没了。</p>
+</li>
+<li><p>我自身对梦的认识：做梦是人的记忆整理，就如我们不会记得一个星期前的你现在在干什么。我想象我们的记忆是梦境和现实经历的结合。不过我们大脑会将与现实不符合，光怪陆离的记忆归为梦，而正常符合猜想的记忆归为现实经历。也就是说，其实我们每个人的记忆早就是不干不净的了。</p>
+</li>
+<li><p>外人看来，情侣间总爱做一些以为感动了自己就能感动对方的事情，但当事人浑然不知，只怪陷入爱里面</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/28/e9-97-b2-e8-b0-88/" data-id="cjc05w0aj003gzl0r5lvmmrf5" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/未分类/">未分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/计算机科普级别/">计算机科普级别</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/14/javascript-e6-b7-b1-e5-85-a5-e7-ac-94-e8-ae-b0/">Javascript深入笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/webpackcommonjs/">webpack+commonJS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/08/e5-9b-a0-e4-b8-ba-e5-a5-bd-e5-a5-87-e6-89-8b-e6-b8-b8-e7-9a-84-e5-90-8c-e6-ad-a5-e7-ad-96-e7-95-a5-ef-bc-8c-e6-9f-a5-e8-af-a2-e7-9a-84-e5-b8-a7-e5-90-8c-e6-ad-a5-e7-9b-b8-e5-85-b3-e5-86-85-e5-ae-b9/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/abi-ef-bc-88-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e4-ba-8c-e8-bf-9b-e5-88-b6-e6-8e-a5-e5-8f-a3-ef-bc-89/">ABI （应用程序二进制接口）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
