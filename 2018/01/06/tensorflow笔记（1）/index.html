@@ -7,16 +7,16 @@
   
   <title>tensorflow笔记（1） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。   不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。    在卷积神经网">
+  <meta name="description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。  在卷积神经网络(C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow笔记（1）">
 <meta property="og:url" content="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。   不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。    在卷积神经网">
-<meta property="og:updated_time" content="2018-01-06T13:02:43.459Z">
+<meta property="og:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。  在卷积神经网络(C">
+<meta property="og:updated_time" content="2018-01-06T13:05:57.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow笔记（1）">
-<meta name="twitter:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。   不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。    在卷积神经网">
+<meta name="twitter:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。  在卷积神经网络(C">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -58,7 +58,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -94,11 +94,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="激励函数（激活函数）"><a href="#激励函数（激活函数）" class="headerlink" title="激励函数（激活函数）"></a>激励函数（激活函数）</h4><p>为了神经网络实现非线性的任务，所引入的方式。<br>激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。<br>不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。</p>
-<blockquote>
-<blockquote>
-<p>不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。</p>
-</blockquote>
-</blockquote>
+<p><strong> 不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。</strong></p>
 <ul>
 <li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu. </li>
 <li>在循环神经网络中(recurrent neural networks), 推荐的是 tanh 或者是 relu</li>
@@ -193,7 +189,7 @@ with tf.Session() as sess:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc3d0zqw003jqq0r6b8ebx0k" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc3d4xbs003hsv0rvqwal86p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +200,7 @@ with tf.Session() as sess:
   
   
     <a href="/2018/01/06/Shell-And-Base/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Shell And Base</div>
     </a>
   
@@ -219,7 +215,7 @@ with tf.Session() as sess:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -234,7 +230,7 @@ with tf.Session() as sess:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -244,7 +240,7 @@ with tf.Session() as sess:
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
