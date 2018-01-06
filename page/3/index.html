@@ -65,6 +65,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-内部排序和外部排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/内部排序和外部排序/" class="article-date">
+  <time datetime="2017-04-14T08:22:10.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/内部排序和外部排序/">内部排序和外部排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a><strong>外排序</strong></h2><p><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8" target="_blank" rel="noopener">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6" target="_blank" rel="noopener">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。<br>外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</p>
+<hr>
+<h2 id="内部排序"><a href="#内部排序" class="headerlink" title="内部排序"></a>内部排序</h2><p>内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</p>
+<p>排序是计算机程序设计中的一种重要操作，其功能是对一个<a href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0" target="_blank" rel="noopener">数据元素</a>集合或序列重新排列成一个按数据元素某个相知有序的序列。排序分为两类：内排序和外排序。</p>
+<p>其中<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>的是目前排序方法中被认为是最好的方法</p>
+<p><a href="http://baike.baidu.com/item/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">内部排序方法</a>：</p>
+<ul>
+<li>1.<a href="http://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">插入排序</a>（<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>）；</li>
+<li>2.<a href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">快速排序</a>；</li>
+<li>3.<a href="http://baike.baidu.com/item/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">选择排序</a>（<a href="http://baike.baidu.com/item/%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">简单选择排序</a>）；</li>
+<li>4.<a href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a></li>
+<li>5.<a href="http://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">冒泡排序</a>；</li>
+<li>6.<a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>；</li>
+<li>7.<a href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">希尔排序</a>是对<a href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">直接插入排序</a>方法的改进。</li>
+<li>8.<a href="http://baike.baidu.com/item/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">堆排序</a>；</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc3ko96u004eyi0r00kwx5fe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-哈希排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/14/哈希排序/" class="article-date">
@@ -366,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc3d4xd1004rsv0rk84lke26" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc3ko97p004wyi0ruxt8f2ju" class="article-share-link">Share</a>
       
       
     </footer>
@@ -520,7 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc3d4xcr004dsv0reakwvkc4" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc3ko972004gyi0rufh5s39c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -605,7 +661,7 @@ typedef struct objc_object *id;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc3d4xca0042sv0rpfycjgek" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc3ko95z0041yi0rg15aviqz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -733,7 +789,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc3d4xdf005bsv0rjfe8o5vh" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc3ko98b005eyi0rcbdx8ekd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -813,7 +869,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc3d4xbl0039sv0rp6azmpq8" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc3ko94t0038yi0rnotqnzdw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -863,7 +919,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc3d4xam0027sv0r9parwwqm" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc3ko93e0029yi0regl4uii4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -985,7 +1041,7 @@ call now():
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc3d4xag0022sv0rsagmqqds" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc3ko93a0027yi0rklb7w46z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1123,7 +1179,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc3d4xaj0024sv0ryo9kxgzq" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc3ko9350022yi0rtym94fq7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1355,95 +1411,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc3d4xaf0020sv0rc20iv7hj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Scrapy爬GitHub日记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/31/Scrapy爬GitHub日记/" class="article-date">
-  <time datetime="2017-03-31T12:19:32.000Z" itemprop="datePublished">2017-03-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/31/Scrapy爬GitHub日记/">Scrapy爬GitHub日记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
-<pre><code>download_delay = 1
-
-headers = {
-    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;
- }
-</code></pre><hr>
-<p>scrapy的输出有时候太多了，挡住了视线。</p>
-<p>可以在setting中设置LOG_LEVEL</p>
-<hr>
-<p>突然发现，原来GitHub的API有访问限制。</p>
-<pre><code>403 reponse
-{
-&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. 
-(But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,
-&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;
-}
-</code></pre><p>详情：<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a></p>
-<h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><blockquote>
-<p>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that the Search API has custom rate limit rules.</p>
-</blockquote>
-<p>认证的可以一个小时5000 requests。非认证的一个小时60 requests，差远了。。。</p>
-<hr>
-<h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
-<p>pyCharm是一个强大的pythonIDE</p>
-<p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
-<pre><code>#!/usr/bin/python
-
-from scrapy.cmdline import execute
-execute()
-</code></pre><p>所以当运行scrapy crawler spider时，其实与指令：</p>
-<pre><code>python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider
-</code></pre><p>的效果是一样的</p>
-<p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
-<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
-<p>Name可以随便填</p>
-<p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
-<hr>
-<h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
-<pre><code>class MySpider(CrawlSpider):
-    handle_httpstatus_list = [403]
-</code></pre><blockquote>
-<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br> <a href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes" target="_blank" rel="noopener">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
-</blockquote>
-<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
-<hr>
-<h2 id="split-函数和GitHub-API中的API调用限制"><a href="#split-函数和GitHub-API中的API调用限制" class="headerlink" title="split()函数和GitHub API中的API调用限制"></a>split()函数和GitHub API中的API调用限制</h2><p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
-<p>不是单单查看client_id和client_secret决定的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc3d4xaq002csv0rtji9xolj" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc3ko9330020yi0rkkfa81rh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1496,6 +1464,10 @@ execute()
       <ul>
         
           <li>
+            <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
           </li>
         
@@ -1509,10 +1481,6 @@ execute()
         
           <li>
             <a href="/2018/01/01/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/14/Javascript深入笔记/">Javascript深入笔记</a>
           </li>
         
       </ul>

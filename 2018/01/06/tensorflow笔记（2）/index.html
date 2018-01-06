@@ -5,14 +5,18 @@
   
 
   
-  <title>Archives: 2017 | C&#39;s Notebook</title>
+  <title>tensorflow笔记 （2） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="C&#39;s Notebook">
-<meta property="og:url" content="https://cshiyuan.github.io/archives/2017/index.html">
+  <meta name="description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow笔记 （2）">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
+<meta property="og:updated_time" content="2018-01-06T16:37:01.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C&#39;s Notebook">
+<meta name="twitter:title" content="tensorflow笔记 （2）">
+<meta name="twitter:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -63,216 +67,122 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/14/Javascript深入笔记/" class="archive-article-date">
-  <time datetime="2017-09-14T07:13:17.000Z" itemprop="datePublished">Sep 14</time>
+        <section id="main"><article id="post-tensorflow笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/06/tensorflow笔记（2）/" class="article-date">
+  <time datetime="2018-01-06T13:10:20.000Z" itemprop="datePublished">2018-01-06</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/14/Javascript深入笔记/">Javascript深入笔记</a>
+    <h1 class="article-title" itemprop="name">
+      tensorflow笔记 （2）
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/15/webpack commonJS/" class="archive-article-date">
-  <time datetime="2017-06-15T11:12:35.000Z" itemprop="datePublished">Jun 15</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
-    </h1>
-  
+        <h3 id="添加一个神经层"><a href="#添加一个神经层" class="headerlink" title="添加一个神经层"></a>添加一个神经层</h3><p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
+<p> 神经层里常见的参数通常有weights、biases和激励函数。</p>
+<h3 id="实现一个训练模型"><a href="#实现一个训练模型" class="headerlink" title="实现一个训练模型"></a>实现一个训练模型</h3><p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
+<pre><code class="Python">import tensorflow as tf
+import numpy as np
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" class="archive-article-date">
-  <time datetime="2017-05-08T13:34:45.000Z" itemprop="datePublished">May 8</time>
-</a>
+
+#添加神经层的函数，有四个参数
+#输入值，输入的大小，输出的大小和激励函数
+def add_layer(input, insize, out_size, activation_function=None):
+
+    #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
+    #这里的weights为一个in_size行，out_size列的随机变量矩阵
+    Weights = tf.Variable(tf.random_normal([insize, out_size]))
+
+    #在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1
+    biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
+
+    #下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法
+    #矩阵乘法是列与行的乘法
+    Wx_plus_b = tf.matmul(inputs, Weights) + biases
+
+    if activation_function is None:
+        outputs = Wx_plus_b
+    else:
+        outputs = activation_function(Wx_plus_b)
+
+    return outputs
+
+
+#导入数据
+#构建所需的数据。这里的x_data和y_data并不是一元二次函数的关系，多加一个躁点
+x_data = np.linspace(-1, 1, 300, dtype=np.float32)[:, np.newaxis]
+#增加躁点 
+noise = np.random.normal(0, 0.05, x_data.shape).astype(np.float32)
+y_data = np.square(x_data) - 0.5 + noise
+
+xs = tf.placeholder(tf.float32, [None, 1])
+ys = tf.placeholder(tf.float32, [None, 1])
+
+#接下来，我们可以开始定义神经层了。
+#通常神经层都包括输入层、隐藏层和输出层。
+#这里输入层只有一个属性，所以我们就只有一个输入
+#隐藏层我们可以自己假设，这里我们假设隐藏层有10个神经元；
+#输出层和输入层的结构是一样的，所以我们的输出层也是只有一层。
+#所以，我们构建的是——输入层1个、隐藏层10个、输出层1个的神经网络。
+
+# -- 搭建网络
+
+#这里使用Tensorflow自带的激励函数relu
+#隐藏层
+l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
+
+#输出层
+prediction = add_layer(l1, 10 ,1,activation_function=None)
+
+#计算预测值prediction和真实值的误差，对二者差的平方求和再平均
+
+loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[1]))
+
+#接下来，是很关键的一步，如何让机器学习提升它的准确率。
+#tf.train.GradientDescentOptimizer()中的值通常都小于1，这里取的是0.1，代表以0.1的效率来最小化误差loss。
+
+train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
+
+#使用变量的时候都要对它进行初始化，这是必不可少的
+</code></pre>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/01/ABI （应用程序二进制接口)/" class="archive-article-date">
-  <time datetime="2017-05-01T07:28:20.000Z" itemprop="datePublished">May 1</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc3ko95f003kyi0rfy8wxkul" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/01/ABI （应用程序二进制接口)/">ABI （应用程序二进制接口）</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/01/摘抄Effective Objective-C 2.0 /" class="archive-article-date">
-  <time datetime="2017-05-01T06:25:49.000Z" itemprop="datePublished">May 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/01/摘抄Effective Objective-C 2.0 /">摘抄Effective Objective-C 2.0 (1)</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/06/tensorflow笔记（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tensorflow笔记（1）</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/" class="archive-article-date">
-  <time datetime="2017-04-26T09:24:05.000Z" itemprop="datePublished">Apr 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/">JavaScript学习笔记(2)(原型prototype部分）</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/26/JavaScript学习笔记 (1)/" class="archive-article-date">
-  <time datetime="2017-04-26T08:57:41.000Z" itemprop="datePublished">Apr 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/26/JavaScript学习笔记 (1)/">JavaScript学习笔记 (1)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/26/HTML DOM (Document Object Model)/" class="archive-article-date">
-  <time datetime="2017-04-26T07:20:17.000Z" itemprop="datePublished">Apr 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/26/HTML DOM (Document Object Model)/">HTML DOM (Document Object Model)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/25/Core Foundation 框架详解/" class="archive-article-date">
-  <time datetime="2017-04-25T01:50:41.000Z" itemprop="datePublished">Apr 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/25/Core Foundation 框架详解/">Core Foundation 框架详解</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/22/ICMP协议与Ping原理/" class="archive-article-date">
-  <time datetime="2017-04-22T09:51:05.000Z" itemprop="datePublished">Apr 22</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/22/ICMP协议与Ping原理/">ICMP协议与Ping原理</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="page-number" href="/archives/2017/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/6/">6</a><a class="extend next" rel="next" href="/archives/2017/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
