@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,135 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Shell-And-Base" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/06/Shell-And-Base/" class="article-date">
+  <time datetime="2018-01-06T09:17:53.000Z" itemprop="datePublished">2018-01-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Bash是什么？"><a href="#Bash是什么？" class="headerlink" title="Bash是什么？"></a>Bash是什么？</h2><p>bash是shell的一种<br>是被采用的最多的shell版本。</p>
+<p>##Shell 是什么？</p>
+<p>shell在翻译来看：</p>
+<blockquote>
+<p> n.    外壳; 炮弹; （贝、卵、坚果等的） 壳; （人的） 表面性格;</p>
+</blockquote>
+<h3 id="那它到底是什么呢？"><a href="#那它到底是什么呢？" class="headerlink" title="那它到底是什么呢？"></a>那它到底是什么呢？</h3><p>我们可以理解为shell是Linux内核的“外壳”程序？的确，shell是Linux内核和操作系统的「桥梁」，我们在操作系统的所有任务都可以通过shell来与Linux内核进行交互。shell是一个用C编写而成的程序。</p>
+<p>Linux下有许多Shell版本，有Bourne again shell(bash)、C shell(csh)、Korn shell(ksh)、Tenex C shell(tcsh)等等。</p>
+<p>虽然有这么多版本，但是shell的功能基本相同，现在许多默认的发行版本用的是默认的bash版本。</p>
+<h3 id="shell是一种解释型程序的设计语言"><a href="#shell是一种解释型程序的设计语言" class="headerlink" title="shell是一种解释型程序的设计语言"></a>shell是一种解释型程序的设计语言</h3><p>shell有定义了各种变量各种函数以及函数结构等，利用它可以编写出shell脚本程序，有点想windows的dos下的批处理文件。</p>
+<h3 id="shell又是一种命令解释程序"><a href="#shell又是一种命令解释程序" class="headerlink" title="shell又是一种命令解释程序"></a>shell又是一种命令解释程序</h3><p>我们接下来要经常使用shell是因为它是命令解释程序，shell会解释用户输入的命令，然后提交给Linux内核，最后会把结果返回给用户。</p>
+<h3 id="内置命令"><a href="#内置命令" class="headerlink" title="内置命令"></a>内置命令</h3><p>shell定义了一些内置命令，比如cd，pwd,exit等等，当用户登录到系统的时候，shell就会和这些内置命令一起加载到内存中，直到用户退出系统才停止运行。</p>
+<h3 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h3><p>除了内置命令外，Linux上还有可执行文件，这些可执行文件可以作为shell命令来执行，比如存放在/lib/ls 的 ls 就是可执行文件，它和shell内置命令的不同在于：可执行文件的命令只有在被调用的时候哦才会加载到内存中去。</p>
+<h3 id="shell命令提示符的用户区别"><a href="#shell命令提示符的用户区别" class="headerlink" title="shell命令提示符的用户区别"></a>shell命令提示符的用户区别</h3><p>当用户登录进入系统的时候，如果用的是普通用户，那么shell会以“$”表示，如果是超级用户，那么shell就会以“#”表示!<br></p>
+<h3 id="Shell命令行的格式"><a href="#Shell命令行的格式" class="headerlink" title="Shell命令行的格式"></a>Shell命令行的格式</h3><blockquote>
+<p>command [options] [argument]</p>
+</blockquote>
+<p>其中：</p>
+<ul>
+<li>command ： 命令的名字</li>
+<li>options ： 选项，它用来改变命令的执行方式，一般前面会加个“-”符号</li>
+<li>argument： 参数，指定操作的对象</li>
+</ul>
+<p>例如：</p>
+<p><code>&gt;ls -l /etc</code></p>
+<p>其中ls就是命令的名字， -l 就是指定要这个命令执行的方式，比如这里是列出目录， /etc就是参数，我们这里是对 /etc的目录进行操作。</p>
+<p>所以这句命令行的意思就是 ： 使用ls命令列出 /etc 下的所有目录。</p>
+<p>###shell命令行的用法<br>命令选项合并使用<br>比如我们要列出etc目录下的所有文件，包含隐藏文件，那么我们就会这样输入：</p>
+<p><code>ls -a -l /etc</code></p>
+<p>然后选项合并之后可以变成成这样：</p>
+<p><code>&gt;ls -al /etc</code></p>
+<p>###命令参数通配符的使用<br>shell命令的通配符的存在是为了我们在使用命令参数的时候对文件目录进行描述，比如我要查询以.sh结尾的所有文件，那么这个时候通配符就会让我们很方便的使用了。</p>
+<p>常用的通配符有以下几个：</p>
+<ul>
+<li>*　 一个或任意多个</li>
+<li>？　 任意单一字符</li>
+<li>[] 　包含在[]内的单字符<br>例如：</li>
+</ul>
+<p>列出etc下的 子目录 的所有以 .conf 结尾的文件</p>
+<p><code>ls -al /etc/*/*.conf</code></p>
+<p>列出当前目录下以a开头，随后一个为随意字母的txt文件：</p>
+<p><code>ls a?.txt</code></p>
+<p>列出当前目录下以a开头，随后三个为随意字母的txt文件：</p>
+<p><code>ls a??.txt</code></p>
+<p>列出当前目录下，以a开头，随后含有1，2，3，4的txt文件：</p>
+<p><code>ls a[1,2,3,4].txt //这里也可以写成 ls a[1-4].txt</code></p>
+<h3 id="shell重定向操作"><a href="#shell重定向操作" class="headerlink" title="shell重定向操作"></a>shell重定向操作</h3><p>有时候我们在字符窗口输入命令行的时候，可能输入源不只是我们敲入的命令行，也可能来源于某个文件，在结果输出的时候有时候数据太多，我们可能需要将它的输出定向到指定的文件，然后我们去文件里面看输出结果，还有的就是一些错误信息，我们也可以将它重定向输出，而不仅仅是在屏幕输出。</p>
+<p>所以有这三个：</p>
+<ul>
+<li>标准输入 对应的重定向操作符为 “&lt;” , “«”;</li>
+<li>标准输出 对应的重定向操作符为 “&gt;” , “»”;</li>
+<li>标准错误输出 对应的重定向操作符为 “2&gt;” , “2»“。</li>
+</ul>
+<h4 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h4><pre><code>wc &lt;&lt;/etc/shadow
+       42       42      1236
+wc &lt;&lt; b b
+&gt; hsdufhi
+&gt; wfhieurhf
+&gt; eirfuberigvber
+&gt; weifuwheifu
+&gt; huief  ieufh iu erfih
+&gt; bb
+       5       8      67
+</code></pre><p>我们看到第一个命令： wc &lt; /etc/shadow</p>
+<p>这个命令的意思就是：wc是统计命令，来源是/etc/shadow，统计的行数，单词数，字符数输出结果。</p>
+<p>第二个命令 ：</p>
+<pre><code>wc &lt;&lt; bb
+&gt; ...
+&gt; ...
+&gt; ...
+&gt; bb
+</code></pre><p>这里的 « 就是告诉命令输入源来源于 bb 和 bb之间，这个bb就是内容的分隔符，可以使任意字符，然后我们就统计到我们在bb之间的行数，单词数，字符数。</p>
+<h4 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h4><p>比如我们将结果输出放到 ls.txt 就可以这样：</p>
+<p><code>ls /etc &gt;ls.txt</code><br>如果这时候ls.txt文件不存在，那么系统会自动创建一个，如果系统已经存在了ls.txt,那么系统会将ls.txt原有的内容覆盖掉。如果不想被覆盖，那么这时候就可以用到 “»”:</p>
+<p><code>ls /etx &gt;&gt;ls.txt</code><br>这个时候将输出的内容追加到ls.txt。</p>
+<p>标准错误输出<br>标准错误输出和标准输出差不多，只不过在输出的时候是 ： <code>2&gt; error.txt;</code></p>
+<h3 id="shell管道"><a href="#shell管道" class="headerlink" title="shell管道"></a>shell管道</h3><p>管道，顾名思义，就是将第一个命令的输出当做第二个命令的输入，管道的符号为”    “,比如：<br><code>ls -l /etc |more</code><br>将 /etc 下的目录输出，然后用more的进行分屏显示。</p>
+<h3 id="shell的转义"><a href="#shell的转义" class="headerlink" title="shell的转义"></a>shell的转义</h3><p>shell的命令有一些特殊的字符是有含义的，我们在使用它们的时候要进行转义才可以使用。比如刚才我们已经知道 ？ 是一个通配符，代表一个任意字符， 但是如果我们真的有一个文件叫做 abc？呢，我们就不能把？当做通配符来使用，这时候就对它进行转义，让系统知道这是真正文件名。</p>
+<p>那么转义字符有： 反斜杠（\） 、双引号（”“）、单引号（’‘）。</p>
+<p>比如我要列出abc？这个文件下的所有目录：</p>
+<p><code>ls -l abc/?/*</code></p>
+<p>也可以这样写：</p>
+<p><code>`ls -l &#39;abc?/*&#39;</code></p>
+<p>也可以这样写：</p>
+<p><code>ls -l &quot;abc?/*&quot;</code></p>
+<p>当然了对于一些更特殊的字符即使我们使用了转义字符，它也会保留自己，比如 “$” ,”`” ,””</p>
+<p>比如这里我用 “” 对 ` 进行转义是无效的：</p>
+<pre><code>echo this is &quot;`hostname`&quot;
+this is mymacbook.local
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cjc369ezg002i030rbiibk82i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-到头来还是从自建wordpress转移到了github.io" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -96,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc0qgi0q0046aq0rrgyc7wbw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc369f100048030rojnupx28" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc0qghzh002zaq0rc4qs8cip" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc369f07003a030roqq1og1g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc0qghxs001caq0rv49w2j3u" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc369eyh001d030ry63sgwn5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -239,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc0qgi01003haq0ri2zqvbxw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc369f0f003i030rbw02329k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc0qgi1a004iaq0rfvbrn04r" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc369f1c004g030r203chf54" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc0qghxa000oaq0r5v2a6dx7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc369exu000h030r72xi8ii3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,7 +557,7 @@ NSString *const EOCStringConstant = @“VALUE”;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc0qgi1o0052aq0ruu66d1w7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc369f1p0054030r8k2yxhyj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,7 +739,7 @@ xiaoming.grade; // 1
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/" data-id="cjc0qghxr001aaq0rmqzynmba" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/" data-id="cjc369eye0018030ruj251rei" class="article-share-link">Share</a>
       
       
     </footer>
@@ -728,62 +857,7 @@ x = x + 2;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记 (1)/" data-id="cjc0qghxn0015aq0rwbt8qd6u" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-HTML DOM (Document Object Model)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/26/HTML DOM (Document Object Model)/" class="article-date">
-  <time datetime="2017-04-26T07:20:17.000Z" itemprop="datePublished">2017-04-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/26/HTML DOM (Document Object Model)/">HTML DOM (Document Object Model)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HTML DOM是HTML Document Object Model(<a href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">文档对象模型</a>)的缩写，HTML DOM则是专门适用于HTML/XHTML的文档对象模型。</p>
-<p>熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。</p>
-<hr>
-<h2 id="相关介绍"><a href="#相关介绍" class="headerlink" title="相关介绍"></a>相关介绍</h2><p>DOM是Document Object Model<a href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">文档对象模型</a>的缩写。根据W3C DOM规范，DOM是一种与浏览器，平台，语言无关的接口，使得你可以访问页面中其他的标准组件。<br>简单理解，DOM解决了Netscape的JavaScript和 Microsoft的JavaScript之间的冲突，给予web设计师和开发者一个标准的方法，让他们来访问他们站点中的数据、脚本和表现层对象。<br>DOM是以<a href="http://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84" target="_blank" rel="noopener">层次结构</a>组织的节点或信息片断的集合。这个层次结构允许开发人员在树中导航寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而 DOM 被认为是基于树或基于对象的。HTML DOM 定义了访问和操作HTML文档的标准方法。  </p>
-<p>HTML DOM 把 HTML 文档呈现为带有元素、属性和文本的树结构（节点树）。</p>
-<hr>
-<p></p>
-<h2 id="节点信息"><a href="#节点信息" class="headerlink" title="节点信息"></a>节点信息</h2><p>每个<a href="http://baike.baidu.com/item/%E8%8A%82%E7%82%B9" target="_blank" rel="noopener">节点</a>都拥有包含着关于节点某些信息的属性。这些属性是：<br>nodeName（节点名称）nodeValue（节点值）nodeType（节点类型）</p>
-<hr>
-<h2 id="HTML-DOM-方法"><a href="#HTML-DOM-方法" class="headerlink" title="HTML DOM 方法"></a>HTML DOM 方法</h2><p>方法是我们可以在节点（HTML 元素）上执行的动作。</p>
-<h3 id="编程接口"><a href="#编程接口" class="headerlink" title="编程接口"></a>编程接口</h3><p></p>
-<div class="para">可通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问。</div><br><div class="para">所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。</div><br><div class="para">方法是您能够执行的动作（比如添加或修改元素）。</div><br><div class="para">属性是您能够获取或设置的值（比如节点的名称或内容）</div><br><div class="para-title level-3"><br><br>### HTML DOM 对象 - 方法和属性<br><br>##### 一些常用的 HTML DOM 方法：<br><br><em>  getElementById(id) - 获取带有指定 id 的节点（元素）
-</em>  appendChild(node) - 插入新的子节点（元素）<br><em>  removeChild(node) - 删除子节点（元素）<br><br><br>##### 一些常用的 HTML DOM 属性：
-
-</em>  innerHTML - 节点（元素）的文本值<br><em>  parentNode - 节点（元素）的父节点
-</em>  childNodes - 节点（元素）的子节点<br>*  attributes - 节点（元素）的属性节点<br><div class="para-title level-3"><br><br>### 一些 DOM 对象方法<br><br></div><br><div class="para">下面列出一些常用的 DOM 对象方法：</div><br><table class="reference"><br><tbody><br><tr><br><th><br><pre class="para">方法</pre><br></th><br><th><br><pre class="para">描述</pre><br></th><br></tr><br><tr><br><td><br><pre class="para">getElementById()</pre><br></td><br><td><br><pre class="para"> 返回带有指定 ID 的元素。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getElementsByTagName()</pre><br></td><br><td><br><pre class="para"> 返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getElementsByClassName()</pre><br></td><br><td><br><pre class="para"> 返回包含带有指定类名的所有元素的节点列表。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">appendChild()</pre><br></td><br><td><br><pre class="para"> 把新的子节点添加到指定节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">removeChild()</pre><br></td><br><td><br><pre class="para"> 删除子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">replaceChild()</pre><br></td><br><td><br><pre class="para"> 替换子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">insertBefore()</pre><br></td><br><td><br><pre class="para"> 在指定的子节点前面插入新的子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createAttribute()</pre><br></td><br><td><br><pre class="para"> 创建属性节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createElement()</pre><br></td><br><td><br><pre class="para"> 创建元素节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createTextNode()</pre><br></td><br><td><br><pre class="para"> 创建文本节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getAttribute()</pre><br></td><br><td><br><pre class="para"> 返回指定的属性值。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">setAttribute()</pre><br></td><br><td><br><pre class="para"> 把指定属性设置或修改为指定的值。</pre><br></td><br></tr><br></tbody><br></table><br></div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/HTML DOM (Document Object Model)/" data-id="cjc0qghxi000yaq0retae1hbl" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记 (1)/" data-id="cjc369eyc0016030r9edsv19e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -797,7 +871,7 @@ x = x + 2;
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -806,7 +880,7 @@ x = x + 2;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -821,7 +895,7 @@ x = x + 2;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -831,9 +905,13 @@ x = x + 2;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
@@ -849,10 +927,6 @@ x = x + 2;
         
           <li>
             <a href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
           </li>
         
       </ul>

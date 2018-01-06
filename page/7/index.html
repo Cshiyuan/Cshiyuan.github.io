@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,122 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" class="article-date">
+  <time datetime="2016-10-04T08:10:32.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/">ShadowsocksR安装  采用chacha20加密net-speeder和配置参数优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>安装服务端的时候推荐启用 chacha20 加密（逼格高），默认的 aes-256-cfb 加密速度较慢，当然你也可以启用最快的 CR4-MD5 加密算法，就是加密弱一些。另外，建议启用搬瓦工的 IPv6 并在 shadowsocksR 配置启用IPv6，走代理的时候就能访问一些只有在 IPv6 下才能访问的网站。</p>
+<p>ChaCha20加密（chacha20 依赖 libsodium，以下是编译安装 libsodium 的方法：）</p>
+<pre><code>yum install gcc gcc-c++
+wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+tar zxf LATEST.tar.gz
+cd libsodium*
+./configure
+make &amp;&amp; make install
+echo /usr/local/lib &gt; /etc/ld.so.conf.d/usr_local_lib.conf
+ldconfig
+</code></pre><p>使用shell脚本安装ShadowsocksR</p>
+<pre><code>wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+chmod +x shadowsocksR.sh
+./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log
+</code></pre><p><em><strong>到此为止就安装完毕了</strong></em></p>
+<p><strong>接下来优化</strong></p>
+<p>修改配置文件：<code>vi /etc/shadowsocks.json</code> (按<code>i</code>编辑，按<code>Ctrl+C</code>退出编辑，<code>:x</code>保存并退出)</p>
+<p>将<span class="crayon-h"> method字段修改为 </span><strong><span class="crayon-s">“method”</span><span class="crayon-o">:</span> <span class="crayon-s">“chacha20”  （修改加密方式)</span></strong></p>
+<p><strong>维护常用的几个命令</strong></p>
+<ul>
+<li>启动：<code>/etc/init.d/shadowsocks start</code></li>
+<li>停止：<code>/etc/init.d/shadowsocks stop</code></li>
+<li>重启：<code>/etc/init.d/shadowsocks restart</code></li>
+<li>状态：<code>/etc/init.d/shadowsocks status</code></li>
+<li>卸载：需要root用户权限，运行<code>./shadowsocks.sh uninstall</code></li>
+<li>更新：<code>pip install -U shadowsocks</code></li>
+</ul>
+<p><strong>安装Net-Speeder</strong></p>
+<p>Net-Speeder是一个linux软件，主要目的是为了解决丢包问题，实现TCP双倍发送，也就是同一份数据包发送两份。这样的话在服务器带宽充足情况下，丢包率会平方级降低。网络传输速度也会有所提升。</p>
+<p><strong>安装方式</strong></p>
+<ul>
+<li>第一步，下载wget <a href="https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh" target="_blank" rel="noopener">https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh</a></li>
+<li><p>第二部，编译并安装<br>bash net_speeder-installer.sh</p>
+</li>
+<li><p>第三部，端口加速</p>
+</li>
+</ul>
+<pre><code>nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;
+</code></pre><ul>
+<li>加入自启动</li>
+</ul>
+<pre><code>echo &quot;nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;&quot; &gt;&gt; /etc/rc.local
+</code></pre><p><strong>参数优化.(参照这里：<a href="https://shadowsocks.org/en/config/advanced.html" target="_blank" rel="noopener">https://shadowsocks.org/en/config/advanced.html</a>)</strong></p>
+<p>首先将服务器内核升级到3.5或更高。</p>
+<pre><code>vi /etc/security/limits.conf
+</code></pre><p>添加两行：</p>
+<pre><code>* soft nofile 51200
+* hard nofile 51200
+</code></pre><p>设置ulimit：</p>
+<pre><code>ulimit -n 51200
+</code></pre><p>然后编辑 sysctl.conf</p>
+<pre><code>/etc/sysctl.conf
+</code></pre><p>&nbsp;</p>
+<pre><code>fs.file-max = 51200
+
+net.core.rmem_max = 67108864
+net.core.wmem_max = 67108864
+net.core.netdev_max_backlog = 250000
+net.core.somaxconn = 4096
+
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_fin_timeout = 30
+net.ipv4.tcp_keepalive_time = 1200
+net.ipv4.ip_local_port_range = 10000 65000
+net.ipv4.tcp_max_syn_backlog = 8192
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_mem = 25600 51200 102400
+net.ipv4.tcp_rmem = 4096 87380 67108864
+net.ipv4.tcp_wmem = 4096 65536 67108864
+net.ipv4.tcp_mtu_probing = 1
+net.ipv4.tcp_congestion_control = hybla
+</code></pre><p>加载配置：</p>
+<pre><code>sysctl -p
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjc369eze002g030rrs8ho3gz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Xcode 8" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -96,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjc0qghzc002taq0r84ncprie" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjc369ezp002s030rlq86uy5l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjc0qgi1g004qaq0rrw17phbx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjc369f1j004s030rnw7288w9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjc0qgi2h005qaq0r697nv53p" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjc369f23005q030rljubueuv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/21/Mac卸载各种软件的目录地址/" data-id="cjc0qghxu001eaq0r54n2v086" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/21/Mac卸载各种软件的目录地址/" data-id="cjc369eyj001f030rcaxkv80y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -301,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/08/iOS设计模式/" data-id="cjc0qghzj0031aq0rsrqacv3s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/08/iOS设计模式/" data-id="cjc369ezx0030030rwcn6kcgn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjc0qghzf002xaq0r550xndt8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjc369ezt002w030rpicdbtn4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -399,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/眼睛是个筛子/" data-id="cjc0qgi26005eaq0r3oh7da4w" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/眼睛是个筛子/" data-id="cjc369f1w005e030rn0qxcjnk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/05/我最好的作品是我的生活－杜尚/" data-id="cjc0qgi1l004yaq0r7bc22g3j" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/05/我最好的作品是我的生活－杜尚/" data-id="cjc369f1m004y030rujg79vkk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -493,74 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/31/ORM/" data-id="cjc0qghy6001naq0rt2x53izt" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-闲谈" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/28/闲谈/" class="article-date">
-  <time datetime="2016-08-27T16:37:56.000Z" itemprop="datePublished">2016-08-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活杂谈/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/28/闲谈/">闲谈</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我觉得嘛。一个闲云野鹤的年轻人，你要拿什么去哄骗他的未来。</p>
-<p>这么多年，思考很多。从对于自身，从不控制，到控制，再到不控制。</p>
-<p>从年轻的偏激，再到追求对所有认知的深刻，可最后发现深刻到最后。</p>
-<p>还是回到原点，深刻是不必须的。深刻的根本仍旧是浅显。</p>
-<p>认识到这点，大概是从辩证法在生活中的极其平庸性开始发现的。</p>
-<p>因为辩证法对于一切的东西，总是动不动就有利有弊的。</p>
-<p>但是如果一个人对于东西的看法总是尝试用辩证法去看待。</p>
-<p>那么看法就会变得很平面化和无趣。或者说，你会发现，辩证法是垃圾，最不出彩的看法了。</p>
-<p>所以我病态的爱着我的病态。那些我不合理，不理性的部分。</p>
-<ul>
-<li><p>恋爱就是一边decode彼此，一边encode一个只有彼此能懂的世界吧</p>
-</li>
-<li><p>我们永远无法了解一个人经历了什么，因为每个人生来都是孤独的，所以不恶意揣测，尊重个人选择。</p>
-</li>
-<li><p>允许自己有错，承认自身的人性缺点，才更容易控制自己的本身缺点，比如嫉妒，愤怒，偏见，懒惰。</p>
-</li>
-<li><p>不要去听什么乱七八糟的人生谏言。要有自己的东西。鸡汤都是垃圾。</p>
-</li>
-<li><p>只有当你接受你将孤独终老这一事实后，你才能找到另一个孤独的灵魂一起携手前行。</p>
-</li>
-<li><p>有些事情，不是你都明白了，什么都懂了。而是说你不明白的事情你不想明白了。之前你每件事你都想明白，每个人你都想仔细把他看透，到底怎么回事。甚至你想去理解这个时代，这个社会。但其实我们明白不了，我们连自己最爱的人坐对面，你都不可能全明白。有些事情不明白就是生活的慌张，后来等老了才发现，那慌张就是青春。不慌张，青春就没了。</p>
-</li>
-<li><p>我自身对梦的认识：做梦是人的记忆整理，就如我们不会记得一个星期前的你现在在干什么。我想象我们的记忆是梦境和现实经历的结合。不过我们大脑会将与现实不符合，光怪陆离的记忆归为梦，而正常符合猜想的记忆归为现实经历。也就是说，其实我们每个人的记忆早就是不干不净的了。</p>
-</li>
-<li><p>外人看来，情侣间总爱做一些以为感动了自己就能感动对方的事情，但当事人浑然不知，只怪陷入爱里面</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/28/闲谈/" data-id="cjc0qgi2q005waq0r9pa28hgp" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/31/ORM/" data-id="cjc369eyn001k030rdfh9ueyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -574,7 +623,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -583,7 +632,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -598,7 +647,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -608,9 +657,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
@@ -626,10 +679,6 @@
         
           <li>
             <a href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
           </li>
         
       </ul>
