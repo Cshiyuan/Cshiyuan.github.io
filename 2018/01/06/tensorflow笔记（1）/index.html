@@ -5,20 +5,18 @@
   
 
   
-  <title>ipa的组成 | C&#39;s Notebook</title>
+  <title>tensorflow笔记（1） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：  事实上，ipa文件只是一个zip包，可以使用如下命令解压：   /usr/bin/unzip -q xxx.ipa -d &amp;amp;lt;destination&amp;amp;gt; 解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：  资源文件，例如图片、html、等等。 _CodeSignature/Code">
+  <meta name="description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。   在卷积神经网络(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ipa的组成">
-<meta property="og:url" content="https://cshiyuan.github.io/2017/03/13/ipa的组成/index.html">
+<meta property="og:title" content="tensorflow笔记（1）">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：  事实上，ipa文件只是一个zip包，可以使用如下命令解压：   /usr/bin/unzip -q xxx.ipa -d &amp;amp;lt;destination&amp;amp;gt; 解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：  资源文件，例如图片、html、等等。 _CodeSignature/Code">
-<meta property="og:image" content="http://pchou.qiniudn.com/ipa%E7%BB%84%E6%88%90.png">
-<meta property="og:updated_time" content="2018-01-04T16:16:42.728Z">
+<meta property="og:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。   在卷积神经网络(">
+<meta property="og:updated_time" content="2018-01-06T12:49:10.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ipa的组成">
-<meta name="twitter:description" content="iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：  事实上，ipa文件只是一个zip包，可以使用如下命令解压：   /usr/bin/unzip -q xxx.ipa -d &amp;amp;lt;destination&amp;amp;gt; 解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：  资源文件，例如图片、html、等等。 _CodeSignature/Code">
-<meta name="twitter:image" content="http://pchou.qiniudn.com/ipa%E7%BB%84%E6%88%90.png">
+<meta name="twitter:title" content="tensorflow笔记（1）">
+<meta name="twitter:description" content="激励函数（激活函数）为了神经网络实现非线性的任务，所引入的方式。激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。  不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。   在卷积神经网络(">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -69,14 +67,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-ipa的组成" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-tensorflow笔记（1）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/13/ipa的组成/" class="article-date">
-  <time datetime="2017-03-13T08:21:19.000Z" itemprop="datePublished">2017-03-13</time>
+    <a href="/2018/01/06/tensorflow笔记（1）/" class="article-date">
+  <time datetime="2018-01-06T11:50:56.000Z" itemprop="datePublished">2018-01-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/tensorflow/">tensorflow</a>
   </div>
 
   </div>
@@ -87,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ipa的组成
+      tensorflow笔记（1）
     </h1>
   
 
@@ -95,25 +93,105 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：</p>
-<p><img src="http://pchou.qiniudn.com/ipa%E7%BB%84%E6%88%90.png" alt=""></p>
-<p>事实上，ipa文件只是一个zip包，可以使用如下命令解压：</p>
-<div class="highlighter-rouge">
+        <h4 id="激励函数（激活函数）"><a href="#激励函数（激活函数）" class="headerlink" title="激励函数（激活函数）"></a>激励函数（激活函数）</h4><p>为了神经网络实现非线性的任务，所引入的方式。<br>激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。<br>不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。</p>
+<blockquote>
+<p>不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。</p>
+</blockquote>
+<ul>
+<li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu. </li>
+<li>在循环神经网络中(recurrent neural networks), 推荐的是 tanh 或者是 relu</li>
+</ul>
+<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre><code class="Python">import tensorflow as tf
+import numpy as np
 
-<pre><code>/usr/bin/unzip -q xxx.ipa -d &amp;lt;destination&amp;gt;
-</code></pre><p></p></div><br>解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：<p></p>
-<ol>
-<li>资源文件，例如图片、html、等等。</li>
-<li>_CodeSignature/CodeResources。这是一个plist文件，可用文本查看，其中的内容就是是程序包中（不包括Frameworks）所有文件的签名。注意这里是<code>所有文件</code>。意味着你的程序一旦签名，就不能更改其中任何的东西，包括资源文件和可执行文件本身。iOS系统会检查这些签名。</li>
-<li>可执行文件。此文件跟资源文件一样需要签名。</li>
-<li>一个mobileprovision文件.打包的时候使用的，从MC上生成的。</li>
-<li>Frameworks。程序引用的非系统自带的Frameworks，每个Frameworks其实就是一个app，其中的结构应该和app差不多，也包含签名信息CodeResources文件</li>
-</ol>
+#create data
+x_data = np.random.rand(100).astype(np.float32)
+y_data = x_data * 0.1 + 0.3
+
+#搭建模型
+Weights = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+biases = tf.Variable(tf.zeros([1]))
+y = Weights * x_data + biases
+
+#计算误差
+loss = tf.reduce_mean(tf.square(y - y_data))
+
+#传播误差  使用的误差传递方法是梯度下降法
+optimizer = tf.train.GradientDescentOptimizer(0.5)
+train = optimizer.minimize(loss)
+
+#训练
+init = tf.global_variables_initializer()  #初始化
+sess = tf.Session()
+sess.run(init)
+
+for step in range(201):
+    sess.run(train)
+    if step % 20 == 0:
+        print(step, sess.run(Weights), sess.run(biases))
+</code></pre>
+<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre><code class="Python">import tensorflow as tf
+
+#在tensorflow 中需要定义placeholder的type，yi ban
+input1 = tf.placeholder(tf.float32)
+input2 = tf.placeholder(tf.float32)
+
+# mul = multiply 是将input1和input2 做乘法运算
+output = tf.multiply(input1, input2)
+
+#传值的工作交给了sess.run()
+
+with tf.Session() as sess:
+    print(sess.run(output, feed_dict={input1: [7.], input2: [2.]}))
+</code></pre>
+<p>####session使用例子</p>
+<pre><code class="Python">import tensorflow as tf
+
+martrix1 = tf.constant([[3, 3]])
+martrix2 = tf.constant([[2], [2]])
+product = tf.matmul(martrix1, martrix2)
+
+# product
+# method 1
+sess = tf.Session()
+result = sess.run(product)
+print(result)
+sess.close()
+#[[12]]d
+
+# method 2
+with tf.Session() as sess:
+    result2 = sess.run(product)
+    print(result2)
+</code></pre>
+<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre><code class="Python">import tensorflow as tf
+
+state = tf.Variable(0, name=&quot;counter&quot;)
+
+#定义常量one
+one = tf.constant(1)
+
+#定义加法步骤(注：此步并没有直接计算)
+new_value = tf.add(state, one)
+
+#将State更新成new_value
+update = tf.assign(state, new_value)
+
+# 如果定义Variable，就一定要initialize
+init = tf.global_variables_initializer()
+# 
+#
+with tf.Session() as sess:
+    sess.run(init)
+    for _ in range(3):
+        sess.run(update)
+        print(sess.run(state))
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc3cjbbl0034jq0ryakojsuw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc3cjbbv003ejq0rh6eiq0eu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -122,19 +200,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          POST git-receive-pack (chunked)问题解决方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/12/非对称加密算法和摘要算法/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/01/06/Shell-And-Base/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">非对称加密算法和摘要算法</div>
+      <div class="article-nav-title">Shell And Base</div>
     </a>
   
 </nav>

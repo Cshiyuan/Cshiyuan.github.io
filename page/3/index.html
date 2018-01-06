@@ -65,6 +65,317 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-哈希排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/哈希排序/" class="article-date">
+  <time datetime="2017-04-14T06:54:31.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/哈希排序/">哈希排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一部分：Top-K-算法详解"><a href="#第一部分：Top-K-算法详解" class="headerlink" title="第一部分：Top K 算法详解"></a>第一部分：Top K 算法详解</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>百度面试题：</p>
+<p><a href="http://lib.csdn.net/base/searchengine" title="搜索引擎知识库" target="_blank" rel="noopener">搜索引擎</a>会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节。</p>
+<p>假设目前有一千万个记录（这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就是越热门。）</p>
+<p>请你统计最热门的10个查询串，要求使用的内存不能超过1G。</p>
+<p>必备知识：</p>
+<h2 id="什么是哈希表？"><a href="#什么是哈希表？" class="headerlink" title="什么是哈希表？"></a>什么是哈希表？</h2><p>哈希表（Hash table，也叫散列表），是根据关键码值(Key value)而直接进行访问的<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">数据结构</a>。</p>
+<p>也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。</p>
+<p>这个映射函数叫做散列函数，存放记录的数组叫做散列表。(常用的数组就是一个哈希表)</p>
+<p>哈希表的做法其实很简单，就是把Key通过一个固定的<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。</p>
+<p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位（文章第二、三部分，会针对Hash表详细阐述）。</p>
+<h2 id="问题解析："><a href="#问题解析：" class="headerlink" title="问题解析："></a>问题解析：</h2><p>要统计最热门查询，首先就是要统计每个Query出现的次数，然后根据统计结果，找出Top 10。</p>
+<p>所以我们可以基于这个思路分两步来设计该算法。</p>
+<p>即，此问题的解决分为以下俩个步骤：</p>
+<hr>
+<h2 id="第一步：Query统计"><a href="#第一步：Query统计" class="headerlink" title="第一步：Query统计"></a>第一步：Query统计</h2><h3 id="Query统计有以下俩个方法，可供选择："><a href="#Query统计有以下俩个方法，可供选择：" class="headerlink" title="Query统计有以下俩个方法，可供选择："></a>Query统计有以下俩个方法，可供选择：</h3><h4 id="1、直接排序法"><a href="#1、直接排序法" class="headerlink" title="1、直接排序法"></a>1、直接排序法</h4><p>首先我们最先想到的的算法就是排序了，首先对这个日志里面的所有Query都进行排序，然后再遍历排好序的Query，统计每个Query出现的次数了。</p>
+<p>但是题目中有明确要求，那就是内存不能超过1G，一千万条记录，每条记录是225Byte，很显然要占据2.55G内存，这个条件就不满足要求了。</p>
+<p>让我们回忆一下数据结构课程上的内容，当数据量比较大而且内存无法装下的时候，我们可以采用外排序的方法来进行排序，这里我们可以采用归并排序，因为归并排序有一个比较好的时间复杂度O(NlgN)。</p>
+<p>排完序之后我们再对已经有序的Query文件进行遍历，统计每个Query出现的次数，再次写入文件中。</p>
+<p>综合分析一下，排序的时间复杂度是O(NlgN)，而遍历的时间复杂度是O(N)，因此该算法的总体时间复杂度就是O(N+NlgN)=O（NlgN）。</p>
+<h4 id="2、Hash-Table法"><a href="#2、Hash-Table法" class="headerlink" title="2、Hash Table法"></a>2、Hash Table法</h4><p>在第1个方法中，我们采用了排序的办法来统计每个Query出现的次数，时间复杂度是NlgN，那么能不能有更好的方法来存储，而时间复杂度更低呢？</p>
+<p>题目中说明了，虽然有一千万个Query，但是由于重复度比较高，因此事实上只有300万的Query，每个Query255Byte，因此我们可以考虑把他们都放进内存中去，而现在只是需要一个合适的数据结构，在这里，Hash Table绝对是我们优先的选择，因为Hash Table的查询速度非常的快，几乎是O(1)的时间复杂度。</p>
+<p>那么，我们的算法就有了：维护一个Key为Query字串，Value为该Query出现次数的HashTable，每次读取一个Query，如果该字串不在Table中，那么加入该字串，并且将Value值设为1；</p>
+<p>如果该字串在Table中，那么将该字串的计数加一即可。最终我们在O(N)的时间复杂度内完成了对该海量数据的处理。</p>
+<p>本方法相比算法1：在时间复杂度上提高了一个数量级，为O（N），但不仅仅是时间复杂度上的优化，该方法只需要IO数据文件一次，而算法1的IO次数较多的，因此该算法2比算法1在工程上有更好的可操作性。</p>
+<hr>
+<h3 id="第二步：找出Top-10"><a href="#第二步：找出Top-10" class="headerlink" title="第二步：找出Top 10"></a>第二步：找出Top 10</h3><h4 id="算法一：普通排序"><a href="#算法一：普通排序" class="headerlink" title="算法一：普通排序"></a>算法一：普通排序</h4><p>我想对于排序算法大家都已经不陌生了，这里不在赘述，我们要注意的是排序算法的时间复杂度是NlgN，在本题目中，三百万条记录，用1G内存是可以存下的。</p>
+<h4 id="算法二：部分排序"><a href="#算法二：部分排序" class="headerlink" title="算法二：部分排序"></a>算法二：部分排序</h4><p>题目要求是求出Top 10，因此我们没有必要对所有的Query都进行排序，我们只需要维护一个10个大小的数组，初始化放入10个Query，按照每个Query的统计次数由大到小排序，然后遍历这300万条记录，每读一条记录就和数组最后一个Query对比，如果小于这个Query，那么继续遍历，否则，将数组中最后一条数据淘汰，加入当前的Query。</p>
+<p>最后当所有的数据都遍历完毕之后，那么这个数组中的10个Query便是我们要找的Top10了。</p>
+<p>不难分析出，这样，算法的最坏时间复杂度是N*K， 其中K是指top多少。</p>
+<h3 id="算法三：堆"><a href="#算法三：堆" class="headerlink" title="算法三：堆"></a>算法三：堆</h3><p>在算法二中，我们已经将时间复杂度由NlogN优化到NK，不得不说这是一个比较大的改进了，可是有没有更好的办法呢？</p>
+<p>分析一下，在算法二中，每次比较完成之后，需要的操作复杂度都是K，因为要把元素插入到一个线性表之中，而且采用的是顺序比较。这里我们注意一下，该数组是有序的，一次我们每次查找的时候可以采用二分的方法查找，这样操作的复杂度就降到了logK，可是，随之而来的问题就是数据移动，因为移动数据次数增多了。不过，这个算法还是比算法二有了改进。</p>
+<p>基于以上的分析，我们想想，有没有一种既能快速查找，又能快速移动元素的数据结构呢？回答是肯定的，那就是堆。</p>
+<p>借助堆结构，我们可以在log量级的时间内查找和调整/移动。因此到这里，我们的算法可以改进为这样，维护一个K(该题目中是10)大小的小根堆，然后遍历300万的Query，分别和根元素进行对比。</p>
+<p>思想与上述算法二一致，只是算法在算法三，我们采用了最小堆这种数据结构代替数组，把查找目标元素的时间复杂度有O（K）降到了O（logK）。</p>
+<p>那么这样，采用堆数据结构，算法三，最终的时间复杂度就降到了N‘logK，和算法二相比，又有了比较大的改进。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>至此，算法就完全结束了，经过上述第一步、先用Hash表统计每个Query出现的次数，O（N）；然后第二步、采用堆数据结构找出Top 10，N<em>O（logK）。所以，我们最终的时间复杂度是：O（N） + N’</em>O（logK）。（N为1000万，N’为300万）。如果各位有什么更好的算法，欢迎留言评论。第一部分，完。</p>
+<hr>
+<h2 id="第二部分、Hash表-算法的详细解析"><a href="#第二部分、Hash表-算法的详细解析" class="headerlink" title="第二部分、Hash表 算法的详细解析"></a>第二部分、Hash表 算法的详细解析</h2><h2 id="什么是Hash"><a href="#什么是Hash" class="headerlink" title="什么是Hash"></a><a name="t12"></a>什么是Hash</h2><p>Hash，一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。</p>
+<p>HASH主要用于信息安全领域中加密算法，它把一些不同长度的信息转化成杂乱的128位的编码,这些编码值叫做HASH值. 也可以说，hash就是找到一种数据内容和数据存放地址之间的映射关系。</p>
+<p>数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？答案是肯定的，这就是我们要提起的哈希表，哈希表有多种不同的实现方法，我接下来解释的是最常用的一种方法——拉链法，我们可以理解为“链表的数组”，如图：</p>
+<p>左边很明显是个数组，数组的每个成员包括一个指针，指向一个链表的头，当然这个链表可能为空，也可能元素很多。我们根据元素的一些特征把元素分配到不同的链表中去，也是根据这些特征，找到正确的链表，再从链表中找出这个元素。</p>
+<p>&nbsp;</p>
+<p>元素特征转变为数组下标的方法就是散列法。散列法当然不止一种，下面列出三种比较常用的：</p>
+<p>1，除法散列法</p>
+<p>最直观的一种，上图使用的就是这种散列法，公式：</p>
+<p>index = value % 16</p>
+<p>学过汇编的都知道，求模数其实是通过一个除法运算得到的，所以叫“除法散列法”。</p>
+<p>2，平方散列法</p>
+<p>求index是非常频繁的操作，而乘法的运算要比除法来得省时（对现在的CPU来说，估计我们感觉不出来），所以我们考虑把除法换成乘法和一个位移操作。公式：</p>
+<p>index = (value * value) &gt;&gt; 28  （右移，除以2^28。记法：左移变大，是乘。右移变小，是除。）</p>
+<p>如果数值分配比较均匀的话这种方法能得到不错的结果，但我上面画的那个图的各个元素的值算出来的index都是0——非常失败。也许你还有个问题，value如果很大，value * value不会溢出吗？答案是会的，但我们这个乘法不关心溢出，因为我们根本不是为了获取相乘结果，而是为了获取index。</p>
+<p>3，斐波那契（Fibonacci）散列法</p>
+<p>平方散列法的缺点是显而易见的，所以我们能不能找出一个理想的乘数，而不是拿value本身当作乘数呢？答案是肯定的。</p>
+<p>1，对于16位整数而言，这个乘数是40503</p>
+<p>2，对于32位整数而言，这个乘数是2654435769</p>
+<p>3，对于64位整数而言，这个乘数是11400714819323198485</p>
+<p>这几个“理想乘数”是如何得出来的呢？这跟一个法则有关，叫黄金分割法则，而描述黄金分割法则的最经典表达式无疑就是著名的斐波那契数列，即如此形式的序列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610， 987, 1597, 2584, 4181, 6765, 10946，…。另外，斐波那契数列的值和太阳系八大行星的轨道半径的比例出奇吻合。</p>
+<p>对我们常见的32位整数而言，公式：</p>
+<p>index = (value * 2654435769) &gt;&gt; 28</p>
+<p>如果用这种斐波那契散列法的话，那上面的图就变成这样了：</p>
+<p>很明显，用斐波那契散列法调整之后要比原来的取摸散列法好很多。</p>
+<p>适用范围</p>
+<p>快速查找，删除的基本数据结构，通常需要总数据量可以放入内存。</p>
+<p>基本原理及要点</p>
+<p>hash函数选择，针对字符串，整数，排列，具体相应的hash方法。</p>
+<p>碰撞处理，一种是openhashing，也称为拉链法；另一种就是closedhashing，也称开地址法，openedaddressing。</p>
+<p>扩展</p>
+<p>d-left hashing中的d是多个的意思，我们先简化这个问题，看一看2-left hashing。2-left hashing指的是将一个哈希表分成长度相等的两半，分别叫做T1和T2，给T1和T2分别配备一个哈希函数，h1和h2。在存储一个新的key时，同 时用两个哈希函数进行计算，得出两个地址h1[key]和h2[key]。这时需要检查T1中的h1[key]位置和T2中的h2[key]位置，哪一个 位置已经存储的（有碰撞的）key比较多，然后将新key存储在负载少的位置。如果两边一样多，比如两个位置都为空或者都存储了一个key，就把新key 存储在左边的T1子表中，2-left也由此而来。在查找一个key时，必须进行两次hash，同时查找两个位置。</p>
+<h2 id="问题实例（海量数据处理）"><a href="#问题实例（海量数据处理）" class="headerlink" title="问题实例（海量数据处理）"></a><a name="t13"></a>问题实例（海量数据处理）</h2><p>我们知道hash 表在海量数据处理中有着广泛的应用，下面，请看另一道百度面试题：</p>
+<p>题目：海量日志数据，提取出某日访问百度次数最多的那个IP。</p>
+<p>方案：IP的数目还是有限的，最多2^32个，所以可以考虑使用hash将ip直接存入内存，然后进行统计。</p>
+<h1 id="第三部分、最快的Hash表算法"><a href="#第三部分、最快的Hash表算法" class="headerlink" title="第三部分、最快的Hash表算法"></a><a name="t14"></a>第三部分、最快的Hash表算法</h1><p>接下来，咱们来具体分析一下一个最快的Hasb表算法。</p>
+<p>我们由一个简单的问题逐步入手：有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它，你会怎么做？有一个方法最简单，老老实实从头查到尾，一个一个比较，直到找到为止，我想只要学过程序设计的人都能把这样一个程序作出来，但要是有程序员把这样的程序交给用户，我只能用无语来评价，或许它真的能工作，但…也只能如此了。</p>
+<p>最合适的算法自然是使用HashTable（哈希表），先介绍介绍其中的基本知识，所谓Hash，一般是一个整数，通过某种算法，可以把一个字符串”压缩” 成一个整数。当然，无论如何，一个32位整数是无法对应回一个字符串的，但在程序中，两个字符串计算出的Hash值相等的可能非常小，下面看看在MPQ中的Hash算法：</p>
+<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><pre><code>1.  prepareCryptTable()
+2.  {
+3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;
+4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )
+6.  {
+7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )
+8.  {
+9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;
+10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;
+12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;
+13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;
+15.  temp2 = (seed &amp;amp; 0xFFFF);
+16.17.  cryptTable[index2] = ( temp1 | temp2 );
+18.  }
+19.  }
+20.  }
+</code></pre><p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</p>
+<ol>
+<li>{</li>
+<li>unsigned <span class="datatypes">char</span> <em>key  = (unsigned <span class="datatypes">char</span> </em>)lpszFileName;</li>
+<li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
+<li>unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;</li>
+<li><span class="datatypes">int</span> ch;<br>30.31.  <span class="keyword">while</span>( *key != 0 )</li>
+<li>{</li>
+<li>ch = toupper(*key++);<br>34.35.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);</li>
+<li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
+<li>}</li>
+<li><span class="keyword">return</span> seed1;</li>
+<li>}<br></li>
+</ol>
+<p>## </p>
+<p>Blizzard的这个算法是非常高效的，被称为”One-Way Hash”( A one-way hash is a an algorithm that isconstructed in such a way that deriving the original string (set of strings,actually) is virtually impossible)。举个例子，字符串”unitneutralacritter.grp”通过这个算法得到的结果是0xA26067F3。</p>
+<p>是不是把第一个算法改进一下，改成逐个比较字符串的Hash值就可以了呢，答案是，远远不够，要想得到最快的算法，就不能进行逐个的比较，通常是构造一个哈希表(Hash Table)来解决问题，哈希表是一个大数组，这个数组的容量根据程序的要求来定义，例如1024，每一个Hash值通过取模运算 (mod) 对应到数组中的一个位置，这样，只要比较这个字符串的哈希值对应的位置有没有被占用，就可以得到最后的结果了，想想这是什么速度？是的，是最快的O(1)，现在仔细看看这个算法吧：</p>
+<div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_2" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_2" data-mce-fragment="1"></div><br></div><br></div>
+
+<ol>
+<li>unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">char</span> <em>key  = (unsigned <span class="datatypes">char</span> </em>)lpszFileName;</li>
+<li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
+<li>unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;</li>
+<li><span class="datatypes">int</span> ch;<br>7.8.  <span class="keyword">while</span>( *key != 0 )</li>
+<li>{</li>
+<li>ch = toupper(*key++);<br>11.12.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);</li>
+<li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
+<li>}</li>
+<li><span class="keyword">return</span> seed1;</li>
+<li>}<br></li></ol></div>
+
+<p>## </p>
+<p>Blizzard的这个算法是非常高效的，被称为”One-Way Hash”( A one-way hash is a an algorithm that isconstructed in such a way that deriving the original string (set of strings,actually) is virtually impossible)。举个例子，字符串”unitneutralacritter.grp”通过这个算法得到的结果是0xA26067F3。</p>
+<p>是不是把第一个算法改进一下，改成逐个比较字符串的Hash值就可以了呢，答案是，远远不够，要想得到最快的算法，就不能进行逐个的比较，通常是构造一个哈希表(Hash Table)来解决问题，哈希表是一个大数组，这个数组的容量根据程序的要求来定义，例如1024，每一个Hash值通过取模运算 (mod) 对应到数组中的一个位置，这样，只要比较这个字符串的哈希值对应的位置有没有被占用，就可以得到最后的结果了，想想这是什么速度？是的，是最快的O(1)，现在仔细看看这个算法吧：</p>
+<div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_3" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_3" data-mce-fragment="1"></div><br></div><br></div>
+
+<ol>
+<li><span class="keyword">typedef</span> <span class="keyword">struct</span></li>
+<li>{</li>
+<li><span class="datatypes">int</span> nHashA;</li>
+<li><span class="datatypes">int</span> nHashB;</li>
+<li><span class="datatypes">char</span> bExists;</li>
+<li>……</li>
+<li>} SOMESTRUCTRUE;</li>
+<li>一种可能的结构体定义？<br>9.10.  函数三、下述函数为在Hash表中查找是否存在目标字符串，有则返回要查找字符串的Hash值，无则，<span class="keyword">return</span> -1.<br>11.12.  <span class="datatypes">int</span> GetHashTablePos( har <em>lpszString, SOMESTRUCTURE </em>lpTable )</li>
+<li><span class="comment">//lpszString要在Hash表中查找的字符串，lpTable为存储字符串Hash值的Hash表。</span></li>
+<li>{</li>
+<li><span class="datatypes">int</span> nHash = HashString(lpszString);  <span class="comment">//调用上述函数二，返回要查找字符串lpszString的Hash值。</span></li>
+<li><span class="datatypes">int</span> nHashPos = nHash % nTableSize;<br>17.18.  <span class="keyword">if</span> ( lpTable[nHashPos].bExists  &amp;&amp;  !strcmp( lpTable[nHashPos].pString, lpszString ) )</li>
+<li>{  <span class="comment">//如果找到的Hash值在表中存在，且要查找的字符串与表中对应位置的字符串相同，</span></li>
+<li><span class="keyword">return</span> nHashPos;    <span class="comment">//则返回上述调用函数二后，找到的Hash值</span></li>
+<li>}</li>
+<li><span class="keyword">else</span></li>
+<li>{</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}</li>
+<li>}<br></li></ol></div>
+
+<p>## </p>
+<p>看到此，我想大家都在想一个很严重的问题：“如果两个字符串在哈希表中对应的位置相同怎么办？”,毕竟一个数组容量是有限的，这种可能性很大。解决该问题的方法很多，我首先想到的就是用“链表”,感谢大学里学的数据结构教会了这个百试百灵的法宝，我遇到的很多算法都可以转化成链表来解决，只要在哈希表的每个入口挂一个链表，保存所有对应的字符串就OK了。事情到此似乎有了完美的结局，如果是把问题独自交给我解决，此时我可能就要开始定义数据结构然后写代码了。</p>
+<p>然而Blizzard的程序员使用的方法则是更精妙的方法。基本原理就是：他们在哈希表中不是用一个哈希值而是用三个哈希值来校验字符串。</p>
+<p>MPQ使用文件名哈希表来跟踪内部的所有文件。但是这个表的格式与正常的哈希表有一些不同。首先，它没有使用哈希作为下标，把实际的文件名存储在表中用于验证，实际上它根本就没有存储文件名。而是使用了3种不同的哈希：一个用于哈希表的下标，两个用于验证。这两个验证哈希替代了实际文件名。</p>
+<p>当然了，这样仍然会出现2个不同的文件名哈希到3个同样的哈希。但是这种情况发生的概率平均是：1:18889465931478580854784，这个概率对于任何人来说应该都是足够小的。现在再回到数据结构上，Blizzard使用的哈希表没有使用链表，而采用”顺延”的方式来解决问题，看看这个算法：</p>
+<h3 id="函数四、lpszString为要在hash表中查找的字符串；lpTable-为存储字符串hash值的hash表；nTableSize-为hash表的长度："><a href="#函数四、lpszString为要在hash表中查找的字符串；lpTable-为存储字符串hash值的hash表；nTableSize-为hash表的长度：" class="headerlink" title="函数四、lpszString为要在hash表中查找的字符串；lpTable 为存储字符串hash值的hash表；nTableSize 为hash表的长度："></a><a name="t16"></a>函数四、lpszString为要在hash表中查找的字符串；lpTable 为存储字符串hash值的hash表；nTableSize 为hash表的长度：</h3><div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_4" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_4" data-mce-fragment="1"></div><br></div><br></div>
+
+<ol>
+<li><span class="datatypes">int</span> GetHashTablePos( <span class="datatypes">char</span> <em>lpszString, MPQHASHTABLE </em>lpTable, <span class="datatypes">int</span> nTableSize )</li>
+<li>{</li>
+<li><span class="keyword">const</span> <span class="datatypes">int</span>  HASH_OFFSET = 0, HASH_A = 1, HASH_B = 2;<br>4.5.  <span class="datatypes">int</span>  nHash = HashString( lpszString, HASH_OFFSET );</li>
+<li><span class="datatypes">int</span>  nHashA = HashString( lpszString, HASH_A );</li>
+<li><span class="datatypes">int</span>  nHashB = HashString( lpszString, HASH_B );</li>
+<li><span class="datatypes">int</span>  nHashStart = nHash % nTableSize;</li>
+<li><span class="datatypes">int</span>  nHashPos = nHashStart;<br>10.11.  <span class="keyword">while</span> ( lpTable[nHashPos].bExists )</li>
+<li>{</li>
+<li><span class="comment">/*如果仅仅是判断在该表中时候存在这个字符串，就比较这两个hash值就可以了，不用对</span></li>
+<li><span class="comment">     *结构体中的字符串进行比较。这样会加快运行的速度？减少hash表占用的空间？这种</span></li>
+<li><span class="comment">      <em>方法一般应用在什么场合？</em>/</span></li>
+<li><span class="keyword">if</span> ( 　 lpTable[nHashPos].nHashA == nHashA</li>
+<li>&amp;&amp;  lpTable[nHashPos].nHashB == nHashB )</li>
+<li>{</li>
+<li><span class="keyword">return</span> nHashPos;</li>
+<li>}</li>
+<li><span class="keyword">else</span></li>
+<li>{</li>
+<li>nHashPos = (nHashPos + 1) % nTableSize;</li>
+<li>}<br>25.26.  <span class="keyword">if</span> (nHashPos == nHashStart)</li>
+<li><span class="keyword">break</span>;</li>
+<li>}</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}<br></li></ol></div>
+
+<p>## </p>
+<h3 id="上述程序解释："><a href="#上述程序解释：" class="headerlink" title="上述程序解释："></a><a name="t17"></a>上述程序解释：</h3><p>1.计算出字符串的三个哈希值（一个用来确定位置，另外两个用来校验)</p>
+<p>2. 察看哈希表中的这个位置</p>
+<p>3. 哈希表中这个位置为空吗？如果为空，则肯定该字符串不存在，返回-1。</p>
+<p>4. 如果存在，则检查其他两个哈希值是否也匹配，如果匹配，则表示找到了该字符串，返回其Hash值。</p>
+<p>5. 移到下一个位置，如果已经移到了表的末尾，则反绕到表的开始位置起继续查询</p>
+<p>6. 看看是不是又回到了原来的位置，如果是，则返回没找到</p>
+<p>7. 回到3</p>
+<p>ok，这就是本文中所说的最快的Hash表算法。什么?不够快?:D。欢迎，各位批评指正。</p>
+<hr>
+<h3 id="补充1、一个简单的hash函数："><a href="#补充1、一个简单的hash函数：" class="headerlink" title="补充1、一个简单的hash函数："></a><a name="t18"></a>补充1、一个简单的hash函数：</h3><div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_5" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_5" data-mce-fragment="1"></div><br></div><br></div>
+
+<ol>
+<li><span class="comment">/*key为一个字符串，nTableLength为哈希表的长度</span></li>
+<li><span class="comment"><em>该函数得到的hash值分布比较均匀</em>/</span></li>
+<li>unsigned <span class="datatypes">long</span> getHashIndex( <span class="keyword">const</span> <span class="datatypes">char</span> *key, <span class="datatypes">int</span> nTableLength )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> nHash = 0;<br>6.7.  <span class="keyword">while</span> (*key)</li>
+<li>{</li>
+<li>nHash = (nHash&lt;&lt;5) + nHash + *key++;</li>
+<li>}<br>11.12.  <span class="keyword">return</span> ( nHash % nTableLength );</li>
+<li>}<br></li></ol></div>
+
+<p>## </p>
+<h2 id="补充2、一个完整测试程序："><a href="#补充2、一个完整测试程序：" class="headerlink" title="补充2、一个完整测试程序："></a><a name="t19"></a>补充2、一个完整测试程序：</h2><p>哈希表的数组是定长的，如果太大，则浪费，如果太小，体现不出效率。合适的数组大小是哈希表的性能的关键。哈希表的尺寸最好是一个质数。当然，根据不同的数据量，会有不同的哈希表的大小。对于数据量时多时少的应用，最好的设计是使用动态可变尺寸的哈希表，那么如果你发现哈希表尺寸太小了，比如其中的元素是哈希表尺寸的2倍时，我们就需要扩大哈希表尺寸，一般是扩大一倍。</p>
+<p>下面是哈希表尺寸大小的可能取值：</p>
+<p>17,            37,          79,        163,          331,</p>
+<p>673,           1361,        2729,       471,         10949,</p>
+<p>21911,          43853,      87719,      175447,      350899,</p>
+<p>701819,         1403641,    2807303,    5614657,     11229331,</p>
+<p>22458671,      44917381,    89834777,    179669557,  359339171,</p>
+<p>718678369,      1437356741,  2147483647</p>
+<p>以下为该程序的完整源码，已在<a href="http://lib.csdn.net/base/linux" title="Linux知识库" target="_blank" rel="noopener">Linux</a>下<a href="http://lib.csdn.net/base/softwaretest" title="软件测试知识库" target="_blank" rel="noopener">测试</a>通过：#include &lt;stdio.h&gt;</p>
+<p>//crytTable[]里面保存的是HashString函数里面将会用到的一些数据，在prepareCryptTable</p>
+<p>//函数里面初始化</p>
+<p>unsigned long cryptTable[0x500];</p>
+<p>//以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</p>
+<div class="dp-highlighter bg_cpp"><br><div class="bar"><br><div class="tools"><br><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain" target="_blank" rel="noopener">view plain</a><span data-mod="popu_168"> <a href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy" target="_blank" rel="noopener">copy</a></span><br><div><embed id="ZeroClipboardMovie_6" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_6" data-mce-fragment="1"></div><br></div><br></div>
+
+<ol>
+<li><span class="keyword">void</span> prepareCryptTable()</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> seed = 0x00100001, index1 = 0, index2 = 0, i;<br>4.5.  <span class="keyword">for</span>( index1 = 0; index1 &lt; 0x100; index1++ )</li>
+<li>{</li>
+<li><span class="keyword">for</span>( index2 = index1, i = 0; i &lt; 5; i++, index2 += 0x100 )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> temp1, temp2;<br>10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
+<li>temp1 = (seed &amp; 0xFFFF) &lt;&lt; 0x10;<br>13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
+<li>temp2 = (seed &amp; 0xFFFF);<br>16.17.  cryptTable[index2] = ( temp1 | temp2 );</li>
+<li>}</li>
+<li>}</li>
+<li>}<br>21.22.  <span class="comment">//以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，</span></li>
+<li><span class="comment">//在下面GetHashTablePos函数里面调用本函数，其可以取的值为0、1、2；该函数</span></li>
+<li><span class="comment">//返回lpszFileName 字符串的hash值；</span></li>
+<li>unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">char</span> <em>key  = (unsigned <span class="datatypes">char</span> </em>)lpszFileName;</li>
+<li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
+<li>unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;</li>
+<li><span class="datatypes">int</span> ch;<br>31.32.  <span class="keyword">while</span>( *key != 0 )</li>
+<li>{</li>
+<li>ch = toupper(*key++);<br>35.36.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);</li>
+<li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
+<li>}</li>
+<li><span class="keyword">return</span> seed1;</li>
+<li>}<br>41.42.  <span class="comment">//在main中测试argv[1]的三个hash值：</span></li>
+<li><span class="comment">//./hash  “arr\units.dat”</span></li>
+<li><span class="comment">//./hash  “unit\neutral\acritter.grp”</span></li>
+<li><span class="datatypes">int</span> main( <span class="datatypes">int</span> argc, <span class="datatypes">char</span> **argv )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> ulHashValue;</li>
+<li><span class="datatypes">int</span> i = 0;<br>49.50.  <span class="keyword">if</span> ( argc != 2 )</li>
+<li>{</li>
+<li>printf(<span class="string">“please input two arguments\n”</span>);</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}<br>55.56.  <span class="comment">/<em>初始化数组：crytTable[0x500]</em>/</span></li>
+<li>prepareCryptTable();<br>58.59.  <span class="comment">/<em>打印数组crytTable[0x500]里面的值</em>/</span></li>
+<li><span class="keyword">for</span> ( ; i &lt; 0x500; i++ )</li>
+<li>{</li>
+<li><span class="keyword">if</span> ( i % 10 == 0 )</li>
+<li>{</li>
+<li>printf(<span class="string">“\n”</span>);</li>
+<li>}<br>66.67.  printf(<span class="string">“%-12X”</span>, cryptTable[i] );</li>
+<li>}<br>69.70.  ulHashValue = HashString( argv[1], 0 );</li>
+<li>printf(<span class="string">“\n—-%X —-\n”</span>, ulHashValue );<br>72.73.  ulHashValue = HashString( argv[1], 1 );</li>
+<li>printf(<span class="string">“—-%X —-\n”</span>, ulHashValue );<br>75.76.  ulHashValue = HashString( argv[1], 2 );</li>
+<li>printf(<span class="string">“—-%X —-\n”</span>, ulHashValue );<br><div class="save_code tracking-ad" data-mod="popu_249"><a><img src="http://static.blog.csdn.net/images/save_snippets.png" alt=""></a></div><br></li></ol></div><br><a href="http://wenku.baidu.com/view/c8ca9533b90d6c85ec3ac6db.html" target="_blank" rel="noopener">http://wenku.baidu.com/view/c8ca9533b90d6c85ec3ac6db.html</a>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc3cjbd6004vjq0rtkibnt3t" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-加密安全大补药" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/12/加密安全大补药/" class="article-date">
@@ -209,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc36o1yr004bcr0ri962n4h1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc3cjbcq004bjq0rjhffp5ss" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -294,7 +605,7 @@ typedef struct objc_object *id;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc36o1yg0041cr0rav5v255q" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc3cjbcc003yjq0rfeq5lgbg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -422,7 +733,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc36o1zo0059cr0rh2bsu7ij" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc3cjbdp0059jq0r1htoxyej" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -502,7 +813,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc36o1xq0037cr0r3ygj3jlw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc3cjbbn0036jq0rqfr2c9uc" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -552,7 +863,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc36o1wv0028cr0r4518uul6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc3cjbau0026jq0rir01ijjk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -674,7 +985,7 @@ call now():
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc36o1wy002ccr0r2vf3hn9z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc3cjbat0024jq0rr6m3twpt" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -812,7 +1123,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc36o1wu0025cr0rps0uclo3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc3cjbap0021jq0r2ff415ct" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1044,7 +1355,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc36o1ws0023cr0r6zl0yq9s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc3cjban001zjq0rndih9yxy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1132,197 +1443,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc36o1x3002gcr0rfrqj6gs8" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Scrapy简单方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/31/Scrapy简单方法/" class="article-date">
-  <time datetime="2017-03-31T05:21:13.000Z" itemprop="datePublished">2017-03-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/31/Scrapy简单方法/">Scrapy简单方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>网络爬虫，是在网上进行数据抓取的程序，使用它能够抓取特定网页的HTML数据。虽然我们利用一些库开发一个爬虫程序，但是使用框架可以大大提高效率，缩短开发时间。Scrapy是一个使用<a href="http://lib.csdn.net/base/python" title="Python知识库" target="_blank" rel="noopener">Python</a>编写的，轻量级的，简单轻巧，并且使用起来非常的方便。使用Scrapy可以很方便的完成网上数据的采集工作，它为我们完成了大量的工作，而不需要自己费大力气去开发。</p>
-<p>首先先要回答一个问题。<br>问：把网站装进爬虫里，总共分几步？<br>答案很简单，四步：<br>新建项目 (Project)：新建一个新的爬虫项目<br>明确目标（Items）：明确你想要抓取的目标<br>制作爬虫（Spider）：制作爬虫开始爬取网页<br>存储内容（Pipeline）：设计管道存储爬取内容</p>
-<p>好的，基本流程既然确定了，那接下来就一步一步的完成就可以了。</p>
-<p><strong>1.新建项目（Project）</strong><br>在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code37356" class="codebody"><br>scrapy startproject tutorial</div><br>其中，tutorial为项目名称。<br>可以看到将会创建一个tutorial文件夹，目录结构如下：<br>代码如下:</p>
-<pre><code>tutorial/
-scrapy.cfg
-tutorial/
-__init__.py
-items.py
-pipelines.py
-settings.py
-spiders/
-__init__.py
-...
-</code></pre><p>下面来简单介绍一下各个文件的作用：</p>
-<ul>
-<li>scrapy.cfg：项目的配置文件</li>
-<li>tutorial/：项目的Python模块，将会从这里引用代码</li>
-<li>tutorial/items.py：项目的items文件</li>
-<li>tutorial/pipelines.py：项目的pipelines文件</li>
-<li>tutorial/settings.py：项目的设置文件</li>
-<li>tutorial/spiders/：存储爬虫的目录</li>
-</ul>
-<p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
-<p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>代码如下:</p>
-<pre><code># Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
-from scrapy.item import Item, Field
-
-class TutorialItem(Item):
-# define the fields for your item here like:
-# name = Field()
-pass
-
-class DmozItem(Item):
-title = Field()
-link = Field()
-desc = Field()
-</code></pre><p><strong>3.制作爬虫（Spider）</strong></p>
-<p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br><strong>3.1爬
-</strong>Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
-<p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
-<p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
-<pre><code>from scrapy.spider import Spider
-class DmozSpider(Spider):
-name = “dmoz”
-allowed_domains = [“dmoz.org”]
-start_urls = [
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
-]
-
-def parse(self, response):
-filename = response.url.split(“/”)[-2]
-open(filename, ‘wb’).write(response.body)
-</code></pre><p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
-<pre><code>scrapy crawl dmoz
-</code></pre><p>运行结果如图：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg" alt=""></p>
-<p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code10248" class="codebody"><br>import sys<br>sys.setdefaultencoding(‘gb2312’)</div><br>再次运行，OK，问题解决了，看一下结果：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119434W5-1.jpg" alt=""></p>
-<p>最后一句INFO: Closing spider (finished)表明爬虫已经成功运行并且自行关闭了。<br>包含 [dmoz]的行 ，那对应着我们的爬虫运行的结果。<br>可以看到start_urls中定义的每个URL都有日志行。<br>还记得我们的start_urls吗？<br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books</a><br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources</a><br>因为这些URL是起始页面，所以他们没有引用(referrers)，所以在它们的每行末尾你会看到 (referer: &lt;None&gt;)。<br>在parse 方法的作用下，两个文件被创建：分别是 Books 和 Resources，这两个文件中有URL的页面内容。</p>
-<p>那么在刚刚的电闪雷鸣之中到底发生了什么呢？<br>首先，Scrapy为爬虫的 start_urls属性中的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数。<br>然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。</p>
-<p><strong>3.2取</strong><br>爬取整个网页完毕，接下来的就是的取过程了。<br>光存储一整个网页还是不够用的。<br>在基础的爬虫里，这一步可以用正则表达式来抓。<br>在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。<br>如果你想了解更多selectors和其他机制你可以查阅资料：点我点我</p>
-<p>这是一些XPath表达式的例子和他们的含义<br>/html/head/title: 选择HTML文档&lt;head&gt;元素下面的&lt;title&gt; 标签。<br>/html/head/title/text(): 选择前面提到的&lt;title&gt; 元素下面的文本内容<br>//td: 选择所有 &lt;td&gt; 元素<br>//div[@class=”mine”]: 选择所有包含 class=”mine” 属性的div 标签元素<br>以上只是几个使用XPath的简单例子，但是实际上XPath非常强大。<br>可以参照W3C教程：点我点我。</p>
-<p>为了方便使用XPaths，Scrapy提供XPathSelector 类，有两种可以选择，HtmlXPathSelector(HTML数据解析)和XmlXPathSelector(XML数据解析)。<br>必须通过一个 Response 对象对他们进行实例化操作。<br>你会发现Selector对象展示了文档的节点结构。因此，第一个实例化的selector必与根节点或者是整个目录有关 。<br>在Scrapy里面，Selectors 有四种基础的方法（点击查看API文档）：<br>xpath()：返回一系列的selectors，每一个select表示一个xpath参数表达式选择的节点<br>css()：返回一系列的selectors，每一个select表示一个css参数表达式选择的节点<br>extract()：返回一个unicode字符串，为选中的数据<br>re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</p>
-<p>3.3xpath实验<br>下面我们在Shell里面尝试一下Selector的用法。<br>实验的网址：<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></p>
-<p>熟悉完了实验的小白鼠，接下来就是用Shell爬取网页了。<br>进入到项目的顶层目录，也就是第一层tutorial文件夹下，在cmd中输入：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code36951" class="codebody"><br>scrapy shell <a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></div><br>回车后可以看到如下的内容：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/21194340K-3.jpg" alt=""></p>
-<p>在Shell载入后，你将获得response回应，存储在本地变量 response中。<br>所以如果你输入response.body，你将会看到response的body部分，也就是抓取到的页面内容：</p>
-<p>或者输入response.headers 来查看它的 header部分：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943GH-5.jpg" alt=""></p>
-<p>现在就像是一大堆沙子握在手里，里面藏着我们想要的金子，所以下一步，就是用筛子摇两下，把杂质出去，选出关键的内容。<br>selector就是这样一个筛子。<br>在旧的版本中，Shell实例化两种selectors，一个是解析HTML的 hxs 变量，一个是解析XML 的 xxs 变量。<br>而现在的Shell为我们准备好的selector对象，sel，可以根据返回的数据类型自动选择最佳的解析方案(XML or HTML)。<br>然后我们来捣弄一下！~<br>要彻底搞清楚这个问题，首先先要知道，抓到的页面到底是个什么样子。<br>比如，我们要抓取网页的标题，也就是&lt;title&gt;这个标签：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432L4-6.png" alt=""></p>
-<p>可以输入：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code56841" class="codebody"><br>sel.xpath(‘//title’)</div><br>结果就是：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119435a0-7.png" alt=""></p>
-<p>这样就能把这个标签取出来了，用extract()和text()还可以进一步做处理。<br>备注：简单的罗列一下有用的xpath路径表达式：<br>表达式 描述<br>nodename 选取此节点的所有子节点。<br>/ 从根节点选取。<br>// 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。<br>. 选取当前节点。<br>.. 选取当前节点的父节点。<br>@ 选取属性。<br>全部的实验结果如下，In[i]表示第i次实验的输入，Out[i]表示第i次结果的输出（建议大家参照：W3C教程）：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code23729" class="codebody"><br>In [1]: sel.xpath(‘//title’)<br>Out[1]: [&lt;Selector xpath=’//title’ data=u’&lt;title&gt;Open Directory - Computers: Progr’&gt;]</div></p>
-<p>In [2]: sel.xpath(‘//title’).extract()<br>Out[2]: [u’&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;/title&gt;’]</p>
-<p>In [3]: sel.xpath(‘//title/text()’)<br>Out[3]: [&lt;Selector xpath=’//title/text()’ data=u’Open Directory - Computers: Programming:’&gt;]</p>
-<p>In [4]: sel.xpath(‘//title/text()’).extract()<br>Out[4]: [u’Open Directory - Computers: Programming: Languages: Python: Books’]</p>
-<p>In [5]: sel.xpath(‘//title/text()’).re(‘(\w+):’)<br>Out[5]: [u’Computers’, u’Programming’, u’Languages’, u’Python’]<br>当然title这个标签对我们来说没有太多的价值，下面我们就来真正抓取一些有意义的东西。<br>使用火狐的审查元素我们可以清楚地看到，我们需要的东西如下：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432254-8.png" alt=""></p>
-<p>我们可以用如下代码来抓取这个&lt;li&gt;标签：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code23065" class="codebody"><br>sel.xpath(‘//ul/li’)</div><br>从&lt;li&gt;标签中，可以这样获取网站的描述：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code98498" class="codebody"><br>sel.xpath(‘//ul/li/text()’).extract()</div><br>可以这样获取网站的标题：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code72200" class="codebody"><br>sel.xpath(‘//ul/li/a/text()’).extract()</div><br>可以这样获取网站的超链接：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code24538" class="codebody"><br>sel.xpath(<a>‘//ul/li/a/@href’).extract</a>()</div><br>当然，前面的这些例子是直接获取属性的方法。<br>我们注意到xpath返回了一个对象列表，<br>那么我们也可以直接调用这个列表中对象的属性挖掘更深的节点<br>（参考：Nesting selectors andWorking with relative XPaths in the Selectors）：<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title, link, desc</p>
-<p>3.4xpath实战<br>我们用shell做了这么久的实战，最后我们可以把前面学习到的内容应用到dmoz_spider这个爬虫中。<br>在原爬虫的parse函数中做如下修改：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code67523" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
-<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
-<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>注意，我们从scrapy.selector中导入了Selector类，并且实例化了一个新的Selector对象。这样我们就可以像Shell中一样操作xpath了。<br>我们来试着输入一下命令运行爬虫（在tutorial根目录里面）：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code91685" class="codebody"><br>scrapy crawl dmoz</div><br>运行结果如下：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119431b3-9.jpg" alt=""></p>
-<p>果然，成功的抓到了所有的标题。但是好像不太对啊，怎么Top，Python这种导航栏也抓取出来了呢？<br>我们只需要红圈中的内容：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943H08-10.jpg" alt=""></p>
-<p>看来是我们的xpath语句有点问题，没有仅仅把我们需要的项目名称抓取出来，也抓了一些无辜的但是xpath语法相同的元素。<br>审查元素我们发现我们需要的&lt;ul&gt;具有class=’directory-url’的属性，<br>那么只要把xpath语句改成sel.xpath(‘//ul[@class=”directory-url”]/li’)即可<br>将xpath语句做如下调整：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code19197" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
-<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
-<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>成功抓出了所有的标题，绝对没有滥杀无辜：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943C96-11.jpg" alt=""></p>
-<p>3.5使用Item<br>接下来我们来看一看如何使用Item。<br>前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
-<p><div class="codetitle">代码如下:</div></p>
-<p><div id="code83545" class="codebody"><br>&gt;&gt;&gt; item = DmozItem()<br>&gt;&gt;&gt; item[‘title’] = ‘Example title’<br>&gt;&gt;&gt; item[‘title’]<br>‘Example title’</div><br>作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:<br>代码如下:</p>
-<pre><code>from scrapy.spider import Spider
-from scrapy.selector import Selector
-from tutorial.items import DmozItem
-
-class DmozSpider(Spider):
-name = “dmoz”
-allowed_domains = [“dmoz.org”]
-start_urls = [
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
-]
-
-def parse(self, response):
-sel = Selector(response)
-sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)
-items = []
-for site in sites:
-item = DmozItem()
-item[‘title’] = site.xpath(‘a/text()’).extract()
-item[‘link’] = site.xpath(‘a/@href’).extract()
-item[‘desc’] = site.xpath(‘text()’).extract()
-items.append(item)
-return items
-</code></pre><p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
-<p><div id="code89953" class="codebody"><br>scrapy crawl dmoz -o items.json -t json</div><br>-o 后面是导出文件名，-t 后面是导出类型。<br>然后来看一下导出的结果，用文本编辑器打开json文件即可（为了方便显示，在item中删去了除了title之外的属性）：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg" alt=""></p>
-<p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>这个我们以后再慢慢玩^_^</p>
-<p>以上便是python爬虫框架Scrapy制作爬虫抓取网站内容的全部过程了，非常的详尽吧，希望能够对大家有所帮助，有需要的话也可以和我联系，一起进步</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc36o1x5002jcr0ryopmjnda" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc3cjbay002bjq0reylqw4qq" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1347,7 +1468,7 @@ return items
   <div class="widget-wrap">
     <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
   </div>
 
@@ -1375,6 +1496,10 @@ return items
       <ul>
         
           <li>
+            <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
           </li>
         
@@ -1388,10 +1513,6 @@ return items
         
           <li>
             <a href="/2017/09/14/Javascript深入笔记/">Javascript深入笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/15/webpack commonJS/">webpack+commonJS</a>
           </li>
         
       </ul>
