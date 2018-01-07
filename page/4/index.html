@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.</a>
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
         </h2>
       
     </div>
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,238 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Python3 学习笔记 （1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/Python3 学习笔记 （1）/" class="article-date">
+  <time datetime="2017-04-01T07:06:15.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/Python3 学习笔记 （1）/">Python3 学习笔记 （1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
+<pre><code>x = b&#39;ABC&#39;
+</code></pre><hr>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39;
+&#39;Hello, world&#39;
+&gt;&gt;&gt; &#39;Hi, %s, you have $%d.&#39; % (&#39;Michael&#39;, 1000000)
+&#39;Hi, Michael, you have $1000000.&#39;
+</code></pre><hr>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
+<p>比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用<code>if</code>语句实现：</p>
+<pre><code>age = 20
+if age &gt;= 18:
+    print(&#39;your age is&#39;, age)
+    print(&#39;adult&#39;)
+</code></pre><p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
+<hr>
+<h2 id="elif于else-if"><a href="#elif于else-if" class="headerlink" title="elif于else if"></a>elif于else if</h2><p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
+<pre><code>if &lt;条件判断1&gt;:
+    &lt;执行1&gt;
+elif &lt;条件判断2&gt;:
+    &lt;执行2&gt;
+elif &lt;条件判断3&gt;:
+    &lt;执行3&gt;
+else:
+    &lt;执行4&gt;
+</code></pre><hr>
+<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><pre><code>Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()
+</code></pre><p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
+<hr>
+<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><pre><code>names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
+for name in names: 
+     print(name)
+</code></pre><p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
+<pre><code>&gt;&gt;&gt; list(range(5))
+[0, 1, 2, 3, 4]
+</code></pre><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
+<pre><code>sum = 0
+n = 99
+while n &gt; 0:
+    sum = sum + n
+    n = n - 2
+print(sum)
+</code></pre><p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre><p>上面的代码可以打印出1~100。</p>
+<p>如果要提前结束循环，可以用<code>break</code>语句：</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    if n &gt; 10: # 当n = 11时，条件满足，执行break语句
+        break # break语句会结束当前循环
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre><p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    print(n)
+</code></pre><p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    if n % 2 == 0: # 如果n是偶数，执行continue语句
+        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
+    print(n)
+</code></pre><p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
+<hr>
+<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><pre><code>&gt;&gt;&gt; d = {&#39;Michael&#39;: 95, &#39;Bob&#39;: 75, &#39;Tracy&#39;: 85}
+&gt;&gt;&gt; d[&#39;Michael&#39;]
+95
+</code></pre><p>和list比较，dict有以下几个特点：</p>
+<ol>
+<li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
+<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
+</li>
+<li><p>查找和插入的时间随着元素的增加而增加；</p>
+</li>
+<li>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</li>
+</ol>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<p>要创建一个set，需要提供一个list作为输入集合：</p>
+<pre><code>&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s
+{1, 2, 3}
+</code></pre><hr>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
+<p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：</p>
+<pre><code>def my_abs(x):
+    if x &gt;= 0:
+        return x
+    else:
+        return -x
+</code></pre><p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
+<p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
+<p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
+<p><code>return None</code>可以简写为<code>return</code></p>
+<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
+<pre><code>def nop():
+    pass
+</code></pre><p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
+<p><code>pass</code>还可以用在其他语句里，比如：</p>
+<pre><code>if age &gt;= 18:
+    pass
+</code></pre><p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>设置默认参数时，有几点要注意：</p>
+<p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
+<p>二是如何设置默认参数。</p>
+<p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
+<p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
+<p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
+<pre><code>def add_end(L=None):
+    if L is None:
+        L = []
+    L.append(&#39;END&#39;)
+    return L
+</code></pre><h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
+<p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
+<pre><code>def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre><p>但是调用的时候，需要先组装出一个list或tuple：</p>
+<pre><code>&gt;&gt;&gt; calc([1, 2, 3])
+14
+&gt;&gt;&gt; calc((1, 3, 5, 7))
+84
+</code></pre><p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
+<pre><code>&gt;&gt;&gt; calc(1, 2, 3)
+14
+&gt;&gt;&gt; calc(1, 3, 5, 7)
+84
+</code></pre><p>所以，我们把函数的参数改为可变参数：</p>
+<pre><code>def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre><p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
+<pre><code>&gt;&gt;&gt; calc(1, 2)
+5
+&gt;&gt;&gt; calc()
+0
+</code></pre><p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])
+14
+</code></pre><p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
+</code></pre><p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
+<pre><code>def person(name, age, **kw):
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
+</code></pre><p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
+<pre><code>&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
+name: Michael age: 30 other: {}
+</code></pre><p>也可以传入任意个数的关键字参数：</p>
+<pre><code>&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+name: Bob age: 35 other: {&#39;city&#39;: &#39;Beijing&#39;}
+&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
+name: Adam age: 45 other: {&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
+<p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
+<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p>当然，上面复杂的调用可以用简化的写法：</p>
+<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+</code></pre><p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
+<p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。</p>
+<p>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！</p>
+<p>要注意定义可变参数和关键字参数的语法：</p>
+<p><code>*args</code>是可变参数，args接收的是一个tuple；</p>
+<p><code>**kw</code>是关键字参数，kw接收的是一个dict。</p>
+<p>以及调用函数时如何传入可变参数和关键字参数的语法：</p>
+<p>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；</p>
+<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**{&#39;a&#39;: 1, &#39;b&#39;: 2})</code>。</p>
+<p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
+<p>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。</p>
+<p>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc4c6i53001zun0r7ewkdsz2" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Scrapy爬GitHub日记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -143,7 +375,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc3ko93k002eyi0r0houciwb" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc4c6i5k002hun0rwgn2pwxt" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -333,7 +565,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc3ko93s002myi0rq8rwg22y" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc4c6i5o002nun0r0o7vidtv" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -411,7 +643,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc3ko93h002cyi0r16rrxcq0" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc4c6i5i002fun0rox0gn04s" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -484,7 +716,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc3ko957003gyi0rlbezgd1u" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc4c6i71003lun0r3b3avzot" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -593,7 +825,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc3ko9610043yi0rkyaulk29" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc4c6i7j0043un0r53ospfkh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -634,7 +866,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc3ko95v003wyi0rq20eyzjw" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc4c6i7g0041un0rhfaiyl8j" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -686,7 +918,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc3ko91j000kyi0r5zq4gwmd" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc4c6i3n000run0rf4xuh0bc" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -740,7 +972,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc3ko91h000iyi0r3lpusvyx" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc4c6i3g000oun0r42sszeig" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -848,84 +1080,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc3ko92y001tyi0rsea1sdlz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-objc_msgSend和消息传递机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/22/objc_msgSend和消息传递机制/" class="article-date">
-  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/22/objc_msgSend和消息传递机制/">objc_msgSend和消息传递机制（大补）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有<strong>「名称(name)」或「选择子(selector)」</strong>,可以接受参数。而且可能还有返回值。</p>
-<hr>
-<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
-<hr>
-<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
-<p>给对象发送消息会转换成</p>
-<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
-<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
-<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
-<hr>
-<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
-<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
-<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
-<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
-<hr>
-<h2 id="尾调用优化（tail-call-optimization-技术"><a href="#尾调用优化（tail-call-optimization-技术" class="headerlink" title="尾调用优化（tail-call optimization) 技术"></a><strong>尾调用优化（tail-call optimization) 技术</strong></h2><p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化”。</p>
-<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
-<hr>
-<h2 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h2><p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
-<hr>
-<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div><br><div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div><br><div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div><br><div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div><br><div><br><br><em> </em> <em><br><br></em></div><br><div>
-
- <em> </em><br><br>### 备援接收者<br><br><div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
-
-<hr>
-<p></p></div><p></p>
-<div>
-
-<h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
-<p>此步骤会调用下列方法转发消息：</p>
-<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
-</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
-<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
-<h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
-<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
-<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
-<hr>
-</div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc3ko94x003ayi0rjrff0s7r" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc4c6i52001xun0r9gpm5j7t" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -939,7 +1094,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -948,7 +1103,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -963,7 +1118,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -973,9 +1128,13 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
@@ -991,10 +1150,6 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/hello-world/">Hello World</a>
           </li>
         
       </ul>

@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.</a>
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
         </h2>
       
     </div>
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -132,7 +132,84 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjc3ko94y003cyi0r4ujpvg16" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjc4c6i6v003fun0rh773q0d0" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-objc_msgSend和消息传递机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/objc_msgSend和消息传递机制/" class="article-date">
+  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/objc_msgSend和消息传递机制/">objc_msgSend和消息传递机制（大补）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有<strong>「名称(name)」或「选择子(selector)」</strong>,可以接受参数。而且可能还有返回值。</p>
+<hr>
+<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
+<hr>
+<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
+<p>给对象发送消息会转换成</p>
+<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
+<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
+<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
+<hr>
+<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
+<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
+<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
+<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
+<hr>
+<h2 id="尾调用优化（tail-call-optimization-技术"><a href="#尾调用优化（tail-call-optimization-技术" class="headerlink" title="尾调用优化（tail-call optimization) 技术"></a><strong>尾调用优化（tail-call optimization) 技术</strong></h2><p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化”。</p>
+<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
+<hr>
+<h2 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h2><p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
+<hr>
+<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div><br><div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div><br><div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div><br><div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div><br><div><br><br><em> </em> <em><br><br></em></div><br><div>
+
+ <em> </em><br><br>### 备援接收者<br><br><div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
+
+<hr>
+<p></p></div><p></p>
+<div>
+
+<h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
+<p>此步骤会调用下列方法转发消息：</p>
+<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
+</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
+<h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
+<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
+<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
+<hr>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc4c6i6p003bun0rtwab9rlh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -182,7 +259,7 @@ int main(int argc, char *argv[])
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc3ko9650046yi0rt7scqyxt" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc4c6i7s0047un0rkobaw8pi" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -286,7 +363,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc3ko97i004qyi0rfg7h87og" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc4c6i8b004qun0rw2yjp9ev" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -334,7 +411,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc3ko930001vyi0rd2ghf1ut" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc4c6i550021un0rfc9ygyxx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -388,7 +465,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc3ko94i0034yi0rhup0ec6t" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc4c6i6f0035un0r9igljbn1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -436,7 +513,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc3ko99e0066yi0riy5vnl8v" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc4c6i9v0068un0rvk6vlu17" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -530,7 +607,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc3ko93v002qyi0r8wia1ny7" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc4c6i5v002tun0rhod0yu5f" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -580,7 +657,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc3ko93m002gyi0ri6ay1vvc" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc4c6i5g002dun0ryaa33yw2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -684,59 +761,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc3ko97m004syi0r6n3jdi54" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Interface Builde（nib和xib的深究）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/10/Interface Builde（nib和xib的深究）/" class="article-date">
-  <time datetime="2017-03-10T14:31:10.000Z" itemprop="datePublished">2017-03-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/Interface Builde（nib和xib的深究）/">Interface Builde（nib和xib的深究）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。</p>
-<p>xib<span class="s1">和</span>nib<span class="s1">都是</span>Interface Builder<span class="s1">的图形界面设计文档。</span></p>
-<hr>
-<h3 id="nib和xib的历史"><a href="#nib和xib的历史" class="headerlink" title="nib和xib的历史"></a>nib和xib的历史</h3><p>nib<span class="s1">这个名字来自于</span>NeXTSTEP<span class="s1">系统，在</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之前，一直使用</span>nib<span class="s1">作为</span>Interface Builder<span class="s1">的图形文档，</span>nib<span class="s1">的发展经过了</span>nib2.0<span class="s1">, </span>nib3.0<span class="s1">，到</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之后，带有</span>NeXTSTEP<span class="s1">标志的</span>nib<span class="s1">被换成了</span>xib</p>
-<hr>
-<h3 id="nib和xib的异同"><a href="#nib和xib的异同" class="headerlink" title="nib和xib的异同"></a>nib和xib的异同</h3><p>xib是一个XML格式的纯文本文件，nib是一个二进制文件。xib比nib有一个很明显的优势。</p>
-<p>可以进行diff操作。</p>
-<p>不管是xib还是nib，<span class="s1">Xcode</span>编译后都将得到一个供程序运行时使用的经过编译的二进制<span class="s1">nib</span>文件。现在最新版本的<span class="s1">Xcode</span>在创建项目时，已经默认使用<span class="s1">xib</span>格式的文档了。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/03/10/Interface Builde（nib和xib的深究）/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc3ko9260016yi0rvqpmmogp" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc4c6i8f004wun0r9wz4cdp1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -750,7 +775,7 @@ int index = (int)[arrView indexOfObject:self];
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -759,7 +784,7 @@ int index = (int)[arrView indexOfObject:self];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -774,7 +799,7 @@ int index = (int)[arrView indexOfObject:self];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -784,9 +809,13 @@ int index = (int)[arrView indexOfObject:self];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
@@ -802,10 +831,6 @@ int index = (int)[arrView indexOfObject:self];
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/hello-world/">Hello World</a>
           </li>
         
       </ul>

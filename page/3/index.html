@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.</a>
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
         </h2>
       
     </div>
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,55 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Objective-C限定词 (摘抄自Objective-C程序设计第六版）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" class="article-date">
+  <time datetime="2017-04-15T07:18:51.000Z" itemprop="datePublished">2017-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="long"><a href="#long" class="headerlink" title="long"></a>long</h2><div>如果直接把限定词long放在int声明之前，那么所声明的整型变量在某些计算机上具有扩展的值域。一个long int声明的例子为：</div><br><pre> <wbr> <wbr>  <wbr> long int factorial;</pre><br><div> <wbr> <wbr>  <wbr> 这条语句将变量factorial声明为long的整型变量，也就是长整型。就象float和double变量一样，long变量的具体精度是由具体的计算机系统决定的。</div><br><div>在许多系统上，int与long int具有相同的值域，而且任何一个都能存储4个字节(1个字节8位)，32位宽(2,147,483,647)的整型值。long在限定整型的时候，实际相当于双精度的short，什么是short?</div><br><div></div><br><div><br><div>long int类型的常量值可通过在整型常量末尾添加字母L(大小写均可)来形成。单数字和L之间不允许由空格。因为小写的L和数字1容易混淆，建议有用到这种情况，都用大写。下面是个简单的例子：</div><br><div></div><br><pre> <wbr> <wbr>  <wbr> long int numberOfPoints = 131071100L;</pre><br><div></div><br><div> <wbr> <wbr>  <wbr> 将变量numberOfPoints声明为长整型，而且初值为131,071,100。</div><br><div> <wbr> <wbr>  <wbr> 要用NSLog显示long int的值，使用字母l做为修饰符并放在整型格式符号i，o和x之前。例如“%lx”表示十六进制格式显示值。</div><br><div></div><br><div> <wbr> <wbr>  <wbr> 当然，我们同样可以把 long 标识符放在double声明之前。范例如下：</div><br><div></div><br><div> <wbr> <wbr>  <wbr> long double US_deficit_2004;</div><br><div></div><br><div> <wbr> <wbr>  <wbr> long double常量可写成其尾部带有字母l或L的浮点常量，例如：1.234e+7L</div><br><div> <wbr> <wbr>  <wbr> 要显示long double的值，需要使用修饰符L。因此，%Lf用浮点计数法显示long double的值，%Le用科学计数法显示同样的值，而%Lg将告诉NSLog在%Lf和%Le之间任选一个使用。</div><br></div><br><div></div>
+
+<hr>
+<h2 id="long-long"><a href="#long-long" class="headerlink" title="long long"></a><strong>long long</strong></h2><div> <wbr> <wbr>  <wbr> 双长整型相当于双精度long，可以用如下形式使用：</div><br><div></div><br><pre> <wbr> <wbr>  <wbr> long long int maxAllowedStorage;</pre><br><div></div><br><div> <wbr> <wbr>  <wbr> 这条语句把指定的变量声明为具有特定扩展精度的双长整型变量，该扩展精度保证变量至少8个字节，具有64位的宽度。NSLog字符串不使用单个字母l，而使用两个l来显示long long的整数，例如“%lli”。</div><br><div></div><br><div><br><br><em> </em> <em><br><br><br></em></div><br><div><br><br>## <strong> short</strong><br><br><div>把限定词short放在int声明之前时，它告诉Objective-C编译器要声明的特定变量用来存储相当小的整数。之所以使用short变量，主要原因是对节约内存空间的考虑，当程序员需要大量内存而可用的内存量又十分有限时，比如iPhone开发的时候，就可用short变量来解决这个问题。</div><br><div>在某些计算机上，short int占用的内存空间是常规int变量所占空间的一半。在任何情况下，确保分配给short int的空间数量不少于2个字节，16位。</div><br><div></div><br><div><strong>注意</strong>，在Objective-C中，没有其他方法可显式地编写short int型常量。要显示short int变量，可将字母h放在任何普通的整型转换符之前，如：%hi，%ho或%hx。换句话说，可用任何整型转换符号来显示short int，因为当它作为参数传递给NSLog例程时，可转换成整数。</div><br></div><br><div>
+
+ <em> </em><br><br><br></div><br><div><br><br>## <strong>unsigned</strong><br><br><div>顾名思义，这个最终限定词就是无符号，可放在int变量之前，当整数变量只用来存储正数的情况下使用最终限定符。以下语句</div><br><div></div><br><div>unsigned int counter;</div><br><div></div><br><div>向编译器声明：变量counter只用来保存正值。</div><br><div>通过限制整型变量的使用，使它专门存储正整数，可以扩展整型变量的精度。</div><br><div>一般unsigned int可简写为uint。</div><br><div>通过将字母u(或U)放在常量之后，可产生unsigned int常量，例如:0x00ffu</div><br><div>编写整型常量时，可将字母u(或U)和l(或L)组合起来使用，例如30000UL，告诉编译器将常量20000看作unsigned long。</div><br><div><br><br><em> </em> <em><br><br><br></em></div><br></div><br><div><br><br>## <strong> <wbr> <wbr>  <wbr> 简写</strong><br><br><div> <wbr> <wbr>  <wbr> 将变量声明为long int，short int或unsigned int类型时，关键字int 可以省略。因此unsigned变量counter可等价地声明为以下形式：</div><br><div></div><br><div> <wbr> <wbr>  <wbr> unsigned counter;</div><br><div></div><br><div> <wbr> <wbr>  <wbr> 同时可将char变量声明为unsigned。</div><br><div>
+
+ <em> </em><br><br><br></div>
+
+<h2 id="signed"><a href="#signed" class="headerlink" title="    signed"></a><wbr> <wbr>  <wbr> <strong>signed</strong></h2><div> <wbr> <wbr>  <wbr> signed限定词可明确地告诉编译器特定变量是有符号的。它主要用在char声明前面，这个就比较复杂，此处按下不表。</div><br></div><br><div></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjc4c6i5a0028un0r403svotl" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-内部排序和外部排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -111,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc3ko96u004eyi0r00kwx5fe" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc4c6i7z004eun0rb7gztlx6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -422,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc3ko97p004wyi0ruxt8f2ju" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc4c6i8c004sun0rpvkajxxs" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -576,7 +625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc3ko972004gyi0rufh5s39c" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc4c6i80004gun0roei69seg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -661,7 +710,7 @@ typedef struct objc_object *id;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc3ko95z0041yi0rg15aviqz" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc4c6i7m0046un0rbgx2gz7t" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -789,7 +838,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc3ko98b005eyi0rcbdx8ekd" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc4c6i8z005gun0ru4wechpf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -869,7 +918,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc3ko94t0038yi0rnotqnzdw" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc4c6i6j0039un0r6j6x1b3i" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -919,7 +968,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc3ko93e0029yi0regl4uii4" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc4c6i5d002bun0rrq2x65g4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1041,7 +1090,7 @@ call now():
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc3ko93a0027yi0rklb7w46z" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc4c6i590026un0rk4cnr1jx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1179,239 +1228,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc3ko9350022yi0rtym94fq7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python3 学习笔记 （1）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/01/Python3 学习笔记 （1）/" class="article-date">
-  <time datetime="2017-04-01T07:06:15.000Z" itemprop="datePublished">2017-04-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/01/Python3 学习笔记 （1）/">Python3 学习笔记 （1）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;</p>
-<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
-<pre><code>x = b&#39;ABC&#39;
-</code></pre><hr>
-<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39;
-&#39;Hello, world&#39;
-&gt;&gt;&gt; &#39;Hi, %s, you have $%d.&#39; % (&#39;Michael&#39;, 1000000)
-&#39;Hi, Michael, you have $1000000.&#39;
-</code></pre><hr>
-<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
-<p>比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用<code>if</code>语句实现：</p>
-<pre><code>age = 20
-if age &gt;= 18:
-    print(&#39;your age is&#39;, age)
-    print(&#39;adult&#39;)
-</code></pre><p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
-<hr>
-<h2 id="elif于else-if"><a href="#elif于else-if" class="headerlink" title="elif于else if"></a>elif于else if</h2><p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
-<pre><code>if &lt;条件判断1&gt;:
-    &lt;执行1&gt;
-elif &lt;条件判断2&gt;:
-    &lt;执行2&gt;
-elif &lt;条件判断3&gt;:
-    &lt;执行3&gt;
-else:
-    &lt;执行4&gt;
-</code></pre><hr>
-<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><pre><code>Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()
-</code></pre><p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
-<hr>
-<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><pre><code>names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
-for name in names: 
-     print(name)
-</code></pre><p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
-<pre><code>&gt;&gt;&gt; list(range(5))
-[0, 1, 2, 3, 4]
-</code></pre><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
-<pre><code>sum = 0
-n = 99
-while n &gt; 0:
-    sum = sum + n
-    n = n - 2
-print(sum)
-</code></pre><p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
-<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
-<pre><code>n = 1
-while n &lt;= 100:
-    print(n)
-    n = n + 1
-print(&#39;END&#39;)
-</code></pre><p>上面的代码可以打印出1~100。</p>
-<p>如果要提前结束循环，可以用<code>break</code>语句：</p>
-<pre><code>n = 1
-while n &lt;= 100:
-    if n &gt; 10: # 当n = 11时，条件满足，执行break语句
-        break # break语句会结束当前循环
-    print(n)
-    n = n + 1
-print(&#39;END&#39;)
-</code></pre><p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
-<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
-<pre><code>n = 0
-while n &lt; 10:
-    n = n + 1
-    print(n)
-</code></pre><p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
-<pre><code>n = 0
-while n &lt; 10:
-    n = n + 1
-    if n % 2 == 0: # 如果n是偶数，执行continue语句
-        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
-    print(n)
-</code></pre><p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
-<hr>
-<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><pre><code>&gt;&gt;&gt; d = {&#39;Michael&#39;: 95, &#39;Bob&#39;: 75, &#39;Tracy&#39;: 85}
-&gt;&gt;&gt; d[&#39;Michael&#39;]
-95
-</code></pre><p>和list比较，dict有以下几个特点：</p>
-<ol>
-<li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
-<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
-</li>
-<li><p>查找和插入的时间随着元素的增加而增加；</p>
-</li>
-<li>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</li>
-</ol>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
-<p>要创建一个set，需要提供一个list作为输入集合：</p>
-<pre><code>&gt;&gt;&gt; s = set([1, 2, 3])
-&gt;&gt;&gt; s
-{1, 2, 3}
-</code></pre><hr>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
-<p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：</p>
-<pre><code>def my_abs(x):
-    if x &gt;= 0:
-        return x
-    else:
-        return -x
-</code></pre><p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
-<p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
-<p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
-<p><code>return None</code>可以简写为<code>return</code></p>
-<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
-<pre><code>def nop():
-    pass
-</code></pre><p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
-<p><code>pass</code>还可以用在其他语句里，比如：</p>
-<pre><code>if age &gt;= 18:
-    pass
-</code></pre><p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
-<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>设置默认参数时，有几点要注意：</p>
-<p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
-<p>二是如何设置默认参数。</p>
-<p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
-<p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
-<p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
-<pre><code>def add_end(L=None):
-    if L is None:
-        L = []
-    L.append(&#39;END&#39;)
-    return L
-</code></pre><h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
-<p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
-<p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
-<pre><code>def calc(numbers):
-    sum = 0
-    for n in numbers:
-        sum = sum + n * n
-    return sum
-</code></pre><p>但是调用的时候，需要先组装出一个list或tuple：</p>
-<pre><code>&gt;&gt;&gt; calc([1, 2, 3])
-14
-&gt;&gt;&gt; calc((1, 3, 5, 7))
-84
-</code></pre><p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
-<pre><code>&gt;&gt;&gt; calc(1, 2, 3)
-14
-&gt;&gt;&gt; calc(1, 3, 5, 7)
-84
-</code></pre><p>所以，我们把函数的参数改为可变参数：</p>
-<pre><code>def calc(*numbers):
-    sum = 0
-    for n in numbers:
-        sum = sum + n * n
-    return sum
-</code></pre><p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
-<pre><code>&gt;&gt;&gt; calc(1, 2)
-5
-&gt;&gt;&gt; calc()
-0
-</code></pre><p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
-<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
-&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])
-14
-</code></pre><p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
-<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
-&gt;&gt;&gt; calc(*nums)
-14
-</code></pre><p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
-<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
-<pre><code>def person(name, age, **kw):
-    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
-</code></pre><p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
-<pre><code>&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
-name: Michael age: 30 other: {}
-</code></pre><p>也可以传入任意个数的关键字参数：</p>
-<pre><code>&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
-name: Bob age: 35 other: {&#39;city&#39;: &#39;Beijing&#39;}
-&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
-name: Adam age: 45 other: {&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;}
-</code></pre><p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
-<p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
-<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
-&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
-name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
-</code></pre><p>当然，上面复杂的调用可以用简化的写法：</p>
-<pre><code>&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
-&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
-name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
-</code></pre><p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
-<p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。</p>
-<p>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！</p>
-<p>要注意定义可变参数和关键字参数的语法：</p>
-<p><code>*args</code>是可变参数，args接收的是一个tuple；</p>
-<p><code>**kw</code>是关键字参数，kw接收的是一个dict。</p>
-<p>以及调用函数时如何传入可变参数和关键字参数的语法：</p>
-<p>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；</p>
-<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**{&#39;a&#39;: 1, &#39;b&#39;: 2})</code>。</p>
-<p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
-<p>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。</p>
-<p>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc3ko9330020yi0rkkfa81rh" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc4c6i5l002jun0rauhu5ayb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1425,7 +1242,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -1434,7 +1251,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -1449,7 +1266,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -1459,9 +1276,13 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
@@ -1477,10 +1298,6 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/hello-world/">Hello World</a>
           </li>
         
       </ul>

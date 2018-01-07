@@ -37,7 +37,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.</a>
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
         </h2>
       
     </div>
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,86 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Anaconda使用笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/07/Anaconda使用笔记/" class="article-date">
+  <time datetime="2018-01-07T05:12:42.000Z" itemprop="datePublished">2018-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是-Anaconda？"><a href="#什么是-Anaconda？" class="headerlink" title="什么是 Anaconda？"></a>什么是 Anaconda？</h4><p>Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？</p>
+<h4 id="什么是-conda-？"><a href="#什么是-conda-？" class="headerlink" title="什么是 conda ？"></a>什么是 conda ？</h4><p>conda 是开源包（packages）和虚拟环境（environment）的管理系统。</p>
+<ul>
+<li>packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。  </li>
+<li>虚拟环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。对纠结于 Python 版本的同学们，我们也可以建立 Python2 和 Python3 两个环境，来分别运行不同版本的 Python 代码。</li>
+</ul>
+<p>知道 是什么（what） 的同时，我们也需要问一问 为什么（why）。那么，为什么要选择用Anaconda呢？</p>
+<h4 id="Anaconda指令"><a href="#Anaconda指令" class="headerlink" title="Anaconda指令"></a>Anaconda指令</h4><p>进入名为 env_name 的环境：</p>
+<pre><code>source activate env_name
+</code></pre><hr>
+<p>退出当前环境：</p>
+<pre><code>source deactivate
+</code></pre><hr>
+<h4 id="conda指令"><a href="#conda指令" class="headerlink" title="conda指令"></a>conda指令</h4><p>安装一个 package：</p>
+<pre><code class="bash">conda install package_name
+</code></pre>
+<hr>
+<p>这里 package_name 是需要安装包的名称。你也可以同时安装多个包，比如同时安装numpy 、scipy 和 pandas，则执行如下命令：</p>
+<pre><code class="bash">conda install numpy scipy pandas
+</code></pre>
+<hr>
+<p>你也可以指定安装的版本，比如安装 1.1 版本的 numpy ：</p>
+<pre><code class="bash">conda install numpy=1.10
+</code></pre>
+<hr>
+<p>移除一个 package：</p>
+<pre><code class="bash">conda remove package_name
+</code></pre>
+<hr>
+<p>升级 package 版本：</p>
+<pre><code class="bash">conda update package_name
+</code></pre>
+<hr>
+<p>查看所有的 packages：</p>
+<pre><code class="bash">conda list
+</code></pre>
+<hr>
+<p>如果你记不清 package 的具体名称，也可以进行模糊查询：</p>
+<pre><code class="bash">conda  search search_term
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2018/01/07/Anaconda使用笔记/" data-id="cjc4c6i3p000tun0rnlx28v6m" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-tensorflow笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -94,13 +174,9 @@
         <h3 id="添加一个神经层"><a href="#添加一个神经层" class="headerlink" title="添加一个神经层"></a>添加一个神经层</h3><p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
 <p> 神经层里常见的参数通常有weights、biases和激励函数。</p>
 <h3 id="实现一个训练模型"><a href="#实现一个训练模型" class="headerlink" title="实现一个训练模型"></a>实现一个训练模型</h3><p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
-<pre><code class="Python">import tensorflow as tf
-import numpy as np
-
-
-#添加神经层的函数，有四个参数
+<pre><code class="Python">#添加神经层的函数，有四个参数
 #输入值，输入的大小，输出的大小和激励函数
-def add_layer(input, insize, out_size, activation_function=None):
+def add_layer(inputs, insize, out_size, activation_function=None):
 
     #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
     #这里的weights为一个in_size行，out_size列的随机变量矩阵
@@ -157,12 +233,27 @@ loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indice
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 #使用变量的时候都要对它进行初始化，这是必不可少的
+
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+
+#训练一千次
+for i in range(10000):
+    # training
+    sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
+
+    #每50步我们输出一下机器学习的误差。
+    if i % 50 == 0:
+        # to see the step improvement
+        print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc3ko95f003kyi0rfy8wxkul" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc4c6i7a003uun0rkvzn052k" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -294,7 +385,7 @@ with tf.Session() as sess:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc3ko95h003myi0rlulhane8" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc4c6i74003pun0r64nhf8sp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -428,7 +519,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cjc3ko93q002kyi0rkkleu9ij" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cjc4c6i5q002pun0rbg8ss53s" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -469,7 +560,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc3ko96b004cyi0rgu9aocj4" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc4c6i83004iun0rrajiob6z" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -518,7 +609,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc3ko94r0036yi0r48n1n2t4" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc4c6i6t003dun0rlr1sfnny" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -561,7 +652,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc3ko92b001ayi0rlwlisabc" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc4c6i48001aun0r1g2yn5yu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -612,7 +703,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc3ko95o003pyi0rffa8f4c5" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc4c6i72003nun0rgwr29gpg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -661,7 +752,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc3ko97r004yyi0rsk9r6hna" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc4c6i8e004uun0ruv999b4y" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -708,100 +799,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc3ko91l000nyi0r2m3d507d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-摘抄Effective Objective-C 2.0 " class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/01/摘抄Effective Objective-C 2.0 /" class="article-date">
-  <time datetime="2017-05-01T06:25:49.000Z" itemprop="datePublished">2017-05-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/01/摘抄Effective Objective-C 2.0 /">摘抄Effective Objective-C 2.0 (1)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Objective-C的对象总是使用指针的原因"><a href="#Objective-C的对象总是使用指针的原因" class="headerlink" title="Objective-C的对象总是使用指针的原因"></a><span class="s1">Objective-C</span>的对象总是使用指针的原因</h3><p>因为对象所占用的内存总是分配在“堆空间 (<span class="s1">heap space</span>) ”中，而绝对不会分配在“栈(<span class="s1">stack</span>)上。不能在栈中分配<span class="s1">Objective-C</span>对象：</p>
-<pre><code>NSString stackString;
-
-// error: interface type cannot be statically allocated
-</code></pre><p><span class="s1">Objective-C</span>将堆内存管理抽象出来了。不需要用<span class="s1">malloc</span>及<span class="s1">free</span>来分配或释放对象所占内存。<span class="s1">Objective-C</span>运行期环境把这部分工作抽象为一套内存管理架构，名叫“引用计数”</p>
-<p>在<span class="s1">Objective-C</span>代码中，有时会遇到定义里不含<span class="s1">*</span>的变量，它们可能会使用“栈空间”这些变量所保存的不是<span class="s1">Objective</span>对象。比如<span class="s1">CoreGraphics</span>框架中的<span class="s1">CGRect</span>。这是一个结构体。与创建结构体相比，创建对象还需要额外开销，例如分配以及释放堆内存等。</p>
-<hr>
-<p><span class="s2">“<strong>向前声明(</strong></span><strong>forward declaring</strong><span class="s2"><strong>)</strong>”</span> <span class="s2">在编译一个使用了</span>EOCPerson<span class="s2">类等文件时，不需要知道</span>EOCEmployer<span class="s2">类等全部细节，只需要知道有一个类名叫</span>EOCEmployer<span class="s2">就好。</span></p>
-<hr>
-<p><strong>委托协议就不用单独写一个头文件了</strong>在那种情况下，协议只有与接受协议委托等类放在一起定义才有意义。此时最好能在实现文件中声明此类实现了该委托协议，并把这段实现代码放在“<span class="s1">class-continuation</span>分类)(<span class="s1">class-continuation category</span>)</p>
-<hr>
-<p><strong>多用字面量语法，少用与之等价的方法。</strong></p>
-<p>其中：</p>
-<p>“<span class="s1">arrayWIthObjects:</span>”方法会依次处理各个参数，直到发现<span class="s1">nil</span>为止。如果在插入数组的时候，存在<span class="s1">nil</span>。方法会提前终止。</p>
-<p>多用类型常量，少用<span class="s1">#define</span>预处理指令</p>
-<pre><code>static const NSTimeInterval kAnimationDuration = 0.3;
-</code></pre><p>常用的命名方法是：若常量局限于某“编译单元”（<span class="s1">translation unit</span>，也就是“实现文件”，<span class="s1">implementation file</span>）之内，则在前面加字母<span class="s1">k</span>；</p>
-<p>若常量在类之外可见，则通常以类名为前缀。变量一定要同时用<span class="s1">static </span>与<span class="s1">const</span>来声明。</p>
-<hr>
-<p><strong>编译器每收到一个编译单元，就会输出一份“目标文件”（<span class="s1">object file</span>）。</strong>在<span class="s1">Objective-C</span>的语境下，“编译单元”一词通常指每个类的实现文件（以<span class="s1">.m</span>为后缀名）。假若声明此变量时不加<span class="s1">static</span>，则编译器会为它创建一个“外部符号”（<span class="s1">external symbol</span>）。</p>
-<hr>
-<p><span class="Apple-converted-space">  </span>全局符号表（<span class="s1">global symbol table</span>）中，以便可以在定义该常量的编译单元外使用。因此，其定义方式与上例演示的<span class="s1">static const</span>有所不同。应该这样子定义</p>
-<pre><code>// In the header file
-
-extern NSString *const EOCStringConstant;
-
-// In the implementation file
-
-NSString *const EOCStringConstant = @“VALUE”;
-</code></pre><p>编译器看到头文件中的<span class="s1">extern</span>关键字，就能明白如何在引入此头文件的代码中处理该常量了。这个关键字是要告诉编译器，在全局符号表中将会有一个名叫<span class="s1">EOCStringConstant</span>的符号。也就是说，编译器无须查看其定义，即允许代码使用此常量。因为它真的，当链接成二进制文件之后，肯定能找到这个常量。</p>
-<p>注意<span class="s1">const</span>修饰符在常量类型中的位置。常量定义应从右至左解读，所以在本例中，<span class="s1">EOCStringConstant</span>就是“一个常量，而这个常量是指针，指向<span class="s1">NSString</span>对象”。</p>
-<hr>
-<p><span class="s1">Foundation</span>框架中定义了一些辅助的宏，用这些宏来定义枚举类型时，也可以指定用于保存枚举值的底层数据类型。</p>
-<pre><code>typedef NS_ENUM(NSUInteger, EOCConnectionState) {
-
-   EOCConectionStateDisconnected,
-
-   EOCConectionStateConnecting,
-
-   EOCConnectionStateConnected,
-
-};
-</code></pre><pre><code>typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) {
-
-  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,
-
-  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,
-
-  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,
-
-  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,
-
-};
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc3ko985005ayi0rc3kpyf1t" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc4c6i3s000xun0rznbsomt3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -815,7 +813,7 @@ NSString *const EOCStringConstant = @“VALUE”;
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -824,7 +822,7 @@ NSString *const EOCStringConstant = @“VALUE”;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -839,7 +837,7 @@ NSString *const EOCStringConstant = @“VALUE”;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -849,9 +847,13 @@ NSString *const EOCStringConstant = @“VALUE”;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
@@ -867,10 +869,6 @@ NSString *const EOCStringConstant = @“VALUE”;
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/hello-world/">Hello World</a>
           </li>
         
       </ul>

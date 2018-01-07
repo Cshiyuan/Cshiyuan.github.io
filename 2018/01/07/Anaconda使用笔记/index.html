@@ -5,18 +5,18 @@
   
 
   
-  <title>OAuth(笔记) | C&#39;s Notebook</title>
+  <title>Anaconda使用笔记 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="三、OAuth的思路 OAuth在“客户端“与“服务提供商“之间，设置了一个授权层（authorization layer）。“客户端“不能直接登录“服务提供商“，只能登录授权层，以此将用户与客户端区分开来。“客户端“登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。 “客户端“登录授权层以后，“服务提供商“根据令牌的权限范围和有效期，向">
+  <meta name="description" content="什么是 Anaconda？Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？ 什么是 conda ？conda 是开源包（packages）和虚拟环境（environment）的管理系统。  packages 管理： 可以使用 conda 来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OAuth(笔记)">
-<meta property="og:url" content="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/index.html">
+<meta property="og:title" content="Anaconda使用笔记">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/07/Anaconda使用笔记/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="三、OAuth的思路 OAuth在“客户端“与“服务提供商“之间，设置了一个授权层（authorization layer）。“客户端“不能直接登录“服务提供商“，只能登录授权层，以此将用户与客户端区分开来。“客户端“登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。 “客户端“登录授权层以后，“服务提供商“根据令牌的权限范围和有效期，向">
-<meta property="og:updated_time" content="2018-01-04T13:54:43.479Z">
+<meta property="og:description" content="什么是 Anaconda？Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？ 什么是 conda ？conda 是开源包（packages）和虚拟环境（environment）的管理系统。  packages 管理： 可以使用 conda 来">
+<meta property="og:updated_time" content="2018-01-07T05:26:49.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OAuth(笔记)">
-<meta name="twitter:description" content="三、OAuth的思路 OAuth在“客户端“与“服务提供商“之间，设置了一个授权层（authorization layer）。“客户端“不能直接登录“服务提供商“，只能登录授权层，以此将用户与客户端区分开来。“客户端“登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。 “客户端“登录授权层以后，“服务提供商“根据令牌的权限范围和有效期，向">
+<meta name="twitter:title" content="Anaconda使用笔记">
+<meta name="twitter:description" content="什么是 Anaconda？Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？ 什么是 conda ？conda 是开源包（packages）和虚拟环境（environment）的管理系统。  packages 管理： 可以使用 conda 来">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-OAuth(笔记)" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Anaconda使用笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/11/OAuth(笔记)/" class="article-date">
-  <time datetime="2017-02-11T05:36:09.000Z" itemprop="datePublished">2017-02-11</time>
+    <a href="/2018/01/07/Anaconda使用笔记/" class="article-date">
+  <time datetime="2018-01-07T05:12:42.000Z" itemprop="datePublished">2018-01-07</time>
 </a>
     
   <div class="article-category">
@@ -85,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      OAuth(笔记)
+      Anaconda使用笔记
     </h1>
   
 
@@ -93,22 +93,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><span class="s1">三、</span><strong>OAuth</strong><span class="s1">的思路</span></p>
-<p><span class="s2">OAuth</span>在<span class="s2">“</span>客户端<span class="s2">“</span>与<span class="s2">“</span>服务提供商<span class="s2">“</span>之间，设置了一个授权层（<span class="s2">authorization layer</span>）。<span class="s2">“</span>客户端<span class="s2">“</span>不能直接登录<span class="s2">“</span>服务提供商<span class="s2">“</span>，只能登录授权层，以此将用户与客户端区分开来。<span class="s2">“</span>客户端<span class="s2">“</span>登录授权层所用的令牌（<span class="s2">token</span>），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。</p>
-<p><span class="s2">“</span>客户端<span class="s2">“</span>登录授权层以后，<span class="s2">“</span>服务提供商<span class="s2">“</span>根据令牌的权限范围和有效期，向<span class="s2">“</span>客户端<span class="s2">“</span>开放用户储存的资料。</p>
-<p>五、客户端的授权模式</p>
-<p><span class="s3">客户端必须得到用户的授权（</span>authorization grant<span class="s3">），才能获得令牌（</span>access token<span class="s3">）。</span>OAuth 2.0<span class="s3">定义了四种授权方式。</span></p>
+        <h4 id="什么是-Anaconda？"><a href="#什么是-Anaconda？" class="headerlink" title="什么是 Anaconda？"></a>什么是 Anaconda？</h4><p>Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？</p>
+<h4 id="什么是-conda-？"><a href="#什么是-conda-？" class="headerlink" title="什么是 conda ？"></a>什么是 conda ？</h4><p>conda 是开源包（packages）和虚拟环境（environment）的管理系统。</p>
 <ul>
-<li><span class="s3">授权码模式（</span>authorization code<span class="s3">）</span></li>
-<li><span class="s3">简化模式（</span>implicit<span class="s3">）</span></li>
-<li><span class="s3">密码模式（</span>resource owner password credentials<span class="s3">）</span></li>
-<li><span class="s3">客户端模式（</span>client credentials<span class="s3">）</span></li>
+<li>packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。  </li>
+<li>虚拟环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。对纠结于 Python 版本的同学们，我们也可以建立 Python2 和 Python3 两个环境，来分别运行不同版本的 Python 代码。</li>
 </ul>
+<p>知道 是什么（what） 的同时，我们也需要问一问 为什么（why）。那么，为什么要选择用Anaconda呢？</p>
+<h4 id="Anaconda指令"><a href="#Anaconda指令" class="headerlink" title="Anaconda指令"></a>Anaconda指令</h4><p>进入名为 env_name 的环境：</p>
+<pre><code>source activate env_name
+</code></pre><hr>
+<p>退出当前环境：</p>
+<pre><code>source deactivate
+</code></pre><hr>
+<h4 id="conda指令"><a href="#conda指令" class="headerlink" title="conda指令"></a>conda指令</h4><p>安装一个 package：</p>
+<pre><code class="bash">conda install package_name
+</code></pre>
+<hr>
+<p>这里 package_name 是需要安装包的名称。你也可以同时安装多个包，比如同时安装numpy 、scipy 和 pandas，则执行如下命令：</p>
+<pre><code class="bash">conda install numpy scipy pandas
+</code></pre>
+<hr>
+<p>你也可以指定安装的版本，比如安装 1.1 版本的 numpy ：</p>
+<pre><code class="bash">conda install numpy=1.10
+</code></pre>
+<hr>
+<p>移除一个 package：</p>
+<pre><code class="bash">conda remove package_name
+</code></pre>
+<hr>
+<p>升级 package 版本：</p>
+<pre><code class="bash">conda update package_name
+</code></pre>
+<hr>
+<p>查看所有的 packages：</p>
+<pre><code class="bash">conda list
+</code></pre>
+<hr>
+<p>如果你记不清 package 的具体名称，也可以进行模糊查询：</p>
+<pre><code class="bash">conda  search search_term
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjc4c6i4q001oun0rh4bkdwwf" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/07/Anaconda使用笔记/" data-id="cjc4c6i3p000tun0rnlx28v6m" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -117,19 +146,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/02/11/Java和C  的区别（转载）/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          Java和C++的区别（转载）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/02/10/Should IBOutlets be strong or weak under ARC/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/01/06/tensorflow笔记（2）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Should IBOutlets be strong or weak under ARC?</div>
+      <div class="article-nav-title">tensorflow笔记 （2）</div>
     </a>
   
 </nav>

@@ -7,16 +7,16 @@
   
   <title>tensorflow笔记 （2） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
+  <meta name="description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, insize, ou">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow笔记 （2）">
 <meta property="og:url" content="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
-<meta property="og:updated_time" content="2018-01-06T16:37:01.756Z">
+<meta property="og:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, insize, ou">
+<meta property="og:updated_time" content="2018-01-07T04:56:47.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow笔记 （2）">
-<meta name="twitter:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 import tensorflow as tf import numpy as np   #添加神经层的函数，有四个参数 #输入值，输入的大">
+<meta name="twitter:description" content="添加一个神经层在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.  神经层里常见的参数通常有weights、biases和激励函数。 实现一个训练模型我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码 #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, insize, ou">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -41,7 +41,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hi! This is my notebook.</a>
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
         </h2>
       
     </div>
@@ -58,7 +58,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -96,13 +96,9 @@
         <h3 id="添加一个神经层"><a href="#添加一个神经层" class="headerlink" title="添加一个神经层"></a>添加一个神经层</h3><p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
 <p> 神经层里常见的参数通常有weights、biases和激励函数。</p>
 <h3 id="实现一个训练模型"><a href="#实现一个训练模型" class="headerlink" title="实现一个训练模型"></a>实现一个训练模型</h3><p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
-<pre><code class="Python">import tensorflow as tf
-import numpy as np
-
-
-#添加神经层的函数，有四个参数
+<pre><code class="Python">#添加神经层的函数，有四个参数
 #输入值，输入的大小，输出的大小和激励函数
-def add_layer(input, insize, out_size, activation_function=None):
+def add_layer(inputs, insize, out_size, activation_function=None):
 
     #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
     #这里的weights为一个in_size行，out_size列的随机变量矩阵
@@ -159,12 +155,27 @@ loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indice
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 #使用变量的时候都要对它进行初始化，这是必不可少的
+
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+
+#训练一千次
+for i in range(10000):
+    # training
+    sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
+
+    #每50步我们输出一下机器学习的误差。
+    if i % 50 == 0:
+        # to see the step improvement
+        print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc3ko95f003kyi0rfy8wxkul" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc4c6i7a003uun0rkvzn052k" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -173,9 +184,18 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
     
 <nav id="article-nav">
   
+    <a href="/2018/01/07/Anaconda使用笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Anaconda使用笔记
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/01/06/tensorflow笔记（1）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">tensorflow笔记（1）</div>
     </a>
   
@@ -190,7 +210,7 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -205,7 +225,7 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -215,9 +235,13 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
@@ -233,10 +257,6 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
         
           <li>
             <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/hello-world/">Hello World</a>
           </li>
         
       </ul>
