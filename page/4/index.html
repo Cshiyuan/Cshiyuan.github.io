@@ -65,6 +65,144 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python3 学习笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/Python3 学习笔记（2）/" class="article-date">
+  <time datetime="2017-04-01T15:25:04.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/Python3 学习笔记（2）/">Python3 学习笔记（2）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="尾递归优化解决递归调用栈溢出"><a href="#尾递归优化解决递归调用栈溢出" class="headerlink" title="尾递归优化解决递归调用栈溢出"></a><strong>尾递归</strong>优化解决递归调用栈溢出</h2><p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
+<p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
+<pre><code>def fact(n):
+    return fact_iter(n, 1)
+
+def fact_iter(num, product):
+    if num == 1:
+        return product
+    return fact_iter(num - 1, num * product)
+</code></pre><p>可以看到，<code>return fact_iter(num - 1, num * product)</code>仅返回递归函数本身，<code>num - 1</code>和<code>num * product</code>在函数调用前就会被计算，不影响函数调用。</p>
+<p><code>fact(5)</code>对应的<code>fact_iter(5, 1)</code>的调用如下：</p>
+<pre><code>===&gt; fact_iter(5, 1)
+===&gt; fact_iter(4, 5)
+===&gt; fact_iter(3, 20)
+===&gt; fact_iter(2, 60)
+===&gt; fact_iter(1, 120)
+===&gt; 120
+</code></pre><p>尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。</p>
+<p>遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的<code>fact(n)</code>函数改成尾递归方式，也会导致栈溢出。</p>
+<p>使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。</p>
+<p>针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。</p>
+<p>Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。</p>
+<hr>
+<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>取前3个元素，应该怎么做？</p>
+<p>笨办法：</p>
+<pre><code>&gt;&gt;&gt; [L[0], L[1], L[2]]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>之所以是笨办法是因为扩展一下，取前N个元素就没辙了。</p>
+<p>取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：</p>
+<pre><code>&gt;&gt;&gt; r = []
+&gt;&gt;&gt; n = 3
+&gt;&gt;&gt; for i in range(n):
+...     r.append(L[i])
+... 
+&gt;&gt;&gt; r
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。</p>
+<p>对应上面的问题，取前3个元素，用一行代码就可以完成切片：</p>
+<pre><code>&gt;&gt;&gt; L[0:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。</p>
+<p>如果第一个索引是<code>0</code>，还可以省略：</p>
+<pre><code>&gt;&gt;&gt; L[:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>也可以从索引1开始，取出2个元素出来：</p>
+<pre><code>&gt;&gt;&gt; L[1:3]
+[&#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre><p>类似的，既然Python支持<code>L[-1]</code>取倒数第一个元素，那么它同样支持倒数切片，试试：</p>
+<pre><code>&gt;&gt;&gt; L[-2:]
+[&#39;Bob&#39;, &#39;Jack&#39;]
+&gt;&gt;&gt; L[-2:-1]
+[&#39;Bob&#39;]
+</code></pre><hr>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。</p>
+<p>而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。</p>
+<p>我们首先要搞明白计算机（Computer）和计算（Compute）的概念。</p>
+<p>在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。</p>
+<p>而计算则指数学意义上的计算，越是抽象的计算，离计算机硬件越远。</p>
+<p>对应到编程语言，就是越低级的语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。</p>
+<p>函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出，因此，这种函数是有副作用的。</p>
+<p>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！</p>
+<p>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</p>
+<hr>
+<h2 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h2><h3 id="变量可以指向函数"><a href="#变量可以指向函数" class="headerlink" title="变量可以指向函数"></a>变量可以指向函数</h3><p>以Python内置的求绝对值的函数<code>abs()</code>为例，调用该函数用以下代码：</p>
+<pre><code>&gt;&gt;&gt; abs(-10)
+10
+</code></pre><p>但是，如果只写<code>abs</code>呢？</p>
+<pre><code>&gt;&gt;&gt; abs
+&lt;built-in function abs&gt;
+</code></pre><p>可见，<code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。</p>
+<hr>
+<h2 id="map-reduce"><a href="#map-reduce" class="headerlink" title="map/reduce"></a>map/reduce</h2><p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
+<p>举例说明，比如我们有一个函数f(x)=x<sup>2</sup>，要把这个函数作用在一个list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code>上，就可以用<code>map()</code>实现如下：</p>
+<p><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<pre><code>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+</code></pre><p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def add(x, y):
+...     return x + y
+...
+&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])
+25
+</code></pre><p>当然求和运算可以直接用Python内建函数<code>sum()</code>，没必要动用<code>reduce</code>。</p>
+<p>但是如果要把序列<code>[1, 3, 5, 7, 9]</code>变换成整数<code>13579</code>，<code>reduce</code>就可以派上用场：</p>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def fn(x, y):
+...     return x * 10 + y
+...
+&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])
+13579
+</code></pre><p>这个例子本身没多大用处，但是，如果考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
+<hr>
+<h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><p>】列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
+<p>举个例子，要生成list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>可以用<code>range(1, 11)</code>：</p>
+<pre><code>&gt;&gt;&gt; range(1, 11)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre><hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc5rn3fr0025vw0rex0r6nsy" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python3 学习笔记 （1）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/01/Python3 学习笔记 （1）/" class="article-date">
@@ -287,7 +425,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc4c6i53001zun0r7ewkdsz2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc5rn3fo0021vw0rc3w85zna" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -375,7 +513,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc4c6i5k002hun0rwgn2pwxt" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc5rn3g0002fvw0r40t7yyvw" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -565,7 +703,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc4c6i5o002nun0r0o7vidtv" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc5rn3g8002lvw0rq0awc824" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -643,7 +781,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc4c6i5i002fun0rox0gn04s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc5rn3fu002avw0rbirr9j5j" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -716,7 +854,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc4c6i71003lun0r3b3avzot" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc5rn3hi003fvw0rz5z782io" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -825,7 +963,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc4c6i7j0043un0r53ospfkh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc5rn3ik0046vw0r1qo2j6v0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -866,7 +1004,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc4c6i7g0041un0rhfaiyl8j" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc5rn3ig0044vw0r5dga7bs0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -918,7 +1056,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc4c6i3n000run0rf4xuh0bc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc5rn3e8000tvw0r1r3toagx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -972,115 +1110,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc4c6i3g000oun0r42sszeig" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Objective-C 新的很有用的特性(其实是为了swift同步）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" class="article-date">
-  <time datetime="2017-03-23T03:13:14.000Z" itemprop="datePublished">2017-03-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/">Objective-C 新的很有用的特性(其实是为了swift同步）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Nullability"><a href="#Nullability" class="headerlink" title="Nullability"></a>Nullability</h2><p>常规用法</p>
-<pre><code>@property (nonatomic, strong, nonnull) Sark *sark;
-@property (nonatomic, copy, readonly, nullable) NSArray *friends;
-+ (nullable NSString *)friendWithName:(nonnull NSString *)name;
-</code></pre><p>修饰变量，前面需要加双下划线，比如 block 内用法：</p>
-<pre><code>- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;
-</code></pre><p>setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。</p>
-<pre><code>@property (null_resettable, nonatomic, strong) UIView *view;
-</code></pre><p>宏的用法（包在宏里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行）：</p>
-<pre><code>NS_ASSUME_NONNULL_BEGIN
-@interface Sark : NSObject
-@property (nonatomic, copy, nullable) NSString *workingCompany;
-@property (nonatomic, copy) NSArray *friends;
-- (nullable NSString *)gayFriend;
-@end
-NS_ASSUME_NONNULL_END
-</code></pre><p>Nullability 主要作用是在编译器层面提供了空值的类型检查，在类型不符时给出 warning，方便开发者第一时间发现潜在问题。</p>
-<hr>
-<h2 id="kindof"><a href="#kindof" class="headerlink" title="__kindof"></a>__kindof</h2><p>主要作用还是编译器层面的类型检查</p>
-<pre><code>//UIView 的写法
-@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
-// UITableView 的写法
-- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
-</code></pre><p>参考:<br><a href="http://blog.csdn.net/lizhongfu2013/article/details/47375649" target="_blank" rel="noopener">iOS开发~Objective-C新特性</a><br><a href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/" target="_blank" rel="noopener">2015 Objective-C 新特性</a></p>
-<h2 id="轻量级的泛型"><a href="#轻量级的泛型" class="headerlink" title="轻量级的泛型"></a>轻量级的泛型</h2><h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><pre><code>NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];
-NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&quot;b&quot;: @2};
-</code></pre><h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><pre><code>@interface Stack&lt;ObjectType&gt; : NSObject
-- (void)pushObject:(ObjectType)object;
-- (ObjectType)popObject;
-@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
-@end
-</code></pre><p>还可以增加限制</p>
-<pre><code>// 只接受 NSNumber * 的泛型
-@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
-// 只接受满足 NSCopying 协议的泛型
-@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject
-</code></pre><h3 id="covariant-amp-amp-contravariant"><a href="#covariant-amp-amp-contravariant" class="headerlink" title="covariant &amp;&amp; contravariant"></a>covariant &amp;&amp; contravariant</h3><ul>
-<li>__covariant : 子类型可以强转到父类型（里氏替换原则）</li>
-<li>__contravariant : 父类型可以强转到子类型（WTF?）<br>参考 NSArray 和 NSMutableArray 的定义</li>
-</ul>
-<pre><code>// NSArray
-@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;
-@property (readonly) NSUInteger count;
-- (ObjectType)objectAtIndex:(NSUInteger)index;
-- (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-
-@end
-
-
-// NSMutableArray
-@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;
-
-
-- (void)addObject:(ObjectType)anObject;
-- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
-- (void)removeLastObject;
-- (void)removeObjectAtIndex:(NSUInteger)index;
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
-- (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-
-@end
-</code></pre><p>&nbsp;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc4c6i52001xun0r9gpm5j7t" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc5rn3ds000hvw0rcjzsktjq" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1133,6 +1163,10 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       <ul>
         
           <li>
+            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
           </li>
         
@@ -1146,10 +1180,6 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
         
           <li>
             <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
           </li>
         
       </ul>

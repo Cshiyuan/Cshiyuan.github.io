@@ -65,6 +65,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-a-summary-of-recent-work" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/a-summary-of-recent-work/" class="article-date">
+  <time datetime="2016-08-05T09:31:01.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/05/a-summary-of-recent-work/">A summary of recent work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CDN（Content-Delivery-Network，内容分发网络）"><a href="#CDN（Content-Delivery-Network，内容分发网络）" class="headerlink" title="CDN（Content Delivery Network，内容分发网络）"></a><strong>CDN（Content Delivery Network，内容分发网络）</strong></h2><p>通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。<br>解决目前互联网业务在网络层面可能存在的问题：</p>
+<ol>
+<li>业务服务器接入互联网的带宽有限。</li>
+<li>不同运营商之间的互联问题使得业务要考虑多运营商分布问题。</li>
+<li>地域问题导致用户到服务器的物理距离会比较远，传输时延非常高。<br>CDN帮助用户解决互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，业务只需简单接入即可完成访问加速，无需关注复杂多变的网络状况。</li>
+</ol>
+<p>使用CDN后的http请求处理流程如下图：</p>
+<p><img src="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png" alt=""></p>
+<p><strong>总结：需要通过DNS解析，将域名CNAME到CDN服务商的提供的CNAME域名。放弃原来的A记录解析，全部交由CNAME域名的CDN节点来处理。CDN节点会主动或者被动的从源拉取资源。**</strong>当节点存储所请求资源就将资源返回，否则返回源服务器请求。**</p>
+<p><strong>吐槽：腾讯的CDN和阿里的CDN差太大，阿里把腾讯甩好几条街。</strong></p>
+<h2 id="MYSQL5-6内存占用过高"><a href="#MYSQL5-6内存占用过高" class="headerlink" title="MYSQL5.6内存占用过高"></a><strong>MYSQL5.6内存占用过高</strong></h2><p>距离MySQL 5.6正式发布已经有比较长的时间了，目前Oracle官网上的最新GA版本MySQL server也为5.6。但reizhi在安装配置后却发现其内存占用居高不下，无论如何调整cache甚至禁用InnoDB都不能解决。由于VPS仅有1GB内存，在开启常用的Web服务之后，无力再为MySQL提供400MB以上的物理内存。</p>
+<p>通过网络爬文，MySQL 5.6相比于前代GA版本性能提升显著，但默认缓存设置对于小型站点并不合理。通过修改my.ini文件中的performance_schema_max_table_instances参数，能够有效降低内存占用。</p>
+<p>修改参数：</p>
+<p><pre class="prettyprint">performance_schema_max_table_instances=400<br>table_definition_cache=400<br>table_open_cache=256</pre><br>保存之后重新启动MySQL服务，其内存占用即可从400MB以上降低至40MB左右。</p>
+<p><img src="http://roov.org/wp-content/uploads/2013/12/20131225225414_75247.jpg" alt=""></p>
+<h2 id="PHP-FPM内存占用过大的优化方法。"><a href="#PHP-FPM内存占用过大的优化方法。" class="headerlink" title="PHP-FPM内存占用过大的优化方法。"></a><strong>PHP-FPM内存占用过大的优化方法。</strong></h2><p><strong>总结或多或少都有内存泄漏的问题</strong></p>
+<div><br><br>php-fpm优化方法<br><br>php-fpm存在两种方式，一种是直接开启指定数量的php-fpm进程，不再增加或者减少；<br>另一种则是开始时开启一定数量的php-fpm进程，当请求量变大时，动态的增加php-fpm进程数到上限，当空闲时自动释放空闲的进程数到一个下限。<br>这两种不同的执行方式，可以根据服务器的实际需求来进行调整。<br><br>要用到的一些参数，分别是pm、pm.max_children、pm.start_servers、pm.min_spare_servers和pm.max_spare_servers。<br><br>pm表示使用那种方式，有两个值可以选择，就是static（静态）或者dynamic（动态）。<br><br>下面4个参数的意思分别为：<br><div><strong>pm.max_children：</strong>静态方式下开启的php-fpm进程数量，在动态方式下他限定php-fpm的最大进程数（这里要注意pm.max_spare_servers的值只能小于等于pm.max_children）<br><strong>pm.start_servers：</strong>动态方式下的起始php-fpm进程数量。<br><strong>pm.min_spare_servers：</strong>动态方式空闲状态下的最小php-fpm进程数量。<br><strong>pm.max_spare_servers：</strong>动态方式空闲状态下的最大php-fpm进程数量。</div><br><strong>如果dm设置为static，那么其实只有pm.max_children这个参数生效。</strong>系统会开启设置的数量个php-fpm进程。<br><br><strong>如果dm设置为dynamic，4个参数都生效。</strong>系统会在php-fpm运行开始时启动pm.start_servers个php-fpm进程，然后根据系统的需求动态在pm.min_spare_servers和pm.max_spare_servers之间调整php-fpm进程数。<br><br>那么，对于服务器，选择哪种执行方式比较好呢？事实上，跟Apache一样，运行的PHP程序在执行完成后，或多或少会有内存泄露的问题。这也是为什么开始时一个php-fpm进程只占用3M左右内存，运行一段时间后就会上升到20-30M的原因了。<br><br>所以，动态方式因为会结束掉多余的进程，可以回收释放一些内存，所以推荐在内存较少的服务器或者VPS上使用。具体最大数量根据 内存/20M 得到。<br>比如说512M的VPS，建议pm.max_spare_servers设置为20（512*0.8/20）。至于pm.min_spare_servers，则建议根据服务器的负载情况来设置，比较合适的值在5~10之间。<br><br>然后对于比较大内存的服务器来说，设置为静态的话会提高效率。<br>因为频繁开关php-fpm进程也会有时滞，所以内存够大的情况下开静态效果会更好。数量也可以根据 内存/30M 得到。<br>比如说2GB内存的服务器，可以设置为50；4GB内存可以设置为100等。<br><br>比如，如果是512M的vps，设置的参数如下：<br><div>代码示例:</div><br><div id="c_VPKcKpCW">pm=dynamic<br>pm.max_children=20<br>pm.start_servers=5<br>pm.min_spare_servers=5<br>pm.max_spare_servers=20</div><br>可以最大的节省内存并提高执行效率。<br><div><br><br>&nbsp;<br><br></div>
+
+<h2 id="Nginx设置alias别名目录访问phpmyadmin"><a href="#Nginx设置alias别名目录访问phpmyadmin" class="headerlink" title="Nginx设置alias别名目录访问phpmyadmin"></a><strong>Nginx设置alias别名目录访问phpmyadmin</strong></h2><h3 id="1-修改nginx配置文件"><a href="#1-修改nginx配置文件" class="headerlink" title="1.修改nginx配置文件"></a>1.修改nginx配置文件</h3><p><strong>cp /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.confbak</strong>  #备份配置文件</p>
+<p><strong>vi /usr/local/nginx/conf/nginx.conf</strong>  #修改配置文件，在 <strong> （推荐使用nano 命令，反正我是比较习惯用nano来修改。）</strong></p>
+<p>server {<br>listen       80;<br>server_name  localhost;</p>
+<p>#charset koi8-r;</p>
+<p>#access_log  logs/host.access.log  main;</p>
+<p>location / {<br>root   html;<br>index index.php  index.html index.htm;<br>}</p>
+<p>下面添加以下内容：(见粗体字，可以仿造改用）</p>
+<p>location <strong>/phpmyadmin</strong> {<br>alias <strong>/home/phpmyadmin;</strong><br>index index.php;<br>}</p>
+<p>location ~<strong> /phpmyadmin/.</strong>+.php$ {<br>if ($fastcgi_script_name ~<strong> /phpmyadmin/</strong>(.+.php.<em>)$) {<br>set $valid_fastcgi_script_name $1;<br>}<br>include fastcgi_params;<br>fastcgi_pass   127.0.0.1:9000;<br>fastcgi_index  index.php;<br>fastcgi_param SCRIPT_FILENAME <em>*/home/phpmyadmin/</em></em>$valid_fastcgi_script_name;<br>}</p>
+<p>:wq!   #保存，退出</p>
+<h3 id="2、设置-home-phpmyadmin目录权限"><a href="#2、设置-home-phpmyadmin目录权限" class="headerlink" title="2、设置/home/phpmyadmin目录权限"></a><strong>2、设置/home/phpmyadmin目录权限</strong></h3><p><strong>chown www.www /home/phpmyadmin -R  #修改目录所有者为www账号</strong></p>
+<p><strong>service nginx restart   #重启nginx</strong></p>
+<p><strong>service php-fpm restart    #重启php-fpm</strong></p>
+<p>&nbsp;</p>
+<p></p></div><p></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/08/05/a-summary-of-recent-work/" data-id="cjc5rn3gq002zvw0r04wan85c" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-perfect-is-the-enemy-of-good" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/05/perfect-is-the-enemy-of-good/" class="article-date">
@@ -102,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/05/perfect-is-the-enemy-of-good/" data-id="cjc4c6i6x003hun0rrwoy6pt3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/05/perfect-is-the-enemy-of-good/" data-id="cjc5rn3hq003lvw0rcrr5ou2k" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -188,7 +261,7 @@ chkconfig mongod on
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/30/CentOS7 安装MongoDB 3.0服务器/" data-id="cjc4c6i3r000vun0rr9qov2te" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/30/CentOS7 安装MongoDB 3.0服务器/" data-id="cjc5rn3e0000ovw0rw7iqd59e" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -317,7 +390,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjc4c6i4t001qun0rry7caw5h" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjc5rn3fa001qvw0rpawj3g3a" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -434,7 +507,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/14/Web工作方式(转载）/" data-id="cjc4c6i66002zun0rn0moqcol" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/14/Web工作方式(转载）/" data-id="cjc5rn3gm002vvw0r0pjvtta5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -480,7 +553,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/25/我们曾经都是孩子/" data-id="cjc4c6i8r0056un0rvwclmff3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/25/我们曾经都是孩子/" data-id="cjc5rn3jx0055vw0r1ardwock" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -524,7 +597,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/23/这两年有意识的在思考，我要怎样去爱一个人。/" data-id="cjc4c6i9r0064un0r6j78x414" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/23/这两年有意识的在思考，我要怎样去爱一个人。/" data-id="cjc5rn3lq0065vw0rnnckqjfp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -569,7 +642,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/14/《上瘾五百年：烟、酒、咖啡和鸦片的历史－戴维·考特莱》/" data-id="cjc4c6i7c003wun0rgggtd6f1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/14/《上瘾五百年：烟、酒、咖啡和鸦片的历史－戴维·考特莱》/" data-id="cjc5rn3i6003xvw0r2is66jab" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -647,7 +720,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/13/线程和进程的区别是什么？/" data-id="cjc4c6i9f005uun0ro0dv6uxo" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/13/线程和进程的区别是什么？/" data-id="cjc5rn3l3005vvw0rluyvt3cg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -698,55 +771,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/06/海滨栈道－－给在小镇子长大的孩子们/" data-id="cjc4c6i98005kun0r8subozxk" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-经济型人格" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/31/经济型人格/" class="article-date">
-  <time datetime="2016-05-31T10:59:03.000Z" itemprop="datePublished">2016-05-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活杂谈/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/31/经济型人格/">经济型人格</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>“古老的夜晚和远方的音乐是永恒的，但那不属于我。”</p>
-<p>今天，我要给大家带来一个词，叫“经济型人格”，而我们的民族比较“经济型人格”。</p>
-<p>这种全民族的“经济型人格”的特点在于，我们每个人的价值不是由自己定义的，而是由别人定义的，整个社会的价值体系相对单一，自动默认所有人都要遵守这套规则。</p>
-<p>举个例子吧。倘若你的身份是一个学生，别人立刻就会开始好奇你的考试排名，学分绩点，学校知名程度，如此这般。了解这些信息，仿佛就可以给一个人估价了。</p>
-<p>在我初中高中的时候，每逢大考小考成绩出来，全级的总分排名和单科排名立刻就会被贴出来。我猜这在全中国的中学都是相对普遍的现象。很多人已经适应了这种比较和被比较的规则，即使毕业了，工作了，很多人还是迷恋着公布排名的模式。因为每个人生阶段都有很多可比的内容呀！比比谁先找到男朋友，比比谁的工资高，比比谁的单位名声更响，比比谁先结婚，比比谁先生孩子，等等。好像这个世界就应该是这样比来比去的，一点也不觉得有什么问题。</p>
-<p>于是，我们的情绪模式都扭曲了。我们逐渐变得无法自己取悦自己，而完全依赖别人的认可才能通向所谓的“成就感”和“快乐”。</p>
-<p>随着我们逐渐融入这个“估价系统”，我们的思维模式也变得越来越“经济”。我们会斤斤计较自己的投资和收益，那些“没用”的事情，那些不能让自己在整个“估价系统”里排名更高的事情，也就没必要去做了。</p>
-<p>而这个估价系统的荒谬之处，就好像是让猎豹、老鹰、海豚一起比赛跑步。有可比性吗？每个个体之间的差异本来都应该被尊重，然而却被硬生生地收在一个“集体主义”的笼子里，用这种本应该平等的多样性挤压出可笑的优越感和挫败感。久而久之，老鹰可能也不知道自己能在天上飞得多高，海豚也忘记了水中生活，因为在这样一个估价系统里，陆地才是唯一的正确答案。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/05/31/经济型人格/" data-id="cjc4c6i9h005wun0r3z668rrt" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/06/海滨栈道－－给在小镇子长大的孩子们/" data-id="cjc5rn3ke005dvw0rpadob806" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -799,6 +824,10 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       <ul>
         
           <li>
+            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
           </li>
         
@@ -812,10 +841,6 @@ NSLog(@”weak属性：%@”,self.weakPoint);
         
           <li>
             <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
           </li>
         
       </ul>

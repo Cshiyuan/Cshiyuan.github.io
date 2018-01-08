@@ -65,6 +65,69 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-tensorflow笔记（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/07/tensorflow笔记（3）/" class="article-date">
+  <time datetime="2018-01-07T09:32:40.000Z" itemprop="datePublished">2018-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="加速神经网络训练（Speed-Up-Training）"><a href="#加速神经网络训练（Speed-Up-Training）" class="headerlink" title="加速神经网络训练（Speed Up Training）"></a>加速神经网络训练（Speed Up Training）</h3><p>越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.</p>
+<p>####Stochastic Gradient Descent (SGD)</p>
+<p> 最基础的方法就是 SGD 啦, 如果用普通的训练方法, 就需要重复不断的把整套数据放入神经网络 NN训练, 这样消耗的计算资源会很大.</p>
+<p>我们换一种思路, 如果把这些数据拆分成小批小批的, 然后再分批不断放入 NN 中计算, 这就是我们常说的 SGD 的正确打开方式了. 每次使用批数据, 虽然不能反映整体数据的情况, 不过却很大程度上加速了 NN 的训练过程, 而且也不会丢失太多准确率.如果运用上了 SGD, 你还是嫌训练速度慢, 那怎么办?</p>
+<p>####Momentum 更新方法</p>
+<p>大多数其他途径是在更新神经网络参数那一步上动动手脚. 传统的参数 W 的更新是把原始的 W 累加上一个负的学习率(learning rate) 乘以校正值 (dx). 这种方法可能会让学习过程曲折无比, 看起来像 喝醉的人回家时, 摇摇晃晃走了很多弯路.</p>
+<p>所以我们把这个人从平地上放到了一个斜坡上, 只要他往下坡的方向走一点点, 由于向下的惯性, 他不自觉地就一直往下走, 走的弯路也变少了. </p>
+<p>$ W += -(Learning Rate) * dx $</p>
+<p>更改为</p>
+<p>$ m = b1 <em> m - (Learning Rate) </em> dx$<br>$W += m$<br>这就是 Momentum 参数更新. 另外一种加速方法叫AdaGrad.</p>
+<h4 id="AdaGrad-更新方法"><a href="#AdaGrad-更新方法" class="headerlink" title="AdaGrad 更新方法"></a>AdaGrad 更新方法</h4><p>这种方法是在学习率上面动手脚, 使得每一个参数更新都会有自己与众不同的学习率, 他的作用和 momentum 类似, 不过不是给喝醉酒的人安排另一个下坡, 而是给他一双不好走路的鞋子, 使得他一摇晃着走路就脚疼, 鞋子成为了走弯路的阻力, 逼着他往前直着走. 他的数学形式是这样的. </p>
+<p>$ W += -(Learning Rate) * dx $</p>
+<p>更改为</p>
+<p>$ v += (dx)^2 $<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>接下来又有什么方法呢? 如果把下坡和不好走路的鞋子合并起来, 是不是更好呢? 没错, 这样我们就有了 RMSProp 更新方法.</p>
+<h4 id="RMSProp-更新方法"><a href="#RMSProp-更新方法" class="headerlink" title="RMSProp 更新方法"></a>RMSProp 更新方法</h4><p>有了 momentum 的惯性原则 , 加上 adagrad 的对错误方向的阻力, 我们就能合并成这样. 让 RMSProp同时具备他们两种方法的优势. 不过细心的同学们肯定看出来了, 似乎在 RMSProp 中少了些什么. 原来是我们还没把 Momentum合并完全, RMSProp 还缺少了 momentum 中的 这一部分. 所以, 我们在 Adam 方法中补上了这种想法.</p>
+<p>$ W += - (Learning Rate * dx)$</p>
+<p>更改为：</p>
+<p>$v = b1 <em> v + (1-b1) </em> dx^2$<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>####Adam更新方法<br>计算m 时有 momentum 下坡的属性, 计算 v 时有 adagrad 阻力的属性, 然后再更新参数时 把 m 和 V 都考虑进去. 实验证明, 大多数时候, 使用 adam 都能又快又好的达到目标, 迅速收敛. 所以说, 在加速神经网络训练的时候, 一个下坡, 一双破鞋子, 功不可没.</p>
+<p>$ W += - (Learning Rate * dx)$</p>
+<p>更改为：</p>
+<p>$m = b1 <em> m + (1-b1) </em> dx \rightarrow  Momentum$<br>$v = b2 <em> v + ( 1-b2) </em> dx^2 \rightarrow  AdaGrad$<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2018/01/07/tensorflow笔记（3）/" data-id="cjc5rn3hy003ovw0rcorz1pri" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Anaconda使用笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/07/Anaconda使用笔记/" class="article-date">
@@ -99,11 +162,13 @@
 </ul>
 <p>知道 是什么（what） 的同时，我们也需要问一问 为什么（why）。那么，为什么要选择用Anaconda呢？</p>
 <h4 id="Anaconda指令"><a href="#Anaconda指令" class="headerlink" title="Anaconda指令"></a>Anaconda指令</h4><p>进入名为 env_name 的环境：</p>
-<pre><code>source activate env_name
-</code></pre><hr>
+<pre><code class="bash">source activate env_name
+</code></pre>
+<hr>
 <p>退出当前环境：</p>
-<pre><code>source deactivate
-</code></pre><hr>
+<pre><code class="bash">source deactivate
+</code></pre>
+<hr>
 <h4 id="conda指令"><a href="#conda指令" class="headerlink" title="conda指令"></a>conda指令</h4><p>安装一个 package：</p>
 <pre><code class="bash">conda install package_name
 </code></pre>
@@ -135,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/07/Anaconda使用笔记/" data-id="cjc4c6i3p000tun0rnlx28v6m" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/07/Anaconda使用笔记/" data-id="cjc5rn3e2000rvw0rpni1aio3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -253,7 +318,7 @@ for i in range(10000):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc4c6i7a003uun0rkvzn052k" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（2）/" data-id="cjc5rn3i1003svw0rp8pe5so8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -385,7 +450,7 @@ with tf.Session() as sess:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc4c6i74003pun0r64nhf8sp" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow笔记（1）/" data-id="cjc5rn3hp003jvw0r0509grev" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -519,7 +584,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cjc4c6i5q002pun0rbg8ss53s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cjc5rn3gg002rvw0r8eoquofh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -560,7 +625,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc4c6i83004iun0rrajiob6z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/04/到头来还是从自建wordpress转移到了github.io/" data-id="cjc5rn3iy004fvw0ry0l2pw1h" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -609,7 +674,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc4c6i6t003dun0rlr1sfnny" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/01/hello-world/" data-id="cjc5rn3h10035vw0r136di6vo" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -652,7 +717,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc4c6i48001aun0r1g2yn5yu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript深入笔记/" data-id="cjc5rn3eq0019vw0r7xcqvln8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -703,7 +768,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc4c6i72003nun0rgwr29gpg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack commonJS/" data-id="cjc5rn3i0003qvw0rabciqgr3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -752,54 +817,7 @@ this is mymacbook.local
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc4c6i8e004uun0ruv999b4y" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ABI （应用程序二进制接口)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/01/ABI （应用程序二进制接口)/" class="article-date">
-  <time datetime="2017-05-01T07:28:20.000Z" itemprop="datePublished">2017-05-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/01/ABI （应用程序二进制接口)/">ABI （应用程序二进制接口）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">应用程序二进制接口</a> 描述了应用程序和操作系统之间，一个应用和它的库之间，或者应用的组成部分之间的低接口。</p>
-<h5 id="ABI涵盖了各种细节，如："><a href="#ABI涵盖了各种细节，如：" class="headerlink" title="ABI涵盖了各种细节，如："></a>ABI涵盖了各种细节，如：</h5><p><strong>数据类型的大小、布局和对齐</strong>;  </p>
-<p><strong>调用约定</strong>（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；<br>系统调用的编码和一个应用如何向操作系统进行系统调用;</p>
-<p>以及在一个完整的操作系统ABI中，<strong>目标文件</strong>的<strong>二进制格式</strong>、程序库等等ABI不同于API ，API定义了源代码和库之间的接口，因此同样的代码可以在支持这个API的任何系统中编译，然而ABI允许编译好的<a href="http://baike.baidu.com/item/%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">目标代码</a>在使用兼容ABI的系统中无需改动就能运行。  </p>
-<p>ABI掩盖了各种细节，例如:调用约定控制着函数的参数如何传送以及如何接受返回值；<br>系统调用的编码和一个应用如何向操作系统进行系统调用；<br>以及在一个完整的操作系统ABI中，对象文件的二进制格式、程序库等等。<br>一个完整的ABI，像 Intel二进制兼容标准 (iBCS) ，允许支持它的操作系统上的程序不经修改在其他支持此ABI的操作系统上运行。  </p>
-<p>其他的 ABI 标准化细节包括C++ name decoration和同一个平台上的编译器之间的调用约定，但是不包括跨平台的兼容性。在Unix的操作系统中，存在很多运行在同一件平台上互相相关但是不兼容的操作系统（尤其是80386兼容系统）。有一些努力尝试标准化AI，以减少销售商将程序移植到其他系统时所需的工作。然而，直到现在还没有很成功的例子，虽然LSB正在为Linux做这方面的努力。  </p>
-<p>它描述了应用程序与OS之间的底层接口。ABI涉及了程序的各个方面，比如：目标文件格式、数据类型、数据对齐、函数调用约定以及函数如何传递参数、如何返回值、系统调用号、如何实现系统调用等。<br>一套完整的ABI（比如：Intel(iBCS)），可以让程序在所有支持该ABI的系统上运行，而无需对程序进行修改。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc4c6i3s000xun0rznbsomt3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc5rn3jk004xvw0rdgv29aiz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -852,6 +870,10 @@ this is mymacbook.local
       <ul>
         
           <li>
+            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
           </li>
         
@@ -865,10 +887,6 @@ this is mymacbook.local
         
           <li>
             <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/04/到头来还是从自建wordpress转移到了github.io/">到头来还是从自建wordpress转移到了github.io</a>
           </li>
         
       </ul>

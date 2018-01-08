@@ -5,18 +5,18 @@
   
 
   
-  <title>关于iOS的main函数入口 | C&#39;s Notebook</title>
+  <title>tensorflow笔记（3） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。 #import UIKit/UIKit.h int main(int argc, char *argv[])   {       @autoreleasepool {                return UIAppl">
+  <meta name="description" content="加速神经网络训练（Speed Up Training）越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来. ####Stochastic Gradient Descent (SGD)  最基础的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于iOS的main函数入口">
-<meta property="og:url" content="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/index.html">
+<meta property="og:title" content="tensorflow笔记（3）">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/07/tensorflow笔记（3）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。 #import UIKit/UIKit.h int main(int argc, char *argv[])   {       @autoreleasepool {                return UIAppl">
-<meta property="og:updated_time" content="2018-01-04T13:57:59.691Z">
+<meta property="og:description" content="加速神经网络训练（Speed Up Training）越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来. ####Stochastic Gradient Descent (SGD)  最基础的">
+<meta property="og:updated_time" content="2018-01-08T05:27:31.203Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于iOS的main函数入口">
-<meta name="twitter:description" content="所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。 #import UIKit/UIKit.h int main(int argc, char *argv[])   {       @autoreleasepool {                return UIAppl">
+<meta name="twitter:title" content="tensorflow笔记（3）">
+<meta name="twitter:description" content="加速神经网络训练（Speed Up Training）越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来. ####Stochastic Gradient Descent (SGD)  最基础的">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -67,14 +67,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-关于iOS的main函数入口" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-tensorflow笔记（3）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/17/关于iOS的main函数入口/" class="article-date">
-  <time datetime="2017-03-17T14:09:52.000Z" itemprop="datePublished">2017-03-17</time>
+    <a href="/2018/01/07/tensorflow笔记（3）/" class="article-date">
+  <time datetime="2018-01-07T09:32:40.000Z" itemprop="datePublished">2018-01-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
   </div>
 
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于iOS的main函数入口
+      tensorflow笔记（3）
     </h1>
   
 
@@ -93,21 +93,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
-<pre><code>#import UIKit/UIKit.h
-int main(int argc, char *argv[])  
-{  
-    @autoreleasepool {       
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  
-    }  
-}
-</code></pre><p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
-<p>上面实例代码中有一个很重要的函数<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIApplicationMain" target="_blank" rel="noopener">UIApplicationMain</a>，它主要是创建App的几个核心对象来处理以下过程：<br>从可用Storyboard文件加载用户界面；<br>调用AppDelegate自定义代码来做一些初始化设置；<br>将App放入Main Run Loop环境中来响应和处理与用户交互产生的事件。</p>
+        <h3 id="加速神经网络训练（Speed-Up-Training）"><a href="#加速神经网络训练（Speed-Up-Training）" class="headerlink" title="加速神经网络训练（Speed Up Training）"></a>加速神经网络训练（Speed Up Training）</h3><p>越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.</p>
+<p>####Stochastic Gradient Descent (SGD)</p>
+<p> 最基础的方法就是 SGD 啦, 如果用普通的训练方法, 就需要重复不断的把整套数据放入神经网络 NN训练, 这样消耗的计算资源会很大.</p>
+<p>我们换一种思路, 如果把这些数据拆分成小批小批的, 然后再分批不断放入 NN 中计算, 这就是我们常说的 SGD 的正确打开方式了. 每次使用批数据, 虽然不能反映整体数据的情况, 不过却很大程度上加速了 NN 的训练过程, 而且也不会丢失太多准确率.如果运用上了 SGD, 你还是嫌训练速度慢, 那怎么办?</p>
+<p>####Momentum 更新方法</p>
+<p>大多数其他途径是在更新神经网络参数那一步上动动手脚. 传统的参数 W 的更新是把原始的 W 累加上一个负的学习率(learning rate) 乘以校正值 (dx). 这种方法可能会让学习过程曲折无比, 看起来像 喝醉的人回家时, 摇摇晃晃走了很多弯路.</p>
+<p>所以我们把这个人从平地上放到了一个斜坡上, 只要他往下坡的方向走一点点, 由于向下的惯性, 他不自觉地就一直往下走, 走的弯路也变少了. </p>
+<p>$ W += -(Learning Rate) * dx $</p>
+<p>更改为</p>
+<p>$ m = b1 <em> m - (Learning Rate) </em> dx$<br>$W += m$<br>这就是 Momentum 参数更新. 另外一种加速方法叫AdaGrad.</p>
+<h4 id="AdaGrad-更新方法"><a href="#AdaGrad-更新方法" class="headerlink" title="AdaGrad 更新方法"></a>AdaGrad 更新方法</h4><p>这种方法是在学习率上面动手脚, 使得每一个参数更新都会有自己与众不同的学习率, 他的作用和 momentum 类似, 不过不是给喝醉酒的人安排另一个下坡, 而是给他一双不好走路的鞋子, 使得他一摇晃着走路就脚疼, 鞋子成为了走弯路的阻力, 逼着他往前直着走. 他的数学形式是这样的. </p>
+<p>$ W += -(Learning Rate) * dx $</p>
+<p>更改为</p>
+<p>$ v += (dx)^2 $<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>接下来又有什么方法呢? 如果把下坡和不好走路的鞋子合并起来, 是不是更好呢? 没错, 这样我们就有了 RMSProp 更新方法.</p>
+<h4 id="RMSProp-更新方法"><a href="#RMSProp-更新方法" class="headerlink" title="RMSProp 更新方法"></a>RMSProp 更新方法</h4><p>有了 momentum 的惯性原则 , 加上 adagrad 的对错误方向的阻力, 我们就能合并成这样. 让 RMSProp同时具备他们两种方法的优势. 不过细心的同学们肯定看出来了, 似乎在 RMSProp 中少了些什么. 原来是我们还没把 Momentum合并完全, RMSProp 还缺少了 momentum 中的 这一部分. 所以, 我们在 Adam 方法中补上了这种想法.</p>
+<p>$ W += - (Learning Rate * dx)$</p>
+<p>更改为：</p>
+<p>$v = b1 <em> v + (1-b1) </em> dx^2$<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>####Adam更新方法<br>计算m 时有 momentum 下坡的属性, 计算 v 时有 adagrad 阻力的属性, 然后再更新参数时 把 m 和 V 都考虑进去. 实验证明, 大多数时候, 使用 adam 都能又快又好的达到目标, 迅速收敛. 所以说, 在加速神经网络训练的时候, 一个下坡, 一双破鞋子, 功不可没.</p>
+<p>$ W += - (Learning Rate * dx)$</p>
+<p>更改为：</p>
+<p>$m = b1 <em> m + (1-b1) </em> dx \rightarrow  Momentum$<br>$v = b2 <em> v + ( 1-b2) </em> dx^2 \rightarrow  AdaGrad$<br>$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc5rn3in0049vw0r2jtb4c6k" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/07/tensorflow笔记（3）/" data-id="cjc5rn3hy003ovw0rcorz1pri" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -116,19 +129,10 @@ int main(int argc, char *argv[])
     
 <nav id="article-nav">
   
-    <a href="/2017/03/22/objc_msgSend和消息传递机制（大补）/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          objc_msgSend和消息传递机制（大补）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/17/周记总结 2017-03-17记下/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/01/07/Anaconda使用笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">周记总结 2017-03-17记下</div>
+      <div class="article-nav-title">Anaconda使用笔记</div>
     </a>
   
 </nav>
