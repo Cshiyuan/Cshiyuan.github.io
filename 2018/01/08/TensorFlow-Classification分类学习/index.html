@@ -5,18 +5,18 @@
   
 
   
-  <title>Wi-Fi定位原理 | C&#39;s Notebook</title>
+  <title>TensorFlow Classification分类学习 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息">
+  <meta name="description" content="使用MNIST实现的例子具体的实现在注释里详细说明了 import tensorflow as tf import numpy as np from tensorflow.examples.tutorials.mnist import input_data   #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, in_size,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Wi-Fi定位原理">
-<meta property="og:url" content="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/index.html">
+<meta property="og:title" content="TensorFlow Classification分类学习">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/08/TensorFlow-Classification分类学习/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息">
-<meta property="og:updated_time" content="2018-01-04T13:57:45.816Z">
+<meta property="og:description" content="使用MNIST实现的例子具体的实现在注释里详细说明了 import tensorflow as tf import numpy as np from tensorflow.examples.tutorials.mnist import input_data   #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, in_size,">
+<meta property="og:updated_time" content="2018-01-10T05:13:15.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wi-Fi定位原理">
-<meta name="twitter:description" content="Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息">
+<meta name="twitter:title" content="TensorFlow Classification分类学习">
+<meta name="twitter:description" content="使用MNIST实现的例子具体的实现在注释里详细说明了 import tensorflow as tf import numpy as np from tensorflow.examples.tutorials.mnist import input_data   #添加神经层的函数，有四个参数 #输入值，输入的大小，输出的大小和激励函数 def add_layer(inputs, in_size,">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -67,14 +67,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Wi-Fi定位原理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-TensorFlow-Classification分类学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/18/Wi-Fi定位原理/" class="article-date">
-  <time datetime="2017-04-18T11:05:51.000Z" itemprop="datePublished">2017-04-18</time>
+    <a href="/2018/01/08/TensorFlow-Classification分类学习/" class="article-date">
+  <time datetime="2018-01-08T12:43:40.000Z" itemprop="datePublished">2018-01-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
   </div>
 
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Wi-Fi定位原理
+      TensorFlow Classification分类学习
     </h1>
   
 
@@ -93,29 +93,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息，而服务器会参考每个热点的信号强弱计算出设备的大致地理位置.下面就一起来看看手机是如何通过wifi定位的？</p>
-<hr>
-<hr>
-<p><strong>一、Wi-Fi定位的原理</strong></p>
-<p>具体来说，Wi-Fi能够定位，原理是这样的：</p>
-<p>1、每一个无线AP（路由器）都有一个全球唯一的MAC地址，并且一般来说无线AP在一段时间内不会移动；</p>
-<p>2、设备在开启Wi-Fi的情况下,即可扫描并收集周围的AP信号，无论是否加密,是否已连接，甚至信号强度不足以显示在无线信号列表中，都可以获取到AP广播出来的MAC地址；</p>
-<p>3、设备将这些能够标示AP的数据发送到位置服务器,服务器检索出每一个AP的地理位置,并结合每个信号的强弱程度,计算出设备的地理位置并返回到用户设备；</p>
-<p>4、位置服务商要不断更新、补充自己的数据库，以保证数据的准确性。</p>
-<p><strong>二、位置服务数据库的搭建</strong></p>
-<p>数据库中的数据主要来自于两个方面，一是用户提交的数据。Android手机用户在开启“使用无线网络定位”时会提示是否允许使用Google的定位服务，如果允许，用户的位置信息就被谷歌收集到。iPhone则会自动收集Wi-Fi的MAC地址、GPS位置信息、运营商基站编码等，并发送给苹果公司的服务器。</p>
-<p>同时谷歌、Skyhook两家位置服务提供商也在主动搜集Wi-Fi等热点的位置信息。Google的街景拍摄车有一个重要的功能就是采集沿途的无线信号,并打上通过GPS定位出的坐标回传至服务器。Skyhook在美国及欧洲一些国家也是直接开着信号采集车采集AP和基站的信号数据。</p>
-<p><strong>三、如何防止被定位？</strong></p>
-<p>最直接的办法是关掉手机系统中的位置服务选项，以避免他人看到你的位置信息。</p>
-<p>如果要杜绝位置服务商获取数据，难度就会比较高。用户需要不连接任何Wi-Fi热点，并且不使用相关的位置服务。也可以使用某些工具。例如谷歌曾发布一款选择退出工具，让无线路由器用户有效阻止谷歌搜集他们的数据。</p>
-<p>&nbsp;</p>
-<a id="more"></a>
-<p>转自：<a href="http://www.jb51.net/shouji/169996.html" target="_blank" rel="noopener">http://www.jb51.net/shouji/169996.html</a></p>
+        <h4 id="使用MNIST实现的例子"><a href="#使用MNIST实现的例子" class="headerlink" title="使用MNIST实现的例子"></a>使用MNIST实现的例子</h4><p>具体的实现在注释里详细说明了</p>
+<pre><code class="Python">import tensorflow as tf
+import numpy as np
+from tensorflow.examples.tutorials.mnist import input_data
+
+
+#添加神经层的函数，有四个参数
+#输入值，输入的大小，输出的大小和激励函数
+def add_layer(inputs, in_size, out_size, activation_function=None):
+
+    #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
+    #这里的weights为一个in_size行，out_size列的随机变量矩阵
+    Weights = tf.Variable(tf.random_normal([in_size, out_size]))
+
+    #在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1
+    biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
+
+    #下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法
+    #矩阵乘法是列与行的乘法
+    Wx_plus_b = tf.matmul(inputs, Weights) + biases
+
+    if activation_function is None:
+        outputs = Wx_plus_b
+    else:
+        outputs = activation_function(Wx_plus_b)
+
+    return outputs
+
+
+def compute_accuracy(v_xs, v_ys):
+    global prediction
+    y_pre = sess.run(prediction, feed_dict={xs: v_xs})
+    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    result = sess.run(accuracy, feed_dict={xs: v_xs, ys: v_ys})
+    return result
+
+
+#导入数据（MNIST库)
+#图片为28 * 28 = 784
+mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True)
+
+#每张图片都表示一个数字，所以我们的输出是数字0到9，共10类
+xs = tf.placeholder(tf.float32, [None, 784])  # 28x28
+ys = tf.placeholder(tf.float32, [None, 10])
+
+#调用add_layer函数搭建一个最简单的训练网络结构，只有输入层和输出层。
+#其中输入数据是784个特征，输出数据是10个特征，激励采用softmax函数，网络结构图是这样子的
+prediction = add_layer(xs, 784, 10, activation_function=tf.nn.softmax)
+
+#Cross entropy loss
+
+#loss函数（即最优化目标函数）选用交叉熵函数。
+#交叉熵用来衡量预测值和真实值的相似程度，如果完全相同，它们的交叉熵等于零
+
+cross_entropy = tf.reduce_mean(
+    -tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[1]))
+
+train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+sess = tf.Session()
+
+# 替换成下面的写法:
+sess.run(tf.global_variables_initializer())
+
+#现在开始train，每次只取100张图片，免得数据太多训练太慢。
+for i in range(1000):
+    batch_xs, batch_ys = mnist.train.next_batch(100)
+    sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys})
+    if i % 50 == 0:
+        # print(mnist.test.images, mnist.test.labels)
+        print(compute_accuracy(mnist.test.images, mnist.test.labels))
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjc8m2d6p002y1w0rpbda5l2m" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/08/TensorFlow-Classification分类学习/" data-id="cjc8m2d6b002j1w0rgzrvxtjr" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -124,19 +178,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/01/07/tensorflow笔记（3）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</div>
+      <div class="article-nav-title">tensorflow笔记（3）</div>
     </a>
   
 </nav>

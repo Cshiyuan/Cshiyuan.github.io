@@ -65,6 +65,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post- iOS 开发证书二次补习 （笔记）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/28/ iOS 开发证书二次补习 （笔记）/" class="article-date">
+  <time datetime="2017-03-28T04:03:48.000Z" itemprop="datePublished">2017-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/28/ iOS 开发证书二次补习 （笔记）/">iOS 开发证书二次补习 （笔记）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Xcode7之前，真机调试和打包ipa是必须要签名的。但是Xcode7出来了，真机调试不需要签名了。打包ipa也可以不需要签名，那不是可以绕过苹果安装app了？？想得美，如果不签名打包的ipa那是不能安装的！！！打包可以不需要签名，但是你要想安装的话，必须签名。</p>
+<p>Ad Hoc源自于拉丁语，意思是“for this”引申为“for this purpose only”，即“为某种目的设置的，特别的”意思，即Ad hoc网络是一种有特殊用途的网络。IEEE802.11标准委员会采用了“Ad hoc网络”一词来描述这种特殊的自组织对等式多跳<a href="http://baike.baidu.com/view/19195.htm" target="_blank" rel="noopener">移动通信</a>网络，Ad hoc网络就此诞生。</p>
+<ol>
+<li>iOS App Development。开发、真机调试用</li>
+<li>Apple Push Notification service SSL (Sandbox)。开发阶段使用苹果的推送服务</li>
+<li>App Store and Ad Hoc。上架和AdHoc方式发布时用</li>
+<li>Apple Push Notification service SSL (Production)。上架后使用苹果推送服务</li>
+<li>In-House。企业版发布，需$299才能拥有，还需邓氏编码</li>
+</ol>
+<hr>
+<hr>
+<h2 id="iOS授权和描述文件"><a href="#iOS授权和描述文件" class="headerlink" title="iOS授权和描述文件"></a>iOS授权和描述文件</h2><p>但是光有证书并不够解决苹果的“后顾之忧”，证书能够证明app的所属以及app的完整性，保证app本身是安全的。但是，却不能细化到app所使用的某些服务是被苹果认可的，比如APN推送服务。而且证书无法限制调试版的app的装机规模。于是，苹果想出了“花式作死”的mobileprovision。你可以使用如下命令查看一个mobileprovision：</p>
+<p>苹果通过证书来授权开发者开发iOS应用，不同的证书具有不同的用处，建议申请时使用相同的请求文件（即保证私钥统一）。可以通过共享私钥的方式让团队使用相同的私钥和证书，已方便开发。为了保证app的安全性，app中所有的文件都会被签名，这样，签过名的app除非重新签名，否则无法改动其中的任何东西。</p>
+<p>mobileprovision是一个配置文件，由苹果签名并发布给开发者。配置文件是一组信息的集合，这组信息决定了某一个应用是否能够在某一个特定的设备上运行。配置文件可以用于让应用在你的开发设备上可以被运行和调试，也可以用于内部测试 (ad-hoc) 或者企业级应用的发布。有了配置文件，苹果对开发者的约束就十分稳固了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc8m2d4b000f1w0reec5k5r7" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Objective-C 新的很有用的特性(其实是为了swift同步）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" class="article-date">
@@ -163,7 +217,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc5s3b1f001tf30rz9rxytiz" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjc8m2d5g001r1w0rrtkfbk37" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -240,7 +294,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc5s3b32003af30rvgwdjoyg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjc8m2d74003a1w0roprafif4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -317,7 +371,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjc5s3b3b003if30rn6h89p13" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjc8m2d7d003i1w0r6yqmfprr" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -367,7 +421,7 @@ int main(int argc, char *argv[])
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc5s3b4u004tf30rn9sxvere" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjc8m2d8c00481w0rjn9tjh2l" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -471,7 +525,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc5s3b4r004pf30rx3vlkz8n" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjc8m2d8p004q1w0rev7p1od5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -519,7 +573,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc5s3b1j001xf30rcyefdq21" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjc8m2d5h001t1w0rw00dld2l" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -573,7 +627,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc5s3b3a003gf30r90bfj8or" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjc8m2d6y00361w0rg7irko4v" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -621,7 +675,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc5s3b6l0063f30rh9ib11sy" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjc8m2dac006e1w0r2i07bffu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -715,57 +769,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc5s3b2i002sf30rmkncp20g" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SSH——Secure SHell（安全外壳协议）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/" class="article-date">
-  <time datetime="2017-03-12T07:56:04.000Z" itemprop="datePublished">2017-03-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/">SSH——Secure SHell（安全外壳协议）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。</p>
-<p>SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多人开始转用开源免费的<a href="http://www.openssh.com/" target="_blank" rel="noopener">openSSH</a>（Linux/Mac OS X标配）。</p>
-<p>SSH提供基于密钥的认证机制，你必须为自己创建一对非对称密钥（public/private key pair），并把公钥放到需要访问的服务器上进行授权。SSH1使用RSA（Ron_<strong>R</strong><em>ivest、Adi</em><strong>S</strong>_hamir、Leonard<strong><em>A</em></strong>dleman）加密密钥，SSH2使用DSA（Digital Signature Algorithm，<a href="http://blog.csdn.net/phunxm/article/details/16344837" target="_blank" rel="noopener">数字签名算法</a>)密钥保护连接和认证。RSA和DSA这两种加密算法都是<a href="http://blog.csdn.net/wzzvictory/article/details/9015155" target="_blank" rel="noopener">非对称加密算法</a>。</p>
-<p>所谓“<strong>SSH公钥认证免密码登录认证机制</strong>”，原理如下：</p>
-<blockquote>
-<p>（1）SSH客户端提前将SSH公钥储存在远程SSH服务器上，然后SSH客户端携带公钥向远程SSH服务器（known_hosts）发起登录请求。</p>
-<p>（2）远程SSH服务器收到该请求之后，先在该服务器上的authorized_keys寻找你上传授权过的公钥，然后把它和你发送过来的公钥进行比较。</p>
-<p>（3）如果两个公钥一致（Key Exchange Success），远程SSH服务器会向用户发送一段使用SSH公钥加密过的随机字符串进行身份质询（Challenge）。</p>
-<p>（4）SSH客户端用自己的私钥解密后再发回给远程SSH服务器，远程SSH服务器对比回包中解密出来的随机字符串是否一致。如果一致，则证明用户（公钥或身份）是可信的，直接允许登录shell，不再要求密码。<br>&nbsp;</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc5s3b2g002qf30ruvy8xuvr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjc8m2d6j002s1w0rootqisq4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -818,6 +822,10 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       <ul>
         
           <li>
+            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
@@ -831,10 +839,6 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
           </li>
         
       </ul>

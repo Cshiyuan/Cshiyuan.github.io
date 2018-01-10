@@ -65,6 +65,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-因为好奇手游的同步策略，查询的帧同步相关内容" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" class="article-date">
+  <time datetime="2017-05-08T13:34:45.000Z" itemprop="datePublished">2017-05-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/">因为好奇手游的同步策略，查询的帧同步相关内容。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该是一致的。随机数可以使用确定随机种子的伪随机数来解决。</p>
+<p>所以关键问题就是要确保客户端以同样的输入可以获得同样的运行结果。 这个是理论上可行的，很多rts游戏也都是基于此原理。比如魔兽争霸3  最高指挥官2  全面战争  星际争霸 帝国时代 等等。  以最高指挥官(Super Commander)为例，其全部单位有上千个，如果要实时同步他们的状态以现在的网络条件都是很困难的，所以这些rts同步的仅仅是操作，即点击了什么位置，点击了什么按钮，选择了什么目标，按了什么按键。客户端接收到对应的操作，进行同样的模拟，达到同样的输出。从而完成网络同步。</p>
+<p>魔兽争霸的录像机制也是基于此原理，记录操作，而不记录状态。所以几十分钟的游戏，其战报只有几百k。同样因为这个原理，所以在出bug的时候（概率不高，但是玩家多了，还是很容易碰到的）会造成录像与实际玩的时候不一致。比如玩的时候剑圣暴击杀死了对手，从而翻盘取得了经典的胜利，但是战报播放的时候却没有发生暴击，直接被对方给推了。  全面战争也是如此，所以也会出现战报跟实际游戏不一致的情况，不过概率确实不大，只有发生极限情况才可能出现这样的问题。</p>
+<hr>
+<p>游戏应该优先保证正常用户的体验，所以当有玩家出现卡帧情况的时候，不应选择暂停其他玩家，而是让他慢慢的追赶上来，设计上，服务器即可以采用客户端的正常速度，按帧驱动客户端，但当网络都出现突发状况的时候，如<strong>图**</strong>9<strong>，通讯异常时，2个客户端都对帧数2缺失，如果服务器照常运行，到恢复网络状况时，会出现情况是，每个客户端都卡了几帧之后，加速拉了几帧。所以，针对这种情况，增加客户端的对帧操作，即客户端执行第1帧时，跟服务器说可以播放第二帧了，然后服务器开始驱动第二帧动作，考虑网络延迟情况，可以提前对帧第n帧的,效果如</strong>图<strong>**9</strong>，左边客户端第二个对帧操作使服务器开始推动第二帧进行，而右边客户端的第二个对帧动作其实不起任何作用</p>
+<p><wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr> <wbr><a href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBRS7hu98" target="_blank" rel="noopener"><img src="http://s9.sinaimg.cn/mw690/001Tiuj0gy6DHBRS7hu98&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
+<p>&nbsp;</p>
+<p><wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <wbr> <strong>图8</strong></p>
+<p><wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr>  <wbr> <wbr><a href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBTfDXza1" target="_blank" rel="noopener"><img src="http://s2.sinaimg.cn/mw690/001Tiuj0gy6DHBTfDXza1&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/05/08/因为好奇手游的同步策略，查询的帧同步相关内容/" data-id="cjc8m2d8t004w1w0ry7abk5uo" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ABI （应用程序二进制接口)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/01/ABI （应用程序二进制接口)/" class="article-date">
@@ -102,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc5s3azo000uf30rc29ez1nf" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI （应用程序二进制接口)/" data-id="cjc8m2d4g000k1w0rwkt054wp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -195,7 +244,7 @@ NSString *const EOCStringConstant = @“VALUE”;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc5s3b5g0057f30rf9w0ashd" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/摘抄Effective Objective-C 2.0 /" data-id="cjc8m2d95005c1w0r38aarm52" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -377,7 +426,7 @@ xiaoming.grade; // 1
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/" data-id="cjc5s3b0i001ef30rzsx1ue8o" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记(2)(原型prototype部分）/" data-id="cjc8m2d57001g1w0ra9j2e3x1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -495,7 +544,7 @@ x = x + 2;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记 (1)/" data-id="cjc5s3b0h001bf30rn1v490kx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/26/JavaScript学习笔记 (1)/" data-id="cjc8m2d5100191w0r5ngvt7c8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -550,7 +599,7 @@ x = x + 2;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/26/HTML DOM (Document Object Model)/" data-id="cjc5s3azy0010f30ri3ihknyd" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/26/HTML DOM (Document Object Model)/" data-id="cjc8m2d4t000y1w0rwx09e1nu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -687,7 +736,7 @@ CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc5s3b050018f30rnhlty0ow" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjc8m2d4q000v1w0r8shkaexd" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -753,7 +802,7 @@ CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjc5s3b0k001gf30rpf85cwxn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjc8m2d4v00121w0r4ufkewdz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -904,7 +953,7 @@ wuqiong:~ apple$ otool -l libTest.a | grep bitcode
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjc5s3b61005jf30ro0gtzdqn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjc8m2d9e005m1w0rdfk17rt9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1092,52 +1141,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjc5s3b6j0061f30r6ka0xs5j" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" class="article-date">
-  <time datetime="2017-04-19T04:03:56.000Z" itemprop="datePublished">2017-04-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/">Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <div class="page" title="Page 49"><br><div class="layoutArea"><br><div class="column"><br><br>Back in the old days when printing wasn’t common, people used to use some sort of wooden stamps (later they became rubber stamps) to print some commonly used graphics and text on paper. Many years later, people realized that by combining different commonly used stamps, it could be one of the easiest ways to mass reproduce the same information on paper. Without using the same stamps for printing the same glyphs on paper, distribution of information and knowledge would be much more expensive and time-consuming.<br><br></div><br></div><br></div>
-
-<hr>
-<p>原型设计方式就像我们的活字印刷术，我们可以通过在木刻上的字，然后通过复杂的组合，快速的再生成同样信息。</p>
-<p>&nbsp;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjc5s3b1m0022f30rfimrhbf9" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjc8m2da500681w0rlcibz6p6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1190,6 +1194,10 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       <ul>
         
           <li>
+            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
@@ -1203,10 +1211,6 @@ cell.imageView.image = [UIImage imageWithData:imageData];
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
           </li>
         
       </ul>

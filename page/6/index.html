@@ -65,6 +65,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SSH——Secure SHell（安全外壳协议）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/" class="article-date">
+  <time datetime="2017-03-12T07:56:04.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/SSH——Secure SHell（安全外壳协议）/">SSH——Secure SHell（安全外壳协议）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。</p>
+<p>SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多人开始转用开源免费的<a href="http://www.openssh.com/" target="_blank" rel="noopener">openSSH</a>（Linux/Mac OS X标配）。</p>
+<p>SSH提供基于密钥的认证机制，你必须为自己创建一对非对称密钥（public/private key pair），并把公钥放到需要访问的服务器上进行授权。SSH1使用RSA（Ron_<strong>R</strong><em>ivest、Adi</em><strong>S</strong>_hamir、Leonard<strong><em>A</em></strong>dleman）加密密钥，SSH2使用DSA（Digital Signature Algorithm，<a href="http://blog.csdn.net/phunxm/article/details/16344837" target="_blank" rel="noopener">数字签名算法</a>)密钥保护连接和认证。RSA和DSA这两种加密算法都是<a href="http://blog.csdn.net/wzzvictory/article/details/9015155" target="_blank" rel="noopener">非对称加密算法</a>。</p>
+<p>所谓“<strong>SSH公钥认证免密码登录认证机制</strong>”，原理如下：</p>
+<blockquote>
+<p>（1）SSH客户端提前将SSH公钥储存在远程SSH服务器上，然后SSH客户端携带公钥向远程SSH服务器（known_hosts）发起登录请求。</p>
+<p>（2）远程SSH服务器收到该请求之后，先在该服务器上的authorized_keys寻找你上传授权过的公钥，然后把它和你发送过来的公钥进行比较。</p>
+<p>（3）如果两个公钥一致（Key Exchange Success），远程SSH服务器会向用户发送一段使用SSH公钥加密过的随机字符串进行身份质询（Challenge）。</p>
+<p>（4）SSH客户端用自己的私钥解密后再发回给远程SSH服务器，远程SSH服务器对比回包中解密出来的随机字符串是否一致。如果一致，则证明用户（公钥或身份）是可信的，直接允许登录shell，不再要求密码。<br>&nbsp;</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjc8m2d67002f1w0ry176midd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-小代码合集" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/11/小代码合集/" class="article-date">
@@ -159,7 +209,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc5s3b6n0067f30rc06e6dvx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjc8m2d8r004u1w0rb4aqoys6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -211,7 +261,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc5s3b030017f30rfwx9nngm" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjc8m2d4x00151w0rky6ibvoq" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -317,7 +367,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjc5s3b4q004nf30rx2ygcrpk" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjc8m2d8n004m1w0rpmanul8b" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -365,7 +415,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjc5s3b67005tf30rq0l71o68" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjc8m2da000631w0r1sd78koa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -410,7 +460,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjc5s3b15001of30r4asq82l3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjc8m2d55001e1w0rl6rhg916" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -461,7 +511,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjc5s3b1h001vf30rfp3ozx0w" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjc8m2d5a001j1w0rr3onjywf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -512,7 +562,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjc5s3b2e002mf30r83fnldmh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjc8m2d6h002q1w0rgpimly5o" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -554,7 +604,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjc5s3b4t004rf30ro57whihj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjc8m2d8k004i1w0rx3pwc8j5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -599,63 +649,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjc5s3b6q0069f30raqqa3k1v" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CookieSession机制详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/10/CookieSession机制详解/" class="article-date">
-  <time datetime="2017-01-10T09:01:57.000Z" itemprop="datePublished">2017-01-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/10/CookieSession机制详解/">Cookie/Session机制详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话。</p>
-<p>其中 Cookie和Session就是一种跟踪技术，Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。</p>
-<hr>
-<h3 id="什么是Cookie（实际上是一小段文本信息）"><a href="#什么是Cookie（实际上是一小段文本信息）" class="headerlink" title="什么是Cookie（实际上是一小段文本信息）"></a><strong>什么是Cookie（实际上是一小段文本信息）</strong></h3><p>Cookie意为“甜饼”，是由W3C组织提出，最早由Netscape社区发展的一种机制。目前Cookie已经成为标准，所有的主流浏览器如IE、Netscape、Firefox、Opera等都支持Cookie。</p>
-<p>由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理。</p>
-<p>Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
-<hr>
-<h3 id="什么是Session（key-value的属性对）"><a href="#什么是Session（key-value的属性对）" class="headerlink" title="什么是Session（key-value的属性对）"></a><strong>什么是Session（key-value的属性对）</strong></h3><p>Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</p>
-<p>如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
-<h3 id="Session对浏览器的要求"><a href="#Session对浏览器的要求" class="headerlink" title="Session对浏览器的要求"></a><strong>Session对浏览器的要求</strong></h3><p>虽然Session保存在服务器，对客户端是透明的，它的正常运行仍然需要客户端浏览器的支持。这是因为Session需要使用Cookie作为识别标志。HTTP协议是无状态的，Session不能依据HTTP连接来判断是否为同一客户，因此服务器向客户端浏览器发送一个名为JSESSIONID的Cookie，它的值为该Session的id（也就是HttpSession.getId()的返回值）。Session依据该Cookie来识别是否为同一用户。</p>
-<p>该Cookie为服务器自动生成的，它的maxAge属性一般为–1，表示仅当前浏览器内有效，并且各浏览器窗口间不共享，关闭浏览器就会失效。</p>
-<p>因此同一机器的两个浏览器窗口访问服务器时，会生成两个不同的Session。但是由浏览器窗口内的链接、脚本等打开的新窗口（也就是说不是双击桌面浏览器图标等打开的窗口）除外。这类子窗口会共享父窗口的Cookie，因此会共享一个Session。</p>
-<p>注意：新开的浏览器窗口会生成新的Session，但子窗口除外。子窗口会共用父窗口的Session。例如，在链接上右击，在弹出的快捷菜单中选择“在新窗口中打开”时，子窗口便可以访问父窗口的Session。</p>
-<p>如果客户端浏览器将Cookie功能禁用，或者不支持Cookie怎么办？例如，绝大多数的手机浏览器都不支持Cookie。Java Web提供了另一种解决方案：URL地址重写。</p>
-<h3 id="URL地址重写"><a href="#URL地址重写" class="headerlink" title="URL地址重写"></a><strong>URL地址重写</strong></h3><p>URL地址重写是对客户端不支持Cookie的解决方案。URL地址重写的原理是将该用户Session的id信息重写到URL地址中。服务器能够解析重写后的URL获取Session的id。这样即使客户端不支持Cookie，也可以使用Session来记录用户状态。</p>
-<h3 id="SESSION劫持"><a href="#SESSION劫持" class="headerlink" title="SESSION劫持"></a>SESSION劫持</h3><p>Session hijack即会话劫持是一种比较严重的安全威胁，也是一种广泛存在的威胁，在session技术中，客户端和服务端通过传送session的标识符来维护会话，但这个标识符很容易就能被嗅探到，从而被其他人利用，这属于一种中间人攻击。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjc5s3b020015f30rlqbjpbix" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjc8m2d9100561w0r6ah5p5gb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -708,6 +702,10 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       <ul>
         
           <li>
+            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
@@ -721,10 +719,6 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
           </li>
         
       </ul>

@@ -65,6 +65,128 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python3 学习笔记（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/Python3 学习笔记（3）/" class="article-date">
+  <time datetime="2017-04-04T06:59:47.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/04/Python3 学习笔记（3）/">Python3 学习笔记（3）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="匿名函数lambda"><a href="#匿名函数lambda" class="headerlink" title="匿名函数lambda"></a>匿名函数lambda</h2><p>当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。</p>
+<p>在Python中，对匿名函数提供了有限支持。还是以<code>map()</code>函数为例，计算f(x)=x<sup>2</sup>时，除了定义一个<code>f(x)</code>的函数外，还可以直接传入匿名函数：</p>
+<pre><code>&gt;&gt;&gt; map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+[1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre><p>通过对比可以看出，匿名函数<code>lambda x: x * x</code>实际上就是：</p>
+<pre><code>def f(x):
+    return x * x
+</code></pre><p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。</p>
+<p>匿名函数有个限制，就是只能有一个表达式，不用写<code>return</code>，返回值就是该表达式的结果。</p>
+<hr>
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>本质上，decorator就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的decorator，可以定义如下：</p>
+<pre><code>def log(func):
+    def wrapper(*args, **kw):
+        print &#39;call %s():&#39; % func.__name__
+        return func(*args, **kw)
+    return wrapper
+</code></pre><p>观察上面的<code>log</code>，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：</p>
+<pre><code>@log
+def now():
+    print &#39;2013-12-25&#39;
+</code></pre><p>调用<code>now()</code>函数，不仅会运行<code>now()</code>函数本身，还会在运行<code>now()</code>函数前打印一行日志：</p>
+<pre><code>&gt;&gt;&gt; now()
+call now():
+2013-12-25
+</code></pre><p>把<code>@log</code>放到<code>now()</code>函数的定义处，相当于执行了语句：</p>
+<pre><code>now = log(now)
+</code></pre><p>在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持</p>
+<p>Python的decorator可以用函数实现，也可以用类实现。</p>
+<p>decorator可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。</p>
+<p>请编写一个decorator，能在函数调用的前后打印出<code>&#39;begin call&#39;</code>和<code>&#39;end call&#39;</code>的日志。</p>
+<p>再思考一下能否写出一个<code>@log</code>的decorator，使它既支持：</p>
+<hr>
+<h2 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h2><p><code>functools.partial</code>就是帮助我们创建一个偏函数的，不需要我们自己定义<code>int2()</code>，可以直接使用下面的代码创建一个新的函数<code>int2</code>：</p>
+<pre><code>&gt;&gt;&gt; import functools
+&gt;&gt;&gt; int2 = functools.partial(int, base=2)
+&gt;&gt;&gt; int2(&#39;1000000&#39;)
+64
+&gt;&gt;&gt; int2(&#39;1010101&#39;)
+85
+</code></pre><p>所以，简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</p>
+<p>注意到上面的新的<code>int2</code>函数，仅仅是把<code>base</code>参数重新设定默认值为<code>2</code>，但也可以在函数调用时传入其他值：</p>
+<pre><code>&gt;&gt;&gt; int2(&#39;1000000&#39;, base=10)
+1000000
+</code></pre><p>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</p>
+<hr>
+<h2 id="类-因为有面向对象经验-说关键点就好了）"><a href="#类-因为有面向对象经验-说关键点就好了）" class="headerlink" title="类(因为有面向对象经验,说关键点就好了）"></a>类(因为有面向对象经验,说关键点就好了）</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化函数模板,不用定义成员变量,直接用self来定义就好了.</p>
+<p>初始化函数规定的名称是<strong>init</strong></p>
+<p>注意到<code>__init__</code>方法的第一个参数永远是<code>self</code>，表示创建的实例本身，因此，在<code>__init__</code>方法内部，就可以把各种属性绑定到<code>self</code>，因为<code>self</code>就指向创建的实例本身。</p>
+<p>有了<code>__init__</code>方法，在创建实例的时候，就不能传入空的参数了，必须传入与<code>__init__</code>方法匹配的参数，但<code>self</code>不需要传，Python解释器自己会把实例变量传进去</p>
+<h3 id="私有成员的实现方法"><a href="#私有成员的实现方法" class="headerlink" title="私有成员的实现方法"></a>私有成员的实现方法</h3><p>实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问，所以，我们把Student类改一改：</p>
+<p>（吐槽一下，想起OC）</p>
+<pre><code>class Student(object):
+
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print &#39;%s: %s&#39; % (self.__name, self.__score)
+</code></pre><hr>
+<h2 id="slots"><a href="#slots" class="headerlink" title="slots"></a><strong>slots</strong></h2><p>限制类的成员变量的数量。</p>
+<p>达到限制的目的，Python允许在定义class的时候，定义一个特殊的<code>__slots__</code>变量，来限制该class能添加的属性：</p>
+<pre><code>&gt;&gt;&gt; class Student(object):
+...     __slots__ = (&#39;name&#39;, &#39;age&#39;) # 用tuple定义允许绑定的属性名称
+</code></pre><p>这样子绑定别的变量就会报错</p>
+<pre><code>object has no attribute &#39;score&#39;
+</code></pre><hr>
+<h2 id="enumerate函数"><a href="#enumerate函数" class="headerlink" title="enumerate函数"></a>enumerate函数</h2><p>如果要对list实现类似Java那样的下标循环怎么办？Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对，这样就可以在<code>for</code>循环中同时迭代索引和元素本身：</p>
+<pre><code>&gt;&gt;&gt; for i, value in enumerate([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]):
+...     print(i, value)
+...
+0 A
+1 B
+2 C
+</code></pre><p>上面的<code>for</code>循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：</p>
+<pre><code>&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:
+...     print(x, y)
+...
+1 1
+2 4
+3 9
+</code></pre><p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjc8m2d5u00251w0rwhp7wwl5" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python3 学习笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/01/Python3 学习笔记（2）/" class="article-date">
@@ -193,7 +315,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc5s3b1v0026f30rums7fx9b" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjc8m2d5o00201w0rroxc76g8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -425,7 +547,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc5s3b1q0024f30r2cdnasqk" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjc8m2d5m001y1w0rokx8jm2v" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -513,7 +635,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc5s3b1z002df30r6ngzpcbx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjc8m2d6a002h1w0r6kypvnco" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -703,7 +825,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc5s3b2p002uf30r2py3tso4" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjc8m2d6c002l1w0rtlpk5mk6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -781,7 +903,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc5s3b1w0029f30rw2rsxkie" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjc8m2d61002a1w0r415avbfi" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -854,7 +976,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc5s3b35003cf30rzus3qnlr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjc8m2d7b003g1w0rzf5io4fn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -963,7 +1085,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc5s3b4j004hf30ruygk6ot7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjc8m2d8800431w0r1t88lcbp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1004,7 +1126,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc5s3b3x0047f30r9c6mvb62" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjc8m2d84003y1w0rhlbc766c" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1056,61 +1178,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc5s3azn000tf30r38gp0474" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post- iOS 开发证书二次补习 （笔记）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/28/ iOS 开发证书二次补习 （笔记）/" class="article-date">
-  <time datetime="2017-03-28T04:03:48.000Z" itemprop="datePublished">2017-03-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/28/ iOS 开发证书二次补习 （笔记）/">iOS 开发证书二次补习 （笔记）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Xcode7之前，真机调试和打包ipa是必须要签名的。但是Xcode7出来了，真机调试不需要签名了。打包ipa也可以不需要签名，那不是可以绕过苹果安装app了？？想得美，如果不签名打包的ipa那是不能安装的！！！打包可以不需要签名，但是你要想安装的话，必须签名。</p>
-<p>Ad Hoc源自于拉丁语，意思是“for this”引申为“for this purpose only”，即“为某种目的设置的，特别的”意思，即Ad hoc网络是一种有特殊用途的网络。IEEE802.11标准委员会采用了“Ad hoc网络”一词来描述这种特殊的自组织对等式多跳<a href="http://baike.baidu.com/view/19195.htm" target="_blank" rel="noopener">移动通信</a>网络，Ad hoc网络就此诞生。</p>
-<ol>
-<li>iOS App Development。开发、真机调试用</li>
-<li>Apple Push Notification service SSL (Sandbox)。开发阶段使用苹果的推送服务</li>
-<li>App Store and Ad Hoc。上架和AdHoc方式发布时用</li>
-<li>Apple Push Notification service SSL (Production)。上架后使用苹果推送服务</li>
-<li>In-House。企业版发布，需$299才能拥有，还需邓氏编码</li>
-</ol>
-<hr>
-<hr>
-<h2 id="iOS授权和描述文件"><a href="#iOS授权和描述文件" class="headerlink" title="iOS授权和描述文件"></a>iOS授权和描述文件</h2><p>但是光有证书并不够解决苹果的“后顾之忧”，证书能够证明app的所属以及app的完整性，保证app本身是安全的。但是，却不能细化到app所使用的某些服务是被苹果认可的，比如APN推送服务。而且证书无法限制调试版的app的装机规模。于是，苹果想出了“花式作死”的mobileprovision。你可以使用如下命令查看一个mobileprovision：</p>
-<p>苹果通过证书来授权开发者开发iOS应用，不同的证书具有不同的用处，建议申请时使用相同的请求文件（即保证私钥统一）。可以通过共享私钥的方式让团队使用相同的私钥和证书，已方便开发。为了保证app的安全性，app中所有的文件都会被签名，这样，签过名的app除非重新签名，否则无法改动其中的任何东西。</p>
-<p>mobileprovision是一个配置文件，由苹果签名并发布给开发者。配置文件是一组信息的集合，这组信息决定了某一个应用是否能够在某一个特定的设备上运行。配置文件可以用于让应用在你的开发设备上可以被运行和调试，也可以用于内部测试 (ad-hoc) 或者企业级应用的发布。有了配置文件，苹果对开发者的约束就十分稳固了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjc5s3azh000qf30rragz3jm9" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjc8m2d4e000h1w0rwx557he0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1163,6 +1231,10 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       <ul>
         
           <li>
+            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
@@ -1176,10 +1248,6 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/Shell-And-Base/">Shell And Base</a>
           </li>
         
       </ul>
