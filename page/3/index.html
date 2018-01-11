@@ -65,6 +65,194 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-详解 iOS 多图下载的缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/详解 iOS 多图下载的缓存机制/" class="article-date">
+  <time datetime="2017-04-19T05:48:13.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/19/详解 iOS 多图下载的缓存机制/">详解 iOS 多图下载的缓存机制 （转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<p>转自：<a href="http://www.jianshu.com/p/bf5c0e462119" target="_blank" rel="noopener">http://www.jianshu.com/p/bf5c0e462119</a></p>
+<p>&nbsp;</p>
+<p>做iOS开发也有半年多了，想想自己对一些第三方库还只是停留在简单运用的阶段，感觉心慌慌的。于是决定用一个月的时间深入了解一些好的第三方库。</p>
+<p>第一个想到了SDWebImage，这个库很不错，几乎每个iOS项目都会有它的影子，因为它很完美地解决了下载图片并显示的处理逻辑。那么深究它之前，笔者准备先了解一下多图下载的缓存机制，因为它和SDWebImage的方案类似。</p>
+<p>有一个多图缓存机制的教程是来自李明杰小码哥的，笔者觉得讲得挺不错的，于是就花了2个小时好好学习了一下。</p>
+<h1 id="1-需求点是什么？"><a href="#1-需求点是什么？" class="headerlink" title="1. 需求点是什么？"></a>1. 需求点是什么？</h1><hr>
+<p>这里所说的<strong>多图下载</strong>，就是要在tableview的每一个cell里显示一张图片,而且这些图片都需要从网上下载。</p>
+<h1 id="2-容易遇到的问题"><a href="#2-容易遇到的问题" class="headerlink" title="2. 容易遇到的问题"></a>2. 容易遇到的问题</h1><hr>
+<p>如果不知道或不使用<strong>异步操作</strong>和<strong>缓存机制</strong>，那么写出来的代码很可能会是这样：</p>
+<pre><code>cell.textLabel.text = app.name;
+cell.detailTextLabel.text = app.download;
+NSData *imageData = [NSData dataWithContentsOfURL:app.url];
+cell.imageView.image = [UIImage imageWithData:imageData];
+</code></pre><p>这样写有什么后果呢？</p>
+<h4 id="后果1：不可避免的卡顿（因为没有异步下载操作）"><a href="#后果1：不可避免的卡顿（因为没有异步下载操作）" class="headerlink" title="后果1：不可避免的卡顿（因为没有异步下载操作）"></a>后果1：不可避免的卡顿（因为没有异步下载操作）</h4><blockquote>
+<p>dataWithContentsOfURL：是耗时操作，将其放在主线程会造成卡顿。如果图片很多，图片很大，而且网络情况不好的话肯定会卡出翔！</p>
+</blockquote>
+<h4 id="后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）"><a href="#后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）" class="headerlink" title="后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）"></a>后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）</h4><blockquote>
+<p>由于没有缓存机制，即使下载完成并显示了当前cell的图片，但是当该cell再一次需要显示的时候还是会下载它所对应的图片：耗费了下载流量，而且还导致重复操作。<br>很显然，要达到Tableview滚动的<strong>如丝滑般的享受</strong>必须二者兼得才可以，具体怎么做呢？</p>
+</blockquote>
+<h1 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3. 解决方案"></a>3. 解决方案</h1><hr>
+<h4 id="1-先看一下解决方案的流程图"><a href="#1-先看一下解决方案的流程图" class="headerlink" title="1. 先看一下解决方案的流程图"></a>1. 先看一下解决方案的流程图</h4><p>小码哥将他的解决方案在PPT里用流程图画了出来，笔者觉得很不错，但是颜值略低（毕竟人家是一心搞技术，没时间在意这些外在的东西），笔者理了理思路，自己重新画了一张（好看么？）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/859001-addf3137097c3912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>要想快速看懂此图，需要先了解该流程所需的所有数据源：</p>
+<p><strong>1. 图片的URL</strong>：因为每张图片对应的URL都是唯一的，所以我们可以通过它来建立<strong>图片缓存</strong>和<strong>下载操作的缓存</strong>的键，以及拼接<strong>沙盒缓存</strong>的路径字符串。  </p>
+<p> <strong>2. 图片缓存（字典）</strong>：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。  </p>
+<p><strong>3. 下载操作缓存（字典）</strong>：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。  </p>
+<p><strong>4. 沙盒缓存(文件路径对应NSData)</strong>：存放于磁盘中，位于Cache文件夹内，路径为“Cache/图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。</p>
+<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><pre><code>/**
+ *  存放所有下载完的图片
+ */
+@property (nonatomic, strong) NSMutableDictionary *images;
+
+/**
+ *  存放所有的下载操作（key是url，value是operation对象）
+ */
+@property (nonatomic, strong) NSMutableDictionary *operations;
+
+/**
+ *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径
+ */
+#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]
+</code></pre><p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
+<pre><code>// 先从images缓存中取出图片url对应的UIImage
+    UIImage *image = self.images[app.icon];
+    if (image) { 
+
+        // 存在：说明图片已经下载成功，并缓存成功）
+        cell.imageView.image = image;
+
+    } else { 
+
+         // 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片
+
+         // 获得url对于的沙盒缓存路径
+        NSString *file = CachedImageFile(app.icon);
+
+        // 先从沙盒中取出图片
+        NSData *data = [NSData dataWithContentsOfFile:file];
+
+        if (data) {
+
+            //data不为空，说明沙盒中存在这个文件
+            cell.imageView.image = [UIImage imageWithData:data];
+
+        } else {
+
+             // 反之沙盒中不存在这个文件
+             // 在下载之前显示占位图片
+            cell.imageView.image = [UIImage imageNamed:@&quot;placeholder&quot;];
+
+            // 下载图片
+            [self download:app.icon indexPath:indexPath];
+        }
+    }
+</code></pre><p><strong>2.3 图片的下载部分</strong>：</p>
+<pre><code>/**
+ *  下载图片
+ *
+ *  @param imageUrl 图片的url
+ */
+- (void)download:(NSString *)imageUrl indexPath:(NSIndexPath *)indexPath
+{
+    // 取出当前图片url对应的下载操作（operation对象）
+    NSBlockOperation *operation = self.operations[imageUrl];
+    if (operation) return;
+
+    // 创建操作，下载图片
+    __weak typeof(self) appsVc = self;
+    operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSURL *url = [NSURL URLWithString:imageUrl];
+        NSData *data = [NSData dataWithContentsOfURL:url]; // 下载
+        UIImage *image = [UIImage imageWithData:data]; // NSData -&gt; UIImage
+
+        // 回到主线程
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+            if (image) {
+                // 如果存在图片（下载完成），存放图片到图片缓存字典中
+                appsVc.images[imageUrl] = image;
+
+                //将图片存入沙盒中
+                //1. 先将图片转化为NSData
+                NSData *data = UIImagePNGRepresentation(image);
+
+                //2.  再生成缓存路径            
+                [data writeToFile:CachedImageFile(imageUrl) atomically:YES];
+            }
+
+            // 从字典中移除下载操作 (保证下载失败后，能重新下载)
+            [appsVc.operations removeObjectForKey:imageUrl];
+
+            // 刷新当前表格，减少系统开销
+            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    }];
+
+    // 添加下载操作到队列中
+    [self.queue addOperation:operation];
+
+    // 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)
+    self.operations[imageUrl] = operation;
+}
+</code></pre><h4 id="3-有哪些点是值得注意的？"><a href="#3-有哪些点是值得注意的？" class="headerlink" title="3. 有哪些点是值得注意的？"></a>3. 有哪些点是值得注意的？</h4><p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
+<p><strong>3.1 关于图片缓存</strong>：<br>很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。</p>
+<p><strong>3.2 关于沙盒缓存</strong>：<br>同样地，对于沙盒缓存也是一个道理：有图就将其转化为NSData，写入磁盘，并对应唯一的路径，没有图就不写。所以即使是要下载相同的图片，因为当前url对应的沙盒路径已经存在文件了，所以直接拿就可以了，不会再下载。</p>
+<p>但是！<br>    下载操作缓存是不同的！</p>
+<p><strong>3.3 关于下载操作缓存</strong><br>我们需要在下载回调完成后，立即将当前的下载操作从下载操作缓存中删去！<br>    因为要避免下载失败后，无法再次下载的情况的发生！</p>
+<p>为什么呢？<br>注意一下将下载操作加入到下载操作缓存的时机：<br>是在<strong>下载开始的那一刻</strong>而不是<strong>下载成功的那一刻</strong>！</p>
+<p>如果在下载开始的那一刻加入到缓存中的话，这个缓存信息就包括两个情况：下载成功和下载失败：</p>
+<ul>
+<li>如果未来下载成功了，那么我们就不会来到判断当前下载操作是否在下载操作缓存这一步，在这之前直接就可以拿图去用了，下载操作是否存在下载操作缓存里并没有什么影响。</li>
+<li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>忘了那段代码了么？回看一下代码（看我多好）：</li>
+</ul>
+<pre><code>NSBlockOperation *operation = self.operations[imageUrl];
+ if (operation) return;//转身就走，毫不留情
+</code></pre><p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>
+<h1 id="4-最后的话"><a href="#4-最后的话" class="headerlink" title="4. 最后的话"></a>4. 最后的话</h1><hr>
+<p>异步+缓存这两个机制双剑合璧的话会对程序新能带来很大的改观。这应该app开发进阶的必经之路。</p>
+<p>小码哥讲述的这套流程还算比较完整的了，更重要的还是学习其中的思想：</p>
+<blockquote>
+<ol>
+<li>将缓存分级：内存缓存，沙盒缓存，下载操作缓存。</li>
+<li>而且还要经常使用二分法，将我们的逻辑考虑得滴水不漏。</li>
+</ol>
+<p>如果我们没有认识到将下载操作添加到下载操作缓存的时机是包含下载成功和下载失败两个情况，那么就不会考虑到即时要将下载操作从下载操作缓存中删去的操作，很容易引起bug。所以在以后的开发中，成功和失败两个情况都要考虑进去，也就是说有if一定要有else！</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjcanyo6x00666o0r6jhdck00" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" class="article-date">
@@ -100,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjc8m2d5k001v1w0ribd34k23" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjcanyo2x001x6o0rvkbvtd43" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -160,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjc8m2d6p002y1w0rpbda5l2m" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjcanyo3s002w6o0rwekulg33" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -209,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjc8m2d5w00271w0r9ivtla52" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjcanyo3400276o0rbn26k0fc" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -265,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjc8m2d8f004c1w0r05pu09jf" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjcanyo5e004i6o0rbqejpnxe" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -576,7 +764,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjc8m2d8x00521w0r4ph24t6b" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjcanyo5u004y6o0ridfzjb2s" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -730,7 +918,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjc8m2d8i004g1w0rbccxyadj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjcanyo5g004k6o0rhysqfrb1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -815,7 +1003,7 @@ typedef struct objc_object *id;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjc8m2d8a00451w0r43a3uhj2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjcanyo4y00496o0r4bvuxbjf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -943,7 +1131,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjc8m2d9d005k1w0r2uc0mo1g" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjcanyo6k005m6o0rgjcdr3sm" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1023,57 +1211,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjc8m2d7100381w0r6z6eysbk" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python命名规则(转）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/04/Python命名规则(转）/" class="article-date">
-  <time datetime="2017-04-04T14:45:26.000Z" itemprop="datePublished">2017-04-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/04/Python命名规则(转）/">Python命名规则(转）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>模块名：</strong><br>小写字母，单词之间用_分割<br>参考<a href="http://lib.csdn.net/base/python" title="Python知识库" target="_blank" rel="noopener">Python</a>：logging</p>
-<p><strong>包名:</strong><br>小写字母，单词之间用_分割<br>参考python：logging</p>
-<p><strong>类名：</strong><br>单词首字母大写<br>参考：python class LogRecord(object):</p>
-<p><strong>普通变量：</strong><br>小写字母，单词之间用_分割<br>参考：exc_info</p>
-<p><strong>实例变量：</strong><br>以<em>开头，小写字母，单词之间用</em>分割<br>参考:_exc_info<br>以一个下划线开头的标识符(_xxx)，不能访问的类属性，但可通过类提供的接口进行访问，<br>不会被语句 “from module import *” 语句加载</p>
-<p><strong>私有实例变量：</strong><br>以<strong>开头（2个下划线），小写字母，单词之间用_分割<br>参考:</strong>private_var<br>外部访问会报错</p>
-<p><strong>专有变量：</strong><br><strong>开头，</strong>结尾，一般为python的自有变量，不要以这种方式命名<br>参考:<strong>doc</strong><br>是系统定义的，具有特殊意义的标识符</p>
-<p><strong>普通函数：</strong><br>小写字母，单词之间用_分割：<br>参考:get_name()</p>
-<p><strong>私有函数</strong>：<br>以<strong>开头（2个下划线），小写字母，单词之间用分割<br>参考:</strong>get_name()<br>外部访问会报错</p>
-<p><strong>注意：</strong><br><em>单下划线开头：弱“内部使用”标识，如：”from M import *”，将不导入所有以下划线开头的对象，包括包、模块、成员<br>单下划线结尾</em>：只是为了避免与python关键字的命名冲突<br>_<em>双下划线开头：模块内的成员，表示私有成员，外部无法直接调用<br>包和模块：模块应该使用尽可能短的、全小写命名，可以在模块命名时使用下划线以增强可读性。同样包的命名也应该是这样的，虽然其并不鼓励下划线。<br>以上这些主要是考虑模块名是与文件夹相对应的，因此需要考虑文件系统的一些命名规则的，比如Unix系统对大小写敏感，而过长的文件名会影响其在Windows/Mac/Dos等系统中的正常使用。<br>类：几乎毫无例外的，类名都使用首字母大写开头(Pascal命名风格)的规范。使用</em>单下划线开头的类名为内部使用，上面说的from M import *默认不被告导入的情况。<br>异常：因为异常也是一个类，所以遵守类的命名规则。此外，如果异常实际上指代一个错误的话，应该使用“Error”做后缀</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjc8m2d5s00221w0r80okkvyj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjcanyo46003c6o0rp2722bzx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1126,6 +1264,10 @@ NSMutableString *stringDCopy = [string mutableCopy];
       <ul>
         
           <li>
+            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
           </li>
         
@@ -1139,10 +1281,6 @@ NSMutableString *stringDCopy = [string mutableCopy];
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
           </li>
         
       </ul>

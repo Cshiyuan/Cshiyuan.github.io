@@ -65,6 +65,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-惰性加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/惰性加载/" class="article-date">
+  <time datetime="2017-01-14T03:56:00.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/惰性加载/">惰性加载（lazyload）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>维基百科的解释</p>
+<p><strong>惰性加载</strong>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Lazy loading、Infinite Scroll</span></span>，又称<strong>延迟加载</strong><sup id="cite_ref-1" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-1" target="_blank" rel="noopener">[1]</a></sup>、<strong>懒加载</strong><sup id="cite_ref-2" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-2" target="_blank" rel="noopener">[2]</a></sup><sup id="cite_ref-3" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-3" target="_blank" rel="noopener">[3]</a></sup>、<strong>无限滚动</strong><sup id="cite_ref-TechOrange_4-0" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4" target="_blank" rel="noopener">[4]</a></sup>、<strong>瀑布流</strong><sup id="cite_ref-TechOrange_4-1" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4" target="_blank" rel="noopener">[4]</a></sup>），是一种<a href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="noopener">设计模式</a> “设计模式 (计算机)”)，被运用在<a href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E8%A8%AD%E8%A8%88" title="软件设计" target="_blank" rel="noopener">软件设计</a>和<a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88" title="网页设计" target="_blank" rel="noopener">网页设计</a>当中<sup id="cite_ref-5" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-5" target="_blank" rel="noopener">[5]</a></sup>，对于网页界面，其特征为用户通过鼠标，<span class="ilh-all" data-orig-title="捲動" data-lang-code="en" data-lang-name="英语" data-foreign-title="Scrolling"><span class="ilh-page"><a href="https://zh.wikipedia.org/w/index.php?title=%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" title="%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">滚动</a></span></span>浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如<a href="https://zh.wikipedia.org/wiki/Google%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2" title="Google图片搜索" target="_blank" rel="noopener">Google图片搜索</a>、<a href="https://zh.wikipedia.org/wiki/Google%2B" title="Google+" target="_blank" rel="noopener">Google+</a>、<a href="https://zh.wikipedia.org/wiki/Facebook" title="Facebook" target="_blank" rel="noopener">Facebook</a>、<a href="https://zh.wikipedia.org/wiki/Twitter" title="Twitter" target="_blank" rel="noopener">Twitter</a>、<a href="https://zh.wikipedia.org/wiki/Pinterest" title="Pinterest" target="_blank" rel="noopener">Pinterest</a><sup id="cite_ref-6" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-6" target="_blank" rel="noopener">[6]</a></sup>和维基百科的<a href="https://zh.wikipedia.org/wiki/Wikipedia:Flow" title="Wikipedia:Flow" target="_blank" rel="noopener">Flow</a>讨论系统。也有结合无限滚动和多<a href="https://zh.wikipedia.org/wiki/%E9%A0%81" title="页" target="_blank" rel="noopener">页</a>，两著特性的网页设计<sup id="cite_ref-7" class="reference"><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-7" target="_blank" rel="noopener">[7]</a></sup>。</p>
+<p>而对于数据结构而言，惰性加载是指从一个数据对象通过方法获得里面的一个属性对象时，这个对应对象实际并没有随其父数据对象创建时一起保存在运行空间中，而是在其读取方法第一次被调用时才从其他数据源中加载到运行空间中，这样可以避免过早地导入过大的数据对象但并没有使用的空间占用浪费。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcanyo6300586o0riu8hc9cz" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CookieSession机制详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/10/CookieSession机制详解/" class="article-date">
@@ -111,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjc8m2d4o000t1w0rpmw9t4fe" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcanyo22000t6o0r90ump5lm" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -251,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjc8m2d8h004e1w0rpo99fp0q" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcanyo5d004g6o0rd5smjn8b" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -329,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjc8m2d4u00101w0rdqci4zzh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcanyo2600106o0rc7ps3mp4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -392,7 +437,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjc8m2d5e001p1w0r2yignzrg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcanyo2v001t6o0rybkdk5nr" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -436,7 +481,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjc8m2d96005e1w0rujmllkcw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcanyo6i005i6o0rxdw0qscx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -552,7 +597,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjc8m2d64002c1w0rapvlyzjh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcanyo3f002j6o0rnmwrskqn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -593,7 +638,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjc8m2d6r00301w0rhjbghezb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcanyo3v00306o0rhg4utpel" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -633,7 +678,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjc8m2d8v004y1w0r78g84jee" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcanyo5y00546o0r6nciac09" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -710,53 +755,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjc8m2da300661w0r1ik73j2v" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Mac卸载各种软件的目录地址" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/21/Mac卸载各种软件的目录地址/" class="article-date">
-  <time datetime="2016-09-21T14:41:49.000Z" itemprop="datePublished">2016-09-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/21/Mac卸载各种软件的目录地址/">Mac卸载各种软件的目录地址</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>Config: ~/Library/Preferences/</li>
-<li>System: ~/Library/Caches/</li>
-<li>Plugins: ~/Library/Application Support/</li>
-<li>Logs: ~/Library/Logs/</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/21/Mac卸载各种软件的目录地址/" data-id="cjc8m2d54001c1w0rkpsj1cd6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjcanyo6v00646o0rql39e8zg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -809,6 +808,10 @@ net.ipv4.tcp_congestion_control = hybla
       <ul>
         
           <li>
+            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
           </li>
         
@@ -822,10 +825,6 @@ net.ipv4.tcp_congestion_control = hybla
         
           <li>
             <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/tensorflow笔记（1）/">tensorflow笔记（1）</a>
           </li>
         
       </ul>
