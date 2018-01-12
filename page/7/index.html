@@ -65,6 +65,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-动态库与静态库优缺点比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/动态库与静态库优缺点比较/" class="article-date">
+  <time datetime="2017-01-14T09:56:13.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/动态库与静态库优缺点比较/">动态库与静态库优缺点比较</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="Ma_Ti"><br><br># 动态库与静态库优缺点比较<br><br></div><br><div class="Ma_Bo"><br><br>     我们在编写一个<a href="http://lib.csdn.net/base/c" title="C语言知识库" target="_blank" rel="noopener">C语言</a>程序的时候，经常会遇到好多重复或常用的部分，如果每次都重新编写固然是可以的，不过那样会大大降低工作效率，并且影响代码的可读性，更不利于后期的代码维护。我们可以把他们制作成相应的功能函数，使用时直接调用就会很方便，还可以进行后期的功能升级。例如我要在一段代码中多次交换两个变量的值，我可以在代码中多次写入<br><pre>i=x;<br> x=y;<br> y=i;</pre><br><pre>不过这样未免有点麻烦我们可以编写一个change_two_int()函数进行简化。<br> 定义如下函数：<br> void change_two_int(int <em>a，int </em>b)<br> {<br>      int c;<br>      c=<em>a;
+      </em>a=<em>b;
+      </em>b=c;<br> }<br> 这样每次要进行交换时只需调用 change_two_int(&amp;x , &amp;y);即可，是否方便了许多？</pre><br>那么我们要讨论的和这些有什么关系呢？库通俗的说就是把这些常用函数的目标文件打包在一起，提供相应函数的接口，便于程序员使用。库是别人写好的现有的，成熟的，可以复用的代码，我们只需要知道其接口如何定义，便可以自如使用。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。比如我们常使用的printf函数，就是c标准库提供的函数。我们在使用时只需要包含相应的头文件就可以使用（非静态编译还要有相应的库文件）。而不用关心printf函数具体是如何实现的，这样就大大提高了程序员编写代码的效率。从使用方法上分库大体上可以分为两类：静态库和共享库。在windows中静态库是以 .lib 为后缀的文件，共享库是以 .dll 为后缀的文件。在<a href="http://lib.csdn.net/base/linux" title="Linux知识库" target="_blank" rel="noopener">Linux</a>中静态库是以 .a 为后缀的文件，共享库是以 .so为后缀的文件。<br>以linux下的静态库和动态库为例我们研究一下，首先我们看一下他们的生成方式<br><br>静态库：<br>首先将源文件编译成目标文件：gcc –c a.c b.c<br>生成静态库：ar –rc libstatic.a a.o b.o<br><br>共享库：<br>同静态库一样编译成目标文件：gcc –c a.c b.c<br>生成共享库：gcc –fPIC –shared –o libshared.so a.o b.o<br><br>由此可见静态库和动态库都是对目标文件的处理，也可以说库文件已经是机器码文件了，静态库和共享库的加载过程有很大的区别。<br><br>静态库的链接方法：<br>gcc –o staticcode –L. –lstatic main.c –static(默认库在当前文件夹)<br><br>共享库的链接方法：<br>gcc –o sharedcode  -L. –lshared main.c(默认库在当前文件夹)<br><br>当程序与静态库连接时，库中目标文件所含的所有将被程序使用的函数的机器码被copy到最终的可执行文件中。这就会导致最终生成的可执行代码量相对变多，相当于编译器将代码补充完整了，这样运行起来相对就快些。不过会有个缺点: 占用磁盘和内存空间. 静态库会被添加到和它连接的每个程序中, 而且这些程序运行时, 都会被加载到内存中. 无形中又多消耗了更多的内存空间.<br><br>与共享库连接的可执行文件只包含它需要的函数的引用表，而不是所有的函数代码，只有在程序执行时, 那些需要的函数代码才被拷贝到内存中。这样就使可执行文件比较小, 节省磁盘空间，更进一步，<a href="http://lib.csdn.net/base/operatingsystem" title="操作系统知识库" target="_blank" rel="noopener">操作系统</a>使用虚拟内存，使得一份共享库驻留在内存中被多个程序使用，也同时节约了内存。不过由于运行时要去链接库会花费一定的时间，执行速度相对会慢一些，总的来说静态库是牺牲了空间效率，换取了时间效率，共享库是牺牲了时间效率换取了空间效率，没有好与坏的区别，只看具体需要了。<br><br>另外，.一个程序编好后，有时需要做一些修改和优化，如果我们要修改的刚好是库函数的话，在接口不变的前提下，使用共享库的程序只需要将共享库重新编译就可以了，而使用静态库的程序则需要将静态库重新编译好后，将程序再重新编译一便。<br><br>&nbsp;<br><br><strong>总结:</strong><br><br>&nbsp;<br><br><strong>一、库的类型</strong><br><br>## <a name="t1"></a>(一) 在windows中<br><br>.dll 动态库<br><br>.lib 静态库<br><br>库即为源代码的二进制文件<br><br>## <a name="t2"></a>(二) 在linux中<br><br>.so 动态库<br><br>.a      静态库<br><br>&nbsp;<br><br>## <a name="t3"></a>(三) 静态库和动态库的优缺点<br><br>我们通常把一些公用函数制作成函数库，供其它程序使用。<br><br>函数库分为静态库和动态库两种。<br><br>静态库在程序编译时会被连接到目标代码中，程序运行时将不再需要该静态库。<br><br>动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入，因此在程序运行时还需要动态库存在<br><br>&nbsp;<br><br>### <a name="t4"></a>1.什么是库<br><br>在windows平台和linux平台下都大量存在着库。<br><br>本质上来说库是一种可执行代码的二进制形式，可以被操作系统载入内存执行。<br><br>由于windows和linux的本质不同，因此二者库的二进制是不兼容的。<br><br>本文仅限于介绍linux下的库<br><br>&nbsp;<br><br>### <a name="t5"></a>2.库的种类<br><br>linux下的库有两种：静态库和共享库（动态库）。<br><br>二者的不同点在于代码被载入的时刻不同。<br><br>静态库的代码在编译过程中已经被载入可执行程序，因此体积较大。<br><br>共享库的代码是在可执行程序运行时才载入内存的，在编译过程中仅简单的引用，因此代码体积较小。<br><br>&nbsp;<br><br>### <a name="t6"></a>3.库存在的意义<br><br>库是别人写好的现有的，成熟的，可以复用的代码，你可以使用但要记得遵守许可协议。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。共享库的好处是，不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例。<br><br>&nbsp;<br><br>### <a name="t7"></a>4.库文件是如何产生的在linux下<br><br>静态库的后缀是.a，它的产生分两步<br><br>Step 1.由源文件编译生成一堆.o，每个.o里都包含这个编译单元的符号表<br><br>Step 2.ar命令将很多.o转换成.a，成文静态库<br><br>动态库的后缀是.so，它由gcc加特定参数编译产生。<br><br>例如:<br><br>$ gcc -fPIC -c <em>.c $ gcc -shared -Wl,-soname, libfoo.so.1 -olibfoo.so.1.0 </em>.<br><br>&nbsp;<br><br>### <a name="t8"></a>5.库文件是如何命名的，有没有什么规范<br><br>在linux下，库文件一般放在/usr/lib和/lib下，<br><br>静态库的名字一般为libxxxx.a，其中xxxx是该lib的名称<br><br>动态库的名字一般为libxxxx.so.major.minor，xxxx是该lib的名称，major是主版本号， minor是副版本号<br><br>&nbsp;<br><br>### <a name="t9"></a>6.如何知道一个可执行程序依赖哪些库<br><br>ldd命令可以查看一个可执行程序依赖的共享库，<br><br>例如# ldd /bin/lnlibc.so.6<br><pre>=&gt; /lib/libc.so.6 (0×40021000)/lib/ld-linux.so.2<br><br>=&gt; /lib/ld- linux.so.2 (0×40000000)</pre><br>可以看到ln命令依赖于libc库和ld-linux库<br><br>&nbsp;<br><br>### <a name="t10"></a>7.可执行程序在执行的时候如何定位共享库文件<br><br>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径<br><br>此时就需要系统动态载入器(dynamiclinker/loader)<br><br>对于elf格式的可执行程序，是由ld-linux.so<em>来完成的<br><br>它先后搜索elf文件的 DT_RPATH段—环境变量LD_LIBRARY_PATH—/etc/ld.so.cache文件列表—/lib/,/usr/lib目录<br><br>找到库文件后将其载入内存<br><br>&nbsp;<br><br>### <a name="t11"></a>8.在新安装一个库之后如何让系统能够找到他<br><br>如果安装在/lib或者/usr/lib下，那么ld默认能够找到，无需其他操作。<br><br>如果安装在其他目录，需要将其添加到/etc/ld.so.cache文件中，步骤如下<br><br>1.编辑/etc/ld.so.conf文件，加入库文件所在目录的路径<br><br>2.运行ldconfig，该命令会重建/etc/ld.so.cache文件<br><br>&nbsp;<br><br>############################################################<br><br>&nbsp;<br><br>linux中编译静态库(.a)和动态库(.so)的基本方法<br><br>&nbsp;<br><br>## <a name="t12"></a>(四) 静态库<br><br>&nbsp;<br><br>在linux环境中, 使用ar命令创建静态库文件.如下是命令的选项:<br><br>d —–从指定的静态库文件中删除文件<br><br>m —–把文件移动到指定的静态库文件中<br><br>p —–把静态库文件中指定的文件输出到标准输出<br><br>q —–快速地把文件追加到静态库文件中<br><br>r —–把文件插入到静态库文件中<br><br>t —–显示静态库文件中文件的列表<br><br>x —–从静态库文件中提取文件<br><br>还有多个修饰符修改以上基本选项,详细请man ar 以下列出三个:<br><br>a —–把新的目标文件(</em>.o)添加到静态库文件中现有文件之后<br><br>b—–<strong><strong><strong><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></strong></strong></strong>之前<br><br>v —–使用详细模式<br><br>ar 命令的命令行格式如下:<br><br>ar[-]{dmpqrtx}[abcfilNoPsSuvV] [membername] [count] archive files…<br><br>参数archive定义库的名称, files是库文件中包含的目标文件的清单, 用空格分隔每个文件.<br><br>&nbsp;<br><br>比如创建一个静态库文件的命令如下:<br><br>ar r libapue.a error.oerrorlog.o lockreg.o<br><br>这样就了libapue.a静态库文件, 可以用 t 选项显示包含在库中的文件<br><br>创建库文件之后,可以创建这个静态库文件的索引来帮助提高和库连接的其他程序的编译速度：<br><br>使用ranlib程序创建库的索引,索引存放在库文件内部.<br><br>ranlib libapue.a<br><br>&nbsp;<br><br>用nm程序显示存档文件的索引,它可以显示目标文件的符号<br><br>nm libapue.a | more<br><br>如果是显示目标文件的符号:<br><br>nm error.o | more<br><br>如何使用呢?如下所示:<br><br>gcc -o test test.c libapue.a<br><br>这样就可以在test.c中调用在libapue.a中的函数了.<br><br>&nbsp;<br><br>&nbsp;<br><br>## <a name="t13"></a>(五) 动态库<br><br>&nbsp;<br><br>### <a name="t14"></a>1.创建共享库<br><br><pre>gcc -shared -o libapue.soerror.o errorlog.o</pre><br>这样就创建了共享库!<br><br>### <a name="t15"></a>2.编译共享库<br><br>假设共享库位于当前目录(即跟程序文件相同的目录中)<br><pre>gcc -o test -L. -lapue test.c</pre><br>这样就编译出了不包含函数代码可执行文件了,但是但你运行时会发现linux动态加载器找不到libapue.so文件.<br><br>可以用ldd 命令查看可执行文件依赖什么共享库:<br><br>ldd test<br><br>如何才能让动态加载器发现库文件呢?有两种方法可以解决:<br><br>1.环境变量<br><br>exportLD_LIBRARY_PATH=”$LD_LIBRARY_PATH:.”<br><br>2.修改/etc/ld.so.conf文件.<br><br>&nbsp;<br><br>一般应用程序的库文件不与系统库文件放在同一个目录下,一般把应用程序的共享库文件放在/usr/local/lib下,新建一个属于自己的目录apue,然后把刚才libapue.so复制过去就行了<br><br>同时在/etc/ld.so.conf中新增一行:<br><br>/usr/local/lib/apue<br><br>&nbsp;<br><br>以后在编译程序时加上编译选项:<br><br>-L /usr/local/lib/apue -lapue<br><br>&nbsp;<br><br>/*<br><br>参数的配置通过mangcc可以看到<br><br>-llibrary<br><br>连接名为 library 的 库文件.<br><br>连接器 在 标准搜索目录 中 寻找 这个 库文件, 库文件 的 真正 名 字<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjcbi8q88004l700r6iuspk2f" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-惰性加载" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/14/惰性加载/" class="article-date">
@@ -100,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcao48th0056910r3r0xfonc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcbi8q8t0057700r0w1yj8rn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -156,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcao48pf000y910redgdu30s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcbi8q4s000r700ry26vvh0z" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -296,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcao48sw004i910r8xp7amwu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcbi8q84004f700r1vm3mujp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -374,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcao48pj0013910rv7q5avmh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcbi8q4x0010700r1j94yivh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -437,7 +479,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcao48q8001p910re27z9dtx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcbi8q5l001o700r8uofod6r" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -481,7 +523,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcao48tv005k910r60kfo2q3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcbi8q90005h700rx5rvh5zw" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -597,7 +639,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcao48r3002n910rkmo7ljai" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcbi8q6k002i700r2yabd4cw" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -638,7 +680,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcao48ro0032910rzs0w2yvr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcbi8q6s002u700r57zh747e" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -678,84 +720,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcao48tm005a910rmefv8nty" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/25/设计模式/" class="article-date">
-  <time datetime="2016-09-25T06:07:35.000Z" itemprop="datePublished">2016-09-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/25/设计模式/">设计模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在某些人看来学习设计模式没有什么意义，因为在实际工作中基本用不上，因此没有什么学习的必要。但是在我看来，学习设计模式非常有必要，暂且不论在实际工作中能否用得上，理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
-<h2 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a><a href="https://github.com/leichunfeng/DesignPatterns-Objective-C#设计模式的基本原则" target="_blank" rel="noopener"></a>设计模式的基本原则</h2><p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
-<ul>
-<li><strong>单一职责原则（SRP）</strong>，就一个类而言，应该仅有一个引起它变化的原因。</li>
-<li><strong>开放-封闭原则（OCP）</strong>，是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
-<li><strong>依赖倒转原则（DIP）</strong>，A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
-<li><strong>里氏代换原则（LSP）</strong>，子类型必须能够替换掉它们的父类型。</li>
-<li><strong>迪米特法则（LoD）</strong>，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
-<li><strong>合成/聚合复用原则（CARP）</strong>，尽量使用合成/聚合，尽量不要使用类继承。<br>注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</li>
-</ul>
-<h2 id="常用的-23-种设计模式"><a href="#常用的-23-种设计模式" class="headerlink" title="常用的 23 种设计模式"></a><a href="https://github.com/leichunfeng/DesignPatterns-Objective-C#常用的-23-种设计模式" target="_blank" rel="noopener"></a>常用的 23 种设计模式</h2><p>不管是 .NET 中的 C# 语言，还是 Java、VB.NET、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
-<ol>
-<li><strong>策略模式（Strategy）</strong>，它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
-<li><strong>装饰模式（Decorator）</strong>，动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
-<li><strong>代理模式（Proxy）</strong>，为其他对象提供一种代理以控制对这个对象的访问。</li>
-<li><strong>工厂方法模式（Factory Method）</strong>，定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
-<li><strong>原型模式（Prototype）</strong>，用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
-<li><strong>模板方法模式（Template Method）</strong>，定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
-<li><strong>外观模式（Facade）</strong>，为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
-<li><strong>建造者模式（Builder）</strong>，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
-<li><strong>观察者模式（Observer）</strong>，定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
-<li><strong>抽象工厂模式（Abstract Factory）</strong>，提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
-<li><strong>状态模式（State）</strong>，当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
-<li><strong>适配器模式（Adapter）</strong>，将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
-<li><strong>备忘录模式（Memento）</strong>，在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
-<li><strong>组合模式（Composite）</strong>，将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
-<li><strong>迭代器模式（Iterator）</strong>，提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
-<li><strong>单例模式（Singleton）</strong>，保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
-<li><strong>桥接模式（Bridge）</strong>，将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
-<li><strong>命令模式（Command）</strong>，将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
-<li><strong>职责链模式（Chain of Responsibility）</strong>，使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
-<li><strong>中介者模式（Mediator）</strong>，用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
-<li><strong>享元模式（Flyweight）</strong>，运用共享技术有效地支持大量细粒度的对象。</li>
-<li><strong>解释器模式（Interpreter）</strong>，给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
-<li><strong>访问者模式（Visitor）</strong>，表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
-</ol>
-<p>## </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjcao48ud0068910rdzprp3xh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcbi8q8q0055700r7u3r8wi8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -769,7 +734,7 @@ net.ipv4.tcp_congestion_control = hybla
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -808,6 +773,10 @@ net.ipv4.tcp_congestion_control = hybla
       <ul>
         
           <li>
+            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
@@ -821,10 +790,6 @@ net.ipv4.tcp_congestion_control = hybla
         
           <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
           </li>
         
       </ul>

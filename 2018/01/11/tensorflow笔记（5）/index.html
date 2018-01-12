@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>tensorflow笔记（5） | C&#39;s Notebook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.  # 保存神经网络的方法 import tensorflow as tf import numpy as np  ## Save to file # remember to define the same dtype an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow笔记（5）">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/11/tensorflow笔记（5）/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.  # 保存神经网络的方法 import tensorflow as tf import numpy as np  ## Save to file # remember to define the same dtype an">
+<meta property="og:updated_time" content="2018-01-12T05:49:33.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow笔记（5）">
+<meta name="twitter:description" content="Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.  # 保存神经网络的方法 import tensorflow as tf import numpy as np  ## Save to file # remember to define the same dtype an">
+  
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">C&#39;s Notebook</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hi! This is my technical notebook.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tensorflow笔记（5）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/11/tensorflow笔记（5）/" class="article-date">
+  <time datetime="2018-01-11T15:52:54.000Z" itemprop="datePublished">2018-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tensorflow笔记（5）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Saver-保存读取"><a href="#Saver-保存读取" class="headerlink" title="Saver 保存读取"></a>Saver 保存读取</h4><p>我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.</p>
+<pre><code class="Python">
+# 保存神经网络的方法
+import tensorflow as tf
+import numpy as np
+
+## Save to file
+# remember to define the same dtype and shape when restore
+# W = tf.Variable([[1, 2, 3], [3, 4, 5]], dtype=tf.float32, name=&#39;weights&#39;)
+# b = tf.Variable([[1, 2, 3]], dtype=tf.float32, name=&#39;biases&#39;)
+
+# init = tf.global_variables_initializer()
+
+# # 保存时，首先要先建立一个tf.train.Saver()用来保存，提取变量
+# # 再创建一个名为my_net的文件夹，用这个saver来保存变量道这个目录
+
+# saver = tf.train.Saver()
+
+# with tf.Session() as sess:
+#     sess.run(init)
+#     save_path = saver.save(sess, &quot;my_net/save_net.ckpt&quot;)
+#     print(&quot;Save to path:&quot;, save_path)
+
+# # 提取
+# # 先建立W，b道容器
+W = tf.Variable(np.arange(6).reshape((2, 3)), dtype=tf.float32, name=&quot;weights&quot;)
+b = tf.Variable(np.arange(3).reshape((1, 3)), dtype=tf.float32, name=&quot;biases&quot;)
+
+# 这里不需要初始化步骤 init=tf.initialize_all_variables()
+
+saver = tf.train.Saver()
+with tf.Session() as sess:
+    # 提取变量
+    saver.restore(sess, &quot;my_net/save_net.ckpt&quot;)
+    print(&quot;weights:&quot;, sess.run(W))
+    print(&quot;biases:&quot;, sess.run(b))
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2018/01/11/tensorflow笔记（5）/" data-id="cjcbi8q7k003p700rtqd124c6" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/10/tensorflow笔记（4）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">tensorflow笔记（4）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 shyiuanchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

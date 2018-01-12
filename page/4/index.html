@@ -65,6 +65,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-node.js express框架笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/06/node.js express框架笔记/" class="article-date">
+  <time datetime="2017-04-06T09:37:31.000Z" itemprop="datePublished">2017-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/node.js express框架笔记/">node.js express框架笔记（1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><p>Express 应用使用回调函数的参数： <strong>request</strong> 和 <strong>response</strong> 对象来处理请求和响应的数据。</p>
+<p><pre class="prettyprint prettyprinted"><span class="pln">app</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="str">‘/‘</span><span class="pun">,</span> <span class="kwd">function</span> <span class="pun">(</span><span class="pln">req</span><span class="pun">,</span><span class="pln"> res</span><span class="pun">)</span> <span class="pun">{</span><br>   <span class="com">// –</span><br><span class="pun">})</span></pre><br><strong>request</strong> 和 <strong>response</strong> 对象的具体介绍：</p>
+<p><strong>Request 对象</strong> - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属性有：</p>
+<ol>
+<li>req.app：当callback为外部文件时，用req.app访问express的实例</li>
+<li>req.baseUrl：获取路由当前安装的URL路径</li>
+<li>req.body / req.cookies：获得「请求主体」/ Cookies</li>
+<li>req.fresh / req.stale：判断请求是否还「新鲜」</li>
+<li>req.hostname / req.ip：获取主机名和IP地址</li>
+<li>req.originalUrl：获取原始请求URL</li>
+<li>req.params：获取路由的parameters</li>
+<li>req.path：获取请求路径</li>
+<li>req.protocol：获取协议类型</li>
+<li>req.query：获取URL的查询参数串</li>
+<li>req.route：获取当前匹配的路由</li>
+<li>req.subdomains：获取子域名</li>
+<li>req.accepts()：检查可接受的请求的文档类型</li>
+<li>req.acceptsCharsets / req.acceptsEncodings / req.acceptsLanguages：返回指定字符集的第一个可接受字符编码</li>
+<li>req.get()：获取指定的HTTP请求头</li>
+<li><p>req.is()：判断请求头Content-Type的MIME类型<br><strong>Response 对象</strong> - response 对象表示 HTTP 响应，即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：</p>
+</li>
+<li><p>res.app：同req.app一样</p>
+</li>
+<li>res.append()：追加指定HTTP头</li>
+<li>res.set()在res.append()后将重置之前设置的头</li>
+<li>res.cookie(name，value [，option])：设置Cookie</li>
+<li>opition: domain / expires / httpOnly / maxAge / path / secure / signed</li>
+<li>res.clearCookie()：清除Cookie</li>
+<li>res.download()：传送指定路径的文件</li>
+<li>res.get()：返回指定的HTTP头</li>
+<li>res.json()：传送JSON响应</li>
+<li>res.jsonp()：传送JSONP响应</li>
+<li>res.location()：只设置响应的Location HTTP头，不设置状态码或者close response</li>
+<li>res.redirect()：设置响应的Location HTTP头，并且设置状态码302</li>
+<li>res.send()：传送HTTP响应</li>
+<li>res.sendFile(path [，options] [，fn])：传送指定路径的文件 -会自动根据文件extension设定Content-Type</li>
+<li>res.set()：设置HTTP头，传入object可以一次设置多个头</li>
+<li>res.status()：设置HTTP状态码</li>
+<li>res.type()：设置Content-Type的MIME类型</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjcbi8q720037700r09sqdzke" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python命名规则(转）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/04/Python命名规则(转）/" class="article-date">
@@ -105,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjcao48qt002c910rcn9h5f8z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjcbi8q650021700rsm44ga9k" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -227,7 +307,7 @@ call now():
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjcao48qp0028910rt9sc2n4j" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjcbi8q670026700r7q670f4r" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -365,7 +445,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjcao48qq002a910r9h7v22sj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjcbi8q63001z700rgg9j4ee0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -597,7 +677,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjcao48qm0023910rn5gyznn1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjcbi8q62001x700rbv78wxzd" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -685,7 +765,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjcao48r0002j910rrtnxr3fg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjcbi8q6g002e700rvw8uwanm" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -875,7 +955,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcao48r2002l910rn5zseca6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcbi8q6i002g700rr2ko60a4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -953,7 +1033,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcao48qw002f910rqpdk37nv" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcbi8q690029700rzpbks5j7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1026,7 +1106,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcao48s2003m910rwgmhxo4g" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcbi8q7e003h700rh8wuliki" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1135,48 +1215,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjcao48sn004b910rmspahxsg" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用react-native时按cmd r不能刷新模拟器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" class="article-date">
-  <time datetime="2017-03-29T10:41:57.000Z" itemprop="datePublished">2017-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/29/使用react-native时按cmd r不能刷新模拟器/">使用react-native时按cmd+r不能刷新模拟器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/original/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a.png" title="屏幕快照 2015-07-24 下午1.03.32.png" target="_blank" rel="noopener"><img src="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/optimized/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a_1_690x300.png" alt=""></a><br>如上图，将模拟器的键盘尝试呼起就行。这样按键就能起作用刷新了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjcao48sj0047910rcgdmpwsq" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjcbi8q7z0046700r2g3r44q7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1190,7 +1229,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -1229,6 +1268,10 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       <ul>
         
           <li>
+            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
@@ -1242,10 +1285,6 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
         
           <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
           </li>
         
       </ul>

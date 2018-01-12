@@ -65,6 +65,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-非对称加密算法和摘要算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/非对称加密算法和摘要算法/" class="article-date">
+  <time datetime="2017-03-12T11:43:39.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/非对称加密算法和摘要算法/">非对称加密算法和摘要算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h3><p>非对称加密算法和摘要算法</p>
+<div class="para">如果用户想得到一份属于自己的证书，他应先向 CA 提出申请。在 CA 判明申请者的身份后，便为他分配一个公钥，并且 CA 将该公钥与申请者的身份信息绑在一起，并为之签字后，便形成证书发给申请者。</div><br><div class="para">如果一个用户想鉴别另一个证书的真伪，他就用 CA 的公钥对那个证书上的签字进行验证，一旦验证通过，该证书就被认为是有效的。证书实际是由证书签证机关（CA）签发的对用户的公钥的认证。</div><br><div class="para">证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。</div><br><div class="para"><br><br><em> </em> *<br><br></div>
+
+<hr>
+<h3 id="其实直接查看维基百科上面的解释就够了："><a href="#其实直接查看维基百科上面的解释就够了：" class="headerlink" title="其实直接查看维基百科上面的解释就够了："></a>其实直接查看维基百科上面的解释就够了：</h3><p><strong>公开密钥加密</strong>英语：<strong>public-key cryptography</strong>，又译为<strong>公开密钥加密</strong>），也称为<strong>非对称加密</strong>（asymmetric cryptography），一种<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8" title="密码学" target="_blank" rel="noopener">密码学</a><a href="https://zh.wikipedia.org/wiki/%E6%BC%94%E7%AE%97%E6%B3%95" title="算法" target="_blank" rel="noopener">算法</a>类型，在这种密码学方法中，需要一对密钥，一个是私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。</p>
+<div class="para"><br><br>如果加密密钥是公开的，这用于客户给私钥所有者上传加密的数据，这被称作为<strong>公开密钥加密</strong>（狭义）。例如，网络银行的客户发给银行网站的账户操作的加密数据。<br><br>如果解密密钥是公开的，用私钥加密的信息，可以用公钥对其解密，用于客户验证持有私钥一方发布的数据或文件是完整准确的，接收者由此可知这条信息确实来自于拥有私钥的某人，这被称作<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D" title="数字签名" target="_blank" rel="noopener">数字签名</a></strong>，公钥的形式就是<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" title="数字证书" target="_blank" rel="noopener">数字证书</a>。例如，从网上下载的安装程序，一般都带有程序制作者的数字签名，可以证明该程序的确是该作者（公司）发布的而不是第三方伪造的且未被篡改过（身份认证/验证）。<br><br>常见的公钥加密算法有：<a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" title="RSA加密算法" target="_blank" rel="noopener">RSA</a>、<a href="https://zh.wikipedia.org/w/index.php?title=ElGamal&amp;action=edit&amp;redlink=1" title="ElGamal（页面不存在）" target="_blank" rel="noopener">ElGamal</a>、<a href="https://zh.wikipedia.org/w/index.php?title=%E8%83%8C%E5%8C%85%E7%AE%97%E6%B3%95&amp;action=edit&amp;redlink=1" title="背包算法（页面不存在）" target="_blank" rel="noopener">背包算法</a>、<a href="https://zh.wikipedia.org/w/index.php?title=Rabin&amp;action=edit&amp;redlink=1" title="Rabin（页面不存在）" target="_blank" rel="noopener">Rabin</a>（RSA的特例）、<a href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2%EF%BC%8D%E8%B5%AB%E5%B0%94%E6%9B%BC%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE" title="迪菲－赫尔曼密钥交换协议" target="_blank" rel="noopener">迪菲－赫尔曼密钥交换协议</a>中的公钥加密算法、<a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95" title="椭圆曲线加密算法" target="_blank" rel="noopener">椭圆曲线加密算法</a>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Elliptic Curve Cryptography, ECC</span></span>）。使用最广泛的是<a href="https://zh.wikipedia.org/wiki/RSA%E7%AE%97%E6%B3%95" title="RSA算法" target="_blank" rel="noopener">RSA算法</a>（由发明者Rivest、Shmir和Adleman姓氏首字母缩写而来）是著名的公开秘钥加密算法，ElGamal是另一种常用的非对称加密算法。<br><br><em> </em> <em>
+
+</em> <em> </em><br><br>##<br><br>### 摘要算法<br><br>另一个神奇的算法就是摘要算法。摘要算法是指，可以将任意长度的文本，通过一个算法，得到一个固定长度的文本。这里文本不一定只是文本，可以是字节数据。所以摘要算法试图将世间万物，变成一个固定长度的东西。摘要算法具有以下重要特性：<br><br><em>   只要源文本不同，计算得到的结果，必然不同
+</em>   无法从结果反推出源（那是当然的，不然就能量不守恒了）<br>典型的摘要算法，比如大名鼎鼎的<code>MD5</code>和<code>SHA</code>。摘要算法主要用于比对信息源是否一致，因为只要源发生变化，得到的摘要必然不同；而且通常结果要比源短很多，所以称为“摘要”。<br><br>## 数字签名<br><br>理解了非对称加密和摘要算法，来看一下数字签名。实际上数字签名就是两者结合。假设，我们有一段授权文本，需要发布，为了防止中途篡改文本内容，保证文本的完整性，以及文本是由指定的权限狗发的。首先，先将文本内容通过摘要算法，得到摘要，再用权限狗的私钥对摘要进行加密得到密文，将源文本、密文、和私钥对应的公钥一并发布即可。那么如何验证呢？<br><br>验证方首先查看公钥是否是权限狗的，然后用公钥对密文进行解密得到摘要，将文本用同样的摘要算法得到摘要，两个摘要进行比对，如果相等那么一切正常。这个过程只要有一步出问题就视为无效。<br><br><img src="http://pchou.qiniudn.com/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D.jpg" alt=""><br><br>数字签名可以快速验证文本的完整性和合法性，已广泛应用于各个领域。理解了数字签名以后，我们进一步来看什么是数字证书。<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcbi8qab006i700rxv98x3yc" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-URL Schemes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/12/URL Schemes/" class="article-date">
@@ -149,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcao48re002r910rqj0grckx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcbi8q6o002m700r6x6sj8x0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -199,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcao48qz002h910ri2y02w0f" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcbi8q6b002b700rm6zp3afh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -303,7 +351,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcao48tc0050910r4rq055uc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcbi8q8i004z700rxf04oq7r" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -355,7 +403,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcao48pq001a910rbhk70po7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcbi8q520014700rfr3gi1dh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -461,7 +509,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcao48t4004s910romthbs69" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcbi8q8e004r700rwkhsm8a1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -509,7 +557,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcao48u80062910rmvyuwok8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcbi8q9c005x700rcosupmsl" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -554,7 +602,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcao48q1001j910r4huzsxy6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcbi8q550018700rzh7wqjp5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -605,7 +653,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcao48q4001l910rxld82m1o" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcbi8q58001d700r5hnw9p3y" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -656,49 +704,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjcao48rc002p910r8t5cp7ks" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-动态库与静态库优缺点比较" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/14/动态库与静态库优缺点比较/" class="article-date">
-  <time datetime="2017-01-14T09:56:13.000Z" itemprop="datePublished">2017-01-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/14/动态库与静态库优缺点比较/">动态库与静态库优缺点比较</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <div class="Ma_Ti"><br><br># 动态库与静态库优缺点比较<br><br></div><br><div class="Ma_Bo"><br><br>     我们在编写一个<a href="http://lib.csdn.net/base/c" title="C语言知识库" target="_blank" rel="noopener">C语言</a>程序的时候，经常会遇到好多重复或常用的部分，如果每次都重新编写固然是可以的，不过那样会大大降低工作效率，并且影响代码的可读性，更不利于后期的代码维护。我们可以把他们制作成相应的功能函数，使用时直接调用就会很方便，还可以进行后期的功能升级。例如我要在一段代码中多次交换两个变量的值，我可以在代码中多次写入<br><pre>i=x;<br> x=y;<br> y=i;</pre><br><pre>不过这样未免有点麻烦我们可以编写一个change_two_int()函数进行简化。<br> 定义如下函数：<br> void change_two_int(int <em>a，int </em>b)<br> {<br>      int c;<br>      c=<em>a;
-      </em>a=<em>b;
-      </em>b=c;<br> }<br> 这样每次要进行交换时只需调用 change_two_int(&amp;x , &amp;y);即可，是否方便了许多？</pre><br>那么我们要讨论的和这些有什么关系呢？库通俗的说就是把这些常用函数的目标文件打包在一起，提供相应函数的接口，便于程序员使用。库是别人写好的现有的，成熟的，可以复用的代码，我们只需要知道其接口如何定义，便可以自如使用。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。比如我们常使用的printf函数，就是c标准库提供的函数。我们在使用时只需要包含相应的头文件就可以使用（非静态编译还要有相应的库文件）。而不用关心printf函数具体是如何实现的，这样就大大提高了程序员编写代码的效率。从使用方法上分库大体上可以分为两类：静态库和共享库。在windows中静态库是以 .lib 为后缀的文件，共享库是以 .dll 为后缀的文件。在<a href="http://lib.csdn.net/base/linux" title="Linux知识库" target="_blank" rel="noopener">Linux</a>中静态库是以 .a 为后缀的文件，共享库是以 .so为后缀的文件。<br>以linux下的静态库和动态库为例我们研究一下，首先我们看一下他们的生成方式<br><br>静态库：<br>首先将源文件编译成目标文件：gcc –c a.c b.c<br>生成静态库：ar –rc libstatic.a a.o b.o<br><br>共享库：<br>同静态库一样编译成目标文件：gcc –c a.c b.c<br>生成共享库：gcc –fPIC –shared –o libshared.so a.o b.o<br><br>由此可见静态库和动态库都是对目标文件的处理，也可以说库文件已经是机器码文件了，静态库和共享库的加载过程有很大的区别。<br><br>静态库的链接方法：<br>gcc –o staticcode –L. –lstatic main.c –static(默认库在当前文件夹)<br><br>共享库的链接方法：<br>gcc –o sharedcode  -L. –lshared main.c(默认库在当前文件夹)<br><br>当程序与静态库连接时，库中目标文件所含的所有将被程序使用的函数的机器码被copy到最终的可执行文件中。这就会导致最终生成的可执行代码量相对变多，相当于编译器将代码补充完整了，这样运行起来相对就快些。不过会有个缺点: 占用磁盘和内存空间. 静态库会被添加到和它连接的每个程序中, 而且这些程序运行时, 都会被加载到内存中. 无形中又多消耗了更多的内存空间.<br><br>与共享库连接的可执行文件只包含它需要的函数的引用表，而不是所有的函数代码，只有在程序执行时, 那些需要的函数代码才被拷贝到内存中。这样就使可执行文件比较小, 节省磁盘空间，更进一步，<a href="http://lib.csdn.net/base/operatingsystem" title="操作系统知识库" target="_blank" rel="noopener">操作系统</a>使用虚拟内存，使得一份共享库驻留在内存中被多个程序使用，也同时节约了内存。不过由于运行时要去链接库会花费一定的时间，执行速度相对会慢一些，总的来说静态库是牺牲了空间效率，换取了时间效率，共享库是牺牲了时间效率换取了空间效率，没有好与坏的区别，只看具体需要了。<br><br>另外，.一个程序编好后，有时需要做一些修改和优化，如果我们要修改的刚好是库函数的话，在接口不变的前提下，使用共享库的程序只需要将共享库重新编译就可以了，而使用静态库的程序则需要将静态库重新编译好后，将程序再重新编译一便。<br><br>&nbsp;<br><br><strong>总结:</strong><br><br>&nbsp;<br><br><strong>一、库的类型</strong><br><br>## <a name="t1"></a>(一) 在windows中<br><br>.dll 动态库<br><br>.lib 静态库<br><br>库即为源代码的二进制文件<br><br>## <a name="t2"></a>(二) 在linux中<br><br>.so 动态库<br><br>.a      静态库<br><br>&nbsp;<br><br>## <a name="t3"></a>(三) 静态库和动态库的优缺点<br><br>我们通常把一些公用函数制作成函数库，供其它程序使用。<br><br>函数库分为静态库和动态库两种。<br><br>静态库在程序编译时会被连接到目标代码中，程序运行时将不再需要该静态库。<br><br>动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入，因此在程序运行时还需要动态库存在<br><br>&nbsp;<br><br>### <a name="t4"></a>1.什么是库<br><br>在windows平台和linux平台下都大量存在着库。<br><br>本质上来说库是一种可执行代码的二进制形式，可以被操作系统载入内存执行。<br><br>由于windows和linux的本质不同，因此二者库的二进制是不兼容的。<br><br>本文仅限于介绍linux下的库<br><br>&nbsp;<br><br>### <a name="t5"></a>2.库的种类<br><br>linux下的库有两种：静态库和共享库（动态库）。<br><br>二者的不同点在于代码被载入的时刻不同。<br><br>静态库的代码在编译过程中已经被载入可执行程序，因此体积较大。<br><br>共享库的代码是在可执行程序运行时才载入内存的，在编译过程中仅简单的引用，因此代码体积较小。<br><br>&nbsp;<br><br>### <a name="t6"></a>3.库存在的意义<br><br>库是别人写好的现有的，成熟的，可以复用的代码，你可以使用但要记得遵守许可协议。<br><br>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。共享库的好处是，不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例。<br><br>&nbsp;<br><br>### <a name="t7"></a>4.库文件是如何产生的在linux下<br><br>静态库的后缀是.a，它的产生分两步<br><br>Step 1.由源文件编译生成一堆.o，每个.o里都包含这个编译单元的符号表<br><br>Step 2.ar命令将很多.o转换成.a，成文静态库<br><br>动态库的后缀是.so，它由gcc加特定参数编译产生。<br><br>例如:<br><br>$ gcc -fPIC -c <em>.c $ gcc -shared -Wl,-soname, libfoo.so.1 -olibfoo.so.1.0 </em>.<br><br>&nbsp;<br><br>### <a name="t8"></a>5.库文件是如何命名的，有没有什么规范<br><br>在linux下，库文件一般放在/usr/lib和/lib下，<br><br>静态库的名字一般为libxxxx.a，其中xxxx是该lib的名称<br><br>动态库的名字一般为libxxxx.so.major.minor，xxxx是该lib的名称，major是主版本号， minor是副版本号<br><br>&nbsp;<br><br>### <a name="t9"></a>6.如何知道一个可执行程序依赖哪些库<br><br>ldd命令可以查看一个可执行程序依赖的共享库，<br><br>例如# ldd /bin/lnlibc.so.6<br><pre>=&gt; /lib/libc.so.6 (0×40021000)/lib/ld-linux.so.2<br><br>=&gt; /lib/ld- linux.so.2 (0×40000000)</pre><br>可以看到ln命令依赖于libc库和ld-linux库<br><br>&nbsp;<br><br>### <a name="t10"></a>7.可执行程序在执行的时候如何定位共享库文件<br><br>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径<br><br>此时就需要系统动态载入器(dynamiclinker/loader)<br><br>对于elf格式的可执行程序，是由ld-linux.so<em>来完成的<br><br>它先后搜索elf文件的 DT_RPATH段—环境变量LD_LIBRARY_PATH—/etc/ld.so.cache文件列表—/lib/,/usr/lib目录<br><br>找到库文件后将其载入内存<br><br>&nbsp;<br><br>### <a name="t11"></a>8.在新安装一个库之后如何让系统能够找到他<br><br>如果安装在/lib或者/usr/lib下，那么ld默认能够找到，无需其他操作。<br><br>如果安装在其他目录，需要将其添加到/etc/ld.so.cache文件中，步骤如下<br><br>1.编辑/etc/ld.so.conf文件，加入库文件所在目录的路径<br><br>2.运行ldconfig，该命令会重建/etc/ld.so.cache文件<br><br>&nbsp;<br><br>############################################################<br><br>&nbsp;<br><br>linux中编译静态库(.a)和动态库(.so)的基本方法<br><br>&nbsp;<br><br>## <a name="t12"></a>(四) 静态库<br><br>&nbsp;<br><br>在linux环境中, 使用ar命令创建静态库文件.如下是命令的选项:<br><br>d —–从指定的静态库文件中删除文件<br><br>m —–把文件移动到指定的静态库文件中<br><br>p —–把静态库文件中指定的文件输出到标准输出<br><br>q —–快速地把文件追加到静态库文件中<br><br>r —–把文件插入到静态库文件中<br><br>t —–显示静态库文件中文件的列表<br><br>x —–从静态库文件中提取文件<br><br>还有多个修饰符修改以上基本选项,详细请man ar 以下列出三个:<br><br>a —–把新的目标文件(</em>.o)添加到静态库文件中现有文件之后<br><br>b—–<strong><strong><strong><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></strong></strong></strong>之前<br><br>v —–使用详细模式<br><br>ar 命令的命令行格式如下:<br><br>ar[-]{dmpqrtx}[abcfilNoPsSuvV] [membername] [count] archive files…<br><br>参数archive定义库的名称, files是库文件中包含的目标文件的清单, 用空格分隔每个文件.<br><br>&nbsp;<br><br>比如创建一个静态库文件的命令如下:<br><br>ar r libapue.a error.oerrorlog.o lockreg.o<br><br>这样就了libapue.a静态库文件, 可以用 t 选项显示包含在库中的文件<br><br>创建库文件之后,可以创建这个静态库文件的索引来帮助提高和库连接的其他程序的编译速度：<br><br>使用ranlib程序创建库的索引,索引存放在库文件内部.<br><br>ranlib libapue.a<br><br>&nbsp;<br><br>用nm程序显示存档文件的索引,它可以显示目标文件的符号<br><br>nm libapue.a | more<br><br>如果是显示目标文件的符号:<br><br>nm error.o | more<br><br>如何使用呢?如下所示:<br><br>gcc -o test test.c libapue.a<br><br>这样就可以在test.c中调用在libapue.a中的函数了.<br><br>&nbsp;<br><br>&nbsp;<br><br>## <a name="t13"></a>(五) 动态库<br><br>&nbsp;<br><br>### <a name="t14"></a>1.创建共享库<br><br><pre>gcc -shared -o libapue.soerror.o errorlog.o</pre><br>这样就创建了共享库!<br><br>### <a name="t15"></a>2.编译共享库<br><br>假设共享库位于当前目录(即跟程序文件相同的目录中)<br><pre>gcc -o test -L. -lapue test.c</pre><br>这样就编译出了不包含函数代码可执行文件了,但是但你运行时会发现linux动态加载器找不到libapue.so文件.<br><br>可以用ldd 命令查看可执行文件依赖什么共享库:<br><br>ldd test<br><br>如何才能让动态加载器发现库文件呢?有两种方法可以解决:<br><br>1.环境变量<br><br>exportLD_LIBRARY_PATH=”$LD_LIBRARY_PATH:.”<br><br>2.修改/etc/ld.so.conf文件.<br><br>&nbsp;<br><br>一般应用程序的库文件不与系统库文件放在同一个目录下,一般把应用程序的共享库文件放在/usr/local/lib下,新建一个属于自己的目录apue,然后把刚才libapue.so复制过去就行了<br><br>同时在/etc/ld.so.conf中新增一行:<br><br>/usr/local/lib/apue<br><br>&nbsp;<br><br>以后在编译程序时加上编译选项:<br><br>-L /usr/local/lib/apue -lapue<br><br>&nbsp;<br><br>/*<br><br>参数的配置通过mangcc可以看到<br><br>-llibrary<br><br>连接名为 library 的 库文件.<br><br>连接器 在 标准搜索目录 中 寻找 这个 库文件, 库文件 的 真正 名 字<br><br></div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjcao48t1004o910rq54b1gns" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjcbi8q6m002k700r9bar9ixv" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -712,7 +718,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -751,6 +757,10 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       <ul>
         
           <li>
+            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
@@ -764,10 +774,6 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
         
           <li>
             <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/06/tensorflow笔记（2）/">tensorflow笔记 （2）</a>
           </li>
         
       </ul>
