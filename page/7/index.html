@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,57 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Should IBOutlets be strong or weak under ARC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/Should IBOutlets be strong or weak under ARC/" class="article-date">
+  <time datetime="2017-02-10T14:50:48.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/Should IBOutlets be strong or weak under ARC/">Should IBOutlets be strong or weak under ARC?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>被采用的答案</p>
+<p>答案仅是摘自官方文档的一个片段：</p>
+<blockquote>
+<p>From a practical perspective, in iOS and OS X outlets should be defined as declared properties. Outlets should generally be weak, except for those from File’s Owner to top-level objects in a nib file (or, in iOS, a storyboard scene) which should be strong. Outlets that you create will therefore typically be weak by default, because:</p>
+<p>Outlets that you create to, for example, subviews of a view controller’s view or a window controller’s window, are arbitrary references between objects that do not imply ownership.</p>
+<p>The strong outlets are frequently specified by framework classes (for example, UIViewController’s view outlet, or NSWindowController’s window outlet).</p>
+<p>@property (weak) IBOutlet MyView viewContainerSubview;</p>
+<p>_@property (strong) IBOutlet MyOtherClass _topLevelObject;</p>
+</blockquote>
+<p>大意是说，在<span class="s2"> ARC </span>中,一般<span class="s2">IBOutlet</span>属性都推荐使用<span class="s2"> weak</span>,应该使用<span class="s2"> strong </span>的<span class="s2"> IBOutlet </span>是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象。<span class="s2"><br></span>什么是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象呢？说白话一点，就是自定义的<span class="s2">view</span>，不是直接作为<span class="s2">main view</span>里面一个<span class="s2">sub view</span>直接显示出来，而是需要通过实例化创建出来的。你自己实例化，当然需要<span class="s2">strong</span>了，不然谁还替你保留对象所有权呢？</p>
+<p><span class="s1">举例来说，</span>UIViewController<span class="s1">的</span>view<span class="s1">属性是</span>strong<span class="s1">，因为</span>controller<span class="s1">要直接拥有</span>view<span class="s1">。而添加到</span>view<span class="s1">上的</span>subviews<span class="s1">，作为</span>IBOutlet<span class="s1">只需要设置为</span>weak<span class="s1">就可以了，因为他们不是</span>controller<span class="s1">直接拥有的。直接拥有</span>subviews<span class="s1">的是</span>controller<span class="s1">的</span>view<span class="s1">，</span>ARC<span class="s1">会帮助管理内存。</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjcbu2nws002osn0rgzywnjck" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-动态库与静态库优缺点比较" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjcbi8q88004l700r6iuspk2f" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjcbu2nyl004rsn0rqyuva6xn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcbi8q8t0057700r0w1yj8rn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcbu2nyy005bsn0ryc5w6nhy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcbi8q4s000r700ry26vvh0z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcbu2nvn000vsn0rudg4toil" class="article-share-link">Share</a>
       
       
     </footer>
@@ -338,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcbi8q84004f700r1vm3mujp" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcbu2nyi004nsn0rtu914il3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcbi8q4x0010700r1j94yivh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcbu2nvr0012sn0ri9d1s4sx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +530,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcbi8q5l001o700r8uofod6r" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcbu2nw7001ssn0rnn0d3wai" class="article-share-link">Share</a>
       
       
     </footer>
@@ -523,7 +574,7 @@ sudo periodic monthly
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcbi8q90005h700rx5rvh5zw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcbu2nz5005nsn0rrv125adh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -639,7 +690,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcbi8q6k002i700r2yabd4cw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcbu2nwq002msn0rytej3z73" class="article-share-link">Share</a>
       
       
     </footer>
@@ -680,47 +731,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcbi8q6s002u700r57zh747e" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-强引用与弱引用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/25/强引用与弱引用/" class="article-date">
-  <time datetime="2016-09-25T08:19:22.000Z" itemprop="datePublished">2016-09-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/25/强引用与弱引用/">强引用与弱引用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <div><span style="color: #fd1748;">默认情况下，一个指针都会使用 <strong>strong 属性，表明这是一个强引用。这意味着，只要引用存在，对象就不能被销毁。这是一种所期望的行为：当所有（强）引用都去除时，对象才能被收集和释放。</strong></span></div><br><div><span style="color: #fd1748;"> </span></div><br><div><span style="color: #fd1748;">不过， 有时我们却希望禁用这种行为：一些集合类不应该增加其元素的引用，因为这会引起对象无法释放。在这种情况下，我们需要使用弱引用（不用担心，内置的集合类 就是这么干的），使用 weak 关键字。NSHashTable 就是一个例子。当被引用的对象消失时，弱引用会自动设置为 nil。Cocoa 的 Notification Center 就是这么一个例子，虽然这已经超出纯 Objective-C 的语言范畴 <wbr></span></div><br><div><span style="color: #fd1748;"> </span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">自己更深理解：</span></div><br><div><span style="color: #2d3efe;">1.(weak与strong)不同的是：当一个对象不再有strong类型的指针指向它的时候，它就会被释放，即使改对象还有_weak类型的指针指向它；</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> <wbr> 2.一旦最后一个指向该对象的strong类型的指针离开，这个对象将被释放，如果这个时候还有weak指针指向该对象，则会清除掉所有剩余的weak指针</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">类比为自己的思想：</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr></span></div><br><div><span style="color: #2d3efe;"> <wbr> 一个对象类比为一条狗，  <wbr>释放对象 类比为 狗要跑掉</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;">逻辑：</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr>strong类型的指针就像是栓住的狗，只要你用 绳子拴住狗，那么狗就不会跑掉.</span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>  <wbr>类比 一个对象 new过以后，不会自动的释放</span></div><br><div><span style="color: #2d3efe;"> </span></div><br><div><span style="color: #2d3efe;"> <wbr>  <wbr>如果有5个人都牵着这一条狗(5条绳子栓一只狗) 类比为 5个strong类型指针指向一个对象.</span></div><br><div><span style="color: #2d3efe;">除非5个绳子都脱落，否则狗是不会跑掉的，类比，5个strong指针都=nil，则该对象释放</span></div><br><div></div><br><div></div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcbi8q8q0055700r7u3r8wi8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcbu2nx10031sn0rten9o2tv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -734,7 +745,7 @@ net.ipv4.tcp_congestion_control = hybla
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -743,7 +754,7 @@ net.ipv4.tcp_congestion_control = hybla
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -758,7 +769,7 @@ net.ipv4.tcp_congestion_control = hybla
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -768,9 +779,13 @@ net.ipv4.tcp_congestion_control = hybla
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
+          </li>
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
@@ -786,10 +801,6 @@ net.ipv4.tcp_congestion_control = hybla
         
           <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
           </li>
         
       </ul>

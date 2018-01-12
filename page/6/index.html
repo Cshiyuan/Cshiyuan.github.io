@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -64,6 +64,60 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ipa的组成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/ipa的组成/" class="article-date">
+  <time datetime="2017-03-13T08:21:19.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/13/ipa的组成/">ipa的组成</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：</p>
+<p><img src="http://pchou.qiniudn.com/ipa%E7%BB%84%E6%88%90.png" alt=""></p>
+<p>事实上，ipa文件只是一个zip包，可以使用如下命令解压：</p>
+<div class="highlighter-rouge">
+
+<pre><code>/usr/bin/unzip -q xxx.ipa -d &amp;lt;destination&amp;gt;
+</code></pre><p></p></div><br>解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：<p></p>
+<ol>
+<li>资源文件，例如图片、html、等等。</li>
+<li>_CodeSignature/CodeResources。这是一个plist文件，可用文本查看，其中的内容就是是程序包中（不包括Frameworks）所有文件的签名。注意这里是<code>所有文件</code>。意味着你的程序一旦签名，就不能更改其中任何的东西，包括资源文件和可执行文件本身。iOS系统会检查这些签名。</li>
+<li>可执行文件。此文件跟资源文件一样需要签名。</li>
+<li>一个mobileprovision文件.打包的时候使用的，从MC上生成的。</li>
+<li>Frameworks。程序引用的非系统自带的Frameworks，每个Frameworks其实就是一个app，其中的结构应该和app差不多，也包含签名信息CodeResources文件</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjcbu2nx80039sn0r2gqu1a95" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-非对称加密算法和摘要算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -103,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcbi8qab006i700rxv98x3yc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcbu2nzl006hsn0rnz6iu42r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -197,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcbi8q6o002m700r6x6sj8x0" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcbu2nww002usn0r1f02orvy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcbi8q6b002b700rm6zp3afh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcbu2nwn002hsn0r8lvhjpjv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,7 +405,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcbi8q8i004z700rxf04oq7r" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcbu2nys0055sn0ruzo25umw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -403,7 +457,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcbi8q520014700rfr3gi1dh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcbu2nvt0017sn0rywnomswl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -509,7 +563,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcbi8q8e004r700rwkhsm8a1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcbu2nyn004vsn0rn1uyr8gl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -557,7 +611,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcbi8q9c005x700rcosupmsl" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcbu2nze0065sn0rvug6az32" class="article-share-link">Share</a>
       
       
     </footer>
@@ -602,7 +656,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcbi8q550018700rzh7wqjp5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcbu2nw0001gsn0ru4rsgj9j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -653,58 +707,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcbi8q58001d700r5hnw9p3y" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Should IBOutlets be strong or weak under ARC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/Should IBOutlets be strong or weak under ARC/" class="article-date">
-  <time datetime="2017-02-10T14:50:48.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/Should IBOutlets be strong or weak under ARC/">Should IBOutlets be strong or weak under ARC?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>被采用的答案</p>
-<p>答案仅是摘自官方文档的一个片段：</p>
-<blockquote>
-<p>From a practical perspective, in iOS and OS X outlets should be defined as declared properties. Outlets should generally be weak, except for those from File’s Owner to top-level objects in a nib file (or, in iOS, a storyboard scene) which should be strong. Outlets that you create will therefore typically be weak by default, because:</p>
-<p>Outlets that you create to, for example, subviews of a view controller’s view or a window controller’s window, are arbitrary references between objects that do not imply ownership.</p>
-<p>The strong outlets are frequently specified by framework classes (for example, UIViewController’s view outlet, or NSWindowController’s window outlet).</p>
-<p>@property (weak) IBOutlet MyView viewContainerSubview;</p>
-<p>_@property (strong) IBOutlet MyOtherClass _topLevelObject;</p>
-</blockquote>
-<p>大意是说，在<span class="s2"> ARC </span>中,一般<span class="s2">IBOutlet</span>属性都推荐使用<span class="s2"> weak</span>,应该使用<span class="s2"> strong </span>的<span class="s2"> IBOutlet </span>是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象。<span class="s2"><br></span>什么是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象呢？说白话一点，就是自定义的<span class="s2">view</span>，不是直接作为<span class="s2">main view</span>里面一个<span class="s2">sub view</span>直接显示出来，而是需要通过实例化创建出来的。你自己实例化，当然需要<span class="s2">strong</span>了，不然谁还替你保留对象所有权呢？</p>
-<p><span class="s1">举例来说，</span>UIViewController<span class="s1">的</span>view<span class="s1">属性是</span>strong<span class="s1">，因为</span>controller<span class="s1">要直接拥有</span>view<span class="s1">。而添加到</span>view<span class="s1">上的</span>subviews<span class="s1">，作为</span>IBOutlet<span class="s1">只需要设置为</span>weak<span class="s1">就可以了，因为他们不是</span>controller<span class="s1">直接拥有的。直接拥有</span>subviews<span class="s1">的是</span>controller<span class="s1">的</span>view<span class="s1">，</span>ARC<span class="s1">会帮助管理内存。</span></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjcbi8q6m002k700r9bar9ixv" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcbu2nw3001lsn0r01y8wcyt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -718,7 +721,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -727,7 +730,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -742,7 +745,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -752,9 +755,13 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
+          </li>
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
@@ -770,10 +777,6 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
         
           <li>
             <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/07/Anaconda使用笔记/">Anaconda使用笔记</a>
           </li>
         
       </ul>
