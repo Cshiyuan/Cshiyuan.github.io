@@ -7,16 +7,16 @@
   
   <title>tensorflow笔记（6） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.">
+  <meta name="description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联. 处理序列数据的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow笔记（6）">
 <meta property="og:url" content="https://cshiyuan.github.io/2018/01/12/tensorflow笔记（6）/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.">
-<meta property="og:updated_time" content="2018-01-12T06:06:49.881Z">
+<meta property="og:description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联. 处理序列数据的">
+<meta property="og:updated_time" content="2018-01-13T13:45:30.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow笔记（6）">
-<meta name="twitter:description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.">
+<meta name="twitter:description" content="序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联. 处理序列数据的">
   
     <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
@@ -58,7 +58,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
@@ -90,11 +90,135 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="序列数据"><a href="#序列数据" class="headerlink" title="序列数据"></a>序列数据</h3><p>我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.</p>
+<h3 id="处理序列数据的神经网络"><a href="#处理序列数据的神经网络" class="headerlink" title="处理序列数据的神经网络"></a>处理序列数据的神经网络</h3><p>那我们如何让数据间的关联也被 NN 加以分析呢? 想想我们人类是怎么分析各种事物的关联吧, 最基本的方式,就是记住之前发生的事情. 那我们让神经网络也具备这种记住之前发生的事的能力. 再分析 Data0 的时候, 我们把分析结果存入记忆. 然后当分析 data1的时候, NN会产生新的记忆, 但是新记忆和老记忆是没有联系的. 我们就简单的把老记忆调用过来, 一起分析. 如果继续分析更多的有序数据 , RNN就会把之前的记忆都累积起来, 一起分析.</p>
+<p>我们再重复一遍刚才的流程, 不过这次是以加入一些数学方面的东西. 每次 RNN 运算完之后都会产生一个对于当前状态的描述 , state. 我们用简写 S( t) 代替, 然后这个 RNN开始分析 x(t+1) , 他会根据 x(t+1)产生s(t+1), 不过此时 y(t+1) 是由 s(t) 和 s(t+1) 共同创造的. 所以我们通常看到的 RNN 也可以表达成这种样子.</p>
+<h3 id="RNN的弊端"><a href="#RNN的弊端" class="headerlink" title="RNN的弊端"></a>RNN的弊端</h3><p>之前我们说过, RNN 是在有顺序的数据上进行学习的. 为了记住这些数据, RNN 会像人一样产生对先前发生事件的记忆. 不过一般形式的 RNN 就像一个老爷爷, 有时候比较健忘. 为什么会这样呢?</p>
+<p>想像现在有这样一个 RNN, 他的输入值是一句话: ‘我今天要做红烧排骨, 首先要准备排骨, 然后…., 最后美味的一道菜就出锅了’, shua ~ 说着说着就流口水了. 现在请 RNN 来分析, 我今天做的到底是什么菜呢. RNN可能会给出“辣子鸡”这个答案. 由于判断失误, RNN就要开始学习 这个长序列 X 和 ‘红烧排骨’ 的关系 , 而RNN需要的关键信息 ”红烧排骨”却出现在句子开头,</p>
+<p>再来看看 RNN是怎样学习的吧. 红烧排骨这个信息原的记忆要进过长途跋涉才能抵达最后一个时间点. 然后我们得到误差, 而且在 反向传递 得到的误差的时候, 他在每一步都会 乘以一个自己的参数 W. 如果这个 W 是一个小于1 的数, 比如0.9. 这个0.9 不断乘以误差, 误差传到初始时间点也会是一个接近于零的数, 所以对于初始时刻, 误差相当于就消失了. 我们把这个问题叫做梯度消失或者梯度弥散 Gradient vanishing. 反之如果 W 是一个大于1 的数, 比如1.1 不断累乘, 则到最后变成了无穷大的数, RNN被这无穷大的数撑死了, 这种情况我们叫做剃度爆炸, Gradient exploding. 这就是普通 RNN 没有办法回忆起久远记忆的原因.</p>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM 就是为了解决这个问题而诞生的. LSTM 和普通 RNN 相比, 多出了三个控制器. (输入控制, 输出控制, 忘记控制). 现在, LSTM RNN 内部的情况是这样.</p>
+<p>他多了一个 控制全局的记忆, 我们用粗线代替. 为了方便理解, 我们把粗线想象成电影或游戏当中的 主线剧情. 而原本的 RNN 体系就是 分线剧情. 三个控制器都是在原始的 RNN 体系上, 我们先看 输入方面 , 如果此时的分线剧情对于剧终结果十分重要, 输入控制就会将这个分线剧情按重要程度 写入主线剧情 进行分析. 再看 忘记方面, 如果此时的分线剧情更改了我们对之前剧情的想法, 那么忘记控制就会将之前的某些主线剧情忘记, 按比例替换成现在的新剧情. 所以 主线剧情的更新就取决于输入 和忘记 控制. 最后的输出方面, 输出控制会基于目前的主线剧情和分线剧情判断要输出的到底是什么.基于这些控制机制, LSTM 就像延缓记忆衰退的良药, 可以带来更好的结果.</p>
+<h3 id="实现例子"><a href="#实现例子" class="headerlink" title="实现例子"></a>实现例子</h3><pre><code class="Python"># 这次我们会使用 RNN 来进行分类的训练 (Classification).
+# 会继续使用到手写数字 MNIST 数据集.
+# 让 RNN 从每张图片的第一行像素读到最后一行, 然后再进行分类判断.
+# 接下来我们导入 MNIST 数据并确定 RNN 的各种参数(hyper-parameters):
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+tf.set_random_seed(1)  #set random seed
+
+# 导入数据
+mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True)
+
+# hyperparameters
+lr = 0.001  # learning rate
+training_iters = 100000  # train step 上限
+batch_size = 128
+n_inputs = 28  # MNIST data input(img shape: 28*28)
+n_steps = 28  # time step
+n_hidden_units = 128  # neurons in hidden layer
+n_classes = 10  # MNIST classes (0-9 digits)
+
+# 接着定义x，y的placeholder和weights，biases的初始状况
+# x y placeholder
+x = tf.placeholder(tf.float32, [None, n_steps, n_inputs])
+y = tf.placeholder(tf.float32, [None, n_classes])
+
+# 对 weights biases 初始值对定义
+
+weights = {
+    # shape (28, 128)
+    &#39;in&#39;: tf.Variable(tf.random_normal([n_inputs, n_hidden_units])),
+    # shape(128 , 10)
+    &#39;out&#39;: tf.Variable(tf.random_normal([n_hidden_units, n_classes]))
+}
+
+biases = {
+    # shape (128, )
+    &#39;in&#39;: tf.Variable(tf.constant(0.1, shape=[
+        n_hidden_units,
+    ])),
+    # shape (10, )
+    &#39;out&#39;: tf.Variable(tf.constant(0.1, shape=[
+        n_classes,
+    ]))
+}
+
+
+# 定义 RNN 的主体结构
+# 接着开始定义RNN主体结构， 这个RNN总共有3个组成部分（input_layer, cell, output_layer)
+# 首先我们线定义input——layer
+def RNN(X, weights, biases):
+    # 原始对 X 是 3 维数据，我们需要把它变成 2 维数据才能使用weights对矩阵乘法
+    # X ===&gt; （128 batches * 28 steps, 28 inputs)
+    X = tf.reshape(X, [-1, n_inputs])
+
+    # X_in = W * X + b
+    X_in = tf.matmul(X, weights[&#39;in&#39;]) + biases[&#39;in&#39;]
+    # X_in ==&gt; (128 batches, 28 steps, 128 hidden) 换回3维
+    X_in = tf.reshape(X_in, [-1, n_steps, n_hidden_units])
+
+    # 接着是 cell 中的计算, 有两种途径:
+    # 使用 tf.nn.rnn(cell, inputs) (不推荐原因). 但是如果使用这种方法, 可以参考原因;
+    # 使用 tf.nn.dynamic_rnn(cell, inputs) (推荐). 这次的练习将使用这种方式.
+    # 因 Tensorflow 版本升级原因, state_is_tuple=True 将在之后的版本中变为默认.
+    # 对于 lstm 来说, state可被分为(c_state, h_state).
+
+    # 使用 basic LSTM Cell。
+    lstm_cell = tf.contrib.rnn.BasicLSTMCell(
+        n_hidden_units, forget_bias=1.0, state_is_tuple=True)
+    init_state = lstm_cell.zero_state(
+        batch_size, dtype=tf.float32)  # 初始化全零 state
+
+    # 如果使用tf.nn.dynamic_rnn(cell, inputs), 我们要确定 inputs 的格式.
+    # tf.nn.dynamic_rnn 中的 time_major 参数会针对不同 inputs 格式有不同的值.
+    # 如果 inputs 为 (batches, steps, inputs) ==&gt; time_major=False;
+    # 如果 inputs 为 (steps, batches, inputs) ==&gt; time_major=True;
+
+    outputs, final_state = tf.nn.dynamic_rnn(
+        lstm_cell, X_in, initial_state=init_state, time_major=False)
+
+    # 方式一: 直接调用final_state 中的 h_state (final_state[1]) 来进行运算:
+    result = tf.matmul(final_state[1], weights[&#39;out&#39;]) + biases[&#39;out&#39;]
+
+    # 方式二: 调用最后一个outputs（在这个例子中，和上面的final_state[1]是一样的）
+    # outputs 变成列表 [(batch, outputs)..] * steps
+    outputs = tf.unstack(tf.transpose(outputs, [1, 0, 2]))
+    results = tf.matmul(outputs[-1],
+                        weights[&#39;out&#39;]) + biases[&#39;out&#39;]  #选取最后一个output
+
+    #最后输出result
+    return results
+
+
+# 定义好了RNN主体结构后，我们就可以来计算cost和train_op
+pred = RNN(x, weights, biases)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
+train_op = tf.train.AdadeltaOptimizer(lr).minimize(cost)
+
+#训练时，不断输出accuract，观看结果：
+
+correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
+init = tf.global_variables_initializer()
+
+with tf.Session() as sess:
+    sess.run(init)
+    step = 0
+    while step * batch_size &lt; training_iters:
+
+        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+        batch_xs = batch_xs.reshape([batch_size, n_steps, n_inputs])
+        sess.run([train_op], feed_dict={x: batch_xs, y: batch_ys})
+
+        if step % 20 == 0:
+            print(sess.run(accuracy, feed_dict={x: batch_xs, y: batch_ys}))
+            step += 1
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/12/tensorflow笔记（6）/" data-id="cjcbu2nxt003zsn0reespgyp2" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/12/tensorflow笔记（6）/" data-id="cjcden9gl003xug0rrv2y7uch" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -105,7 +229,7 @@
   
   
     <a href="/2018/01/11/tensorflow笔记（5）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">tensorflow笔记（5）</div>
     </a>
   
@@ -120,7 +244,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活杂谈/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科普级别/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/记录问题和心得/">记录问题和心得</a></li></ul>
     </div>
@@ -135,7 +259,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -145,7 +269,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
