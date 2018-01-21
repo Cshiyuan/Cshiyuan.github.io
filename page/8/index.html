@@ -65,6 +65,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数组和链表的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/15/数组和链表的区别/" class="article-date">
+  <time datetime="2016-10-15T15:03:58.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/数组和链表的区别/">数组和链表的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><div>数组是将元素在内存中连续存放，由于每个元素占用内存相同，可以通过下标迅速访问数组中任何元素。但是如果要在数组中增加一个元素，需要移动大量元素，在内存中空出一个元素的空间，然后将要增加的元素放在其中。同样的道理，如果想删除一个元素，同样需要移动大量元素去填掉被移动的元素。如果应用需要快速访问数据，很少或不插入和删除元素，就应该用数组。</div></li>
+<li><div>链表恰好相反，链表中的元素在内存中不是顺序存储的，而是通过存在元素中的指针联系到一起。比如：上一个元素有个指针指到下一个元素，以此类推，直到最后一个元素。如果要访问链表中一个元素，需要从第一个元素开始，一直找到需要的元素位置。但是增加和删除一个元素对于链表数据结构就非常简单了，只要修改元素中的指针就可以了。如果应用需要经常插入和删除元素你就需要用链表数据结构了。</div><br><strong><em>C++语言中可以用数组处理一组数据类型相同的数据，但不允许动态定义数组的大小，即在使用数组之前必须确定数组的大小。而在实际应用中，用户使用数组之前有时无法准确确定数组的大小，只能将数组定义成足够大小，这样数组中有些空间可能不被使用，从而造成内存空间的浪费。*</em></strong>链表是一种常见的数据组织形式，它采用动态分配内存的形式实现。需要时可以用new分配内存空间，不需要时用delete将已分配的空间释放，不会造成内存空间的浪费。**<br>(1) 从逻辑结构角度来看<br>a, 数组必须事先定义固定的长度（元素个数），不能适应数据动态地增减的情况。当数据增加时，可能超出原先定义的元素个数；当数据减少时，造成内存浪费。<br>b,链表动态地进行存储分配，可以适应数据动态地增减的情况，且可以方便地插入、删除数据项。（数组中插入、删除数据项时，需要移动其它数据项）<br>(2)从内存存储角度来看<br>a,(静态)数组从栈中分配空间, 对于程序员方便快速,但自由度小。<br>b, 链表从堆中分配空间, 自由度大但申请管理比较麻烦.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/10/15/数组和链表的区别/" data-id="cjcov819u0057fc0rruev2buu" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" class="article-date">
@@ -171,7 +215,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcof1tmk002ldk0r9hmnn7sg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/04/ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化/" data-id="cjcov81630020fc0r0rnzdy6v" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -212,7 +256,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcof1tmu0030dk0rs0sn1ima" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/26/Xcode 8/" data-id="cjcov816u002mfc0rmax3hhnd" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -252,7 +296,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcof1tr2005cdk0rwgzpg5w5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/强引用与弱引用/" data-id="cjcov819l004xfc0ro2xqxez1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -329,7 +373,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjcof1trw006adk0revwwesyx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/25/设计模式/" data-id="cjcov81ag005xfc0r74tjsgdb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -375,7 +419,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/21/Mac卸载各种软件的目录地址/" data-id="cjcof1tla001idk0rw35ki8b5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/21/Mac卸载各种软件的目录地址/" data-id="cjcov81550011fc0ryqjnfj9d" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -417,7 +461,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/08/iOS设计模式/" data-id="cjcof1tnc0036dk0rg9xodfiu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/08/iOS设计模式/" data-id="cjcov816y002pfc0rrwek06w5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -470,7 +514,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjcof1tn30034dk0rfs29jrxv" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/git rebase和merge 区别和应用场景/" data-id="cjcov816n002ifc0rss49urxa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -515,7 +559,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/眼睛是个筛子/" data-id="cjcof1trl005ydk0r2kthvd1s" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/眼睛是个筛子/" data-id="cjcov81a5005jfc0rsx8ta87u" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -563,53 +607,7 @@ net.ipv4.tcp_congestion_control = hybla
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/05/我最好的作品是我的生活－杜尚/" data-id="cjcof1tr5005gdk0rvgq88qug" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ORM" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/31/ORM/" class="article-date">
-  <time datetime="2016-08-31T05:25:03.000Z" itemprop="datePublished">2016-08-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/31/ORM/">ORM</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一、ORM简介<br>对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>这种方案存在以下不足：<br>1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。</p>
-<p>ORM提供了实现持久化层的另一种模式，它采用映射元数据来描述对象关系的映射，使得ORM中间件能在任何一个应用的业务逻辑层和数据库层之间充当桥梁。Java典型的ORM中间件有:Hibernate,ibatis,speedframework。<br>ORM的方法论基于三个核心原则：<br>· 简单：以最基本的形式建模数据。<br>· 传达性：数据库结构被任何人都能理解的语言文档化。<br>· 精确性：基于数据模型创建正确标准化了的结构。</p>
-<p>二、ORM的概念<br>让我们从O/R开始。字母O起源于”对象”(Object),而R则来自于”关系”(Relational)。几乎所有的程序里面，都存在对象和关系数据库。在业务逻辑层和用户界面层中，我们是面向对象的。当对象信息发生变化的时候，我们需要把对象的信息保存在关系数据库中。<br>当你开发一个应用程序的时候(不使用O/R Mapping),你可能会写不少数据访问层的代码，用来从数据库保存，删除，读取对象信息，等等。你在DAL中写了很多的方法来读取对象数据，改变状态对象等等任务。而这些代码写起来总是重复的。</p>
-<p>ORM解决的主要问题是对象关系的映射。域模型和关系模型分别是建立在概念模型的基础上的。域模型是面向对象的，而关系模型是面向关系的。一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录，类的每个属性对应表的每个字段。<br>ORM技术特点：<br>1.提高了开发效率。由于ORM可以自动对Entity对象与数据库中的Table进行字段与属性的映射，所以我们实际可能已经不需要一个专用的、庞大的数据访问层。<br>2.ORM提供了对数据库的映射，不用sql直接编码，能够像操作对象一样从数据库获取数据。</p>
-<p>三、ORM的优缺点<br>ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。</p>
-<p>在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/31/ORM/" data-id="cjcof1tlk001pdk0ro9eenw0v" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/05/我最好的作品是我的生活－杜尚/" data-id="cjcov819q0053fc0rnk8y9d2d" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -662,6 +660,10 @@ net.ipv4.tcp_congestion_control = hybla
       <ul>
         
           <li>
+            <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
           </li>
         
@@ -675,10 +677,6 @@ net.ipv4.tcp_congestion_control = hybla
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
       </ul>

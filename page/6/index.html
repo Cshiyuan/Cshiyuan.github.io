@@ -65,6 +65,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关于iOS的main函数入口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/关于iOS的main函数入口/" class="article-date">
+  <time datetime="2017-03-17T14:09:52.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/关于iOS的main函数入口/">关于iOS的main函数入口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
+<pre><code>#import UIKit/UIKit.h
+int main(int argc, char *argv[])  
+{  
+    @autoreleasepool {       
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  
+    }  
+}
+</code></pre><p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
+<p>上面实例代码中有一个很重要的函数<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIApplicationMain" target="_blank" rel="noopener">UIApplicationMain</a>，它主要是创建App的几个核心对象来处理以下过程：<br>从可用Storyboard文件加载用户界面；<br>调用AppDelegate自定义代码来做一些初始化设置；<br>将App放入Main Run Loop环境中来响应和处理与用户交互产生的事件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjcov818n0043fc0rbsn1olja" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-周记总结 2017-03-17记下" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/17/周记总结 2017-03-17记下/" class="article-date">
@@ -159,7 +209,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjcof1tqb004ydk0r6txvnqo1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjcov819c004nfc0rtwwggt93" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -207,7 +257,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjcof1tlw001vdk0rffgrelgg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjcov815d001bfc0r5obu5al8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -261,7 +311,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjcof1tnj0038dk0reqh1ow9z" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjcov8170002rfc0rld7d3moh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -309,7 +359,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcof1ts7006idk0rfxn1x66f" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcov81an0065fc0r66bo4l5z" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -403,7 +453,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcof1tmp002tdk0rk29whrq1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcov816a0027fc0rsrflbv56" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -453,7 +503,7 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcof1tme002edk0r90l9tse8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcov815s001sfc0rzdefy23e" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -557,7 +607,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcof1tqv0058dk0r8tsvplch" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcov819d004pfc0r25dyq9fy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -609,7 +659,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcof1tko0017dk0rt1lkvhz2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcov814w000rfc0rw9t3ub3m" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -715,55 +765,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcof1tqg0050dk0rfyj49mrg" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编译型与解释型、动态语言与静态语言" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/20/编译型与解释型、动态语言与静态语言/" class="article-date">
-  <time datetime="2017-02-20T13:46:15.000Z" itemprop="datePublished">2017-02-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/20/编译型与解释型、动态语言与静态语言/">编译型与解释型、动态语言与静态语言、</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="编译型与解释型"><a href="#编译型与解释型" class="headerlink" title="编译型与解释型"></a>编译型与解释型</h2><p>编译型与解释型，两者各有利弊。前者由于程序执行速度快，同等条件下对系统要求较低，因此像开发操作系统、大型应用程序、数据库系统等时都采用它，像C/C++、Pascal/Object   Pascal（Delphi）、VB等基本都可视为编译语言，而一些网页脚本、服务器脚本及辅助开发接口这样的对速度要求不高、对不同系统平台间的兼容性有一定要求的程序则通常使用解释性语言，如Java、JavaScript、VBScript、Perl、Python等等。</p>
-<h2 id="动态语言与静态语言"><a href="#动态语言与静态语言" class="headerlink" title="动态语言与静态语言"></a>动态语言与静态语言</h2><p>（1）动态类型语言：动态类型语言是指在运行期间才去做数据类型检查的语言，也就是说，在用动态类型的语言编程时，永远也不用给任何变量指定数据类型，该语言会在你第一次赋值给变量时，在内部将数据类型记录下来。Python和Ruby就是一种典型的动态类型语言，其他的各种脚本语言如VBScript也多少属于动态类型语言。</p>
-<p>（2）静态类型语言：静态类型语言与动态类型语言刚好相反，它的数据类型是在编译其间检查的，也就是说在写程序时要声明所有变量的数据类型，C/C++是静态类型语言的典型代表，其他的静态类型语言还有C#、JAVA等。</p>
-<p>对于动态语言与静态语言的区分，套用一句流行的话就是：Static typing when possible, dynamic typing when needed。</p>
-<p>&nbsp;</p>
-<h2 id="强类型定义语言和弱类型定义语言"><a href="#强类型定义语言和弱类型定义语言" class="headerlink" title="强类型定义语言和弱类型定义语言"></a>强类型定义语言和弱类型定义语言</h2><p>（1）强类型定义语言：强制数据类型定义的语言。也就是说，一旦一个变量被指定了某个数据类型，如果不经过强制转换，那么它就永远是这个数据类型了。举个例子：如果你定义了一个整型变量a,那么程序根本不可能将a当作字符串类型处理。强类型定义语言是类型安全的语言。</p>
-<p>（2）弱类型定义语言：数据类型可以被忽略的语言。它与强类型定义语言相反, 一个变量可以赋不同数据类型的值。</p>
-<p>强类型定义语言在速度上可能略逊色于弱类型定义语言，但是强类型定义语言带来的严谨性能够有效的避免许多错误。另外，“这门语言是不是动态语言”与“这门语言是否类型安全”之间是完全没有联系的！<br>例如：Python是动态语言，是强类型定义语言（类型安全的语言）; VBScript是动态语言，是弱类型定义语言（类型不安全的语言）; JAVA是静态语言，是强类型定义语言（类型安全的语言）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcof1trr0066dk0rvekxvyrs" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcov8198004hfc0ri0noz9c0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -816,6 +818,10 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       <ul>
         
           <li>
+            <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
           </li>
         
@@ -829,10 +835,6 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
       </ul>

@@ -65,6 +65,135 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-OC中retain,assign,copy的区别和用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/22/OC中retain,assign,copy的区别和用法/" class="article-date">
+  <time datetime="2016-07-22T13:48:27.000Z" itemprop="datePublished">2016-07-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/OC中retain,assign,copy的区别和用法/">OC中retain,assign,copy的区别和用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。</p>
+<p>可能不太好理解下面我写了一个演示程序。</p>
+<p>OC：</p>
+<pre><code>//
+
+//  ViewController.m
+
+//  weak与assgin的区别
+
+//
+
+//  Created by bihongbo on 15/3/19.
+
+//  Copyright (c) 2015年 毕洪博. All rights reserved.
+
+//
+
+#import “ViewController.h”
+
+@interface ViewController ()
+
+@property (nonatomic,weak) id      weakPoint;
+
+@property (nonatomic,assign) id    assignPoint;
+
+@property (nonatomic,strong) id    strongPoint;
+
+@end
+
+@implementation ViewController
+
+– (void)viewDidLoad {
+
+[super viewDidLoad];
+
+self.strongPoint = [NSDate date];
+
+NSLog(@”strong属性：%@”,self.strongPoint);
+
+self.weakPoint = self.strongPoint;
+
+self.assignPoint = self.strongPoint;
+
+self.strongPoint = nil;
+
+NSLog(@”weak属性：%@”,self.weakPoint);
+
+//    NSLog(@”assign属性：%@”,self.assignPoint);
+
+}
+
+@end
+</code></pre><p>当程序中的注释被打开时，运行程序有可能会崩溃（有时候不崩溃，你可能需要多运行几次），这是因为当assign指针所指向的内存被释放（释放并不等于抹除，只是引用计数为0），不会自动赋值nil，这样再引用self.assignPoint就会导致野指针操作，如果这个操作发生时内存还没有改变内容，依旧可以输出正确的结果，而如果发生时内存内容被改变了，就会crash。</p>
+<p><strong>结论：在ARC模式下编程时，指针变量一定要用weak修饰，只有基本数据类型和结构体需要用assgin，例如delegate，一定要用weak修饰。</strong></p>
+<h2 id="看一送一："><a href="#看一送一：" class="headerlink" title="看一送一："></a><strong>看一送一：</strong></h2><p><strong>《iOS中assign，copy，retain之间的区别以及weak和strong的区别》</strong></p>
+<p><strong>• copy: 用于希望保持一份传入值的拷贝，而不是值自身的情况，即把原来的对象完整的赋值到另外一地方，重新加载一内存区，一个地方变了不影响另一个地方的对象。
+</strong></p>
+<p>• assign:  简单的直接赋值，相当于说两个对象指向同个内存区，一个地方的变了，其他的也跟着改变。</p>
+<p>• retain:释放旧的对象,将旧对象的值赋予输入对象,再提高输入对象的索引计数 为1</p>
+<p>那上面的是什么意思呢?</p>
+<p>Copy 其实是建立了一个相同的对象,而 retain 不是:</p>
+<p>比如一个 NSString 对象,地址为 0×1111,内容为@”ABC”</p>
+<p>Copy 到另外一个 NSString 之 后,地址为 0×2222,内容相同,新的对象 retain 为 1, 旧 有对象没有变化</p>
+<p>retain 到另外一个 NSString 之 后,地址相同(建立一个指针,指针拷贝),内容当然相 同,这个对象的 retain 值+1</p>
+<p>assign 地址还是0x1111,内容也还是“ABC”。</p>
+<p>也就是说,</p>
+<p>1.strong :除NSString\block以外的OC对象</p>
+<p>@property(nonatomic,strong) NSArray  *&lt;#model#&gt;;</p>
+<p>2.weak：各种UI控件(但不是绝对，也有控件要使用strong属性的，但是xib中必须使用weak，因为控件被拖进xib的时候就被strong修饰了)</p>
+<p>@property (nonatomic,weak) UIButton *button;</p>
+<p>3.assign：CGFloat，NSInteger等基本数据类型、枚举、结构体（非OC对象）</p>
+<p>@property(nonatomic,assign) CGFloat &lt;#model#&gt;;</p>
+<p>4.copy：</p>
+<p>&lt;1. copy : 创建的是不可变副本(如NSString、NSArray、NSDictionary)</p>
+<p>&lt;2.  mutableCopy :创建的是可变副本(如NSMutableString、NSMutableArray、NSMutableDictionary)</p>
+<p>&lt;3. @property(nonatomic,copy)NSString *&lt;#model#&gt;;</p>
+<p>•@property内存管理策略的选择</p>
+<p>•1.非ARC</p>
+<p>• 1&gt; copy : 只用于NSString\block</p>
+<p>• 2&gt; retain : 除NSString\block以外的OC对象</p>
+<p>• 3&gt; assign : 基本数据类型、枚举、结构体（非OC对象），当2个对象相互引用，一端用retain，一端用assign</p>
+<p>•2.ARC</p>
+<p>• 1&gt; copy : 只用于NSString\block</p>
+<p>• 2&gt; strong : 除NSString\block以外的OC对象</p>
+<p>• 3&gt; weak : 当2个对象相互引用，一端用strong，一端用weak</p>
+<p>• 4&gt; assgin : 基本数据类型、枚举、结构体（非OC对象）</p>
+<p>&nbsp;</p>
+<p>为什么NSString用copy呢？</p>
+<p>mutable string被无意中修改, NSMutableString是NSString的子类, 因此NSString指针可以持有NSMutableString对象.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjcov8153000zfc0rfvpnqiaq" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web工作方式(转载）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/14/Web工作方式(转载）/" class="article-date">
@@ -172,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/14/Web工作方式(转载）/" data-id="cjcof1tmr002wdk0r4hhh9j3e" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/14/Web工作方式(转载）/" data-id="cjcov816m002gfc0ryr3r1288" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -218,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/25/我们曾经都是孩子/" data-id="cjcof1tr6005idk0rrhfuauyf" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/25/我们曾经都是孩子/" data-id="cjcov819p0051fc0rjvaakrd8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -262,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/23/这两年有意识的在思考，我要怎样去爱一个人。/" data-id="cjcof1ts0006edk0rvmakn38g" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/23/这两年有意识的在思考，我要怎样去爱一个人。/" data-id="cjcov81ad005vfc0rse1o77l6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -307,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/14/《上瘾五百年：烟、酒、咖啡和鸦片的历史－戴维·考特莱》/" data-id="cjcof1toz0048dk0rei621uqc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/14/《上瘾五百年：烟、酒、咖啡和鸦片的历史－戴维·考特莱》/" data-id="cjcov8185003tfc0rbu30min1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -385,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/13/线程和进程的区别是什么？/" data-id="cjcof1tro0062dk0rt6cqmqy2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/13/线程和进程的区别是什么？/" data-id="cjcov81a9005pfc0r1810cwub" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -436,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/06/06/海滨栈道－－给在小镇子长大的孩子们/" data-id="cjcof1trd005sdk0r7s6que46" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/06/06/海滨栈道－－给在小镇子长大的孩子们/" data-id="cjcov81a0005bfc0r0d3yv3d0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -484,7 +613,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/05/31/经济型人格/" data-id="cjcof1trp0064dk0rvyccnyht" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/05/31/经济型人格/" data-id="cjcov81a7005nfc0rspm6p74l" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -532,7 +661,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/05/31/它一定期待着我能懂得什么。/" data-id="cjcof1tqt0056dk0rq6wzjzxe" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/05/31/它一定期待着我能懂得什么。/" data-id="cjcov819a004lfc0r5nfvpeki" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -572,114 +701,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/05/26/张跃然：美国高校怎么教“马克思主义原理”？/" data-id="cjcof1tqy005adk0ra8r42ui0" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/26/【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》/" class="article-date">
-  <time datetime="2016-05-25T16:48:04.000Z" itemprop="datePublished">2016-05-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活杂谈/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/26/【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》/">【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[美] 布鲁斯·布鲁诺·德·梅斯奎塔 [美]阿拉斯泰尔·史密斯 著</p>
-<p>骆伟阳 译</p>
-<p>江苏文艺出版社</p>
-<p>■</p>
-<p>首先，政治就是获得和维持政治权力。它与“我们，人民”的普遍幸福无关。其次，确保政治生存的最好方式是只依靠少数人来上位和在位。这意味着，那些拥有一批同伙可以依靠的独裁者——常常寿终正寝——比民主人士更容易长年掌权。第三，当这个同伙小集团明白外面还有大把人排队等着取而代之大吃公家饭，最高领导层就具有了如何花钱、如何征税的巨大自由裁量权。所有这些税入和自由裁量权为很多领导人大开窃国之门，很少人为公共利益着想。它也意味着大大增加了在位期限。第四，依靠一个支持者小联盟，领导人可以放手大肆提高税率，正如贝尔市那样。</p>
-<p>■</p>
-<p>我们将学到的一个重要教训是，凡是在事关政治的地方，意识形态、国籍和文化远没有那么要紧。我们越快放弃思考或谈论诸如“美国应该……”、“美国人民要求……”或“中国政府应该……”这样的句子，我们就越能更好地理解政府、企业和所有其他组织形式。在对待政治时，我们必须使自己习惯于思考和谈论具体的、有名有姓的领导人的行为和利益，而不是思考和谈论那些含糊不清的理念如国家利益、共同福祉、普遍福利等。一旦我们开始思考是什么因素帮助领导人获取和维持权力，我们也将明白如何去矫正政治。政治，正如所有的生活，是关于个人的，每个人都致力于去做对自己有利的事，而不是对他人有利的事。</p>
-<p>■</p>
-<p>公平来说，这些历史上杰出人物的缺陷与如下事实有关：除了受制于他们的时代背景，他们也沉溺于“大问题”——人的最高本质应该如何，政府的“正确”形态是什么，或者在政治术语中“正义”到底意味什么。这种短视不仅影响了政治思想史上的巨人，也影响到了当代政治思想家，如尤根·哈贝马斯、米歇尔·福柯、约翰·罗尔斯——这些思想家有一天也许会被与历史上的巨人等量齐观。</p>
-<p>■</p>
-<p>国家不会有利益，人有。身处所有关于国家利益的争论之中，奥巴马总统在制定其阿富汗政策时为哪些东西焦躁？如果他不提出一个从阿富汗撤军的时间表，他将失去他的民主党选举根基的支持——而不是他的全国性选举根基的支持。相似地，肯尼迪总统在古巴导弹危机中烦恼的是，如果他不采取行动，他将被弹劾并且民主党人在1962年的中期选举中将遭到重挫。他们每个人的脑中也许都有国家利益，但他们的个人政治安危才是最紧要的考量。</p>
-<p>■</p>
-<p>统治者们的自私算计和行为是所有政治的推动力。</p>
-<p>■</p>
-<p>领导人的自私算计和行为构成了他的统治方式。那么对于一个领导人来说，什么才是“最佳”的统治方式？关于如何统治才是最佳，答案就是：采取一切必要手段先攫取权力，然后维持权力，并从始至终掌握尽可能多的国家（或企业）收入。</p>
-<p>领导人行为的理由是什么？是为了攫取权力，维持权力，最大限度地控制财权。</p>
-<p>■</p>
-<p>我们将政治家看做自私粗鄙之人，就是那种你不想与之共进晚餐的人，但没有他们你可能又根本吃不上晚餐。</p>
-<p>■</p>
-<p>我们必须停止认为领袖们能够独自领导。</p>
-<p>没有哪个领导人是单枪匹马的。如果我们要理解权力如何运行，我们必须停止认为独裁者可以为所欲为。我们必须停止相信阿道夫·希特勒或任何其他独裁者能够独自掌控他们各自的国家。</p>
-<p>■</p>
-<p>当债务超出了偿债能力，对领导人来说，真正的麻烦不在于必须削减公共开支，而在于他丧失了必要的资源去换取核心支持者的政治忠诚。</p>
-<p>■</p>
-<p>国家破产的前景让初掌大权的路易十四身处险境，因为保守派贵族、包括军队将领看到他们的财富和特权在逐渐干涸。这一情况促使这些政治上重要但薄情寡义的朋友开始另找他人来确保他们的财富和特权。</p>
-<p>■</p>
-<p>对领导人而言，政治情势可以被分解为三种人群：名义选择人集团、实际选择人集团和致胜联盟。</p>
-<p>■</p>
-<p>从根本上讲，名义选择人就是领导人的潜在支持者；实际选择人则指那些其对领导人的支持确实有重要影响的人；而致胜联盟只包括那些领导人不可或缺的关键支持者。这三种人可简单概括为：可相互替代者、有影响者以及不可或缺者。</p>
-<p>■</p>
-<p>事实上，基于美国大选的结构，只要选票得到有效配置，那么只需赢得全部选票的五分之一，就有可能同时掌握美国的行政部门和立法部门（亚伯拉罕·林肯就是有效配置选票方面的大师）。</p>
-<p>■</p>
-<p>“独裁制”这个术语在我们这里的真正意思是，政府建立在极少数不可或缺者的基础上，而他们是从数量非常庞大的可相互替代者以及通常相对较少的一群有影响者当中产生出来的。另一方面，当我们提到民主制，我们的真正意思是政府建立在数量庞大的不可或缺者和可相互替代者的基础上；同时，有影响者的数量几乎与可相互替代者一样多。当我们提到君主制或军事独裁制，我们的意思是可相互替代者、有影响者、不可或缺者的数量都很少。</p>
-<p>■</p>
-<p>我们的出发点是意识到：任何一个有能力的领导人都希望掌握尽可能多的权力，并尽可能长久地掌握权力。设法利用可相互替代者、有影响者和不可或缺者来达到自己的目的，这就是统治的行为、艺术和科学。</p>
-<p>■</p>
-<p>理解政治真正如何运行的第一步是询问领导人都把钱花在哪类政策上。他们把钱花在惠及每一个人的公共物品上了吗？还是花在了只惠及少数人的私人物品上？对任何精明的政治家来说，问题的答案取决于他需要保持多少人的忠诚——也就是致胜联盟里不可或缺者的人数。</p>
-<p>■</p>
-<p>依赖大型致胜联盟的、较民主的政府趋向于着重把钱花在能增进普遍福利的有效公共政策上。</p>
-<p>■</p>
-<p>与此形成对照的是，独裁者、君主、军政府领导人以及大部分企业首席执行官只依赖一小撮不可或缺者。正如马基雅维利所言，他们通过大慷公家之慨、以私人回报的方式收买致胜联盟的忠诚，这种统治方式更有成效，尽管这意味着要牺牲广大纳税人或千百万小股民的利益。</p>
-<p>■</p>
-<p>任何有雄心统治的人必须首先自问能从大众那里提取到多少钱，无论大众是指一个国家的公民还是一家企业的股东。</p>
-<p>■</p>
-<p>尽管我们可能很乐意为给我们带来实际好处的项目纳税，比如说消防、防止恶性犯罪、防御外部敌人，我们却不会很乐意看到自己缴纳的税金被用于支付巨额薪水给总统或首相。</p>
-<p>■</p>
-<p>当致胜联盟很小并且私人物品成为维持权力的有效方法时，大部分人民的福利就靠边站了，这与霍布斯的观点相反。在这种情形下，领导人喜欢征收重税，从可怜的可相互替代者以及被剥夺选举权的人那里尽可能地搜刮，通过这种方式来重新分配财富，把财富转到致胜联盟成员的手上，使他们发财致富，保持忠诚。</p>
-<p>■</p>
-<p>投资者要的是财富增值、股价上扬、股份增加、分红丰厚且稳定。</p>
-<p>■</p>
-<p>我们对政治算计的下一步解释将是搞清楚一个领导人能给自己留多少钱、又必须花多少钱在致胜联盟身上以保住位子。</p>
-<p>■</p>
-<p>只有领导人为那些不可或缺者提供的好处超过了别的领导人或政府能给的，才能获得这种支持。一旦核心支持者预计在领导人的政治对手那里能得到更多好处，他们就弃汉投曹。</p>
-<p>■</p>
-<p>政客们在争夺权力时许下的承诺和他们上台后实际做的大相径庭。一旦上台，新领导人可能抛弃助他上台的人，让他认为更忠诚的人取而代之。</p>
-<p>■</p>
-<p>政治变迁中充满了辅佐领导人上台的支持者被撤换的例子·无论是在中央政府、地方政府、企业、犯罪家族或任何其他组织，这都是事实。致胜联盟的每一个成员都明白有大把的人在门外等着取代他，每个成员都要小心翼翼不给在位者提供理由寻找替代者。</p>
-<p>■</p>
-<p>我们有了“为了政治生存而统治”这样的观念，就能明白领导人有5个基本法则可用于在任何体制下获得成功：</p>
-<p><strong>法则1：让你的致胜联盟越小越好。</strong>一个小规模的致胜联盟使领导人只需依赖极少数人就能保持权位。越少的不可或缺者相当于领导人拥有更多控制权，对支出的自由裁量权也越大。</p>
-<p><strong>法则2：让你的名义选择人集团越大越好。</strong>保持一个很大的选择人集团你就能很容易地替换掉致胜联盟里的捣蛋分子，无论是有影响者还是不可或缺者。毕竟，一个很大的选择人集团提供了充足的替代支持者，让不可或缺者时刻谨记必须保持忠诚、规规矩矩，不然就会被别人取代。</p>
-<p><strong>法则3：掌控收入的分配。</strong>对一个统治者来说，与其拥有一张让人民可以喂饱自己的更大的饼，永远不如他能够决定谁吃这张饼。对领导人来说，最有效的资金分配方式是让很多人受穷，通过重新分配让挑选出来的支持者发财。</p>
-<p>让我们为巴基斯坦总统阿西夫·阿里·扎尔达里喝彩，他的财富估计高达40亿美元，尽管他统治着一个人均国民收入几乎全球垫底的国家。</p>
-<p><strong>法则4：支付给你的核心支持者刚好足够确保他们忠诚的钱。</strong>记住，你的支持者宁愿成为你而不是仰赖你。你的巨大优势在于你知道钱在哪里而他们不知道。给你的联盟足够的钱，以免他们到处寻找取代你的人，但一分钱都不要多给。</p>
-<p>让我们为津巴布韦的罗伯特·穆加贝喝彩，他无论何时面临军事政变的威胁，最终总能用钱摆平，在重重困难下始终保持军队忠诚。</p>
-<p><strong>法则5**</strong>：不要从你的支持者的口袋里挪钱去改善人民的生活。**法则4的反面就是不要对你的支持者太抠门。如果你以损害致胜联盟的利益为代价而善待人民，很快你的“朋友们”就会伺机找你的麻烦。有利于普通老百姓的政策不仅未必能让核心支持者产生忠诚，而且太贵。饥饿的人民不可能有精力推翻你，大可不必担心他们。相反地，失望的致胜联盟成员则会变节，让你深陷麻烦。</p>
-<p>让我们为缅甸的丹瑞将军喝彩，在2008年的纳尔吉斯飓风之后他控制了外界提供的粮食援助，让他的军队支持者拿到黑市上去倒卖，而不是援助灾民——至少13.8万人死于那场风灾，有的报告甚至认为死亡人数高达50万人。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/05/26/【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》/" data-id="cjcof1tp0004adk0rgiy5aw6a" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/05/26/张跃然：美国高校怎么教“马克思主义原理”？/" data-id="cjcov819j004vfc0rlbwpuowu" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -732,6 +754,10 @@
       <ul>
         
           <li>
+            <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
           </li>
         
@@ -745,10 +771,6 @@
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
       </ul>

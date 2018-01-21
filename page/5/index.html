@@ -65,6 +65,196 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Scrapy简单方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/31/Scrapy简单方法/" class="article-date">
+  <time datetime="2017-03-31T05:21:13.000Z" itemprop="datePublished">2017-03-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/Scrapy简单方法/">Scrapy简单方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网络爬虫，是在网上进行数据抓取的程序，使用它能够抓取特定网页的HTML数据。虽然我们利用一些库开发一个爬虫程序，但是使用框架可以大大提高效率，缩短开发时间。Scrapy是一个使用<a href="http://lib.csdn.net/base/python" title="Python知识库" target="_blank" rel="noopener">Python</a>编写的，轻量级的，简单轻巧，并且使用起来非常的方便。使用Scrapy可以很方便的完成网上数据的采集工作，它为我们完成了大量的工作，而不需要自己费大力气去开发。</p>
+<p>首先先要回答一个问题。<br>问：把网站装进爬虫里，总共分几步？<br>答案很简单，四步：<br>新建项目 (Project)：新建一个新的爬虫项目<br>明确目标（Items）：明确你想要抓取的目标<br>制作爬虫（Spider）：制作爬虫开始爬取网页<br>存储内容（Pipeline）：设计管道存储爬取内容</p>
+<p>好的，基本流程既然确定了，那接下来就一步一步的完成就可以了。</p>
+<p><strong>1.新建项目（Project）</strong><br>在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code37356" class="codebody"><br>scrapy startproject tutorial</div><br>其中，tutorial为项目名称。<br>可以看到将会创建一个tutorial文件夹，目录结构如下：<br>代码如下:</p>
+<pre><code>tutorial/
+scrapy.cfg
+tutorial/
+__init__.py
+items.py
+pipelines.py
+settings.py
+spiders/
+__init__.py
+...
+</code></pre><p>下面来简单介绍一下各个文件的作用：</p>
+<ul>
+<li>scrapy.cfg：项目的配置文件</li>
+<li>tutorial/：项目的Python模块，将会从这里引用代码</li>
+<li>tutorial/items.py：项目的items文件</li>
+<li>tutorial/pipelines.py：项目的pipelines文件</li>
+<li>tutorial/settings.py：项目的设置文件</li>
+<li>tutorial/spiders/：存储爬虫的目录</li>
+</ul>
+<p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
+<p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>代码如下:</p>
+<pre><code># Define here the models for your scraped items
+#
+# See documentation in:
+# http://doc.scrapy.org/en/latest/topics/items.html
+from scrapy.item import Item, Field
+
+class TutorialItem(Item):
+# define the fields for your item here like:
+# name = Field()
+pass
+
+class DmozItem(Item):
+title = Field()
+link = Field()
+desc = Field()
+</code></pre><p><strong>3.制作爬虫（Spider）</strong></p>
+<p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br><strong>3.1爬
+</strong>Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
+<p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
+<p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
+<pre><code>from scrapy.spider import Spider
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+filename = response.url.split(“/”)[-2]
+open(filename, ‘wb’).write(response.body)
+</code></pre><p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
+<pre><code>scrapy crawl dmoz
+</code></pre><p>运行结果如图：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg" alt=""></p>
+<p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code10248" class="codebody"><br>import sys<br>sys.setdefaultencoding(‘gb2312’)</div><br>再次运行，OK，问题解决了，看一下结果：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119434W5-1.jpg" alt=""></p>
+<p>最后一句INFO: Closing spider (finished)表明爬虫已经成功运行并且自行关闭了。<br>包含 [dmoz]的行 ，那对应着我们的爬虫运行的结果。<br>可以看到start_urls中定义的每个URL都有日志行。<br>还记得我们的start_urls吗？<br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books</a><br><a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources</a><br>因为这些URL是起始页面，所以他们没有引用(referrers)，所以在它们的每行末尾你会看到 (referer: &lt;None&gt;)。<br>在parse 方法的作用下，两个文件被创建：分别是 Books 和 Resources，这两个文件中有URL的页面内容。</p>
+<p>那么在刚刚的电闪雷鸣之中到底发生了什么呢？<br>首先，Scrapy为爬虫的 start_urls属性中的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数。<br>然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。</p>
+<p><strong>3.2取</strong><br>爬取整个网页完毕，接下来的就是的取过程了。<br>光存储一整个网页还是不够用的。<br>在基础的爬虫里，这一步可以用正则表达式来抓。<br>在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。<br>如果你想了解更多selectors和其他机制你可以查阅资料：点我点我</p>
+<p>这是一些XPath表达式的例子和他们的含义<br>/html/head/title: 选择HTML文档&lt;head&gt;元素下面的&lt;title&gt; 标签。<br>/html/head/title/text(): 选择前面提到的&lt;title&gt; 元素下面的文本内容<br>//td: 选择所有 &lt;td&gt; 元素<br>//div[@class=”mine”]: 选择所有包含 class=”mine” 属性的div 标签元素<br>以上只是几个使用XPath的简单例子，但是实际上XPath非常强大。<br>可以参照W3C教程：点我点我。</p>
+<p>为了方便使用XPaths，Scrapy提供XPathSelector 类，有两种可以选择，HtmlXPathSelector(HTML数据解析)和XmlXPathSelector(XML数据解析)。<br>必须通过一个 Response 对象对他们进行实例化操作。<br>你会发现Selector对象展示了文档的节点结构。因此，第一个实例化的selector必与根节点或者是整个目录有关 。<br>在Scrapy里面，Selectors 有四种基础的方法（点击查看API文档）：<br>xpath()：返回一系列的selectors，每一个select表示一个xpath参数表达式选择的节点<br>css()：返回一系列的selectors，每一个select表示一个css参数表达式选择的节点<br>extract()：返回一个unicode字符串，为选中的数据<br>re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</p>
+<p>3.3xpath实验<br>下面我们在Shell里面尝试一下Selector的用法。<br>实验的网址：<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></p>
+<p>熟悉完了实验的小白鼠，接下来就是用Shell爬取网页了。<br>进入到项目的顶层目录，也就是第一层tutorial文件夹下，在cmd中输入：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code36951" class="codebody"><br>scrapy shell <a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></div><br>回车后可以看到如下的内容：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/21194340K-3.jpg" alt=""></p>
+<p>在Shell载入后，你将获得response回应，存储在本地变量 response中。<br>所以如果你输入response.body，你将会看到response的body部分，也就是抓取到的页面内容：</p>
+<p>或者输入response.headers 来查看它的 header部分：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943GH-5.jpg" alt=""></p>
+<p>现在就像是一大堆沙子握在手里，里面藏着我们想要的金子，所以下一步，就是用筛子摇两下，把杂质出去，选出关键的内容。<br>selector就是这样一个筛子。<br>在旧的版本中，Shell实例化两种selectors，一个是解析HTML的 hxs 变量，一个是解析XML 的 xxs 变量。<br>而现在的Shell为我们准备好的selector对象，sel，可以根据返回的数据类型自动选择最佳的解析方案(XML or HTML)。<br>然后我们来捣弄一下！~<br>要彻底搞清楚这个问题，首先先要知道，抓到的页面到底是个什么样子。<br>比如，我们要抓取网页的标题，也就是&lt;title&gt;这个标签：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432L4-6.png" alt=""></p>
+<p>可以输入：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code56841" class="codebody"><br>sel.xpath(‘//title’)</div><br>结果就是：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119435a0-7.png" alt=""></p>
+<p>这样就能把这个标签取出来了，用extract()和text()还可以进一步做处理。<br>备注：简单的罗列一下有用的xpath路径表达式：<br>表达式 描述<br>nodename 选取此节点的所有子节点。<br>/ 从根节点选取。<br>// 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。<br>. 选取当前节点。<br>.. 选取当前节点的父节点。<br>@ 选取属性。<br>全部的实验结果如下，In[i]表示第i次实验的输入，Out[i]表示第i次结果的输出（建议大家参照：W3C教程）：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code23729" class="codebody"><br>In [1]: sel.xpath(‘//title’)<br>Out[1]: [&lt;Selector xpath=’//title’ data=u’&lt;title&gt;Open Directory - Computers: Progr’&gt;]</div></p>
+<p>In [2]: sel.xpath(‘//title’).extract()<br>Out[2]: [u’&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;/title&gt;’]</p>
+<p>In [3]: sel.xpath(‘//title/text()’)<br>Out[3]: [&lt;Selector xpath=’//title/text()’ data=u’Open Directory - Computers: Programming:’&gt;]</p>
+<p>In [4]: sel.xpath(‘//title/text()’).extract()<br>Out[4]: [u’Open Directory - Computers: Programming: Languages: Python: Books’]</p>
+<p>In [5]: sel.xpath(‘//title/text()’).re(‘(\w+):’)<br>Out[5]: [u’Computers’, u’Programming’, u’Languages’, u’Python’]<br>当然title这个标签对我们来说没有太多的价值，下面我们就来真正抓取一些有意义的东西。<br>使用火狐的审查元素我们可以清楚地看到，我们需要的东西如下：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432254-8.png" alt=""></p>
+<p>我们可以用如下代码来抓取这个&lt;li&gt;标签：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code23065" class="codebody"><br>sel.xpath(‘//ul/li’)</div><br>从&lt;li&gt;标签中，可以这样获取网站的描述：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code98498" class="codebody"><br>sel.xpath(‘//ul/li/text()’).extract()</div><br>可以这样获取网站的标题：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code72200" class="codebody"><br>sel.xpath(‘//ul/li/a/text()’).extract()</div><br>可以这样获取网站的超链接：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code24538" class="codebody"><br>sel.xpath(<a>‘//ul/li/a/@href’).extract</a>()</div><br>当然，前面的这些例子是直接获取属性的方法。<br>我们注意到xpath返回了一个对象列表，<br>那么我们也可以直接调用这个列表中对象的属性挖掘更深的节点<br>（参考：Nesting selectors andWorking with relative XPaths in the Selectors）：<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title, link, desc</p>
+<p>3.4xpath实战<br>我们用shell做了这么久的实战，最后我们可以把前面学习到的内容应用到dmoz_spider这个爬虫中。<br>在原爬虫的parse函数中做如下修改：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code67523" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>注意，我们从scrapy.selector中导入了Selector类，并且实例化了一个新的Selector对象。这样我们就可以像Shell中一样操作xpath了。<br>我们来试着输入一下命令运行爬虫（在tutorial根目录里面）：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code91685" class="codebody"><br>scrapy crawl dmoz</div><br>运行结果如下：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119431b3-9.jpg" alt=""></p>
+<p>果然，成功的抓到了所有的标题。但是好像不太对啊，怎么Top，Python这种导航栏也抓取出来了呢？<br>我们只需要红圈中的内容：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943H08-10.jpg" alt=""></p>
+<p>看来是我们的xpath语句有点问题，没有仅仅把我们需要的项目名称抓取出来，也抓了一些无辜的但是xpath语法相同的元素。<br>审查元素我们发现我们需要的&lt;ul&gt;具有class=’directory-url’的属性，<br>那么只要把xpath语句改成sel.xpath(‘//ul[@class=”directory-url”]/li’)即可<br>将xpath语句做如下调整：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code19197" class="codebody"><br>from scrapy.spider import Spider<br>from scrapy.selector import Selector</div></p>
+<p>class DmozSpider(Spider):<br>name = “dmoz”<br>allowed_domains = [“dmoz.org”]<br>start_urls = [<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/" target="_blank" rel="noopener">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel = Selector(response)<br>sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)<br>for site in sites:<br>title = site.xpath(‘a/text()’).extract()<br>link = site.xpath(<a>‘a/@href’).extract</a>()<br>desc = site.xpath(‘text()’).extract()<br>print title<br>成功抓出了所有的标题，绝对没有滥杀无辜：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943C96-11.jpg" alt=""></p>
+<p>3.5使用Item<br>接下来我们来看一看如何使用Item。<br>前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
+<p><div class="codetitle">代码如下:</div></p>
+<p><div id="code83545" class="codebody"><br>&gt;&gt;&gt; item = DmozItem()<br>&gt;&gt;&gt; item[‘title’] = ‘Example title’<br>&gt;&gt;&gt; item[‘title’]<br>‘Example title’</div><br>作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:<br>代码如下:</p>
+<pre><code>from scrapy.spider import Spider
+from scrapy.selector import Selector
+from tutorial.items import DmozItem
+
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+sel = Selector(response)
+sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)
+items = []
+for site in sites:
+item = DmozItem()
+item[‘title’] = site.xpath(‘a/text()’).extract()
+item[‘link’] = site.xpath(‘a/@href’).extract()
+item[‘desc’] = site.xpath(‘text()’).extract()
+items.append(item)
+return items
+</code></pre><p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
+<p><div id="code89953" class="codebody"><br>scrapy crawl dmoz -o items.json -t json</div><br>-o 后面是导出文件名，-t 后面是导出类型。<br>然后来看一下导出的结果，用文本编辑器打开json文件即可（为了方便显示，在item中删去了除了title之外的属性）：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg" alt=""></p>
+<p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>这个我们以后再慢慢玩^_^</p>
+<p>以上便是python爬虫框架Scrapy制作爬虫抓取网站内容的全部过程了，非常的详尽吧，希望能够对大家有所帮助，有需要的话也可以和我联系，一起进步</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcov81650022fc0rsw0dsc6p" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-SIP机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/30/SIP机制/" class="article-date">
@@ -133,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcof1tmd002bdk0r0zf2exuy" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcov815w001vfc0r9rjknsku" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -206,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcof1tof003kdk0rqz92m29q" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcov8178002zfc0r4w64lecb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -315,7 +505,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjcof1tp5004fdk0rnrb5yfjc" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjcov818f0040fc0r7ofh4j63" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -356,7 +546,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjcof1tp4004ddk0rwwl6xsuo" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjcov818c003yfc0r5402k8ux" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -408,7 +598,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjcof1tjy000hdk0rr33hnqba" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjcov81440005fc0r35bvjpj2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -462,7 +652,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjcof1tk1000jdk0rawwavvkv" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjcov813t0001fc0rwl886es2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -570,84 +760,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjcof1tlq001tdk0rlfadw9m0" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-objc_msgSend和消息传递机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/22/objc_msgSend和消息传递机制/" class="article-date">
-  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/22/objc_msgSend和消息传递机制/">objc_msgSend和消息传递机制（大补）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有<strong>「名称(name)」或「选择子(selector)」</strong>,可以接受参数。而且可能还有返回值。</p>
-<hr>
-<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
-<hr>
-<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
-<p>给对象发送消息会转换成</p>
-<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
-<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
-<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
-<hr>
-<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
-<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
-<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
-<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
-<hr>
-<h2 id="尾调用优化（tail-call-optimization-技术"><a href="#尾调用优化（tail-call-optimization-技术" class="headerlink" title="尾调用优化（tail-call optimization) 技术"></a><strong>尾调用优化（tail-call optimization) 技术</strong></h2><p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化”。</p>
-<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
-<hr>
-<h2 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h2><p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
-<hr>
-<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div><br><div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div><br><div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div><br><div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div><br><div><br><br><em> </em> <em><br><br></em></div><br><div>
-
- <em> </em><br><br>### 备援接收者<br><br><div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
-
-<hr>
-<p></p></div><p></p>
-<div>
-
-<h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
-<p>此步骤会调用下列方法转发消息：</p>
-<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
-</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
-<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
-<h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
-<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
-<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
-<hr>
-</div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjcof1tny003edk0r5bfva26l" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjcov815b0019fc0rauyp5haa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -724,7 +837,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjcof1to3003gdk0reygempwa" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjcov8176002xfc0r23xy2glb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -734,10 +847,10 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
 
 
   
-    <article id="post-关于iOS的main函数入口" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-objc_msgSend和消息传递机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/17/关于iOS的main函数入口/" class="article-date">
-  <time datetime="2017-03-17T14:09:52.000Z" itemprop="datePublished">2017-03-17</time>
+    <a href="/2017/03/22/objc_msgSend和消息传递机制/" class="article-date">
+  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
 </a>
     
   <div class="article-category">
@@ -752,7 +865,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/17/关于iOS的main函数入口/">关于iOS的main函数入口</a>
+      <a class="article-title" href="/2017/03/22/objc_msgSend和消息传递机制/">objc_msgSend和消息传递机制（大补）</a>
     </h1>
   
 
@@ -760,21 +873,48 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
-<pre><code>#import UIKit/UIKit.h
-int main(int argc, char *argv[])  
-{  
-    @autoreleasepool {       
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  
-    }  
-}
-</code></pre><p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
-<p>上面实例代码中有一个很重要的函数<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIApplicationMain" target="_blank" rel="noopener">UIApplicationMain</a>，它主要是创建App的几个核心对象来处理以下过程：<br>从可用Storyboard文件加载用户界面；<br>调用AppDelegate自定义代码来做一些初始化设置；<br>将App放入Main Run Loop环境中来响应和处理与用户交互产生的事件。</p>
+        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有<strong>「名称(name)」或「选择子(selector)」</strong>,可以接受参数。而且可能还有返回值。</p>
+<hr>
+<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
+<hr>
+<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
+<p>给对象发送消息会转换成</p>
+<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
+<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
+<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
+<hr>
+<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
+<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
+<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
+<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
+<hr>
+<h2 id="尾调用优化（tail-call-optimization-技术"><a href="#尾调用优化（tail-call-optimization-技术" class="headerlink" title="尾调用优化（tail-call optimization) 技术"></a><strong>尾调用优化（tail-call optimization) 技术</strong></h2><p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化”。</p>
+<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
+<hr>
+<h2 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h2><p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
+<hr>
+<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div><br><div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div><br><div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div><br><div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div><br><div><br><br><em> </em> <em><br><br></em></div><br><div>
 
+ <em> </em><br><br>### 备援接收者<br><br><div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
+
+<hr>
+<p></p></div><p></p>
+<div>
+
+<h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
+<p>此步骤会调用下列方法转发消息：</p>
+<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
+</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
+<h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
+<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
+<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
+<hr>
+</div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/17/关于iOS的main函数入口/" data-id="cjcof1tpg004kdk0rhb1pj3v7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjcov8173002vfc0ro9bkeiak" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -827,6 +967,10 @@ int main(int argc, char *argv[])
       <ul>
         
           <li>
+            <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
           </li>
         
@@ -840,10 +984,6 @@ int main(int argc, char *argv[])
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
       </ul>

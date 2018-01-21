@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ORM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/31/ORM/" class="article-date">
+  <time datetime="2016-08-31T05:25:03.000Z" itemprop="datePublished">2016-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/31/ORM/">ORM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、ORM简介<br>对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>这种方案存在以下不足：<br>1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。</p>
+<p>ORM提供了实现持久化层的另一种模式，它采用映射元数据来描述对象关系的映射，使得ORM中间件能在任何一个应用的业务逻辑层和数据库层之间充当桥梁。Java典型的ORM中间件有:Hibernate,ibatis,speedframework。<br>ORM的方法论基于三个核心原则：<br>· 简单：以最基本的形式建模数据。<br>· 传达性：数据库结构被任何人都能理解的语言文档化。<br>· 精确性：基于数据模型创建正确标准化了的结构。</p>
+<p>二、ORM的概念<br>让我们从O/R开始。字母O起源于”对象”(Object),而R则来自于”关系”(Relational)。几乎所有的程序里面，都存在对象和关系数据库。在业务逻辑层和用户界面层中，我们是面向对象的。当对象信息发生变化的时候，我们需要把对象的信息保存在关系数据库中。<br>当你开发一个应用程序的时候(不使用O/R Mapping),你可能会写不少数据访问层的代码，用来从数据库保存，删除，读取对象信息，等等。你在DAL中写了很多的方法来读取对象数据，改变状态对象等等任务。而这些代码写起来总是重复的。</p>
+<p>ORM解决的主要问题是对象关系的映射。域模型和关系模型分别是建立在概念模型的基础上的。域模型是面向对象的，而关系模型是面向关系的。一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录，类的每个属性对应表的每个字段。<br>ORM技术特点：<br>1.提高了开发效率。由于ORM可以自动对Entity对象与数据库中的Table进行字段与属性的映射，所以我们实际可能已经不需要一个专用的、庞大的数据访问层。<br>2.ORM提供了对数据库的映射，不用sql直接编码，能够像操作对象一样从数据库获取数据。</p>
+<p>三、ORM的优缺点<br>ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。</p>
+<p>在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2016/08/31/ORM/" data-id="cjcov81570014fc0rte6y6r5m" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-闲谈" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/28/闲谈/" class="article-date">
@@ -122,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/28/闲谈/" data-id="cjcof1ts4006gdk0rwp3t5lhn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/28/闲谈/" data-id="cjcov81ak0061fc0rfxqxojz8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -182,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/27/理解RESTful架构/" data-id="cjcof1trf005wdk0rici06nho" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/27/理解RESTful架构/" data-id="cjcov81a3005ffc0rauvnk14o" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -224,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/20/我的坏习惯/" data-id="cjcof1tr7005kdk0roo5m69np" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/20/我的坏习惯/" data-id="cjcov819s0055fc0rjfkm5val" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -335,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/13/各种快捷键/" data-id="cjcof1tq7004wdk0rh3o19ft5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/13/各种快捷键/" data-id="cjcov8199004jfc0rdx15d3uf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -388,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/12/windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）/" data-id="cjcof1tox0046dk0rl2lb6tk3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/12/windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）/" data-id="cjcov8183003rfc0rhwap8m4q" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -480,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/07/A summary of recent work/" data-id="cjcof1tk3000mdk0rm9bt57y7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/07/A summary of recent work/" data-id="cjcov81470006fc0rbeb15buj" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -553,7 +599,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/05/a-summary-of-recent-work/" data-id="cjcof1tmx0032dk0rvmjm1g5e" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/05/a-summary-of-recent-work/" data-id="cjcov816k002efc0r476j4cme" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -600,7 +646,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/05/perfect-is-the-enemy-of-good/" data-id="cjcof1tob003idk0rxeol9j8y" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/05/perfect-is-the-enemy-of-good/" data-id="cjcov817a0031fc0rnsfzbufn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -686,136 +732,7 @@ chkconfig mongod on
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/30/CentOS7 安装MongoDB 3.0服务器/" data-id="cjcof1tk6000rdk0rcg50t6kk" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OC中retain,assign,copy的区别和用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/22/OC中retain,assign,copy的区别和用法/" class="article-date">
-  <time datetime="2016-07-22T13:48:27.000Z" itemprop="datePublished">2016-07-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/OC中retain,assign,copy的区别和用法/">OC中retain,assign,copy的区别和用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。</p>
-<p>可能不太好理解下面我写了一个演示程序。</p>
-<p>OC：</p>
-<pre><code>//
-
-//  ViewController.m
-
-//  weak与assgin的区别
-
-//
-
-//  Created by bihongbo on 15/3/19.
-
-//  Copyright (c) 2015年 毕洪博. All rights reserved.
-
-//
-
-#import “ViewController.h”
-
-@interface ViewController ()
-
-@property (nonatomic,weak) id      weakPoint;
-
-@property (nonatomic,assign) id    assignPoint;
-
-@property (nonatomic,strong) id    strongPoint;
-
-@end
-
-@implementation ViewController
-
-– (void)viewDidLoad {
-
-[super viewDidLoad];
-
-self.strongPoint = [NSDate date];
-
-NSLog(@”strong属性：%@”,self.strongPoint);
-
-self.weakPoint = self.strongPoint;
-
-self.assignPoint = self.strongPoint;
-
-self.strongPoint = nil;
-
-NSLog(@”weak属性：%@”,self.weakPoint);
-
-//    NSLog(@”assign属性：%@”,self.assignPoint);
-
-}
-
-@end
-</code></pre><p>当程序中的注释被打开时，运行程序有可能会崩溃（有时候不崩溃，你可能需要多运行几次），这是因为当assign指针所指向的内存被释放（释放并不等于抹除，只是引用计数为0），不会自动赋值nil，这样再引用self.assignPoint就会导致野指针操作，如果这个操作发生时内存还没有改变内容，依旧可以输出正确的结果，而如果发生时内存内容被改变了，就会crash。</p>
-<p><strong>结论：在ARC模式下编程时，指针变量一定要用weak修饰，只有基本数据类型和结构体需要用assgin，例如delegate，一定要用weak修饰。</strong></p>
-<h2 id="看一送一："><a href="#看一送一：" class="headerlink" title="看一送一："></a><strong>看一送一：</strong></h2><p><strong>《iOS中assign，copy，retain之间的区别以及weak和strong的区别》</strong></p>
-<p><strong>• copy: 用于希望保持一份传入值的拷贝，而不是值自身的情况，即把原来的对象完整的赋值到另外一地方，重新加载一内存区，一个地方变了不影响另一个地方的对象。
-</strong></p>
-<p>• assign:  简单的直接赋值，相当于说两个对象指向同个内存区，一个地方的变了，其他的也跟着改变。</p>
-<p>• retain:释放旧的对象,将旧对象的值赋予输入对象,再提高输入对象的索引计数 为1</p>
-<p>那上面的是什么意思呢?</p>
-<p>Copy 其实是建立了一个相同的对象,而 retain 不是:</p>
-<p>比如一个 NSString 对象,地址为 0×1111,内容为@”ABC”</p>
-<p>Copy 到另外一个 NSString 之 后,地址为 0×2222,内容相同,新的对象 retain 为 1, 旧 有对象没有变化</p>
-<p>retain 到另外一个 NSString 之 后,地址相同(建立一个指针,指针拷贝),内容当然相 同,这个对象的 retain 值+1</p>
-<p>assign 地址还是0x1111,内容也还是“ABC”。</p>
-<p>也就是说,</p>
-<p>1.strong :除NSString\block以外的OC对象</p>
-<p>@property(nonatomic,strong) NSArray  *&lt;#model#&gt;;</p>
-<p>2.weak：各种UI控件(但不是绝对，也有控件要使用strong属性的，但是xib中必须使用weak，因为控件被拖进xib的时候就被strong修饰了)</p>
-<p>@property (nonatomic,weak) UIButton *button;</p>
-<p>3.assign：CGFloat，NSInteger等基本数据类型、枚举、结构体（非OC对象）</p>
-<p>@property(nonatomic,assign) CGFloat &lt;#model#&gt;;</p>
-<p>4.copy：</p>
-<p>&lt;1. copy : 创建的是不可变副本(如NSString、NSArray、NSDictionary)</p>
-<p>&lt;2.  mutableCopy :创建的是可变副本(如NSMutableString、NSMutableArray、NSMutableDictionary)</p>
-<p>&lt;3. @property(nonatomic,copy)NSString *&lt;#model#&gt;;</p>
-<p>•@property内存管理策略的选择</p>
-<p>•1.非ARC</p>
-<p>• 1&gt; copy : 只用于NSString\block</p>
-<p>• 2&gt; retain : 除NSString\block以外的OC对象</p>
-<p>• 3&gt; assign : 基本数据类型、枚举、结构体（非OC对象），当2个对象相互引用，一端用retain，一端用assign</p>
-<p>•2.ARC</p>
-<p>• 1&gt; copy : 只用于NSString\block</p>
-<p>• 2&gt; strong : 除NSString\block以外的OC对象</p>
-<p>• 3&gt; weak : 当2个对象相互引用，一端用strong，一端用weak</p>
-<p>• 4&gt; assgin : 基本数据类型、枚举、结构体（非OC对象）</p>
-<p>&nbsp;</p>
-<p>为什么NSString用copy呢？</p>
-<p>mutable string被无意中修改, NSMutableString是NSString的子类, 因此NSString指针可以持有NSMutableString对象.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/07/22/OC中retain,assign,copy的区别和用法/" data-id="cjcof1tlf001ndk0rzwn7bax7" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/07/30/CentOS7 安装MongoDB 3.0服务器/" data-id="cjcov81480007fc0rkodf4v1x" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -868,6 +785,10 @@ NSLog(@”weak属性：%@”,self.weakPoint);
       <ul>
         
           <li>
+            <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
           </li>
         
@@ -881,10 +802,6 @@ NSLog(@”weak属性：%@”,self.weakPoint);
         
           <li>
             <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
           </li>
         
       </ul>
