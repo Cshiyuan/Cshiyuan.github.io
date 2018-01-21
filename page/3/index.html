@@ -65,6 +65,198 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-HTML DOM (Document Object Model)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/HTML DOM (Document Object Model)/" class="article-date">
+  <time datetime="2017-04-26T07:20:17.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/HTML DOM (Document Object Model)/">HTML DOM (Document Object Model)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTML DOM是HTML Document Object Model(<a href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">文档对象模型</a>)的缩写，HTML DOM则是专门适用于HTML/XHTML的文档对象模型。</p>
+<p>熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。</p>
+<hr>
+<h2 id="相关介绍"><a href="#相关介绍" class="headerlink" title="相关介绍"></a>相关介绍</h2><p>DOM是Document Object Model<a href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">文档对象模型</a>的缩写。根据W3C DOM规范，DOM是一种与浏览器，平台，语言无关的接口，使得你可以访问页面中其他的标准组件。<br>简单理解，DOM解决了Netscape的JavaScript和 Microsoft的JavaScript之间的冲突，给予web设计师和开发者一个标准的方法，让他们来访问他们站点中的数据、脚本和表现层对象。<br>DOM是以<a href="http://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84" target="_blank" rel="noopener">层次结构</a>组织的节点或信息片断的集合。这个层次结构允许开发人员在树中导航寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而 DOM 被认为是基于树或基于对象的。HTML DOM 定义了访问和操作HTML文档的标准方法。  </p>
+<p>HTML DOM 把 HTML 文档呈现为带有元素、属性和文本的树结构（节点树）。</p>
+<hr>
+<p></p>
+<h2 id="节点信息"><a href="#节点信息" class="headerlink" title="节点信息"></a>节点信息</h2><p>每个<a href="http://baike.baidu.com/item/%E8%8A%82%E7%82%B9" target="_blank" rel="noopener">节点</a>都拥有包含着关于节点某些信息的属性。这些属性是：<br>nodeName（节点名称）nodeValue（节点值）nodeType（节点类型）</p>
+<hr>
+<h2 id="HTML-DOM-方法"><a href="#HTML-DOM-方法" class="headerlink" title="HTML DOM 方法"></a>HTML DOM 方法</h2><p>方法是我们可以在节点（HTML 元素）上执行的动作。</p>
+<h3 id="编程接口"><a href="#编程接口" class="headerlink" title="编程接口"></a>编程接口</h3><p></p>
+<div class="para">可通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问。</div><br><div class="para">所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。</div><br><div class="para">方法是您能够执行的动作（比如添加或修改元素）。</div><br><div class="para">属性是您能够获取或设置的值（比如节点的名称或内容）</div><br><div class="para-title level-3"><br><br>### HTML DOM 对象 - 方法和属性<br><br>##### 一些常用的 HTML DOM 方法：<br><br><em>  getElementById(id) - 获取带有指定 id 的节点（元素）
+</em>  appendChild(node) - 插入新的子节点（元素）<br><em>  removeChild(node) - 删除子节点（元素）<br><br><br>##### 一些常用的 HTML DOM 属性：
+
+</em>  innerHTML - 节点（元素）的文本值<br><em>  parentNode - 节点（元素）的父节点
+</em>  childNodes - 节点（元素）的子节点<br>*  attributes - 节点（元素）的属性节点<br><div class="para-title level-3"><br><br>### 一些 DOM 对象方法<br><br></div><br><div class="para">下面列出一些常用的 DOM 对象方法：</div><br><table class="reference"><br><tbody><br><tr><br><th><br><pre class="para">方法</pre><br></th><br><th><br><pre class="para">描述</pre><br></th><br></tr><br><tr><br><td><br><pre class="para">getElementById()</pre><br></td><br><td><br><pre class="para"> 返回带有指定 ID 的元素。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getElementsByTagName()</pre><br></td><br><td><br><pre class="para"> 返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getElementsByClassName()</pre><br></td><br><td><br><pre class="para"> 返回包含带有指定类名的所有元素的节点列表。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">appendChild()</pre><br></td><br><td><br><pre class="para"> 把新的子节点添加到指定节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">removeChild()</pre><br></td><br><td><br><pre class="para"> 删除子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">replaceChild()</pre><br></td><br><td><br><pre class="para"> 替换子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">insertBefore()</pre><br></td><br><td><br><pre class="para"> 在指定的子节点前面插入新的子节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createAttribute()</pre><br></td><br><td><br><pre class="para"> 创建属性节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createElement()</pre><br></td><br><td><br><pre class="para"> 创建元素节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">createTextNode()</pre><br></td><br><td><br><pre class="para"> 创建文本节点。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">getAttribute()</pre><br></td><br><td><br><pre class="para"> 返回指定的属性值。</pre><br></td><br></tr><br><tr><br><td><br><pre class="para">setAttribute()</pre><br></td><br><td><br><pre class="para"> 把指定属性设置或修改为指定的值。</pre><br></td><br></tr><br></tbody><br></table><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/26/HTML DOM (Document Object Model)/" data-id="cjcof1tke0010dk0r6un5de77" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Core Foundation 框架详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/25/Core Foundation 框架详解/" class="article-date">
+  <time datetime="2017-04-25T01:50:41.000Z" itemprop="datePublished">2017-04-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/25/Core Foundation 框架详解/">Core Foundation 框架详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先来说说「Core Foundation」（以下简称CF）的历史吧。当年乔布斯被自己创办的公司驱逐后，成立了「NeXT Computer」,其实做的还是老本行：卖电脑，但依旧不景气。好在NeXTSTEP系统表现还不错，亏损不至于太严重。正好此时苹果的市场份额大跌，急需一个新的操作系统，结果大家都知道了，乔布斯借此收购，重新回到了苹果。</p>
+<p>这里就牵扯到了一个问题，如何让旧有的系统（Mac OS 9）和NeXTSTEP合成为一个新系统？这就需要一个更为底层的核心库可以供Mac Toolbox和OPENSTEP双方调用。CF就这么诞生了。</p>
+<p>CF是由C语言实现的，而不是Objective-C，所以如果用到了CF，就需要手动管理内存，ARC是无能为力的。当然因为CF和Foundation之间的友好关系，它们之间的管理权也是可以移交的，这个后面再说。<br><strong>Core Foundation框架</strong> (CoreFoundation.framework) 是一组C语言接口，它们为iOS应用程序提供基本数据管理和服务功能。下面列举该框架支持进行管理的数据以及可提供的服务：</p>
+<ul>
+<li>群体数据类型 (数组、集合等)</li>
+<li>程序包</li>
+<li>字符串管理</li>
+<li>日期和时间管理</li>
+<li>原始数据块管理</li>
+<li>偏好管理</li>
+<li>URL及数据流操作</li>
+<li>线程和RunLoop</li>
+<li>端口和soket通讯  </li>
+</ul>
+<p>Core Foundation框架和Foundation框架紧密相关，它们为相同功能提供接口，但Foundation框架提供Objective-C接口。如果您将Foundation对象和Core Foundation类型掺杂使用，则可利用两个框架之间的 “toll-free bridging”。所谓的<strong>Toll-free bridging</strong>是说您可以在某个框架的方法或函数同时使用Core Foundatio和Foundation 框架中的某些类型。很多数据类型支持这一特性，其中包括群体和字符串数据类型。每个框架的类和类型描述都会对某个对象是否为 toll-free bridged，应和什么对象桥接进行说明。<br>如需进一步信息，请阅读<a href="http://developer.apple.com/iphone/library/documentation/CoreFoundation/Reference/CoreFoundation_Collection/index.html#/apple_ref/doc/uid/TP40003849" target="_blank" rel="noopener">Core Foundation 框架参考</a>。<br>自 Xcode4.2 开始导入ARC机制后，为了支持对象间的转型，Apple又增加了许多转型用的关键字。这一讲我们就来了解其用法，以及产生的理由。</p>
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>我们先来看一下ARC无效的时候，我们写id类型转void*类型的写法：</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = obj;
+</code></pre><p>反过来，当把void*对象变回id类型时，只是简单地如下来写，</p>
+<pre><code>id obj = p;
+[obj release];
+</code></pre><p>但是上面的代码在ARC有效时，就有了下面的错误：</p>
+<pre><code> error: implicit conversion of an Objective-C pointer
+ to ’void *’ is disallowed with ARC
+ void *p = obj;
+ ^error: implicit conversion of a non-Objective-C pointer
+ type ’void *’ to ’id’ is disallowed with ARC
+ id o = p;
+</code></pre><h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>为了解决这一问题，我们使用 __bridge 关键字来实现id类型与void*类型的相互转换。看下面的例子。</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = (__bridge void *)obj;
+id o = (__bridge id)p;
+</code></pre><p>将Objective-C的对象类型用 bridge 转换为 void* 类型和使用 unsafe_unretained 关键字修饰的变量是一样的。被代入对象的所有者需要明确对象生命周期的管理，不要出现异常访问的问题。<br>除过 bridge 以外，还有两个 bridge 相关的类型转换关键字：</p>
+<ul>
+<li>__bridge_retained</li>
+<li>__bridge_transfer</li>
+</ul>
+<p>接下来，我们将看看这两个关键字的区别。</p>
+<h2 id="bridge-retained"><a href="#bridge-retained" class="headerlink" title="__bridge_retained"></a>__bridge_retained</h2><p>先来看使用 __bridge_retained 关键字的例子程序：</p>
+<pre><code>d obj = [[NSObject alloc] init]; 
+void *p = (__bridge_retained void *)obj;
+</code></pre><p>从名字上我们应该能理解其意义：类型被转换时，其对象的所有权也将被变换后变量所持有。如果不是ARC代码，类似下面的实现：</p>
+<pre><code>id obj = [[NSObject alloc] init];
+void *p = obj;
+[(id)p retain];
+</code></pre><p>可以用一个实际的例子验证，对象所有权是否被持有。</p>
+<pre><code>void *p = 0;
+{
+ id obj = [[NSObject alloc] init];
+ p = (__bridge_retained void *)obj;
+}
+NSLog(@&quot;class=%@&quot;, [(__bridge id)p class]);
+</code></pre><p>出了大括号的范围后，p 仍然指向一个有效的实体。说明他拥有该对象的所有权，该对象没有因为出其定义范围而被销毁。</p>
+<h2 id="bridge-transfer"><a href="#bridge-transfer" class="headerlink" title="__bridge_transfer"></a>__bridge_transfer</h2><p>相反，当想把本来拥有对象所有权的变量，在类型转换后，让其释放原先所有权的时候，需要使用 __bridge_transfer 关键字。文字有点绕口，我们还是来看一段代码吧。</p>
+<p>如果ARC无效的时候，我们可能需要写下面的代码。</p>
+<pre><code>// p 变量原先持有对象的所有权
+id obj = (id)p;
+[obj retain];
+[(id)p release];
+</code></pre><p>那么ARC有效后，我们可以用下面的代码来替换：</p>
+<pre><code>// p 变量原先持有对象的所有权
+id obj = (__bridge_transfer id)p;
+</code></pre><p>可以看出来，bridge_retained 是编译器替我们做了 retain 操作，而 bridge_transfer 是替我们做了 release。</p>
+<h4 id="Toll-Free-bridged"><a href="#Toll-Free-bridged" class="headerlink" title="Toll-Free bridged"></a>Toll-Free bridged</h4><p>在iOS世界，主要有两种对象：Objective-C 对象和 Core Foundation 对象0。Core Foundation 对象主要是有C语言实现的 Core Foundation Framework 的对象，其中也有对象引用计数的概念，只是不是 Cocoa Framework::Foundation Framework 的 retain/release，而是自身的 CFRetain/CFRelease 接口。</p>
+<p>这两种对象间可以互相转换和操作，不使用ARC的时候，单纯的用C原因的类型转换，不需要消耗CPU的资源，所以叫做 Toll-Free bridged。比如 NSArray和CFArrayRef, NSString和CFStringRef，他们虽然属于不同的 Framework，但是具有相同的对象结构，所以可以用标准C的类型转换。</p>
+<p>比如不使用ARC时，我们用下面的代码：</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (CFStringRef)string;
+</code></pre><p>同样，Core Foundation类型向Objective-C类型转换时，也是简单地用标准C的类型转换即可。<br>但是在ARC有效的情况下，将出现类似下面的编译错误：</p>
+<pre><code> Cast of Objective-C pointer type ‘NSString *’ to C pointer type ‘CFStringRef’ (aka ‘const struct __CFString *’) requires a bridged cast
+ Use __bridge to convert directly (no change in ownership)
+ Use __bridge_retained to make an ARC object available as a +1 ‘CFStringRef’ (aka ‘const struct __CFString *’)
+</code></pre><p>错误中已经提示了我们需要怎样做：用 bridge 或者 bridge_retained 来转型，其差别就是变更对象的所有权。<br>正因为Objective-C是ARC管理的对象，而Core Foundation不是ARC管理的对象，所以才要特意这样转换，这与id类型向void*转换是一个概念。也就是说，当这两种类型（有ARC管理，没有ARC管理）在转换时，需要告诉编译器怎样处理对象的所有权。<br>上面的例子，使用 bridge/bridge_retained 后的代码如下：</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (__bridge CFStringRef)string;
+</code></pre><p>只是单纯地执行了类型转换，没有进行所有权的转移，也就是说，当string对象被释放的时候，cfString也不能被使用了。</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = (__bridge_retained CFStringRef)string;
+...
+CFRelease(cfString); // 由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release
+</code></pre><p>使用 __bridge_retained 可以通过转换目标处（cfString）的 retain 处理，来使所有权转移。即使 string 变量被释放，cfString 还是可以使用具体的对象。只是有一点，由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release。</p>
+<p>实际上，Core Foundation 内部，为了实现Core Foundation对象类型与Objective-C对象类型的相互转换，提供了下面的函数。</p>
+<pre><code>CFTypeRef CFBridgingRetain(id X) {
+ return (__bridge_retained CFTypeRef)X;
+}
+
+id CFBridgingRelease(CFTypeRef X) {
+ return (__bridge_transfer id)X;
+}
+</code></pre><p>所以，可以用 CFBridgingRetain 替代 __bridge_retained 关键字：</p>
+<pre><code>NSString *string = [NSString stringWithFormat:...];
+CFStringRef cfString = CFBridgingRetain(string);
+...
+CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以需要主动release。
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由上面的学习我们了解到 ARC 中类型转换的用法，那么我们实际使用中按照怎样的原则或者方法来区分使用呢，下面我总结了几点关键要素。<br>明确被转换类型是否是 ARC 管理的对象Core Foundation 对象类型不在 ARC 管理范畴内<br>Cocoa Framework::Foundation 对象类型（即一般使用到的Objectie-C对象类型）在 ARC 的管理范畴内</p>
+<p>如果不在 ARC 管理范畴内的对象，那么要清楚 release 的责任应该是谁<br>各种对象的生命周期是怎样的</p>
+<p>1. 声明 id obj 的时候，其实是缺省的申明了一个 <strong>strong 修饰的变量，所以编译器自动地加入了 retain 的处理，所以说 </strong>bridge_transfer 关键字只为我们做了 release 处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/25/Core Foundation 框架详解/" data-id="cjcof1tka000xdk0rm4f5fkl0" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ICMP协议与Ping原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/22/ICMP协议与Ping原理/" class="article-date">
@@ -121,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjcden9b30014ug0r2hbxaod8" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/22/ICMP协议与Ping原理/" data-id="cjcof1tki0014dk0riqgrimfi" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -272,7 +464,7 @@ wuqiong:~ apple$ otool -l libTest.a | grep bitcode
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjcden9kz005tug0rvrl53jbg" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/20/深入理解iOS开发中的BitCode功能/" data-id="cjcof1tre005udk0rxyri7zyb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -460,7 +652,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjcden9lp006bug0rx3bclo36" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/详解 iOS 多图下载的缓存机制/" data-id="cjcof1trx006cdk0rtjcldq98" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -505,7 +697,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjcden9cn0021ug0rqcfq1dnx" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/19/Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cjcof1tm2001xdk0rvhc0p0fa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -565,7 +757,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjcden9ez002zug0rs7jaxggj" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/18/Wi-Fi定位原理/" data-id="cjcof1tmt002ydk0r5cixuwmg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -614,7 +806,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjcden9ck001yug0rx8c1i098" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/15/Objective-C限定词 (摘抄自Objective-C程序设计第六版）/" data-id="cjcof1tm40020dk0rgtzp5hg8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -670,7 +862,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjcden9i7004nug0r8x34lsrq" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/内部排序和外部排序/" data-id="cjcof1tpm004mdk0r1j25xvix" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -981,246 +1173,7 @@ cell.imageView.image = [UIImage imageWithData:imageData];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjcden9j20051ug0r0s9y6ahk" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-加密安全大补药" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/12/加密安全大补药/" class="article-date">
-  <time datetime="2017-04-12T09:55:53.000Z" itemprop="datePublished">2017-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/12/加密安全大补药/">加密安全大补药</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Base64-编码"><a href="#Base64-编码" class="headerlink" title="Base64 编码"></a>Base64 编码</h2><ul>
-<li>Base 64 编码后的结果能够反算，非常不安全。</li>
-<li>用 base64 编码之后，结果会变大，增加了约 1/3。</li>
-<li>用 base64 编码的结果有非常明显的特点，末尾有 = 。</li>
-</ul>
-<hr>
-<h2 id="对称算法"><a href="#对称算法" class="headerlink" title="对称算法"></a>对称算法</h2><ul>
-<li>算法公开、计算量小、加密速度快、加密效率高，可以对大数据进行加密。</li>
-<li>双方使用相同钥匙，安全性得不到保证。秘钥的安全性非常重要，普遍采用的方法是使用 RSA 的加密算法加密给对称加密算法的秘钥进行加密。</li>
-<li>对称加密的速度比公钥加密快很多，在很多场合都需要对称加密。</li>
-<li><p>加密方法：</p>
-<ul>
-<li>DES ：数据加密标准。<ul>
-<li>是一种分组数据加密技术，先将数据分成固定长度的小数据块，之后进行加密。</li>
-<li>速度较快，适用于大量数据加密。</li>
-</ul>
-</li>
-<li>3DES：使用三组密钥做三次加密。<pre><code>*   是一种基于 DES 的加密算法，使用 3 个不同密钥对同一个分组数据块进行 3 次加密，如此以使得密文强度更高。
-</code></pre></li>
-<li><p>AES ：高级加密标准。</p>
-<ul>
-<li>是美国联邦政府采用的一种区块加密标准。</li>
-<li>相较于 DES 和 3DES 算法而言，AES 算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>加密技术：</p>
-<ul>
-<li>ECB ：电子代码本，就是说每个块都是独立加密的。</li>
-<li><p>CBC ：密码块链，使用一个密钥和一个初始化向量(IV)对数据执行加密转换。</p>
-<ul>
-<li>CBC 加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="非对称算法"><a href="#非对称算法" class="headerlink" title="非对称算法"></a>非对称算法</h2><ul>
-<li><a href="http://baike.baidu.com/link?url=bcaM-sDHmaRhphKXH6Em2p4E7s-Hz1j4b83k1MIbx9ZQwyhN2_mYcgShu_83RXarBvmyc3kKYodI4wyv5nC1KELF_-y4iZRh9O50cRb0x83tR3HksYvEWrHOOkEa4q8hMBzUm2GApByXXzx5uzs7G_" target="_blank" rel="noopener">非对称算法</a>是指加密和解密使用不同密钥的算法，又称公钥加密。</li>
-<li>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey），公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。</li>
-<li>非对称密码体制的特点：算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快，适合对小数据加密。</li>
-<li>对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</li>
-<li><p>加密方法：</p>
-<ul>
-<li><p>RSA ：</p>
-<ul>
-<li>由于 RSA 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取数据本身的加密解密使用对称加密算法(AES/DES3)，用 RSA 算法加密并传输对称算法所需的秘钥。</li>
-<li>RSA 算法还在身份认证（或称鉴权）以及数字签名方面得到广泛的使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h2><ul>
-<li><a href="http://baike.baidu.com/link?url=hlbEtGdEcEkX1VfiwsRiY-Bc73pEV582oBP1T7Trz-yrv0rVLPjidtfVyqwzuR3qRn3jHQaxw_OJjK0U_p6vCTwGHKZQAy1s-wzxt50QCNFxy22BhiB79a8yIgoq1i5z" target="_blank" rel="noopener">散列算法</a>又称散列函数，哈希(HASH)函数，该函数将数据打乱混合，重新创建一个叫做散列值的指纹。</li>
-<li>任意二进制数据进行 “散列”，即对不同长度的输入消息，产生固定长度的输出。这个固定长度的输出称为原输入消息的 “散列” 或 “消息摘要”。</li>
-<li>对任意一个二进制数据进行加密，可以得到定长的字符串结果。相同的字符串，使用相同的算法，每次加密的结果是固定的。</li>
-<li>散列不能逆运算，常用在用户密码上，服务器不需要知道用户的准确密码。</li>
-<li><p>加密方法：</p>
-<ul>
-<li><p><a href="http://baike.baidu.com/link?url=LvNy7xajWfhabxkF4KcV9wvgzpi-vtT6HS8jv_6PtiwzS_Zlzj6vuNVzrflB_YdvuMYpL4Qzxsd6w9_81ght0a" target="_blank" rel="noopener">MD5</a> ：加密结果只有 32 个字符，因为数据长度不够，现在国外基本上已经不怎么用了，国内用的很普遍。</p>
-<ul>
-<li>MD5 不能反算，但 MD5 已经被<a href="http://baike.baidu.com/subview/350813/7544439.htm" target="_blank" rel="noopener">破解</a>了，用碰撞算法，可以将两个不同的文件生成出相同的 MD5 结果。</li>
-<li>MD5 在线加密解密网站 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</li>
-<li><p>终端命令：</p>
-</li>
-<li><pre><code>  $ echo -n hello | openssl md5  
-  $ echo -n hello | openssl sha1
-  $ echo -n hello | openssl sha -sha256
-  $ echo -n hello | openssl sha -sha512
-</code></pre></li>
-<li><p>MD5 常用加密方式：</p>
-<ul>
-<li>直接使用 MD5 加密：</li>
-<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 上很容易被破解。</li>
-</ul>
-</li>
-<li><p>MD5 + 盐 加密：</p>
-<ul>
-<li>早期方案。关于盐，随机添加的字符串，要够长，够复杂。</li>
-<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 不易被破解。</li>
-</ul>
-</li>
-<li><p>MD5 + HMAC加密：</p>
-<ul>
-<li>HMAC 是一个结合了散列函数的加密算法。给定一个 “密钥”，分别作两次加密和散列，密钥强度要求不那么高。国外用的比较多，国内还可以。</li>
-<li><p>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</p>
-</li>
-<li><p>MD5 + HMAC + 时间戳 加密：</p>
-<ul>
-<li>相同的加密算法+相同的密码明文，每分钟的结果是不一样的。只有每次都不一样，黑客才不好猜。加时间戳，需要客户端和服务器端采用相同的加密算法。</li>
-</ul>
-</li>
-<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</li>
-<li>用户注册时发送 pwd.hmac 密码给服务器记录。关于用户第一次的密码安全，被黑客拦截到的几率非常非常低，增加附加安全手段，如 IP 辅助，手机绑定等。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200229534-756739925.png" alt="sign3"><ul>
-<li>用户登录时发送经过时间戳加密的密码给服务器端，服务器端根据用户名从数据库中取出记录的 pwd.hmac 密码，加上当前时间（时分）计算一次时间戳密码，加上当前时间（时(分－1)）计算一次时间戳密码，分别与用户发过来的密码进行比对，只要有一个相同，便认为用户是合法的。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200235081-321804614.png" alt="sign4"></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>SHA1 ：理论上已经被破解</p>
-</li>
-<li>SHA256：美国国家安全局、苹果等在使用的</li>
-<li>SHA512：</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="iOS-上-非对称加密算法"><a href="#iOS-上-非对称加密算法" class="headerlink" title="iOS 上 非对称加密算法"></a>iOS 上 非对称加密算法</h2><p>在 iOS 中使用 RSA 加密解密，需要用到 .der 和 .p12 后缀格式的文件，其中 .der 格式的文件存放的是公钥（Public key）用于加密，.p12 格式的文件存放的是私钥（Private key）用于解密. 首先需要先生成这些文件，然后再将文件导入工程使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjcden9if004pug0rhdxv6q56" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关于Runtime的两个用处" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/11/关于Runtime的两个用处/" class="article-date">
-  <time datetime="2017-04-11T14:39:35.000Z" itemprop="datePublished">2017-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/关于Runtime的两个用处/">关于Runtime的两个用处</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发人员都知道Runtine是比较底层的东西，平时用得少，但是一旦用起来，威力是巨大的，常常有四两拨千斤的用处。</p>
-<h3 id="Runtime是什么"><a href="#Runtime是什么" class="headerlink" title="Runtime是什么"></a>Runtime是什么</h3><blockquote>
-<p>运行时刻是指一个程序在运行（或者在被执行）的状态。也就是说，当你打开一个程序使它在电脑上运行的时候，那个程序就是处于运行时刻。在一些编程语言中，把某些可以重用的程序或者实例打包或者重建成为“运行库”。这些实例可以在它们运行的时候被连接或者被任何程序调用。</p>
-</blockquote>
-<ul>
-<li>Runtime从字面上理解是运行时的意思，OC是一门动态编程语言，归因于继承和多态，代码的最终实现在运行的时候才最终确定。而Runtime可以通过这种特性，在程序运行前对代码自定义。Runtime是一个开源库，通过这个库，OC中的[target doMethodWith:var1]转换为objc_msgSend(target,@selector(doMethodWith:),var1)，下面就来看看这个转换是怎么发生的。</li>
-<li><strong>注意使用Runtime需要导入objc/runtime.h头文件</strong></li>
-</ul>
-<h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
-<li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
-</ul>
-<pre><code>struct objc_object {
-  Class isa  OBJC_ISA_AVAILABILITY;
-};
-typedef struct objc_object *id;
-</code></pre><p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
-<ul>
-<li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
-</ul>
-<pre><code>struct objc_class {
-      Class isa  OBJC_ISA_AVAILABILITY;
-
-  #if !__OBJC2__
-      Class super_class                       OBJC2_UNAVAILABLE;  // 父类
-      const char *name                        OBJC2_UNAVAILABLE;  // 类名
-      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0
-      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识
-      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小
-      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表
-      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表
-      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存
-      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表
-  #endif
-
-  } OBJC2_UNAVAILABLE;
-</code></pre><p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    _objc_ivar<em>list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    _objc_method<em>list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
-<ul>
-<li>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：</li>
-<li><img src="http://upload-images.jianshu.io/upload_images/3523280-1a77c1c4e00afedf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
-</ul>
-<h4 id="2-target-doMethodWith-var1-是怎么运行的"><a href="#2-target-doMethodWith-var1-是怎么运行的" class="headerlink" title="2.  [target doMethodWith:var1]是怎么运行的"></a>2.  [target doMethodWith:var1]是怎么运行的</h4><ul>
-<li>首先代码运行时会将[target doMethodWith:var1]编译为objc_msgSend(target,@selector(doMethodWith:),var1)，然后通过target对象结构体中的isa指针寻找到对象的结构体地址。</li>
-<li>在寻找到类的结构体后，如果方法doMethodWith:是实例方法，就在类结构体中的methodLists寻找这个方法来执行，如果没有找到，就会通过类的super_class指针到父类的methodLists去寻找，一直向上，如果在根类没有找到，就会crash；如果是类方法，就会通过类结构体中的isa指针找到元类结构体的地址，在元类的methodLists寻找类方法，如果没有找到也会像上面的父类去寻找，最终没有找到也会crash。</li>
-<li>var1是执行doMethodWith:方法需要的参数，不必多说。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjcden9hk004hug0r39grj74y" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/哈希排序/" data-id="cjcof1tqr0054dk0r2pov41o5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1273,6 +1226,14 @@ typedef struct objc_object *id;
       <ul>
         
           <li>
+            <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/tensorflow笔记（7）/">tensorflow笔记（7）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
           </li>
         
@@ -1282,14 +1243,6 @@ typedef struct objc_object *id;
         
           <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
       </ul>

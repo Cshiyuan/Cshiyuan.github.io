@@ -65,6 +65,158 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-周记总结 2017-03-17记下" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/周记总结 2017-03-17记下/" class="article-date">
+  <time datetime="2017-03-17T12:01:08.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/周记总结 2017-03-17记下/">周记总结 2017-03-17记下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="UITableViewCell左侧会有默认15像素的空白"><a href="#UITableViewCell左侧会有默认15像素的空白" class="headerlink" title="UITableViewCell左侧会有默认15像素的空白"></a>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白</span></h3><p><span class="s1">在iOS</span>7<span class="s1">中，</span>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白。这时候，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">能将空白去掉。</span></p>
+<p><span class="s1">但是在</span>ios8<span class="s1">中，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">已经不起作用了。下面是解决办法</span></p>
+<p>首先在<span class="s2">viewDidLoad</span>方法加入以下代码：</p>
+<pre><code>if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+
+}
+
+if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+
+}
+</code></pre><p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
+<pre><code>– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+
+    }
+
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+
+    }
+
+}
+</code></pre><hr>
+<h3 id="封装View注意事项"><a href="#封装View注意事项" class="headerlink" title="封装View注意事项"></a>封装View注意事项</h3><p><span class="s1">封装</span>view<span class="s1">的时候要注意在</span>-<span class="s1">(</span>void<span class="s1">)</span>layoutSubviews<span class="s1">中重写子视图的</span>frame</p>
+<hr>
+<h3 id="Block的书写格式"><a href="#Block的书写格式" class="headerlink" title=" Block的书写格式"></a><span class="s2"> Block的书写格式</span></h3><p><span class="s2">Block</span>的格式<span class="s2">:  ^ + </span>返回值类型(可以省略)<span class="s2"> + </span>(参数)(如果没有参数,可以省略)<span class="s2"> + {</span>表达式<span class="s2">}</span></p>
+<p><span class="s2">     Block</span>变量格式<span class="s2">: </span>返回值类型(不可省略, 最少<span class="s2">void</span>)<span class="s2"> + </span>(<span class="s2">^</span>变量名称)<span class="s2"> + </span>(参数) (不可省略, 至少())<span class="s2">.  </span>格式和函数指针很相似,只是把<span class="s2">*</span>改成了<span class="s2">^.</span></p>
+<p>修复在没有获得位置就连接<span class="s2">Socket</span>，上传位置信息的<span class="s2">bug</span></p>
+<hr>
+<h3 id="模拟器的坑"><a href="#模拟器的坑" class="headerlink" title="模拟器的坑"></a>模拟器的坑</h3><p>如果用模拟器，有时候会选择直接电脑键盘输入，但这时候需要考虑很多问题。因为键盘弹出事件就消失了。</p>
+<hr>
+<h3 id="关于OC在浮点数-f说明"><a href="#关于OC在浮点数-f说明" class="headerlink" title="关于OC在浮点数.f说明"></a>关于OC在浮点数.f说明</h3><p><span class="s1">1.</span>如果是赋给<span class="s1">CGFloat</span>类型，则加不加<span class="s1">f</span>后缀都是一样的。</p>
+<p><span class="s1">2.</span>如果是赋给<span class="s1">double</span>或<span class="s1">float</span>类型，就要考虑精度的问题。不加<span class="s1">f</span>后缀的话类型为<span class="s1">double</span>，<span class="s1">8</span>字节，加<span class="s1">f</span>后缀的话类型为<span class="s1">float</span>，<span class="s1">4</span>字节。</p>
+<hr>
+<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><pre><code>+ (AccountManager *)sharedManager
+{
+        static AccountManager *sharedAccountManagerInstance = nil;
+        static dispatch_once_t predicate;
+        dispatch_once(&amp;predicate, ^{
+                sharedAccountManagerInstance = [[self alloc] init];
+        });
+    return sharedAccountManagerInstance;
+}
+</code></pre><hr>
+<h3 id="Block会复制到堆的情况"><a href="#Block会复制到堆的情况" class="headerlink" title="Block会复制到堆的情况"></a><span class="s1">Block</span>会复制到堆的情况</h3><p>1.<span class="s1">调用</span>Block<span class="s1">的</span>copy<span class="s1">实例方法</span></p>
+<p><span class="s2">2.Block</span>作为函数返回值时</p>
+<p>3.<span class="s1">将</span>Block<span class="s1">赋值给附有</span>_strong<span class="s1">修饰符</span>id<span class="s1">类型的类或</span>Block<span class="s1">类成员变量时</span></p>
+<p>3.<span class="s1">在方法名中含有</span>usingBlock<span class="s1">的</span>Cocoa<span class="s1">框架方法或</span>Grand Central Dispatch<span class="s1">的</span>API<span class="s1">中传递</span>Block<span class="s1">时</span></p>
+<hr>
+<h3 id="对使用-block变量避免循环引用的方法和使用weak修饰符及unsafe-unretained修饰符避免循环引用的方法做个比较"><a href="#对使用-block变量避免循环引用的方法和使用weak修饰符及unsafe-unretained修饰符避免循环引用的方法做个比较" class="headerlink" title="对使用_block变量避免循环引用的方法和使用weak修饰符及unsafe_unretained修饰符避免循环引用的方法做个比较"></a>对使用<span class="s1">_block</span>变量避免循环引用的方法和使用<span class="s1"><strong>weak</strong></span>修饰符及<span class="s1">unsafe_unretained</span>修饰符避免循环引用的方法做个比较</h3><p><span class="s1">1.</span>通过<span class="s1">__block</span>变量可控制对象的持有期间</p>
+<p><span class="s1">2.</span>在不能使用<span class="s1"><strong>weak</strong></span>修饰符的环境中不使用<span class="s1">unsafe</span>)<span class="s1">unretained</span>修饰符即可(不必担心悬垂指针)</p>
+<p><span class="s1">3.</span>在执行<span class="s1">Block</span>时可动态地决定是否将<span class="s1">nil</span>或其他对象赋值在<span class="s1">__block</span>变量中</p>
+<p><span class="s1">4.</span>为避免循环引用必须执行<span class="s1">Block</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/17/周记总结 2017-03-17记下/" data-id="cjcof1tqb004ydk0r6txvnqo1" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-POST git-receive-pack (chunked)问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" class="article-date">
+  <time datetime="2017-03-17T08:55:41.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/POST git-receive-pack (chunked)问题解决方法/">POST git-receive-pack (chunked)问题解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">出现</span> POST git-receive-pack <span class="s1">(</span>chunked<span class="s1">)</span> <span class="s1">的原因就是</span> <span class="s1">当使用</span> HTTPS <span class="s1">提交到</span> Git <span class="s1">上时使用不检查加密要是东西过多将导致提交停止</span></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><hr>
+<h3 id="方案1-gt-使用-Git-提交代码"><a href="#方案1-gt-使用-Git-提交代码" class="headerlink" title="方案1&gt;  使用 Git 提交代码"></a><span class="s1">方案</span>1&gt;  <span class="s1">使用</span> Git <span class="s1">提交代码</span></h3><p><span class="s1">进入到要提交的代码的目录，里面包含</span> .git <span class="s1">文件夹，输入指令</span> git config http.postBuffer 524288000</p>
+<hr>
+<h3 id="方案2-gt-使用-SourceTreee-提交代码"><a href="#方案2-gt-使用-SourceTreee-提交代码" class="headerlink" title="方案2&gt; 使用 SourceTreee 提交代码"></a><span class="s1">方案</span>2&gt; <span class="s1">使用</span> SourceTreee <span class="s1">提交代码</span></h3><p>如图按照顺序依次点击在最后一步增加</p>
+<p><span class="s1">[</span>http<span class="s1">]</span></p>
+<pre><code>postBuffer = 524288000
+</code></pre><p>再次提交将会成功<span class="s2"> </span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/17/POST git-receive-pack (chunked)问题解决方法/" data-id="cjcof1tlw001vdk0rffgrelgg" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ipa的组成" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/13/ipa的组成/" class="article-date">
@@ -109,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjcden9fp003bug0rlgkinqxn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/13/ipa的组成/" data-id="cjcof1tnj0038dk0reqh1ow9z" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -157,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcden9m0006hug0rxomjmxdy" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/非对称加密算法和摘要算法/" data-id="cjcof1ts7006idk0rfxn1x66f" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -251,7 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcden9el002sug0rp1dfnu83" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL Schemes/" data-id="cjcof1tmp002tdk0rk29whrq1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -301,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcden9d8002fug0r1qvxjjgr" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH——Secure SHell（安全外壳协议）/" data-id="cjcof1tme002edk0r90l9tse8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -405,7 +557,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcden9jn0057ug0ra4jbtzbu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/小代码合集/" data-id="cjcof1tqv0058dk0r8tsvplch" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -457,7 +609,7 @@ int index = (int)[arrView indexOfObject:self];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcden9bb0017ug0r9qx7k5qb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface Builde（nib和xib的深究）/" data-id="cjcof1tko0017dk0rt1lkvhz2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -563,7 +715,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcden9iu004vug0rrys51b1f" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjcof1tqg0050dk0rfyj49mrg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -611,103 +763,7 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcden9le0065ug0rrnlhemhz" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Java和C  的区别（转载）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/11/Java和C  的区别（转载）/" class="article-date">
-  <time datetime="2017-02-11T14:40:32.000Z" itemprop="datePublished">2017-02-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/Java和C  的区别（转载）/">Java和C++的区别（转载）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <div id="article_content" class="article_content"><br><div><br><br>　　1.<u><a href="http://lib.csdn.net/base/javase" title="Java SE知识库" target="_blank" rel="noopener">Java</a>没有显式指针</u>，而在C++中却可以用。<br><br>2.Java是<u>主动多态的</u>，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。<br><br>3.Java是<u>隐式继承的</u>，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能谈到实例化的对象。这时，Java看上去是强制面向对象。C++却把话都说明白了，你继承谁就继承谁，继承多个都可以，你什么都不说那么就不继承。但是C++当中，不继承不代表不能被继承，实际上C++禁止这么做。原因前面已经说过了，C++是被动多态的。你不用virtual去修饰基类的成员函数，程序执行时函数调用就不会自动调到派生类。<br><br>4.Java<u>有接口</u>，C++中却没有。这不是说C++不好，只是C++没有明确提出这样一个概念。C++中定义一个抽象类，把成员函数设为常量，并改成纯虚函数，数据域也设成常量，那么<u>在C++中这样的抽象类就是接口</u>。你可以说它不是，因为C++中没有接口，但是我要说明的是，C++可以做出一个接口来。<br><br>5.Java是<u>单根继承</u>（Single inheritance）的，但是允许一个类实现多个接口。<u>C++却支持多继承</u>，尽管很少有人去用它。<br><br>6.Java和C++最显著的区别体现在对象的处理上。Java中，对象变量在内部被当作指针处理。Java文献指出将对象变量作为引用，不过它们与C++中的引用并不完全相同。所谓引用，就是一个介于指针和变量之间的东西。<br><br>7.<u>Java中所有的函数都与类相关，没有全局变量和非成员函数，而C++却支持这些</u>。从这个角度上讲，C++又是强制面向对象的。因为C++当中可以没有类，即使没有类，程序依然执行得好好的，并且在程序设计的功能很少的时候，我就喜欢这么干。偶尔面向过程编程，又有什么不好呢？<br><br>8.C++中，你使用的动态内存怎么用就怎么还，Java中你不用管，<u>Java包含一个垃圾收集系统</u>，作为运行时库的一部分。它会监视正在运行的程序，当内存不足的时候自动去回收它，当然你也可以干预这个过程，不过如无必要，你不必惦记这件事，Java总会把你的硬件想象得比较好，不到万不得已不回收动态内存，这也解决了C++程序的内存泄漏问题，虽然这是程序员自己的不负责任。<br><br>9.Java有很紧凑的<u>异常处理机制</u>，而C++稍微显得草率了一些。但是这并不代表C++异常处理机制不强大，因为Java只能抛出Throwable子类的异常，C++却什么都可以。<br><div>　　10.Java标准库又是Java庞大的体现，涵盖了国际化、网络化、数学、声音、Web应用和服务以及数据库等。你可以说Java语言在JSP、JavaScipt、网络编程、分布计算交易管理应用、Java ME应用、Web应用上风光无限，说Java是一门小巧的语言，但是Java的小巧也主要就小巧这些方面。</div><br></div><br></div><br><div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1491922184681"></div><br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/11/Java和C  的区别（转载）/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcden9bv001gug0rhhueoajw" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OAuth(笔记)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/11/OAuth(笔记)/" class="article-date">
-  <time datetime="2017-02-11T05:36:09.000Z" itemprop="datePublished">2017-02-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/OAuth(笔记)/">OAuth(笔记)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span class="s1">三、</span><strong>OAuth</strong><span class="s1">的思路</span></p>
-<p><span class="s2">OAuth</span>在<span class="s2">“</span>客户端<span class="s2">“</span>与<span class="s2">“</span>服务提供商<span class="s2">“</span>之间，设置了一个授权层（<span class="s2">authorization layer</span>）。<span class="s2">“</span>客户端<span class="s2">“</span>不能直接登录<span class="s2">“</span>服务提供商<span class="s2">“</span>，只能登录授权层，以此将用户与客户端区分开来。<span class="s2">“</span>客户端<span class="s2">“</span>登录授权层所用的令牌（<span class="s2">token</span>），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。</p>
-<p><span class="s2">“</span>客户端<span class="s2">“</span>登录授权层以后，<span class="s2">“</span>服务提供商<span class="s2">“</span>根据令牌的权限范围和有效期，向<span class="s2">“</span>客户端<span class="s2">“</span>开放用户储存的资料。</p>
-<p>五、客户端的授权模式</p>
-<p><span class="s3">客户端必须得到用户的授权（</span>authorization grant<span class="s3">），才能获得令牌（</span>access token<span class="s3">）。</span>OAuth 2.0<span class="s3">定义了四种授权方式。</span></p>
-<ul>
-<li><span class="s3">授权码模式（</span>authorization code<span class="s3">）</span></li>
-<li><span class="s3">简化模式（</span>implicit<span class="s3">）</span></li>
-<li><span class="s3">密码模式（</span>resource owner password credentials<span class="s3">）</span></li>
-<li><span class="s3">客户端模式（</span>client credentials<span class="s3">）</span></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcden9c1001lug0rll6n6f61" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcof1trr0066dk0rvekxvyrs" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -760,6 +816,14 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
       <ul>
         
           <li>
+            <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/tensorflow笔记（7）/">tensorflow笔记（7）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
           </li>
         
@@ -769,14 +833,6 @@ NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); /
         
           <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
       </ul>

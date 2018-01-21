@@ -65,6 +65,245 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-加密安全大补药" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/12/加密安全大补药/" class="article-date">
+  <time datetime="2017-04-12T09:55:53.000Z" itemprop="datePublished">2017-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/12/加密安全大补药/">加密安全大补药</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Base64-编码"><a href="#Base64-编码" class="headerlink" title="Base64 编码"></a>Base64 编码</h2><ul>
+<li>Base 64 编码后的结果能够反算，非常不安全。</li>
+<li>用 base64 编码之后，结果会变大，增加了约 1/3。</li>
+<li>用 base64 编码的结果有非常明显的特点，末尾有 = 。</li>
+</ul>
+<hr>
+<h2 id="对称算法"><a href="#对称算法" class="headerlink" title="对称算法"></a>对称算法</h2><ul>
+<li>算法公开、计算量小、加密速度快、加密效率高，可以对大数据进行加密。</li>
+<li>双方使用相同钥匙，安全性得不到保证。秘钥的安全性非常重要，普遍采用的方法是使用 RSA 的加密算法加密给对称加密算法的秘钥进行加密。</li>
+<li>对称加密的速度比公钥加密快很多，在很多场合都需要对称加密。</li>
+<li><p>加密方法：</p>
+<ul>
+<li>DES ：数据加密标准。<ul>
+<li>是一种分组数据加密技术，先将数据分成固定长度的小数据块，之后进行加密。</li>
+<li>速度较快，适用于大量数据加密。</li>
+</ul>
+</li>
+<li>3DES：使用三组密钥做三次加密。<pre><code>*   是一种基于 DES 的加密算法，使用 3 个不同密钥对同一个分组数据块进行 3 次加密，如此以使得密文强度更高。
+</code></pre></li>
+<li><p>AES ：高级加密标准。</p>
+<ul>
+<li>是美国联邦政府采用的一种区块加密标准。</li>
+<li>相较于 DES 和 3DES 算法而言，AES 算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>加密技术：</p>
+<ul>
+<li>ECB ：电子代码本，就是说每个块都是独立加密的。</li>
+<li><p>CBC ：密码块链，使用一个密钥和一个初始化向量(IV)对数据执行加密转换。</p>
+<ul>
+<li>CBC 加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="非对称算法"><a href="#非对称算法" class="headerlink" title="非对称算法"></a>非对称算法</h2><ul>
+<li><a href="http://baike.baidu.com/link?url=bcaM-sDHmaRhphKXH6Em2p4E7s-Hz1j4b83k1MIbx9ZQwyhN2_mYcgShu_83RXarBvmyc3kKYodI4wyv5nC1KELF_-y4iZRh9O50cRb0x83tR3HksYvEWrHOOkEa4q8hMBzUm2GApByXXzx5uzs7G_" target="_blank" rel="noopener">非对称算法</a>是指加密和解密使用不同密钥的算法，又称公钥加密。</li>
+<li>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey），公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。</li>
+<li>非对称密码体制的特点：算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快，适合对小数据加密。</li>
+<li>对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</li>
+<li><p>加密方法：</p>
+<ul>
+<li><p>RSA ：</p>
+<ul>
+<li>由于 RSA 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取数据本身的加密解密使用对称加密算法(AES/DES3)，用 RSA 算法加密并传输对称算法所需的秘钥。</li>
+<li>RSA 算法还在身份认证（或称鉴权）以及数字签名方面得到广泛的使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h2><ul>
+<li><a href="http://baike.baidu.com/link?url=hlbEtGdEcEkX1VfiwsRiY-Bc73pEV582oBP1T7Trz-yrv0rVLPjidtfVyqwzuR3qRn3jHQaxw_OJjK0U_p6vCTwGHKZQAy1s-wzxt50QCNFxy22BhiB79a8yIgoq1i5z" target="_blank" rel="noopener">散列算法</a>又称散列函数，哈希(HASH)函数，该函数将数据打乱混合，重新创建一个叫做散列值的指纹。</li>
+<li>任意二进制数据进行 “散列”，即对不同长度的输入消息，产生固定长度的输出。这个固定长度的输出称为原输入消息的 “散列” 或 “消息摘要”。</li>
+<li>对任意一个二进制数据进行加密，可以得到定长的字符串结果。相同的字符串，使用相同的算法，每次加密的结果是固定的。</li>
+<li>散列不能逆运算，常用在用户密码上，服务器不需要知道用户的准确密码。</li>
+<li><p>加密方法：</p>
+<ul>
+<li><p><a href="http://baike.baidu.com/link?url=LvNy7xajWfhabxkF4KcV9wvgzpi-vtT6HS8jv_6PtiwzS_Zlzj6vuNVzrflB_YdvuMYpL4Qzxsd6w9_81ght0a" target="_blank" rel="noopener">MD5</a> ：加密结果只有 32 个字符，因为数据长度不够，现在国外基本上已经不怎么用了，国内用的很普遍。</p>
+<ul>
+<li>MD5 不能反算，但 MD5 已经被<a href="http://baike.baidu.com/subview/350813/7544439.htm" target="_blank" rel="noopener">破解</a>了，用碰撞算法，可以将两个不同的文件生成出相同的 MD5 结果。</li>
+<li>MD5 在线加密解密网站 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</li>
+<li><p>终端命令：</p>
+</li>
+<li><pre><code>  $ echo -n hello | openssl md5  
+  $ echo -n hello | openssl sha1
+  $ echo -n hello | openssl sha -sha256
+  $ echo -n hello | openssl sha -sha512
+</code></pre></li>
+<li><p>MD5 常用加密方式：</p>
+<ul>
+<li>直接使用 MD5 加密：</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 上很容易被破解。</li>
+</ul>
+</li>
+<li><p>MD5 + 盐 加密：</p>
+<ul>
+<li>早期方案。关于盐，随机添加的字符串，要够长，够复杂。</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 不易被破解。</li>
+</ul>
+</li>
+<li><p>MD5 + HMAC加密：</p>
+<ul>
+<li>HMAC 是一个结合了散列函数的加密算法。给定一个 “密钥”，分别作两次加密和散列，密钥强度要求不那么高。国外用的比较多，国内还可以。</li>
+<li><p>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</p>
+</li>
+<li><p>MD5 + HMAC + 时间戳 加密：</p>
+<ul>
+<li>相同的加密算法+相同的密码明文，每分钟的结果是不一样的。只有每次都不一样，黑客才不好猜。加时间戳，需要客户端和服务器端采用相同的加密算法。</li>
+</ul>
+</li>
+<li>在 <a href="http://cmd5.com/" target="_blank" rel="noopener">http://cmd5.com</a> 无法破解。</li>
+<li>用户注册时发送 pwd.hmac 密码给服务器记录。关于用户第一次的密码安全，被黑客拦截到的几率非常非常低，增加附加安全手段，如 IP 辅助，手机绑定等。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200229534-756739925.png" alt="sign3"><ul>
+<li>用户登录时发送经过时间戳加密的密码给服务器端，服务器端根据用户名从数据库中取出记录的 pwd.hmac 密码，加上当前时间（时分）计算一次时间戳密码，加上当前时间（时(分－1)）计算一次时间戳密码，分别与用户发过来的密码进行比对，只要有一个相同，便认为用户是合法的。<img src="http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200235081-321804614.png" alt="sign4"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SHA1 ：理论上已经被破解</p>
+</li>
+<li>SHA256：美国国家安全局、苹果等在使用的</li>
+<li>SHA512：</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="iOS-上-非对称加密算法"><a href="#iOS-上-非对称加密算法" class="headerlink" title="iOS 上 非对称加密算法"></a>iOS 上 非对称加密算法</h2><p>在 iOS 中使用 RSA 加密解密，需要用到 .der 和 .p12 后缀格式的文件，其中 .der 格式的文件存放的是公钥（Public key）用于加密，.p12 格式的文件存放的是私钥（Private key）用于解密. 首先需要先生成这些文件，然后再将文件导入工程使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/12/加密安全大补药/" data-id="cjcof1tpx004qdk0r42gpmiuv" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于Runtime的两个用处" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/关于Runtime的两个用处/" class="article-date">
+  <time datetime="2017-04-11T14:39:35.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/关于Runtime的两个用处/">关于Runtime的两个用处</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS开发人员都知道Runtine是比较底层的东西，平时用得少，但是一旦用起来，威力是巨大的，常常有四两拨千斤的用处。</p>
+<h3 id="Runtime是什么"><a href="#Runtime是什么" class="headerlink" title="Runtime是什么"></a>Runtime是什么</h3><blockquote>
+<p>运行时刻是指一个程序在运行（或者在被执行）的状态。也就是说，当你打开一个程序使它在电脑上运行的时候，那个程序就是处于运行时刻。在一些编程语言中，把某些可以重用的程序或者实例打包或者重建成为“运行库”。这些实例可以在它们运行的时候被连接或者被任何程序调用。</p>
+</blockquote>
+<ul>
+<li>Runtime从字面上理解是运行时的意思，OC是一门动态编程语言，归因于继承和多态，代码的最终实现在运行的时候才最终确定。而Runtime可以通过这种特性，在程序运行前对代码自定义。Runtime是一个开源库，通过这个库，OC中的[target doMethodWith:var1]转换为objc_msgSend(target,@selector(doMethodWith:),var1)，下面就来看看这个转换是怎么发生的。</li>
+<li><strong>注意使用Runtime需要导入objc/runtime.h头文件</strong></li>
+</ul>
+<h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
+<li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
+</ul>
+<pre><code>struct objc_object {
+  Class isa  OBJC_ISA_AVAILABILITY;
+};
+typedef struct objc_object *id;
+</code></pre><p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
+<ul>
+<li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
+</ul>
+<pre><code>struct objc_class {
+      Class isa  OBJC_ISA_AVAILABILITY;
+
+  #if !__OBJC2__
+      Class super_class                       OBJC2_UNAVAILABLE;  // 父类
+      const char *name                        OBJC2_UNAVAILABLE;  // 类名
+      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0
+      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识
+      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小
+      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表
+      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表
+      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存
+      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表
+  #endif
+
+  } OBJC2_UNAVAILABLE;
+</code></pre><p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    _objc_ivar<em>list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    _objc_method<em>list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
+<ul>
+<li>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：</li>
+<li><img src="http://upload-images.jianshu.io/upload_images/3523280-1a77c1c4e00afedf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+</ul>
+<h4 id="2-target-doMethodWith-var1-是怎么运行的"><a href="#2-target-doMethodWith-var1-是怎么运行的" class="headerlink" title="2.  [target doMethodWith:var1]是怎么运行的"></a>2.  [target doMethodWith:var1]是怎么运行的</h4><ul>
+<li>首先代码运行时会将[target doMethodWith:var1]编译为objc_msgSend(target,@selector(doMethodWith:),var1)，然后通过target对象结构体中的isa指针寻找到对象的结构体地址。</li>
+<li>在寻找到类的结构体后，如果方法doMethodWith:是实例方法，就在类结构体中的methodLists寻找这个方法来执行，如果没有找到，就会通过类的super_class指针到父类的methodLists去寻找，一直向上，如果在根类没有找到，就会crash；如果是类方法，就会通过类结构体中的isa指针找到元类结构体的地址，在元类的methodLists寻找类方法，如果没有找到也会像上面的父类去寻找，最终没有找到也会crash。</li>
+<li>var1是执行doMethodWith:方法需要的参数，不必多说。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/04/11/关于Runtime的两个用处/" data-id="cjcof1tpb004idk0ryx0yktai" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-查缺补漏 2017.04.11" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/11/查缺补漏 2017.04.11/" class="article-date">
@@ -183,7 +422,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjcden9ku005pug0r4a1ejpz1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/11/查缺补漏 2017.04.11/" data-id="cjcof1trc005qdk0rr0xo0lnt" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -263,7 +502,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjcden9fu003dug0r4xalzkjs" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js express框架笔记/" data-id="cjcof1tnv003cdk0rbhskcnp5" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -313,7 +552,7 @@ NSMutableString *stringDCopy = [string mutableCopy];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjcden9d0002aug0r0b86cwtu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python命名规则(转）/" data-id="cjcof1tmc0029dk0rq3mm8ed4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -435,7 +674,7 @@ call now():
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjcden9cw0028ug0r01qzvgvu" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/04/Python3 学习笔记（3）/" data-id="cjcof1tma0027dk0rk4h6dzfd" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -573,7 +812,7 @@ def fact_iter(num, product):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjcden9ct0025ug0rtyz9e7zw" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记（2）/" data-id="cjcof1tm80024dk0r1gx5udu2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -805,7 +1044,7 @@ name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#3
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjcden9cq0023ug0ranxzt7y3" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3 学习笔记 （1）/" data-id="cjcof1tm60022dk0r2ao2x0rn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -893,7 +1132,7 @@ execute()
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjcden9dc002hug0rxevsc2h5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjcof1tmf002gdk0ren25i86j" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1083,158 +1322,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcden9dm002kug0rwlseqluq" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SIP机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/30/SIP机制/" class="article-date">
-  <time datetime="2017-03-30T07:42:44.000Z" itemprop="datePublished">2017-03-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/30/SIP机制/">SIP机制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为最新的OSX有SIP机制，安装的时候命令加上user<br>pip install –user 命令<br>即可！</p>
-<p><div id="article_content" class="article_content"></div></p>
-<div class="markdown_views">
-
-<h3 id="关闭SIP"><a href="#关闭SIP" class="headerlink" title="关闭SIP"></a>关闭SIP</h3><ul>
-<li>重启电脑，按住Command+R(直到出现苹果标志)进入Recovery Mode(恢复模式)</li>
-<li>左上角菜单里找到实用工具 -&gt; 终端</li>
-<li>输入<code>$ csrutil disable</code>回车</li>
-<li>重启Mac即可</li>
-<li><p>如果想重新启动SIP机制重复上述步骤改用<code>$ csrutil enable</code>即可<br>查看SIP状态：</p>
-<p><span class="hljs-variable">$ </span>csrutil status</p>
-</li>
-<li><p>1</p>
-</li>
-<li><p>1<br><code>System Integrity Protection status: enabled.</code></p>
-</li>
-</ul>
-<p></p></div><br><p></p>
-<p><div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1490859913277"></div></p>
-<p><div id="digg"></div><br>&nbsp;</p>
-<h2 id="二、初识SIP"><a href="#二、初识SIP" class="headerlink" title="二、初识SIP"></a>二、初识SIP</h2><p>刚升级完系统之后，我在进行一个操作的时候，遇到了一些问题，主要就是提示系统权限不足，但当我提升到sudo以后，还是提示：Operation not permitted，当时我就挺郁闷，啥情况，我sudo失败了？后面google了一下，才发现，原来OSX EI Capitan中增加了一个SIP功能，不管你是不是su，都会阻止你在系统目录下进行操作……</p>
-<p><strong>当时唯一的想法就是，这个东西能关不？怎么关？还是Google……找到了如下的方法：</strong></p>
-<blockquote>
-<p>(1)重启OSX系统，然后按住Command+R</p>
-<p>(2)出现界面之后，选择Utilities menu中Terminal</p>
-<p>(3)在Terminal中输入csrutil disable关闭SIP(csrutil enable打开SIP)</p>
-<p>(4)重启reboot OSX<br>这个方法在我之前介绍《OSX内核调试技术分享》这篇文章中也提到过（<a href="http://www.freebuf.com/articles/system/90049.html" target="_blank" rel="noopener">链接</a>），其实网上关闭SIP也都是这个，千篇一律吧（网上的文章一大抄，呵呵），如果大家对OSX安全不感兴趣，只想解结这个问题，那到这里就可以了，但作为一个安全研究员，对各种安全系统研究是我们的兴趣和职责所在，如果你对SIP感兴趣，可以继续望下看！</p>
-</blockquote>
-<h2 id="三、SIP工作原理"><a href="#三、SIP工作原理" class="headerlink" title="三、SIP工作原理"></a>三、SIP工作原理</h2><p>SIP全名System Integrity Protection（系统完整性保护），它是为了保护系统进程，文件，文档不被其它进程修改，不管是否为root user，SIP技术主要分为文件系统保护，运行时保护，内核扩展签名,文件系统保护主要是通过沙盒机制限制root权限，运行时保护，主要就是保护关键进程无法被进程代码注入，挂调试器以及内核调试等，内核扩展签名，所有的第三方kext必须被安装到/Library/Extensions，并强制使用签名。</p>
-<p>Apple提供的官方文档中，我们可以找到OSX SIP的工作原理（<a href="http://devstreaming.apple.com/videos/wwdc/2015/706nu20qkag/706/706_security_and_your_apps.pdf" target="_blank" rel="noopener">下载地址</a>）。文档中说明了苹果的新OSX系统，采用了如下的OSX Security Model：</p>
-<p><a href="http://image.3001.net/images/20160229/14567401573597.png" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567401573597.png!small" alt="sip1.png"></a></p>
-<p>这种安全模式削减了之前root权限，同时通过沙箱默认保护系统，提供不能被根自动入侵的配置机制，我们可以通过命令行工具，查看被保护的目录，如图：</p>
-<p><a href="http://image.3001.net/images/20160229/14567401708438.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567401708438.jpg!small" alt="sip2.jpg"></a></p>
-<p>从图中可以看出标志有restricted的为系统限制目录，这些目录是在系统启动的时候，通过OSX新的安全模型被定义的，之后不管用户是否使用root权限都无法对这些目录进行操作，查看目录中的文件信息，也可以看到文件同样被标记为restricted，如下图：</p>
-<p><a href="http://image.3001.net/images/20160229/14567402442881.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567402442881.jpg!small" alt="sip2.5.jpg"></a></p>
-<p>SIP同时也保护驱动程序，我们之前使用第三方驱动的时候，可以通过kext-dev-mode=1来加载第三方驱动程序，SIP强制要求我们把第三方驱动程序放到/Library/Extensions目录下，并且停用了kext-dev-modeboot-arg这个启动项，我们可以查看这个目录下的kext，发现没有restricted，但是系统目录下的kext是被restricted的，具体有哪些目录和文件或驱动被保护，从/System/Library/Sandbox目录中，我们可以看到rootless.conf，这是rootless的配置文件，主要用于说明哪些目录，程序，以及符号链接被保护，如下图所示：</p>
-<p><a href="http://image.3001.net/images/20160229/14567402045169.jpg" target="_blank" rel="noopener"><img src="http://image.3001.net/images/20160229/14567402045169.jpg!small" alt="sip3.jpg"></a></p>
-<p>这个文件说明了OSX系统中被SIP保护的整体配置信息，其实SIP机制就是苹果通过分层的安全机制，在底层设置一个rootless配置文件，然后在系统中，对配置文件中的信息增加一个限制标志项，这种标志信息不可复制，系统默认配置的，存在这个标志的信息，苹果统一通过底层沙箱进行保护，不用去额外权限大小，这样也削减了root在OSX中的权限大小</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcden9d2002cug0r6b8bcpbw" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-rpm和yum详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/30/rpm和yum详解/" class="article-date">
-  <time datetime="2017-03-30T06:19:59.000Z" itemprop="datePublished">2017-03-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机科普级别/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/30/rpm和yum详解/">rpm和yum详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Linux中软件的安装"><a href="#Linux中软件的安装" class="headerlink" title="Linux中软件的安装"></a><strong>Linux中软件的安装</strong></h2><p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
-<p>不论是通过那种途径安装软件都具有一下4个特点：</p>
-<p>1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征</p>
-<p>2.都具有二进制的程序主体</p>
-<p>3.都自带库文件，供程序主体进行调用</p>
-<p>4.都带有帮助文件，对程序的使用方法进行说明</p>
-<p>软件的安装路径：</p>
-<p>除了自行下载源码编译安装的软件可以自定义安装路径之外，rpm包的安装都是按照自身预设的安装路径进行安装。主要有以下几类：</p>
-<p>1./：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
-<p>2./usr：此目录下一般情况下是提供基本服务的软件</p>
-<p>3./usr/local：此目录下一般情况下是用户自行安装的第三方软件</p>
-<p>系统相关：</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/bin 、/sbin</p>
-<p>库文件路径：/lib</p>
-<p>系统提供功能服务相关</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/usr/bin   /usr/sbin</p>
-<p>库文件：/usr/lib</p>
-<p>第三方软件：</p>
-<p>配置文件路径/usr/local/etc</p>
-<p>二进制文件路径：/usr/local/bin  /usr/local/sbin</p>
-<p>库文件：/usr/local/lib</p>
-<p>说明文件主要都存放在/usr/share/man和/usr/local/share/man</p>
-<p>RPM(RedhatPackage Manager)是由redhat公司提供的软件包管理器 ,可以实现软件包的安装、查询、卸载、升级以及校验等但是rpm不能很好的解决软件之间的依赖关系</p>
-<p>&nbsp;</p>
-<hr>
-<hr>
-<h2 id="使用yum软件升级器进行安装"><a href="#使用yum软件升级器进行安装" class="headerlink" title="使用yum软件升级器进行安装"></a><strong>使用yum软件升级器进行安装</strong></h2><p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp://   http:// file:///在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
-<p>yum库文件的配置:</p>
-<p>通过/etc/yum.conf 和 /etc/yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
-<p>yum的配置文件 /etc/yum.conf</p>
-<p>yumrepository仓库的配置文件/etc/yum.repos.d/*.repo</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcden9g7003lug0r70nioys1" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcof1tmi002jdk0r8ozrrkf1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -1287,6 +1375,14 @@ return items
       <ul>
         
           <li>
+            <a href="/2018/01/19/tensorflow笔记（8）/">tensorflow笔记（8）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/tensorflow笔记（7）/">tensorflow笔记（7）</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
           </li>
         
@@ -1296,14 +1392,6 @@ return items
         
           <li>
             <a href="/2018/01/10/tensorflow笔记（4）/">tensorflow笔记（4）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/08/TensorFlow-Classification分类学习/">TensorFlow Classification分类学习</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/07/tensorflow笔记（3）/">tensorflow笔记（3）</a>
           </li>
         
       </ul>
