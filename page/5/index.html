@@ -65,6 +65,94 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Scrapy爬GitHub日记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/31/Scrapy爬GitHub日记/" class="article-date">
+  <time datetime="2017-03-31T12:19:32.000Z" itemprop="datePublished">2017-03-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/Scrapy爬GitHub日记/">Scrapy爬GitHub日记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
+<pre><code>download_delay = 1
+
+headers = {
+    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;
+ }
+</code></pre><hr>
+<p>scrapy的输出有时候太多了，挡住了视线。</p>
+<p>可以在setting中设置LOG_LEVEL</p>
+<hr>
+<p>突然发现，原来GitHub的API有访问限制。</p>
+<pre><code>403 reponse
+{
+&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. 
+(But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,
+&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;
+}
+</code></pre><p>详情：<a href="https://developer.github.com/v3/#rate-limiting" target="_blank" rel="noopener">https://developer.github.com/v3/#rate-limiting</a></p>
+<h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><blockquote>
+<p>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that the Search API has custom rate limit rules.</p>
+</blockquote>
+<p>认证的可以一个小时5000 requests。非认证的一个小时60 requests，差远了。。。</p>
+<hr>
+<h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
+<p>pyCharm是一个强大的pythonIDE</p>
+<p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
+<pre><code>#!/usr/bin/python
+
+from scrapy.cmdline import execute
+execute()
+</code></pre><p>所以当运行scrapy crawler spider时，其实与指令：</p>
+<pre><code>python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider
+</code></pre><p>的效果是一样的</p>
+<p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
+<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
+<p>Name可以随便填</p>
+<p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
+<hr>
+<h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
+<pre><code>class MySpider(CrawlSpider):
+    handle_httpstatus_list = [403]
+</code></pre><blockquote>
+<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br> <a href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes" target="_blank" rel="noopener">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
+</blockquote>
+<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
+<hr>
+<h2 id="split-函数和GitHub-API中的API调用限制"><a href="#split-函数和GitHub-API中的API调用限制" class="headerlink" title="split()函数和GitHub API中的API调用限制"></a>split()函数和GitHub API中的API调用限制</h2><p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
+<p>不是单单查看client_id和client_secret决定的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy爬GitHub日记/" data-id="cjdlsbky9002jxf0r3nkkx2tu" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Scrapy简单方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/31/Scrapy简单方法/" class="article-date">
@@ -245,7 +333,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjcov81650022fc0rsw0dsc6p" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy简单方法/" data-id="cjdlsbkyd002lxf0rrifdrpb4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -323,7 +411,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjcov815w001vfc0r9rjknsku" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP机制/" data-id="cjdlsbky3002fxf0rtd0p4bpc" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -396,7 +484,7 @@ return items
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjcov8178002zfc0r4w64lecb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm和yum详解/" data-id="cjdlsbkzk003mxf0rss5ecmgl" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -505,7 +593,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjcov818f0040fc0r7ofh4j63" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/全面理解面向对象的 JavaScript/" data-id="cjdlsbl10004ixf0rvbv7u7dv" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -546,7 +634,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjcov818c003yfc0r5402k8ux" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/使用react-native时按cmd r不能刷新模拟器/" data-id="cjdlsbl0v004fxf0rznez0egl" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -598,7 +686,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjcov81440005fc0r35bvjpj2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/ React Native笔记/" data-id="cjdlsbkw7000jxf0rn9a5btj4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -652,7 +740,7 @@ console.log(Mammal.prototype.__proto__ === Animal.prototype);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjcov813t0001fc0rwl886es2" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/ iOS 开发证书二次补习 （笔记）/" data-id="cjdlsbkw5000hxf0rjtl327sa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -760,84 +848,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjcov815b0019fc0rauyp5haa" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-objc_msgSend和消息传递机制（大补）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/22/objc_msgSend和消息传递机制（大补）/" class="article-date">
-  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/22/objc_msgSend和消息传递机制（大补）/">objc_msgSend和消息传递机制（大补）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有<strong>「名称(name)」或「选择子(selector)」</strong>,可以接受参数。而且可能还有返回值。</p>
-<hr>
-<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
-<hr>
-<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
-<p>给对象发送消息会转换成</p>
-<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
-<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
-<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
-<hr>
-<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
-<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
-<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
-<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
-<hr>
-<h2 id="尾调用优化（tail-call-optimization-技术"><a href="#尾调用优化（tail-call-optimization-技术" class="headerlink" title="尾调用优化（tail-call optimization) 技术"></a><strong>尾调用优化（tail-call optimization) 技术</strong></h2><p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化”。</p>
-<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
-<hr>
-<h2 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h2><p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
-<hr>
-<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div><br><div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div><br><div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div><br><div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div><br><div><br><br><em> </em> <em><br><br></em></div><br><div>
-
- <em> </em><br><br>### 备援接收者<br><br><div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
-
-<hr>
-<p></p></div><p></p>
-<div>
-
-<h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库" target="_blank" rel="noopener">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
-<p>此步骤会调用下列方法转发消息：</p>
-<pre><code> -(void)forwardInvocation:(NSInvocation*)invocation
-</code></pre><p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
-<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
-<h3 id="消息转发全流程"><a href="#消息转发全流程" class="headerlink" title="消息转发全流程"></a>消息转发全流程</h3><p>下图描述了消息转发的各个步骤：</p>
-<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
-<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
-<hr>
-</div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制（大补）/" data-id="cjcov8176002xfc0r23xy2glb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C 新的很有用的特性(其实是为了swift同步）/" data-id="cjdlsbkxg001wxf0rlk9rqir7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -914,7 +925,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjcov8173002vfc0ro9bkeiak" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/22/objc_msgSend和消息传递机制/" data-id="cjdlsbkzg003gxf0rj2owlmmo" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -954,7 +965,7 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -965,6 +976,10 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS开发日记/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
         
           <li>
             <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
@@ -980,10 +995,6 @@ NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @{@&quot;a&quot;: @1, @&qu
         
           <li>
             <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
           </li>
         
       </ul>

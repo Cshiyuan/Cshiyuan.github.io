@@ -65,6 +65,112 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-周记总结 2017-3-10记下" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/周记总结 2017-3-10记下/" class="article-date">
+  <time datetime="2017-03-10T14:07:52.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/记录问题和心得/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/周记总结 2017-3-10记下/">周记总结 2017-3-10记下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><span class="s1">熟悉Socket.IO原理。</span></li>
+<li><span class="s3">看书《</span><span class="s1">Objective-C高级编程：iOS与OS X多线程和内存管理》</span></li>
+<li><span class="s1">了解iOS的方方面面</span></li>
+</ol>
+<hr>
+<h3 id="关于是否要releases-dispatch-queues："><a href="#关于是否要releases-dispatch-queues：" class="headerlink" title="关于是否要releases dispatch queues："></a>关于是否要releases dispatch queues<span class="s1">：</span></h3><p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
+<p>You need to use dispatch_retain and dispatch_release on your queue. ARC does not manage them.</p>
+<p><strong>If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</strong></p>
+<p>ARC will manage your queue for you. You do not need to (and cannot) use dispatch_retain or dispatch_release if ARC is enabled.</p>
+<p>（简单的说就是在iOS6.0之后，ARC会帮忙我们管理线程队列（GCD）不需要我们去retain或者release了。</p>
+<hr>
+<h3 id="数据模型属性采用的基本策略"><a href="#数据模型属性采用的基本策略" class="headerlink" title="数据模型属性采用的基本策略"></a>数据模型属性采用的基本策略</h3><p>除了基本类型需要用assign，字符串需要用copy，其他对象类型都需要用strong<br>（考虑到循环引用问题时strong和weak从中选择）</p>
+<hr>
+<h3 id="iOS应用到内部储存结构"><a href="#iOS应用到内部储存结构" class="headerlink" title="iOS应用到内部储存结构"></a>iOS应用到内部储存结构</h3><ul>
+<li><strong>Documents</strong>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
+<li><strong>Library/Caches</strong> : 保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
+<li><strong>Library/Preference</strong> :保存应用的所有偏好设置，iOS的 Setting(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</li>
+<li><strong>tmp</strong> :保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录</li>
+</ul>
+<hr>
+<h3 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a>Socket.IO</h3><p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时功能,模糊化各种传输机制。</p>
+<hr>
+<h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
+<p>Global Dispatch Queue<span class="s1">是所有应用程序都能够使用</span>Concurrent Dispatch Queue</p>
+<hr>
+<h3 id="IBOutlet"><a href="#IBOutlet" class="headerlink" title="IBOutlet"></a>IBOutlet</h3><p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
+<p>Interface Builder<span class="s2">则是根据</span>IBOutlet<span class="s2">来寻找可以在</span>Builder<span class="s2">里操作的成员变量。</span></p>
+<p>IBAction<span class="s2">也是。。。（相当于</span>void<span class="s2">）</span></p>
+<p><span class="s2">（</span>The type qualifier IBAction<span class="s2">,</span> which is used in place of the void return type<span class="s2">,</span> flags the declared method as an action so that Interface Builder is aware of it.For an action method to appear in Interface Builder<span class="s2">,</span> you first must declare it in a header file of the class whose instance is to receive the action message.<span class="s2">）</span></p>
+<hr>
+<hr>
+<h3 id="关于设置StatusBarStyle的相关方法"><a href="#关于设置StatusBarStyle的相关方法" class="headerlink" title="关于设置StatusBarStyle的相关方法"></a>关于设置StatusBarStyle的相关方法</h3><p><span class="s1">定制</span>statusBar<span class="s1">的前景部分。</span></p>
+<ul>
+<li><ul>
+<li><span class="s1">(</span>UIStatusBarStyle<span class="s1">)</span>preferredStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li><ul>
+<li><span class="s1">(</span>UIViewController *<span class="s1">)</span>childViewControllerForStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li><ul>
+<li><span class="s1">(</span>void<span class="s1">)</span>setNeedsStatusBarAppearanceUpdate</li>
+</ul>
+</li>
+<li><span class="s1">默认的黑色（</span><strong>UIStatusBarStyleDefault</strong><span class="s1">）</span></li>
+<li><span class="s1">白色（</span><strong>UIStatusBarStyleLightContent</strong><span class="s1">）</span></li>
+</ul>
+<hr>
+<hr>
+<h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
+<p>其实最好可以用代码来查看一下</p>
+<pre><code>CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
+NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 
+CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;
+NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度
+</code></pre><hr>
+<hr>
+<h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong>和<strong>id</strong>的异同</h3><p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
+<p><strong>1</strong>、相同点</p>
+<p>都可以作为方法的返回类型</p>
+<p><strong>2</strong>、不同点</p>
+<p>① instancetype&lt;可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象；</p>
+<p>② instancetype只能作为返回值，不能像id那样作为参数，比如下面的写法：</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cshiyuan.github.io/2017/03/10/周记总结 2017-3-10记下/" data-id="cjdlsbl1l0050xf0rstyidb42" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-编译型与解释型、动态语言与静态语言" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/20/编译型与解释型、动态语言与静态语言/" class="article-date">
@@ -103,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjcov81aa005rfc0rks5aoswb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/20/编译型与解释型、动态语言与静态语言/" data-id="cjdlsbl30006axf0rztrplpgq" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -148,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjcov814x000sfc0rkjd6gagi" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java和C  的区别（转载）/" data-id="cjdlsbkx4001ixf0rfopx41si" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -199,7 +305,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjcov814z000vfc0r3nk550uh" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/OAuth(笔记)/" data-id="cjdlsbkx8001nxf0rvvvtkdqq" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -250,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjcov81680025fc0rn2p5wd04" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/10/Should IBOutlets be strong or weak under ARC/" data-id="cjdlsbkyj002rxf0raqnxm1qy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -292,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjcov8195004dfc0r87d0u4vn" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/动态库与静态库优缺点比较/" data-id="cjdlsbl1d004uxf0r1arnwiyf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -337,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjcov819n004zfc0r58bfebw5" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/惰性加载/" data-id="cjdlsbl26005exf0r3onhufev" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -393,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjcov814b0009fc0rln4xpvet" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/10/CookieSession机制详解/" data-id="cjdlsbkwm0010xf0rroauk87b" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -533,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjcov81910047fc0rsbqxxyb6" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/11/12/关于苹果开发的一些基础知识/" data-id="cjdlsbl19004oxf0ry1xe6j54" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -611,70 +717,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjcov814l000efc0rxf3b3tfj" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OS X" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/17/OS X/" class="article-date">
-  <time datetime="2016-10-17T15:07:01.000Z" itemprop="datePublished">2016-10-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/未分类/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/OS X/">OS X</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>1.  defaults write com.apple.finder AppleShowAllFiles -boolean true ;
-killall Finder
-2.  defaults write com.apple.finder AppleShowAllFiles -boolean false ;
-killall Finder
-</code></pre><p>每个系统都要定期做些维护工作，这不仅是为了提高系统的运行速度也是为了使系统性能发挥到最大，节省可用的磁盘空间。</p>
-<p>现在我向大家介绍几个维护系统的方法。</p>
-<p><strong>修复磁盘权限：</strong></p>
-<p>在[应用程序]目录下有一个[实用程序]的目录下找到磁盘工具，选中你想修复权限的磁盘后分别有两个选择，一个是校验当前的权限，另一个就是修复权限。修复权限可以让系统把磁盘中的所有文件复原它们正确的权限配置，不至于在使用中出现因为权限问题而不能进行操作的情况，也是为了防止恶意程序对系统进行修改。</p>
-<p><strong>修复磁盘：</strong></p>
-<p>如果你使用的是一个文件系统已经损伤了的硬盘的话，那就要注意了，不过不用太担心，用修复磁盘工具可以解决这个问题。 　　找到你的Mac OS X的系统光盘，用它直接启动电脑，之后运行磁盘工具，选择你要修复的磁盘，就可以修复了，很多诸如死机之类的问题往往修复磁盘就能够彻底解决了。为了使数据安全，一定要经常备份重要数据。由磁盘的S.M.A.R.T.状态可以知道当前硬盘的状态，最好每星期检查一次。</p>
-<p><strong>主动维护：</strong></p>
-<p>Mac OS X系统默认在每天凌晨3点后去做定期的系统维护，主要是清除没用的日志和缓存，当然也会备份重要的系统文件。但是如果这段时间里把系统关闭或者休眠，定期维护作业就无法进行了。这样并不会使系统出问题，不过维护可以使硬盘空出更多的可用空间。</p>
-<p>其实完全可以来选择主动维护方式来手动做这些维护，要做这些维护请执行以下命令，要顺着往下做才行。</p>
-<pre><code>sudo periodic daily
-
-sudo periodic weekly
-
-sudo periodic monthly
-</code></pre><p><strong>更新加固：</strong></p>
-<p>如果有时系统在做过更新操作或其它操作之后非常的慢请在终端（Terminal）中执行以下命令：</p>
-<pre><code>sudo update_prebinding -root / -force
-</code></pre><p>回车后，输入管理员密码回车，等运行结束出现$符时，立即重启系统。</p>
-<p>以上几个维护方法，最好每月都能做一次，当然，出现问题时不要急着去重装系统，做一下以上操作也许会很快解决的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/10/17/OS X/" data-id="cjcov81580016fc0r8ejyivmb" class="article-share-link">Teilen</a>
+      <a data-url="https://cshiyuan.github.io/2016/10/28/HTTP (笔记）/" data-id="cjdlsbkwn0012xf0r7sx2rgz2" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -714,7 +757,7 @@ sudo periodic monthly
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -725,6 +768,10 @@ sudo periodic monthly
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS开发日记/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
         
           <li>
             <a href="/2018/01/21/tensorflow笔记（9）/">tensorflow笔记（9）</a>
@@ -740,10 +787,6 @@ sudo periodic monthly
         
           <li>
             <a href="/2018/01/12/tensorflow笔记（6）/">tensorflow笔记（6）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/11/tensorflow笔记（5）/">tensorflow笔记（5）</a>
           </li>
         
       </ul>
