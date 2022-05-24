@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java和C++的区别（转载） | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java和C++的区别（转载）">
+<meta property="og:url" content="http://example.com/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-02-11T14:40:32.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.076Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java和C  的区别（转载）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="article-date">
+  <time datetime="2017-02-11T14:40:32.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java和C++的区别（转载）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="article_content" class="article_content">
+<div>
+<p>1.<u><a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>没有显式指针</u>，而在C++中却可以用。</p>
+<p>2.Java是<u>主动多态的</u>，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。</p>
+<p>3.Java是<u>隐式继承的</u>，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能谈到实例化的对象。这时，Java看上去是强制面向对象。C++却把话都说明白了，你继承谁就继承谁，继承多个都可以，你什么都不说那么就不继承。但是C++当中，不继承不代表不能被继承，实际上C++禁止这么做。原因前面已经说过了，C++是被动多态的。你不用virtual去修饰基类的成员函数，程序执行时函数调用就不会自动调到派生类。</p>
+<p>4.Java<u>有接口</u>，C++中却没有。这不是说C++不好，只是C++没有明确提出这样一个概念。C++中定义一个抽象类，把成员函数设为常量，并改成纯虚函数，数据域也设成常量，那么<u>在C++中这样的抽象类就是接口</u>。你可以说它不是，因为C++中没有接口，但是我要说明的是，C++可以做出一个接口来。</p>
+<p>5.Java是<u>单根继承</u>（Single inheritance）的，但是允许一个类实现多个接口。<u>C++却支持多继承</u>，尽管很少有人去用它。</p>
+<p>6.Java和C++最显著的区别体现在对象的处理上。Java中，对象变量在内部被当作指针处理。Java文献指出将对象变量作为引用，不过它们与C++中的引用并不完全相同。所谓引用，就是一个介于指针和变量之间的东西。</p>
+<p>7.<u>Java中所有的函数都与类相关，没有全局变量和非成员函数，而C++却支持这些</u>。从这个角度上讲，C++又是强制面向对象的。因为C++当中可以没有类，即使没有类，程序依然执行得好好的，并且在程序设计的功能很少的时候，我就喜欢这么干。偶尔面向过程编程，又有什么不好呢？</p>
+<p>8.C++中，你使用的动态内存怎么用就怎么还，Java中你不用管，<u>Java包含一个垃圾收集系统</u>，作为运行时库的一部分。它会监视正在运行的程序，当内存不足的时候自动去回收它，当然你也可以干预这个过程，不过如无必要，你不必惦记这件事，Java总会把你的硬件想象得比较好，不到万不得已不回收动态内存，这也解决了C++程序的内存泄漏问题，虽然这是程序员自己的不负责任。</p>
+<p>9.Java有很紧凑的<u>异常处理机制</u>，而C++稍微显得草率了一些。但是这并不代表C++异常处理机制不强大，因为Java只能抛出Throwable子类的异常，C++却什么都可以。</p>
+<div>　　10.Java标准库又是Java庞大的体现，涵盖了国际化、网络化、数学、声音、Web应用和服务以及数据库等。你可以说Java语言在JSP、JavaScipt、网络编程、分布计算交易管理应用、Java ME应用、Web应用上风光无限，说Java是一门小巧的语言，但是Java的小巧也主要就小巧这些方面。</div>
+</div>
+</div>
+<div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1491922184681"></div>
+<span id="more"></span>
+<div id="digg">
+<dl id="btnDigg" class="digg digg_disable">
+ 	<dt>转自百度文库[http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html](http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html)</dt>
+</dl>
+<dl id="btnBury" class="digg digg_disable"></dl>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" data-id="cl3jmf7mk00269jv34xx494yl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/20/%E7%BC%96%E8%AF%91%E5%9E%8B%E4%B8%8E%E8%A7%A3%E9%87%8A%E5%9E%8B%E3%80%81%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          编译型与解释型、动态语言与静态语言、
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/11/OAuth(%E7%AC%94%E8%AE%B0)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OAuth(笔记)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

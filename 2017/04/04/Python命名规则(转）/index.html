@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python命名规则(转） | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="模块名： 小写字母，单词之间用_分割 参考Python：logging 包名: 小写字母，单词之间用_分割 参考python：logging 类名： 单词首字母大写 参考：python class LogRecord(object): 普通变量： 小写字母，单词之间用_分割 参考：exc_info 实例变量： 以_开头，小写字母，单词之间用_分割 参考:_exc_info 以一个下划线开头的标识符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python命名规则(转）">
+<meta property="og:url" content="http://example.com/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="模块名： 小写字母，单词之间用_分割 参考Python：logging 包名: 小写字母，单词之间用_分割 参考python：logging 类名： 单词首字母大写 参考：python class LogRecord(object): 普通变量： 小写字母，单词之间用_分割 参考：exc_info 实例变量： 以_开头，小写字母，单词之间用_分割 参考:_exc_info 以一个下划线开头的标识符">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-04-04T14:45:26.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.078Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Python命名规则(转）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-04T14:45:26.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python命名规则(转）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>模块名：</strong><br>
+小写字母，单词之间用_分割<br>
+参考<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/python" title="Python知识库">Python</a>：logging</p>
+<p><strong>包名:</strong><br>
+小写字母，单词之间用_分割<br>
+参考python：logging</p>
+<p><strong>类名：</strong><br>
+单词首字母大写<br>
+参考：python class LogRecord(object):</p>
+<p><strong>普通变量：</strong><br>
+小写字母，单词之间用_分割<br>
+参考：exc_info</p>
+<p><strong>实例变量：</strong><br>
+以_开头，小写字母，单词之间用_分割<br>
+参考:_exc_info<br>
+以一个下划线开头的标识符(_xxx)，不能访问的类属性，但可通过类提供的接口进行访问，<br>
+不会被语句 “from module import *” 语句加载</p>
+<p><strong>私有实例变量：</strong><br>
+以__开头（2个下划线），小写字母，单词之间用_分割<br>
+参考:__private_var<br>
+外部访问会报错</p>
+<p><strong>专有变量：</strong><br>
+**开头，**结尾，一般为python的自有变量，不要以这种方式命名<br>
+参考:<strong>doc</strong><br>
+是系统定义的，具有特殊意义的标识符</p>
+<p><strong>普通函数：</strong><br>
+小写字母，单词之间用_分割：<br>
+参考:get_name()</p>
+<p><strong>私有函数</strong>：<br>
+以__开头（2个下划线），小写字母，单词之间用分割<br>
+参考:__get_name()<br>
+外部访问会报错</p>
+<p><strong>注意：</strong><br>
+<em>单下划线开头：弱“内部使用”标识，如：”from M import *”，将不导入所有以下划线开头的对象，包括包、模块、成员<br>
+单下划线结尾</em>：只是为了避免与python关键字的命名冲突<br>
+__双下划线开头：模块内的成员，表示私有成员，外部无法直接调用<br>
+包和模块：模块应该使用尽可能短的、全小写命名，可以在模块命名时使用下划线以增强可读性。同样包的命名也应该是这样的，虽然其并不鼓励下划线。<br>
+以上这些主要是考虑模块名是与文件夹相对应的，因此需要考虑文件系统的一些命名规则的，比如Unix系统对大小写敏感，而过长的文件名会影响其在Windows/Mac/Dos等系统中的正常使用。<br>
+类：几乎毫无例外的，类名都使用首字母大写开头(Pascal命名风格)的规范。使用_单下划线开头的类名为内部使用，上面说的from M import *默认不被告导入的情况。<br>
+异常：因为异常也是一个类，所以遵守类的命名规则。此外，如果异常实际上指代一个错误的话，应该使用“Error”做后缀</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/" data-id="cl3jmf7mu003d9jv31rqg4u29" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node.js express框架笔记（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/04/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python3 学习笔记（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

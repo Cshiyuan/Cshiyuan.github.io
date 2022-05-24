@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ICMP协议与Ping原理 | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、ICMP协议分析 ICMP：Internet控制报文协议。由于IP协议并不是一个可靠的协议，它不保证数据被成功送达，那么，如何才能保证数据的可靠送达呢？ 这里就需要使用到一个重要的协议模块ICMP(网络控制报文)协议。它传递差错报文以及其他需要注意的信息，经常供IP层或更高层协议（TCP或UDP）使用。所以它经常被认为是IP层的一个组成部分。它在IP数据报文中的封装如下：  ICMP的数据报文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICMP协议与Ping原理">
+<meta property="og:url" content="http://example.com/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="一、ICMP协议分析 ICMP：Internet控制报文协议。由于IP协议并不是一个可靠的协议，它不保证数据被成功送达，那么，如何才能保证数据的可靠送达呢？ 这里就需要使用到一个重要的协议模块ICMP(网络控制报文)协议。它传递差错报文以及其他需要注意的信息，经常供IP层或更高层协议（TCP或UDP）使用。所以它经常被认为是IP层的一个组成部分。它在IP数据报文中的封装如下：  ICMP的数据报文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11-300x91.png">
+<meta property="og:image" content="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-2-300x136.png">
+<meta property="og:image" content="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-3.png">
+<meta property="og:image" content="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-4.png">
+<meta property="article:published_time" content="2017-04-22T09:51:05.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.075Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11-300x91.png">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ICMP协议与Ping原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2017-04-22T09:51:05.000Z" itemprop="datePublished">2017-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ICMP协议与Ping原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、ICMP协议分析">一、ICMP协议分析</h4>
+<p>ICMP：Internet控制报文协议。由于IP协议并不是一个可靠的协议，它不保证数据被成功送达，那么，如何才能保证数据的可靠送达呢？ 这里就需要使用到一个重要的协议模块ICMP(网络控制报文)协议。它传递差错报文以及其他需要注意的信息，经常供IP层或更高层协议（TCP或UDP）使用。所以它经常被认为是IP层的一个组成部分。它在IP数据报文中的封装如下：</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11-300x91.png" alt=""></a></p>
+<p>ICMP的数据报文格式如下所示。所有报文的前4个字节都是一样的，其他的因报文类型不同而不一样。类型字段可以有15个不同的值，用以描述不同的ICMP报文。校验和字段覆盖整个ICMP报文，使用了和IP首部检验和一样的算法，具体可以看看这篇博文链接：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/xy-kidult/archive/2013/05/06/3063800.html">【TCP/IP】检验和算法</a>。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-2.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-2-300x136.png" alt="icmp-2"></a></p>
+<p>不同类型的报文是由类型字段和代码字段来共同决定。下表是各种类型的I C M P报文。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-3.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-3.png" alt="icmp-3"></a></p>
+<p>根据上表可知，ICMP协议大致分为两类，一种是查询报文，一种是差错报文。查询报文是用一对请求和应答定义的，它通常有以下几种用途:</p>
+<ol>
+<li>ping查询</li>
+<li>子网掩码查询（用于无盘工作站在初始化自身的时候初始化子网掩码）</li>
+<li>时间戳查询（可以用来同步时间）<br>
+而差错报文通常包含了引起错误的IP数据报的第一个分片的IP首部（和选项），加上该分片数据部分的前8个字节。RFC 792规范中定义的这8个字节中包含了该分组运输层首部的所有分用信息，这样运输层协议就可以向正确的进程提交ICMP差错报文。</li>
+</ol>
+<p>当传送IP数据包发生错误时，比如主机不可达，端口不可达等，ICMP协议就会把错误信息封包，然后传送回给主机。给主机一个处理错误的机会，这也就是为什么说建立在IP层以上的协议是可能做到安全的原因。由上面可知，ICMP数据包由8bit的错误类型和8bit的代码和16bit的校验和组成，而前 16bit就组成了ICMP所要传递的信息。由数据链路层所能发送的最大数据帧，即MTU（Maximum Transmission Unit）为1500，计算易知ICMP协议在实际传输中数据包为：20字节IP首部 + 8字节ICMP首部+ 1472字节（数据大小）。</p>
+<p>尽管在大多数情况下，错误的包传送应该给出ICMP报文，但是在特殊情况下，是不产生ICMP错误报文的。如下</p>
+<ol>
+<li>ICMP差错报文不会产生ICMP差错报文（出IMCP查询报文）（防止IMCP的无限产生和传送）</li>
+<li>目的地址是广播地址或多播地址的IP数据报。</li>
+<li>作为链路层广播的数据报。</li>
+<li>不是IP分片的第一片。</li>
+<li>源地址不是单个主机的数据报。这就是说，源地址不能为零地址、环回地址、广播地 址或多播地址。</li>
+</ol>
+<h4 id="二、ping程序原理分析">二、ping程序原理分析</h4>
+<p>ping程序是由Mike Muuss编写，目的是为了测试另一 台主机是否可达，现在已经成为一个常用的网络状态检查工具。该程序发送一份 ICMP回显请求报文给远程主机，并等待返回 ICMP回显应答。利用ping这种原理，已经出现了许多基于ping的网络扫描器，比如nmap、arping、fping、hping3等。所以随着Internet安全意识的增强，现在有些提供访问控制策略的路由器和防火墙已经可以设置过滤特定ICMP报文请求。因此并不能通过简单的ping命令判断远程主机是否在线。</p>
+<p>ping 使用的是ICMP协议，它发送icmp回送请求消息给目的主机。ICMP协议规定：目的主机必须返回ICMP回送应答消息给源主机。如果源主机在一定时间内收到应答，则认为主机可达。大多数的 TCP/IP 实现都在内核中直接支持Ping服务器，ICMP回显请求和回显应答报文如下图所示。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-4.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-4.png" alt="icmp-4"></a></p>
+<p>ping的原理是用类型码为0的ICMP发请 求，受到请求的主机则用类型码为8的ICMP回应。通过计算ICMP应答报文数量和与接受与发送报文之间的时间差，判断当前的网络状态。这个往返时间的计算方法是：ping命令在发送ICMP报文时将当前的时间值存储在ICMP报文中发出，当应答报文返回时，使用当前时间值减去存放在ICMP报文数据中存放发送请求的时间值来计算往返时间。ping返回接受到的数据报文字节大小、TTL值以及往返时间。</p>
+<p>Unix系统在实现ping程序时是把ICMP报文中的标识符字段置成发送进程的 ID号。这样 即使在同一台主机上同时运行了多个 ping程序实例，ping程序也可以识别出返回的信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/" data-id="cl3jmf7mg001q9jv3c1bt4jxt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Core Foundation 框架详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84BitCode%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">深入理解iOS开发中的BitCode功能 （转）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

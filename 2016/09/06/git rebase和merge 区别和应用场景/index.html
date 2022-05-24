@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>git rebase和merge 区别和应用场景 | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git rebase和merge 区别和应用场景">
+<meta property="og:url" content="http://example.com/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-06T13:52:27.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.080Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git rebase和merge 区别和应用场景" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="article-date">
+  <time datetime="2016-09-06T13:52:27.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git rebase和merge 区别和应用场景
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景：</p>
+<p>1，控制产品OEM。</p>
+<p>基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？</p>
+<p>如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每多一个新的OEM就多拷贝一份代码，那如果发现公用模块里面有个BUG，难道你要每个版本的源代码都要修改？万一改错地方了，或者哪个版本的忘记改了，又是一件麻烦事。</p>
+<p>这个时候我们就可以考虑使用branch功能，在第一个OEM的基础上分支出第二个OEM，第三个OEM完全取决于和哪个版本更像，就在那个版本的基础上做新的分支，有新的OEM特性需求，就切换到那个分支上修改，放心，所有的的单独分支上的代码看起来都是独立的，不会影响其他版本。</p>
+<p>2，多人协作长时间开发功能模块</p>
+<p>如果你在一个团队中，那几乎很难做到每天都能按期完成某个模块功能，并且测试通过。那团队成员又必须每日下班前把自己的代码保存一下，万一机器故障了之类的还能有代码备份机制。如果提交了不能工作的代码，别人又获取到了，那其他人的事情就做不下去了。所以，branch另外一个适用场景就是为team单独成员开辟个人工作区域，单元测试无误之后再把成员的工作代码合并到主分支中，既能达到个人代码备份的目的，又能不影响其他人的工作。</p>
+<p>其实上面所说的就是rebase和merge的不同适用场景。</p>
+<p>在场景1的情况下，如果修改了某个公用代码的BUG，这个时候就应该是把所有的OEM版本分支rebase到这个修复BUG的分支上来，在rebase过程中，Git会要你手动解决代码上的冲突，你需要做的就是把修复BUG的代码放到目标分支代码里面去。rebase的结果是：所有的分支依然存在</p>
+<p>在场景2的情况下，因为成员的代码开发工作已经完成了，也不需要再保留这个分支了，所以我们可以把这个成员分支merge到主分支上，当然冲突在所难免，手工解决的工作肯定逃不掉，但是利大于弊不是吗。merge以后，分支就不存在了，但是在Git的所有分支历史中还能看到身影。</p>
+<p>根据适用场景不同，采用不同的分支合并策略，让你团队的代码保持生命力吧。</p>
+<p> </p>
+<h1><span class="link_title">git stash和git stash pop</span></h1>
+<p>git stash 可用来暂存当前正在进行的工作， 比如想pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。<br>
+基础命令：<br>
+<strong>$git stash<br>
+$do some work<br>
+$git stash pop</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-id="cl3jmf7n4004j9jv34mrs1az4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/08/iOS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iOS设计模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/06/%E7%9C%BC%E7%9D%9B%E6%98%AF%E4%B8%AA%E7%AD%9B%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">眼睛是个筛子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

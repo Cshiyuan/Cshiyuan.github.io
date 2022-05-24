@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>tensorflow笔记（6） | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="序列数据 我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联. 处理序列数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow笔记（6）">
+<meta property="og:url" content="http://example.com/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="序列数据 我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联. 处理序列数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-01-12T05:54:58.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.083Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tensorflow笔记（6）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/" class="article-date">
+  <time datetime="2018-01-12T05:54:58.000Z" itemprop="datePublished">2018-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tensorflow笔记（6）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="序列数据">序列数据</h3>
+<p>我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.</p>
+<h3 id="处理序列数据的神经网络">处理序列数据的神经网络</h3>
+<p>那我们如何让数据间的关联也被 NN 加以分析呢? 想想我们人类是怎么分析各种事物的关联吧, 最基本的方式,就是记住之前发生的事情. 那我们让神经网络也具备这种记住之前发生的事的能力. 再分析 Data0 的时候, 我们把分析结果存入记忆. 然后当分析 data1的时候, NN会产生新的记忆, 但是新记忆和老记忆是没有联系的. 我们就简单的把老记忆调用过来, 一起分析. 如果继续分析更多的有序数据 , RNN就会把之前的记忆都累积起来, 一起分析.</p>
+<p>我们再重复一遍刚才的流程, 不过这次是以加入一些数学方面的东西. 每次 RNN 运算完之后都会产生一个对于当前状态的描述 , state. 我们用简写 S( t) 代替, 然后这个 RNN开始分析 x(t+1) , 他会根据 x(t+1)产生s(t+1), 不过此时 y(t+1) 是由 s(t) 和 s(t+1) 共同创造的. 所以我们通常看到的 RNN 也可以表达成这种样子.</p>
+<h3 id="RNN的弊端">RNN的弊端</h3>
+<p>之前我们说过, RNN 是在有顺序的数据上进行学习的. 为了记住这些数据, RNN 会像人一样产生对先前发生事件的记忆. 不过一般形式的 RNN 就像一个老爷爷, 有时候比较健忘. 为什么会这样呢?</p>
+<p>想像现在有这样一个 RNN, 他的输入值是一句话: ‘我今天要做红烧排骨, 首先要准备排骨, 然后…., 最后美味的一道菜就出锅了’, shua ~ 说着说着就流口水了. 现在请 RNN 来分析, 我今天做的到底是什么菜呢. RNN可能会给出“辣子鸡”这个答案. 由于判断失误, RNN就要开始学习 这个长序列 X 和 ‘红烧排骨’ 的关系 , 而RNN需要的关键信息 ”红烧排骨”却出现在句子开头,</p>
+<p>再来看看 RNN是怎样学习的吧. 红烧排骨这个信息原的记忆要进过长途跋涉才能抵达最后一个时间点. 然后我们得到误差, 而且在 反向传递 得到的误差的时候, 他在每一步都会 乘以一个自己的参数 W. 如果这个 W 是一个小于1 的数, 比如0.9. 这个0.9 不断乘以误差, 误差传到初始时间点也会是一个接近于零的数, 所以对于初始时刻, 误差相当于就消失了. 我们把这个问题叫做梯度消失或者梯度弥散 Gradient vanishing. 反之如果 W 是一个大于1 的数, 比如1.1 不断累乘, 则到最后变成了无穷大的数, RNN被这无穷大的数撑死了, 这种情况我们叫做剃度爆炸, Gradient exploding. 这就是普通 RNN 没有办法回忆起久远记忆的原因.</p>
+<h3 id="LSTM">LSTM</h3>
+<p>LSTM 就是为了解决这个问题而诞生的. LSTM 和普通 RNN 相比, 多出了三个控制器. (输入控制, 输出控制, 忘记控制). 现在, LSTM RNN 内部的情况是这样.</p>
+<p>他多了一个 控制全局的记忆, 我们用粗线代替. 为了方便理解, 我们把粗线想象成电影或游戏当中的 主线剧情. 而原本的 RNN 体系就是 分线剧情. 三个控制器都是在原始的 RNN 体系上, 我们先看 输入方面 , 如果此时的分线剧情对于剧终结果十分重要, 输入控制就会将这个分线剧情按重要程度 写入主线剧情 进行分析. 再看 忘记方面, 如果此时的分线剧情更改了我们对之前剧情的想法, 那么忘记控制就会将之前的某些主线剧情忘记, 按比例替换成现在的新剧情. 所以 主线剧情的更新就取决于输入 和忘记 控制. 最后的输出方面, 输出控制会基于目前的主线剧情和分线剧情判断要输出的到底是什么.基于这些控制机制, LSTM 就像延缓记忆衰退的良药, 可以带来更好的结果.</p>
+<h3 id="实现例子">实现例子</h3>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这次我们会使用 RNN 来进行分类的训练 (Classification).</span></span><br><span class="line"><span class="comment"># 会继续使用到手写数字 MNIST 数据集.</span></span><br><span class="line"><span class="comment"># 让 RNN 从每张图片的第一行像素读到最后一行, 然后再进行分类判断.</span></span><br><span class="line"><span class="comment"># 接下来我们导入 MNIST 数据并确定 RNN 的各种参数(hyper-parameters):</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">tf.set_random_seed(<span class="number">1</span>)  <span class="comment">#set random seed</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">&#x27;MNIST_data&#x27;</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hyperparameters</span></span><br><span class="line">lr = <span class="number">0.001</span>  <span class="comment"># learning rate</span></span><br><span class="line">training_iters = <span class="number">100000</span>  <span class="comment"># train step 上限</span></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line"></span><br><span class="line">n_inputs = <span class="number">28</span>  <span class="comment"># MNIST data input(img shape: 28*28)</span></span><br><span class="line">n_steps = <span class="number">28</span>  <span class="comment"># time step</span></span><br><span class="line">n_hidden_units = <span class="number">128</span>  <span class="comment"># neurons in hidden layer</span></span><br><span class="line">n_classes = <span class="number">10</span>  <span class="comment"># MNIST classes (0-9 digits)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接着定义x，y的placeholder和weights，biases的初始状况</span></span><br><span class="line"><span class="comment"># x y placeholder</span></span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="literal">None</span>, n_steps, n_inputs])</span><br><span class="line">y = tf.placeholder(tf.float32, [<span class="literal">None</span>, n_classes])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对 weights biases 初始值对定义</span></span><br><span class="line"></span><br><span class="line">weights = &#123;</span><br><span class="line">    <span class="comment"># shape (28, 128)</span></span><br><span class="line">    <span class="string">&#x27;in&#x27;</span>: tf.Variable(tf.random_normal([n_inputs, n_hidden_units])),</span><br><span class="line">    <span class="comment"># shape(128 , 10)</span></span><br><span class="line">    <span class="string">&#x27;out&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_units, n_classes]))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">biases = &#123;</span><br><span class="line">    <span class="comment"># shape (128, )</span></span><br><span class="line">    <span class="string">&#x27;in&#x27;</span>: tf.Variable(tf.constant(<span class="number">0.1</span>, shape=[</span><br><span class="line">        n_hidden_units,</span><br><span class="line">    ])),</span><br><span class="line">    <span class="comment"># shape (10, )</span></span><br><span class="line">    <span class="string">&#x27;out&#x27;</span>: tf.Variable(tf.constant(<span class="number">0.1</span>, shape=[</span><br><span class="line">        n_classes,</span><br><span class="line">    ]))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 RNN 的主体结构</span></span><br><span class="line"><span class="comment"># 接着开始定义RNN主体结构， 这个RNN总共有3个组成部分（input_layer, cell, output_layer)</span></span><br><span class="line"><span class="comment"># 首先我们线定义input——layer</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">RNN</span>(<span class="params">X, weights, biases</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 原始对 X 是 3 维数据，我们需要把它变成 2 维数据才能使用weights对矩阵乘法</span></span><br><span class="line">    <span class="comment"># X ==&gt; (128 batch * 28 steps, 28 inputs)</span></span><br><span class="line">    X = tf.reshape(X, [-<span class="number">1</span>, n_inputs])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># X_in = W * X + b</span></span><br><span class="line">    <span class="comment"># X_in = (128 batch * 28 steps, 128 hidden)</span></span><br><span class="line">    X_in = tf.matmul(X, weights[<span class="string">&#x27;in&#x27;</span>]) + biases[<span class="string">&#x27;in&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># X_in ==&gt; (128 batch, 28 steps, 128 hidden) 换回3维</span></span><br><span class="line">    X_in = tf.reshape(X_in, [-<span class="number">1</span>, n_steps, n_hidden_units])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 接着是 cell 中的计算, 有两种途径:</span></span><br><span class="line">    <span class="comment"># 使用 tf.nn.rnn(cell, inputs) (不推荐原因). 但是如果使用这种方法, 可以参考原因;</span></span><br><span class="line">    <span class="comment"># 使用 tf.nn.dynamic_rnn(cell, inputs) (推荐). 这次的练习将使用这种方式.</span></span><br><span class="line">    <span class="comment"># 因 Tensorflow 版本升级原因, state_is_tuple=True 将在之后的版本中变为默认.</span></span><br><span class="line">    <span class="comment"># 对于 lstm 来说, state可被分为(c_state, h_state).</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用 basic LSTM Cell。</span></span><br><span class="line">    lstm_cell = tf.contrib.rnn.BasicLSTMCell(n_hidden_units)</span><br><span class="line">    init_state = lstm_cell.zero_state(</span><br><span class="line">        batch_size, dtype=tf.float32)  <span class="comment"># 初始化全零 state</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果使用tf.nn.dynamic_rnn(cell, inputs), 我们要确定 inputs 的格式.</span></span><br><span class="line">    <span class="comment"># tf.nn.dynamic_rnn 中的 time_major 参数会针对不同 inputs 格式有不同的值.</span></span><br><span class="line">    <span class="comment"># 如果 inputs 为 (batches, steps, inputs) ==&gt; time_major=False;</span></span><br><span class="line">    <span class="comment"># 如果 inputs 为 (steps, batches, inputs) ==&gt; time_major=True;</span></span><br><span class="line"></span><br><span class="line">    outputs, final_state = tf.nn.dynamic_rnn(</span><br><span class="line">        lstm_cell, X_in, initial_state=init_state, time_major=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 方式一: 直接调用final_state 中的 h_state (final_state[1]) 来进行运算:</span></span><br><span class="line">    <span class="comment"># results = tf.matmul(final_state[1], weights[&#x27;out&#x27;]) + biases[&#x27;out&#x27;]</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 方式二: 调用最后一个outputs（在这个例子中，和上面的final_state[1]是一样的）</span></span><br><span class="line">    <span class="comment"># outputs 变成列表 [(batch, outputs) ..] * steps</span></span><br><span class="line">    outputs = tf.unstack(tf.transpose(outputs, [<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">    results = tf.matmul(outputs[-<span class="number">1</span>],</span><br><span class="line">                        weights[<span class="string">&#x27;out&#x27;</span>]) + biases[<span class="string">&#x27;out&#x27;</span>]  <span class="comment">#选取最后一个output</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#最后输出result</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义好了RNN主体结构后，我们就可以来计算cost和train_op</span></span><br><span class="line">pred = RNN(x, weights, biases)</span><br><span class="line">cost = tf.reduce_mean(</span><br><span class="line">    tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))</span><br><span class="line">train_op = tf.train.AdamOptimizer(lr).minimize(cost)</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练时，不断输出accuract，观看结果：</span></span><br><span class="line"></span><br><span class="line">correct_pred = tf.equal(tf.argmax(pred, <span class="number">1</span>), tf.argmax(y, <span class="number">1</span>))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    init = tf.global_variables_initializer()</span><br><span class="line">    sess.run(init)</span><br><span class="line">    step = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> step * batch_size &lt; training_iters:</span><br><span class="line"></span><br><span class="line">        batch_xs, batch_ys = mnist.train.next_batch(batch_size)</span><br><span class="line">        batch_xs = batch_xs.reshape([batch_size, n_steps, n_inputs])</span><br><span class="line">        sess.run([train_op], feed_dict=&#123;x: batch_xs, y: batch_ys&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> step % <span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(sess.run(accuracy, feed_dict=&#123;x: batch_xs, y: batch_ys&#125;))</span><br><span class="line">        step += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/" data-id="cl3jmf7ni005y9jv3d2i590qc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          tensorflow笔记（7）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tensorflow笔记（5）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

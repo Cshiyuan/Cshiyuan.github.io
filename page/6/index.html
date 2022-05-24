@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="miehaha">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CShyiuan博客">
+<meta property="og:url" content="http://example.com/page/6/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="miehaha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-objc_msgSend和消息传递机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/">objc_msgSend和消息传递机制（大补）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有**「名称(name)」或「选择子(selector)」**,可以接受参数。而且可能还有返回值。</p>
+<hr>
+<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
+<hr>
+<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
+<p>给对象发送消息会转换成</p>
+<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
+<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
+<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
+<hr>
+<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
+<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
+<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
+<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
+<hr>
+<h2 id="尾调用优化（tail-call-optimization-技术"><strong>尾调用优化（tail-call optimization) 技术</strong></h2>
+<p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化&quot;。</p>
+<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
+<hr>
+<h2 id="理解消息转发机制">理解消息转发机制</h2>
+<p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
+<hr>
+<h3 id="动态方法解析">动态方法解析</h3>
+<div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div>
+<div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div>
+<div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div>
+<div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div>
+<div>
+<hr>
+</div>
+<div>
+<hr>
+<h3 id="备援接收者">备援接收者</h3>
+<div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
+<hr>
+</div>
+<div>
+<h2 id="完整的消息转发">完整的消息转发</h2>
+<p>如果转发<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
+<p>此步骤会调用下列方法转发消息：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)forwardInvocation:(NSInvocation*)invocation</span><br></pre></td></tr></table></figure>
+<p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
+<h3 id="消息转发全流程">消息转发全流程</h3>
+<p>下图描述了消息转发的各个步骤：</p>
+<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
+<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/" data-id="cl3jmf7n900519jv3a2ul51cl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-objc_msgSend和消息传递机制（大补）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%EF%BC%88%E5%A4%A7%E8%A1%A5%EF%BC%89/" class="article-date">
+  <time datetime="2017-03-22T09:46:26.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%EF%BC%88%E5%A4%A7%E8%A1%A5%EF%BC%89/">objc_msgSend和消息传递机制（大补）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Objective-C上在对象上调用方法。用Objective-C大术语来说，这叫做「传递消息」（pass a message）。消息有**「名称(name)」或「选择子(selector)」**,可以接受参数。而且可能还有返回值。</p>
+<hr>
+<p>动态绑定(dynamic binding) 待调用的函数地址无法硬编码在指令中，而是要在运行期读取出来。</p>
+<hr>
+<p>在OC中，如果要向某对象传递消息，那就会使用<strong>动态绑定机制</strong>来决定需要调用的方法 。在底层，所有方法都是普通的C语音函数，然而在对象收到消息之后，究竟该调用哪个方法则<strong>完全于运行期决定</strong>，甚至可以在程序运行时改变。这些特性使得Objective-C成为一门真正的动态语言。</p>
+<p>给对象发送消息会转换成</p>
+<p><strong>void objc_msgSend(id self, SEL cmd,…)</strong></p>
+<p>objc_msgSend函数会依据接收者与选择子的类型来调用适当的方法。为了完成此操作，该方法需要在接收者所属的类中搜索其“<strong>方法列表</strong>”（list of methods）如果能找到与选择子名称相符的方法，就跳至其实现代码。若找不到，那就沿着继承体系继续向上查找，等找到名称相符的方法之后再跳转。如果最终还是找不到相符的方法，那就执行“消息转发”</p>
+<p>这么说来，想调用一个方法似乎需要很多步骤。所幸objc_msgSend会将匹配结果缓存在“快速映射表”里面。实际上，消息派发（message dispatch）并非应用程序的瓶颈所在。</p>
+<hr>
+<p>刚才曾提到，objc_msgSend等函数一旦找到应该调用的方法实现之后，就会“跳转过去”。之所以能这样做，是因为OC对象的每个方法都可以视为简单的C函数，原型如下：</p>
+<p>&lt;return_type&gt; class_selector(id self,SEL _cmd,…)</p>
+<p>每个类里都有一张表格（参考下面第14条关于isa的描述），其中的指针都会指向这个函数，而选择子的名称则是查表时所用的“键”。objc_msgSend等函数正是通过这张表格来寻找应该执行的方法并跳至其实现的。请注意，原型的样子和objc_msgSend很像。这不是巧合，而是利用“尾调用优化”（tail-call optimization）技术，令“跳至方法实现”这一操作变得更简单。</p>
+<p>在实际编写OC时，无须担心这些问题，开发者应该了解其底层工作原理。代码究竟是如何执行的，而且能理解为何在调试的时候，栈信息中总是出现objc_msgSend</p>
+<hr>
+<h2 id="尾调用优化（tail-call-optimization-技术-2"><strong>尾调用优化（tail-call optimization) 技术</strong></h2>
+<p>如果某函数的最后一项操作是调用另外一个函数，那么就可以运用“尾调用优化”技术。编译器会生成调转至另一函数所需的指令码，而且不会向调用推栈中推入新的“栈帧（frame stack)。只有当某函数的最后一个操作仅仅是调用其他函数而不会将其返回值来作他用时，才能执行“尾调用优化&quot;。</p>
+<p>这项优化对objc_msgSend非常关键，如果不这么做的话，那么每调用Objective-C方法之前，都需要为调用objc_msgSend函数准备「栈帧」，大家在“栈踪迹”（stack trace）中可以看到这种「栈帧」</p>
+<hr>
+<h2 id="理解消息转发机制-2">理解消息转发机制</h2>
+<p>若想令类能理解某条消息，我们必须以程序码实现出对应的方法才行。但是，在编译器向类发送了其无法解读的消息并不会报错，因为在运行期可以继续向类中添加方法，所以编译器在编译时还无法确知类中到底会不会有某个方法实现。当对象接受到无法解读的消息后，就会启动“消息转发”（message forwarding）机制，程序员可经由此过程告诉对象应该如何处理未知消息。</p>
+<hr>
+<h3 id="动态方法解析-2">动态方法解析</h3>
+<div>    对象在收到无法解读的消息后，首先将调用其所属类的下列类方法：</div>
+<div>    +(BOOL) resolveInstanceMethod:(SEL)selector</div>
+<div>    该方法的参数就是哪个未知的选择子，其返回值为Boolean类型，表示这个类是否新增一个实例方法处理此选择子。在继续往下执行转发机制之前，本类有机会新增一个处理此选择子的方法。假如尚未实现的方法不是实例方法而是类方法，那么运行期系统就会调用另外一个方法，“resolveClassMethod”</div>
+<div>    使用这种办法的前提是：相关方法的实现代码已经写好，只等待运行的时候动态插在类里面就可以了。此方案通常用来实现@dynamic属性，下面代码展示了如何使用“resolveInstanceMethod:”来实现@dynamic属性：</div>
+<div>
+<hr>
+</div>
+<div>
+<hr>
+<h3 id="备援接收者-2">备援接收者</h3>
+<div>    当前接收者还有第二次机会处理未知的选择子，在这一步中，运行期系统会问它：能不能把这条消息转给其他接收者来注册。</div>
+<hr>
+</div>
+<div>
+<h2 id="完整的消息转发-2">完整的消息转发</h2>
+<p>如果转发<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
+<p>此步骤会调用下列方法转发消息：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)forwardInvocation:(NSInvocation*)invocation</span><br></pre></td></tr></table></figure>
+<p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
+<p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>
+<h3 id="消息转发全流程-2">消息转发全流程</h3>
+<p>下图描述了消息转发的各个步骤：</p>
+<p><img src="http://img.blog.csdn.net/20140807214718411" alt=""></p>
+<p>接收者在每一步均有机会处理消息。步骤越往后，消息处理的代价就越大。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/22/objc_msgSend%E5%92%8C%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%EF%BC%88%E5%A4%A7%E8%A1%A5%EF%BC%89/" data-id="cl3jmf7na00549jv390n876lm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于iOS的main函数入口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/%E5%85%B3%E4%BA%8EiOS%E7%9A%84main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3/" class="article-date">
+  <time datetime="2017-03-17T14:09:52.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/%E5%85%B3%E4%BA%8EiOS%E7%9A%84main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3/">关于iOS的main函数入口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import UIKit/UIKit.h</span><br><span class="line">int main(int argc, char *argv[])  </span><br><span class="line">&#123;  </span><br><span class="line">    @autoreleasepool &#123;       </span><br><span class="line">        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>
+<p>上面实例代码中有一个很重要的函数<a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIApplicationMain">UIApplicationMain</a>，它主要是创建App的几个核心对象来处理以下过程：<br>
+从可用Storyboard文件加载用户界面；<br>
+调用AppDelegate自定义代码来做一些初始化设置；<br>
+将App放入Main Run Loop环境中来响应和处理与用户交互产生的事件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/17/%E5%85%B3%E4%BA%8EiOS%E7%9A%84main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3/" data-id="cl3jmf7nq006u9jv39egsd47b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-周记总结 2017-03-17记下" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-03-17%E8%AE%B0%E4%B8%8B/" class="article-date">
+  <time datetime="2017-03-17T12:01:08.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-03-17%E8%AE%B0%E4%B8%8B/">周记总结 2017-03-17记下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="UITableViewCell-span-class-s1-左侧会有默认-span-15-span-class-s1-像素的空白-span">UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白</span></h3>
+<p><span class="s1">在iOS</span>7<span class="s1">中，</span>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白。这时候，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">能将空白去掉。</span></p>
+<p><span class="s1">但是在</span>ios8<span class="s1">中，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">已经不起作用了。下面是解决办法</span></p>
+<p>首先在<span class="s2">viewDidLoad</span>方法加入以下代码：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">    [self.tableView setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [cell setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="封装View注意事项">封装View注意事项</h3>
+<p><span class="s1">封装</span>view<span class="s1">的时候要注意在</span>-<span class="s1">(</span>void<span class="s1">)</span>layoutSubviews<span class="s1">中重写子视图的</span>frame</p>
+<hr>
+<h3 id="span-class-s2-Block的书写格式-span"><span class="s2"> Block的书写格式</span></h3>
+<p><span class="s2">Block</span>的格式<span class="s2">:  ^ + </span>返回值类型(可以省略)<span class="s2"> + </span>(参数)(如果没有参数,可以省略)<span class="s2"> + {</span>表达式<span class="s2">}</span></p>
+<p><span class="s2">     Block</span>变量格式<span class="s2">: </span>返回值类型(不可省略, 最少<span class="s2">void</span>)<span class="s2"> + </span>(<span class="s2">^</span>变量名称)<span class="s2"> + </span>(参数) (不可省略, 至少())<span class="s2">.  </span>格式和函数指针很相似,只是把<span class="s2">*</span>改成了<span class="s2">^.</span></p>
+<p>修复在没有获得位置就连接<span class="s2">Socket</span>，上传位置信息的<span class="s2">bug</span></p>
+<hr>
+<h3 id="模拟器的坑">模拟器的坑</h3>
+<p>如果用模拟器，有时候会选择直接电脑键盘输入，但这时候需要考虑很多问题。因为键盘弹出事件就消失了。</p>
+<hr>
+<h3 id="关于OC在浮点数-f说明">关于OC在浮点数.f说明</h3>
+<p><span class="s1">1.</span>如果是赋给<span class="s1">CGFloat</span>类型，则加不加<span class="s1">f</span>后缀都是一样的。</p>
+<p><span class="s1">2.</span>如果是赋给<span class="s1">double</span>或<span class="s1">float</span>类型，就要考虑精度的问题。不加<span class="s1">f</span>后缀的话类型为<span class="s1">double</span>，<span class="s1">8</span>字节，加<span class="s1">f</span>后缀的话类型为<span class="s1">float</span>，<span class="s1">4</span>字节。</p>
+<hr>
+<h3 id="span-class-s1-一种单例写法（-span-dispatch-once-t-span-class-s1-的单例用法-span"><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (AccountManager *)sharedManager</span><br><span class="line">&#123;</span><br><span class="line">        static AccountManager *sharedAccountManagerInstance = nil;</span><br><span class="line">        static dispatch_once_t predicate;</span><br><span class="line">        dispatch_once(&amp;predicate, ^&#123;</span><br><span class="line">                sharedAccountManagerInstance = [[self alloc] init];</span><br><span class="line">        &#125;);</span><br><span class="line">    return sharedAccountManagerInstance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="span-class-s1-Block-span-会复制到堆的情况"><span class="s1">Block</span>会复制到堆的情况</h3>
+<p>1.<span class="s1">调用</span>Block<span class="s1">的</span>copy<span class="s1">实例方法</span></p>
+<p><span class="s2">2.Block</span>作为函数返回值时</p>
+<p>3.<span class="s1">将</span>Block<span class="s1">赋值给附有</span>_strong<span class="s1">修饰符</span>id<span class="s1">类型的类或</span>Block<span class="s1">类成员变量时</span></p>
+<p>3.<span class="s1">在方法名中含有</span>usingBlock<span class="s1">的</span>Cocoa<span class="s1">框架方法或</span>Grand Central Dispatch<span class="s1">的</span>API<span class="s1">中传递</span>Block<span class="s1">时</span></p>
+<hr>
+<h3 id="对使用-span-class-s1-block-span-变量避免循环引用的方法和使用-span-class-s1-weak-span-修饰符及-span-class-s1-unsafe-unretained-span-修饰符避免循环引用的方法做个比较">对使用<span class="s1">_block</span>变量避免循环引用的方法和使用<span class="s1">__weak</span>修饰符及<span class="s1">__unsafe_unretained</span>修饰符避免循环引用的方法做个比较</h3>
+<p><span class="s1">1.</span>通过<span class="s1">__block</span>变量可控制对象的持有期间</p>
+<p><span class="s1">2.</span>在不能使用<span class="s1">__weak</span>修饰符的环境中不使用<span class="s1">__unsafe</span>)<span class="s1">unretained</span>修饰符即可(不必担心悬垂指针)</p>
+<p><span class="s1">3.</span>在执行<span class="s1">Block</span>时可动态地决定是否将<span class="s1">nil</span>或其他对象赋值在<span class="s1">__block</span>变量中</p>
+<p><span class="s1">4.</span>为避免循环引用必须执行<span class="s1">Block</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/17/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-03-17%E8%AE%B0%E4%B8%8B/" data-id="cl3jmf7nu007f9jv3ecn8a5f4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-POST git-receive-pack (chunked)问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/POST%20git-receive-pack%20(chunked)%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2017-03-17T08:55:41.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/POST%20git-receive-pack%20(chunked)%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">POST git-receive-pack (chunked)问题解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">出现</span> POST git-receive-pack <span class="s1">(</span>chunked<span class="s1">)</span> <span class="s1">的原因就是</span> <span class="s1">当使用</span> HTTPS <span class="s1">提交到</span> Git <span class="s1">上时使用不检查加密要是东西过多将导致提交停止</span></p>
+<h2 id="解决方案">解决方案</h2>
+<hr>
+<h3 id="span-class-s1-方案-span-1-span-class-s1-使用-span-Git-span-class-s1-提交代码-span"><span class="s1">方案</span>1&gt;  <span class="s1">使用</span> Git <span class="s1">提交代码</span></h3>
+<p><span class="s1">进入到要提交的代码的目录，里面包含</span> .git <span class="s1">文件夹，输入指令</span> git config http.postBuffer 524288000</p>
+<hr>
+<h3 id="span-class-s1-方案-span-2-span-class-s1-使用-span-SourceTreee-span-class-s1-提交代码-span"><span class="s1">方案</span>2&gt; <span class="s1">使用</span> SourceTreee <span class="s1">提交代码</span></h3>
+<p>如图按照顺序依次点击在最后一步增加</p>
+<p><span class="s1">[</span>http<span class="s1">]</span></p>
+<p>postBuffer = 524288000</p>
+<p>再次提交将会成功<span class="s2"> </span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/17/POST%20git-receive-pack%20(chunked)%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cl3jmf7mq002w9jv3gdvn78az" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ipa的组成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/ipa%E7%9A%84%E7%BB%84%E6%88%90/" class="article-date">
+  <time datetime="2017-03-13T08:21:19.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/13/ipa%E7%9A%84%E7%BB%84%E6%88%90/">ipa的组成</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：</p>
+<p><img src="http://pchou.qiniudn.com/ipa%E7%BB%84%E6%88%90.png" alt=""></p>
+<p>事实上，ipa文件只是一个zip包，可以使用如下命令解压：</p>
+<div class="highlighter-rouge">
+<pre><code>/usr/bin/unzip -q xxx.ipa -d &amp;lt;destination&amp;gt;
+</code></pre>
+</div>
+解压后，得到上图的Payload目录，下面是个子目录，其中的内容如下：
+<ol>
+<li>资源文件，例如图片、html、等等。</li>
+<li>_CodeSignature/CodeResources。这是一个plist文件，可用文本查看，其中的内容就是是程序包中（不包括Frameworks）所有文件的签名。注意这里是<code>所有文件</code>。意味着你的程序一旦签名，就不能更改其中任何的东西，包括资源文件和可执行文件本身。iOS系统会检查这些签名。</li>
+<li>可执行文件。此文件跟资源文件一样需要签名。</li>
+<li>一个mobileprovision文件.打包的时候使用的，从MC上生成的。</li>
+<li>Frameworks。程序引用的非系统自带的Frameworks，每个Frameworks其实就是一个app，其中的结构应该和app差不多，也包含签名信息CodeResources文件</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/13/ipa%E7%9A%84%E7%BB%84%E6%88%90/" data-id="cl3jmf7n8004v9jv3778v1dqb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-非对称加密算法和摘要算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%92%8C%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2017-03-12T11:43:39.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%92%8C%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/">非对称加密算法和摘要算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CA证书">CA证书</h3>
+<p>非对称加密算法和摘要算法</p>
+<div class="para">如果用户想得到一份属于自己的证书，他应先向 CA 提出申请。在 CA 判明申请者的身份后，便为他分配一个公钥，并且 CA 将该公钥与申请者的身份信息绑在一起，并为之签字后，便形成证书发给申请者。</div>
+<div class="para">如果一个用户想鉴别另一个证书的真伪，他就用 CA 的公钥对那个证书上的签字进行验证，一旦验证通过，该证书就被认为是有效的。证书实际是由证书签证机关（CA）签发的对用户的公钥的认证。</div>
+<div class="para">证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。</div>
+<div class="para">
+<hr>
+</div>
+<hr>
+<h3 id="其实直接查看维基百科上面的解释就够了：">其实直接查看维基百科上面的解释就够了：</h3>
+<p><strong>公开密钥加密</strong>英语：<strong>public-key cryptography</strong>，又译为<strong>公开密钥加密</strong>），也称为<strong>非对称加密</strong>（asymmetric cryptography），一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8" title="密码学">密码学</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BC%94%E7%AE%97%E6%B3%95" title="算法">算法</a>类型，在这种密码学方法中，需要一对密钥，一个是私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。</div></p>
+<div class="para">
+<p>如果加密密钥是公开的，这用于客户给私钥所有者上传加密的数据，这被称作为<strong>公开密钥加密</strong>（狭义）。例如，网络银行的客户发给银行网站的账户操作的加密数据。</p>
+<p>如果解密密钥是公开的，用私钥加密的信息，可以用公钥对其解密，用于客户验证持有私钥一方发布的数据或文件是完整准确的，接收者由此可知这条信息确实来自于拥有私钥的某人，这被称作**<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D" title="数字签名">数字签名</a>**，公钥的形式就是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" title="数字证书">数字证书</a>。例如，从网上下载的安装程序，一般都带有程序制作者的数字签名，可以证明该程序的确是该作者（公司）发布的而不是第三方伪造的且未被篡改过（身份认证/验证）。</p>
+<p>常见的公钥加密算法有：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" title="RSA加密算法">RSA</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=ElGamal&amp;action=edit&amp;redlink=1" title="ElGamal（页面不存在）">ElGamal</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E8%83%8C%E5%8C%85%E7%AE%97%E6%B3%95&amp;action=edit&amp;redlink=1" title="背包算法（页面不存在）">背包算法</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=Rabin&amp;action=edit&amp;redlink=1" title="Rabin（页面不存在）">Rabin</a>（RSA的特例）、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2%EF%BC%8D%E8%B5%AB%E5%B0%94%E6%9B%BC%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE" title="迪菲－赫尔曼密钥交换协议">迪菲－赫尔曼密钥交换协议</a>中的公钥加密算法、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95" title="椭圆曲线加密算法">椭圆曲线加密算法</a>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Elliptic Curve Cryptography, ECC</span></span>）。使用最广泛的是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/RSA%E7%AE%97%E6%B3%95" title="RSA算法">RSA算法</a>（由发明者Rivest、Shmir和Adleman姓氏首字母缩写而来）是著名的公开秘钥加密算法，ElGamal是另一种常用的非对称加密算法。</p>
+<hr>
+<hr>
+<h2 id="-7"></h2>
+<h3 id="摘要算法">摘要算法</h3>
+<p>另一个神奇的算法就是摘要算法。摘要算法是指，可以将任意长度的文本，通过一个算法，得到一个固定长度的文本。这里文本不一定只是文本，可以是字节数据。所以摘要算法试图将世间万物，变成一个固定长度的东西。摘要算法具有以下重要特性：</p>
+<ul>
+<li>只要源文本不同，计算得到的结果，必然不同</li>
+<li>无法从结果反推出源（那是当然的，不然就能量不守恒了）<br>
+典型的摘要算法，比如大名鼎鼎的<code>MD5</code>和<code>SHA</code>。摘要算法主要用于比对信息源是否一致，因为只要源发生变化，得到的摘要必然不同；而且通常结果要比源短很多，所以称为“摘要”。</li>
+</ul>
+<h2 id="数字签名">数字签名</h2>
+<p>理解了非对称加密和摘要算法，来看一下数字签名。实际上数字签名就是两者结合。假设，我们有一段授权文本，需要发布，为了防止中途篡改文本内容，保证文本的完整性，以及文本是由指定的权限狗发的。首先，先将文本内容通过摘要算法，得到摘要，再用权限狗的私钥对摘要进行加密得到密文，将源文本、密文、和私钥对应的公钥一并发布即可。那么如何验证呢？</p>
+<p>验证方首先查看公钥是否是权限狗的，然后用公钥对密文进行解密得到摘要，将文本用同样的摘要算法得到摘要，两个摘要进行比对，如果相等那么一切正常。这个过程只要有一步出问题就视为无效。</p>
+<p><img src="http://pchou.qiniudn.com/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D.jpg" alt=""></p>
+<p>数字签名可以快速验证文本的完整性和合法性，已广泛应用于各个领域。理解了数字签名以后，我们进一步来看什么是数字证书。</p>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/12/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%92%8C%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/" data-id="cl3jmf7o6008x9jv3gbhmd3l9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-URL Schemes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/URL%20Schemes/" class="article-date">
+  <time datetime="2017-03-12T09:30:55.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/URL%20Schemes/">URL Schemes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="URL-Schemes-是什么">URL Schemes 是什么</h2>
+<p><em>通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。</em></p>
+<p>URL Schemes 有两个单词：</p>
+<ul>
+<li>URL，我们都很清楚，<code>http://www.apple.com</code> 就是个 URL，我们也叫它链接或网址；</li>
+<li>Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 <code>://</code>之前的那段字符。比如 <code>http://www.apple.com</code> 这个网址的 <code>Schemes</code> 是 <strong>http</strong>。<br>
+根据我们上面对 URL Schemes 的使用，我们可以很轻易地理解，在以本地应用为主的 iOS 上，我们可以像定位一个网页一样，用一种特殊的 URL 来定位一个应用甚至应用里某个具体的功能。而定位这个应用的，就应该这个应用的 URL 的 Schemes 部分，也就是开头儿那部分。比如短信，就是 <code>sms:</code></li>
+</ul>
+<p>你可以完全按照理解一个网页的 URL ——也就是它的网址——的方式来理解一个 iOS 应用的 URL，拿苹果的网站和 iOS 上的微信来做个简单对比：</p>
+<div class="table-responsive">
+<table class="table"><colgroup> <col /> <col /> <col /></colgroup>
+<thead>
+<tr>
+<th></th>
+<th>网页（苹果）</th>
+<th>iOS 应用（微信）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网站首页/打开应用</td>
+<td>http://www.apple.com</td>
+<td>weixin://</td>
+</tr>
+<tr>
+<td>子页面/具体功能</td>
+<td>http://www.apple.com/mac/（Mac页面）</td>
+<td>weixin://dl/moments（朋友圈）</td>
+</tr>
+</tbody>
+</table>
+</div>
+在这里，`http://www.apple.com` 和 `weixin://` 都声明了这是谁的地盘。然后在 `http://www.apple.com` 后面加上 `/mac` 就跳转到从属于 `http://www.apple.com` 的一个网页（Mac 页）上；同样，在 `weixin://` 后面加上 `dl/moments` 就进入了微信的一个具体的功能——朋友圈。
+<p><strong>但是，两者还有几个重要的区别：</strong></p>
+<ol>
+<li>所有网页都一定有网址，不管是首页还是子页。但未必所有的应用都有自己的 URL Schemes，更不是每个应用的每个功能都有相应的 URL Schemes。实际上，现状是，大多数的应用只有用于打开应用的 URL Schemes，而有一些应用甚至没有用于打开应用的 URL Schemes。几乎没有所有功能都有对应 URL 的应用。<strong>所以，不要说某某应用烂，不支持国内应用。一个 App 是否支持 URL Schemes 要看那个 App 的作者是否在自己的作品里添加了 URL Schemes 相关的代码。</strong></li>
+<li>一个网址只对应一个网页，但并非每个 URL Schemes 都只对应一款应用。这点是因为苹果没有对 URL Schemes 有不允许重复的硬性要求，所以曾经出现过<a target="_blank" rel="noopener" href="http://jbguide.me/2015/03/26/url-scheme-is-vulnerable/">有 App 使用支付宝的 URL Schemes 拦截支付帐号和密码的事件</a>。</li>
+<li>一般网页的 URL 比较好预测，而 iOS 上的 URL Schemes 因为没有统一标准，所以非常难猜，通过猜来获取 iOS 应用的 URL Schemes 是不现实的。</li>
+</ol>
+<h2 id="URL-Schemes-的发展">URL Schemes 的发展</h2>
+<p><em>URL Schemes 的发展过程可以说就是 iOS 效率工具类 App 的发展过程。</em></p>
+<p>起初的苹果建立的 <a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007899">Apple URL Schemes</a> 只是用于自用，里面只有邮件、电话、iTunes 搜索、Youtube 视频等一些内置服务的 URL。</p>
+<p>个人认为 URL Schemes 第一次大火是在 2011 年末（如有异议欢迎指正），那个时期也是越狱的鼎盛时期，那个时期越狱后大家都会装的一个插件是 SBSettings<a target="_blank" rel="noopener" href="https://sspai.com/post/31500#fn:1" title="see footnote">[1]</a>。越狱的人都知道每当新系统发布的时候，等待新系统的越狱发布是最撩人的，而这段时期那些「不越狱就能做到某种越狱功能」的应用经常一时间风头无两。</p>
+<p>2011年 iOS 5 发布带来了通知中心，没过多久，出现了一大批使用 iOS 系统设置的 URL Schemes 的 App 神奇地完成了接近 SBSettings 的功能——它们可以让我们从通知中心直接跳转到某些 App 的特定界面，比如 Twitter 的发推界面。它们甚至还可以直接跳转到系统设置里的 Wi-Fi 选项。在这一批 App 中，就有如今效率软件霸主之一 <a target="_blank" rel="noopener" href="https://sspai.com/tag/Launch%20Center%20Pro">Launch Center Pro</a> 的前身——Launch Center。</p>
+<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286106.png?origin" alt=""></p>
+<p>但很快，这一批 App 被苹果火速下架，原因是「对通知中心的误用」。模糊的解释让开发者们摸不到头脑，这种不满一直延续到 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/Launcher">Launcher</a> 在 iOS 8 之后的下架事件。</p>
+<p>总之，在这一批 App 被下架之后，玩票的都离开了，只留下了一个 Launch Center。作者似乎觉得 URL Schemes 大有可为，所以在不触碰红线（当时的红线是一不许动通知中心，二不许调用系统设置的界面）的基础上继续发力，在几个月（2012年7月）之后推出了 Launch Center Pro v1.0。</p>
+<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286108.jpeg?origin" alt=""></p>
+<p>另一个注意到 iOS 上的 URL Schemes 的作用的是 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/drafts/">Drafts</a> 的作者 <a target="_blank" rel="noopener" href="https://twitter.com/agiletortoise/">Greg Pierce</a>。不同于 Launch Center Pro，Greg Pierce 打造的是一个以输入文字为主的效率应用，它以一个笔记本的面目示人，所以被媒体称为「Launch Center for text」。</p>
+<p>两者大的区别在于先选动作还是先输入。Launch Center Pro 的使用方法是：先打开动作，如果需要输入的话，你可以让它跳出来一个输入框，你来输入，输入完成后跳转到相应应用。Drafts 则是先在笔记本里把东西输入了，然后再选择动作，跳转到相应应用。</p>
+<p>好像没什么大不了的嘛……吗？这里至少有两个重要的区别：</p>
+<ol>
+<li>Drafts 中输入过的内容会储存在笔记本中以留作备份，而 Launch Center Pro 里的则是动作运行完了就没了。</li>
+<li>Drafts 中输入过的内容可以通过 URL Schemes 进行多次使用或一次性发给多个应用或服务，而 Launch Center Pro 只能将输入内容发送到一个服务或应用。即除了剪切版外， Launch Center Pro 没有其它变量的概念。</li>
+<li>第三个区别不太重要：Launch Center Pro 里的输入框和 Drafts 的笔记本界面来比较很明显不是一个好的写作环境。<br>
+细节上的区别还有很多，两者适用的范围随着各自的发展扩大，因此重合的那部分功能也愈发的不起眼。Launch Center Pro 和 Drafts 从那以后成为效率类应用中的双雄，不断提出更多更灵活使用 iOS 上 URL Schemes 的办法。</li>
+</ol>
+<p>比如 Launch Center Pro 提出了 List 的概念，将列表的想法融入到了 URL Schemes 中，列表的每一项可以是简单的字符，又可以是一串新的复杂的 URL。使用列表可以让我们每次的输入变为更轻松的选择，对于那些重复的任务更为高效。</p>
+<p>而 Drafts 的作者直接不满 URL Schemes 只能跳出不能跳回的问题，和 <a target="_blank" rel="noopener" href="http://www.marco.org/">Marco Arment</a>、<a target="_blank" rel="noopener" href="https://twitter.com/justin">Justin Williams</a> 等人开发了 x-callback-URL 来做到跳出，并跳回这样的动作。</p>
+<p>可以说这两款 App 对 URL Schemes 的推广和使用构思上的贡献是最突出的，现在 URL Schemes 越来越被 iOS 用户和开发者所重视，在我眼里，一款 App 是否完整系统地支持 URL Schemes 已经是判断它是否优秀的标志之一。</p>
+<p>故事讲到这里，更重要的还是如何使用 URL Schemes。</p>
+<p><em>故事里没有提到 <a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/pythonista/id528579881?ls=1&amp;mt=8">Pythonista</a>、<a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/editorial/id673907758?mt=8">Editorial</a> 跟 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/workflow">Workflow</a>，绝不是我认为这些 App 不够腕儿，而是它们做的事情重点已经不在于 URL Schemes 了。</em></p>
+<p> </p>
+<hr>
+<hr>
+<p> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/12/URL%20Schemes/" data-id="cl3jmf7n100469jv363lr1zqk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SSH——Secure SHell（安全外壳协议）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/" class="article-date">
+  <time datetime="2017-03-12T07:56:04.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/">SSH——Secure SHell（安全外壳协议）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。</p>
+<p>SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多人开始转用开源免费的<a target="_blank" rel="noopener" href="http://www.openssh.com/">openSSH</a>（Linux/Mac OS X标配）。</p>
+<p>SSH提供基于密钥的认证机制，你必须为自己创建一对非对称密钥（public/private key pair），并把公钥放到需要访问的服务器上进行授权。SSH1使用RSA（Ron_<strong>R</strong><em>ivest、Adi</em><strong>S</strong>_hamir、Leonard**<em>A</em>**dleman）加密密钥，SSH2使用DSA（Digital Signature Algorithm，<a target="_blank" rel="noopener" href="http://blog.csdn.net/phunxm/article/details/16344837">数字签名算法</a>)密钥保护连接和认证。RSA和DSA这两种加密算法都是<a target="_blank" rel="noopener" href="http://blog.csdn.net/wzzvictory/article/details/9015155">非对称加密算法</a>。</p>
+<p>所谓“<strong>SSH公钥认证免密码登录认证机制</strong>”，原理如下：</p>
+<blockquote>
+<p>（1）SSH客户端提前将SSH公钥储存在远程SSH服务器上，然后SSH客户端携带公钥向远程SSH服务器（known_hosts）发起登录请求。</p>
+<p>（2）远程SSH服务器收到该请求之后，先在该服务器上的authorized_keys寻找你上传授权过的公钥，然后把它和你发送过来的公钥进行比较。</p>
+<p>（3）如果两个公钥一致（Key Exchange Success），远程SSH服务器会向用户发送一段使用SSH公钥加密过的随机字符串进行身份质询（Challenge）。</p>
+<p>（4）SSH客户端用自己的私钥解密后再发回给远程SSH服务器，远程SSH服务器对比回包中解密出来的随机字符串是否一致。如果一致，则证明用户（公钥或身份）是可信的，直接允许登录shell，不再要求密码。<br>
+ </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/" data-id="cl3jmf7mw003k9jv3gaqbgonk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小代码合集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/" class="article-date">
+  <time datetime="2017-03-10T17:57:43.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/">小代码合集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="解决block中self的引用">解决block中self的引用</h3>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h3 id="iOS获得屏幕大小">iOS获得屏幕大小</h3>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//宽度:</span><br><span class="line">UIScreen mainScreen] bounds].size.width</span><br><span class="line"></span><br><span class="line">//高度:</span><br><span class="line">UIScreen mainScreen] bounds].size.height</span><br><span class="line"></span><br><span class="line">//可以将屏幕大小定义成一个宏:</span><br><span class="line">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span><br><span class="line"></span><br><span class="line">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="延时执行可以尝试NSTimer方法">延时执行可以尝试NSTimer方法</h3>
+<p>例子：UIAlertViewController自动消失</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">[self presentViewController:alert animated:NO completion:nil];</span><br><span class="line"></span><br><span class="line">[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];</span><br><span class="line"></span><br><span class="line">- (void)creatAlert:(NSTimer *)timer &#123;</span><br><span class="line"></span><br><span class="line">    UIAlertController *alert = [timer userInfo];</span><br><span class="line"></span><br><span class="line">    [alert dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    alert = nil;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="span-class-s2-定制-span-span-class-s1-statusBar-span-span-class-s2-部分-span"><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(UIStatusBarStyle)preferredStatusBarStyle</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    return UIStatusBarStyleLightContent;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="span-class-s1-NSString-和-NSNumber-span"><span class="s1">   NSString 和 NSNumber </span></h2>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSString *str = @&quot;120&quot;.</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];</span><br><span class="line"></span><br><span class="line">NSNumber *numTemp = [numberFormatter numberFromString:str];</span><br></pre></td></tr></table></figure>
+<hr>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSNumber *num = [NSNumber numberWithInt:2] ;</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">NSString* str = [numberFormatter stringFromNumber:num];</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UINavigationController-span-class-s1-先-span-pop-span-class-s1-再-span-push-span-class-s1-，-span-push-span-class-s1-操作将无效。-span">UINavigationController<span class="s1">先</span>pop<span class="s1">再</span>push<span class="s1">，</span>push<span class="s1">操作将无效。</span></h2>
+<p>解决方案是：</p>
+<p>1. <span class="s1">从</span>self.navigationController.viewControllers<span class="s1">中拿出需要保留的</span>View Controller<span class="s1">放到一个数组中</span></p>
+<p>2. <span class="s1">向数组中添加需要</span>push<span class="s1">的</span>View Controller</p>
+<p>3. <span class="s1">调用</span>[self.navigationController setViewControllers:array animated:YES]</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];</span><br><span class="line">investmentList.hidesBottomBarWhenPushed = YES;</span><br><span class="line">NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];</span><br><span class="line">int index = (int)[arrView indexOfObject:self];</span><br><span class="line">[arrView removeObjectAtIndex:index];</span><br><span class="line">[arrView addObject:investmentList];</span><br><span class="line">[self.navigationController setViewControllers:arrView animated:YES];</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/" data-id="cl3jmf7nw007n9jv32h7t0n9o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

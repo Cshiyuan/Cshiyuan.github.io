@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>HTML DOM (Document Object Model) | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTML DOM是HTML Document Object Model(文档对象模型)的缩写，HTML DOM则是专门适用于HTML&#x2F;XHTML的文档对象模型。 熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。  相关介绍 DOM是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML DOM (Document Object Model)">
+<meta property="og:url" content="http://example.com/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="HTML DOM是HTML Document Object Model(文档对象模型)的缩写，HTML DOM则是专门适用于HTML&#x2F;XHTML的文档对象模型。 熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。  相关介绍 DOM是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-04-26T07:20:17.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.074Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTML DOM (Document Object Model)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/" class="article-date">
+  <time datetime="2017-04-26T07:20:17.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTML DOM (Document Object Model)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTML DOM是HTML Document Object Model(<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">文档对象模型</a>)的缩写，HTML DOM则是专门适用于HTML/XHTML的文档对象模型。</p>
+<p>熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。</p>
+<hr>
+<h2 id="相关介绍">相关介绍</h2>
+<p>DOM是Document Object Model<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">文档对象模型</a>的缩写。根据W3C DOM规范，DOM是一种与浏览器，平台，语言无关的接口，使得你可以访问页面中其他的标准组件。<br>
+简单理解，DOM解决了Netscape的JavaScript和 Microsoft的JavaScript之间的冲突，给予web设计师和开发者一个标准的方法，让他们来访问他们站点中的数据、脚本和表现层对象。<br>
+DOM是以<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">层次结构</a>组织的节点或信息片断的集合。这个层次结构允许开发人员在树中导航寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而 DOM 被认为是基于树或基于对象的。HTML DOM 定义了访问和操作HTML文档的标准方法。</p>
+<p>HTML DOM 把 HTML 文档呈现为带有元素、属性和文本的树结构（节点树）。</p>
+<hr>
+</div>
+<h2 id="节点信息">节点信息</h2>
+<p>每个<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E8%8A%82%E7%82%B9">节点</a>都拥有包含着关于节点某些信息的属性。这些属性是：<br>
+nodeName（节点名称）nodeValue（节点值）nodeType（节点类型）</p>
+<hr>
+<h2 id="HTML-DOM-方法">HTML DOM 方法</h2>
+<p>方法是我们可以在节点（HTML 元素）上执行的动作。</p>
+<h3 id="编程接口">编程接口</h3>
+</div>
+<div class="para">可通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问。</div>
+<div class="para">所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。</div>
+<div class="para">方法是您能够执行的动作（比如添加或修改元素）。</div>
+<div class="para">属性是您能够获取或设置的值（比如节点的名称或内容）</div>
+<div class="para-title level-3">
+<h3 id="HTML-DOM-对象-方法和属性">HTML DOM 对象 - 方法和属性</h3>
+<h5 id="一些常用的-HTML-DOM-方法：">一些常用的 HTML DOM 方法：</h5>
+<ul>
+<li>getElementById(id) - 获取带有指定 id 的节点（元素）</li>
+<li>appendChild(node) - 插入新的子节点（元素）</li>
+<li>removeChild(node) - 删除子节点（元素）</li>
+</ul>
+<h5 id="一些常用的-HTML-DOM-属性：">一些常用的 HTML DOM 属性：</h5>
+<ul>
+<li>innerHTML - 节点（元素）的文本值</li>
+<li>parentNode - 节点（元素）的父节点</li>
+<li>childNodes - 节点（元素）的子节点</li>
+<li>attributes - 节点（元素）的属性节点</li>
+</ul>
+<div class="para-title level-3">
+<h3 id="一些-DOM-对象方法">一些 DOM 对象方法</h3>
+</div>
+<div class="para">下面列出一些常用的 DOM 对象方法：</div>
+<table class="reference">
+<tbody>
+<tr>
+<th>
+<pre class="para">方法</pre>
+</th>
+<th>
+<pre class="para">描述</pre>
+</th>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementById()</pre>
+</td>
+<td>
+<pre class="para"> 返回带有指定 ID 的元素。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementsByTagName()</pre>
+</td>
+<td>
+<pre class="para"> 返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementsByClassName()</pre>
+</td>
+<td>
+<pre class="para"> 返回包含带有指定类名的所有元素的节点列表。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">appendChild()</pre>
+</td>
+<td>
+<pre class="para"> 把新的子节点添加到指定节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">removeChild()</pre>
+</td>
+<td>
+<pre class="para"> 删除子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">replaceChild()</pre>
+</td>
+<td>
+<pre class="para"> 替换子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">insertBefore()</pre>
+</td>
+<td>
+<pre class="para"> 在指定的子节点前面插入新的子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 创建属性节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createElement()</pre>
+</td>
+<td>
+<pre class="para"> 创建元素节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createTextNode()</pre>
+</td>
+<td>
+<pre class="para"> 创建文本节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 返回指定的属性值。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">setAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 把指定属性设置或修改为指定的值。</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/" data-id="cl3jmf7md001g9jv3h56age55" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20(1)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript学习笔记 (1)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Core Foundation 框架详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>A summary of recent work | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CDN（Content Delivery Network，内容分发网络） 通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。 解决目前互联网业务在网络层面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A summary of recent work">
+<meta property="og:url" content="http://example.com/2016/08/05/a-summary-of-recent-work/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="CDN（Content Delivery Network，内容分发网络） 通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。 解决目前互联网业务在网络层面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png">
+<meta property="og:image" content="http://roov.org/wp-content/uploads/2013/12/20131225225414_75247.jpg">
+<meta property="article:published_time" content="2016-08-05T09:31:01.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.080Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-a-summary-of-recent-work" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/a-summary-of-recent-work/" class="article-date">
+  <time datetime="2016-08-05T09:31:01.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      A summary of recent work
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CDN（Content-Delivery-Network，内容分发网络）"><strong>CDN（Content Delivery Network，内容分发网络）</strong></h2>
+<p>通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。<br>
+解决目前互联网业务在网络层面可能存在的问题：</p>
+<ol>
+<li>业务服务器接入互联网的带宽有限。</li>
+<li>不同运营商之间的互联问题使得业务要考虑多运营商分布问题。</li>
+<li>地域问题导致用户到服务器的物理距离会比较远，传输时延非常高。<br>
+CDN帮助用户解决互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，业务只需简单接入即可完成访问加速，无需关注复杂多变的网络状况。</li>
+</ol>
+<p>使用CDN后的http请求处理流程如下图：</p>
+<p><img src="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png" alt=""></p>
+<p>**总结：需要通过DNS解析，将域名CNAME到CDN服务商的提供的CNAME域名。放弃原来的A记录解析，全部交由CNAME域名的CDN节点来处理。CDN节点会主动或者被动的从源拉取资源。**<strong>当节点存储所请求资源就将资源返回，否则返回源服务器请求。</strong></p>
+<p><strong>吐槽：腾讯的CDN和阿里的CDN差太大，阿里把腾讯甩好几条街。</strong></p>
+<h2 id="MYSQL5-6内存占用过高"><strong>MYSQL5.6内存占用过高</strong></h2>
+<p>距离MySQL 5.6正式发布已经有比较长的时间了，目前Oracle官网上的最新GA版本MySQL server也为5.6。但reizhi在安装配置后却发现其内存占用居高不下，无论如何调整cache甚至禁用InnoDB都不能解决。由于VPS仅有1GB内存，在开启常用的Web服务之后，无力再为MySQL提供400MB以上的物理内存。</p>
+<p>通过网络爬文，MySQL 5.6相比于前代GA版本性能提升显著，但默认缓存设置对于小型站点并不合理。通过修改my.ini文件中的performance_schema_max_table_instances参数，能够有效降低内存占用。</p>
+<p>修改参数：</p>
+<pre class="prettyprint">performance_schema_max_table_instances=400
+table_definition_cache=400
+table_open_cache=256</pre>
+<p>保存之后重新启动MySQL服务，其内存占用即可从400MB以上降低至40MB左右。</p>
+<p><img src="http://roov.org/wp-content/uploads/2013/12/20131225225414_75247.jpg" alt=""></p>
+<h2 id="PHP-FPM内存占用过大的优化方法。"><strong>PHP-FPM内存占用过大的优化方法。</strong></h2>
+<p><strong>总结或多或少都有内存泄漏的问题</strong></p>
+<div>
+<p>php-fpm优化方法</p>
+<p>php-fpm存在两种方式，一种是直接开启指定数量的php-fpm进程，不再增加或者减少；<br>
+另一种则是开始时开启一定数量的php-fpm进程，当请求量变大时，动态的增加php-fpm进程数到上限，当空闲时自动释放空闲的进程数到一个下限。<br>
+这两种不同的执行方式，可以根据服务器的实际需求来进行调整。</p>
+<p>要用到的一些参数，分别是pm、pm.max_children、pm.start_servers、pm.min_spare_servers和pm.max_spare_servers。</p>
+<p>pm表示使用那种方式，有两个值可以选择，就是static（静态）或者dynamic（动态）。</p>
+<p>下面4个参数的意思分别为：</p>
+<div>**pm.max_children：**静态方式下开启的php-fpm进程数量，在动态方式下他限定php-fpm的最大进程数（这里要注意pm.max_spare_servers的值只能小于等于pm.max_children）
+**pm.start_servers：**动态方式下的起始php-fpm进程数量。
+**pm.min_spare_servers：**动态方式空闲状态下的最小php-fpm进程数量。
+**pm.max_spare_servers：**动态方式空闲状态下的最大php-fpm进程数量。</div>
+**如果dm设置为static，那么其实只有pm.max_children这个参数生效。**系统会开启设置的数量个php-fpm进程。
+<p>**如果dm设置为dynamic，4个参数都生效。**系统会在php-fpm运行开始时启动pm.start_servers个php-fpm进程，然后根据系统的需求动态在pm.min_spare_servers和pm.max_spare_servers之间调整php-fpm进程数。</p>
+<p>那么，对于服务器，选择哪种执行方式比较好呢？事实上，跟Apache一样，运行的PHP程序在执行完成后，或多或少会有内存泄露的问题。这也是为什么开始时一个php-fpm进程只占用3M左右内存，运行一段时间后就会上升到20-30M的原因了。</p>
+<p>所以，动态方式因为会结束掉多余的进程，可以回收释放一些内存，所以推荐在内存较少的服务器或者VPS上使用。具体最大数量根据 内存/20M 得到。<br>
+比如说512M的VPS，建议pm.max_spare_servers设置为20（512*0.8/20）。至于pm.min_spare_servers，则建议根据服务器的负载情况来设置，比较合适的值在5~10之间。</p>
+<p>然后对于比较大内存的服务器来说，设置为静态的话会提高效率。<br>
+因为频繁开关php-fpm进程也会有时滞，所以内存够大的情况下开静态效果会更好。数量也可以根据 内存/30M 得到。<br>
+比如说2GB内存的服务器，可以设置为50；4GB内存可以设置为100等。</p>
+<p>比如，如果是512M的vps，设置的参数如下：</p>
+<div>代码示例:</div>
+<div id="c_VPKcKpCW">pm=dynamic
+pm.max_children=20
+pm.start_servers=5
+pm.min_spare_servers=5
+pm.max_spare_servers=20</div>
+可以最大的节省内存并提高执行效率。
+<div>
+<p> </p>
+</div>
+<h2 id="Nginx设置alias别名目录访问phpmyadmin"><strong>Nginx设置alias别名目录访问phpmyadmin</strong></h2>
+<h3 id="1-修改nginx配置文件">1.修改nginx配置文件</h3>
+<p><strong>cp /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.confbak</strong>  #备份配置文件</p>
+<p><strong>vi /usr/local/nginx/conf/nginx.conf</strong>  #修改配置文件，在 ** （推荐使用nano 命令，反正我是比较习惯用nano来修改。）**</p>
+<p>server {<br>
+listen       80;<br>
+server_name  localhost;</p>
+<p>#charset koi8-r;</p>
+<p>#access_log  logs/host.access.log  main;</p>
+<p>location / {<br>
+root   html;<br>
+index index.php  index.html index.htm;<br>
+}</p>
+<p>下面添加以下内容：(见粗体字，可以仿造改用）</p>
+<p>location <strong>/phpmyadmin</strong> {<br>
+alias <strong>/home/phpmyadmin;</strong><br>
+index index.php;<br>
+}</p>
+<p>location ~** /phpmyadmin/.<strong>+.php$ {<br>
+if ($fastcgi_script_name ~</strong> /phpmyadmin/**(.+.php.*)$) {<br>
+set $valid_fastcgi_script_name $1;<br>
+}<br>
+include fastcgi_params;<br>
+fastcgi_pass   127.0.0.1:9000;<br>
+fastcgi_index  index.php;<br>
+fastcgi_param SCRIPT_FILENAME <strong>/home/phpmyadmin/</strong>$valid_fastcgi_script_name;<br>
+}</p>
+<p>:wq!   #保存，退出</p>
+<h3 id="2、设置-home-phpmyadmin目录权限"><strong>2、设置/home/phpmyadmin目录权限</strong></h3>
+<p><strong>chown www.www /home/phpmyadmin -R  #修改目录所有者为www账号</strong></p>
+<p><strong>service nginx restart   #重启nginx</strong></p>
+<p><strong>service php-fpm restart    #重启php-fpm</strong></p>
+<p> </p>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/08/05/a-summary-of-recent-work/" data-id="cl3jmf7n5004m9jv3ah5pakxk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/07/A%20summary%20of%20recent%20work/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          A summary of recent work
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/05/perfect-is-the-enemy-of-good/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Perfect is the enemy of good</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

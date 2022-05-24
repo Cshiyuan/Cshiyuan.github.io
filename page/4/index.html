@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="miehaha">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CShyiuan博客">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="miehaha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Objective-C限定词 (摘抄自Objective-C程序设计第六版）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/15/Objective-C%E9%99%90%E5%AE%9A%E8%AF%8D%20(%E6%91%98%E6%8A%84%E8%87%AAObjective-C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-15T07:18:51.000Z" itemprop="datePublished">2017-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/15/Objective-C%E9%99%90%E5%AE%9A%E8%AF%8D%20(%E6%91%98%E6%8A%84%E8%87%AAObjective-C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89/">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="long">long</h2>
+<div>如果直接把限定词long放在int声明之前，那么所声明的整型变量在某些计算机上具有扩展的值域。一个long int声明的例子为：</div>
+<pre> <wbr /> <wbr />  <wbr /> long int factorial;</pre>
+<div> <wbr /> <wbr />  <wbr /> 这条语句将变量factorial声明为long的整型变量，也就是长整型。就象float和double变量一样，long变量的具体精度是由具体的计算机系统决定的。</div>
+<div>在许多系统上，int与long int具有相同的值域，而且任何一个都能存储4个字节(1个字节8位)，32位宽(2,147,483,647)的整型值。long在限定整型的时候，实际相当于双精度的short，什么是short?</div>
+<div></div>
+<div>
+<div>long int类型的常量值可通过在整型常量末尾添加字母L(大小写均可)来形成。单数字和L之间不允许由空格。因为小写的L和数字1容易混淆，建议有用到这种情况，都用大写。下面是个简单的例子：</div>
+<div></div>
+<pre> <wbr /> <wbr />  <wbr /> long int numberOfPoints = 131071100L;</pre>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> 将变量numberOfPoints声明为长整型，而且初值为131,071,100。</div>
+<div> <wbr /> <wbr />  <wbr /> 要用NSLog显示long int的值，使用字母l做为修饰符并放在整型格式符号i，o和x之前。例如“%lx”表示十六进制格式显示值。</div>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> 当然，我们同样可以把 long 标识符放在double声明之前。范例如下：</div>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> long double US_deficit_2004;</div>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> long double常量可写成其尾部带有字母l或L的浮点常量，例如：1.234e+7L</div>
+<div> <wbr /> <wbr />  <wbr /> 要显示long double的值，需要使用修饰符L。因此，%Lf用浮点计数法显示long double的值，%Le用科学计数法显示同样的值，而%Lg将告诉NSLog在%Lf和%Le之间任选一个使用。</div>
+</div>
+<div></div>
+<hr>
+<h2 id="long-long"><strong>long long</strong></h2>
+<div> <wbr /> <wbr />  <wbr /> 双长整型相当于双精度long，可以用如下形式使用：</div>
+<div></div>
+<pre> <wbr /> <wbr />  <wbr /> long long int maxAllowedStorage;</pre>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> 这条语句把指定的变量声明为具有特定扩展精度的双长整型变量，该扩展精度保证变量至少8个字节，具有64位的宽度。NSLog字符串不使用单个字母l，而使用两个l来显示long long的整数，例如“%lli”。</div>
+<div></div>
+<div>
+<hr>
+</div>
+<div>
+<h2 id="short">** short**</h2>
+<div>把限定词short放在int声明之前时，它告诉Objective-C编译器要声明的特定变量用来存储相当小的整数。之所以使用short变量，主要原因是对节约内存空间的考虑，当程序员需要大量内存而可用的内存量又十分有限时，比如iPhone开发的时候，就可用short变量来解决这个问题。</div>
+<div>在某些计算机上，short int占用的内存空间是常规int变量所占空间的一半。在任何情况下，确保分配给short int的空间数量不少于2个字节，16位。</div>
+<div></div>
+<div>**注意**，在Objective-C中，没有其他方法可显式地编写short int型常量。要显示short int变量，可将字母h放在任何普通的整型转换符之前，如：%hi，%ho或%hx。换句话说，可用任何整型转换符号来显示short int，因为当它作为参数传递给NSLog例程时，可转换成整数。</div>
+</div>
+<div>
+<hr>
+</div>
+<div>
+<h2 id="unsigned"><strong>unsigned</strong></h2>
+<div>顾名思义，这个最终限定词就是无符号，可放在int变量之前，当整数变量只用来存储正数的情况下使用最终限定符。以下语句</div>
+<div></div>
+<div>unsigned int counter;</div>
+<div></div>
+<div>向编译器声明：变量counter只用来保存正值。</div>
+<div>通过限制整型变量的使用，使它专门存储正整数，可以扩展整型变量的精度。</div>
+<div>一般unsigned int可简写为uint。</div>
+<div>通过将字母u(或U)放在常量之后，可产生unsigned int常量，例如:0x00ffu</div>
+<div>编写整型常量时，可将字母u(或U)和l(或L)组合起来使用，例如30000UL，告诉编译器将常量20000看作unsigned long。</div>
+<div>
+<hr>
+</div>
+</div>
+<div>
+<h2 id="wbr-wbr-wbr-简写">** <wbr /> <wbr />  <wbr /> 简写**</h2>
+<div> <wbr /> <wbr />  <wbr /> 将变量声明为long int，short int或unsigned int类型时，关键字int 可以省略。因此unsigned变量counter可等价地声明为以下形式：</div>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> unsigned counter;</div>
+<div></div>
+<div> <wbr /> <wbr />  <wbr /> 同时可将char变量声明为unsigned。</div>
+<div>
+<hr>
+</div>
+<h2 id="wbr-wbr-wbr-signed"><wbr /> <wbr />  <wbr /> <strong>signed</strong></h2>
+<div> <wbr /> <wbr />  <wbr /> signed限定词可明确地告诉编译器特定变量是有符号的。它主要用在char声明前面，这个就比较复杂，此处按下不表。</div>
+</div>
+<div></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/15/Objective-C%E9%99%90%E5%AE%9A%E8%AF%8D%20(%E6%91%98%E6%8A%84%E8%87%AAObjective-C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89/" data-id="cl3jmf7mp002t9jv31ir84oi0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-内部排序和外部排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2017-04-14T08:22:10.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/">内部排序和外部排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="外排序"><strong>外排序</strong></h2>
+<p><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。<br>
+外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</p>
+<hr>
+<h2 id="内部排序">内部排序</h2>
+<p>内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</p>
+<p>排序是计算机程序设计中的一种重要操作，其功能是对一个<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0">数据元素</a>集合或序列重新排列成一个按数据元素某个相知有序的序列。排序分为两类：内排序和外排序。</p>
+<p>其中<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>的是目前排序方法中被认为是最好的方法</p>
+<p><a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95">内部排序方法</a>：</p>
+<ul>
+<li>1.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">插入排序</a>（<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">直接插入排序</a>）；</li>
+<li>2.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>；</li>
+<li>3.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">选择排序</a>（<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">简单选择排序</a>）；</li>
+<li>4.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
+<li>5.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a>；</li>
+<li>6.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a>；</li>
+<li>7.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a>是对<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">直接插入排序</a>方法的改进。</li>
+<li>8.<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%A0%86%E6%8E%92%E5%BA%8F">堆排序</a>；</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/" data-id="cl3jmf7nr00719jv319wq0755" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-哈希排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/%E5%93%88%E5%B8%8C%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2017-04-14T06:54:31.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/%E5%93%88%E5%B8%8C%E6%8E%92%E5%BA%8F/">哈希排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>第一部分：Top K 算法详解</h1>
+<h2 id="问题描述">问题描述</h2>
+<p>百度面试题：</p>
+<p><a target="_blank" rel="noopener" href="http://lib.csdn.net/base/searchengine" title="搜索引擎知识库">搜索引擎</a>会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节。</p>
+<p>假设目前有一千万个记录（这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就是越热门。）</p>
+<p>请你统计最热门的10个查询串，要求使用的内存不能超过1G。</p>
+<p>必备知识：</p>
+<h2 id="什么是哈希表？">什么是哈希表？</h2>
+<p>哈希表（Hash table，也叫散列表），是根据关键码值(Key value)而直接进行访问的<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库">数据结构</a>。</p>
+<p>也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。</p>
+<p>这个映射函数叫做散列函数，存放记录的数组叫做散列表。(常用的数组就是一个哈希表)</p>
+<p>哈希表的做法其实很简单，就是把Key通过一个固定的<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库">算法</a>函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。</p>
+<p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位（文章第二、三部分，会针对Hash表详细阐述）。</p>
+<h2 id="问题解析：">问题解析：</h2>
+<p>要统计最热门查询，首先就是要统计每个Query出现的次数，然后根据统计结果，找出Top 10。</p>
+<p>所以我们可以基于这个思路分两步来设计该算法。</p>
+<p>即，此问题的解决分为以下俩个步骤：</p>
+<hr>
+<h2 id="第一步：Query统计">第一步：Query统计</h2>
+<h3 id="Query统计有以下俩个方法，可供选择：">Query统计有以下俩个方法，可供选择：</h3>
+<h4 id="1、直接排序法">1、直接排序法</h4>
+<p>首先我们最先想到的的算法就是排序了，首先对这个日志里面的所有Query都进行排序，然后再遍历排好序的Query，统计每个Query出现的次数了。</p>
+<p>但是题目中有明确要求，那就是内存不能超过1G，一千万条记录，每条记录是225Byte，很显然要占据2.55G内存，这个条件就不满足要求了。</p>
+<p>让我们回忆一下数据结构课程上的内容，当数据量比较大而且内存无法装下的时候，我们可以采用外排序的方法来进行排序，这里我们可以采用归并排序，因为归并排序有一个比较好的时间复杂度O(NlgN)。</p>
+<p>排完序之后我们再对已经有序的Query文件进行遍历，统计每个Query出现的次数，再次写入文件中。</p>
+<p>综合分析一下，排序的时间复杂度是O(NlgN)，而遍历的时间复杂度是O(N)，因此该算法的总体时间复杂度就是O(N+NlgN)=O（NlgN）。</p>
+<h4 id="2、Hash-Table法">2、Hash Table法</h4>
+<p>在第1个方法中，我们采用了排序的办法来统计每个Query出现的次数，时间复杂度是NlgN，那么能不能有更好的方法来存储，而时间复杂度更低呢？</p>
+<p>题目中说明了，虽然有一千万个Query，但是由于重复度比较高，因此事实上只有300万的Query，每个Query255Byte，因此我们可以考虑把他们都放进内存中去，而现在只是需要一个合适的数据结构，在这里，Hash Table绝对是我们优先的选择，因为Hash Table的查询速度非常的快，几乎是O(1)的时间复杂度。</p>
+<p>那么，我们的算法就有了：维护一个Key为Query字串，Value为该Query出现次数的HashTable，每次读取一个Query，如果该字串不在Table中，那么加入该字串，并且将Value值设为1；</p>
+<p>如果该字串在Table中，那么将该字串的计数加一即可。最终我们在O(N)的时间复杂度内完成了对该海量数据的处理。</p>
+<p>本方法相比算法1：在时间复杂度上提高了一个数量级，为O（N），但不仅仅是时间复杂度上的优化，该方法只需要IO数据文件一次，而算法1的IO次数较多的，因此该算法2比算法1在工程上有更好的可操作性。</p>
+<hr>
+<h3 id="第二步：找出Top-10">第二步：找出Top 10</h3>
+<h4 id="算法一：普通排序">算法一：普通排序</h4>
+<p>我想对于排序算法大家都已经不陌生了，这里不在赘述，我们要注意的是排序算法的时间复杂度是NlgN，在本题目中，三百万条记录，用1G内存是可以存下的。</p>
+<h4 id="算法二：部分排序">算法二：部分排序</h4>
+<p>题目要求是求出Top 10，因此我们没有必要对所有的Query都进行排序，我们只需要维护一个10个大小的数组，初始化放入10个Query，按照每个Query的统计次数由大到小排序，然后遍历这300万条记录，每读一条记录就和数组最后一个Query对比，如果小于这个Query，那么继续遍历，否则，将数组中最后一条数据淘汰，加入当前的Query。</p>
+<p>最后当所有的数据都遍历完毕之后，那么这个数组中的10个Query便是我们要找的Top10了。</p>
+<p>不难分析出，这样，算法的最坏时间复杂度是N*K， 其中K是指top多少。</p>
+<h3 id="算法三：堆">算法三：堆</h3>
+<p>在算法二中，我们已经将时间复杂度由NlogN优化到NK，不得不说这是一个比较大的改进了，可是有没有更好的办法呢？</p>
+<p>分析一下，在算法二中，每次比较完成之后，需要的操作复杂度都是K，因为要把元素插入到一个线性表之中，而且采用的是顺序比较。这里我们注意一下，该数组是有序的，一次我们每次查找的时候可以采用二分的方法查找，这样操作的复杂度就降到了logK，可是，随之而来的问题就是数据移动，因为移动数据次数增多了。不过，这个算法还是比算法二有了改进。</p>
+<p>基于以上的分析，我们想想，有没有一种既能快速查找，又能快速移动元素的数据结构呢？回答是肯定的，那就是堆。</p>
+<p>借助堆结构，我们可以在log量级的时间内查找和调整/移动。因此到这里，我们的算法可以改进为这样，维护一个K(该题目中是10)大小的小根堆，然后遍历300万的Query，分别和根元素进行对比。</p>
+<p>思想与上述算法二一致，只是算法在算法三，我们采用了最小堆这种数据结构代替数组，把查找目标元素的时间复杂度有O（K）降到了O（logK）。</p>
+<p>那么这样，采用堆数据结构，算法三，最终的时间复杂度就降到了N‘logK，和算法二相比，又有了比较大的改进。</p>
+<h3 id="总结：">总结：</h3>
+<p>至此，算法就完全结束了，经过上述第一步、先用Hash表统计每个Query出现的次数，O（N）；然后第二步、采用堆数据结构找出Top 10，N*O（logK）。所以，我们最终的时间复杂度是：O（N） + N’*O（logK）。（N为1000万，N’为300万）。如果各位有什么更好的算法，欢迎留言评论。第一部分，完。</p>
+<hr>
+<h2 id="第二部分、Hash表-算法的详细解析">第二部分、Hash表 算法的详细解析</h2>
+<h2 id="a-name-t12-a-什么是Hash"><a name="t12"></a>什么是Hash</h2>
+<p>Hash，一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。</p>
+<p>HASH主要用于信息安全领域中加密算法，它把一些不同长度的信息转化成杂乱的128位的编码,这些编码值叫做HASH值. 也可以说，hash就是找到一种数据内容和数据存放地址之间的映射关系。</p>
+<p>数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？答案是肯定的，这就是我们要提起的哈希表，哈希表有多种不同的实现方法，我接下来解释的是最常用的一种方法——拉链法，我们可以理解为“链表的数组”，如图：</p>
+<p>左边很明显是个数组，数组的每个成员包括一个指针，指向一个链表的头，当然这个链表可能为空，也可能元素很多。我们根据元素的一些特征把元素分配到不同的链表中去，也是根据这些特征，找到正确的链表，再从链表中找出这个元素。</p>
+<p> </p>
+<p>元素特征转变为数组下标的方法就是散列法。散列法当然不止一种，下面列出三种比较常用的：</p>
+<p>1，除法散列法</p>
+<p>最直观的一种，上图使用的就是这种散列法，公式：</p>
+<p>index = value % 16</p>
+<p>学过汇编的都知道，求模数其实是通过一个除法运算得到的，所以叫“除法散列法”。</p>
+<p>2，平方散列法</p>
+<p>求index是非常频繁的操作，而乘法的运算要比除法来得省时（对现在的CPU来说，估计我们感觉不出来），所以我们考虑把除法换成乘法和一个位移操作。公式：</p>
+<p>index = (value * value) &gt;&gt; 28  （右移，除以2^28。记法：左移变大，是乘。右移变小，是除。）</p>
+<p>如果数值分配比较均匀的话这种方法能得到不错的结果，但我上面画的那个图的各个元素的值算出来的index都是0——非常失败。也许你还有个问题，value如果很大，value * value不会溢出吗？答案是会的，但我们这个乘法不关心溢出，因为我们根本不是为了获取相乘结果，而是为了获取index。</p>
+<p>3，斐波那契（Fibonacci）散列法</p>
+<p>平方散列法的缺点是显而易见的，所以我们能不能找出一个理想的乘数，而不是拿value本身当作乘数呢？答案是肯定的。</p>
+<p>1，对于16位整数而言，这个乘数是40503</p>
+<p>2，对于32位整数而言，这个乘数是2654435769</p>
+<p>3，对于64位整数而言，这个乘数是11400714819323198485</p>
+<p>这几个“理想乘数”是如何得出来的呢？这跟一个法则有关，叫黄金分割法则，而描述黄金分割法则的最经典表达式无疑就是著名的斐波那契数列，即如此形式的序列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610， 987, 1597, 2584, 4181, 6765, 10946，…。另外，斐波那契数列的值和太阳系八大行星的轨道半径的比例出奇吻合。</p>
+<p>对我们常见的32位整数而言，公式：</p>
+<p>index = (value * 2654435769) &gt;&gt; 28</p>
+<p>如果用这种斐波那契散列法的话，那上面的图就变成这样了：</p>
+<p>很明显，用斐波那契散列法调整之后要比原来的取摸散列法好很多。</p>
+<p>适用范围</p>
+<p>快速查找，删除的基本数据结构，通常需要总数据量可以放入内存。</p>
+<p>基本原理及要点</p>
+<p>hash函数选择，针对字符串，整数，排列，具体相应的hash方法。</p>
+<p>碰撞处理，一种是openhashing，也称为拉链法；另一种就是closedhashing，也称开地址法，openedaddressing。</p>
+<p>扩展</p>
+<p>d-left hashing中的d是多个的意思，我们先简化这个问题，看一看2-left hashing。2-left hashing指的是将一个哈希表分成长度相等的两半，分别叫做T1和T2，给T1和T2分别配备一个哈希函数，h1和h2。在存储一个新的key时，同 时用两个哈希函数进行计算，得出两个地址h1[key]和h2[key]。这时需要检查T1中的h1[key]位置和T2中的h2[key]位置，哪一个 位置已经存储的（有碰撞的）key比较多，然后将新key存储在负载少的位置。如果两边一样多，比如两个位置都为空或者都存储了一个key，就把新key 存储在左边的T1子表中，2-left也由此而来。在查找一个key时，必须进行两次hash，同时查找两个位置。</p>
+<h2 id="a-name-t13-a-问题实例（海量数据处理）"><a name="t13"></a>问题实例（海量数据处理）</h2>
+<p>我们知道hash 表在海量数据处理中有着广泛的应用，下面，请看另一道百度面试题：</p>
+<p>题目：海量日志数据，提取出某日访问百度次数最多的那个IP。</p>
+<p>方案：IP的数目还是有限的，最多2^32个，所以可以考虑使用hash将ip直接存入内存，然后进行统计。</p>
+<h1><a name="t14"></a>第三部分、最快的Hash表算法</h1>
+<p>接下来，咱们来具体分析一下一个最快的Hasb表算法。</p>
+<p>我们由一个简单的问题逐步入手：有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它，你会怎么做？有一个方法最简单，老老实实从头查到尾，一个一个比较，直到找到为止，我想只要学过程序设计的人都能把这样一个程序作出来，但要是有程序员把这样的程序交给用户，我只能用无语来评价，或许它真的能工作，但…也只能如此了。</p>
+<p>最合适的算法自然是使用HashTable（哈希表），先介绍介绍其中的基本知识，所谓Hash，一般是一个整数，通过某种算法，可以把一个字符串&quot;压缩&quot; 成一个整数。当然，无论如何，一个32位整数是无法对应回一个字符串的，但在程序中，两个字符串计算出的Hash值相等的可能非常小，下面看看在MPQ中的Hash算法：</p>
+<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500">函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1.  prepareCryptTable()</span><br><span class="line">2.  &#123;</span><br><span class="line">3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;</span><br><span class="line">4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )</span><br><span class="line">6.  &#123;</span><br><span class="line">7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )</span><br><span class="line">8.  &#123;</span><br><span class="line">9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;</span><br><span class="line">10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;</span><br><span class="line">13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</span><br><span class="line">15.  temp2 = (seed &amp;amp; 0xFFFF);</span><br><span class="line">16.17.  cryptTable[index2] = ( temp1 | temp2 );</span><br><span class="line">18.  &#125;</span><br><span class="line">19.  &#125;</span><br><span class="line">20.  &#125;</span><br></pre></td></tr></table></figure>
+<p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>
+23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )<br>
+25.  {<br>
+26.  unsigned <span class="datatypes">char</span> *key  = (unsigned <span class="datatypes">char</span> *)lpszFileName;<br>
+27.  unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;<br>
+28.  unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;<br>
+29.  <span class="datatypes">int</span> ch;<br>
+30.31.  <span class="keyword">while</span>( *key != 0 )<br>
+32.  {<br>
+33.  ch = toupper(*key++);<br>
+34.35.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);<br>
+36.  seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;<br>
+37.  }<br>
+38.  <span class="keyword">return</span> seed1;<br>
+39.  }</p>
+</div>
+<h2 id=""></h2>
+<p>Blizzard的这个算法是非常高效的，被称为&quot;One-Way Hash&quot;( A one-way hash is a an algorithm that isconstructed in such a way that deriving the original string (set of strings,actually) is virtually impossible)。举个例子，字符串&quot;unitneutralacritter.grp&quot;通过这个算法得到的结果是0xA26067F3。</p>
+<p>是不是把第一个算法改进一下，改成逐个比较字符串的Hash值就可以了呢，答案是，远远不够，要想得到最快的算法，就不能进行逐个的比较，通常是构造一个哈希表(Hash Table)来解决问题，哈希表是一个大数组，这个数组的容量根据程序的要求来定义，例如1024，每一个Hash值通过取模运算 (mod) 对应到数组中的一个位置，这样，只要比较这个字符串的哈希值对应的位置有没有被占用，就可以得到最后的结果了，想想这是什么速度？是的，是最快的O(1)，现在仔细看看这个算法吧：</p>
+<div class="dp-highlighter bg_cpp">
+<div class="bar">
+<div class="tools">
+<p><strong>[cpp]</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain">view plain</a><span data-mod="popu_168"> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy">copy</a></span></p>
+<div><embed id="ZeroClipboardMovie_2" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_2" data-mce-fragment="1"></embed></div>
+</div>
+</div>
+<ol>
+<li>unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">char</span> *key  = (unsigned <span class="datatypes">char</span> *)lpszFileName;</li>
+<li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
+<li>unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;</li>
+<li><span class="datatypes">int</span> ch;<br>
+7.8.  <span class="keyword">while</span>( *key != 0 )</li>
+<li>{</li>
+<li>ch = toupper(*key++);<br>
+11.12.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);</li>
+<li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
+<li>}</li>
+<li><span class="keyword">return</span> seed1;</li>
+<li>}</li>
+</ol>
+</div>
+<h2 id="-2"></h2>
+<p>Blizzard的这个算法是非常高效的，被称为&quot;One-Way Hash&quot;( A one-way hash is a an algorithm that isconstructed in such a way that deriving the original string (set of strings,actually) is virtually impossible)。举个例子，字符串&quot;unitneutralacritter.grp&quot;通过这个算法得到的结果是0xA26067F3。</p>
+<p>是不是把第一个算法改进一下，改成逐个比较字符串的Hash值就可以了呢，答案是，远远不够，要想得到最快的算法，就不能进行逐个的比较，通常是构造一个哈希表(Hash Table)来解决问题，哈希表是一个大数组，这个数组的容量根据程序的要求来定义，例如1024，每一个Hash值通过取模运算 (mod) 对应到数组中的一个位置，这样，只要比较这个字符串的哈希值对应的位置有没有被占用，就可以得到最后的结果了，想想这是什么速度？是的，是最快的O(1)，现在仔细看看这个算法吧：</p>
+<div class="dp-highlighter bg_cpp">
+<div class="bar">
+<div class="tools">
+<p><strong>[cpp]</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain">view plain</a><span data-mod="popu_168"> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy">copy</a></span></p>
+<div><embed id="ZeroClipboardMovie_3" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_3" data-mce-fragment="1"></embed></div>
+</div>
+</div>
+<ol>
+<li><span class="keyword">typedef</span> <span class="keyword">struct</span></li>
+<li>{</li>
+<li><span class="datatypes">int</span> nHashA;</li>
+<li><span class="datatypes">int</span> nHashB;</li>
+<li><span class="datatypes">char</span> bExists;</li>
+<li>…</li>
+<li>} SOMESTRUCTRUE;</li>
+<li>一种可能的结构体定义？<br>
+9.10.  函数三、下述函数为在Hash表中查找是否存在目标字符串，有则返回要查找字符串的Hash值，无则，<span class="keyword">return</span> -1.<br>
+11.12.  <span class="datatypes">int</span> GetHashTablePos( har *lpszString, SOMESTRUCTURE *lpTable )</li>
+<li><span class="comment">//lpszString要在Hash表中查找的字符串，lpTable为存储字符串Hash值的Hash表。</span></li>
+<li>{</li>
+<li><span class="datatypes">int</span> nHash = HashString(lpszString);  <span class="comment">//调用上述函数二，返回要查找字符串lpszString的Hash值。</span></li>
+<li><span class="datatypes">int</span> nHashPos = nHash % nTableSize;<br>
+17.18.  <span class="keyword">if</span> ( lpTable[nHashPos].bExists  &amp;&amp;  !strcmp( lpTable[nHashPos].pString, lpszString ) )</li>
+<li>{  <span class="comment">//如果找到的Hash值在表中存在，且要查找的字符串与表中对应位置的字符串相同，</span></li>
+<li><span class="keyword">return</span> nHashPos;    <span class="comment">//则返回上述调用函数二后，找到的Hash值</span></li>
+<li>}</li>
+<li><span class="keyword">else</span></li>
+<li>{</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}</li>
+<li>}</li>
+</ol>
+</div>
+<h2 id="-3"></h2>
+<p>看到此，我想大家都在想一个很严重的问题：“如果两个字符串在哈希表中对应的位置相同怎么办？”,毕竟一个数组容量是有限的，这种可能性很大。解决该问题的方法很多，我首先想到的就是用“链表”,感谢大学里学的数据结构教会了这个百试百灵的法宝，我遇到的很多算法都可以转化成链表来解决，只要在哈希表的每个入口挂一个链表，保存所有对应的字符串就OK了。事情到此似乎有了完美的结局，如果是把问题独自交给我解决，此时我可能就要开始定义数据结构然后写代码了。</p>
+<p>然而Blizzard的程序员使用的方法则是更精妙的方法。基本原理就是：他们在哈希表中不是用一个哈希值而是用三个哈希值来校验字符串。</p>
+<p>MPQ使用文件名哈希表来跟踪内部的所有文件。但是这个表的格式与正常的哈希表有一些不同。首先，它没有使用哈希作为下标，把实际的文件名存储在表中用于验证，实际上它根本就没有存储文件名。而是使用了3种不同的哈希：一个用于哈希表的下标，两个用于验证。这两个验证哈希替代了实际文件名。</p>
+<p>当然了，这样仍然会出现2个不同的文件名哈希到3个同样的哈希。但是这种情况发生的概率平均是：1:18889465931478580854784，这个概率对于任何人来说应该都是足够小的。现在再回到数据结构上，Blizzard使用的哈希表没有使用链表，而采用&quot;顺延&quot;的方式来解决问题，看看这个算法：</p>
+<h3 id="a-name-t16-a-函数四、lpszString为要在hash表中查找的字符串；lpTable-为存储字符串hash值的hash表；nTableSize-为hash表的长度："><a name="t16"></a>函数四、lpszString为要在hash表中查找的字符串；lpTable 为存储字符串hash值的hash表；nTableSize 为hash表的长度：</h3>
+<div class="dp-highlighter bg_cpp">
+<div class="bar">
+<div class="tools">
+<p><strong>[cpp]</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain">view plain</a><span data-mod="popu_168"> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy">copy</a></span></p>
+<div><embed id="ZeroClipboardMovie_4" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_4" data-mce-fragment="1"></embed></div>
+</div>
+</div>
+<ol>
+<li><span class="datatypes">int</span> GetHashTablePos( <span class="datatypes">char</span> *lpszString, MPQHASHTABLE *lpTable, <span class="datatypes">int</span> nTableSize )</li>
+<li>{</li>
+<li><span class="keyword">const</span> <span class="datatypes">int</span>  HASH_OFFSET = 0, HASH_A = 1, HASH_B = 2;<br>
+4.5.  <span class="datatypes">int</span>  nHash = HashString( lpszString, HASH_OFFSET );</li>
+<li><span class="datatypes">int</span>  nHashA = HashString( lpszString, HASH_A );</li>
+<li><span class="datatypes">int</span>  nHashB = HashString( lpszString, HASH_B );</li>
+<li><span class="datatypes">int</span>  nHashStart = nHash % nTableSize;</li>
+<li><span class="datatypes">int</span>  nHashPos = nHashStart;<br>
+10.11.  <span class="keyword">while</span> ( lpTable[nHashPos].bExists )</li>
+<li>{</li>
+<li><span class="comment">/*如果仅仅是判断在该表中时候存在这个字符串，就比较这两个hash值就可以了，不用对</span></li>
+<li><span class="comment">     *结构体中的字符串进行比较。这样会加快运行的速度？减少hash表占用的空间？这种</span></li>
+<li><span class="comment">      <em>方法一般应用在什么场合？</em>/</span></li>
+<li><span class="keyword">if</span> ( 　 lpTable[nHashPos].nHashA == nHashA</li>
+<li>&amp;&amp;  lpTable[nHashPos].nHashB == nHashB )</li>
+<li>{</li>
+<li><span class="keyword">return</span> nHashPos;</li>
+<li>}</li>
+<li><span class="keyword">else</span></li>
+<li>{</li>
+<li>nHashPos = (nHashPos + 1) % nTableSize;</li>
+<li>}<br>
+25.26.  <span class="keyword">if</span> (nHashPos == nHashStart)</li>
+<li><span class="keyword">break</span>;</li>
+<li>}</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}</li>
+</ol>
+</div>
+<h2 id="-4"></h2>
+<h3 id="a-name-t17-a-上述程序解释："><a name="t17"></a>上述程序解释：</h3>
+<p>1.计算出字符串的三个哈希值（一个用来确定位置，另外两个用来校验)</p>
+<p>2. 察看哈希表中的这个位置</p>
+<p>3. 哈希表中这个位置为空吗？如果为空，则肯定该字符串不存在，返回-1。</p>
+<p>4. 如果存在，则检查其他两个哈希值是否也匹配，如果匹配，则表示找到了该字符串，返回其Hash值。</p>
+<p>5. 移到下一个位置，如果已经移到了表的末尾，则反绕到表的开始位置起继续查询</p>
+<p>6. 看看是不是又回到了原来的位置，如果是，则返回没找到</p>
+<p>7. 回到3</p>
+<p>ok，这就是本文中所说的最快的Hash表算法。什么?不够快?:D。欢迎，各位批评指正。</p>
+<hr>
+<h3 id="a-name-t18-a-补充1、一个简单的hash函数："><a name="t18"></a>补充1、一个简单的hash函数：</h3>
+<div class="dp-highlighter bg_cpp">
+<div class="bar">
+<div class="tools">
+<p><strong>[cpp]</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain">view plain</a><span data-mod="popu_168"> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy">copy</a></span></p>
+<div><embed id="ZeroClipboardMovie_5" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_5" data-mce-fragment="1"></embed></div>
+</div>
+</div>
+<ol>
+<li><span class="comment">/*key为一个字符串，nTableLength为哈希表的长度</span></li>
+<li><span class="comment"><em>该函数得到的hash值分布比较均匀</em>/</span></li>
+<li>unsigned <span class="datatypes">long</span> getHashIndex( <span class="keyword">const</span> <span class="datatypes">char</span> *key, <span class="datatypes">int</span> nTableLength )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> nHash = 0;<br>
+6.7.  <span class="keyword">while</span> (*key)</li>
+<li>{</li>
+<li>nHash = (nHash&lt;&lt;5) + nHash + *key++;</li>
+<li>}<br>
+11.12.  <span class="keyword">return</span> ( nHash % nTableLength );</li>
+<li>}</li>
+</ol>
+</div>
+<h2 id="-5"></h2>
+<h2 id="a-name-t19-a-补充2、一个完整测试程序："><a name="t19"></a>补充2、一个完整测试程序：</h2>
+<p>哈希表的数组是定长的，如果太大，则浪费，如果太小，体现不出效率。合适的数组大小是哈希表的性能的关键。哈希表的尺寸最好是一个质数。当然，根据不同的数据量，会有不同的哈希表的大小。对于数据量时多时少的应用，最好的设计是使用动态可变尺寸的哈希表，那么如果你发现哈希表尺寸太小了，比如其中的元素是哈希表尺寸的2倍时，我们就需要扩大哈希表尺寸，一般是扩大一倍。</p>
+<p>下面是哈希表尺寸大小的可能取值：</p>
+<p>17,            37,          79,        163,          331,</p>
+<p>673,           1361,        2729,       471,         10949,</p>
+<p>21911,          43853,      87719,      175447,      350899,</p>
+<p>701819,         1403641,    2807303,    5614657,     11229331,</p>
+<p>22458671,      44917381,    89834777,    179669557,  359339171,</p>
+<p>718678369,      1437356741,  2147483647</p>
+<p>以下为该程序的完整源码，已在<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/linux" title="Linux知识库">Linux</a>下<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/softwaretest" title="软件测试知识库">测试</a>通过：#include &lt;stdio.h&gt;</p>
+<p>//crytTable[]里面保存的是HashString函数里面将会用到的一些数据，在prepareCryptTable</p>
+<p>//函数里面初始化</p>
+<p>unsigned long cryptTable[0x500];</p>
+<p>//以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</p>
+<div class="dp-highlighter bg_cpp">
+<div class="bar">
+<div class="tools">
+<p><strong>[cpp]</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="view plain">view plain</a><span data-mod="popu_168"> <a target="_blank" rel="noopener" href="http://blog.csdn.net/txl199106/article/details/39834001#" title="copy">copy</a></span></p>
+<div><embed id="ZeroClipboardMovie_6" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="18" height="18" align="middle" name="ZeroClipboardMovie_6" data-mce-fragment="1"></embed></div>
+</div>
+</div>
+<ol>
+<li><span class="keyword">void</span> prepareCryptTable()</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> seed = 0x00100001, index1 = 0, index2 = 0, i;<br>
+4.5.  <span class="keyword">for</span>( index1 = 0; index1 &lt; 0x100; index1++ )</li>
+<li>{</li>
+<li><span class="keyword">for</span>( index2 = index1, i = 0; i &lt; 5; i++, index2 += 0x100 )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> temp1, temp2;<br>
+10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
+<li>temp1 = (seed &amp; 0xFFFF) &lt;&lt; 0x10;<br>
+13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;</li>
+<li>temp2 = (seed &amp; 0xFFFF);<br>
+16.17.  cryptTable[index2] = ( temp1 | temp2 );</li>
+<li>}</li>
+<li>}</li>
+<li>}<br>
+21.22.  <span class="comment">//以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，</span></li>
+<li><span class="comment">//在下面GetHashTablePos函数里面调用本函数，其可以取的值为0、1、2；该函数</span></li>
+<li><span class="comment">//返回lpszFileName 字符串的hash值；</span></li>
+<li>unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">char</span> *key  = (unsigned <span class="datatypes">char</span> *)lpszFileName;</li>
+<li>unsigned <span class="datatypes">long</span> seed1 = 0x7FED7FED;</li>
+<li>unsigned <span class="datatypes">long</span> seed2 = 0xEEEEEEEE;</li>
+<li><span class="datatypes">int</span> ch;<br>
+31.32.  <span class="keyword">while</span>( *key != 0 )</li>
+<li>{</li>
+<li>ch = toupper(*key++);<br>
+35.36.  seed1 = cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);</li>
+<li>seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;</li>
+<li>}</li>
+<li><span class="keyword">return</span> seed1;</li>
+<li>}<br>
+41.42.  <span class="comment">//在main中测试argv[1]的三个hash值：</span></li>
+<li><span class="comment">//./hash  “arr\units.dat”</span></li>
+<li><span class="comment">//./hash  “unit\neutral\acritter.grp”</span></li>
+<li><span class="datatypes">int</span> main( <span class="datatypes">int</span> argc, <span class="datatypes">char</span> **argv )</li>
+<li>{</li>
+<li>unsigned <span class="datatypes">long</span> ulHashValue;</li>
+<li><span class="datatypes">int</span> i = 0;<br>
+49.50.  <span class="keyword">if</span> ( argc != 2 )</li>
+<li>{</li>
+<li>printf(<span class="string">“please input two arguments\n”</span>);</li>
+<li><span class="keyword">return</span> -1;</li>
+<li>}<br>
+55.56.  <span class="comment">/<em>初始化数组：crytTable[0x500]</em>/</span></li>
+<li>prepareCryptTable();<br>
+58.59.  <span class="comment">/<em>打印数组crytTable[0x500]里面的值</em>/</span></li>
+<li><span class="keyword">for</span> ( ; i &lt; 0x500; i++ )</li>
+<li>{</li>
+<li><span class="keyword">if</span> ( i % 10 == 0 )</li>
+<li>{</li>
+<li>printf(<span class="string">“\n”</span>);</li>
+<li>}<br>
+66.67.  printf(<span class="string">“%-12X”</span>, cryptTable[i] );</li>
+<li>}<br>
+69.70.  ulHashValue = HashString( argv[1], 0 );</li>
+<li>printf(<span class="string">“\n----%X ----\n”</span>, ulHashValue );<br>
+72.73.  ulHashValue = HashString( argv[1], 1 );</li>
+<li>printf(<span class="string">“----%X ----\n”</span>, ulHashValue );<br>
+75.76.  ulHashValue = HashString( argv[1], 2 );</li>
+<li>printf(<span class="string">“----%X ----\n”</span>, ulHashValue );</li>
+</ol>
+<div class="save_code tracking-ad" data-mod="popu_249"><a>![](http://static.blog.csdn.net/images/save_snippets.png)</a></div>
+</div>
+http://wenku.baidu.com/view/c8ca9533b90d6c85ec3ac6db.html
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/14/%E5%93%88%E5%B8%8C%E6%8E%92%E5%BA%8F/" data-id="cl3jmf7nv007h9jv31qeo6hay" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-加密安全大补药" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/12/%E5%8A%A0%E5%AF%86%E5%AE%89%E5%85%A8%E5%A4%A7%E8%A1%A5%E8%8D%AF/" class="article-date">
+  <time datetime="2017-04-12T09:55:53.000Z" itemprop="datePublished">2017-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/12/%E5%8A%A0%E5%AF%86%E5%AE%89%E5%85%A8%E5%A4%A7%E8%A1%A5%E8%8D%AF/">加密安全大补药</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Base64-编码">Base64 编码</h2>
+<ul>
+<li>Base 64 编码后的结果能够反算，非常不安全。</li>
+<li>用 base64 编码之后，结果会变大，增加了约 1/3。</li>
+<li>用 base64 编码的结果有非常明显的特点，末尾有 = 。</li>
+</ul>
+<hr>
+<h2 id="对称算法">对称算法</h2>
+<ul>
+<li>
+<p>算法公开、计算量小、加密速度快、加密效率高，可以对大数据进行加密。</p>
+</li>
+<li>
+<p>双方使用相同钥匙，安全性得不到保证。秘钥的安全性非常重要，普遍采用的方法是使用 RSA 的加密算法加密给对称加密算法的秘钥进行加密。</p>
+</li>
+<li>
+<p>对称加密的速度比公钥加密快很多，在很多场合都需要对称加密。</p>
+</li>
+<li>
+<p>加密方法：</p>
+<ul>
+<li>
+<p>DES ：数据加密标准。</p>
+<ul>
+<li>是一种分组数据加密技术，先将数据分成固定长度的小数据块，之后进行加密。</li>
+<li>速度较快，适用于大量数据加密。</li>
+</ul>
+</li>
+<li>
+<p>3DES：使用三组密钥做三次加密。<br>
+*   是一种基于 DES 的加密算法，使用 3 个不同密钥对同一个分组数据块进行 3 次加密，如此以使得密文强度更高。</p>
+</li>
+<li>
+<p>AES ：高级加密标准。</p>
+<ul>
+<li>是美国联邦政府采用的一种区块加密标准。</li>
+<li>相较于 DES 和 3DES 算法而言，AES 算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>加密技术：</p>
+<ul>
+<li>
+<p>ECB ：电子代码本，就是说每个块都是独立加密的。</p>
+</li>
+<li>
+<p>CBC ：密码块链，使用一个密钥和一个初始化向量(IV)对数据执行加密转换。</p>
+<ul>
+<li>CBC 加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="非对称算法">非对称算法</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=bcaM-sDHmaRhphKXH6Em2p4E7s-Hz1j4b83k1MIbx9ZQwyhN2_mYcgShu_83RXarBvmyc3kKYodI4wyv5nC1KELF_-y4iZRh9O50cRb0x83tR3HksYvEWrHOOkEa4q8hMBzUm2GApByXXzx5uzs7G_">非对称算法</a>是指加密和解密使用不同密钥的算法，又称公钥加密。</p>
+</li>
+<li>
+<p>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey），公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。</p>
+</li>
+<li>
+<p>非对称密码体制的特点：算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快，适合对小数据加密。</p>
+</li>
+<li>
+<p>对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</p>
+</li>
+<li>
+<p>加密方法：</p>
+<ul>
+<li>
+<p>RSA ：</p>
+<ul>
+<li>由于 RSA 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取数据本身的加密解密使用对称加密算法(AES/DES3)，用 RSA 算法加密并传输对称算法所需的秘钥。</li>
+<li>RSA 算法还在身份认证（或称鉴权）以及数字签名方面得到广泛的使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="散列算法">散列算法</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=hlbEtGdEcEkX1VfiwsRiY-Bc73pEV582oBP1T7Trz-yrv0rVLPjidtfVyqwzuR3qRn3jHQaxw_OJjK0U_p6vCTwGHKZQAy1s-wzxt50QCNFxy22BhiB79a8yIgoq1i5z">散列算法</a>又称散列函数，哈希(HASH)函数，该函数将数据打乱混合，重新创建一个叫做散列值的指纹。</p>
+</li>
+<li>
+<p>任意二进制数据进行 “散列”，即对不同长度的输入消息，产生固定长度的输出。这个固定长度的输出称为原输入消息的 “散列” 或 “消息摘要”。</p>
+</li>
+<li>
+<p>对任意一个二进制数据进行加密，可以得到定长的字符串结果。相同的字符串，使用相同的算法，每次加密的结果是固定的。</p>
+</li>
+<li>
+<p>散列不能逆运算，常用在用户密码上，服务器不需要知道用户的准确密码。</p>
+</li>
+<li>
+<p>加密方法：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=LvNy7xajWfhabxkF4KcV9wvgzpi-vtT6HS8jv_6PtiwzS_Zlzj6vuNVzrflB_YdvuMYpL4Qzxsd6w9_81ght0a">MD5</a> ：加密结果只有 32 个字符，因为数据长度不够，现在国外基本上已经不怎么用了，国内用的很普遍。</p>
+<ul>
+<li>
+<p>MD5 不能反算，但 MD5 已经被<a target="_blank" rel="noopener" href="http://baike.baidu.com/subview/350813/7544439.htm">破解</a>了，用碰撞算法，可以将两个不同的文件生成出相同的 MD5 结果。</p>
+</li>
+<li>
+<p>MD5 在线加密解密网站 <a target="_blank" rel="noopener" href="http://www.cmd5.com/">http://www.cmd5.com</a> ，该网站破解原理：大量的常见数据被生成 md5 码，用户提交的数据与数据库中的 md5 数据进行比对查找。</p>
+</li>
+<li>
+<p>终端命令：</p>
+</li>
+<li>
+<pre><code>  $ echo -n hello | openssl md5  
+  $ echo -n hello | openssl sha1
+  $ echo -n hello | openssl sha -sha256
+  $ echo -n hello | openssl sha -sha512
+</code></pre>
+</li>
+<li>
+<p>MD5 常用加密方式：</p>
+<ul>
+<li>直接使用 MD5 加密：</li>
+<li>在 <a target="_blank" rel="noopener" href="http://cmd5.com/">http://cmd5.com</a> 上很容易被破解。</li>
+</ul>
+</li>
+<li>
+<p>MD5 + 盐 加密：</p>
+<ul>
+<li>早期方案。关于盐，随机添加的字符串，要够长，够复杂。</li>
+<li>在 <a target="_blank" rel="noopener" href="http://cmd5.com/">http://cmd5.com</a> 不易被破解。</li>
+</ul>
+</li>
+<li>
+<p>MD5 + HMAC加密：</p>
+<ul>
+<li>HMAC 是一个结合了散列函数的加密算法。给定一个 “密钥”，分别作两次加密和散列，密钥强度要求不那么高。国外用的比较多，国内还可以。</li>
+<li>在 <a target="_blank" rel="noopener" href="http://cmd5.com/">http://cmd5.com</a> 无法破解。</li>
+</ul>
+</li>
+<li>
+<p>MD5 + HMAC + 时间戳 加密：</p>
+<ul>
+<li>相同的加密算法+相同的密码明文，每分钟的结果是不一样的。只有每次都不一样，黑客才不好猜。加时间戳，需要客户端和服务器端采用相同的加密算法。</li>
+</ul>
+</li>
+</ul>
+<pre><code>*   在 [http://cmd5.com](http://cmd5.com/) 无法破解。
+*   用户注册时发送 pwd.hmac 密码给服务器记录。关于用户第一次的密码安全，被黑客拦截到的几率非常非常低，增加附加安全手段，如 IP 辅助，手机绑定等。![sign3](http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200229534-756739925.png)
+ *   用户登录时发送经过时间戳加密的密码给服务器端，服务器端根据用户名从数据库中取出记录的 pwd.hmac 密码，加上当前时间（时分）计算一次时间戳密码，加上当前时间（时(分－1)）计算一次时间戳密码，分别与用户发过来的密码进行比对，只要有一个相同，便认为用户是合法的。![sign4](http://images2015.cnblogs.com/blog/993906/201701/993906-20170103200235081-321804614.png)
+</code></pre>
+</li>
+<li>
+<p>SHA1 ：理论上已经被破解</p>
+</li>
+<li>
+<p>SHA256：美国国家安全局、苹果等在使用的</p>
+</li>
+<li>
+<p>SHA512：</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="iOS-上-非对称加密算法">iOS 上 非对称加密算法</h2>
+<p>在 iOS 中使用 RSA 加密解密，需要用到 .der 和 .p12 后缀格式的文件，其中 .der 格式的文件存放的是公钥（Public key）用于加密，.p12 格式的文件存放的是私钥（Private key）用于解密. 首先需要先生成这些文件，然后再将文件导入工程使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/12/%E5%8A%A0%E5%AF%86%E5%AE%89%E5%85%A8%E5%A4%A7%E8%A1%A5%E8%8D%AF/" data-id="cl3jmf7ns00779jv3bojd678o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于Runtime的两个用处" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/%E5%85%B3%E4%BA%8ERuntime%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%94%A8%E5%A4%84/" class="article-date">
+  <time datetime="2017-04-11T14:39:35.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/%E5%85%B3%E4%BA%8ERuntime%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%94%A8%E5%A4%84/">关于Runtime的两个用处</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS开发人员都知道Runtine是比较底层的东西，平时用得少，但是一旦用起来，威力是巨大的，常常有四两拨千斤的用处。</p>
+<h3 id="Runtime是什么">Runtime是什么</h3>
+<blockquote>
+<p>运行时刻是指一个程序在运行（或者在被执行）的状态。也就是说，当你打开一个程序使它在电脑上运行的时候，那个程序就是处于运行时刻。在一些编程语言中，把某些可以重用的程序或者实例打包或者重建成为“运行库&quot;。这些实例可以在它们运行的时候被连接或者被任何程序调用。</p>
+</blockquote>
+<ul>
+<li>Runtime从字面上理解是运行时的意思，OC是一门动态编程语言，归因于继承和多态，代码的最终实现在运行的时候才最终确定。而Runtime可以通过这种特性，在程序运行前对代码自定义。Runtime是一个开源库，通过这个库，OC中的[target doMethodWith:var1]转换为objc_msgSend(target,@selector(doMethodWith:),var1)，下面就来看看这个转换是怎么发生的。</li>
+<li><strong>注意使用Runtime需要导入objc/runtime.h头文件</strong></li>
+</ul>
+<h4 id="1-类与对象的存储结构">1.类与对象的存储结构</h4>
+<ul>
+<li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct objc_object &#123;</span><br><span class="line">  Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct objc_object *id;</span><br></pre></td></tr></table></figure>
+<p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
+<ul>
+<li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">struct objc_class &#123;</span><br><span class="line">      Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line"></span><br><span class="line">  #if !__OBJC2__</span><br><span class="line">      Class super_class                       OBJC2_UNAVAILABLE;  // 父类</span><br><span class="line">      const char *name                        OBJC2_UNAVAILABLE;  // 类名</span><br><span class="line">      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0</span><br><span class="line">      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识</span><br><span class="line">      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小</span><br><span class="line">      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表</span><br><span class="line">      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表</span><br><span class="line">      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存</span><br><span class="line">      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表</span><br><span class="line">  #endif</span><br><span class="line"></span><br><span class="line">  &#125; OBJC2_UNAVAILABLE;</span><br></pre></td></tr></table></figure>
+<p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>
+<em>objc_ivar_list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>
+<em>objc_method_list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>
+<em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
+<ul>
+<li>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：</li>
+<li><img src="http://upload-images.jianshu.io/upload_images/3523280-1a77c1c4e00afedf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+</ul>
+<h4 id="2-target-doMethodWith-var1-是怎么运行的">2.  [target doMethodWith:var1]是怎么运行的</h4>
+<ul>
+<li>首先代码运行时会将[target doMethodWith:var1]编译为objc_msgSend(target,@selector(doMethodWith:),var1)，然后通过target对象结构体中的isa指针寻找到对象的结构体地址。</li>
+<li>在寻找到类的结构体后，如果方法doMethodWith:是实例方法，就在类结构体中的methodLists寻找这个方法来执行，如果没有找到，就会通过类的super_class指针到父类的methodLists去寻找，一直向上，如果在根类没有找到，就会crash；如果是类方法，就会通过类结构体中的isa指针找到元类结构体的地址，在元类的methodLists寻找类方法，如果没有找到也会像上面的父类去寻找，最终没有找到也会crash。</li>
+<li>var1是执行doMethodWith:方法需要的参数，不必多说。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/11/%E5%85%B3%E4%BA%8ERuntime%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%94%A8%E5%A4%84/" data-id="cl3jmf7np006s9jv387mp52pr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-查缺补漏 2017.04.11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%202017.04.11/" class="article-date">
+  <time datetime="2017-04-11T13:16:35.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%202017.04.11/">查缺补漏  2017.04.11</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="C-与多态性与虚函数">C++与多态性与虚函数</h2>
+<p>多态与非多态的实质区别就是函数地址是<strong>早绑定</strong>还是<strong>晚绑定</strong>。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。<br>
+那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不论传递过来的究竟是那个类的对象，函数都能够通过同一个接口调用到适应各自对象的实现方法。</p>
+<p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
+<p>（C++中基类指针只有调用虚函数才会体现出多态性，不然基类指针会被限制）</p>
+<hr>
+<h2 id="OC中的内存地址">OC中的内存地址</h2>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;const int %lx&quot;, &amp;constA);         // const int 7fff5fbff6ec</span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;a);                    // int 7fff5fbff6e8 </span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;b);                    // int 7fff5fbff6e4</span><br><span class="line">NSLog(@&quot;int %lx&quot;, &amp;c);                    // int 7fff5fbff6e0</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staA);          // static int 100002330</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staB);          // static int 100002334</span><br><span class="line">NSLog(@&quot;static int %lx&quot;, &amp;staC);          // static int 100002338</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array1);          // NSArray* 7fff5fbff6d8</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array2);          // NSArray* 7fff5fbff6d0</span><br><span class="line">NSLog(@&quot;NSArray* %lx&quot;, &amp;array3);          // NSArray* 7fff5fbff6c8</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str);            // NSString* 7fff5fbff6b8</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str1);           // NSString* 7fff5fbff6b0</span><br><span class="line">NSLog(@&quot;NSString* %lx&quot;, &amp;str2);           // NSString* 7fff5fbff6a8</span><br><span class="line">NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayA); // static NSArray* 100002340</span><br><span class="line">NSLog(@&quot;static NSArray* %lx&quot;, &amp;stArrayB); // static NSArray* 100002348</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array1);            // NSArray 1002032a0</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array2);            // NSArray 1002013f0</span><br><span class="line">NSLog(@&quot;NSArray %lx&quot;, array3);            // NSArray 1002035c0</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str);              // NSString 100002080</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str1);             // NSString 100002080</span><br><span class="line">NSLog(@&quot;NSString %lx&quot;, str2);             // NSString 1000020a0</span><br><span class="line">NSLog(@&quot;static NSArray %lx&quot;, stArrayA);   // static NSArray 1002035f0</span><br><span class="line">NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   // static NSArray 1002013d0</span><br></pre></td></tr></table></figure>
+<p>分析一下打印结果，可以得出：</p>
+<ol>
+<li>局部的常量和变量（包括指针）存于高地址，连续声明的变量地址会紧挨在一起，地址从高地址向低地址扩展。这一部分就是<strong>栈</strong>。</li>
+<li>对象存储于低地址，而且连续声明的对象地址不连续。这一部分就是<strong>堆</strong>，其实堆内存是由类似链表的结构串起来的，每一个空闲内存块地址并不一定连续，所以会出现这样的现象。</li>
+<li>静态的变量会存储于低地址，比堆空间地址还低，静态的对象只有指针存储在静态区，分配给对象的空间在堆中。</li>
+<li>表示字符串的类<strong>NSString</strong>的对象存储在比静态区地址还要低一些的地址中，变量<strong>str</strong>与<strong>str1</strong>的值相同，所以共享字符串地址。</li>
+</ol>
+<hr>
+<h2 id="栈区、堆区、文字常量区、静态-全局区和代码区">栈区、堆区、文字常量区、静态/全局区和代码区</h2>
+<p><strong>栈区</strong>：一般存储局部变量和常量，包括函数的参数，由编译器分配和释放。存取速度较快，但存储的数据一般生命周期较短。</p>
+<p><strong>堆区</strong>：一般存储对象，由程序员分配和释放，如果程序员不释放，则由操作系统释放。当然，如果使用的高级语言有垃圾回收机制，则大多数情况下程序员也不用担心内存空间的释放问题了。</p>
+<p><strong>文字常量区</strong>：存放字符串。为了节省内存空间，编译器一般会将字符串常量存储在文字常量区，在给字符串变量赋值时先在文字常量区寻找，如果有相同字符串，则共享该字符串地址，如果没有，则在常量区中添加该字符串，并将地址传给变量。</p>
+<p><strong>静态/全局区</strong>：存放静态变量和全局变量，程序结束后由系统释放。</p>
+<p><strong>代码区</strong>：存放函数体的二进制代码。</p>
+<hr>
+<h2 id="对称加密与非对称加密算法">对称加密与非对称加密算法</h2>
+<h3 id="对称加密">对称加密</h3>
+<p>对称加密算法的特点是算法公开、计算量小、加密速度快、加密效率高。不足之处是，交易双方都使用同样钥匙，安全性得不到保证。此外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一钥匙，这会使得发收信双方所拥有的钥匙数量呈几何级数增长，密钥管理成为用户的负担。</p>
+<h3 id="非对称加密">非对称加密</h3>
+<p>优点：非对称加密与对称加密相比，其安全性更好：对称加密的通信双方使用相同的秘钥，如果一方的秘钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对秘钥，一个用来加密，一个用来解密，而且公钥是公开的，秘钥是自己保存的，不需要像对称加密那样在通信之前要先同步秘钥；<br>
+缺点：非对称加密的缺点是加密和解密花费时间长、速度慢，只适合对少量数据进行加密。</p>
+<hr>
+<h2 id="Objective-C中的浅拷贝和深拷贝">Objective-C中的浅拷贝和深拷贝</h2>
+<p>浅拷贝就是对内存地址的复制，让目标对象指针和源对象指向同一片内存空间。如：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char* str = (char*)malloc(100);</span><br><span class="line">char* str2 = str;</span><br></pre></td></tr></table></figure>
+<p>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。</p>
+<p><strong>iOS 里面的浅拷贝：</strong></p>
+<p>在 iOS 里面， 使用retain 关键字进行引用计数，就是一种更加保险的浅拷贝。他既让几个指针共用同一片内存空间，又可以在release 由于计数的存在，不会轻易的销毁内存，达到更加简单使用的目的。</p>
+<p><strong>深拷贝：</strong></p>
+<p>深拷贝是指拷贝对象的具体内容，而内存地址是自主分配的，拷贝结束之后，两个对象虽然存的值是相同的，但是内存地址不一样，两个对象也互不影响，互不干涉。</p>
+<p>copy 与 retain 的区别：</p>
+<p>copy 是创建一个新对象，retain 是创建一个指针，引用对象计数加一。 copy属性标识两个对象内容相同，新的对象retain count为1, 与旧有对象引用计数无关，旧有对象没有变化。copy减少对象对上下文的依赖。</p>
+<p><strong>iOS里的深拷贝：</strong></p>
+<p>iOS提供了copy和mutableCopy方法，顾名思义，copy就是复制了一个imutable的对象，而mutableCopy就是复制了一个mutable的对象。以下将举几个例子来说明。<br>
+这里指的是NSString, NSNumber等等一类的对象。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = @”dddd&quot;;</span><br><span class="line">NSString *stringCopy = [string copy];</span><br><span class="line">NSMutableString *stringDCopy = [string mutableCopy];</span><br><span class="line">[stringMCopy appendString:@&quot;!!&quot;];</span><br></pre></td></tr></table></figure>
+<p>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。</p>
+<p><strong>拷贝构造：</strong></p>
+<p>当然在 ios 中并不是所有的对象都支持copy，mutableCopy，遵守NSCopying协议的类可以发送copy消息，遵守NSMutableCopying协议的类才可以发送mutableCopy消息。</p>
+<p>假如发送了一个没有遵守上诉两协议而发送copy或者 mutableCopy,那么就会发生异常。但是默认的ios类并没有遵守这两个协议。如果想自定义一下copy 那么就必须遵守NSCopying,并且实现 copyWithZone: 方法，如果想自定义一下mutableCopy 那么就必须遵守NSMutableCopying,并且实现 mutableCopyWithZone: 方法。</p>
+<p>如果是我们定义的对象，那么我们自己要实现NSCopying , NSMutableCopying这样就能调用copy和mutablecopy了。举个例子：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@interface MyObj : NSObject&lt;NSCopying, NSMutableCopying&gt; &#123;</span><br><span class="line">    NSMutableString *_name;</span><br><span class="line">    NSString * _imutableStr ;</span><br><span class="line">    int _age;</span><br><span class="line">&#125;     </span><br><span class="line">@property (nonatomic, retain) NSMutableString *name;</span><br><span class="line">@property (nonatomic, retain) NSString *imutableStr;</span><br><span class="line">@property (nonatomic) int age;</span><br></pre></td></tr></table></figure>
+<p>copy拷贝构造：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;</span><br><span class="line">    MyObj *copy = [[[self class] allocWithZone :zone] init];</span><br><span class="line">    copy-&gt;name = [_name copy];</span><br><span class="line">    copy-&gt;imutableStr = [_imutableStr copy];</span><br><span class="line">    copy-&gt;age = age;</span><br><span class="line">    return copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mutableCopy拷贝构造：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone&#123;</span><br><span class="line">    MyObj *copy = NSCopyObject(self, 0, zone);</span><br><span class="line">    copy-&gt;name = [_name mutableCopy];</span><br><span class="line">    copy-&gt;age = age;</span><br><span class="line">    return copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/11/%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%202017.04.11/" data-id="cl3jmf7o000859jv35lni3l2u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-node.js express框架笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2017-04-06T09:37:31.000Z" itemprop="datePublished">2017-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">node.js express框架笔记（1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请求和响应">请求和响应</h2>
+<p>Express 应用使用回调函数的参数： <strong>request</strong> 和 <strong>response</strong> 对象来处理请求和响应的数据。</p>
+<pre class="prettyprint prettyprinted"><span class="pln">app</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="str">'/'</span><span class="pun">,</span> <span class="kwd">function</span> <span class="pun">(</span><span class="pln">req</span><span class="pun">,</span><span class="pln"> res</span><span class="pun">)</span> <span class="pun">{</span>
+   <span class="com">// --</span>
+<span class="pun">})</span></pre>
+<p><strong>request</strong> 和 <strong>response</strong> 对象的具体介绍：</p>
+<p><strong>Request 对象</strong> - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属性有：</p>
+<ol>
+<li>
+<p>req.app：当callback为外部文件时，用req.app访问express的实例</p>
+</li>
+<li>
+<p>req.baseUrl：获取路由当前安装的URL路径</p>
+</li>
+<li>
+<p>req.body / req.cookies：获得「请求主体」/ Cookies</p>
+</li>
+<li>
+<p>req.fresh / req.stale：判断请求是否还「新鲜」</p>
+</li>
+<li>
+<p>req.hostname / req.ip：获取主机名和IP地址</p>
+</li>
+<li>
+<p>req.originalUrl：获取原始请求URL</p>
+</li>
+<li>
+<p>req.params：获取路由的parameters</p>
+</li>
+<li>
+<p>req.path：获取请求路径</p>
+</li>
+<li>
+<p>req.protocol：获取协议类型</p>
+</li>
+<li>
+<p>req.query：获取URL的查询参数串</p>
+</li>
+<li>
+<p>req.route：获取当前匹配的路由</p>
+</li>
+<li>
+<p>req.subdomains：获取子域名</p>
+</li>
+<li>
+<p>req.accepts()：检查可接受的请求的文档类型</p>
+</li>
+<li>
+<p>req.acceptsCharsets / req.acceptsEncodings / req.acceptsLanguages：返回指定字符集的第一个可接受字符编码</p>
+</li>
+<li>
+<p>req.get()：获取指定的HTTP请求头</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://req.is">req.is</a>()：判断请求头Content-Type的MIME类型<br>
+<strong>Response 对象</strong> - response 对象表示 HTTP 响应，即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：</p>
+</li>
+<li>
+<p>res.app：同req.app一样</p>
+</li>
+<li>
+<p>res.append()：追加指定HTTP头</p>
+</li>
+<li>
+<p>res.set()在res.append()后将重置之前设置的头</p>
+</li>
+<li>
+<p>res.cookie(name，value [，option])：设置Cookie</p>
+</li>
+<li>
+<p>opition: domain / expires / httpOnly / maxAge / path / secure / signed</p>
+</li>
+<li>
+<p>res.clearCookie()：清除Cookie</p>
+</li>
+<li>
+<p>res.download()：传送指定路径的文件</p>
+</li>
+<li>
+<p>res.get()：返回指定的HTTP头</p>
+</li>
+<li>
+<p>res.json()：传送JSON响应</p>
+</li>
+<li>
+<p>res.jsonp()：传送JSONP响应</p>
+</li>
+<li>
+<p>res.location()：只设置响应的Location HTTP头，不设置状态码或者close response</p>
+</li>
+<li>
+<p>res.redirect()：设置响应的Location HTTP头，并且设置状态码302</p>
+</li>
+<li>
+<p>res.send()：传送HTTP响应</p>
+</li>
+<li>
+<p>res.sendFile(path [，options] [，fn])：传送指定路径的文件 -会自动根据文件extension设定Content-Type</p>
+</li>
+<li>
+<p>res.set()：设置HTTP头，传入object可以一次设置多个头</p>
+</li>
+<li>
+<p>res.status()：设置HTTP状态码</p>
+</li>
+<li>
+<p>res.type()：设置Content-Type的MIME类型</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" data-id="cl3jmf7n8004y9jv3brx086vn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Python命名规则(转）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-04T14:45:26.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/">Python命名规则(转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>模块名：</strong><br>
+小写字母，单词之间用_分割<br>
+参考<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/python" title="Python知识库">Python</a>：logging</p>
+<p><strong>包名:</strong><br>
+小写字母，单词之间用_分割<br>
+参考python：logging</p>
+<p><strong>类名：</strong><br>
+单词首字母大写<br>
+参考：python class LogRecord(object):</p>
+<p><strong>普通变量：</strong><br>
+小写字母，单词之间用_分割<br>
+参考：exc_info</p>
+<p><strong>实例变量：</strong><br>
+以_开头，小写字母，单词之间用_分割<br>
+参考:_exc_info<br>
+以一个下划线开头的标识符(_xxx)，不能访问的类属性，但可通过类提供的接口进行访问，<br>
+不会被语句 “from module import *” 语句加载</p>
+<p><strong>私有实例变量：</strong><br>
+以__开头（2个下划线），小写字母，单词之间用_分割<br>
+参考:__private_var<br>
+外部访问会报错</p>
+<p><strong>专有变量：</strong><br>
+**开头，**结尾，一般为python的自有变量，不要以这种方式命名<br>
+参考:<strong>doc</strong><br>
+是系统定义的，具有特殊意义的标识符</p>
+<p><strong>普通函数：</strong><br>
+小写字母，单词之间用_分割：<br>
+参考:get_name()</p>
+<p><strong>私有函数</strong>：<br>
+以__开头（2个下划线），小写字母，单词之间用分割<br>
+参考:__get_name()<br>
+外部访问会报错</p>
+<p><strong>注意：</strong><br>
+<em>单下划线开头：弱“内部使用”标识，如：”from M import *”，将不导入所有以下划线开头的对象，包括包、模块、成员<br>
+单下划线结尾</em>：只是为了避免与python关键字的命名冲突<br>
+__双下划线开头：模块内的成员，表示私有成员，外部无法直接调用<br>
+包和模块：模块应该使用尽可能短的、全小写命名，可以在模块命名时使用下划线以增强可读性。同样包的命名也应该是这样的，虽然其并不鼓励下划线。<br>
+以上这些主要是考虑模块名是与文件夹相对应的，因此需要考虑文件系统的一些命名规则的，比如Unix系统对大小写敏感，而过长的文件名会影响其在Windows/Mac/Dos等系统中的正常使用。<br>
+类：几乎毫无例外的，类名都使用首字母大写开头(Pascal命名风格)的规范。使用_单下划线开头的类名为内部使用，上面说的from M import *默认不被告导入的情况。<br>
+异常：因为异常也是一个类，所以遵守类的命名规则。此外，如果异常实际上指代一个错误的话，应该使用“Error”做后缀</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/04/Python%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99(%E8%BD%AC%EF%BC%89/" data-id="cl3jmf7mu003d9jv31rqg4u29" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Python3 学习笔记（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-04T06:59:47.000Z" itemprop="datePublished">2017-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/04/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/">Python3 学习笔记（3）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="匿名函数lambda">匿名函数lambda</h2>
+<p>当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。</p>
+<p>在Python中，对匿名函数提供了有限支持。还是以<code>map()</code>函数为例，计算f(x)=x<sup>2</sup>时，除了定义一个<code>f(x)</code>的函数外，还可以直接传入匿名函数：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre></td></tr></table></figure>
+<p>通过对比可以看出，匿名函数<code>lambda x: x * x</code>实际上就是：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">    return x * x</span><br></pre></td></tr></table></figure>
+<p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。</p>
+<p>匿名函数有个限制，就是只能有一个表达式，不用写<code>return</code>，返回值就是该表达式的结果。</p>
+<hr>
+<h2 id="装饰器">装饰器</h2>
+<p>本质上，decorator就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的decorator，可以定义如下：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def log(func):</span><br><span class="line">    def wrapper(*args, **kw):</span><br><span class="line">        print &#x27;call %s():&#x27; % func.__name__</span><br><span class="line">        return func(*args, **kw)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure>
+<p>观察上面的<code>log</code>，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。我们要借助Python的@语法，把decorator置于函数的定义处：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@log</span><br><span class="line">def now():</span><br><span class="line">    print &#x27;2013-12-25&#x27;</span><br></pre></td></tr></table></figure>
+<p>调用<code>now()</code>函数，不仅会运行<code>now()</code>函数本身，还会在运行<code>now()</code>函数前打印一行日志：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">call now():</span><br><span class="line">2013-12-25</span><br></pre></td></tr></table></figure>
+<p>把<code>@log</code>放到<code>now()</code>函数的定义处，相当于执行了语句：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now = log(now)</span><br></pre></td></tr></table></figure>
+<p>在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持</p>
+<p>Python的decorator可以用函数实现，也可以用类实现。</p>
+<p>decorator可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。</p>
+<p>请编写一个decorator，能在函数调用的前后打印出<code>'begin call'</code>和<code>'end call'</code>的日志。</p>
+<p>再思考一下能否写出一个<code>@log</code>的decorator，使它既支持：</p>
+<hr>
+<h2 id="偏函数">偏函数</h2>
+<p><code>functools.partial</code>就是帮助我们创建一个偏函数的，不需要我们自己定义<code>int2()</code>，可以直接使用下面的代码创建一个新的函数<code>int2</code>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import functools</span><br><span class="line">&gt;&gt;&gt; int2 = functools.partial(int, base=2)</span><br><span class="line">&gt;&gt;&gt; int2(&#x27;1000000&#x27;)</span><br><span class="line">64</span><br><span class="line">&gt;&gt;&gt; int2(&#x27;1010101&#x27;)</span><br><span class="line">85</span><br></pre></td></tr></table></figure>
+<p>所以，简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</p>
+<p>注意到上面的新的<code>int2</code>函数，仅仅是把<code>base</code>参数重新设定默认值为<code>2</code>，但也可以在函数调用时传入其他值：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int2(&#x27;1000000&#x27;, base=10)</span><br><span class="line">1000000</span><br></pre></td></tr></table></figure>
+<p>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</p>
+<hr>
+<h2 id="类-因为有面向对象经验-说关键点就好了）">类(因为有面向对象经验,说关键点就好了）</h2>
+<h3 id="初始化">初始化</h3>
+<p>初始化函数模板,不用定义成员变量,直接用self来定义就好了.</p>
+<p>初始化函数规定的名称是__init__</p>
+<p>注意到<code>__init__</code>方法的第一个参数永远是<code>self</code>，表示创建的实例本身，因此，在<code>__init__</code>方法内部，就可以把各种属性绑定到<code>self</code>，因为<code>self</code>就指向创建的实例本身。</p>
+<p>有了<code>__init__</code>方法，在创建实例的时候，就不能传入空的参数了，必须传入与<code>__init__</code>方法匹配的参数，但<code>self</code>不需要传，Python解释器自己会把实例变量传进去</p>
+<h3 id="私有成员的实现方法">私有成员的实现方法</h3>
+<p>实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问，所以，我们把Student类改一改：</p>
+<p>（吐槽一下，想起OC）</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__score = score</span><br><span class="line"></span><br><span class="line">    def print_score(self):</span><br><span class="line">        print &#x27;%s: %s&#x27; % (self.__name, self.__score)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="slots"><strong>slots</strong></h2>
+<p>限制类的成员变量的数量。</p>
+<p>达到限制的目的，Python允许在定义class的时候，定义一个特殊的<code>__slots__</code>变量，来限制该class能添加的属性：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     __slots__ = (&#x27;name&#x27;, &#x27;age&#x27;) # 用tuple定义允许绑定的属性名称</span><br></pre></td></tr></table></figure>
+<p>这样子绑定别的变量就会报错</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object has no attribute &#x27;score&#x27;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="enumerate函数">enumerate函数</h2>
+<p>如果要对list实现类似Java那样的下标循环怎么办？Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对，这样就可以在<code>for</code>循环中同时迭代索引和元素本身：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i, value in enumerate([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]):</span><br><span class="line">...     print(i, value)</span><br><span class="line">...</span><br><span class="line">0 A</span><br><span class="line">1 B</span><br><span class="line">2 C</span><br></pre></td></tr></table></figure>
+<p>上面的<code>for</code>循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:</span><br><span class="line">...     print(x, y)</span><br><span class="line">...</span><br><span class="line">1 1</span><br><span class="line">2 4</span><br><span class="line">3 9</span><br></pre></td></tr></table></figure>
+<p> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/04/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" data-id="cl3jmf7mu00399jv3g28r3xk8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Python3 学习笔记（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-01T15:25:04.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">Python3 学习笔记（2）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="尾递归优化解决递归调用栈溢出"><strong>尾递归</strong>优化解决递归调用栈溢出</h2>
+<p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+<p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
+<p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fact(n):</span><br><span class="line">    return fact_iter(n, 1)</span><br><span class="line"></span><br><span class="line">def fact_iter(num, product):</span><br><span class="line">    if num == 1:</span><br><span class="line">        return product</span><br><span class="line">    return fact_iter(num - 1, num * product)</span><br></pre></td></tr></table></figure>
+<p>可以看到，<code>return fact_iter(num - 1, num * product)</code>仅返回递归函数本身，<code>num - 1</code>和<code>num * product</code>在函数调用前就会被计算，不影响函数调用。</p>
+<p><code>fact(5)</code>对应的<code>fact_iter(5, 1)</code>的调用如下：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">===&gt; fact_iter(5, 1)</span><br><span class="line">===&gt; fact_iter(4, 5)</span><br><span class="line">===&gt; fact_iter(3, 20)</span><br><span class="line">===&gt; fact_iter(2, 60)</span><br><span class="line">===&gt; fact_iter(1, 120)</span><br><span class="line">===&gt; 120</span><br></pre></td></tr></table></figure>
+<p>尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。</p>
+<p>遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的<code>fact(n)</code>函数改成尾递归方式，也会导致栈溢出。</p>
+<p>使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。</p>
+<p>针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。</p>
+<p>Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。</p>
+<hr>
+<h2 id="切片">切片</h2>
+<p>取前3个元素，应该怎么做？</p>
+<p>笨办法：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [L[0], L[1], L[2]]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<p>之所以是笨办法是因为扩展一下，取前N个元素就没辙了。</p>
+<p>取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = []</span><br><span class="line">&gt;&gt;&gt; n = 3</span><br><span class="line">&gt;&gt;&gt; for i in range(n):</span><br><span class="line">...     r.append(L[i])</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<p>对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。</p>
+<p>对应上面的问题，取前3个元素，用一行代码就可以完成切片：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[0:3]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。</p>
+<p>如果第一个索引是<code>0</code>，还可以省略：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[:3]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<p>也可以从索引1开始，取出2个元素出来：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[1:3]</span><br><span class="line">[&#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<p>类似的，既然Python支持<code>L[-1]</code>取倒数第一个元素，那么它同样支持倒数切片，试试：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[-2:]</span><br><span class="line">[&#x27;Bob&#x27;, &#x27;Jack&#x27;]</span><br><span class="line">&gt;&gt;&gt; L[-2:-1]</span><br><span class="line">[&#x27;Bob&#x27;]</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="函数式编程">函数式编程</h2>
+<p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。</p>
+<p>而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。</p>
+<p>我们首先要搞明白计算机（Computer）和计算（Compute）的概念。</p>
+<p>在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。</p>
+<p>而计算则指数学意义上的计算，越是抽象的计算，离计算机硬件越远。</p>
+<p>对应到编程语言，就是越低级的语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。</p>
+<p>函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出，因此，这种函数是有副作用的。</p>
+<p>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！</p>
+<p>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</p>
+<hr>
+<h2 id="函数名也是变量">函数名也是变量</h2>
+<h3 id="变量可以指向函数">变量可以指向函数</h3>
+<p>以Python内置的求绝对值的函数<code>abs()</code>为例，调用该函数用以下代码：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<p>但是，如果只写<code>abs</code>呢？</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure>
+<p>可见，<code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。</p>
+<hr>
+<h2 id="map-reduce">map/reduce</h2>
+<p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
+<p>举例说明，比如我们有一个函数f(x)=x<sup>2</sup>，要把这个函数作用在一个list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code>上，就可以用<code>map()</code>实现如下：</p>
+<p><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</span><br></pre></td></tr></table></figure>
+<p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def add(x, y):</span><br><span class="line">...     return x + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
+<p>当然求和运算可以直接用Python内建函数<code>sum()</code>，没必要动用<code>reduce</code>。</p>
+<p>但是如果要把序列<code>[1, 3, 5, 7, 9]</code>变换成整数<code>13579</code>，<code>reduce</code>就可以派上用场：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def fn(x, y):</span><br><span class="line">...     return x * 10 + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])</span><br><span class="line">13579</span><br></pre></td></tr></table></figure>
+<p>这个例子本身没多大用处，但是，如果考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
+<hr>
+<h2 id="列表生成式">列表生成式</h2>
+<p>】列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
+<p>举个例子，要生成list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>可以用<code>range(1, 11)</code>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; range(1, 11)</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" data-id="cl3jmf7mt00369jv37j7ef8od" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

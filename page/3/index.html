@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="miehaha">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CShyiuan博客">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="miehaha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-摘抄Effective Objective-C 2.0 " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/" class="article-date">
+  <time datetime="2017-05-01T06:25:49.000Z" itemprop="datePublished">2017-05-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/">摘抄Effective Objective-C 2.0 (1)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="span-class-s1-Objective-C-span-的对象总是使用指针的原因"><span class="s1">Objective-C</span>的对象总是使用指针的原因</h3>
+<p>因为对象所占用的内存总是分配在“堆空间 (<span class="s1">heap space</span>) ”中，而绝对不会分配在“栈(<span class="s1">stack</span>)上。不能在栈中分配<span class="s1">Objective-C</span>对象：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString stackString;</span><br><span class="line"></span><br><span class="line">// error: interface type cannot be statically allocated</span><br></pre></td></tr></table></figure>
+<p><span class="s1">Objective-C</span>将堆内存管理抽象出来了。不需要用<span class="s1">malloc</span>及<span class="s1">free</span>来分配或释放对象所占内存。<span class="s1">Objective-C</span>运行期环境把这部分工作抽象为一套内存管理架构，名叫“引用计数”</p>
+<p>在<span class="s1">Objective-C</span>代码中，有时会遇到定义里不含<span class="s1">*</span>的变量，它们可能会使用“栈空间”这些变量所保存的不是<span class="s1">Objective</span>对象。比如<span class="s1">CoreGraphics</span>框架中的<span class="s1">CGRect</span>。这是一个结构体。与创建结构体相比，创建对象还需要额外开销，例如分配以及释放堆内存等。</p>
+<hr>
+<p><span class="s2">“<strong>向前声明(</strong></span><strong>forward declaring</strong><span class="s2"><strong>)</strong>”</span> <span class="s2">在编译一个使用了</span>EOCPerson<span class="s2">类等文件时，不需要知道</span>EOCEmployer<span class="s2">类等全部细节，只需要知道有一个类名叫</span>EOCEmployer<span class="s2">就好。</span></p>
+<hr>
+<p><strong>委托协议就不用单独写一个头文件了</strong>在那种情况下，协议只有与接受协议委托等类放在一起定义才有意义。此时最好能在实现文件中声明此类实现了该委托协议，并把这段实现代码放在“<span class="s1">class-continuation</span>分类)(<span class="s1">class-continuation category</span>)</p>
+<hr>
+<p><strong>多用字面量语法，少用与之等价的方法。</strong></p>
+<p>其中：</p>
+<p>“<span class="s1">arrayWIthObjects:</span>”方法会依次处理各个参数，直到发现<span class="s1">nil</span>为止。如果在插入数组的时候，存在<span class="s1">nil</span>。方法会提前终止。</p>
+<p>多用类型常量，少用<span class="s1">#define</span>预处理指令</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static const NSTimeInterval kAnimationDuration = 0.3;</span><br></pre></td></tr></table></figure>
+<p>常用的命名方法是：若常量局限于某“编译单元”（<span class="s1">translation unit</span>，也就是“实现文件”，<span class="s1">implementation file</span>）之内，则在前面加字母<span class="s1">k</span>；</p>
+<p>若常量在类之外可见，则通常以类名为前缀。变量一定要同时用<span class="s1">static </span>与<span class="s1">const</span>来声明。</p>
+<hr>
+<p>**编译器每收到一个编译单元，就会输出一份“目标文件”（<span class="s1">object file</span>）。**在<span class="s1">Objective-C</span>的语境下，“编译单元”一词通常指每个类的实现文件（以<span class="s1">.m</span>为后缀名）。假若声明此变量时不加<span class="s1">static</span>，则编译器会为它创建一个“外部符号”（<span class="s1">external symbol</span>）。</p>
+<hr>
+<p><span class="Apple-converted-space">  </span>全局符号表（<span class="s1">global symbol table</span>）中，以便可以在定义该常量的编译单元外使用。因此，其定义方式与上例演示的<span class="s1">static const</span>有所不同。应该这样子定义</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// In the header file</span><br><span class="line"></span><br><span class="line">extern NSString *const EOCStringConstant;</span><br><span class="line"></span><br><span class="line">// In the implementation file</span><br><span class="line"></span><br><span class="line">NSString *const EOCStringConstant = @“VALUE”;</span><br></pre></td></tr></table></figure>
+<p>编译器看到头文件中的<span class="s1">extern</span>关键字，就能明白如何在引入此头文件的代码中处理该常量了。这个关键字是要告诉编译器，在全局符号表中将会有一个名叫<span class="s1">EOCStringConstant</span>的符号。也就是说，编译器无须查看其定义，即允许代码使用此常量。因为它真的，当链接成二进制文件之后，肯定能找到这个常量。</p>
+<p>注意<span class="s1">const</span>修饰符在常量类型中的位置。常量定义应从右至左解读，所以在本例中，<span class="s1">EOCStringConstant</span>就是“一个常量，而这个常量是指针，指向<span class="s1">NSString</span>对象”。</p>
+<hr>
+<p><span class="s1">Foundation</span>框架中定义了一些辅助的宏，用这些宏来定义枚举类型时，也可以指定用于保存枚举值的底层数据类型。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, EOCConnectionState) &#123;</span><br><span class="line"></span><br><span class="line">   EOCConectionStateDisconnected,</span><br><span class="line"></span><br><span class="line">   EOCConectionStateConnecting,</span><br><span class="line"></span><br><span class="line">   EOCConnectionStateConnected,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) &#123;</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/" data-id="cl3jmf7nz00819jv366fs8e4a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaScript学习笔记(2)(原型prototype部分）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/" class="article-date">
+  <time datetime="2017-04-26T09:24:05.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/">JavaScript学习笔记(2)(原型prototype部分）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原型是指当我们想要创建<code>xiaoming</code>这个具体的学生时，我们并没有一个<code>Student</code>类型可用。那怎么办？恰好有这么一个现成的对象：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var robot = &#123;</span><br><span class="line">    name: &#x27;Robot&#x27;,</span><br><span class="line">    height: 1.6,</span><br><span class="line">    run: function () &#123;</span><br><span class="line">        console.log(this.name + &#x27; is running...&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我们看这个<code>robot</code>对象有名字，有身高，还会跑，有点像小明，干脆就根据它来“创建”小明得了！<br>
+于是我们把它改名为<code>Student</code>，然后创建出<code>xiaoming</code>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var Student = &#123;</span><br><span class="line">    name: &#x27;Robot&#x27;,</span><br><span class="line">    height: 1.2,</span><br><span class="line">    run: function () &#123;</span><br><span class="line">        console.log(this.name + &#x27; is running...&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var xiaoming = &#123;</span><br><span class="line">    name: &#x27;小明&#x27;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.__proto__ = Student;</span><br></pre></td></tr></table></figure>
+<p>注意最后一行代码把<code>xiaoming</code>的原型指向了对象<code>Student</code>，看上去<code>xiaoming</code>仿佛是从<code>Student</code>继承下来的：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xiaoming.name; // &#x27;小明&#x27;</span><br><span class="line">xiaoming.run(); // 小明 is running...</span><br></pre></td></tr></table></figure>
+<p><code>xiaoming</code>有自己的<code>name</code>属性，但并没有定义<code>run()</code>方法。不过，由于小明是从<code>Student</code>继承而来，只要<code>Student</code>有<code>run()</code>方法，<code>xiaoming</code>也可以调用：</p>
+<p>JavaScript的原型链和Java的Class区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已。</p>
+<p>如果你把<code>xiaoming</code>的原型指向其他对象：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var Bird = &#123;</span><br><span class="line">    fly: function () &#123;</span><br><span class="line">        console.log(this.name + &#x27; is flying...&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.__proto__ = Bird;</span><br></pre></td></tr></table></figure>
+<p>现在<code>xiaoming</code>已经无法<code>run()</code>了，他已经变成了一只鸟：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xiaoming.fly(); // 小明 is flying...</span><br></pre></td></tr></table></figure>
+<p>在JavaScrip代码运行时期，你可以把<code>xiaoming</code>从<code>Student</code>变成<code>Bird</code>，或者变成任何对象。</p>
+<p><em>请注意</em>，上述代码仅用于演示目的。在编写JavaScript代码时，不要直接用<code>obj.__proto__</code>去改变一个对象的原型，并且，低版本的IE也无法使用<code>__proto__</code>。<code>Object.create()</code>方法可以传入一个原型对象，并创建一个基于该原型的新对象，但是新对象什么属性都没有，因此，我们可以编写一个函数来创建<code>xiaoming</code>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 原型对象:</span><br><span class="line">var Student = &#123;</span><br><span class="line">    name: &#x27;Robot&#x27;,</span><br><span class="line">    height: 1.2,</span><br><span class="line">    run: function () &#123;</span><br><span class="line">        console.log(this.name + &#x27; is running...&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function createStudent(name) &#123;</span><br><span class="line">    // 基于Student原型创建一个新对象:</span><br><span class="line">    var s = Object.create(Student);</span><br><span class="line">    // 初始化新对象:</span><br><span class="line">    s.name = name;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var xiaoming = createStudent(&#x27;小明&#x27;);</span><br><span class="line">xiaoming.run(); // 小明 is running...</span><br><span class="line">xiaoming.__proto__ === Student; // true</span><br></pre></td></tr></table></figure>
+<p>这是创建原型继承的一种方法，JavaScript还有其他方法来创建对象，我们在后面会一一讲到。</p>
+<hr>
+<h2 id="创建对象">创建对象</h2>
+<div class="x-wiki-content">
+<p>JavaScript对每个创建的对象都会设置一个原型，指向它的原型对象。</p>
+<p>当我们用<code>obj.xxx</code>访问一个对象的属性时，JavaScript引擎先在当前对象上查找该属性，如果没有找到，就到其原型对象上找，如果还没有找到，就一直上溯到<code>Object.prototype</code>对象，最后，如果还没有找到，就只能返回<code>undefined</code>。</p>
+<p>例如，创建一个<code>Array</code>对象：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2, 3];</span><br></pre></td></tr></table></figure>
+<p><code>Array.prototype</code>定义了<code>indexOf()</code>、<code>shift()</code>等方法，因此你可以在所有的<code>Array</code>对象上直接调用这些方法。</p>
+<hr>
+<h2 id="构造函数">构造函数</h2>
+<p>除了直接用<code>&#123; ... &#125;</code>创建一个对象外，JavaScript还可以用一种构造函数的方法来创建对象。它的用法是，先定义一个构造函数：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Student(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.hello = function () &#123;</span><br><span class="line">        alert(&#x27;Hello, &#x27; + this.name + &#x27;!&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你会问，咦，这不是一个普通函数吗？</p>
+<p>这确实是一个普通函数，但是在JavaScript中，可以用关键字<code>new</code>来调用这个函数，并返回一个对象：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var xiaoming = new Student(&#x27;小明&#x27;);</span><br><span class="line">xiaoming.name; // &#x27;小明&#x27;</span><br><span class="line">xiaoming.hello(); // Hello, 小明!</span><br></pre></td></tr></table></figure>
+<p><em>注意</em>，如果不写<code>new</code>，这就是一个普通函数，它返回<code>undefined</code>。但是，如果写了<code>new</code>，它就变成了一个构造函数，它绑定的<code>this</code>指向新创建的对象，并默认返回<code>this</code>，也就是说，不需要在最后写<code>return this;</code>。</p>
+<p>新创建的<code>xiaoming</code>的原型链是：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xiaoming ----&gt; Student.prototype ----&gt; Object.prototype ----&gt; null</span><br></pre></td></tr></table></figure>
+<p>也就是说，xiaoming的原型指向函数Student的原型。如果你又创建了xiaohong、xiaojun，那么这些对象的原型与xiaoming是一样的：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xiaoming ↘</span><br><span class="line">xiaohong -→ Student.prototype ----&gt; Object.prototype ----&gt; null</span><br><span class="line">xiaojun  ↗</span><br></pre></td></tr></table></figure>
+<p>用<code>new Student()</code>创建的对象还从原型上获得了一个<code>constructor</code>属性，它指向函数<code>Student</code>本身：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xiaoming.constructor === Student.prototype.constructor; // true</span><br><span class="line">Student.prototype.constructor === Student; // true</span><br><span class="line"></span><br><span class="line">Object.getPrototypeOf(xiaoming) === Student.prototype; // true</span><br><span class="line"></span><br><span class="line">xiaoming instanceof Student; // true</span><br></pre></td></tr></table></figure>
+<p>看晕了吧？用一张图来表示这些乱七八糟的关系就是：</p>
+<p>红色箭头是原型链。注意，<code>Student.prototype</code>指向的对象就是<code>xiaoming</code>、<code>xiaohong</code>的原型对象，这个原型对象自己还有个属性<code>constructor</code>，指向<code>Student</code>函数本身。</p>
+<p>另外，函数<code>Student</code>恰好有个属性<code>prototype</code>指向<code>xiaoming</code>、<code>xiaohong</code>的原型对象，但是<code>xiaoming</code>、<code>xiaohong</code>这些对象可没有<code>prototype</code>这个属性，不过可以用<code>__proto__</code>这个非标准用法来查看。</p>
+<p>现在我们就认为<code>xiaoming</code>、<code>xiaohong</code>这些对象“继承”自<code>Student</code>。</p>
+<p>不过还有一个小问题，注意观察：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xiaoming.name; // &#x27;小明&#x27;</span><br><span class="line">xiaohong.name; // &#x27;小红&#x27;</span><br><span class="line">xiaoming.hello; // function: Student.hello()</span><br><span class="line">xiaohong.hello; // function: Student.hello()</span><br><span class="line">xiaoming.hello === xiaohong.hello; // false</span><br></pre></td></tr></table></figure>
+<p><code>xiaoming</code>和<code>xiaohong</code>各自的<code>name</code>不同，这是对的，否则我们无法区分谁是谁了。</p>
+<p><code>xiaoming</code>和<code>xiaohong</code>各自的<code>hello</code>是一个函数，但它们是两个不同的函数，虽然函数名称和代码都是相同的！</p>
+<p>如果我们通过<code>new Student()</code>创建了很多对象，这些对象的<code>hello</code>函数实际上只需要共享同一个函数就可以了，这样可以节省很多内存。</p>
+<p>要让创建的对象共享一个<code>hello</code>函数，根据对象的属性查找原则，我们只要把<code>hello</code>函数移动到<code>xiaoming</code>、<code>xiaohong</code>这些对象共同的原型上就可以了，也就是<code>Student.prototype</code>：</p>
+<p>修改代码如下：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function Student(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student.prototype.hello = function () &#123;</span><br><span class="line">    alert(&#x27;Hello, &#x27; + this.name + &#x27;!&#x27;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>用<code>new</code>创建基于原型的JavaScript的对象就是这么简单！</p>
+<hr>
+<h2 id="忘记写new怎么办">忘记写new怎么办</h2>
+<p>如果一个函数被定义为用于创建对象的构造函数，但是调用时忘记了写<code>new</code>怎么办？</p>
+<p>在strict模式下，<code>this.name = name</code>将报错，因为<code>this</code>绑定为<code>undefined</code>，在非strict模式下，<code>this.name = name</code>不报错，因为<code>this</code>绑定为<code>window</code>，于是无意间创建了全局变量<code>name</code>，并且返回<code>undefined</code>，这个结果更糟糕。</p>
+<p>所以，调用构造函数千万不要忘记写<code>new</code>。为了区分普通函数和构造函数，按照约定，构造函数首字母应当大写，而普通函数首字母应当小写，这样，一些语法检查工具如<a target="_blank" rel="noopener" href="http://www.jslint.com/">jslint</a>将可以帮你检测到漏写的<code>new</code>。</p>
+<p>最后，我们还可以编写一个<code>createStudent()</code>函数，在内部封装所有的<code>new</code>操作。一个常用的编程模式像这样：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Student(props) &#123;</span><br><span class="line">    this.name = props.name || &#x27;匿名&#x27;; // 默认值为&#x27;匿名&#x27;</span><br><span class="line">    this.grade = props.grade || 1; // 默认值为1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student.prototype.hello = function () &#123;</span><br><span class="line">    alert(&#x27;Hello, &#x27; + this.name + &#x27;!&#x27;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function createStudent(props) &#123;</span><br><span class="line">    return new Student(props || &#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个<code>createStudent()</code>函数有几个巨大的优点：一是不需要<code>new</code>来调用，二是参数非常灵活，可以不传，也可以这么传：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var xiaoming = createStudent(&#123;</span><br><span class="line">    name: &#x27;小明&#x27;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xiaoming.grade; // 1</span><br></pre></td></tr></table></figure>
+<p>如果创建的对象有很多属性，我们只需要传递需要的某些属性，剩下的属性可以用默认值。由于参数是一个Object，我们无需记忆参数的顺序。如果恰好从<code>JSON</code>拿到了一个对象，就可以直接创建出<code>xiaoming</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/" data-id="cl3jmf7mi001z9jv3azdngbqe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaScript学习笔记 (1)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20(1)/" class="article-date">
+  <time datetime="2017-04-26T08:57:41.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20(1)/">JavaScript学习笔记 (1)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>数据类型</h1>
+<hr>
+<h2 id="Number">Number</h2>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">123; // 整数123</span><br><span class="line">0.456; // 浮点数0.456</span><br><span class="line">1.2345e3; // 科学计数法表示1.2345x1000，等同于1234.5</span><br><span class="line">-99; // 负数</span><br><span class="line">NaN; // NaN表示Not a Number，当无法计算结果时用NaN表示</span><br><span class="line">Infinity; // Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时，就表示为Infinity</span><br></pre></td></tr></table></figure>
+<h2 id="字符串">字符串</h2>
+<p>字符串是以单引号’或双引号”括起来的任意文本，比如’abc’，&quot;xyz&quot;等等。</p>
+<p>请注意，''或&quot;&quot;本身只是一种表示方式，不是字符串的一部分，因此，字符串’abc’只有a，b，c这3个字符。</p>
+<h2 id="布尔值">布尔值</h2>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">true; // 这是一个true值</span><br><span class="line">false; // 这是一个false值</span><br><span class="line">2 &gt; 1; // 这是一个true值</span><br><span class="line">2 &gt;= 3; // 这是一个false值</span><br></pre></td></tr></table></figure>
+<h2 id="比较运算符">比较运算符</h2>
+<p>JavaScript在设计时，有两种比较运算符：</p>
+<p>第一种是<code>==</code>比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；</p>
+<p>第二种是<code>===</code>比较，它不会自动转换数据类型，如果数据类型不一致，返回<code>false</code>，如果一致，再比较。</p>
+<p>由于JavaScript这个设计缺陷，_不要_使用<code>==</code>比较，始终坚持使用<code>===</code>比较。</p>
+<p>另一个例外是<code>NaN</code>这个特殊的Number与所有其他值都不相等，包括它自己：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NaN === NaN; // false</span><br></pre></td></tr></table></figure>
+<p>唯一能判断<code>NaN</code>的方法是通过<code>isNaN()</code>函数：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isNaN(NaN); // true</span><br></pre></td></tr></table></figure>
+<p>最后要注意浮点数的相等比较：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 / 3 === (1 - 2 / 3); // false</span><br></pre></td></tr></table></figure>
+<p>这不是JavaScript的设计缺陷。浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.abs(1 / 3 - (1 - 2 / 3)) &lt; 0.0000001; // true</span><br></pre></td></tr></table></figure>
+<h2 id="null和undefined">null和undefined</h2>
+<p><code>null</code>表示一个“空”的值，它和<code>0</code>以及空字符串<code>''</code>不同，<code>0</code>是一个数值，<code>''</code>表示长度为0的字符串，而<code>null</code>表示“空”。</p>
+<p>在其他语言中，也有类似JavaScript的<code>null</code>的表示，例如Java也用<code>null</code>，Swift用<code>nil</code>，Python用<code>None</code>表示。但是，在JavaScript中，还有一个和<code>null</code>类似的<code>undefined</code>，它表示“未定义”。</p>
+<p>JavaScript的设计者希望用<code>null</code>表示一个空的值，而<code>undefined</code>表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用<code>null</code>。<code>undefined</code>仅仅在判断函数参数是否传递的情况下有用。</p>
+<h2 id="数组">数组</h2>
+<p>数组是一组按顺序排列的集合，集合的每个值称为元素。JavaScript的数组可以包括任意数据类型。例如：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3.14, &#x27;Hello&#x27;, null, true];</span><br></pre></td></tr></table></figure>
+<p>上述数组包含6个元素。数组用<code>[]</code>表示，元素之间用<code>,</code>分隔。</p>
+<p>另一种创建数组的方法是通过<code>Array()</code>函数实现：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Array(1, 2, 3); // 创建了数组[1, 2, 3]</span><br></pre></td></tr></table></figure>
+<p>然而，出于代码的可读性考虑，强烈建议直接使用<code>[]</code>。</p>
+<p>数组的元素可以通过索引来访问。请注意，索引的起始值为<code>0</code>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2, 3.14, &#x27;Hello&#x27;, null, true];</span><br><span class="line">arr[0]; // 返回索引为0的元素，即1</span><br><span class="line">arr[5]; // 返回索引为5的元素，即true</span><br><span class="line">arr[6]; // 索引超出了范围，返回undefined</span><br></pre></td></tr></table></figure>
+<h2 id="对象">对象</h2>
+<p>JavaScript的对象是一组由键-值组成的无序集合，例如：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name: &#x27;Bob&#x27;,</span><br><span class="line">    age: 20,</span><br><span class="line">    tags: [&#x27;js&#x27;, &#x27;web&#x27;, &#x27;mobile&#x27;],</span><br><span class="line">    city: &#x27;Beijing&#x27;,</span><br><span class="line">    hasCar: true,</span><br><span class="line">    zipcode: null</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>JavaScript对象的键都是字符串类型，值可以是任意数据类型。上述<code>person</code>对象一共定义了6个键值对，其中每个键又称为对象的属性，例如，<code>person</code>的<code>name</code>属性为<code>'Bob'</code>，<code>zipcode</code>属性为<code>null</code>。</p>
+<p>要获取一个对象的属性，我们用<code>对象变量.属性名</code>的方式：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person.name; // &#x27;Bob&#x27;</span><br><span class="line">person.zipcode; // null</span><br></pre></td></tr></table></figure>
+<h2 id="变量">变量</h2>
+<p>变量的概念基本上和初中代数的方程变量是一致的，只是在计算机程序中，变量不仅可以是数字，还可以是任意数据类型。</p>
+<p>变量在JavaScript中就是用一个变量名表示，变量名是大小写英文、数字、<code>$</code>和<code>_</code>的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如<code>if</code>、<code>while</code>等。申明一个变量用<code>var</code>语句，比如：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a; // 申明了变量a，此时a的值为undefined</span><br><span class="line">var $b = 1; // 申明了变量$b，同时给$b赋值，此时$b的值为1</span><br><span class="line">var s_007 = &#x27;007&#x27;; // s_007是一个字符串</span><br><span class="line">var Answer = true; // Answer是一个布尔值true</span><br><span class="line">var t = null; // t的值是null</span><br></pre></td></tr></table></figure>
+<p>变量名也可以用中文，但是，请不要给自己找麻烦。</p>
+<p>在JavaScript中，使用等号<code>=</code>对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用<code>var</code>申明一次，例如：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = 123; // a的值是整数123</span><br><span class="line">a = &#x27;ABC&#x27;; // a变为字符串</span><br></pre></td></tr></table></figure>
+<p>这种变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言，赋值语句如下：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = 123; // a是整数类型变量，类型用int申明</span><br><span class="line">a = &quot;ABC&quot;; // 错误：不能把字符串赋给整型变量</span><br></pre></td></tr></table></figure>
+<p>和静态语言相比，动态语言更灵活，就是这个原因。</p>
+<p>请不要把赋值语句的等号等同于数学的等号。比如下面的代码：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var x = 10;</span><br><span class="line">x = x + 2;</span><br></pre></td></tr></table></figure>
+<p>如果从数学上理解<code>x = x + 2</code>那无论如何是不成立的，在程序中，赋值语句先计算右侧的表达式<code>x + 2</code>，得到结果<code>12</code>，再赋给变量<code>x</code>。由于<code>x</code>之前的值是<code>10</code>，重新赋值后，<code>x</code>的值变成<code>12</code>。</p>
+<h2 id="strict模式">strict模式</h2>
+<p>JavaScript在设计之初，为了方便初学者学习，并不强制要求用<code>var</code>申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过<code>var</code>申明就被使用，那么该变量就自动被申明为全局变量：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = 10; // i现在是全局变量</span><br></pre></td></tr></table></figure>
+<p>在同一个页面的不同的JavaScript文件中，如果都不用<code>var</code>申明，恰好都使用了变量<code>i</code>，将造成变量<code>i</code>互相影响，产生难以调试的错误结果。</p>
+<p>使用<code>var</code>申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。</p>
+<p>为了修补JavaScript这一严重设计缺陷，ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过<code>var</code>申明变量，未使用<code>var</code>申明变量就使用的，将导致运行错误。</p>
+<p>启用strict模式的方法是在JavaScript代码的第一行写上：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;use strict&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20(1)/" data-id="cl3jmf7mh001w9jv35hmj90zk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-HTML DOM (Document Object Model)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/" class="article-date">
+  <time datetime="2017-04-26T07:20:17.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/">HTML DOM (Document Object Model)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTML DOM是HTML Document Object Model(<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">文档对象模型</a>)的缩写，HTML DOM则是专门适用于HTML/XHTML的文档对象模型。</p>
+<p>熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。</p>
+<hr>
+<h2 id="相关介绍">相关介绍</h2>
+<p>DOM是Document Object Model<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">文档对象模型</a>的缩写。根据W3C DOM规范，DOM是一种与浏览器，平台，语言无关的接口，使得你可以访问页面中其他的标准组件。<br>
+简单理解，DOM解决了Netscape的JavaScript和 Microsoft的JavaScript之间的冲突，给予web设计师和开发者一个标准的方法，让他们来访问他们站点中的数据、脚本和表现层对象。<br>
+DOM是以<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">层次结构</a>组织的节点或信息片断的集合。这个层次结构允许开发人员在树中导航寻找特定信息。分析该结构通常需要加载整个文档和构造层次结构，然后才能做任何工作。由于它是基于信息层次的，因而 DOM 被认为是基于树或基于对象的。HTML DOM 定义了访问和操作HTML文档的标准方法。</p>
+<p>HTML DOM 把 HTML 文档呈现为带有元素、属性和文本的树结构（节点树）。</p>
+<hr>
+</div>
+<h2 id="节点信息">节点信息</h2>
+<p>每个<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E8%8A%82%E7%82%B9">节点</a>都拥有包含着关于节点某些信息的属性。这些属性是：<br>
+nodeName（节点名称）nodeValue（节点值）nodeType（节点类型）</p>
+<hr>
+<h2 id="HTML-DOM-方法">HTML DOM 方法</h2>
+<p>方法是我们可以在节点（HTML 元素）上执行的动作。</p>
+<h3 id="编程接口">编程接口</h3>
+</div>
+<div class="para">可通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问。</div>
+<div class="para">所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。</div>
+<div class="para">方法是您能够执行的动作（比如添加或修改元素）。</div>
+<div class="para">属性是您能够获取或设置的值（比如节点的名称或内容）</div>
+<div class="para-title level-3">
+<h3 id="HTML-DOM-对象-方法和属性">HTML DOM 对象 - 方法和属性</h3>
+<h5 id="一些常用的-HTML-DOM-方法：">一些常用的 HTML DOM 方法：</h5>
+<ul>
+<li>getElementById(id) - 获取带有指定 id 的节点（元素）</li>
+<li>appendChild(node) - 插入新的子节点（元素）</li>
+<li>removeChild(node) - 删除子节点（元素）</li>
+</ul>
+<h5 id="一些常用的-HTML-DOM-属性：">一些常用的 HTML DOM 属性：</h5>
+<ul>
+<li>innerHTML - 节点（元素）的文本值</li>
+<li>parentNode - 节点（元素）的父节点</li>
+<li>childNodes - 节点（元素）的子节点</li>
+<li>attributes - 节点（元素）的属性节点</li>
+</ul>
+<div class="para-title level-3">
+<h3 id="一些-DOM-对象方法">一些 DOM 对象方法</h3>
+</div>
+<div class="para">下面列出一些常用的 DOM 对象方法：</div>
+<table class="reference">
+<tbody>
+<tr>
+<th>
+<pre class="para">方法</pre>
+</th>
+<th>
+<pre class="para">描述</pre>
+</th>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementById()</pre>
+</td>
+<td>
+<pre class="para"> 返回带有指定 ID 的元素。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementsByTagName()</pre>
+</td>
+<td>
+<pre class="para"> 返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getElementsByClassName()</pre>
+</td>
+<td>
+<pre class="para"> 返回包含带有指定类名的所有元素的节点列表。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">appendChild()</pre>
+</td>
+<td>
+<pre class="para"> 把新的子节点添加到指定节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">removeChild()</pre>
+</td>
+<td>
+<pre class="para"> 删除子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">replaceChild()</pre>
+</td>
+<td>
+<pre class="para"> 替换子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">insertBefore()</pre>
+</td>
+<td>
+<pre class="para"> 在指定的子节点前面插入新的子节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 创建属性节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createElement()</pre>
+</td>
+<td>
+<pre class="para"> 创建元素节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">createTextNode()</pre>
+</td>
+<td>
+<pre class="para"> 创建文本节点。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">getAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 返回指定的属性值。</pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre class="para">setAttribute()</pre>
+</td>
+<td>
+<pre class="para"> 把指定属性设置或修改为指定的值。</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/" data-id="cl3jmf7md001g9jv3h56age55" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Core Foundation 框架详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2017-04-25T01:50:41.000Z" itemprop="datePublished">2017-04-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">Core Foundation 框架详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先来说说「Core Foundation」（以下简称CF）的历史吧。当年乔布斯被自己创办的公司驱逐后，成立了「NeXT Computer」,其实做的还是老本行：卖电脑，但依旧不景气。好在NeXTSTEP系统表现还不错，亏损不至于太严重。正好此时苹果的市场份额大跌，急需一个新的操作系统，结果大家都知道了，乔布斯借此收购，重新回到了苹果。</p>
+<p>这里就牵扯到了一个问题，如何让旧有的系统（Mac OS 9）和NeXTSTEP合成为一个新系统？这就需要一个更为底层的核心库可以供Mac Toolbox和OPENSTEP双方调用。CF就这么诞生了。</p>
+<p>CF是由C语言实现的，而不是Objective-C，所以如果用到了CF，就需要手动管理内存，ARC是无能为力的。当然因为CF和Foundation之间的友好关系，它们之间的管理权也是可以移交的，这个后面再说。<br>
+<strong>Core Foundation框架</strong> (CoreFoundation.framework) 是一组C语言接口，它们为iOS应用程序提供基本数据管理和服务功能。下面列举该框架支持进行管理的数据以及可提供的服务：</p>
+<ul>
+<li>群体数据类型 (数组、集合等)</li>
+<li>程序包</li>
+<li>字符串管理</li>
+<li>日期和时间管理</li>
+<li>原始数据块管理</li>
+<li>偏好管理</li>
+<li>URL及数据流操作</li>
+<li>线程和RunLoop</li>
+<li>端口和soket通讯</li>
+</ul>
+<p>Core Foundation框架和Foundation框架紧密相关，它们为相同功能提供接口，但Foundation框架提供Objective-C接口。如果您将Foundation对象和Core Foundation类型掺杂使用，则可利用两个框架之间的 “toll-free bridging”。所谓的<strong>Toll-free bridging</strong>是说您可以在某个框架的方法或函数同时使用Core Foundatio和Foundation 框架中的某些类型。很多数据类型支持这一特性，其中包括群体和字符串数据类型。每个框架的类和类型描述都会对某个对象是否为 toll-free bridged，应和什么对象桥接进行说明。<br>
+如需进一步信息，请阅读<a target="_blank" rel="noopener" href="http://developer.apple.com/iphone/library/documentation/CoreFoundation/Reference/CoreFoundation_Collection/index.html#/apple_ref/doc/uid/TP40003849">Core Foundation 框架参考</a>。<br>
+自 Xcode4.2 开始导入ARC机制后，为了支持对象间的转型，Apple又增加了许多转型用的关键字。这一讲我们就来了解其用法，以及产生的理由。</p>
+<h1>引子</h1>
+<p>我们先来看一下ARC无效的时候，我们写id类型转void*类型的写法：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br></pre></td></tr></table></figure>
+<p>反过来，当把void*对象变回id类型时，只是简单地如下来写，</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id obj = p;</span><br><span class="line">[obj release];</span><br></pre></td></tr></table></figure>
+<p>但是上面的代码在ARC有效时，就有了下面的错误：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">error: implicit conversion of an Objective-C pointer</span><br><span class="line">to ’void *’ is disallowed with ARC</span><br><span class="line">void *p = obj;</span><br><span class="line">^error: implicit conversion of a non-Objective-C pointer</span><br><span class="line">type ’void *’ to ’id’ is disallowed with ARC</span><br><span class="line">id o = p;</span><br></pre></td></tr></table></figure>
+<h2 id="bridge">__bridge</h2>
+<p>为了解决这一问题，我们使用 __bridge 关键字来实现id类型与void*类型的相互转换。看下面的例子。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = (__bridge void *)obj;</span><br><span class="line">id o = (__bridge id)p;</span><br></pre></td></tr></table></figure>
+<p>将Objective-C的对象类型用 bridge 转换为 void* 类型和使用 unsafe_unretained 关键字修饰的变量是一样的。被代入对象的所有者需要明确对象生命周期的管理，不要出现异常访问的问题。<br>
+除过 bridge 以外，还有两个 bridge 相关的类型转换关键字：</p>
+<ul>
+<li>__bridge_retained</li>
+<li>__bridge_transfer</li>
+</ul>
+<p>接下来，我们将看看这两个关键字的区别。</p>
+<h2 id="bridge-retained">__bridge_retained</h2>
+<p>先来看使用 __bridge_retained 关键字的例子程序：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d obj = [[NSObject alloc] init]; </span><br><span class="line">void *p = (__bridge_retained void *)obj;</span><br></pre></td></tr></table></figure>
+<p>从名字上我们应该能理解其意义：类型被转换时，其对象的所有权也将被变换后变量所持有。如果不是ARC代码，类似下面的实现：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = [[NSObject alloc] init];</span><br><span class="line">void *p = obj;</span><br><span class="line">[(id)p retain];</span><br></pre></td></tr></table></figure>
+<p>可以用一个实际的例子验证，对象所有权是否被持有。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void *p = 0;</span><br><span class="line">&#123;</span><br><span class="line"> id obj = [[NSObject alloc] init];</span><br><span class="line"> p = (__bridge_retained void *)obj;</span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;class=%@&quot;, [(__bridge id)p class]);</span><br></pre></td></tr></table></figure>
+<p>出了大括号的范围后，p 仍然指向一个有效的实体。说明他拥有该对象的所有权，该对象没有因为出其定义范围而被销毁。</p>
+<h2 id="bridge-transfer">__bridge_transfer</h2>
+<p>相反，当想把本来拥有对象所有权的变量，在类型转换后，让其释放原先所有权的时候，需要使用 __bridge_transfer 关键字。文字有点绕口，我们还是来看一段代码吧。</p>
+<p>如果ARC无效的时候，我们可能需要写下面的代码。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (id)p;</span><br><span class="line">[obj retain];</span><br><span class="line">[(id)p release];</span><br></pre></td></tr></table></figure>
+<p>那么ARC有效后，我们可以用下面的代码来替换：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// p 变量原先持有对象的所有权</span><br><span class="line">id obj = (__bridge_transfer id)p;</span><br></pre></td></tr></table></figure>
+<p>可以看出来，bridge_retained 是编译器替我们做了 retain 操作，而 bridge_transfer 是替我们做了 release。</p>
+<h4 id="Toll-Free-bridged">Toll-Free bridged</h4>
+<p>在iOS世界，主要有两种对象：Objective-C 对象和 Core Foundation 对象0。Core Foundation 对象主要是有C语言实现的 Core Foundation Framework 的对象，其中也有对象引用计数的概念，只是不是 Cocoa Framework::Foundation Framework 的 retain/release，而是自身的 CFRetain/CFRelease 接口。</p>
+<p>这两种对象间可以互相转换和操作，不使用ARC的时候，单纯的用C原因的类型转换，不需要消耗CPU的资源，所以叫做 Toll-Free bridged。比如 NSArray和CFArrayRef, NSString和CFStringRef，他们虽然属于不同的 Framework，但是具有相同的对象结构，所以可以用标准C的类型转换。</p>
+<p>比如不使用ARC时，我们用下面的代码：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (CFStringRef)string;</span><br></pre></td></tr></table></figure>
+<p>同样，Core Foundation类型向Objective-C类型转换时，也是简单地用标准C的类型转换即可。<br>
+但是在ARC有效的情况下，将出现类似下面的编译错误：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cast of Objective-C pointer type ‘NSString *’ to C pointer type ‘CFStringRef’ (aka ‘const struct __CFString *’) requires a bridged cast</span><br><span class="line">Use __bridge to convert directly (no change in ownership)</span><br><span class="line">Use __bridge_retained to make an ARC object available as a +1 ‘CFStringRef’ (aka ‘const struct __CFString *’)</span><br></pre></td></tr></table></figure>
+<p>错误中已经提示了我们需要怎样做：用 bridge 或者 bridge_retained 来转型，其差别就是变更对象的所有权。<br>
+正因为Objective-C是ARC管理的对象，而Core Foundation不是ARC管理的对象，所以才要特意这样转换，这与id类型向void*转换是一个概念。也就是说，当这两种类型（有ARC管理，没有ARC管理）在转换时，需要告诉编译器怎样处理对象的所有权。<br>
+上面的例子，使用 bridge/bridge_retained 后的代码如下：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge CFStringRef)string;</span><br></pre></td></tr></table></figure>
+<p>只是单纯地执行了类型转换，没有进行所有权的转移，也就是说，当string对象被释放的时候，cfString也不能被使用了。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = (__bridge_retained CFStringRef)string;</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release</span><br></pre></td></tr></table></figure>
+<p>使用 __bridge_retained 可以通过转换目标处（cfString）的 retain 处理，来使所有权转移。即使 string 变量被释放，cfString 还是可以使用具体的对象。只是有一点，由于Core Foundation的对象不属于ARC的管理范畴，所以需要自己release。</p>
+<p>实际上，Core Foundation 内部，为了实现Core Foundation对象类型与Objective-C对象类型的相互转换，提供了下面的函数。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CFTypeRef CFBridgingRetain(id X) &#123;</span><br><span class="line"> return (__bridge_retained CFTypeRef)X;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">id CFBridgingRelease(CFTypeRef X) &#123;</span><br><span class="line"> return (__bridge_transfer id)X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，可以用 CFBridgingRetain 替代 __bridge_retained 关键字：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = [NSString stringWithFormat:...];</span><br><span class="line">CFStringRef cfString = CFBridgingRetain(string);</span><br><span class="line">...</span><br><span class="line">CFRelease(cfString); // 由于Core Foundation不在ARC管理范围内，所以需要主动release。</span><br></pre></td></tr></table></figure>
+<h1>总结</h1>
+<p>由上面的学习我们了解到 ARC 中类型转换的用法，那么我们实际使用中按照怎样的原则或者方法来区分使用呢，下面我总结了几点关键要素。<br>
+明确被转换类型是否是 ARC 管理的对象Core Foundation 对象类型不在 ARC 管理范畴内<br>
+Cocoa Framework::Foundation 对象类型（即一般使用到的Objectie-C对象类型）在 ARC 的管理范畴内</p>
+<p>如果不在 ARC 管理范畴内的对象，那么要清楚 release 的责任应该是谁<br>
+各种对象的生命周期是怎样的</p>
+<p>1. 声明 id obj 的时候，其实是缺省的申明了一个 **strong 修饰的变量，所以编译器自动地加入了 retain 的处理，所以说 **bridge_transfer 关键字只为我们做了 release 处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" data-id="cl3jmf7mc001c9jv3dxst9pvi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ICMP协议与Ping原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2017-04-22T09:51:05.000Z" itemprop="datePublished">2017-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/">ICMP协议与Ping原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、ICMP协议分析">一、ICMP协议分析</h4>
+<p>ICMP：Internet控制报文协议。由于IP协议并不是一个可靠的协议，它不保证数据被成功送达，那么，如何才能保证数据的可靠送达呢？ 这里就需要使用到一个重要的协议模块ICMP(网络控制报文)协议。它传递差错报文以及其他需要注意的信息，经常供IP层或更高层协议（TCP或UDP）使用。所以它经常被认为是IP层的一个组成部分。它在IP数据报文中的封装如下：</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-11-300x91.png" alt=""></a></p>
+<p>ICMP的数据报文格式如下所示。所有报文的前4个字节都是一样的，其他的因报文类型不同而不一样。类型字段可以有15个不同的值，用以描述不同的ICMP报文。校验和字段覆盖整个ICMP报文，使用了和IP首部检验和一样的算法，具体可以看看这篇博文链接：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/xy-kidult/archive/2013/05/06/3063800.html">【TCP/IP】检验和算法</a>。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-2.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-2-300x136.png" alt="icmp-2"></a></p>
+<p>不同类型的报文是由类型字段和代码字段来共同决定。下表是各种类型的I C M P报文。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-3.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-3.png" alt="icmp-3"></a></p>
+<p>根据上表可知，ICMP协议大致分为两类，一种是查询报文，一种是差错报文。查询报文是用一对请求和应答定义的，它通常有以下几种用途:</p>
+<ol>
+<li>ping查询</li>
+<li>子网掩码查询（用于无盘工作站在初始化自身的时候初始化子网掩码）</li>
+<li>时间戳查询（可以用来同步时间）<br>
+而差错报文通常包含了引起错误的IP数据报的第一个分片的IP首部（和选项），加上该分片数据部分的前8个字节。RFC 792规范中定义的这8个字节中包含了该分组运输层首部的所有分用信息，这样运输层协议就可以向正确的进程提交ICMP差错报文。</li>
+</ol>
+<p>当传送IP数据包发生错误时，比如主机不可达，端口不可达等，ICMP协议就会把错误信息封包，然后传送回给主机。给主机一个处理错误的机会，这也就是为什么说建立在IP层以上的协议是可能做到安全的原因。由上面可知，ICMP数据包由8bit的错误类型和8bit的代码和16bit的校验和组成，而前 16bit就组成了ICMP所要传递的信息。由数据链路层所能发送的最大数据帧，即MTU（Maximum Transmission Unit）为1500，计算易知ICMP协议在实际传输中数据包为：20字节IP首部 + 8字节ICMP首部+ 1472字节（数据大小）。</p>
+<p>尽管在大多数情况下，错误的包传送应该给出ICMP报文，但是在特殊情况下，是不产生ICMP错误报文的。如下</p>
+<ol>
+<li>ICMP差错报文不会产生ICMP差错报文（出IMCP查询报文）（防止IMCP的无限产生和传送）</li>
+<li>目的地址是广播地址或多播地址的IP数据报。</li>
+<li>作为链路层广播的数据报。</li>
+<li>不是IP分片的第一片。</li>
+<li>源地址不是单个主机的数据报。这就是说，源地址不能为零地址、环回地址、广播地 址或多播地址。</li>
+</ol>
+<h4 id="二、ping程序原理分析">二、ping程序原理分析</h4>
+<p>ping程序是由Mike Muuss编写，目的是为了测试另一 台主机是否可达，现在已经成为一个常用的网络状态检查工具。该程序发送一份 ICMP回显请求报文给远程主机，并等待返回 ICMP回显应答。利用ping这种原理，已经出现了许多基于ping的网络扫描器，比如nmap、arping、fping、hping3等。所以随着Internet安全意识的增强，现在有些提供访问控制策略的路由器和防火墙已经可以设置过滤特定ICMP报文请求。因此并不能通过简单的ping命令判断远程主机是否在线。</p>
+<p>ping 使用的是ICMP协议，它发送icmp回送请求消息给目的主机。ICMP协议规定：目的主机必须返回ICMP回送应答消息给源主机。如果源主机在一定时间内收到应答，则认为主机可达。大多数的 TCP/IP 实现都在内核中直接支持Ping服务器，ICMP回显请求和回显应答报文如下图所示。</p>
+<p><a target="_blank" rel="noopener" href="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-4.png"><img src="http://www.s0nnet.com/wp-content/uploads/2015/05/icmp-4.png" alt="icmp-4"></a></p>
+<p>ping的原理是用类型码为0的ICMP发请 求，受到请求的主机则用类型码为8的ICMP回应。通过计算ICMP应答报文数量和与接受与发送报文之间的时间差，判断当前的网络状态。这个往返时间的计算方法是：ping命令在发送ICMP报文时将当前的时间值存储在ICMP报文中发出，当应答报文返回时，使用当前时间值减去存放在ICMP报文数据中存放发送请求的时间值来计算往返时间。ping返回接受到的数据报文字节大小、TTL值以及往返时间。</p>
+<p>Unix系统在实现ping程序时是把ICMP报文中的标识符字段置成发送进程的 ID号。这样 即使在同一台主机上同时运行了多个 ping程序实例，ping程序也可以识别出返回的信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/22/ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8EPing%E5%8E%9F%E7%90%86/" data-id="cl3jmf7mg001q9jv3c1bt4jxt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-深入理解iOS开发中的BitCode功能" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84BitCode%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2017-04-20T10:22:14.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84BitCode%E5%8A%9F%E8%83%BD/">深入理解iOS开发中的BitCode功能 （转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言">前言</h2>
+<p>做iOS开发的朋友们都知道,目前最新的Xcode7,新建项目默认就打开了bitcode设置.而且大部分开发者都被这个突如其来的bitcode功能给坑过导致项目编译失败,而这些因为bitcode而编译失败的的项目都有一个共同点,就是链接了第三方二进制的库或者框架,而这些框架或者库恰好没有包含bitcode的东西(暂且称为东西),从而导致项目编译不成功.所以每当遇到这个情况时候大部分人都是直接设置Xcode关闭bitcode功能,全部不生成bitcode.也不去深究这一开关背后隐藏的原理.中枪的请点个赞.</p>
+<p>LLVM是目前苹果采用的编译器工具链,Bitcode是LLVM编译器的中间代码的一种编码,LLVM的前端可以理解为C/C++/OC/Swift等编程语言,LLVM的后端可以理解为各个芯片平台上的汇编指令或者可执行机器指令数据,那么,BitCode就是位于这两者直接的中间码. LLVM的编译工作原理是前端负责把项目程序源代码翻译成Bitcode中间码,然后再根据不同目标机器芯片平台转换为相应的汇编指令以及翻译为机器码.这样设计就可以让LLVM成为了一个编译器架构,可以轻而易举的在LLVM架构之上发明新的语言(前端),以及在LLVM架构下面支持新的CPU(后端)指令输出,虽然Bitcode仅仅只是一个中间码不能在任何平台上运行,但是它可以转化为任何被支持的CPU架构,包括现在还没被发明的CPU架构,也就是说现在打开Bitcode功能提交一个App到应用商店,以后如果苹果新出了一款手机并CPU也是全新设计的,在苹果后台服务器一样可以从这个App的Bitcode开始编译转化为新CPU上的可执行程序,可供新手机用户下载运行这个App.</p>
+<h2 id="历史回顾">历史回顾</h2>
+<p>在iPhone出来之前,苹果主要的编译器技术是用经过稍微改进的GCC工具链来把Objective-C语言编写的代码编译出所指定的机器处理器上原生的可执行程序.编译器产生的可执行程序叫做&quot;Fat Binaries&quot;–类似于Windows下PE格式的exe和Linux下的ELF格式的二进制,不同的是,一个&quot;Fat Binary&quot;可以包含同一个程序的很多版本,所以同一个可执行文件可以在不同的处理器上运行.主要就是这个技术让苹果的硬件很容易的从PowerPC迁移到PowerPC64的处理器,以及后来再迁移到Intel和Intel64处理器.这个方案带来的负面影响就是同一个文件中存了多份可执行代码,除了当前机器可执行的那一份之外其他都是无用的,白占空间. 这个在市场上被称为&quot;Universal Binary&quot;,在苹果从PowerPC迁移到Intel处理器的事情开始存在的(一个二进制文件既包含一份PowerPC版本和一份Intel版本).慢慢的后来又支持同时包含Intel 32bit和Intel 64bit. 在一个Fat binary中,又操作系统运行时根据处理器类型动态选择正确的二进制版本来运行,但是应用程序要支持不同平台的处理器的话,应用程序本身要多占用一些空间.当然也有一些瘦身的工具,比如lipo,可以用来移除fat binary中那些当前机器中不被支持的或者多余的可执行代码达到瘦身目的,lipo不会改变程序执行逻辑,仅仅只是文件的大小瘦身.</p>
+<h2 id="编译器现状">编译器现状</h2>
+<p>随着移动设备移动互联网的深入发展,现在移动设备中的程序大小变得越来越重要了,主要是因为移动设备中不会有电脑上那么大的一个硬盘驱动器.还有就是苹果早就从原始的ARM处理器迁移到自家设计的A4,A5,A5X,A6,A7,A8,A8X,A9,A9X以及后续的A10处理器,他们的指令集已经发生了改变和原始ARM设计的有所区别,所有的这些变化都被iOS操作系统底层以及Xcode/LLVM编译工具向上层程序员一定程度的透明了,编译出来的程序会包含很多执行代码版本.当面对这个问题后,苹果投入大量成本迁移到LLVM编译器架构并使用bitcode的必要性越来越大.从最开始的把OPENGL编译为特定的GPU指令到把Clang编译器(LLCM的C/OC编译前端)支持Objective-C的改进并作为Xcode的默认编译器.</p>
+<p>LLVM提供了一个虚拟指令集机制,它可以翻译出指定的所支持的处理器架构的执行代码(机器码).这个就使得为iOS应用程序的编译开发一个完全基于LLVM架构的工具链成为可能.而LLVM的这个虚拟的通用的指令集可以用很多种表示格式:</p>
+<ul>
+<li>叫做IR的文本表示的汇编格式(像汇编语言);</li>
+<li>转换为二进制数据表示的格式(像目标代码),这个二进制格式就是我们所说的bitcode.<br>
+Bitcode和传统的可执行指令集不同,他维护的是函数功能的类型和签名,比如,传统可执行指令集中,一系列(&lt;=8)的布尔值可以压缩存储到单个字节中,但是在bitcode中他们是各自独自表示的.此外,逻辑运算操作(比如寄存器清零操作)也由他们对应的逻辑表示方法(<code>$R=0</code>);当这些BitCode要转换为特定机器平台的指令集时,他可以用经过针对特定机器平台优化过的汇编指令来代替:<code>xor eax, eax</code>.(这个汇编指令同样是寄存器&lt;eax&gt;清零操作).</li>
+</ul>
+<p>然而bitcode他也不是完全独立于处理器平台和调用约定的.寄存器的大小在指令集中是一个相当重要的特性,众所周知,64bit寄存器可以比32bit寄存器存储更多的数据,生成64bit平台的bitcode和32bit平台的bitcode是明显不同的,还有,调用约定可以根据函数定义或者函数调用来定义,这些可以确定函数的参数传递是传寄存器值呢还是压栈. 一些编程语言还有一些像sizeof(long)这样的预处理指令,这些将在bitcode生成之前前被翻译.一般情况下,对于支持<code>fastcc</code>(fast calling convention)调用的64bit平台会生成与其一致的bitcode代码.</p>
+<h2 id="苹果的要求">苹果的要求</h2>
+<p>到此,让我们思考一下,为什么苹果默认要求watchOS和tvOS的App要上传bitcode? 因为把bitcode上传到他自己的中心服务器后,他可以为目标安装App的设备进行优化二进制,减小安装包的下载大小,当然iOS开发者也可以上传多个版本而不是打包到单个包里,但是这样会占用更多的存储空间. 最重要的是允许苹果可以在后台服务器对应用程序进行签名,而不用导出任何密钥到终端开发者那.</p>
+<p>上传到服务器的bitcode给苹果带来更好处是: 以后新设计了新指令集的新CPU,可以继续从这份bitcode开始编译出新CPU上执行的可执行文件,以供用户下载安装.<br>
+但是bitcode给开发者带来的不便之处就是: 没用bitcode之前,当应用程序奔溃后,开发者可以根据获取的的奔溃日志再配上上传到苹果服务器的二进制文件的调试符号表信息可以还原程序运行过程到奔溃时后调用栈信息,对问题进行定位排查.但是用了bitcode之后,用户安装的二进制不是开发者这边生成的,而是苹果服务器经过优化后生成的,其对应的调试符号信息丢失了,也就无法进行前面说的还原奔溃现场找原因了.</p>
+<p>目前,watchOS和tvOS应用发布必须上传带bitcode版本的包.iOS应用发布对bitcode的要求是可选的,用户可以在Xcode的项目设置中关闭. 相当于在编译的时候加一个标记:embed-bitcode-marker(调试构建) embed-bitcode(打包/真机构建).这个在clang编译器的参数是-fembed-bitcode,swift编译器的参数是-embed-bitcode.</p>
+<h2 id="实践出真知">实践出真知</h2>
+<p>我们还是应该实际弄两个测试代码进行实践和检验一下比较好.做两次测试,第一次准备两个C语言源代码继续测试;第二次把其中一个转变为汇编语言源代码后再一个C代码和一个汇编代码一起重复之前的测试步骤进行对比校验差异.</p>
+<ul>
+<li>
+<p>1 . 如下两个全部是Objective-C代码:<br>
+test.m :</p>
+<p><span class="hljs-meta">#import <span class="hljs-meta-string">&lt;Foundation/Foundation.h&gt;</span></span><br>
+<span class="hljs-keyword">void</span> greeting(<span class="hljs-keyword">void</span>)<br>
+{<br>
+<span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@“hello world!”</span>);<br>
+}`</pre><br>
+demo.m :</p>
+<pre class="hljs objectivec">`<span class="hljs-meta">#import <span class="hljs-meta-string">&lt;Foundation/Foundation.h&gt;</span></span>
+<span class="hljs-keyword">void</span> demo(<span class="hljs-keyword">void</span>)
+{
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"demo func"</span>);
+}`</pre>
+<p>用Clang编译成 ARM64 格式且带bitcode的目标文件test.o demo.o:</p>
+<pre class="hljs bash">`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.m`</pre>
+<p>然后把两个目标文件打包为一个静态库文件:</p>
+<pre class="hljs bash">`wuqiong:~ apple$ xcrun -sdk iphoneos ar  -r libTest.a test.o demo.o
+ar: creating archive libTest.a`</pre>
+<p>用Shell命令otool查看目标文件中是否包含bitcode段:</p>
+<pre class="hljs bash">`wuqiong:~ apple$ otool <span class="hljs-_">-l</span> test.o |grep bitcode
+  sectname __bitcode
+  sectname __bitcode`</pre>
+<p>如果看到输出了2行<code>sectname __bitcode</code>,就是说明这静态库中的两个目标文件包含了bitcode.</p>
+</li>
+<li>
+<p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:</p>
+</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m</span><br><span class="line">wuqiong:~ apple$ cat demo.s</span><br><span class="line">    .section    __TEXT,__text,regular,pure_instructions</span><br><span class="line">    .ios_version_min 9, 2</span><br><span class="line">    .globl    _demo</span><br><span class="line">    .align    2</span><br><span class="line">_demo:                                  ; @demo</span><br><span class="line">    .cfi_startproc</span><br><span class="line">; BB#0:</span><br><span class="line">    stp    x29, x30, [sp, #-16]!</span><br><span class="line">    mov     x29, sp</span><br><span class="line">Ltmp0:</span><br><span class="line">    .cfi_def_cfa w29, 16</span><br><span class="line">Ltmp1:</span><br><span class="line">    .cfi_offset w30, -8</span><br><span class="line">Ltmp2:</span><br><span class="line">    .cfi_offset w29, -16</span><br><span class="line">    adrp    x0, L__unnamed_cfstring_@PAGE</span><br><span class="line">    add    x0, x0, L__unnamed_cfstring_@PAGEOFF</span><br><span class="line">    bl    _NSLog</span><br><span class="line">    ldp    x29, x30, [sp], #16</span><br><span class="line">    ret</span><br><span class="line">    .cfi_endproc</span><br><span class="line">.section    __TEXT,__cstring,cstring_literals</span><br><span class="line">L_.str:                                 ; @.str</span><br><span class="line">.asciz    &quot;demo func&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__cfstring</span><br><span class="line">.align    4                       ; @_unnamed_cfstring_</span><br><span class="line">L__unnamed_cfstring_:</span><br><span class="line">.quad    __CFConstantStringClassReference</span><br><span class="line">.long    1992                    ; 0x7c8</span><br><span class="line">.space    4</span><br><span class="line">.quad    L.str</span><br><span class="line">.quad    9                       ; 0x9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.section    __DATA,__objc_imageinfo,regular,no_dead_strip</span><br><span class="line">L_OBJC_IMAGE_INFO:</span><br><span class="line">.long    0</span><br><span class="line">.long    0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ rm demo.m`</span><br><span class="line"></span><br><span class="line">现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s</span><br><span class="line">wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`</span><br><span class="line"></span><br><span class="line">然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`wuqiong:~ apple$ ar -t libTest.a</span><br><span class="line">__.SYMDEF SORTED</span><br><span class="line">test.o</span><br><span class="line">demo.o</span><br><span class="line">wuqiong:~ apple$ otool -l libTest.a | grep bitcode</span><br><span class="line">  sectname __bitcode</span><br></pre></td></tr></table></figure>
+<p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>
+<p>那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.</p>
+<p>目前我们日常的iOS应用开发中,一般不会需要用到汇编层面去优化的代码.所以我们主要关注第三方(开源)C代码,尤其是音视频编码解码这些计算密集型项目代码,关键计算的代码针对特定平台都有对应平台的汇编版本实现,当然也有C的实现,但是默认编译一般都是用的汇编版本,这样就会导致我们在编译这个开源代码的时候哪怕你带了<code>-fembed-bitcode</code>参数也仅仅只是让项目中的部分C代码的目标文件带了bitcode段,而那小数的汇编代码的目标文件一样不带bitcode段,这样编译出这个库交给上层开发者使用的时候,就会出现在打包上传或者真机调试的时候因为Xcode默认开了bitcode功能而链接失败,导致不能真机调试或者不能上传应用到AppStore.</p>
+<h2 id="此文之初衷">此文之初衷</h2>
+<p>最近在辅导我戴维营战友们做手机音视频直播的App,调试的时候手机采集音视频,视频用h264编码,音频采用aac编码,通过RTMP协议往斗鱼直播频道发布媒体流,项目需要用<code>FFMPEG</code>和<code>libx264</code>两个开源项目,在编译为iOS框架库提供给学生用的时候,他们遇到了bitcode的问题,虽然可以采取直接关闭bitcode来避免错误,但是战友的求知欲必须满足,格物致知,必须让其知其究竟.</p>
+<p><code>libx264</code>是VideoLan基金会管理的一个视频编解码的开源项目,其大量使用了各个平台的多媒体汇编指令进行了优化,在编译为不带bitcode的库的时候,完全按官方autotools编译方法是没有任何问题的;编译全带bitcode的库的时候我们不得不关闭汇编优化,在执行<code>./configure</code>阶段可以加上<code>--disable-asm</code>参数来禁用汇编.但是,这个选项在<code>configure</code>脚本中的实现机制有问题.导致其仍然调用了汇编的函数,但是汇编的代码却没有编译进去,从而会导致项目为真机构建和打包的链接阶段会爆出找不到符号的错误,这样就不能做到两全其美.出于轻微程度的强迫症影响,故把之前的<code>FFMPEG</code>和<code>libx264</code>项目的编译脚本进行了改进和打补丁.目前已经可以做到一键编译出带全部bitcode的FFMPEG和libx264的框架了.</p>
+<blockquote>
+<p><code>FFmpeg</code>需要依赖<code>libx264</code>.<br>
+自动编译脚本项目位置放在github:<br>
+<a target="_blank" rel="noopener" href="https://github.com/Diveinedu-CN/FFmpeg-iOS-build-script.git">https://github.com/Diveinedu-CN/FFmpeg-iOS-build-script.git</a></p>
+</blockquote>
+<p>由于时间和篇幅原因,关于其他更多详细的信息就不细细道来了.</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84BitCode%E5%8A%9F%E8%83%BD/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84BitCode%E5%8A%9F%E8%83%BD/" data-id="cl3jmf7o100899jv36rnya003" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-详解 iOS 多图下载的缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/%E8%AF%A6%E8%A7%A3%20iOS%20%E5%A4%9A%E5%9B%BE%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time datetime="2017-04-19T05:48:13.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/19/%E8%AF%A6%E8%A7%A3%20iOS%20%E5%A4%9A%E5%9B%BE%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">详解 iOS 多图下载的缓存机制 （转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>转自：<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/bf5c0e462119">http://www.jianshu.com/p/bf5c0e462119</a></p>
+<p> </p>
+<p>做iOS开发也有半年多了，想想自己对一些第三方库还只是停留在简单运用的阶段，感觉心慌慌的。于是决定用一个月的时间深入了解一些好的第三方库。</p>
+<p>第一个想到了SDWebImage，这个库很不错，几乎每个iOS项目都会有它的影子，因为它很完美地解决了下载图片并显示的处理逻辑。那么深究它之前，笔者准备先了解一下多图下载的缓存机制，因为它和SDWebImage的方案类似。</p>
+<p>有一个多图缓存机制的教程是来自李明杰小码哥的，笔者觉得讲得挺不错的，于是就花了2个小时好好学习了一下。</p>
+<h1>1. 需求点是什么？</h1>
+<hr>
+<p>这里所说的<strong>多图下载</strong>，就是要在tableview的每一个cell里显示一张图片,而且这些图片都需要从网上下载。</p>
+<h1>2. 容易遇到的问题</h1>
+<hr>
+<p>如果不知道或不使用<strong>异步操作</strong>和<strong>缓存机制</strong>，那么写出来的代码很可能会是这样：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cell.textLabel.text = app.name;</span><br><span class="line">cell.detailTextLabel.text = app.download;</span><br><span class="line">NSData *imageData = [NSData dataWithContentsOfURL:app.url];</span><br><span class="line">cell.imageView.image = [UIImage imageWithData:imageData];</span><br></pre></td></tr></table></figure>
+<p>这样写有什么后果呢？</p>
+<h4 id="后果1：不可避免的卡顿（因为没有异步下载操作）">后果1：不可避免的卡顿（因为没有异步下载操作）</h4>
+<blockquote>
+<p>dataWithContentsOfURL：是耗时操作，将其放在主线程会造成卡顿。如果图片很多，图片很大，而且网络情况不好的话肯定会卡出翔！</p>
+</blockquote>
+<h4 id="后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）">后果2：同一图片重复下载，耗费流量和系统开销（因为没有建立缓存机制）</h4>
+<blockquote>
+<p>由于没有缓存机制，即使下载完成并显示了当前cell的图片，但是当该cell再一次需要显示的时候还是会下载它所对应的图片：耗费了下载流量，而且还导致重复操作。<br>
+很显然，要达到Tableview滚动的<strong>如丝滑般的享受</strong>必须二者兼得才可以，具体怎么做呢？</p>
+</blockquote>
+<h1>3. 解决方案</h1>
+<hr>
+<h4 id="1-先看一下解决方案的流程图">1. 先看一下解决方案的流程图</h4>
+<p>小码哥将他的解决方案在PPT里用流程图画了出来，笔者觉得很不错，但是颜值略低（毕竟人家是一心搞技术，没时间在意这些外在的东西），笔者理了理思路，自己重新画了一张（好看么？）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/859001-addf3137097c3912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>要想快速看懂此图，需要先了解该流程所需的所有数据源：</p>
+<p><strong>1. 图片的URL</strong>：因为每张图片对应的URL都是唯一的，所以我们可以通过它来建立<strong>图片缓存</strong>和<strong>下载操作的缓存</strong>的键，以及拼接<strong>沙盒缓存</strong>的路径字符串。</p>
+<p><strong>2. 图片缓存（字典）</strong>：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。</p>
+<p><strong>3. 下载操作缓存（字典）</strong>：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。</p>
+<p><strong>4. 沙盒缓存(文件路径对应NSData)</strong>：存放于磁盘中，位于Cache文件夹内，路径为“Cache/图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。</p>
+<h4 id="2-再看一下解决方案的代码">2. 再看一下解决方案的代码</h4>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  存放所有下载完的图片</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *images;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  存放所有的下载操作（key是url，value是operation对象）</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSMutableDictionary *operations;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径</span><br><span class="line"> */</span><br><span class="line">#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]</span><br></pre></td></tr></table></figure>
+<p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 先从images缓存中取出图片url对应的UIImage</span><br><span class="line">    UIImage *image = self.images[app.icon];</span><br><span class="line">    if (image) &#123; </span><br><span class="line"></span><br><span class="line">        // 存在：说明图片已经下载成功，并缓存成功）</span><br><span class="line">        cell.imageView.image = image;</span><br><span class="line"></span><br><span class="line">    &#125; else &#123; </span><br><span class="line"></span><br><span class="line">         // 不存在：说明图片并未下载成功过，或者成功下载但是在images里缓存失败，需要在沙盒里寻找对于的图片</span><br><span class="line"></span><br><span class="line">         // 获得url对于的沙盒缓存路径</span><br><span class="line">        NSString *file = CachedImageFile(app.icon);</span><br><span class="line"></span><br><span class="line">        // 先从沙盒中取出图片</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfFile:file];</span><br><span class="line"></span><br><span class="line">        if (data) &#123;</span><br><span class="line"></span><br><span class="line">            //data不为空，说明沙盒中存在这个文件</span><br><span class="line">            cell.imageView.image = [UIImage imageWithData:data];</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">             // 反之沙盒中不存在这个文件</span><br><span class="line">             // 在下载之前显示占位图片</span><br><span class="line">            cell.imageView.image = [UIImage imageNamed:@&quot;placeholder&quot;];</span><br><span class="line"></span><br><span class="line">            // 下载图片</span><br><span class="line">            [self download:app.icon indexPath:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.3 图片的下载部分</strong>：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  下载图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageUrl 图片的url</span><br><span class="line"> */</span><br><span class="line">- (void)download:(NSString *)imageUrl indexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    // 取出当前图片url对应的下载操作（operation对象）</span><br><span class="line">    NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line">    if (operation) return;</span><br><span class="line"></span><br><span class="line">    // 创建操作，下载图片</span><br><span class="line">    __weak typeof(self) appsVc = self;</span><br><span class="line">    operation = [NSBlockOperation blockOperationWithBlock:^&#123;</span><br><span class="line">        NSURL *url = [NSURL URLWithString:imageUrl];</span><br><span class="line">        NSData *data = [NSData dataWithContentsOfURL:url]; // 下载</span><br><span class="line">        UIImage *image = [UIImage imageWithData:data]; // NSData -&gt; UIImage</span><br><span class="line"></span><br><span class="line">        // 回到主线程</span><br><span class="line">        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line"></span><br><span class="line">            if (image) &#123;</span><br><span class="line">                // 如果存在图片（下载完成），存放图片到图片缓存字典中</span><br><span class="line">                appsVc.images[imageUrl] = image;</span><br><span class="line"></span><br><span class="line">                //将图片存入沙盒中</span><br><span class="line">                //1. 先将图片转化为NSData</span><br><span class="line">                NSData *data = UIImagePNGRepresentation(image);</span><br><span class="line"></span><br><span class="line">                //2.  再生成缓存路径            </span><br><span class="line">                [data writeToFile:CachedImageFile(imageUrl) atomically:YES];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 从字典中移除下载操作 (保证下载失败后，能重新下载)</span><br><span class="line">            [appsVc.operations removeObjectForKey:imageUrl];</span><br><span class="line"></span><br><span class="line">            // 刷新当前表格，减少系统开销</span><br><span class="line">            [appsVc.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    // 添加下载操作到队列中</span><br><span class="line">    [self.queue addOperation:operation];</span><br><span class="line"></span><br><span class="line">    // 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)</span><br><span class="line">    self.operations[imageUrl] = operation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-有哪些点是值得注意的？">3. 有哪些点是值得注意的？</h4>
+<p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
+<p><strong>3.1 关于图片缓存</strong>：<br>
+很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。</p>
+<p><strong>3.2 关于沙盒缓存</strong>：<br>
+同样地，对于沙盒缓存也是一个道理：有图就将其转化为NSData，写入磁盘，并对应唯一的路径，没有图就不写。所以即使是要下载相同的图片，因为当前url对应的沙盒路径已经存在文件了，所以直接拿就可以了，不会再下载。</p>
+<p>但是！<br>
+下载操作缓存是不同的！</p>
+<p><strong>3.3 关于下载操作缓存</strong><br>
+我们需要在下载回调完成后，立即将当前的下载操作从下载操作缓存中删去！<br>
+因为要避免下载失败后，无法再次下载的情况的发生！</p>
+<p>为什么呢？<br>
+注意一下将下载操作加入到下载操作缓存的时机：<br>
+是在<strong>下载开始的那一刻</strong>而不是<strong>下载成功的那一刻</strong>！</p>
+<p>如果在下载开始的那一刻加入到缓存中的话，这个缓存信息就包括两个情况：下载成功和下载失败：</p>
+<ul>
+<li>如果未来下载成功了，那么我们就不会来到判断当前下载操作是否在下载操作缓存这一步，在这之前直接就可以拿图去用了，下载操作是否存在下载操作缓存里并没有什么影响。</li>
+<li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>
+忘了那段代码了么？回看一下代码（看我多好）：</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSBlockOperation *operation = self.operations[imageUrl];</span><br><span class="line"> if (operation) return;//转身就走，毫不留情</span><br></pre></td></tr></table></figure>
+<p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>
+<h1>4. 最后的话</h1>
+<hr>
+<p>异步+缓存这两个机制双剑合璧的话会对程序新能带来很大的改观。这应该app开发进阶的必经之路。</p>
+<p>小码哥讲述的这套流程还算比较完整的了，更重要的还是学习其中的思想：</p>
+<blockquote>
+<ol>
+<li>将缓存分级：内存缓存，沙盒缓存，下载操作缓存。</li>
+<li>而且还要经常使用二分法，将我们的逻辑考虑得滴水不漏。</li>
+</ol>
+<p>如果我们没有认识到将下载操作添加到下载操作缓存的时机是包含下载成功和下载失败两个情况，那么就不会考虑到即时要将下载操作从下载操作缓存中删去的操作，很容易引起bug。所以在以后的开发中，成功和失败两个情况都要考虑进去，也就是说有if一定要有else！</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/19/%E8%AF%A6%E8%A7%A3%20iOS%20%E5%A4%9A%E5%9B%BE%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" data-id="cl3jmf7o4008r9jv3bk518yjh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/Prototype%20%E6%91%98%E6%8A%84%E8%87%AA%20Pro.Objective-C.Design.Patterns.for.iOS/" class="article-date">
+  <time datetime="2017-04-19T04:03:56.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/19/Prototype%20%E6%91%98%E6%8A%84%E8%87%AA%20Pro.Objective-C.Design.Patterns.for.iOS/">Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="page" title="Page 49">
+<div class="layoutArea">
+<div class="column">
+<p>Back in the old days when printing wasn’t common, people used to use some sort of wooden stamps (later they became rubber stamps) to print some commonly used graphics and text on paper. Many years later, people realized that by combining different commonly used stamps, it could be one of the easiest ways to mass reproduce the same information on paper. Without using the same stamps for printing the same glyphs on paper, distribution of information and knowledge would be much more expensive and time-consuming.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>原型设计方式就像我们的活字印刷术，我们可以通过在木刻上的字，然后通过复杂的组合，快速的再生成同样信息。</p>
+<p> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/19/Prototype%20%E6%91%98%E6%8A%84%E8%87%AA%20Pro.Objective-C.Design.Patterns.for.iOS/" data-id="cl3jmf7mr002z9jv35jnk5kl1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Wi-Fi定位原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/18/Wi-Fi%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2017-04-18T11:05:51.000Z" itemprop="datePublished">2017-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/18/Wi-Fi%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/">Wi-Fi定位原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息，而服务器会参考每个热点的信号强弱计算出设备的大致地理位置.下面就一起来看看手机是如何通过wifi定位的？</p>
+<hr>
+<hr>
+<p><strong>一、Wi-Fi定位的原理</strong></p>
+<p>具体来说，Wi-Fi能够定位，原理是这样的：</p>
+<p>1、每一个无线AP（路由器）都有一个全球唯一的MAC地址，并且一般来说无线AP在一段时间内不会移动；</p>
+<p>2、设备在开启Wi-Fi的情况下,即可扫描并收集周围的AP信号，无论是否加密,是否已连接，甚至信号强度不足以显示在无线信号列表中，都可以获取到AP广播出来的MAC地址；</p>
+<p>3、设备将这些能够标示AP的数据发送到位置服务器,服务器检索出每一个AP的地理位置,并结合每个信号的强弱程度,计算出设备的地理位置并返回到用户设备；</p>
+<p>4、位置服务商要不断更新、补充自己的数据库，以保证数据的准确性。</p>
+<p><strong>二、位置服务数据库的搭建</strong></p>
+<p>数据库中的数据主要来自于两个方面，一是用户提交的数据。Android手机用户在开启“使用无线网络定位”时会提示是否允许使用Google的定位服务，如果允许，用户的位置信息就被谷歌收集到。iPhone则会自动收集Wi-Fi的MAC地址、GPS位置信息、运营商基站编码等，并发送给苹果公司的服务器。</p>
+<p>同时谷歌、Skyhook两家位置服务提供商也在主动搜集Wi-Fi等热点的位置信息。Google的街景拍摄车有一个重要的功能就是采集沿途的无线信号,并打上通过GPS定位出的坐标回传至服务器。Skyhook在美国及欧洲一些国家也是直接开着信号采集车采集AP和基站的信号数据。</p>
+<p><strong>三、如何防止被定位？</strong></p>
+<p>最直接的办法是关掉手机系统中的位置服务选项，以避免他人看到你的位置信息。</p>
+<p>如果要杜绝位置服务商获取数据，难度就会比较高。用户需要不连接任何Wi-Fi热点，并且不使用相关的位置服务。也可以使用某些工具。例如谷歌曾发布一款选择退出工具，让无线路由器用户有效阻止谷歌搜集他们的数据。</p>
+<p> </p>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/18/Wi-Fi%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/04/18/Wi-Fi%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/" data-id="cl3jmf7n3004d9jv3dzub9o7b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

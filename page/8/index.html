@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="miehaha">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CShyiuan博客">
+<meta property="og:url" content="http://example.com/page/8/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="miehaha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-HTTP (笔记）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/HTTP%20(%E7%AC%94%E8%AE%B0%EF%BC%89/" class="article-date">
+  <time datetime="2016-10-28T05:41:06.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/28/HTTP%20(%E7%AC%94%E8%AE%B0%EF%BC%89/">HTTP (笔记）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>HTTP协议是无状态的<a name="statelesshttp"></a></h1>
+<p>http协议是无状态的，同一个客户端的这次请求和上次请求是没有对应关系，对http服务器来说，它并不知道这两个请求来自同一个客户端。 为了解决这个问题， Web程序引入了Cookie机制来维护状态.</p>
+<hr>
+<hr>
+<h1>打开一个网页需要浏览器发送很多次Request<a name="ManyRequest"></a></h1>
+<p>1. 当你在浏览器输入URL <a target="_blank" rel="noopener" href="http://www.cnblogs.com">http://www.cnblogs.com</a> 的时候，浏览器发送一个Request去获取 <a target="_blank" rel="noopener" href="http://www.cnblogs.com">http://www.cnblogs.com</a> 的html.  服务器把Response发送回给浏览器.</p>
+<p>2. 浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如图片，CSS文件，JS文件。</p>
+<p>3. 浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。</p>
+<p>4. 等所有的文件都下载成功后。 网页就被显示出来了。</p>
+<h1>状态码<a name="statecode"></a></h1>
+<p>Response 消息中的第一行叫做状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。</p>
+<p>状态码用来告诉HTTP客户端,HTTP服务器是否产生了预期的Response.</p>
+<p>HTTP/1.1中定义了5类状态码， 状态码由三位数字组成，第一个数字定义了响应的类别</p>
+<p>1XX  提示信息 - 表示请求已被成功接收，继续处理</p>
+<p>2XX  成功 - 表示请求已被成功接收，理解，接受</p>
+<p>3XX  重定向 - 要完成请求必须进行更进一步的处理</p>
+<p>4XX  客户端错误 -  请求有语法错误或请求无法实现</p>
+<p>5XX  服务器端错误 -   服务器未能实现合法的请求</p>
+<hr>
+<hr>
+<h1>HTTP工作原理</h1>
+<p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<h6 id="1、客户端连接到Web服务器">1、客户端连接到Web服务器</h6>
+<p>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a target="_blank" rel="noopener" href="http://www.oakcms.cn./">http://www.oakcms.cn。</a></p>
+<h6 id="2、发送HTTP请求">2、发送HTTP请求</h6>
+<p>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<h6 id="3、服务器接受请求并返回HTTP响应">3、服务器接受请求并返回HTTP响应</h6>
+<p>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<h6 id="4、释放连接TCP连接">4、释放连接<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP连接</a></h6>
+<p>若connection 模式为close，则服务器主动关闭<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP连接</a>，客户端被动关闭连接，释放<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP连接</a>;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<h6 id="5、客户端浏览器解析HTML内容">5、客户端浏览器解析HTML内容</h6>
+<p>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<p>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：</p>
+<p>1、浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;</p>
+<p>2、解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP连接</a>;</p>
+<p>3、浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP 三次握手</a>的第三个报文的数据发送给服务器;</p>
+<p>4、服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;</p>
+<p>5、释放 <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef892323e68f">TCP连接</a>;</p>
+<p>6、浏览器将该 html 文本并显示内容;</p>
+<hr>
+<hr>
+<h2 id="GET和POST的数据大小">GET和POST的数据大小</h2>
+<p>2、传输数据的大小：首先声明：HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。</p>
+<p>而在实际开发中存在的限制主要有：</p>
+<p><strong>GET</strong>:特定浏览器和服务器对URL长度有限制，例如 IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系 统的支持。</p>
+<p>因此对于GET提交时，传输数据就会受到URL长度的 限制。</p>
+<p><strong>POST</strong>:由于不是通过URL传值，理论上数据不受 限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/10/28/HTTP%20(%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="cl3jmf7me001j9jv304f7cs1n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-OS X" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/17/OS%20X/" class="article-date">
+  <time datetime="2016-10-17T15:07:01.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/OS%20X/">OS X</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.  defaults write com.apple.finder AppleShowAllFiles -boolean true ;</span><br><span class="line">killall Finder</span><br><span class="line">2.  defaults write com.apple.finder AppleShowAllFiles -boolean false ;</span><br><span class="line">killall Finder</span><br></pre></td></tr></table></figure>
+<p>每个系统都要定期做些维护工作，这不仅是为了提高系统的运行速度也是为了使系统性能发挥到最大，节省可用的磁盘空间。</p>
+<p>现在我向大家介绍几个维护系统的方法。</p>
+<p><strong>修复磁盘权限：</strong></p>
+<p>在[应用程序]目录下有一个[实用程序]的目录下找到磁盘工具，选中你想修复权限的磁盘后分别有两个选择，一个是校验当前的权限，另一个就是修复权限。修复权限可以让系统把磁盘中的所有文件复原它们正确的权限配置，不至于在使用中出现因为权限问题而不能进行操作的情况，也是为了防止恶意程序对系统进行修改。</p>
+<p><strong>修复磁盘：</strong></p>
+<p>如果你使用的是一个文件系统已经损伤了的硬盘的话，那就要注意了，不过不用太担心，用修复磁盘工具可以解决这个问题。 　　找到你的Mac OS X的系统光盘，用它直接启动电脑，之后运行磁盘工具，选择你要修复的磁盘，就可以修复了，很多诸如死机之类的问题往往修复磁盘就能够彻底解决了。为了使数据安全，一定要经常备份重要数据。由磁盘的S.M.A.R.T.状态可以知道当前硬盘的状态，最好每星期检查一次。</p>
+<p><strong>主动维护：</strong></p>
+<p>Mac OS X系统默认在每天凌晨3点后去做定期的系统维护，主要是清除没用的日志和缓存，当然也会备份重要的系统文件。但是如果这段时间里把系统关闭或者休眠，定期维护作业就无法进行了。这样并不会使系统出问题，不过维护可以使硬盘空出更多的可用空间。</p>
+<p>其实完全可以来选择主动维护方式来手动做这些维护，要做这些维护请执行以下命令，要顺着往下做才行。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo periodic daily</span><br><span class="line"></span><br><span class="line">sudo periodic weekly</span><br><span class="line"></span><br><span class="line">sudo periodic monthly</span><br></pre></td></tr></table></figure>
+<p><strong>更新加固：</strong></p>
+<p>如果有时系统在做过更新操作或其它操作之后非常的慢请在终端（Terminal）中执行以下命令：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update_prebinding -root / -force</span><br></pre></td></tr></table></figure>
+<p>回车后，输入管理员密码回车，等运行结束出现$符时，立即重启系统。</p>
+<p>以上几个维护方法，最好每月都能做一次，当然，出现问题时不要急着去重装系统，做一下以上操作也许会很快解决的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/10/17/OS%20X/" data-id="cl3jmf7mo002n9jv385g37nhy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数组和链表的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/15/%E6%95%B0%E7%BB%84%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+  <time datetime="2016-10-15T15:03:58.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/%E6%95%B0%E7%BB%84%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8C%BA%E5%88%AB/">数组和链表的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>
+<div>数组是将元素在内存中连续存放，由于每个元素占用内存相同，可以通过下标迅速访问数组中任何元素。但是如果要在数组中增加一个元素，需要移动大量元素，在内存中空出一个元素的空间，然后将要增加的元素放在其中。同样的道理，如果想删除一个元素，同样需要移动大量元素去填掉被移动的元素。如果应用需要快速访问数据，很少或不插入和删除元素，就应该用数组。</div>
+</li>
+<li>
+<div>链表恰好相反，链表中的元素在内存中不是顺序存储的，而是通过存在元素中的指针联系到一起。比如：上一个元素有个指针指到下一个元素，以此类推，直到最后一个元素。如果要访问链表中一个元素，需要从第一个元素开始，一直找到需要的元素位置。但是增加和删除一个元素对于链表数据结构就非常简单了，只要修改元素中的指针就可以了。如果应用需要经常插入和删除元素你就需要用链表数据结构了。</div>
+</li>
+</ul>
+<p>***C++语言中可以用数组处理一组数据类型相同的数据，但不允许动态定义数组的大小，即在使用数组之前必须确定数组的大小。而在实际应用中，用户使用数组之前有时无法准确确定数组的大小，只能将数组定义成足够大小，这样数组中有些空间可能不被使用，从而造成内存空间的浪费。**<strong>链表是一种常见的数据组织形式，它采用动态分配内存的形式实现。需要时可以用new分配内存空间，不需要时用delete将已分配的空间释放，不会造成内存空间的浪费。</strong><br>
+(1) 从逻辑结构角度来看<br>
+a, 数组必须事先定义固定的长度（元素个数），不能适应数据动态地增减的情况。当数据增加时，可能超出原先定义的元素个数；当数据减少时，造成内存浪费。<br>
+b,链表动态地进行存储分配，可以适应数据动态地增减的情况，且可以方便地插入、删除数据项。（数组中插入、删除数据项时，需要移动其它数据项）<br>
+(2)从内存存储角度来看<br>
+a,(静态)数组从栈中分配空间, 对于程序员方便快速,但自由度小。<br>
+b, 链表从堆中分配空间, 自由度大但申请管理比较麻烦.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/10/15/%E6%95%B0%E7%BB%84%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="cl3jmf7o000839jv306hq1ibk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ShadowsocksR安装 采用chacha20加密net-speeder和配置参数优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/ShadowsocksR%E5%AE%89%E8%A3%85%20%E9%87%87%E7%94%A8chacha20%E5%8A%A0%E5%AF%86net-speeder%E5%92%8C%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/" class="article-date">
+  <time datetime="2016-10-04T08:10:32.000Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/ShadowsocksR%E5%AE%89%E8%A3%85%20%E9%87%87%E7%94%A8chacha20%E5%8A%A0%E5%AF%86net-speeder%E5%92%8C%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/">ShadowsocksR安装  采用chacha20加密net-speeder和配置参数优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>安装服务端的时候推荐启用 chacha20 加密（逼格高），默认的 aes-256-cfb 加密速度较慢，当然你也可以启用最快的 CR4-MD5 加密算法，就是加密弱一些。另外，建议启用搬瓦工的 IPv6 并在 shadowsocksR 配置启用IPv6，走代理的时候就能访问一些只有在 IPv6 下才能访问的网站。</p>
+<p>ChaCha20加密（chacha20 依赖 libsodium，以下是编译安装 libsodium 的方法：）</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++</span><br><span class="line">wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz</span><br><span class="line">tar zxf LATEST.tar.gz</span><br><span class="line">cd libsodium*</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">echo /usr/local/lib &gt; /etc/ld.so.conf.d/usr_local_lib.conf</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+<p>使用shell脚本安装ShadowsocksR</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh</span><br><span class="line">chmod +x shadowsocksR.sh</span><br><span class="line">./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log</span><br></pre></td></tr></table></figure>
+<p><em><strong>到此为止就安装完毕了</strong></em></p>
+<p><strong>接下来优化</strong></p>
+<p>修改配置文件：<code>vi /etc/shadowsocks.json</code> (按<code>i</code>编辑，按<code>Ctrl+C</code>退出编辑，<code>:x</code>保存并退出)</p>
+<p>将<span class="crayon-h"> method字段修改为 </span><strong><span class="crayon-s">“method”</span><span class="crayon-o">:</span> <span class="crayon-s">“chacha20”  （修改加密方式)</span></strong></p>
+<p><strong>维护常用的几个命令</strong></p>
+<ul>
+<li>启动：<code>/etc/init.d/shadowsocks start</code></li>
+<li>停止：<code>/etc/init.d/shadowsocks stop</code></li>
+<li>重启：<code>/etc/init.d/shadowsocks restart</code></li>
+<li>状态：<code>/etc/init.d/shadowsocks status</code></li>
+<li>卸载：需要root用户权限，运行<code>./shadowsocks.sh uninstall</code></li>
+<li>更新：<code>pip install -U shadowsocks</code></li>
+</ul>
+<p><strong>安装Net-Speeder</strong></p>
+<p>Net-Speeder是一个linux软件，主要目的是为了解决丢包问题，实现TCP双倍发送，也就是同一份数据包发送两份。这样的话在服务器带宽充足情况下，丢包率会平方级降低。网络传输速度也会有所提升。</p>
+<p><strong>安装方式</strong></p>
+<ul>
+<li>
+<p>第一步，下载wget <a target="_blank" rel="noopener" href="https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh">https://coding.net/u/njzhenghao/p/download/git/raw/master/net_speeder-installer.sh</a></p>
+</li>
+<li>
+<p>第二部，编译并安装<br>
+bash net_speeder-installer.sh</p>
+</li>
+<li>
+<p>第三部，端口加速</p>
+</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>加入自启动</li>
+</ul>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+<p><strong>参数优化.(参照这里：<a target="_blank" rel="noopener" href="https://shadowsocks.org/en/config/advanced.html">https://shadowsocks.org/en/config/advanced.html</a>)</strong></p>
+<p>首先将服务器内核升级到3.5或更高。</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+<p>添加两行：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nofile 51200</span><br><span class="line">* hard nofile 51200</span><br></pre></td></tr></table></figure>
+<p>设置ulimit：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -n 51200</span><br></pre></td></tr></table></figure>
+<p>然后编辑 sysctl.conf</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p> </p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fs.file-max = 51200</span><br><span class="line"> </span><br><span class="line">net.core.rmem_max = 67108864</span><br><span class="line">net.core.wmem_max = 67108864</span><br><span class="line">net.core.netdev_max_backlog = 250000</span><br><span class="line">net.core.somaxconn = 4096</span><br><span class="line"> </span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_tw_recycle = 0</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">net.ipv4.tcp_keepalive_time = 1200</span><br><span class="line">net.ipv4.ip_local_port_range = 10000 65000</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 8192</span><br><span class="line">net.ipv4.tcp_max_tw_buckets = 5000</span><br><span class="line">net.ipv4.tcp_fastopen = 3</span><br><span class="line">net.ipv4.tcp_mem = 25600 51200 102400</span><br><span class="line">net.ipv4.tcp_rmem = 4096 87380 67108864</span><br><span class="line">net.ipv4.tcp_wmem = 4096 65536 67108864</span><br><span class="line">net.ipv4.tcp_mtu_probing = 1</span><br><span class="line">net.ipv4.tcp_congestion_control = hybla</span><br></pre></td></tr></table></figure>
+<p>加载配置：</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/10/04/ShadowsocksR%E5%AE%89%E8%A3%85%20%E9%87%87%E7%94%A8chacha20%E5%8A%A0%E5%AF%86net-speeder%E5%92%8C%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/" data-id="cl3jmf7my003u9jv39ozz2gov" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Xcode 8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Xcode%208/" class="article-date">
+  <time datetime="2016-09-26T14:35:34.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/Xcode%208/">Xcode 8</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对函数注释的快捷键是option + command + /</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/26/Xcode%208/" data-id="cl3jmf7n4004g9jv34uxtgknh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-强引用与弱引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/25/%E5%BC%BA%E5%BC%95%E7%94%A8%E4%B8%8E%E5%BC%B1%E5%BC%95%E7%94%A8/" class="article-date">
+  <time datetime="2016-09-25T08:19:22.000Z" itemprop="datePublished">2016-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/25/%E5%BC%BA%E5%BC%95%E7%94%A8%E4%B8%8E%E5%BC%B1%E5%BC%95%E7%94%A8/">强引用与弱引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div><span style="color: #fd1748;">默认情况下，一个指针都会使用 __strong 属性，表明这是一个强引用。这意味着，只要引用存在，对象就不能被销毁。这是一种所期望的行为：当所有（强）引用都去除时，对象才能被收集和释放。</span></div>
+<div><span style="color: #fd1748;"> </span></div>
+<div><span style="color: #fd1748;">不过， 有时我们却希望禁用这种行为：一些集合类不应该增加其元素的引用，因为这会引起对象无法释放。在这种情况下，我们需要使用弱引用（不用担心，内置的集合类 就是这么干的），使用 __weak 关键字。NSHashTable 就是一个例子。当被引用的对象消失时，弱引用会自动设置为 nil。Cocoa 的 Notification Center 就是这么一个例子，虽然这已经超出纯 Objective-C 的语言范畴 <wbr /></span></div>
+<div><span style="color: #fd1748;"> </span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;">自己更深理解：</span></div>
+<div><span style="color: #2d3efe;">1.(weak与strong)不同的是：当一个对象不再有strong类型的指针指向它的时候，它就会被释放，即使改对象还有_weak类型的指针指向它；</span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;"> <wbr /> 2.一旦最后一个指向该对象的strong类型的指针离开，这个对象将被释放，如果这个时候还有weak指针指向该对象，则会清除掉所有剩余的weak指针</span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;">类比为自己的思想：</span></div>
+<div><span style="color: #2d3efe;"> <wbr />  <wbr />  <wbr /></span></div>
+<div><span style="color: #2d3efe;"> <wbr /> 一个对象类比为一条狗，  <wbr />释放对象 类比为 狗要跑掉</span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;">逻辑：</span></div>
+<div><span style="color: #2d3efe;"> <wbr />  <wbr />  <wbr />strong类型的指针就像是栓住的狗，只要你用 绳子拴住狗，那么狗就不会跑掉.</span></div>
+<div><span style="color: #2d3efe;"> <wbr />  <wbr />  <wbr />类比 一个对象 new过以后，不会自动的释放</span></div>
+<div><span style="color: #2d3efe;"> </span></div>
+<div><span style="color: #2d3efe;"> <wbr />  <wbr />如果有5个人都牵着这一条狗(5条绳子栓一只狗) 类比为 5个strong类型指针指向一个对象.</span></div>
+<div><span style="color: #2d3efe;">除非5个绳子都脱落，否则狗是不会跑掉的，类比，5个strong指针都=nil，则该对象释放</span></div>
+<div></div>
+<div></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/25/%E5%BC%BA%E5%BC%95%E7%94%A8%E4%B8%8E%E5%BC%B1%E5%BC%95%E7%94%A8/" data-id="cl3jmf7nx007r9jv3bk1wghdn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2016-09-25T06:07:35.000Z" itemprop="datePublished">2016-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言-2">前言</h2>
+<p>在某些人看来学习设计模式没有什么意义，因为在实际工作中基本用不上，因此没有什么学习的必要。但是在我看来，学习设计模式非常有必要，暂且不论在实际工作中能否用得上，理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
+<h2 id="设计模式的基本原则"><a target="_blank" rel="noopener" href="https://github.com/leichunfeng/DesignPatterns-Objective-C#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"></a>设计模式的基本原则</h2>
+<p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
+<ul>
+<li><strong>单一职责原则（SRP）</strong>，就一个类而言，应该仅有一个引起它变化的原因。</li>
+<li><strong>开放-封闭原则（OCP）</strong>，是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
+<li><strong>依赖倒转原则（DIP）</strong>，A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
+<li><strong>里氏代换原则（LSP）</strong>，子类型必须能够替换掉它们的父类型。</li>
+<li><strong>迪米特法则（LoD）</strong>，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
+<li><strong>合成/聚合复用原则（CARP）</strong>，尽量使用合成/聚合，尽量不要使用类继承。<br>
+注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</li>
+</ul>
+<h2 id="常用的-23-种设计模式"><a target="_blank" rel="noopener" href="https://github.com/leichunfeng/DesignPatterns-Objective-C#%E5%B8%B8%E7%94%A8%E7%9A%84-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"></a>常用的 23 种设计模式</h2>
+<p>不管是 .NET 中的 C# 语言，还是 Java、<a target="_blank" rel="noopener" href="http://VB.NET">VB.NET</a>、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
+<ol>
+<li><strong>策略模式（Strategy）</strong>，它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
+<li><strong>装饰模式（Decorator）</strong>，动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
+<li><strong>代理模式（Proxy）</strong>，为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li><strong>工厂方法模式（Factory Method）</strong>，定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li><strong>原型模式（Prototype）</strong>，用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
+<li><strong>模板方法模式（Template Method）</strong>，定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
+<li><strong>外观模式（Facade）</strong>，为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
+<li><strong>建造者模式（Builder）</strong>，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+<li><strong>观察者模式（Observer）</strong>，定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
+<li><strong>抽象工厂模式（Abstract Factory）</strong>，提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
+<li><strong>状态模式（State）</strong>，当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
+<li><strong>适配器模式（Adapter）</strong>，将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
+<li><strong>备忘录模式（Memento）</strong>，在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
+<li><strong>组合模式（Composite）</strong>，将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
+<li><strong>迭代器模式（Iterator）</strong>，提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
+<li><strong>单例模式（Singleton）</strong>，保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+<li><strong>桥接模式（Bridge）</strong>，将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
+<li><strong>命令模式（Command）</strong>，将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
+<li><strong>职责链模式（Chain of Responsibility）</strong>，使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
+<li><strong>中介者模式（Mediator）</strong>，用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
+<li><strong>享元模式（Flyweight）</strong>，运用共享技术有效地支持大量细粒度的对象。</li>
+<li><strong>解释器模式（Interpreter）</strong>，给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
+<li><strong>访问者模式（Visitor）</strong>，表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ol>
+<h2 id="-6"></h2>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cl3jmf7o4008p9jv35llb8hqk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mac卸载各种软件的目录地址" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/21/Mac%E5%8D%B8%E8%BD%BD%E5%90%84%E7%A7%8D%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%9B%AE%E5%BD%95%E5%9C%B0%E5%9D%80/" class="article-date">
+  <time datetime="2016-09-21T14:41:49.000Z" itemprop="datePublished">2016-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/21/Mac%E5%8D%B8%E8%BD%BD%E5%90%84%E7%A7%8D%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%9B%AE%E5%BD%95%E5%9C%B0%E5%9D%80/">Mac卸载各种软件的目录地址</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Config: ~/Library/Preferences/</li>
+<li>System: ~/Library/Caches/</li>
+<li>Plugins: ~/Library/Application Support/</li>
+<li>Logs: ~/Library/Logs/</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/21/Mac%E5%8D%B8%E8%BD%BD%E5%90%84%E7%A7%8D%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%9B%AE%E5%BD%95%E5%9C%B0%E5%9D%80/" data-id="cl3jmf7mk00299jv3h6l872aj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/08/iOS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2016-09-07T16:48:40.000Z" itemprop="datePublished">2016-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/08/iOS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">iOS设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="经典观察者模式">经典观察者模式</h2>
+<p>经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做出相应的一些动作。在文章一开始举的例子就是典型观察者模式的应用。</p>
+<p>而在IOS开发中我们可能会接触到的经典观察者模式的实现方式，有这么几种：NSNotificationCenter、KVO、Delegate等</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/08/iOS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cl3jmf7n7004s9jv3a3d4h03o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git rebase和merge 区别和应用场景" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="article-date">
+  <time datetime="2016-09-06T13:52:27.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">git rebase和merge 区别和应用场景</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景：</p>
+<p>1，控制产品OEM。</p>
+<p>基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？</p>
+<p>如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每多一个新的OEM就多拷贝一份代码，那如果发现公用模块里面有个BUG，难道你要每个版本的源代码都要修改？万一改错地方了，或者哪个版本的忘记改了，又是一件麻烦事。</p>
+<p>这个时候我们就可以考虑使用branch功能，在第一个OEM的基础上分支出第二个OEM，第三个OEM完全取决于和哪个版本更像，就在那个版本的基础上做新的分支，有新的OEM特性需求，就切换到那个分支上修改，放心，所有的的单独分支上的代码看起来都是独立的，不会影响其他版本。</p>
+<p>2，多人协作长时间开发功能模块</p>
+<p>如果你在一个团队中，那几乎很难做到每天都能按期完成某个模块功能，并且测试通过。那团队成员又必须每日下班前把自己的代码保存一下，万一机器故障了之类的还能有代码备份机制。如果提交了不能工作的代码，别人又获取到了，那其他人的事情就做不下去了。所以，branch另外一个适用场景就是为team单独成员开辟个人工作区域，单元测试无误之后再把成员的工作代码合并到主分支中，既能达到个人代码备份的目的，又能不影响其他人的工作。</p>
+<p>其实上面所说的就是rebase和merge的不同适用场景。</p>
+<p>在场景1的情况下，如果修改了某个公用代码的BUG，这个时候就应该是把所有的OEM版本分支rebase到这个修复BUG的分支上来，在rebase过程中，Git会要你手动解决代码上的冲突，你需要做的就是把修复BUG的代码放到目标分支代码里面去。rebase的结果是：所有的分支依然存在</p>
+<p>在场景2的情况下，因为成员的代码开发工作已经完成了，也不需要再保留这个分支了，所以我们可以把这个成员分支merge到主分支上，当然冲突在所难免，手工解决的工作肯定逃不掉，但是利大于弊不是吗。merge以后，分支就不存在了，但是在Git的所有分支历史中还能看到身影。</p>
+<p>根据适用场景不同，采用不同的分支合并策略，让你团队的代码保持生命力吧。</p>
+<p> </p>
+<h1><span class="link_title">git stash和git stash pop</span></h1>
+<p>git stash 可用来暂存当前正在进行的工作， 比如想pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。<br>
+基础命令：<br>
+<strong>$git stash<br>
+$do some work<br>
+$git stash pop</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-id="cl3jmf7n4004j9jv34mrs1az4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

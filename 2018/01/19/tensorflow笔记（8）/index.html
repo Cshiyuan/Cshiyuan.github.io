@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>tensorflow笔记（8） | CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="####非监督学习  Autoencoder 今天我们会来聊聊用神经网络如何进行非监督形式的学习. 也就是 autoencoder, 自编码. 自编码 autoencoder 是一种什么码呢. 他是不是 条形码? 二维码? 打码? 其中的一种呢? NONONONO. 和他们统统没有关系. 自编码是一种神经网络的形式.如果你一定要把他们扯上关系, 我想也只能这样解释啦. 原来有时神经网络要接受大量的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow笔记（8）">
+<meta property="og:url" content="http://example.com/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="####非监督学习  Autoencoder 今天我们会来聊聊用神经网络如何进行非监督形式的学习. 也就是 autoencoder, 自编码. 自编码 autoencoder 是一种什么码呢. 他是不是 条形码? 二维码? 打码? 其中的一种呢? NONONONO. 和他们统统没有关系. 自编码是一种神经网络的形式.如果你一定要把他们扯上关系, 我想也只能这样解释啦. 原来有时神经网络要接受大量的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-01-19T04:07:05.000Z">
+<meta property="article:modified_time" content="2022-05-23T08:43:39.083Z">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tensorflow笔记（8）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/" class="article-date">
+  <time datetime="2018-01-19T04:07:05.000Z" itemprop="datePublished">2018-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tensorflow笔记（8）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>####非监督学习  Autoencoder</p>
+<p>今天我们会来聊聊用神经网络如何进行非监督形式的学习. 也就是 autoencoder, 自编码.</p>
+<p>自编码 autoencoder 是一种什么码呢. 他是不是 条形码? 二维码? 打码? 其中的一种呢? NONONONO. 和他们统统没有关系. 自编码是一种神经网络的形式.如果你一定要把他们扯上关系, 我想也只能这样解释啦.</p>
+<p>原来有时神经网络要接受大量的输入信息, 比如输入信息是高清图片时, 输入信息量可能达到上千万, 让神经网络直接从上千万个信息源中学习是一件很吃力的工作. 所以, 何不压缩一下, 提取出原图片中的最具代表性的信息, 缩减输入信息量, 再把缩减过后的信息放进神经网络学习. 这样学习起来就简单轻松了. 所以, 自编码就能在这时发挥作用. 通过将原数据白色的X 压缩, 解压 成黑色的X, 然后通过对比黑白 X ,求出预测误差, 进行反向传递, 逐步提升自编码的准确性. 训练好的自编码中间这一部分就是能总结原数据的精髓. 可以看出, 从头到尾, 我们只用到了输入数据 X, 并没有用到 X 对应的数据标签, 所以也可以说自编码是一种非监督学习. 到了真正使用自编码的时候. 通常只会用到自编码前半部分.</p>
+<h4 id="编码器-Encoder">编码器 Encoder</h4>
+<p>编码器能得到原数据的精髓, 然后我们只需要再创建一个小的神经网络学习这个精髓的数据,不仅减少了神经网络的负担, 而且同样能达到很好的效果.</p>
+<p>他能从原数据中总结出每种类型数据的特征, 如果把这些特征类型都放在一张二维的图片上, 每种类型都已经被很好的用原数据的精髓区分开来. 如果你了解 PCA 主成分分析, 再提取主要特征时, 自编码和它一样,甚至超越了 PCA. 换句话说, 自编码 可以像 PCA 一样 给特征属性降维.</p>
+<h4 id="解码器-Decoder">解码器 Decoder</h4>
+<p>至于解码器 Decoder, 我们也能那它来做点事情. 我们知道, 解码器在训练的时候是要将精髓信息解压成原始信息, 那么这就提供了一个解压器的作用, 甚至我们可以认为是一个生成器 (类似于GAN). 那做这件事的一种特殊自编码叫做 variational autoencoders, 你能在这里找到他的具体说明.</p>
+<h4 id="Autoencoder">Autoencoder</h4>
+<p>Autoencoder 简单来说就是将有很多Feature的数据进行压缩，之后再进行解压的过程。 本质上来说，它也是一个对数据的非监督学习，如果大家知道 PCA (Principal component analysis)， 与 Autoencoder 相类似，它的主要功能即对数据进行非监督学习，并将压缩之后得到的“特征值”，这一中间结果正类似于PCA的结果。 之后再将压缩过的“特征值”进行解压，得到的最终结果与原始数据进行比较，对此进行非监督学习。如果大家还不是非常了解，请观看机器学习简介系列里的 Autoencoder 那一集； 如果对它已经有了一定的了解，那么便可以进行代码阶段的学习了。大概过程如下图所示：</p>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">&quot;tmp/data/&quot;</span>, one_hot=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line">training_epochs = <span class="number">5</span>  <span class="comment">#五组训练</span></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">display_step = <span class="number">1</span></span><br><span class="line">examples_to_show = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们的MNIST数据，每张图片大小是28x28 pix，即 784 Feature</span></span><br><span class="line"><span class="comment"># Network Parameters</span></span><br><span class="line">n_input = <span class="number">784</span>  <span class="comment"># MNIST data input (img shape: 28*28)</span></span><br><span class="line"><span class="comment"># tf Graph input (only pictures)</span></span><br><span class="line">X = tf.placeholder(<span class="string">&quot;float&quot;</span>, [<span class="literal">None</span>, n_input])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在压缩环节：我们要把这个Features不断压缩，</span></span><br><span class="line"><span class="comment"># 经过第一个隐藏层压缩至256个 Features，再经过第二个隐藏层压缩至128个。</span></span><br><span class="line"><span class="comment"># 在解压环节：我们将128个Features还原至256个，再经过一步还原至784个。</span></span><br><span class="line"><span class="comment"># 在对比环节：比较原始数据与还原后的拥有 784 Features 的数据进行 cost 的对比，</span></span><br><span class="line"><span class="comment"># 根据 cost 来提升我的 Autoencoder 的准确率，下图是两个隐藏层的 weights 和 biases 的定义：</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hidden layer settings</span></span><br><span class="line">n_hidden_1 = <span class="number">256</span>  <span class="comment"># 1sr layer num features</span></span><br><span class="line">n_hidden_2 = <span class="number">128</span>  <span class="comment"># 2nd layer num features</span></span><br><span class="line">weights = &#123;</span><br><span class="line">    <span class="string">&#x27;encoder_h1&#x27;</span>: tf.Variable(tf.random_normal([n_input, n_hidden_1])),</span><br><span class="line">    <span class="string">&#x27;encoder_h2&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),</span><br><span class="line">    <span class="string">&#x27;decoder_h1&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_2, n_hidden_1])),</span><br><span class="line">    <span class="string">&#x27;decoder_h2&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_1, n_input])),</span><br><span class="line">&#125;</span><br><span class="line">biases = &#123;</span><br><span class="line">    <span class="string">&#x27;encoder_b1&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_1])),</span><br><span class="line">    <span class="string">&#x27;encoder_b2&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_2])),</span><br><span class="line">    <span class="string">&#x27;decoder_b1&#x27;</span>: tf.Variable(tf.random_normal([n_hidden_1])),</span><br><span class="line">    <span class="string">&#x27;decoder_b2&#x27;</span>: tf.Variable(tf.random_normal([n_input])),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面来定义Encoder和Decoder，使用的Activiation function是</span></span><br><span class="line"><span class="comment"># sigmoid, 压缩之后的值应该在[0,1]这个范围内。</span></span><br><span class="line"><span class="comment"># 在decoder过程中，通常使用对应与encoder的Activation function:</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Building the encoder</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encoder</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment"># Encoder Hidden layer with sigmoid activation #1</span></span><br><span class="line">    layer_1 = tf.nn.sigmoid(</span><br><span class="line">        tf.add(tf.matmul(x, weights[<span class="string">&#x27;encoder_h1&#x27;</span>]), biases[<span class="string">&#x27;encoder_b1&#x27;</span>]))</span><br><span class="line">    <span class="comment"># Decoder Hidden layer with sigmoid activation #2</span></span><br><span class="line">    layer_2 = tf.nn.sigmoid(</span><br><span class="line">        tf.add(</span><br><span class="line">            tf.matmul(layer_1, weights[<span class="string">&#x27;encoder_h2&#x27;</span>]), biases[<span class="string">&#x27;encoder_b2&#x27;</span>]))</span><br><span class="line">    <span class="keyword">return</span> layer_2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Building the decoder</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decoder</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment"># Encoder Hidden layer with sigmoid activation #1</span></span><br><span class="line">    layer_1 = tf.nn.sigmoid(</span><br><span class="line">        tf.add(tf.matmul(x, weights[<span class="string">&#x27;decoder_h1&#x27;</span>]), biases[<span class="string">&#x27;decoder_b1&#x27;</span>]))</span><br><span class="line">    <span class="comment"># Decoder Hidden layer with sigmoid activation #2</span></span><br><span class="line">    layer_2 = tf.nn.sigmoid(</span><br><span class="line">        tf.add(</span><br><span class="line">            tf.matmul(layer_1, weights[<span class="string">&#x27;decoder_h2&#x27;</span>]), biases[<span class="string">&#x27;decoder_b2&#x27;</span>]))</span><br><span class="line">    <span class="keyword">return</span> layer_2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 来实现 Encoder 和 Decoder 输出的结果：</span></span><br><span class="line"><span class="comment"># Construct model</span></span><br><span class="line">encoder_op = encoder(X)  <span class="comment"># 128 Features</span></span><br><span class="line">decoder_op = decoder(encoder_op)  <span class="comment"># 784 Features</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Prediction</span></span><br><span class="line">y_pred = decoder_op  <span class="comment"># After</span></span><br><span class="line"><span class="comment"># Targets (Labels) are the input data.</span></span><br><span class="line">y_true = X  <span class="comment"># Before</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#再通过我们非监督学习进行对照，</span></span><br><span class="line"><span class="comment"># 即对 “原始的有 784 Features 的数据集” 和 “通过 ‘Prediction’</span></span><br><span class="line"><span class="comment"># 得出的有 784 Features 的数据集” 进行最小二乘法的计算，</span></span><br><span class="line"><span class="comment"># 并且使 cost 最小化:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define loss and optimizer, minimize the squared error</span></span><br><span class="line">cost = tf.reduce_mean(tf.<span class="built_in">pow</span>(y_true - y_pred, <span class="number">2</span>))</span><br><span class="line">optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最后，通过Matplotlib的pyplot模块将结果显示出来，</span></span><br><span class="line"><span class="comment"># 注意在输出时MNIST数据集经过压缩之后x的最大值是1，而非255</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Launch the graph</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    total_batch = <span class="built_in">int</span>(mnist.train.num_examples / batch_size)</span><br><span class="line">    <span class="comment"># Training cycle</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(training_epochs):</span><br><span class="line">        <span class="comment"># Loop over all batches</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(total_batch):</span><br><span class="line">            batch_xs, batch_ys = mnist.train.next_batch(batch_size)</span><br><span class="line">            <span class="comment"># Run optimization op (backprop) and cost op (to get loss value)</span></span><br><span class="line">            _, c = sess.run([optimizer, cost], feed_dict=&#123;X: batch_xs&#125;)</span><br><span class="line">            <span class="comment"># Display logs per epoch step</span></span><br><span class="line">            <span class="keyword">if</span> epoch % display_step == <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;Epoch:&#x27;</span>, <span class="string">&#x27;%04d&#x27;</span> % (epoch + <span class="number">1</span>), <span class="string">&#x27;cost=&#x27;</span>,</span><br><span class="line">                      <span class="string">&#x27;&#123;:.9f&#125;&#x27;</span>.<span class="built_in">format</span>(c))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Optimization Finished!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># # Applyinh encode and decode over test set</span></span><br><span class="line">    encode_decode = sess.run(</span><br><span class="line">        y_pred, feed_dict=&#123;</span><br><span class="line">            X: mnist.test.images[:examples_to_show]</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="comment"># Compare original imamges with their reconstructions</span></span><br><span class="line">    f, a = plt.subplots(<span class="number">2</span>, <span class="number">10</span>, figsize=(<span class="number">10</span>, <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(examples_to_show):</span><br><span class="line">        a[<span class="number">0</span>][i].imshow(np.reshape(mnist.test.images[i], (<span class="number">28</span>, <span class="number">28</span>)))</span><br><span class="line">        a[<span class="number">1</span>][i].imshow(np.reshape(encode_decode[i], (<span class="number">28</span>, <span class="number">28</span>)))</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/" data-id="cl3jmf7nj00649jv3e5l2f1a1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          tensorflow笔记（9）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tensorflow笔记（7）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CShyiuan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="miehaha">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CShyiuan博客">
+<meta property="og:url" content="http://example.com/page/7/index.html">
+<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:description" content="miehaha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="[object Object]">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CShyiuan博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Interface Builde（nib和xib的深究）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/" class="article-date">
+  <time datetime="2017-03-10T14:31:10.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/">Interface Builde（nib和xib的深究）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。</p>
+<p>xib<span class="s1">和</span>nib<span class="s1">都是</span>Interface Builder<span class="s1">的图形界面设计文档。</span></p>
+<hr>
+<h3 id="nib和xib的历史">nib和xib的历史</h3>
+<p>nib<span class="s1">这个名字来自于</span>NeXTSTEP<span class="s1">系统，在</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之前，一直使用</span>nib<span class="s1">作为</span>Interface Builder<span class="s1">的图形文档，</span>nib<span class="s1">的发展经过了</span>nib2.0<span class="s1">, </span>nib3.0<span class="s1">，到</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之后，带有</span>NeXTSTEP<span class="s1">标志的</span>nib<span class="s1">被换成了</span>xib</p>
+<hr>
+<h3 id="nib和xib的异同">nib和xib的异同</h3>
+<p>xib是一个XML格式的纯文本文件，nib是一个二进制文件。xib比nib有一个很明显的优势。</p>
+<p>可以进行diff操作。</p>
+<p>不管是xib还是nib，<span class="s1">Xcode</span>编译后都将得到一个供程序运行时使用的经过编译的二进制<span class="s1">nib</span>文件。现在最新版本的<span class="s1">Xcode</span>在创建项目时，已经默认使用<span class="s1">xib</span>格式的文档了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/" data-id="cl3jmf7mg001t9jv3b3oeh319" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-周记总结 2017-3-10记下" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/" class="article-date">
+  <time datetime="2017-03-10T14:07:52.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/">周记总结 2017-3-10记下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><span class="s1">熟悉Socket.IO原理。</span></li>
+<li><span class="s3">看书《</span><span class="s1">Objective-C高级编程：iOS与OS X多线程和内存管理》</span></li>
+<li><span class="s1">了解iOS的方方面面</span></li>
+</ol>
+<hr>
+<h3 id="关于是否要releases-dispatch-queues-span-class-s1-：-span">关于是否要releases dispatch queues<span class="s1">：</span></h3>
+<p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
+<p>You need to use dispatch_retain and dispatch_release on your queue. ARC does not manage them.</p>
+<p><strong>If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</strong></p>
+<p>ARC will manage your queue for you. You do not need to (and cannot) use dispatch_retain or dispatch_release if ARC is enabled.</p>
+<p>（简单的说就是在iOS6.0之后，ARC会帮忙我们管理线程队列（GCD）不需要我们去retain或者release了。</p>
+<hr>
+<h3 id="数据模型属性采用的基本策略">数据模型属性采用的基本策略</h3>
+<p>除了基本类型需要用assign，字符串需要用copy，其他对象类型都需要用strong<br>
+（考虑到循环引用问题时strong和weak从中选择）</p>
+<hr>
+<h3 id="iOS应用到内部储存结构">iOS应用到内部储存结构</h3>
+<ul>
+<li><strong>Documents</strong>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
+<li><strong>Library/Caches</strong> : 保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
+<li><strong>Library/Preference</strong> :保存应用的所有偏好设置，iOS的 Setting(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</li>
+<li><strong>tmp</strong> :保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录</li>
+</ul>
+<hr>
+<h3 id="Socket-IO"><a target="_blank" rel="noopener" href="http://Socket.IO">Socket.IO</a></h3>
+<p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时功能,模糊化各种传输机制。</p>
+<hr>
+<h3 id="GCD">GCD</h3>
+<p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
+<p>Global Dispatch Queue<span class="s1">是所有应用程序都能够使用</span>Concurrent Dispatch Queue</p>
+<hr>
+<h3 id="IBOutlet">IBOutlet</h3>
+<p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
+<p>Interface Builder<span class="s2">则是根据</span>IBOutlet<span class="s2">来寻找可以在</span>Builder<span class="s2">里操作的成员变量。</span></p>
+<p>IBAction<span class="s2">也是。。。（相当于</span>void<span class="s2">）</span></p>
+<p><span class="s2">（</span>The type qualifier IBAction<span class="s2">,</span> which is used in place of the void return type<span class="s2">,</span> flags the declared method as an action so that Interface Builder is aware of it.For an action method to appear in Interface Builder<span class="s2">,</span> you first must declare it in a header file of the class whose instance is to receive the action message.<span class="s2">）</span></p>
+<hr>
+<hr>
+<h3 id="关于设置StatusBarStyle的相关方法">关于设置StatusBarStyle的相关方法</h3>
+<p><span class="s1">定制</span>statusBar<span class="s1">的前景部分。</span></p>
+<ul>
+<li>
+<ul>
+<li><span class="s1">(</span>UIStatusBarStyle<span class="s1">)</span>preferredStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><span class="s1">(</span>UIViewController *<span class="s1">)</span>childViewControllerForStatusBarStyle<span class="s1">;</span></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><span class="s1">(</span>void<span class="s1">)</span>setNeedsStatusBarAppearanceUpdate</li>
+</ul>
+</li>
+<li><span class="s1">默认的黑色（</span><strong>UIStatusBarStyleDefault</strong><span class="s1">）</span></li>
+<li><span class="s1">白色（</span><strong>UIStatusBarStyleLightContent</strong><span class="s1">）</span></li>
+</ul>
+<hr>
+<hr>
+<h3 id="状态栏和导航栏高度">状态栏和导航栏高度</h3>
+<p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
+<p>其实最好可以用代码来查看一下</p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];</span><br><span class="line">NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 </span><br><span class="line">CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;</span><br><span class="line">NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h3 id="instancetype和id的异同"><strong>instancetype</strong>和<strong>id</strong>的异同</h3>
+<p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
+<p><strong>1</strong>、相同点</p>
+<p>都可以作为方法的返回类型</p>
+<p><strong>2</strong>、不同点</p>
+<p>① instancetype&lt;可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象；</p>
+<p>② instancetype只能作为返回值，不能像id那样作为参数，比如下面的写法：</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/" data-id="cl3jmf7nu007d9jv3cbqpdulg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编译型与解释型、动态语言与静态语言" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/20/%E7%BC%96%E8%AF%91%E5%9E%8B%E4%B8%8E%E8%A7%A3%E9%87%8A%E5%9E%8B%E3%80%81%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80/" class="article-date">
+  <time datetime="2017-02-20T13:46:15.000Z" itemprop="datePublished">2017-02-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/20/%E7%BC%96%E8%AF%91%E5%9E%8B%E4%B8%8E%E8%A7%A3%E9%87%8A%E5%9E%8B%E3%80%81%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80/">编译型与解释型、动态语言与静态语言、</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编译型与解释型">编译型与解释型</h2>
+<p>编译型与解释型，两者各有利弊。前者由于程序执行速度快，同等条件下对系统要求较低，因此像开发操作系统、大型应用程序、数据库系统等时都采用它，像C/C++、Pascal/Object   Pascal（Delphi）、VB等基本都可视为编译语言，而一些网页脚本、服务器脚本及辅助开发接口这样的对速度要求不高、对不同系统平台间的兼容性有一定要求的程序则通常使用解释性语言，如Java、JavaScript、VBScript、Perl、Python等等。</p>
+<h2 id="动态语言与静态语言">动态语言与静态语言</h2>
+<p>（1）动态类型语言：动态类型语言是指在运行期间才去做数据类型检查的语言，也就是说，在用动态类型的语言编程时，永远也不用给任何变量指定数据类型，该语言会在你第一次赋值给变量时，在内部将数据类型记录下来。Python和Ruby就是一种典型的动态类型语言，其他的各种脚本语言如VBScript也多少属于动态类型语言。</p>
+<p>（2）静态类型语言：静态类型语言与动态类型语言刚好相反，它的数据类型是在编译其间检查的，也就是说在写程序时要声明所有变量的数据类型，C/C++是静态类型语言的典型代表，其他的静态类型语言还有C#、JAVA等。</p>
+<p>对于动态语言与静态语言的区分，套用一句流行的话就是：Static typing when possible, dynamic typing when needed。</p>
+<p> </p>
+<h2 id="强类型定义语言和弱类型定义语言">强类型定义语言和弱类型定义语言</h2>
+<p>（1）强类型定义语言：强制数据类型定义的语言。也就是说，一旦一个变量被指定了某个数据类型，如果不经过强制转换，那么它就永远是这个数据类型了。举个例子：如果你定义了一个整型变量a,那么程序根本不可能将a当作字符串类型处理。强类型定义语言是类型安全的语言。</p>
+<p>（2）弱类型定义语言：数据类型可以被忽略的语言。它与强类型定义语言相反, 一个变量可以赋不同数据类型的值。</p>
+<p>强类型定义语言在速度上可能略逊色于弱类型定义语言，但是强类型定义语言带来的严谨性能够有效的避免许多错误。另外，“这门语言是不是动态语言”与“这门语言是否类型安全”之间是完全没有联系的！<br>
+例如：Python是动态语言，是强类型定义语言（类型安全的语言）; VBScript是动态语言，是弱类型定义语言（类型不安全的语言）; JAVA是静态语言，是强类型定义语言（类型安全的语言）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/20/%E7%BC%96%E8%AF%91%E5%9E%8B%E4%B8%8E%E8%A7%A3%E9%87%8A%E5%9E%8B%E3%80%81%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80/" data-id="cl3jmf7o3008l9jv31wh2g6tb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java和C  的区别（转载）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="article-date">
+  <time datetime="2017-02-11T14:40:32.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/">Java和C++的区别（转载）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="article_content" class="article_content">
+<div>
+<p>1.<u><a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>没有显式指针</u>，而在C++中却可以用。</p>
+<p>2.Java是<u>主动多态的</u>，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。</p>
+<p>3.Java是<u>隐式继承的</u>，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能谈到实例化的对象。这时，Java看上去是强制面向对象。C++却把话都说明白了，你继承谁就继承谁，继承多个都可以，你什么都不说那么就不继承。但是C++当中，不继承不代表不能被继承，实际上C++禁止这么做。原因前面已经说过了，C++是被动多态的。你不用virtual去修饰基类的成员函数，程序执行时函数调用就不会自动调到派生类。</p>
+<p>4.Java<u>有接口</u>，C++中却没有。这不是说C++不好，只是C++没有明确提出这样一个概念。C++中定义一个抽象类，把成员函数设为常量，并改成纯虚函数，数据域也设成常量，那么<u>在C++中这样的抽象类就是接口</u>。你可以说它不是，因为C++中没有接口，但是我要说明的是，C++可以做出一个接口来。</p>
+<p>5.Java是<u>单根继承</u>（Single inheritance）的，但是允许一个类实现多个接口。<u>C++却支持多继承</u>，尽管很少有人去用它。</p>
+<p>6.Java和C++最显著的区别体现在对象的处理上。Java中，对象变量在内部被当作指针处理。Java文献指出将对象变量作为引用，不过它们与C++中的引用并不完全相同。所谓引用，就是一个介于指针和变量之间的东西。</p>
+<p>7.<u>Java中所有的函数都与类相关，没有全局变量和非成员函数，而C++却支持这些</u>。从这个角度上讲，C++又是强制面向对象的。因为C++当中可以没有类，即使没有类，程序依然执行得好好的，并且在程序设计的功能很少的时候，我就喜欢这么干。偶尔面向过程编程，又有什么不好呢？</p>
+<p>8.C++中，你使用的动态内存怎么用就怎么还，Java中你不用管，<u>Java包含一个垃圾收集系统</u>，作为运行时库的一部分。它会监视正在运行的程序，当内存不足的时候自动去回收它，当然你也可以干预这个过程，不过如无必要，你不必惦记这件事，Java总会把你的硬件想象得比较好，不到万不得已不回收动态内存，这也解决了C++程序的内存泄漏问题，虽然这是程序员自己的不负责任。</p>
+<p>9.Java有很紧凑的<u>异常处理机制</u>，而C++稍微显得草率了一些。但是这并不代表C++异常处理机制不强大，因为Java只能抛出Throwable子类的异常，C++却什么都可以。</p>
+<div>　　10.Java标准库又是Java庞大的体现，涵盖了国际化、网络化、数学、声音、Web应用和服务以及数据库等。你可以说Java语言在JSP、JavaScipt、网络编程、分布计算交易管理应用、Java ME应用、Web应用上风光无限，说Java是一门小巧的语言，但是Java的小巧也主要就小巧这些方面。</div>
+</div>
+</div>
+<div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1491922184681"></div>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" data-id="cl3jmf7mk00269jv34xx494yl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-OAuth(笔记)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/11/OAuth(%E7%AC%94%E8%AE%B0)/" class="article-date">
+  <time datetime="2017-02-11T05:36:09.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/OAuth(%E7%AC%94%E8%AE%B0)/">OAuth(笔记)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">三、</span><strong>OAuth</strong><span class="s1">的思路</span></p>
+<p><span class="s2">OAuth</span>在<span class="s2">“</span>客户端<span class="s2">”</span>与<span class="s2">“</span>服务提供商<span class="s2">”</span>之间，设置了一个授权层（<span class="s2">authorization layer</span>）。<span class="s2">“</span>客户端<span class="s2">”</span>不能直接登录<span class="s2">“</span>服务提供商<span class="s2">”</span>，只能登录授权层，以此将用户与客户端区分开来。<span class="s2">“</span>客户端<span class="s2">”</span>登录授权层所用的令牌（<span class="s2">token</span>），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。</p>
+<p><span class="s2">“</span>客户端<span class="s2">”</span>登录授权层以后，<span class="s2">“</span>服务提供商<span class="s2">”</span>根据令牌的权限范围和有效期，向<span class="s2">“</span>客户端<span class="s2">”</span>开放用户储存的资料。</p>
+<p>五、客户端的授权模式</p>
+<p><span class="s3">客户端必须得到用户的授权（</span>authorization grant<span class="s3">），才能获得令牌（</span>access token<span class="s3">）。</span>OAuth 2.0<span class="s3">定义了四种授权方式。</span></p>
+<ul>
+<li><span class="s3">授权码模式（</span>authorization code<span class="s3">）</span></li>
+<li><span class="s3">简化模式（</span>implicit<span class="s3">）</span></li>
+<li><span class="s3">密码模式（</span>resource owner password credentials<span class="s3">）</span></li>
+<li><span class="s3">客户端模式（</span>client credentials<span class="s3">）</span></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/11/OAuth(%E7%AC%94%E8%AE%B0)/" data-id="cl3jmf7mm002g9jv3crmle47v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Should IBOutlets be strong or weak under ARC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/Should%20IBOutlets%20be%20strong%20or%20weak%20under%20ARC/" class="article-date">
+  <time datetime="2017-02-10T14:50:48.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/Should%20IBOutlets%20be%20strong%20or%20weak%20under%20ARC/">Should IBOutlets be strong or weak under ARC?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>被采用的答案</p>
+<p>答案仅是摘自官方文档的一个片段：</p>
+<blockquote>
+<p>From a practical perspective, in iOS and OS X outlets should be defined as declared properties. Outlets should generally be weak, except for those from File’s Owner to top-level objects in a nib file (or, in iOS, a storyboard scene) which should be strong. Outlets that you create will therefore typically be weak by default, because:</p>
+<p>Outlets that you create to, for example, subviews of a view controller’s view or a window controller’s window, are arbitrary references between objects that do not imply ownership.</p>
+<p>The strong outlets are frequently specified by framework classes (for example, UIViewController’s view outlet, or NSWindowController’s window outlet).</p>
+<p>@property (weak) IBOutlet MyView viewContainerSubview;</p>
+<p>_@property (strong) IBOutlet MyOtherClass _topLevelObject;</p>
+</blockquote>
+<p>大意是说，在<span class="s2"> ARC </span>中,一般<span class="s2">IBOutlet</span>属性都推荐使用<span class="s2"> weak</span>,应该使用<span class="s2"> strong </span>的<span class="s2"> IBOutlet </span>是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象。<span class="s2"><br>
+</span>什么是<span class="s2"> File’s Owner</span>连接到<span class="s2"> nib </span>的顶层对象呢？说白话一点，就是自定义的<span class="s2">view</span>，不是直接作为<span class="s2">main view</span>里面一个<span class="s2">sub view</span>直接显示出来，而是需要通过实例化创建出来的。你自己实例化，当然需要<span class="s2">strong</span>了，不然谁还替你保留对象所有权呢？</p>
+<p><span class="s1">举例来说，</span>UIViewController<span class="s1">的</span>view<span class="s1">属性是</span>strong<span class="s1">，因为</span>controller<span class="s1">要直接拥有</span>view<span class="s1">。而添加到</span>view<span class="s1">上的</span>subviews<span class="s1">，作为</span>IBOutlet<span class="s1">只需要设置为</span>weak<span class="s1">就可以了，因为他们不是</span>controller<span class="s1">直接拥有的。直接拥有</span>subviews<span class="s1">的是</span>controller<span class="s1">的</span>view<span class="s1">，</span>ARC<span class="s1">会帮助管理内存。</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/10/Should%20IBOutlets%20be%20strong%20or%20weak%20under%20ARC/" data-id="cl3jmf7n000409jv39qer84vs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-动态库与静态库优缺点比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93%E4%BC%98%E7%BC%BA%E7%82%B9%E6%AF%94%E8%BE%83/" class="article-date">
+  <time datetime="2017-01-14T09:56:13.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93%E4%BC%98%E7%BC%BA%E7%82%B9%E6%AF%94%E8%BE%83/">动态库与静态库优缺点比较</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="Ma_Ti">
+<h1>动态库与静态库优缺点比较</h1>
+</div>
+<div class="Ma_Bo">
+<p>我们在编写一个<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/c" title="C语言知识库">C语言</a>程序的时候，经常会遇到好多重复或常用的部分，如果每次都重新编写固然是可以的，不过那样会大大降低工作效率，并且影响代码的可读性，更不利于后期的代码维护。我们可以把他们制作成相应的功能函数，使用时直接调用就会很方便，还可以进行后期的功能升级。例如我要在一段代码中多次交换两个变量的值，我可以在代码中多次写入</p>
+<pre>i=x;
+ x=y;
+ y=i;</pre>
+<pre>不过这样未免有点麻烦我们可以编写一个change_two_int()函数进行简化。
+ 定义如下函数：
+ void change_two_int(int *a，int *b)
+ {
+      int c;
+      c=*a;
+      *a=*b;
+      *b=c;
+ }
+ 这样每次要进行交换时只需调用 change_two_int(&amp;x , &amp;y);即可，是否方便了许多？</pre>
+<p>那么我们要讨论的和这些有什么关系呢？库通俗的说就是把这些常用函数的目标文件打包在一起，提供相应函数的接口，便于程序员使用。库是别人写好的现有的，成熟的，可以复用的代码，我们只需要知道其接口如何定义，便可以自如使用。</p>
+<p>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。比如我们常使用的printf函数，就是c标准库提供的函数。我们在使用时只需要包含相应的头文件就可以使用（非静态编译还要有相应的库文件）。而不用关心printf函数具体是如何实现的，这样就大大提高了程序员编写代码的效率。从使用方法上分库大体上可以分为两类：静态库和共享库。在windows中静态库是以 .lib 为后缀的文件，共享库是以 .dll 为后缀的文件。在<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/linux" title="Linux知识库">Linux</a>中静态库是以 .a 为后缀的文件，共享库是以 .so为后缀的文件。<br>
+以linux下的静态库和动态库为例我们研究一下，首先我们看一下他们的生成方式</p>
+<p>静态库：<br>
+首先将源文件编译成目标文件：gcc –c a.c b.c<br>
+生成静态库：ar –rc libstatic.a a.o b.o</p>
+<p>共享库：<br>
+同静态库一样编译成目标文件：gcc –c a.c b.c<br>
+生成共享库：gcc –fPIC –shared –o <a target="_blank" rel="noopener" href="http://libshared.so">libshared.so</a> a.o b.o</p>
+<p>由此可见静态库和动态库都是对目标文件的处理，也可以说库文件已经是机器码文件了，静态库和共享库的加载过程有很大的区别。</p>
+<p>静态库的链接方法：<br>
+gcc –o staticcode –L. –lstatic main.c –static(默认库在当前文件夹)</p>
+<p>共享库的链接方法：<br>
+gcc –o sharedcode  -L. –lshared main.c(默认库在当前文件夹)</p>
+<p>当程序与静态库连接时，库中目标文件所含的所有将被程序使用的函数的机器码被copy到最终的可执行文件中。这就会导致最终生成的可执行代码量相对变多，相当于编译器将代码补充完整了，这样运行起来相对就快些。不过会有个缺点: 占用磁盘和内存空间. 静态库会被添加到和它连接的每个程序中, 而且这些程序运行时, 都会被加载到内存中. 无形中又多消耗了更多的内存空间.</p>
+<p>与共享库连接的可执行文件只包含它需要的函数的引用表，而不是所有的函数代码，只有在程序执行时, 那些需要的函数代码才被拷贝到内存中。这样就使可执行文件比较小, 节省磁盘空间，更进一步，<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/operatingsystem" title="操作系统知识库">操作系统</a>使用虚拟内存，使得一份共享库驻留在内存中被多个程序使用，也同时节约了内存。不过由于运行时要去链接库会花费一定的时间，执行速度相对会慢一些，总的来说静态库是牺牲了空间效率，换取了时间效率，共享库是牺牲了时间效率换取了空间效率，没有好与坏的区别，只看具体需要了。</p>
+<p>另外，.一个程序编好后，有时需要做一些修改和优化，如果我们要修改的刚好是库函数的话，在接口不变的前提下，使用共享库的程序只需要将共享库重新编译就可以了，而使用静态库的程序则需要将静态库重新编译好后，将程序再重新编译一便。</p>
+<p> </p>
+<p><strong>总结:</strong></p>
+<p> </p>
+<p><strong>一、库的类型</strong></p>
+<h2 id="a-name-t1-a-一-在windows中"><a name="t1"></a>(一) 在windows中</h2>
+<p>.dll 动态库</p>
+<p>.lib 静态库</p>
+<p>库即为源代码的二进制文件</p>
+<h2 id="a-name-t2-a-二-在linux中"><a name="t2"></a>(二) 在linux中</h2>
+<p>.so 动态库</p>
+<p>.a      静态库</p>
+<p> </p>
+<h2 id="a-name-t3-a-三-静态库和动态库的优缺点"><a name="t3"></a>(三) 静态库和动态库的优缺点</h2>
+<p>我们通常把一些公用函数制作成函数库，供其它程序使用。</p>
+<p>函数库分为静态库和动态库两种。</p>
+<p>静态库在程序编译时会被连接到目标代码中，程序运行时将不再需要该静态库。</p>
+<p>动态库在程序编译时并不会被连接到目标代码中，而是在程序运行是才被载入，因此在程序运行时还需要动态库存在</p>
+<p> </p>
+<h3 id="a-name-t4-a-1-什么是库"><a name="t4"></a>1.什么是库</h3>
+<p>在windows平台和linux平台下都大量存在着库。</p>
+<p>本质上来说库是一种可执行代码的二进制形式，可以被操作系统载入内存执行。</p>
+<p>由于windows和linux的本质不同，因此二者库的二进制是不兼容的。</p>
+<p>本文仅限于介绍linux下的库</p>
+<p> </p>
+<h3 id="a-name-t5-a-2-库的种类"><a name="t5"></a>2.库的种类</h3>
+<p>linux下的库有两种：静态库和共享库（动态库）。</p>
+<p>二者的不同点在于代码被载入的时刻不同。</p>
+<p>静态库的代码在编译过程中已经被载入可执行程序，因此体积较大。</p>
+<p>共享库的代码是在可执行程序运行时才载入内存的，在编译过程中仅简单的引用，因此代码体积较小。</p>
+<p> </p>
+<h3 id="a-name-t6-a-3-库存在的意义"><a name="t6"></a>3.库存在的意义</h3>
+<p>库是别人写好的现有的，成熟的，可以复用的代码，你可以使用但要记得遵守许可协议。</p>
+<p>现实中每个程序都要依赖很多基础的底层库，不可能每个人的代码都从零开始，因此库的存在意义非同寻常。共享库的好处是，不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例。</p>
+<p> </p>
+<h3 id="a-name-t7-a-4-库文件是如何产生的在linux下"><a name="t7"></a>4.库文件是如何产生的在linux下</h3>
+<p>静态库的后缀是.a，它的产生分两步</p>
+<p>Step 1.由源文件编译生成一堆.o，每个.o里都包含这个编译单元的符号表</p>
+<p>Step 2.ar命令将很多.o转换成.a，成文静态库</p>
+<p><a target="_blank" rel="noopener" href="http://xn--6fr85a24u2nbc4oyqzpfn.so">动态库的后缀是.so</a>，它由gcc加特定参数编译产生。</p>
+<p>例如:</p>
+<p>$ gcc -fPIC -c *.c $ gcc -shared -Wl,-soname, libfoo.so.1 -olibfoo.so.1.0 *.</p>
+<p> </p>
+<h3 id="a-name-t8-a-5-库文件是如何命名的，有没有什么规范"><a name="t8"></a>5.库文件是如何命名的，有没有什么规范</h3>
+<p>在linux下，库文件一般放在/usr/lib和/lib下，</p>
+<p>静态库的名字一般为libxxxx.a，其中xxxx是该lib的名称</p>
+<p>动态库的名字一般为libxxxx.so.major.minor，xxxx是该lib的名称，major是主版本号， minor是副版本号</p>
+<p> </p>
+<h3 id="a-name-t9-a-6-如何知道一个可执行程序依赖哪些库"><a name="t9"></a>6.如何知道一个可执行程序依赖哪些库</h3>
+<p>ldd命令可以查看一个可执行程序依赖的共享库，</p>
+<p>例如# ldd /bin/lnlibc.so.6</p>
+<pre>=&gt; /lib/libc.so.6 (0×40021000)/lib/ld-linux.so.2
+
+=&gt; /lib/ld- linux.so.2 (0×40000000)</pre>
+<p>可以看到ln命令依赖于libc库和ld-linux库</p>
+<p> </p>
+<h3 id="a-name-t10-a-7-可执行程序在执行的时候如何定位共享库文件"><a name="t10"></a>7.可执行程序在执行的时候如何定位共享库文件</h3>
+<p>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径</p>
+<p>此时就需要系统动态载入器(dynamiclinker/loader)</p>
+<p>对于elf格式的可执行程序，<a target="_blank" rel="noopener" href="http://xn--ld-linux-yi5qu41j.so">是由ld-linux.so</a>*来完成的</p>
+<p>它先后搜索elf文件的 DT_RPATH段—环境变量LD_LIBRARY_PATH—/etc/ld.so.cache文件列表—/lib/,/usr/lib目录</p>
+<p>找到库文件后将其载入内存</p>
+<p> </p>
+<h3 id="a-name-t11-a-8-在新安装一个库之后如何让系统能够找到他"><a name="t11"></a>8.在新安装一个库之后如何让系统能够找到他</h3>
+<p>如果安装在/lib或者/usr/lib下，那么ld默认能够找到，无需其他操作。</p>
+<p>如果安装在其他目录，需要将其添加到/etc/ld.so.cache文件中，步骤如下</p>
+<p>1.编辑/etc/ld.so.conf文件，加入库文件所在目录的路径</p>
+<p>2.运行ldconfig，该命令会重建/etc/ld.so.cache文件</p>
+<p> </p>
+<p>############################################################</p>
+<p> </p>
+<p>linux中编译静态库(.a)和动态库(.so)的基本方法</p>
+<p> </p>
+<h2 id="a-name-t12-a-四-静态库"><a name="t12"></a>(四) 静态库</h2>
+<p> </p>
+<p>在linux环境中, 使用ar命令创建静态库文件.如下是命令的选项:</p>
+<p>d -----从指定的静态库文件中删除文件</p>
+<p>m -----把文件移动到指定的静态库文件中</p>
+<p>p -----把静态库文件中指定的文件输出到标准输出</p>
+<p>q -----快速地把文件追加到静态库文件中</p>
+<p>r -----把文件插入到静态库文件中</p>
+<p>t -----显示静态库文件中文件的列表</p>
+<p>x -----从静态库文件中提取文件</p>
+<p>还有多个修饰符修改以上基本选项,详细请man ar 以下列出三个:</p>
+<p>a -----把新的目标文件(*.o)添加到静态库文件中现有文件之后</p>
+<p>b-----***************************************之前</p>
+<p>v -----使用详细模式</p>
+<p>ar 命令的命令行格式如下:</p>
+<p>ar[-]{dmpqrtx}[abcfilNoPsSuvV] [membername] [count] archive files…</p>
+<p>参数archive定义库的名称, files是库文件中包含的目标文件的清单, 用空格分隔每个文件.</p>
+<p> </p>
+<p>比如创建一个静态库文件的命令如下:</p>
+<p>ar r libapue.a error.oerrorlog.o lockreg.o</p>
+<p>这样就了libapue.a静态库文件, 可以用 t 选项显示包含在库中的文件</p>
+<p>创建库文件之后,可以创建这个静态库文件的索引来帮助提高和库连接的其他程序的编译速度：</p>
+<p>使用ranlib程序创建库的索引,索引存放在库文件内部.</p>
+<p>ranlib libapue.a</p>
+<p> </p>
+<p>用nm程序显示存档文件的索引,它可以显示目标文件的符号</p>
+<p>nm libapue.a | more</p>
+<p>如果是显示目标文件的符号:</p>
+<p>nm error.o | more</p>
+<p>如何使用呢?如下所示:</p>
+<p>gcc -o test test.c libapue.a</p>
+<p>这样就可以在test.c中调用在libapue.a中的函数了.</p>
+<p> </p>
+<p> </p>
+<h2 id="a-name-t13-a-五-动态库"><a name="t13"></a>(五) 动态库</h2>
+<p> </p>
+<h3 id="a-name-t14-a-1-创建共享库"><a name="t14"></a>1.创建共享库</h3>
+<pre>gcc -shared -o libapue.soerror.o errorlog.o</pre>
+<p>这样就创建了共享库!</p>
+<h3 id="a-name-t15-a-2-编译共享库"><a name="t15"></a>2.编译共享库</h3>
+<p>假设共享库位于当前目录(即跟程序文件相同的目录中)</p>
+<pre>gcc -o test -L. -lapue test.c</pre>
+<p>这样就编译出了不包含函数代码可执行文件了,但是但你运行时会发现linux动态加载器找不到libapue.so文件.</p>
+<p>可以用ldd 命令查看可执行文件依赖什么共享库:</p>
+<p>ldd test</p>
+<p>如何才能让动态加载器发现库文件呢?有两种方法可以解决:</p>
+<p>1.环境变量</p>
+<p>exportLD_LIBRARY_PATH=“$LD_LIBRARY_PATH:.”</p>
+<p>2.修改/etc/ld.so.conf文件.</p>
+<p> </p>
+<p>一般应用程序的库文件不与系统库文件放在同一个目录下,一般把应用程序的共享库文件放在/usr/local/lib下,新建一个属于自己的目录apue,然后把刚才libapue.so复制过去就行了</p>
+<p>同时在/etc/ld.so.conf中新增一行:</p>
+<p>/usr/local/lib/apue</p>
+<p> </p>
+<p>以后在编译程序时加上编译选项:</p>
+<p>-L /usr/local/lib/apue -lapue</p>
+<p> </p>
+<p>/*</p>
+<p>参数的配置通过mangcc可以看到</p>
+<p>-llibrary</p>
+<p>连接名为 library 的 库文件.</p>
+<p>连接器 在 标准搜索目录 中 寻找 这个 库文件, 库文件 的 真正 名 字</p>
+</div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/01/14/%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93%E4%BC%98%E7%BC%BA%E7%82%B9%E6%AF%94%E8%BE%83/" data-id="cl3jmf7nt00799jv353bcd0tq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-惰性加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time datetime="2017-01-14T03:56:00.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/">惰性加载（lazyload）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>维基百科的解释</p>
+<p><strong>惰性加载</strong>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Lazy loading、Infinite Scroll</span></span>，又称<strong>延迟加载</strong><sup id="cite_ref-1" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-1">[1]</a></sup>、<strong>懒加载</strong><sup id="cite_ref-2" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-2">[2]</a></sup><sup id="cite_ref-3" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-3">[3]</a></sup>、<strong>无限滚动</strong><sup id="cite_ref-TechOrange_4-0" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4">[4]</a></sup>、<strong>瀑布流</strong><sup id="cite_ref-TechOrange_4-1" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4">[4]</a></sup>），是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)" title="设计模式 (计算机)">设计模式</a>，被运用在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E8%A8%AD%E8%A8%88" title="软件设计">软件设计</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88" title="网页设计">网页设计</a>当中<sup id="cite_ref-5" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-5">[5]</a></sup>，对于网页界面，其特征为用户通过鼠标，<span class="ilh-all" data-orig-title="捲動" data-lang-code="en" data-lang-name="英语" data-foreign-title="Scrolling"><span class="ilh-page"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" title="%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1">滚动</a></span></span>浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2" title="Google图片搜索">Google图片搜索</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google%2B" title="Google+">Google+</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Facebook" title="Facebook">Facebook</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Twitter" title="Twitter">Twitter</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Pinterest" title="Pinterest">Pinterest</a><sup id="cite_ref-6" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-6">[6]</a></sup>和维基百科的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Wikipedia:Flow" title="Wikipedia:Flow">Flow</a>讨论系统。也有结合无限滚动和多<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A0%81" title="页">页</a>，两著特性的网页设计<sup id="cite_ref-7" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-7">[7]</a></sup>。</p>
+<p>而对于数据结构而言，惰性加载是指从一个数据对象通过方法获得里面的一个属性对象时，这个对应对象实际并没有随其父数据对象创建时一起保存在运行空间中，而是在其读取方法第一次被调用时才从其他数据源中加载到运行空间中，这样可以避免过早地导入过大的数据对象但并没有使用的空间占用浪费。</p>
+<p> </p>
+<p> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/" data-id="cl3jmf7ny007t9jv34bq76ekq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CookieSession机制详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/10/CookieSession%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2017-01-10T09:01:57.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/CookieSession%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">Cookie/Session机制详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话。</p>
+<p>其中 Cookie和Session就是一种跟踪技术，Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。</p>
+<hr>
+<h3 id="什么是Cookie（实际上是一小段文本信息）"><strong>什么是Cookie（实际上是一小段文本信息）</strong></h3>
+<p>Cookie意为“甜饼”，是由W3C组织提出，最早由Netscape社区发展的一种机制。目前Cookie已经成为标准，所有的主流浏览器如IE、Netscape、Firefox、Opera等都支持Cookie。</p>
+<p>由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理。</p>
+<p>Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
+<hr>
+<h3 id="什么是Session（key-value的属性对）"><strong>什么是Session（key-value的属性对）</strong></h3>
+<p>Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</p>
+<p>如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
+<h3 id="Session对浏览器的要求"><strong>Session对浏览器的要求</strong></h3>
+<p>虽然Session保存在服务器，对客户端是透明的，它的正常运行仍然需要客户端浏览器的支持。这是因为Session需要使用Cookie作为识别标志。HTTP协议是无状态的，Session不能依据HTTP连接来判断是否为同一客户，因此服务器向客户端浏览器发送一个名为JSESSIONID的Cookie，它的值为该Session的id（也就是HttpSession.getId()的返回值）。Session依据该Cookie来识别是否为同一用户。</p>
+<p>该Cookie为服务器自动生成的，它的maxAge属性一般为–1，表示仅当前浏览器内有效，并且各浏览器窗口间不共享，关闭浏览器就会失效。</p>
+<p>因此同一机器的两个浏览器窗口访问服务器时，会生成两个不同的Session。但是由浏览器窗口内的链接、脚本等打开的新窗口（也就是说不是双击桌面浏览器图标等打开的窗口）除外。这类子窗口会共享父窗口的Cookie，因此会共享一个Session。</p>
+<p>注意：新开的浏览器窗口会生成新的Session，但子窗口除外。子窗口会共用父窗口的Session。例如，在链接上右击，在弹出的快捷菜单中选择“在新窗口中打开”时，子窗口便可以访问父窗口的Session。</p>
+<p>如果客户端浏览器将Cookie功能禁用，或者不支持Cookie怎么办？例如，绝大多数的手机浏览器都不支持Cookie。Java Web提供了另一种解决方案：URL地址重写。</p>
+<h3 id="URL地址重写"><strong>URL地址重写</strong></h3>
+<p>URL地址重写是对客户端不支持Cookie的解决方案。URL地址重写的原理是将该用户Session的id信息重写到URL地址中。服务器能够解析重写后的URL获取Session的id。这样即使客户端不支持Cookie，也可以使用Session来记录用户状态。</p>
+<h3 id="SESSION劫持">SESSION劫持</h3>
+<p>Session hijack即会话劫持是一种比较严重的安全威胁，也是一种广泛存在的威胁，在session技术中，客户端和服务端通过传送session的标识符来维护会话，但这个标识符很容易就能被嗅探到，从而被其他人利用，这属于一种中间人攻击。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/01/10/CookieSession%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" data-id="cl3jmf7mc00199jv30ojq2box" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于苹果开发的一些基础知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time datetime="2016-11-12T07:50:21.000Z" itemprop="datePublished">2016-11-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">关于苹果开发的一些基础知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>App ID（bundle identifier）</strong></p>
+<p>在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。</p>
+<p>App ID 字符串通常以<strong>反域名</strong>（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix/Seed），一般不超过 255 个 ASCII 字符。</p>
+<hr>
+<h3 id="Bundle">Bundle</h3>
+<p><strong>Bundle简单地讲，就是一个内部结构按照标准规则组织的特殊目录。也就是说，Bundle本质上是一个目录。</strong></p>
+<p>我们开发的每一个应用，本质上是遵守着Application类型规则的一个特殊目录。</p>
+<hr>
+<h3 id="UDID">UDID</h3>
+<p>UDID是一种iOS设备的特殊识别码。除序号之外,每台iOS装置都另有一组独一无二的号码,我们就称之为识别码( Unique Device Identifier, UDID )。</p>
+<hr>
+<hr>
+<h3 id="开发证书（Certificates）"><strong>开发证书（Certificates）</strong></h3>
+<h4 id="1-证书的概念"><strong>1.证书的概念</strong></h4>
+<p><strong>证书</strong>是由公证处或认证机关开具的证明资格或权力的_证件_，它是表明（或帮助断定）事理的一个_凭证_。证件或凭证的尾部通常会烙印_公章_。</p>
+<p>每个中国人一生可能需要70多个证件，含15种身份证明。证件中“必需的”有30到40个。将这些证件按时间顺序铺开，那就是一个天朝子民的一生——持<strong>准生证</strong>许可落地，以户籍证明入籍，以身份证认证身份，持结婚证以合法同居，最终以<strong>死亡证</strong>明注销。</p>
+<h4 id="2-数字证书的概念">2.数字证书的概念</h4>
+<p><strong><em>数字证书</em><strong>就是互联网通讯中</strong>标志</strong>通讯各方_<strong>身份信息</strong>_的一串数字，提供了一种在 Internet 上验证通信<strong>实体身份</strong>的方式，其作用类似于司机的驾驶执照或日常生活中的身份证。它是由一个由权威机构——<strong>CA机构（CA =_C_ertificate_A_uthority）</strong>，又称为数字证书授权中心（数字证书认证机构）颁发（发行）的，人们可以在网上用它来识别对方的身份。</p>
+<ul>
+<li>数字证书是一个经 CA 数字签名的包含公开密钥拥有者信息以及公开密钥的文件。最简单的证书包含一个公开密钥、名称以及 CA 的数字签名。</li>
+<li>数字证书还有一个重要的特征就是<strong>时效性</strong>：只在特定的时间段内有效。</li>
+</ul>
+<div>
+<p>数字证书中的<strong>公开密钥</strong>（公钥）相当于公章。</p>
+<p>证书的信任链条是环环相扣的，根证书就是一开始就被信任的证书，是<u>信任链的<strong>起始点</strong>。</p>
+<p>在天朝子民的一生中，户籍证明可理解为等效的<strong>根证书</strong>：有了户籍证明，才能办理身份证；有了上流的身份证，才能办理下游居住证、结婚证、计划生育证、驾驶执照等认证。</p>
+<hr>
+<h4 id="3-iOS（开发）证书">3.iOS（开发）证书</h4>
+<p>iOS 证书是用来证明 iOS App 内容（bundle with executable and resources）的合法性和完整性的<strong>数字证书</strong>。对于想安装到真机或发布到 AppStore 的应用程序（App），只有经过<strong>签名验证</strong>（Signature Validated）才能确保来源可信，并且保证 App 内容是完整、未经篡改的。</p>
+<p>iOS 证书分为两类：Development 和 Production（Distribution）。</p>
+<ul>
+<li>Development 证书用来开发和调试应用程序：A <span class="newTerm"><strong><em>development certificate</em></strong></span> identifies you, as a team member, in a development provisioning profile that allows apps signed by you to **_launch _**on devices.</li>
+<li>Production 主要用来分发应用程序（根据证书种类有不同作用）：A <span class="newTerm"><em><strong>distribution certificate</strong></em></span> identifies your team or organization in a distribution provisioning profile and allows you to _**submit  **_your app to the store. Only a team agent or an admin can create a distribution certificate.<br>
+普通个人开发账号最多可注册 iOS Development/Distribution 证书各2个，用户可在网站上删除（Revoke）已注册的 Certificate。</li>
+</ul>
+<h3 id="申请证书（CSR：Certificate-Signing-Request）">申请证书（CSR：Certificate Signing Request）</h3>
+<p>**私钥 private key **始终保存在 Mac OS 的 Keychain Access 中，用于签名（CodeSign）本机对外发布的 App；**公钥 **_**public key **_一般随证书（随Provisioning Profile，随 App 安装）散布出去，对 App 签名进行校验认证。用户必须妥善保存本地 Keychain 中的 private key，以防伪冒。</p>
+<ul>
+<li>Keep a secure backup of your public-private key pair. If the private key is lost, you’ll have to create an <em><strong>entirely new</strong></em> identity to sign code.</li>
+<li>Worse, if someone else has your private key, that person may be able to **_impersonate _**you.<br>
+在 Apple 开发网站上传包含公钥的 CSR 文件作为换取证书的凭证（Upload CSR file to generate your certificate），有点类似为github账号添加SSH公钥到服务器上进行授权。</li>
+</ul>
+<p>Apple Developer 开发证书颁发机构 WWDRCA_ _将使用<strong>其 <strong>private key 对 CSR 中的 public key 和一些身份信息进行加密签名生成</strong>数字证书</strong>（ios_development.cer）并记录在案（Apple Member Center）。</p>
+<hr>
+<hr>
+<h3 id="供应配置文件（Provisioning-Profiles）"><strong>供应配置文件（<strong>Provisioning Profiles</strong>）</strong></h3>
+<p>Provisioning Profile 文件包含了上述的所有内容：<strong>证书、App ID 和 设备 ID</strong>。</p>
+<p><img src="http://img.blog.csdn.net/20150126225313444" alt=""></p>
+<p>一个 Provisioning Profile 对应一个 Explicit App ID 或 Wildcard App ID（一组相同 Prefix/Seed 的 App IDs）。在网站上手动创建一个 Provisioning Profile 时，需要依次指定 App ID（单选）、证书（Certificates，可多选）和设备（Devices，可多选）。用户可在网站上删除（Delete）已注册的 Provisioning Profiles。</p>
+<p>Provisioning Profile 决定 Xcode 用哪个证书（公钥）/私钥组合（Key Pair/Signing Identity）来<strong>签署</strong>应用程序（Signing Product），并将在应用程序打包时嵌入到 .ipa 包里。安装应用程序时，Provisioning Profile 文件被拷贝到 iOS 设备中，运行该 iOS App 的设备通过它来认证安装的程序。</p>
+<p>如果要打包到真机上运行一个APP，一般要经历以下三步：</p>
+<ul>
+<li>首先，需要指明它的 App ID，并且验证 Bundle ID 是否与其一致；</li>
+<li>其次，需要证书对应的私钥来进行签名，用于标识这个 APP 是合法、安全、完整的；</li>
+<li>然后，如果是真机调试，需要确认这台设备是否授权运行该 APP。</li>
+</ul>
+<p>Provisioning Profile 把这些信息全部打包在一起，方便我们在调试和发布程序打包时使用。这样，只要在不同的情况下选择不同的 Provisioning Profile 文件就可以了。</p>
+<p>如上所述，在一台设备上运行应用程序的过程如下：</p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/16185213-ea355ff0690b497a80ed5fd2dd5e62cf.png" alt=""></p>
+<p> </p>
+<p>Provisioning Profile 也分为 Development 和 Distribution 两类，有效期同 Certificate 一样。Distribution 版本的 ProvisioningProfile 主要用于提交 App Store 审核，其中不指定开发测试的Devices（0，unlimited）。App ID 为 Wildcard App ID（*）。App Store 审核通过上架后，允许所有 iOS 设备（Deployment Target）上安装运行该App。</p>
+<p>Xcode 将全部供应配置文件（包括用户手动下载安装的和 Xcode 自动创建的 Team Provisioning Profile）放在目录 ~/Library/MobileDevice/Provisioning</p>
+<hr>
+<hr>
+<h3 id="开发组供应配置文件（Team-Provisioning-Profiles）"><strong>开发组供应配置文件（<strong>Team Provisioning Profiles</strong>）</strong></h3>
+<h4 id="1-Team-Provisioning-Profile的概念">1.Team Provisioning Profile的概念</h4>
+<p>每个 Apple 开发者账号都对应一个唯一的 **Team ID，**Xcode3.2.3 预发布版本中加入了 Team Provisioning Profile 这项新功能。</p>
+<p>在 Xcode 中添加 Apple Developer Account 时，它将与 Apple Member Center 后台勾兑**自动生成 **iOS Team Provisioning Profile（Managed by Xcode）。</p>
+<p><img src="http://img.blog.csdn.net/20150113233612875" alt=""></p>
+<p>Team Provisioning Profile 包含一个为 Xcode iOS Wildcard App ID(<em>) 生成的 iOS Team Provisioning Profile:</em>（匹配所有应用程序），账户里所有的 Development Certificates 和 Devices 都可以使用它在这个 team 注册的所有设备上调试应用程序（不管bundle identifier是什么）。同时，它还会为开发者自己创建的 Wildcard/Explicit App IDs 创建对应的 iOS Team Provisioning Profile。</p>
+<p><img src="http://img.blog.csdn.net/20150126225425594" alt=""></p>
+<h4 id="a-name-t16-a-2-Team-Provisioning-Profile-生成-更新时机"><a name="t16"></a>2.Team Provisioning Profile 生成/更新时机</h4>
+<ul>
+<li>Add an Apple ID account to Xcode</li>
+<li>Fix issue “No Provisioning Profiles with a valid signing identity” in Xcode</li>
+<li>Assign Your App to a Team in Xcode project settings of General|Identity</li>
+<li>Register new device on the apple development website or Xcode detected new device connected<br>
+利用 Xcode 生成和管理的 iOS Team Provisioning Profile 来进行开发非常方便，可以不需要上网站手动生成下载 Provisioning Profile。</li>
+</ul>
+<p>Team Provisioning Profile 同 Provisioning Profile，只不过是由 Xcode 自动生成的，也<strong>被配置到</strong>【XcodeTarget|Build Settings|Code Signing|Provisioning Profile】下，同时需要在【XcodeTarget|General|Identity】下指定 Team 账号 ID。</p>
+<hr>
+<hr>
+<h3 id="证书与签名（-Certificate-Signature）">**<a target="_blank" rel="noopener" href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/CodeSigningGuide.pdf">证书与签名</a>（**<strong>Certificate&amp; Signature）</strong></h3>
+<h2 id="1-Code-Signing-Identity">1.Code Signing Identity</h2>
+<p><img src="http://img.blog.csdn.net/20150126225508120" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20150113233322156" alt=""></p>
+<p><span class="s1">Xcode 中配置的 Code Signing Identity（entitlements、certificate）必须与 Provisioning Profile 匹配，并且配置的 Certificate 必须在本机 Keychain Access 中存在对应 Public／Private Key Pair，否则编译会报错。</span></p>
+<p>Xcode 所在的 Mac 设备（系统）使用 CA 证书（WWDRCA.cer）来判断 Code Signing Identity 中 Certificate 的合法性：</p>
+<ul>
+<li>若用 WWDRCA 公钥能成功解密出证书并得到公钥（Public Key）和内容摘要（Signature），证明此证书确乃 AppleWWDRCA 颁布，即证书来源可信；</li>
+<li>再对证书本身使用哈希算法计算摘要，若与上一步得到的摘要一致，则证明此证书未被篡改过，即证书完整。</li>
+</ul>
+<hr>
+<hr>
+<h3 id="开发-真机调试流程"><strong>开发/真机调试流程</strong></h3>
+<p>根据上面的介绍，可以知道进行Development主要有以下几个步骤：</p>
+<ul>
+<li>申请证书</li>
+<li>加入设备</li>
+<li>生成Provisioning Profile</li>
+<li>设置Xcode Code Sign Identifer<br>
+事实上第三步通常是不需要的，因为我们通常都是用Xcode生成和管理的iOS Team Provisioning Profile来进行开发，因为它非常方便，所以不需要自己手动生成Provisioning Profile。</li>
+</ul>
+<p>iOS Team Provisioning Profile是第一次使用Xcode添加设备时，Xcode自动生成的，它包含了Xcode生成的一个Wildcard App ID（*，匹配所有应用程序），账户里面所有的Devices和所有Development Certificates，如下图所示。因此，team中的所有成员都可以使用这个iOS Team Provisioning Profile在team中的所有设备上调试所有的应用程序。并且当有新设备添加进来时，Xcode会更新这个文件。</p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/19100011-967bd3326acb49db98412f0c70d7fe41.png" alt=""></p>
+<p><strong>发布流程</strong></p>
+<p>网上有很多关于发布App Store的流程，我就不缀述了，不过根据上面的概念介绍，不管是App Store、In-House还是Ad-Hoc，打包流程都是差不多的，都包括了以下几个关键步骤：</p>
+<ul>
+<li>创建发布证书</li>
+<li>创建App ID</li>
+<li>创建对应的Provisioning Profile文件</li>
+<li>设备Bundle ID和App ID一致</li>
+<li>设置Xcode Code Sign Identifer，选择合适的Profile和证书进行签名，打包<br>
+ </li>
+</ul>
+<p>参考网址：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/phunxm/article/details/42685597">http://blog.csdn.net/phunxm/article/details/42685597</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/cywin888/p/3263027.html">http://www.cnblogs.com/cywin888/p/3263027.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="cl3jmf7nq006y9jv38za02xkn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+  <!-- highlight.js代码高亮主题 script 引入-->
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js代码高亮主题 script 引入-->
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
