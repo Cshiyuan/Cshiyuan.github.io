@@ -86,45 +86,44 @@
 <article class='content md post'>
 <h1 class="article-title"><span>tensorflow笔记（5）</span></h1>
 <h4 id="Saver-保存读取"><a href="#Saver-保存读取" class="headerlink" title="Saver 保存读取"></a>Saver 保存读取</h4><p>我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.</p>
-<pre><code class="Python">
+<pre class="language-Python" data-language="Python"><code class="language-Python">
 # 保存神经网络的方法
 import tensorflow as tf
 import numpy as np
 
 ## Save to file
 # remember to define the same dtype and shape when restore
-# W = tf.Variable([[1, 2, 3], [3, 4, 5]], dtype=tf.float32, name=&#39;weights&#39;)
-# b = tf.Variable([[1, 2, 3]], dtype=tf.float32, name=&#39;biases&#39;)
+# W &#x3D; tf.Variable([[1, 2, 3], [3, 4, 5]], dtype&#x3D;tf.float32, name&#x3D;&#39;weights&#39;)
+# b &#x3D; tf.Variable([[1, 2, 3]], dtype&#x3D;tf.float32, name&#x3D;&#39;biases&#39;)
 
-# init = tf.global_variables_initializer()
+# init &#x3D; tf.global_variables_initializer()
 
 # # 保存时，首先要先建立一个tf.train.Saver()用来保存，提取变量
 # # 再创建一个名为my_net的文件夹，用这个saver来保存变量道这个目录
 
-# saver = tf.train.Saver()
+# saver &#x3D; tf.train.Saver()
 
 # with tf.Session() as sess:
 #     sess.run(init)
-#     save_path = saver.save(sess, &quot;my_net/save_net.ckpt&quot;)
+#     save_path &#x3D; saver.save(sess, &quot;my_net&#x2F;save_net.ckpt&quot;)
 #     print(&quot;Save to path:&quot;, save_path)
 
 # # 提取
 # # 先建立W，b道容器
-W = tf.Variable(np.arange(6).reshape((2, 3)), dtype=tf.float32, name=&quot;weights&quot;)
-b = tf.Variable(np.arange(3).reshape((1, 3)), dtype=tf.float32, name=&quot;biases&quot;)
+W &#x3D; tf.Variable(np.arange(6).reshape((2, 3)), dtype&#x3D;tf.float32, name&#x3D;&quot;weights&quot;)
+b &#x3D; tf.Variable(np.arange(3).reshape((1, 3)), dtype&#x3D;tf.float32, name&#x3D;&quot;biases&quot;)
 
-# 这里不需要初始化步骤 init=tf.initialize_all_variables()
+# 这里不需要初始化步骤 init&#x3D;tf.initialize_all_variables()
 
-saver = tf.train.Saver()
+saver &#x3D; tf.train.Saver()
 with tf.Session() as sess:
     # 提取变量
-    saver.restore(sess, &quot;my_net/save_net.ckpt&quot;)
+    saver.restore(sess, &quot;my_net&#x2F;save_net.ckpt&quot;)
     print(&quot;weights:&quot;, sess.run(W))
     print(&quot;biases:&quot;, sess.run(b))
 
 
 </code></pre>
-
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

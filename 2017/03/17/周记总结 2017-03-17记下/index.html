@@ -89,7 +89,7 @@
 <h3 id="UITableViewCell左侧会有默认15像素的空白"><a href="#UITableViewCell左侧会有默认15像素的空白" class="headerlink" title="UITableViewCell左侧会有默认15像素的空白"></a>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白</span></h3><p><span class="s1">在iOS</span>7<span class="s1">中，</span>UITableViewCell<span class="s1">左侧会有默认</span>15<span class="s1">像素的空白。这时候，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">能将空白去掉。</span></p>
 <p><span class="s1">但是在</span>ios8<span class="s1">中，设置</span>setSeparatorInset:UIEdgeInsetsZero <span class="s1">已经不起作用了。下面是解决办法</span></p>
 <p>首先在<span class="s2">viewDidLoad</span>方法加入以下代码：</p>
-<pre><code>if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;
+<pre class="language-none"><code class="language-none">if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;
 
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
 
@@ -99,10 +99,11 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;
 
     [self.tableView setLayoutMargins:UIEdgeInsetsZero];
 
-&#125;
-</code></pre>
+&#125;</code></pre>
+
+
 <p>然后在<span class="s2">UITableView</span>的代理方法中加入以下代码</p>
-<pre><code>– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+<pre class="language-none"><code class="language-none">– (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 
 &#123;
 
@@ -118,8 +119,9 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;
 
     &#125;
 
-&#125;
-</code></pre>
+&#125;</code></pre>
+
+
 <hr>
 <h3 id="封装View注意事项"><a href="#封装View注意事项" class="headerlink" title="封装View注意事项"></a>封装View注意事项</h3><p><span class="s1">封装</span>view<span class="s1">的时候要注意在</span>-<span class="s1">(</span>void<span class="s1">)</span>layoutSubviews<span class="s1">中重写子视图的</span>frame</p>
 <hr>
@@ -132,16 +134,17 @@ if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;
 <h3 id="关于OC在浮点数-f说明"><a href="#关于OC在浮点数-f说明" class="headerlink" title="关于OC在浮点数.f说明"></a>关于OC在浮点数.f说明</h3><p><span class="s1">1.</span>如果是赋给<span class="s1">CGFloat</span>类型，则加不加<span class="s1">f</span>后缀都是一样的。</p>
 <p><span class="s1">2.</span>如果是赋给<span class="s1">double</span>或<span class="s1">float</span>类型，就要考虑精度的问题。不加<span class="s1">f</span>后缀的话类型为<span class="s1">double</span>，<span class="s1">8</span>字节，加<span class="s1">f</span>后缀的话类型为<span class="s1">float</span>，<span class="s1">4</span>字节。</p>
 <hr>
-<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><pre><code>+ (AccountManager *)sharedManager
+<h3 id="一种单例写法（dispatch-once-t-的单例用法"><a href="#一种单例写法（dispatch-once-t-的单例用法" class="headerlink" title="一种单例写法（dispatch_once_t)的单例用法"></a><span class="s1">一种单例写法（</span>dispatch_once_t<span class="s1">)的单例用法</span></h3><pre class="language-none"><code class="language-none">+ (AccountManager *)sharedManager
 &#123;
-        static AccountManager *sharedAccountManagerInstance = nil;
+        static AccountManager *sharedAccountManagerInstance &#x3D; nil;
         static dispatch_once_t predicate;
         dispatch_once(&amp;predicate, ^&#123;
-                sharedAccountManagerInstance = [[self alloc] init];
+                sharedAccountManagerInstance &#x3D; [[self alloc] init];
         &#125;);
     return sharedAccountManagerInstance;
-&#125;
-</code></pre>
+&#125;</code></pre>
+
+
 <hr>
 <h3 id="Block会复制到堆的情况"><a href="#Block会复制到堆的情况" class="headerlink" title="Block会复制到堆的情况"></a><span class="s1">Block</span>会复制到堆的情况</h3><p>1.<span class="s1">调用</span>Block<span class="s1">的</span>copy<span class="s1">实例方法</span></p>
 <p><span class="s2">2.Block</span>作为函数返回值时</p>

@@ -121,7 +121,7 @@ ar: creating archive libTest.a`</pre>
 <li><p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:</p>
 </li>
 </ul>
-<pre><code>wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m
+<pre class="language-none"><code class="language-none">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m
 wuqiong:~ apple$ cat demo.s
     .section    __TEXT,__text,regular,pure_instructions
     .ios_version_min 9, 2
@@ -165,27 +165,28 @@ L_OBJC_IMAGE_INFO:
 .long    0
 
 
-.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:
+.subsections_via_symbol&lt;&#x2F;pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s&#96;:
 
 
-`wuqiong:~ apple$ rm demo.m`
+&#96;wuqiong:~ apple$ rm demo.m&#96;
 
 现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:
 
 
-`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
-wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`
+&#96;wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
+wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o&#96;
 
 然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:
 
 
-`wuqiong:~ apple$ ar -t libTest.a
+&#96;wuqiong:~ apple$ ar -t libTest.a
 __.SYMDEF SORTED
 test.o
 demo.o
 wuqiong:~ apple$ otool -l libTest.a | grep bitcode
-  sectname __bitcode
-</code></pre>
+  sectname __bitcode</code></pre>
+
+
 <p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>
 <p>那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.</p>
 <p>目前我们日常的iOS应用开发中,一般不会需要用到汇编层面去优化的代码.所以我们主要关注第三方(开源)C代码,尤其是音视频编码解码这些计算密集型项目代码,关键计算的代码针对特定平台都有对应平台的汇编版本实现,当然也有C的实现,但是默认编译一般都是用的汇编版本,这样就会导致我们在编译这个开源代码的时候哪怕你带了<code>-fembed-bitcode</code>参数也仅仅只是让项目中的部分C代码的目标文件带了bitcode段,而那小数的汇编代码的目标文件一样不带bitcode段,这样编译出这个库交给上层开发者使用的时候,就会出现在打包上传或者真机调试的时候因为Xcode默认开了bitcode功能而链接失败,导致不能真机调试或者不能上传应用到AppStore.</p>

@@ -102,19 +102,19 @@
 
   <div class="post-list post"><a class="post-card post " href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/">
 <article class="md"><h2 class="post-title">JavaScript学习笔记(2)(原型prototype部分）</h2><div class="excerpt"><p>原型是指当我们想要创建xiaoming这个具体的学生时，我们并没有一个Student类型可用。那怎么办？恰好有这么一个现成的对象：
-var robot = &#123;
+var robot &#x3D; &#123;
     name: &#39;Robot&#39;,
     height: 1.6,
     run: function () &#123;
-        console.log(this.name + &#39; is...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-26T09:24:05.000Z">2017-04-26</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
+        console.log(this.name + &#3...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-26T09:24:05.000Z">2017-04-26</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
 </a><a class="post-card post " href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20(1)/">
 <article class="md"><h2 class="post-title">JavaScript学习笔记 (1)</h2><div class="excerpt"><p>数据类型
-Number123; // 整数123
-0.456; // 浮点数0.456
-1.2345e3; // 科学计数法表示1.2345x1000，等同于1234.5
--99; // 负数
-NaN; // NaN表示Not a Number，当无法计算结果时用NaN表示
-Infinity; // Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-26T08:57:41.000Z">2017-04-26</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
+Number123; &#x2F;&#x2F; 整数123
+0.456; &#x2F;&#x2F; 浮点数0.456
+1.2345e3; &#x2F;&#x2F; 科学计数法表示1.2345x1000，等同于1234.5
+-99; &#x2F;&#x2F; 负数
+NaN; &#x2F;&#x2F; NaN表示Not a Number，当无法计算结果时用NaN表示
+Infinity;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-26T08:57:41.000Z">2017-04-26</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
 </a><a class="post-card post " href="/2017/04/26/HTML%20DOM%20(Document%20Object%20Model)/">
 <article class="md"><h2 class="post-title">HTML DOM (Document Object Model)</h2><div class="excerpt"><p>HTML DOM是HTML Document Object Model(文档对象模型)的缩写，HTML DOM则是专门适用于HTML&#x2F;XHTML的文档对象模型。
 熟悉软件开发的人员可以将HTML DOM理解为网页的API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。 例如Javascript就可以利用HTML DOM动态地修改网页。
@@ -208,26 +208,27 @@ L_OBJC_IMAGE_INFO:
 .long    0
 
 
-.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:
+.subsections_via_symbol&lt;&#x2F;pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s&#96;:
 
 
-`wuqiong:~ apple$ rm demo.m`
+&#96;wuqiong:~ apple$ rm demo.m&#96;
 
 现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:
 
 
-`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
-wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`
+&#96;wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
+wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o&#96;
 
 然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:
 
 
-`wuqiong:~ apple$ ar -t libTest.a
+&#96;wuqiong:~ apple$ ar -t libTest.a
 __.SYMDEF SORTED
 test.o
 demo.o
 wuqiong:~ apple$ otool -l libTest.a | grep bitcode
   sectname __bitcode
+
 
 很意外,这一次,只有一行sectname __bitcode输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数-fembed-bitcode也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.
 那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.

@@ -88,38 +88,38 @@
 <h3 id="添加一个神经层"><a href="#添加一个神经层" class="headerlink" title="添加一个神经层"></a>添加一个神经层</h3><p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
 <p> 神经层里常见的参数通常有weights、biases和激励函数。</p>
 <h3 id="实现一个训练模型"><a href="#实现一个训练模型" class="headerlink" title="实现一个训练模型"></a>实现一个训练模型</h3><p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
-<pre><code class="Python">#添加神经层的函数，有四个参数
+<pre class="language-Python" data-language="Python"><code class="language-Python">#添加神经层的函数，有四个参数
 #输入值，输入的大小，输出的大小和激励函数
-def add_layer(inputs, insize, out_size, activation_function=None):
+def add_layer(inputs, insize, out_size, activation_function&#x3D;None):
 
     #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
     #这里的weights为一个in_size行，out_size列的随机变量矩阵
-    Weights = tf.Variable(tf.random_normal([insize, out_size]))
+    Weights &#x3D; tf.Variable(tf.random_normal([insize, out_size]))
 
     #在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1
-    biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
+    biases &#x3D; tf.Variable(tf.zeros([1, out_size]) + 0.1)
 
     #下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法
     #矩阵乘法是列与行的乘法
-    Wx_plus_b = tf.matmul(inputs, Weights) + biases
+    Wx_plus_b &#x3D; tf.matmul(inputs, Weights) + biases
 
     if activation_function is None:
-        outputs = Wx_plus_b
+        outputs &#x3D; Wx_plus_b
     else:
-        outputs = activation_function(Wx_plus_b)
+        outputs &#x3D; activation_function(Wx_plus_b)
 
     return outputs
 
 
 #导入数据
 #构建所需的数据。这里的x_data和y_data并不是一元二次函数的关系，多加一个躁点
-x_data = np.linspace(-1, 1, 300, dtype=np.float32)[:, np.newaxis]
+x_data &#x3D; np.linspace(-1, 1, 300, dtype&#x3D;np.float32)[:, np.newaxis]
 #增加躁点 
-noise = np.random.normal(0, 0.05, x_data.shape).astype(np.float32)
-y_data = np.square(x_data) - 0.5 + noise
+noise &#x3D; np.random.normal(0, 0.05, x_data.shape).astype(np.float32)
+y_data &#x3D; np.square(x_data) - 0.5 + noise
 
-xs = tf.placeholder(tf.float32, [None, 1])
-ys = tf.placeholder(tf.float32, [None, 1])
+xs &#x3D; tf.placeholder(tf.float32, [None, 1])
+ys &#x3D; tf.placeholder(tf.float32, [None, 1])
 
 #接下来，我们可以开始定义神经层了。
 #通常神经层都包括输入层、隐藏层和输出层。
@@ -132,37 +132,37 @@ ys = tf.placeholder(tf.float32, [None, 1])
 
 #这里使用Tensorflow自带的激励函数relu
 #隐藏层
-l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
+l1 &#x3D; add_layer(xs, 1, 10, activation_function&#x3D;tf.nn.relu)
 
 #输出层
-prediction = add_layer(l1, 10 ,1,activation_function=None)
+prediction &#x3D; add_layer(l1, 10 ,1,activation_function&#x3D;None)
 
 #计算预测值prediction和真实值的误差，对二者差的平方求和再平均
 
-loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[1]))
+loss &#x3D; tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices&#x3D;[1]))
 
 #接下来，是很关键的一步，如何让机器学习提升它的准确率。
 #tf.train.GradientDescentOptimizer()中的值通常都小于1，这里取的是0.1，代表以0.1的效率来最小化误差loss。
 
-train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
+train_step &#x3D; tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 #使用变量的时候都要对它进行初始化，这是必不可少的
 
-init = tf.global_variables_initializer()
-sess = tf.Session()
+init &#x3D; tf.global_variables_initializer()
+sess &#x3D; tf.Session()
 sess.run(init)
 
 
 #训练一千次
 for i in range(10000):
     # training
-    sess.run(train_step, feed_dict=&#123;xs: x_data, ys: y_data&#125;)
+    sess.run(train_step, feed_dict&#x3D;&#123;xs: x_data, ys: y_data&#125;)
 
     #每50步我们输出一下机器学习的误差。
-    if i % 50 == 0:
+    if i % 50 &#x3D;&#x3D; 0:
         # to see the step improvement
-        print(sess.run(loss, feed_dict=&#123;xs: x_data, ys: y_data&#125;))
-</code></pre>
+        print(sess.run(loss, feed_dict&#x3D;&#123;xs: x_data, ys: y_data&#125;))</code></pre>
+
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

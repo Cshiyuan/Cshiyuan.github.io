@@ -93,23 +93,23 @@
 <p>他能从原数据中总结出每种类型数据的特征, 如果把这些特征类型都放在一张二维的图片上, 每种类型都已经被很好的用原数据的精髓区分开来. 如果你了解 PCA 主成分分析, 再提取主要特征时, 自编码和它一样,甚至超越了 PCA. 换句话说, 自编码 可以像 PCA 一样 给特征属性降维.</p>
 <h4 id="解码器-Decoder"><a href="#解码器-Decoder" class="headerlink" title="解码器 Decoder"></a>解码器 Decoder</h4><p>至于解码器 Decoder, 我们也能那它来做点事情. 我们知道, 解码器在训练的时候是要将精髓信息解压成原始信息, 那么这就提供了一个解压器的作用, 甚至我们可以认为是一个生成器 (类似于GAN). 那做这件事的一种特殊自编码叫做 variational autoencoders, 你能在这里找到他的具体说明.</p>
 <h4 id="Autoencoder"><a href="#Autoencoder" class="headerlink" title="Autoencoder"></a>Autoencoder</h4><p>Autoencoder 简单来说就是将有很多Feature的数据进行压缩，之后再进行解压的过程。 本质上来说，它也是一个对数据的非监督学习，如果大家知道 PCA (Principal component analysis)， 与 Autoencoder 相类似，它的主要功能即对数据进行非监督学习，并将压缩之后得到的“特征值”，这一中间结果正类似于PCA的结果。 之后再将压缩过的“特征值”进行解压，得到的最终结果与原始数据进行比较，对此进行非监督学习。如果大家还不是非常了解，请观看机器学习简介系列里的 Autoencoder 那一集； 如果对它已经有了一定的了解，那么便可以进行代码阶段的学习了。大概过程如下图所示：</p>
-<pre><code class="python">import tensorflow as tf
+<pre class="language-python" data-language="python"><code class="language-python">import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets(&quot;tmp/data/&quot;, one_hot=False)
+mnist &#x3D; input_data.read_data_sets(&quot;tmp&#x2F;data&#x2F;&quot;, one_hot&#x3D;False)
 
-learning_rate = 0.01
-training_epochs = 5  #五组训练
-batch_size = 256
-display_step = 1
-examples_to_show = 10
+learning_rate &#x3D; 0.01
+training_epochs &#x3D; 5  #五组训练
+batch_size &#x3D; 256
+display_step &#x3D; 1
+examples_to_show &#x3D; 10
 
 # 我们的MNIST数据，每张图片大小是28x28 pix，即 784 Feature
 # Network Parameters
-n_input = 784  # MNIST data input (img shape: 28*28)
+n_input &#x3D; 784  # MNIST data input (img shape: 28*28)
 # tf Graph input (only pictures)
-X = tf.placeholder(&quot;float&quot;, [None, n_input])
+X &#x3D; tf.placeholder(&quot;float&quot;, [None, n_input])
 
 # 在压缩环节：我们要把这个Features不断压缩，
 # 经过第一个隐藏层压缩至256个 Features，再经过第二个隐藏层压缩至128个。
@@ -118,15 +118,15 @@ X = tf.placeholder(&quot;float&quot;, [None, n_input])
 # 根据 cost 来提升我的 Autoencoder 的准确率，下图是两个隐藏层的 weights 和 biases 的定义：
 
 # hidden layer settings
-n_hidden_1 = 256  # 1sr layer num features
-n_hidden_2 = 128  # 2nd layer num features
-weights = &#123;
+n_hidden_1 &#x3D; 256  # 1sr layer num features
+n_hidden_2 &#x3D; 128  # 2nd layer num features
+weights &#x3D; &#123;
     &#39;encoder_h1&#39;: tf.Variable(tf.random_normal([n_input, n_hidden_1])),
     &#39;encoder_h2&#39;: tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
     &#39;decoder_h1&#39;: tf.Variable(tf.random_normal([n_hidden_2, n_hidden_1])),
     &#39;decoder_h2&#39;: tf.Variable(tf.random_normal([n_hidden_1, n_input])),
 &#125;
-biases = &#123;
+biases &#x3D; &#123;
     &#39;encoder_b1&#39;: tf.Variable(tf.random_normal([n_hidden_1])),
     &#39;encoder_b2&#39;: tf.Variable(tf.random_normal([n_hidden_2])),
     &#39;decoder_b1&#39;: tf.Variable(tf.random_normal([n_hidden_1])),
@@ -141,10 +141,10 @@ biases = &#123;
 # Building the encoder
 def encoder(x):
     # Encoder Hidden layer with sigmoid activation #1
-    layer_1 = tf.nn.sigmoid(
+    layer_1 &#x3D; tf.nn.sigmoid(
         tf.add(tf.matmul(x, weights[&#39;encoder_h1&#39;]), biases[&#39;encoder_b1&#39;]))
     # Decoder Hidden layer with sigmoid activation #2
-    layer_2 = tf.nn.sigmoid(
+    layer_2 &#x3D; tf.nn.sigmoid(
         tf.add(
             tf.matmul(layer_1, weights[&#39;encoder_h2&#39;]), biases[&#39;encoder_b2&#39;]))
     return layer_2
@@ -153,10 +153,10 @@ def encoder(x):
 # Building the decoder
 def decoder(x):
     # Encoder Hidden layer with sigmoid activation #1
-    layer_1 = tf.nn.sigmoid(
+    layer_1 &#x3D; tf.nn.sigmoid(
         tf.add(tf.matmul(x, weights[&#39;decoder_h1&#39;]), biases[&#39;decoder_b1&#39;]))
     # Decoder Hidden layer with sigmoid activation #2
-    layer_2 = tf.nn.sigmoid(
+    layer_2 &#x3D; tf.nn.sigmoid(
         tf.add(
             tf.matmul(layer_1, weights[&#39;decoder_h2&#39;]), biases[&#39;decoder_b2&#39;]))
     return layer_2
@@ -164,13 +164,13 @@ def decoder(x):
 
 # 来实现 Encoder 和 Decoder 输出的结果：
 # Construct model
-encoder_op = encoder(X)  # 128 Features
-decoder_op = decoder(encoder_op)  # 784 Features
+encoder_op &#x3D; encoder(X)  # 128 Features
+decoder_op &#x3D; decoder(encoder_op)  # 784 Features
 
 # Prediction
-y_pred = decoder_op  # After
+y_pred &#x3D; decoder_op  # After
 # Targets (Labels) are the input data.
-y_true = X  # Before
+y_true &#x3D; X  # Before
 
 #再通过我们非监督学习进行对照，
 # 即对 “原始的有 784 Features 的数据集” 和 “通过 ‘Prediction’
@@ -178,8 +178,8 @@ y_true = X  # Before
 # 并且使 cost 最小化:
 
 # Define loss and optimizer, minimize the squared error
-cost = tf.reduce_mean(tf.pow(y_true - y_pred, 2))
-optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
+cost &#x3D; tf.reduce_mean(tf.pow(y_true - y_pred, 2))
+optimizer &#x3D; tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
 # 最后，通过Matplotlib的pyplot模块将结果显示出来，
 # 注意在输出时MNIST数据集经过压缩之后x的最大值是1，而非255
@@ -188,34 +188,33 @@ optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 with tf.Session() as sess:
 
     sess.run(tf.global_variables_initializer())
-    total_batch = int(mnist.train.num_examples / batch_size)
+    total_batch &#x3D; int(mnist.train.num_examples &#x2F; batch_size)
     # Training cycle
     for epoch in range(training_epochs):
         # Loop over all batches
         for i in range(total_batch):
-            batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+            batch_xs, batch_ys &#x3D; mnist.train.next_batch(batch_size)
             # Run optimization op (backprop) and cost op (to get loss value)
-            _, c = sess.run([optimizer, cost], feed_dict=&#123;X: batch_xs&#125;)
+            _, c &#x3D; sess.run([optimizer, cost], feed_dict&#x3D;&#123;X: batch_xs&#125;)
             # Display logs per epoch step
-            if epoch % display_step == 0:
-                print(&#39;Epoch:&#39;, &#39;%04d&#39; % (epoch + 1), &#39;cost=&#39;,
+            if epoch % display_step &#x3D;&#x3D; 0:
+                print(&#39;Epoch:&#39;, &#39;%04d&#39; % (epoch + 1), &#39;cost&#x3D;&#39;,
                       &#39;&#123;:.9f&#125;&#39;.format(c))
 
     print(&#39;Optimization Finished!&#39;)
 
     # # Applyinh encode and decode over test set
-    encode_decode = sess.run(
-        y_pred, feed_dict=&#123;
+    encode_decode &#x3D; sess.run(
+        y_pred, feed_dict&#x3D;&#123;
             X: mnist.test.images[:examples_to_show]
         &#125;)
     # Compare original imamges with their reconstructions
-    f, a = plt.subplots(2, 10, figsize=(10, 2))
+    f, a &#x3D; plt.subplots(2, 10, figsize&#x3D;(10, 2))
     for i in range(examples_to_show):
         a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
         a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
     plt.show()
 </code></pre>
-
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

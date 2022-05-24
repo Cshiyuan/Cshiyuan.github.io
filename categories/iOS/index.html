@@ -106,9 +106,10 @@
 <article class="md"><h2 class="post-title">摘抄Effective Objective-C 2.0 (1)</h2><div class="excerpt"><p>Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象：
 NSString stackString;
 
-// error: interface type cannot be statically allocated
+&#x2F;&#x2F; error: interface type cannot be statically allocated
 
-Objective-C将堆内存管理...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T06:25:49.000Z">2017-05-01</time></span><span class="cap breadcrumb">iOS</span></div></article>
+
+Object...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T06:25:49.000Z">2017-05-01</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a><a class="post-card post " href="/2017/04/25/Core%20Foundation%20%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">
 <article class="md"><h2 class="post-title">Core Foundation 框架详解</h2><div class="excerpt"><p>先来说说「Core Foundation」（以下简称CF）的历史吧。当年乔布斯被自己创办的公司驱逐后，成立了「NeXT Computer」,其实做的还是老本行：卖电脑，但依旧不景气。好在NeXTSTEP系统表现还不错，亏损不至于太严重。正好此时苹果的市场份额大跌，急需一个新的操作系统，结果大家都知道了，乔布斯借此收购，重新回到了苹果。
 这里就牵扯到了一个问题，如何让旧有的系统（Mac OS ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-25T01:50:41.000Z">2017-04-25</time></span><span class="cap breadcrumb">iOS</span></div></article>
@@ -193,26 +194,27 @@ L_OBJC_IMAGE_INFO:
 .long    0
 
 
-.subsections_via_symbol&lt;/pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s`:
+.subsections_via_symbol&lt;&#x2F;pre&gt; 然后删除demo.m这个C源代码,仅留下test.m和demo.s&#96;:
 
 
-`wuqiong:~ apple$ rm demo.m`
+&#96;wuqiong:~ apple$ rm demo.m&#96;
 
 现在,我们来把test.m这个C源代码和dmeo.s这个汇编源代码来一起带着-fembed-bitcode参数来生成目标代码并打包为一个静态库:
 
 
-`wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
-wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o`
+&#96;wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -fembed-bitcode -c test.m demo.s
+wuqiong:~ apple$ xcrun -sdk iphoneos ar -r libTest.a test.o demo.o&#96;
 
 然后我们再运行otool工具来检查这个新的静态库中包含的2个目标文件是否都带有bitcode段:
 
 
-`wuqiong:~ apple$ ar -t libTest.a
+&#96;wuqiong:~ apple$ ar -t libTest.a
 __.SYMDEF SORTED
 test.o
 demo.o
 wuqiong:~ apple$ otool -l libTest.a | grep bitcode
   sectname __bitcode
+
 
 很意外,这一次,只有一行sectname __bitcode输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数-fembed-bitcode也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.
 那么就得出一个结论,bitcode的生成,是由汇编语言以上的上层语言编译而来,和最前面所说的那样,他是上层语言与汇编语言(机器语言)之间的一个中间码.

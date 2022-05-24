@@ -89,20 +89,20 @@
 <h1 class="article-title"><span>ShadowsocksR安装  采用chacha20加密net-speeder和配置参数优化</span></h1>
 <p>安装服务端的时候推荐启用 chacha20 加密（逼格高），默认的 aes-256-cfb 加密速度较慢，当然你也可以启用最快的 CR4-MD5 加密算法，就是加密弱一些。另外，建议启用搬瓦工的 IPv6 并在 shadowsocksR 配置启用IPv6，走代理的时候就能访问一些只有在 IPv6 下才能访问的网站。</p>
 <p>ChaCha20加密（chacha20 依赖 libsodium，以下是编译安装 libsodium 的方法：）</p>
-<pre><code>yum install gcc gcc-c++
-wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+<pre class="language-none"><code class="language-none">yum install gcc gcc-c++
+wget https:&#x2F;&#x2F;download.libsodium.org&#x2F;libsodium&#x2F;releases&#x2F;LATEST.tar.gz
 tar zxf LATEST.tar.gz
 cd libsodium*
-./configure
+.&#x2F;configure
 make &amp;&amp; make install
-echo /usr/local/lib &gt; /etc/ld.so.conf.d/usr_local_lib.conf
-ldconfig
-</code></pre>
+echo &#x2F;usr&#x2F;local&#x2F;lib &gt; &#x2F;etc&#x2F;ld.so.conf.d&#x2F;usr_local_lib.conf
+ldconfig</code></pre>
+
 <p>使用shell脚本安装ShadowsocksR</p>
-<pre><code>wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+<pre class="language-none"><code class="language-none">wget --no-check-certificate https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;teddysun&#x2F;shadowsocks_install&#x2F;master&#x2F;shadowsocksR.sh
 chmod +x shadowsocksR.sh
-./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log
-</code></pre>
+.&#x2F;shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log</code></pre>
+
 <p><em><strong>到此为止就安装完毕了</strong></em></p>
 <p><strong>接下来优化</strong></p>
 <p>修改配置文件：<code>vi /etc/shadowsocks.json</code> (按<code>i</code>编辑，按<code>Ctrl+C</code>退出编辑，<code>:x</code>保存并退出)</p>
@@ -127,53 +127,56 @@ chmod +x shadowsocksR.sh
 <li><p>第三部，端口加速</p>
 </li>
 </ul>
-<pre><code>nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;
-</code></pre>
+<pre class="language-none"><code class="language-none">nohup &#x2F;usr&#x2F;local&#x2F;net_speeder&#x2F;net_speeder venet0 &quot;ip&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</code></pre>
+
+
 <ul>
 <li>加入自启动</li>
 </ul>
-<pre><code>echo &quot;nohup /usr/local/net_speeder/net_speeder venet0 &quot;ip&quot; &gt;/dev/null 2&gt;&amp;1 &amp;&quot; &gt;&gt; /etc/rc.local
-</code></pre>
+<pre class="language-none"><code class="language-none">echo &quot;nohup &#x2F;usr&#x2F;local&#x2F;net_speeder&#x2F;net_speeder venet0 &quot;ip&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;&quot; &gt;&gt; &#x2F;etc&#x2F;rc.local</code></pre>
+
+
 <p><strong>参数优化.(参照这里：<a target="_blank" rel="noopener" href="https://shadowsocks.org/en/config/advanced.html">https://shadowsocks.org/en/config/advanced.html</a>)</strong></p>
 <p>首先将服务器内核升级到3.5或更高。</p>
-<pre><code>vi /etc/security/limits.conf
-</code></pre>
+<pre class="language-none"><code class="language-none">vi &#x2F;etc&#x2F;security&#x2F;limits.conf</code></pre>
+
+
 <p>添加两行：</p>
-<pre><code>* soft nofile 51200
-* hard nofile 51200
-</code></pre>
+<pre class="language-none"><code class="language-none">* soft nofile 51200
+* hard nofile 51200</code></pre>
+
 <p>设置ulimit：</p>
-<pre><code>ulimit -n 51200
-</code></pre>
+<pre class="language-none"><code class="language-none">ulimit -n 51200</code></pre>
+
+
 <p>然后编辑 sysctl.conf</p>
-<pre><code>/etc/sysctl.conf
-</code></pre>
+<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;sysctl.conf</code></pre>
+
 <p>&amp;nbsp;</p>
-<pre><code>fs.file-max = 51200
+<pre class="language-none"><code class="language-none">fs.file-max &#x3D; 51200
  
-net.core.rmem_max = 67108864
-net.core.wmem_max = 67108864
-net.core.netdev_max_backlog = 250000
-net.core.somaxconn = 4096
+net.core.rmem_max &#x3D; 67108864
+net.core.wmem_max &#x3D; 67108864
+net.core.netdev_max_backlog &#x3D; 250000
+net.core.somaxconn &#x3D; 4096
  
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_tw_reuse = 1
-net.ipv4.tcp_tw_recycle = 0
-net.ipv4.tcp_fin_timeout = 30
-net.ipv4.tcp_keepalive_time = 1200
-net.ipv4.ip_local_port_range = 10000 65000
-net.ipv4.tcp_max_syn_backlog = 8192
-net.ipv4.tcp_max_tw_buckets = 5000
-net.ipv4.tcp_fastopen = 3
-net.ipv4.tcp_mem = 25600 51200 102400
-net.ipv4.tcp_rmem = 4096 87380 67108864
-net.ipv4.tcp_wmem = 4096 65536 67108864
-net.ipv4.tcp_mtu_probing = 1
-net.ipv4.tcp_congestion_control = hybla
-</code></pre>
+net.ipv4.tcp_syncookies &#x3D; 1
+net.ipv4.tcp_tw_reuse &#x3D; 1
+net.ipv4.tcp_tw_recycle &#x3D; 0
+net.ipv4.tcp_fin_timeout &#x3D; 30
+net.ipv4.tcp_keepalive_time &#x3D; 1200
+net.ipv4.ip_local_port_range &#x3D; 10000 65000
+net.ipv4.tcp_max_syn_backlog &#x3D; 8192
+net.ipv4.tcp_max_tw_buckets &#x3D; 5000
+net.ipv4.tcp_fastopen &#x3D; 3
+net.ipv4.tcp_mem &#x3D; 25600 51200 102400
+net.ipv4.tcp_rmem &#x3D; 4096 87380 67108864
+net.ipv4.tcp_wmem &#x3D; 4096 65536 67108864
+net.ipv4.tcp_mtu_probing &#x3D; 1
+net.ipv4.tcp_congestion_control &#x3D; hybla</code></pre>
+
 <p>加载配置：</p>
-<pre><code>sysctl -p
-</code></pre>
+<pre class="language-none"><code class="language-none">sysctl -p</code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

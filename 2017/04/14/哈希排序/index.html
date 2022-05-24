@@ -159,23 +159,23 @@
 <h1 id="第三部分、最快的Hash表算法"><a href="#第三部分、最快的Hash表算法" class="headerlink" title="第三部分、最快的Hash表算法"></a><a name="t14"></a>第三部分、最快的Hash表算法</h1><p>接下来，咱们来具体分析一下一个最快的Hasb表算法。</p>
 <p>我们由一个简单的问题逐步入手：有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它，你会怎么做？有一个方法最简单，老老实实从头查到尾，一个一个比较，直到找到为止，我想只要学过程序设计的人都能把这样一个程序作出来，但要是有程序员把这样的程序交给用户，我只能用无语来评价，或许它真的能工作，但…也只能如此了。</p>
 <p>最合适的算法自然是使用HashTable（哈希表），先介绍介绍其中的基本知识，所谓Hash，一般是一个整数，通过某种算法，可以把一个字符串”压缩” 成一个整数。当然，无论如何，一个32位整数是无法对应回一个字符串的，但在程序中，两个字符串计算出的Hash值相等的可能非常小，下面看看在MPQ中的Hash算法：</p>
-<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><pre><code>1.  prepareCryptTable()
+<h3 id="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500"><a href="#函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable-0x500" class="headerlink" title="函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]"></a>函数一、以下的函数生成一个长度为0x500（合10进制数：1280）的cryptTable[0x500]</h3><pre class="language-none"><code class="language-none">1.  prepareCryptTable()
 2.  &#123;
-3.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; seed = 0x00100001, index1 = 0, index2 = 0, i;
-4.5.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index1 = 0; index1 &amp;lt; 0x100; index1++ )
+3.  unsigned &lt;span class&#x3D;&quot;datatypes&quot;&gt;long&lt;&#x2F;span&gt; seed &#x3D; 0x00100001, index1 &#x3D; 0, index2 &#x3D; 0, i;
+4.5.  &lt;span class&#x3D;&quot;keyword&quot;&gt;for&lt;&#x2F;span&gt;( index1 &#x3D; 0; index1 &lt; 0x100; index1++ )
 6.  &#123;
-7.  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( index2 = index1, i = 0; i &amp;lt; 5; i++, index2 += 0x100 )
+7.  &lt;span class&#x3D;&quot;keyword&quot;&gt;for&lt;&#x2F;span&gt;( index2 &#x3D; index1, i &#x3D; 0; i &lt; 5; i++, index2 +&#x3D; 0x100 )
 8.  &#123;
-9.  unsigned &lt;span class=&quot;datatypes&quot;&gt;long&lt;/span&gt; temp1, temp2;
-10.11.  seed = (seed * 125 + 3) % 0x2AAAAB;
-12.  temp1 = (seed &amp;amp; 0xFFFF) &amp;lt;&amp;lt; 0x10;
-13.14.  seed = (seed * 125 + 3) % 0x2AAAAB;
-15.  temp2 = (seed &amp;amp; 0xFFFF);
-16.17.  cryptTable[index2] = ( temp1 | temp2 );
+9.  unsigned &lt;span class&#x3D;&quot;datatypes&quot;&gt;long&lt;&#x2F;span&gt; temp1, temp2;
+10.11.  seed &#x3D; (seed * 125 + 3) % 0x2AAAAB;
+12.  temp1 &#x3D; (seed &amp; 0xFFFF) &lt;&lt; 0x10;
+13.14.  seed &#x3D; (seed * 125 + 3) % 0x2AAAAB;
+15.  temp2 &#x3D; (seed &amp; 0xFFFF);
+16.17.  cryptTable[index2] &#x3D; ( temp1 | temp2 );
 18.  &#125;
 19.  &#125;
-20.  &#125;
-</code></pre>
+20.  &#125;</code></pre>
+
 <p>21.22.  函数二、以下函数计算lpszFileName 字符串的hash值，其中dwHashType 为hash的类型，在下面的函数三、GetHashTablePos函数中调用此函数二，其可以取的值为0、1、2；该函数返回lpszFileName 字符串的hash值：<br>23.24.  unsigned <span class="datatypes">long</span> HashString( <span class="datatypes">char</span> *lpszFileName, unsigned <span class="datatypes">long</span> dwHashType )<br>25.  {<br>26.  unsigned <span class="datatypes">char</span> *key  &#x3D; (unsigned <span class="datatypes">char</span> *)lpszFileName;<br>27.  unsigned <span class="datatypes">long</span> seed1 &#x3D; 0x7FED7FED;<br>28.  unsigned <span class="datatypes">long</span> seed2 &#x3D; 0xEEEEEEEE;<br>29.  <span class="datatypes">int</span> ch;<br>30.31.  <span class="keyword">while</span>( *key !&#x3D; 0 )<br>32.  {<br>33.  ch &#x3D; toupper(*key++);<br>34.35.  seed1 &#x3D; cryptTable[(dwHashType &lt;&lt; 8) + ch] ^ (seed1 + seed2);<br>36.  seed2 &#x3D; ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;<br>37.  }<br>38.  <span class="keyword">return</span> seed1;<br>39.  }</p>
 </div>
 

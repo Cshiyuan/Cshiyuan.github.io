@@ -98,32 +98,33 @@
 <h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
 <li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
 </ul>
-<pre><code>struct objc_object &#123;
+<pre class="language-none"><code class="language-none">struct objc_object &#123;
   Class isa  OBJC_ISA_AVAILABILITY;
 &#125;;
-typedef struct objc_object *id;
-</code></pre>
+typedef struct objc_object *id;</code></pre>
+
 <p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
 <ul>
 <li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
 </ul>
-<pre><code>struct objc_class &#123;
+<pre class="language-none"><code class="language-none">struct objc_class &#123;
       Class isa  OBJC_ISA_AVAILABILITY;
 
   #if !__OBJC2__
-      Class super_class                       OBJC2_UNAVAILABLE;  // 父类
-      const char *name                        OBJC2_UNAVAILABLE;  // 类名
-      long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0
-      long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识
-      long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小
-      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量列表
-      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法列表
-      struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存
-      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议列表
+      Class super_class                       OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 父类
+      const char *name                        OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 类名
+      long version                            OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 类的版本信息，默认为0
+      long info                               OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 类信息，供运行期使用的一些位标识
+      long instance_size                      OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 该类的实例变量大小
+      struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 该类的成员变量列表
+      struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 方法列表
+      struct objc_cache *cache                OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 方法缓存
+      struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 协议列表
   #endif
 
-  &#125; OBJC2_UNAVAILABLE;
-</code></pre>
+  &#125; OBJC2_UNAVAILABLE;</code></pre>
+
+
 <p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    <em>objc_ivar_list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    <em>objc_method_list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>
 <ul>
 <li>元类：上面说了，类是元类的对象，类的isa指针指向类的元类，元类中存储着类方法。元类的结构和类是一样的，元类的isa指针指向根元类，根元类的isa指针指向自身。除了isa指针，类和元类的结构体中还有一个super_class指针，指向各自的父类，当方法在本类中找不到时，就会在父类中寻找，值得注意的是：根元类的父类是根类，根类的父类是nil。了解这些关系，就可以了解在代码执行过程中消息发送机制转换的函数如何实现。说到底就是在类的继承体系中找到实现方法的指针，实例方法在类中寻找，类方法在元类中寻找。具体结构如下图所示：</li>

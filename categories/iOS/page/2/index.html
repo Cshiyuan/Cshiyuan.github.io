@@ -122,11 +122,11 @@
 在OC中，如果要向某对象传递消息，那就会使用动态绑定机制...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-22T09:46:26.000Z">2017-03-22</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a><a class="post-card post " href="/2017/03/17/%E5%85%B3%E4%BA%8EiOS%E7%9A%84main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3/">
 <article class="md"><h2 class="post-title">关于iOS的main函数入口</h2><div class="excerpt"><p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。
-#import UIKit/UIKit.h
+#import UIKit&#x2F;UIKit.h
 int main(int argc, char *argv[])  
 &#123;  
     @autoreleasepool &#123;       
-        ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-17T14:09:52.000Z">2017-03-17</time></span><span class="cap breadcrumb">iOS</span></div></article>
+   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-17T14:09:52.000Z">2017-03-17</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a><a class="post-card post " href="/2017/03/13/ipa%E7%9A%84%E7%BB%84%E6%88%90/">
 <article class="md"><h2 class="post-title">ipa的组成</h2><div class="excerpt"><p>iOS程序最终都会以.ipa文件导出，先来了解一下ipa文件的结构：
 
@@ -148,18 +148,18 @@ URL Schemes 有两个单词：
 URL，我们都很清楚，http://www.apple.com 就是个 URL，我们也叫它链接或网址；
 Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 ://之前的那段字符。比如 http://www.apple.com...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-12T09:30:55.000Z">2017-03-12</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a><a class="post-card post " href="/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/">
-<article class="md"><h2 class="post-title">小代码合集</h2><div class="excerpt"><p>解决block中self的引用__weak typeof(self) weakSelf = self
+<article class="md"><h2 class="post-title">小代码合集</h2><div class="excerpt"><p>解决block中self的引用__weak typeof(self) weakSelf &#x3D; self
 
 
 
-iOS获得屏幕大小//宽度:
+
+iOS获得屏幕大小&#x2F;&#x2F;宽度:
 UIScreen mainScreen] bounds].size.width
 
-//高度:
+&#x2F;&#x2F;高度:
 UIScreen mainScreen] bounds].size.height
 
-//可以将屏幕大小定义成一个宏:
-#define SCREEN_WIDTH (...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-10T17:57:43.000Z">2017-03-11</time></span><span class="cap breadcrumb">iOS</span></div></article>
+&#x2F;&#x2F;可...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-10T17:57:43.000Z">2017-03-11</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a><a class="post-card post " href="/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/">
 <article class="md"><h2 class="post-title">Interface Builde（nib和xib的深究）</h2><div class="excerpt"><p>iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。
 xib和nib都是Interface Builder的图形界面设计文档。

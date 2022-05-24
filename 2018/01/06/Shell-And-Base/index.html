@@ -109,16 +109,17 @@
 <li>argument： 参数，指定操作的对象</li>
 </ul>
 <p>例如：</p>
-<pre><code>&gt;ls -l /etc
-</code></pre>
+<pre class="language-none"><code class="language-none">&gt;ls -l &#x2F;etc</code></pre>
+
 <p>其中ls就是命令的名字， -l 就是指定要这个命令执行的方式，比如这里是列出目录， &#x2F;etc就是参数，我们这里是对 &#x2F;etc的目录进行操作。</p>
 <p>所以这句命令行的意思就是 ： 使用ls命令列出 &#x2F;etc 下的所有目录。</p>
 <p>###shell命令行的用法<br>命令选项合并使用<br>比如我们要列出etc目录下的所有文件，包含隐藏文件，那么我们就会这样输入：</p>
-<pre><code>ls -a -l /etc
-</code></pre>
+<pre class="language-none"><code class="language-none">ls -a -l &#x2F;etc</code></pre>
+
 <p>然后选项合并之后可以变成成这样：</p>
-<pre><code>&gt;ls -al /etc
-</code></pre>
+<pre class="language-none"><code class="language-none">&gt;ls -al &#x2F;etc</code></pre>
+
+
 <p>###命令参数通配符的使用<br>shell命令的通配符的存在是为了我们在使用命令参数的时候对文件目录进行描述，比如我要查询以.sh结尾的所有文件，那么这个时候通配符就会让我们很方便的使用了。</p>
 <p>常用的通配符有以下几个：</p>
 <ul>
@@ -127,17 +128,17 @@
 <li>[] 　包含在[]内的单字符<br>例如：</li>
 </ul>
 <p>列出etc下的 子目录 的所有以 .conf 结尾的文件</p>
-<pre><code>ls -al /etc/*/*.conf　
-</code></pre>
+<pre class="language-none"><code class="language-none">ls -al &#x2F;etc&#x2F;*&#x2F;*.conf　</code></pre>
+
 <p>列出当前目录下以a开头，随后一个为随意字母的txt文件：</p>
-<pre><code>ls a?.txt
-</code></pre>
+<pre class="language-none"><code class="language-none">ls a?.txt</code></pre>
+
 <p>列出当前目录下以a开头，随后三个为随意字母的txt文件：</p>
-<pre><code>ls a??.txt
-</code></pre>
+<pre class="language-none"><code class="language-none">ls a??.txt</code></pre>
+
 <p>列出当前目录下，以a开头，随后含有1，2，3，4的txt文件：</p>
-<pre><code>ls a[1,2,3,4].txt //这里也可以写成 ls a[1-4].txt
-</code></pre>
+<pre class="language-none"><code class="language-none">ls a[1,2,3,4].txt &#x2F;&#x2F;这里也可以写成 ls a[1-4].txt</code></pre>
+
 <h3 id="shell重定向操作"><a href="#shell重定向操作" class="headerlink" title="shell重定向操作"></a>shell重定向操作</h3><p>有时候我们在字符窗口输入命令行的时候，可能输入源不只是我们敲入的命令行，也可能来源于某个文件，在结果输出的时候有时候数据太多，我们可能需要将它的输出定向到指定的文件，然后我们去文件里面看输出结果，还有的就是一些错误信息，我们也可以将它重定向输出，而不仅仅是在屏幕输出。</p>
 <p>所以有这三个：</p>
 <ul>
@@ -145,7 +146,7 @@
 <li>标准输出 对应的重定向操作符为 “&gt;” , “»”;</li>
 <li>标准错误输出 对应的重定向操作符为 “2&gt;” , “2»“。</li>
 </ul>
-<h4 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h4><pre><code>wc &lt;&lt;/etc/shadow
+<h4 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h4><pre class="language-none"><code class="language-none">wc &lt;&lt;&#x2F;etc&#x2F;shadow
        42       42      1236
 wc &lt;&lt; b b
 &gt; hsdufhi
@@ -154,47 +155,50 @@ wc &lt;&lt; b b
 &gt; weifuwheifu
 &gt; huief  ieufh iu erfih
 &gt; bb
-       5       8      67
-</code></pre>
+       5       8      67</code></pre>
+
 <p>我们看到第一个命令： wc &lt; &#x2F;etc&#x2F;shadow</p>
 <p>这个命令的意思就是：wc是统计命令，来源是&#x2F;etc&#x2F;shadow，统计的行数，单词数，字符数输出结果。</p>
 <p>第二个命令 ：</p>
-<pre><code>wc &lt;&lt; bb
+<pre class="language-none"><code class="language-none">wc &lt;&lt; bb
 &gt; ...
 &gt; ...
 &gt; ...
-&gt; bb
-</code></pre>
+&gt; bb</code></pre>
+
 <p>这里的 « 就是告诉命令输入源来源于 bb 和 bb之间，这个bb就是内容的分隔符，可以使任意字符，然后我们就统计到我们在bb之间的行数，单词数，字符数。</p>
 <h4 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h4><p>比如我们将结果输出放到 ls.txt 就可以这样：</p>
-<pre><code>ls /etc &gt;ls.txt
-</code></pre>
+<pre class="language-none"><code class="language-none">ls &#x2F;etc &gt;ls.txt</code></pre>
 <p>如果这时候ls.txt文件不存在，那么系统会自动创建一个，如果系统已经存在了ls.txt,那么系统会将ls.txt原有的内容覆盖掉。如果不想被覆盖，那么这时候就可以用到 “»”:</p>
-<pre><code>ls /etx &gt;&gt;ls.txt
-</code></pre>
+<pre class="language-none"><code class="language-none">ls &#x2F;etx &gt;&gt;ls.txt</code></pre>
 <p>这个时候将输出的内容追加到ls.txt。</p>
 <p>标准错误输出<br>标准错误输出和标准输出差不多，只不过在输出的时候是 ： </p>
-<pre><code>2&gt; error.txt;
-</code></pre>
+<pre class="language-none"><code class="language-none">2&gt; error.txt;</code></pre>
+
 <h3 id="shell管道"><a href="#shell管道" class="headerlink" title="shell管道"></a>shell管道</h3><p>管道，顾名思义，就是将第一个命令的输出当做第二个命令的输入，管道的符号为”	“,比如：</p>
-<pre><code>ls -l /etc |more
-</code></pre>
+<pre class="language-none"><code class="language-none">ls -l &#x2F;etc |more</code></pre>
 <p>将 &#x2F;etc 下的目录输出，然后用more的进行分屏显示。</p>
 <h3 id="shell的转义"><a href="#shell的转义" class="headerlink" title="shell的转义"></a>shell的转义</h3><p>shell的命令有一些特殊的字符是有含义的，我们在使用它们的时候要进行转义才可以使用。比如刚才我们已经知道 ？ 是一个通配符，代表一个任意字符， 但是如果我们真的有一个文件叫做 abc？呢，我们就不能把？当做通配符来使用，这时候就对它进行转义，让系统知道这是真正文件名。</p>
 <p>那么转义字符有： 反斜杠（\） 、双引号（”“）、单引号（’‘）。</p>
 <p>比如我要列出abc？这个文件下的所有目录：</p>
-<pre><code>ls -l abc/?/*
+<pre class="language-none"><code class="language-none">ls -l abc&#x2F;?&#x2F;*
+&#96;&#96;&#96;  
+
+也可以这样写：
 </code></pre>
-<p>也可以这样写：</p>
-<pre><code>ls -l &#39;abc?/*
+<p>ls -l ‘abc?&#x2F;*</p>
+<pre class="language-none"><code class="language-none">
+也可以这样写：
 </code></pre>
-<p>也可以这样写：</p>
-<pre><code>ls -l &quot;abc?/*&quot;
+<p>ls -l “abc?&#x2F;*”</p>
+<pre class="language-none"><code class="language-none">
+当然了对于一些更特殊的字符即使我们使用了转义字符，它也会保留自己，比如 “$” ,”&#96;” ,”&quot;
+
+比如这里我用 “” 对 &#96; 进行转义是无效的：
 </code></pre>
-<p>当然了对于一些更特殊的字符即使我们使用了转义字符，它也会保留自己，比如 “$” ,”&#96;” ,””</p>
-<p>比如这里我用 “” 对 &#96; 进行转义是无效的：</p>
-<pre><code>echo this is &quot;`hostname`&quot;
-this is mymacbook.local
+<p>echo this is “<code>hostname</code>“<br>this is mymacbook.local</p>
+<pre><code>
+
 </code></pre>
 
 

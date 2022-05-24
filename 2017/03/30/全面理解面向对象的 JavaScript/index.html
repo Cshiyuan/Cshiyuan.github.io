@@ -107,56 +107,58 @@
 <hr>
 <h3 id="彻底理解原型链-prototype-chain"><a href="#彻底理解原型链-prototype-chain" class="headerlink" title="彻底理解原型链 (prototype chain)"></a>彻底理解原型链 (prototype chain)</h3><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（<strong><strong>implicit reference</strong></strong>）</strong>，这个引用称之为<strong>原型（<strong><strong>prototype</strong></strong>）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（<strong><strong>prototype chain</strong></strong>）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个**<strong>proto</strong> 属性<strong>来实现对原型的</strong>隐式引用**。  程序清单4说明了这一点。  </p>
 <p><strong>清单 4. 对象的 <strong>proto</strong> 属性和隐式引用</strong></p>
-<pre><code>function Person( name ) &#123; this.name = name; &#125;
+<pre class="language-none"><code class="language-none">function Person( name ) &#123; this.name &#x3D; name; &#125;
 
-var p = new Person();
+var p &#x3D; new Person();
 
-// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
+&#x2F;&#x2F; 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
 
-console.log( p.__proto__ === Person.prototype );
+console.log( p.__proto__ &#x3D;&#x3D;&#x3D; Person.prototype );
 
-// 原型本身是一个 Object 对象，所以他的隐式引用指向了
+&#x2F;&#x2F; 原型本身是一个 Object 对象，所以他的隐式引用指向了
 
-// Object 构造器的 prototype 属性 , 故而打印 true
+&#x2F;&#x2F; Object 构造器的 prototype 属性 , 故而打印 true
 
-console.log( Person.prototype.__proto__ === Object.prototype );
+console.log( Person.prototype.__proto__ &#x3D;&#x3D;&#x3D; Object.prototype );
 
-// 构造器 Person 本身是一个函数对象，所以此处打印 true
+&#x2F;&#x2F; 构造器 Person 本身是一个函数对象，所以此处打印 true
 
-console.log( Person.__proto__ === Function.prototype );
-</code></pre>
+console.log( Person.__proto__ &#x3D;&#x3D;&#x3D; Function.prototype );</code></pre>
+
+
 <p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
 <p><strong>图 1. 原型链中的属性隐藏机制</strong><br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
 <p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，  </p>
 <p>程序清单5.是利用原型链实现继承的简单例子。<br><strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
-<pre><code>// 声明 Animal 对象构造器 
-function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，
-// 亦可直接理解为指定 Animal 对象的原型 
-Animal.prototype = &#123;
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F; 声明 Animal 对象构造器 
+function Animal() &#123; &#125; &#x2F;&#x2F;将 Animal 的 prototype 属性指向一个对象，
+&#x2F;&#x2F; 亦可直接理解为指定 Animal 对象的原型 
+Animal.prototype &#x3D; &#123;
     name: &quot;animal&quot;,
     weight: 0, eat:
     function () &#123; 
         alert(&quot;Animal is eating!&quot;); 
     &#125;
-&#125; // 声明 Mammal 对象构造器 
-function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 
-    this.name = &quot;mammal&quot;;
+&#125; &#x2F;&#x2F; 声明 Mammal 对象构造器 
+function Mammal() &#123; &#x2F;&#x2F; 指定 Mammal 对象的原型为一个 Animal 对象。 
+    this.name &#x3D; &quot;mammal&quot;;
 &#125; 
-// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
-Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 
+&#x2F;&#x2F; 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
+Mammal.prototype &#x3D; new Animal(); &#x2F;&#x2F; 声明 Horse 对象构造器 
 function Horse(height, weight) &#123;
-    this.name = &quot;horse&quot;;
-    this.height = height;
-    this.weight = weight;
+    this.name &#x3D; &quot;horse&quot;;
+    this.height &#x3D; height;
+    this.weight &#x3D; weight;
 &#125;
-// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
-Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
-Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 
-var horse = new Horse(100, 300);
-console.log(horse.__proto__ === Horse.prototype);
-console.log(Horse.prototype.__proto__ === Mammal.prototype);
-console.log(Mammal.prototype.__proto__ === Animal.prototype);
-</code></pre>
+&#x2F;&#x2F; 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
+Horse.prototype &#x3D; new Mammal(); &#x2F;&#x2F; 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
+Horse.prototype.eat &#x3D; function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; &#x2F;&#x2F; 验证并理解原型链 
+var horse &#x3D; new Horse(100, 300);
+console.log(horse.__proto__ &#x3D;&#x3D;&#x3D; Horse.prototype);
+console.log(Horse.prototype.__proto__ &#x3D;&#x3D;&#x3D; Mammal.prototype);
+console.log(Mammal.prototype.__proto__ &#x3D;&#x3D;&#x3D; Animal.prototype);</code></pre>
+
+
 <p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype &#x3D; new Mammal()</strong> 和 <strong>Mammal.prototype &#x3D; new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
 
 

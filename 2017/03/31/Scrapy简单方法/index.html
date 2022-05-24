@@ -110,17 +110,17 @@ scrapy startproject tutorial</div>
 可以看到将会创建一个tutorial文件夹，目录结构如下：
 代码如下:
 
-<pre><code>tutorial/
+<pre class="language-none"><code class="language-none">tutorial&#x2F;
 scrapy.cfg
-tutorial/
+tutorial&#x2F;
 __init__.py
 items.py
 pipelines.py
 settings.py
-spiders/
+spiders&#x2F;
 __init__.py
-...
-</code></pre>
+...</code></pre>
+
 <p>下面来简单介绍一下各个文件的作用：</p>
 <ul>
 <li>scrapy.cfg：项目的配置文件</li>
@@ -132,42 +132,44 @@ __init__.py
 </ul>
 <p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
 <p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>代码如下:</p>
-<pre><code># Define here the models for your scraped items
+<pre class="language-none"><code class="language-none"># Define here the models for your scraped items
 #
 # See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
+# http:&#x2F;&#x2F;doc.scrapy.org&#x2F;en&#x2F;latest&#x2F;topics&#x2F;items.html
 from scrapy.item import Item, Field
 
 class TutorialItem(Item):
 # define the fields for your item here like:
-# name = Field()
+# name &#x3D; Field()
 pass
 
 class DmozItem(Item):
-title = Field()
-link = Field()
-desc = Field()
-</code></pre>
+title &#x3D; Field()
+link &#x3D; Field()
+desc &#x3D; Field()</code></pre>
+
+
 <p><strong>3.制作爬虫（Spider）</strong></p>
 <p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br>**3.1爬<br>**Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
 <p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
 <p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
-<pre><code>from scrapy.spider import Spider
+<pre class="language-none"><code class="language-none">from scrapy.spider import Spider
 class DmozSpider(Spider):
-name = “dmoz”
-allowed_domains = [“dmoz.org”]
-start_urls = [
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+name &#x3D; “dmoz”
+allowed_domains &#x3D; [“dmoz.org”]
+start_urls &#x3D; [
+“http:&#x2F;&#x2F;www.dmoz.org&#x2F;Computers&#x2F;Programming&#x2F;Languages&#x2F;Python&#x2F;Books&#x2F;“,
+“http:&#x2F;&#x2F;www.dmoz.org&#x2F;Computers&#x2F;Programming&#x2F;Languages&#x2F;Python&#x2F;Resources&#x2F;”
 ]
 
 def parse(self, response):
-filename = response.url.split(“/”)[-2]
-open(filename, ‘wb’).write(response.body)
-</code></pre>
+filename &#x3D; response.url.split(“&#x2F;”)[-2]
+open(filename, ‘wb’).write(response.body)</code></pre>
+
+
 <p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
-<pre><code>scrapy crawl dmoz
-</code></pre>
+<pre class="language-none"><code class="language-none">scrapy crawl dmoz</code></pre>
+
 <p>运行结果如图：</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg"></p>
 <p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
@@ -276,30 +278,31 @@ from scrapy.selector import Selector
 作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:
 代码如下:
 
-<pre><code>from scrapy.spider import Spider
+<pre class="language-none"><code class="language-none">from scrapy.spider import Spider
 from scrapy.selector import Selector
 from tutorial.items import DmozItem
 
 class DmozSpider(Spider):
-name = “dmoz”
-allowed_domains = [“dmoz.org”]
-start_urls = [
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
-“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+name &#x3D; “dmoz”
+allowed_domains &#x3D; [“dmoz.org”]
+start_urls &#x3D; [
+“http:&#x2F;&#x2F;www.dmoz.org&#x2F;Computers&#x2F;Programming&#x2F;Languages&#x2F;Python&#x2F;Books&#x2F;“,
+“http:&#x2F;&#x2F;www.dmoz.org&#x2F;Computers&#x2F;Programming&#x2F;Languages&#x2F;Python&#x2F;Resources&#x2F;”
 ]
 
 def parse(self, response):
-sel = Selector(response)
-sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)
-items = []
+sel &#x3D; Selector(response)
+sites &#x3D; sel.xpath(‘&#x2F;&#x2F;ul[@class&#x3D;”directory-url”]&#x2F;li’)
+items &#x3D; []
 for site in sites:
-item = DmozItem()
-item[‘title’] = site.xpath(‘a/text()’).extract()
-item[‘link’] = site.xpath(‘a/@href’).extract()
-item[‘desc’] = site.xpath(‘text()’).extract()
+item &#x3D; DmozItem()
+item[‘title’] &#x3D; site.xpath(‘a&#x2F;text()’).extract()
+item[‘link’] &#x3D; site.xpath(‘a&#x2F;@href’).extract()
+item[‘desc’] &#x3D; site.xpath(‘text()’).extract()
 items.append(item)
-return items
-</code></pre>
+return items</code></pre>
+
+
 <p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
 <div id="code89953" class="codebody">
 scrapy crawl dmoz -o items.json -t json</div>

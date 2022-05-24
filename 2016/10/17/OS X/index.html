@@ -87,11 +87,11 @@
 
 <article class='content md post'>
 <h1 class="article-title"><span>OS X</span></h1>
-<pre><code>1.  defaults write com.apple.finder AppleShowAllFiles -boolean true ;
+<pre class="language-none"><code class="language-none">1.  defaults write com.apple.finder AppleShowAllFiles -boolean true ;
 killall Finder
 2.  defaults write com.apple.finder AppleShowAllFiles -boolean false ;
-killall Finder
-</code></pre>
+killall Finder</code></pre>
+
 <p>每个系统都要定期做些维护工作，这不仅是为了提高系统的运行速度也是为了使系统性能发挥到最大，节省可用的磁盘空间。</p>
 <p>现在我向大家介绍几个维护系统的方法。</p>
 <p><strong>修复磁盘权限：</strong></p>
@@ -101,16 +101,18 @@ killall Finder
 <p><strong>主动维护：</strong></p>
 <p>Mac OS X系统默认在每天凌晨3点后去做定期的系统维护，主要是清除没用的日志和缓存，当然也会备份重要的系统文件。但是如果这段时间里把系统关闭或者休眠，定期维护作业就无法进行了。这样并不会使系统出问题，不过维护可以使硬盘空出更多的可用空间。</p>
 <p>其实完全可以来选择主动维护方式来手动做这些维护，要做这些维护请执行以下命令，要顺着往下做才行。</p>
-<pre><code>sudo periodic daily
+<pre class="language-none"><code class="language-none">sudo periodic daily
 
 sudo periodic weekly
 
-sudo periodic monthly
-</code></pre>
+sudo periodic monthly</code></pre>
+
+
 <p><strong>更新加固：</strong></p>
 <p>如果有时系统在做过更新操作或其它操作之后非常的慢请在终端（Terminal）中执行以下命令：</p>
-<pre><code>sudo update_prebinding -root / -force
-</code></pre>
+<pre class="language-none"><code class="language-none">sudo update_prebinding -root &#x2F; -force</code></pre>
+
+
 <p>回车后，输入管理员密码回车，等运行结束出现$符时，立即重启系统。</p>
 <p>以上几个维护方法，最好每月都能做一次，当然，出现问题时不要急着去重装系统，做一下以上操作也许会很快解决的。</p>
 

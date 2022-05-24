@@ -91,93 +91,89 @@
 <li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu. </li>
 <li>在循环神经网络中(recurrent neural networks), 推荐的是 tanh 或者是 relu</li>
 </ul>
-<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre><code class="Python">import tensorflow as tf
+<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 import numpy as np
 
 #create data
-x_data = np.random.rand(100).astype(np.float32)
-y_data = x_data * 0.1 + 0.3
+x_data &#x3D; np.random.rand(100).astype(np.float32)
+y_data &#x3D; x_data * 0.1 + 0.3
 
 #搭建模型
-Weights = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
-biases = tf.Variable(tf.zeros([1]))
-y = Weights * x_data + biases
+Weights &#x3D; tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+biases &#x3D; tf.Variable(tf.zeros([1]))
+y &#x3D; Weights * x_data + biases
 
 #计算误差
-loss = tf.reduce_mean(tf.square(y - y_data))
+loss &#x3D; tf.reduce_mean(tf.square(y - y_data))
 
 #传播误差  使用的误差传递方法是梯度下降法
-optimizer = tf.train.GradientDescentOptimizer(0.5)
-train = optimizer.minimize(loss)
+optimizer &#x3D; tf.train.GradientDescentOptimizer(0.5)
+train &#x3D; optimizer.minimize(loss)
 
 #训练
-init = tf.global_variables_initializer()  #初始化
-sess = tf.Session()
+init &#x3D; tf.global_variables_initializer()  #初始化
+sess &#x3D; tf.Session()
 sess.run(init)
 
 for step in range(201):
     sess.run(train)
-    if step % 20 == 0:
-        print(step, sess.run(Weights), sess.run(biases))
-</code></pre>
-<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre><code class="Python">import tensorflow as tf
+    if step % 20 &#x3D;&#x3D; 0:
+        print(step, sess.run(Weights), sess.run(biases))</code></pre>
+<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 
 #在tensorflow 中需要定义placeholder的type，yi ban
-input1 = tf.placeholder(tf.float32)
-input2 = tf.placeholder(tf.float32)
+input1 &#x3D; tf.placeholder(tf.float32)
+input2 &#x3D; tf.placeholder(tf.float32)
 
-# mul = multiply 是将input1和input2 做乘法运算
-output = tf.multiply(input1, input2)
+# mul &#x3D; multiply 是将input1和input2 做乘法运算
+output &#x3D; tf.multiply(input1, input2)
 
 #传值的工作交给了sess.run()
 
 with tf.Session() as sess:
-    print(sess.run(output, feed_dict=&#123;input1: [7.], input2: [2.]&#125;))
-</code></pre>
-<p>####session使用例子</p>
-<pre><code class="Python">import tensorflow as tf
+    print(sess.run(output, feed_dict&#x3D;&#123;input1: [7.], input2: [2.]&#125;))</code></pre>
 
-martrix1 = tf.constant([[3, 3]])
-martrix2 = tf.constant([[2], [2]])
-product = tf.matmul(martrix1, martrix2)
+<p>####session使用例子</p>
+<pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+
+martrix1 &#x3D; tf.constant([[3, 3]])
+martrix2 &#x3D; tf.constant([[2], [2]])
+product &#x3D; tf.matmul(martrix1, martrix2)
 
 # product
 # method 1
-sess = tf.Session()
-result = sess.run(product)
+sess &#x3D; tf.Session()
+result &#x3D; sess.run(product)
 print(result)
 sess.close()
 #[[12]]d
 
 # method 2
 with tf.Session() as sess:
-    result2 = sess.run(product)
-    print(result2)
-</code></pre>
-<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre><code class="Python">import tensorflow as tf
+    result2 &#x3D; sess.run(product)
+    print(result2)</code></pre>
+<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 
-state = tf.Variable(0, name=&quot;counter&quot;)
+state &#x3D; tf.Variable(0, name&#x3D;&quot;counter&quot;)
 
 #定义常量one
-one = tf.constant(1)
+one &#x3D; tf.constant(1)
 
 #定义加法步骤(注：此步并没有直接计算)
-new_value = tf.add(state, one)
+new_value &#x3D; tf.add(state, one)
 
 #将State更新成new_value
-update = tf.assign(state, new_value)
+update &#x3D; tf.assign(state, new_value)
 
 # 如果定义Variable，就一定要initialize
-init = tf.global_variables_initializer()
+init &#x3D; tf.global_variables_initializer()
 # 
 #
 with tf.Session() as sess:
     sess.run(init)
     for _ in range(3):
         sess.run(update)
-        print(sess.run(state))
-</code></pre>
-
+        print(sess.run(state))</code></pre>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

@@ -106,10 +106,10 @@
 <article class="md"><h2 class="post-title">因为好奇手游的同步策略，查询的帧同步相关内容。</h2><div class="excerpt"><p>大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-08T13:34:45.000Z">2017-05-08</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
 </a><a class="post-card post " href="/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/">
 <article class="md"><h2 class="post-title">Scrapy爬GitHub日记</h2><div class="excerpt"><p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;
-download_delay = 1
+download_delay &#x3D; 1
 
-headers = &#123;
-    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/53...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-31T12:19:32.000Z">2017-03-31</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
+headers &#x3D; &#123;
+    &#39;User-Agent&#39;: &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_4)...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-03-31T12:19:32.000Z">2017-03-31</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
 </a><a class="post-card post " href="/2017/03/30/SIP%E6%9C%BA%E5%88%B6/">
 <article class="md"><h2 class="post-title">SIP机制</h2><div class="excerpt"><p>因为最新的OSX有SIP机制，安装的时候命令加上userpip install –user 命令即可！
 

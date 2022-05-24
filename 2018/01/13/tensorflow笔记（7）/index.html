@@ -89,7 +89,7 @@
 <h1 class="article-title"><span>tensorflow笔记（7）</span></h1>
 <p>###RNN LSTM（回归例子）</p>
 <p>这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. </p>
-<pre><code class="python"># 这次我们会使用 RNN 来进行回归的训练 (Regression).
+<pre class="language-python" data-language="python"><code class="language-python"># 这次我们会使用 RNN 来进行回归的训练 (Regression).
 # 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.
 # 接下来我们先确定 RNN 的各种参数(super-parameters):
 
@@ -97,13 +97,13 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-BATCH_START = 0  # 建立 batch data 时候的 index
-TIME_STEPS = 20  # backpropagation through time 的 time_steps
-BATCH_SIZE = 50
-INPUT_SIZE = 1  # sin数据输入 size
-OUTPUT_SIZE = 1  # cos数据输出 size
-CELL_SIZE = 10  # RNN的 hidden unit size
-LR = 0.006  # learning rate
+BATCH_START &#x3D; 0  # 建立 batch data 时候的 index
+TIME_STEPS &#x3D; 20  # backpropagation through time 的 time_steps
+BATCH_SIZE &#x3D; 50
+INPUT_SIZE &#x3D; 1  # sin数据输入 size
+OUTPUT_SIZE &#x3D; 1  # cos数据输出 size
+CELL_SIZE &#x3D; 10  # RNN的 hidden unit size
+LR &#x3D; 0.006  # learning rate
 
 
 ## 数据生成 ##
@@ -111,11 +111,11 @@ LR = 0.006  # learning rate
 def get_batch():
     global BATCH_START, TIME_STEPS
     # xs shape (50 batch, 20 steps)
-    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
-        (BATCH_SIZE, TIME_STEPS)) / (10 * np.pi)
-    seq = np.sin(xs)
-    res = np.cos(xs)
-    BATCH_START += TIME_STEPS
+    xs &#x3D; np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
+        (BATCH_SIZE, TIME_STEPS)) &#x2F; (10 * np.pi)
+    seq &#x3D; np.sin(xs)
+    res &#x3D; np.cos(xs)
+    BATCH_START +&#x3D; TIME_STEPS
     # returned seq, res and xs: shape (batch, step, input)
     return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
 
@@ -127,17 +127,17 @@ class LSTMRNN(object):
     def __init__(self, n_steps, input_size, output_size, cell_size,
                  batch_size):
 
-        self.n_steps = n_steps
-        self.input_size = input_size
-        self.output_size = output_size
-        self.cell_size = cell_size
-        self.batch_size = batch_size
+        self.n_steps &#x3D; n_steps
+        self.input_size &#x3D; input_size
+        self.output_size &#x3D; output_size
+        self.cell_size &#x3D; cell_size
+        self.batch_size &#x3D; batch_size
 
         with tf.name_scope(&#39;inputs&#39;):
-            self.xs = tf.placeholder(
-                tf.float32, [None, n_steps, input_size], name=&#39;xs&#39;)
-            self.ys = tf.placeholder(
-                tf.float32, [None, n_steps, output_size], name=&#39;ys&#39;)
+            self.xs &#x3D; tf.placeholder(
+                tf.float32, [None, n_steps, input_size], name&#x3D;&#39;xs&#39;)
+            self.ys &#x3D; tf.placeholder(
+                tf.float32, [None, n_steps, output_size], name&#x3D;&#39;ys&#39;)
 
         with tf.variable_scope(&#39;in_hidden&#39;):
             self.add_input_layer()
@@ -152,93 +152,93 @@ class LSTMRNN(object):
             self.compute_cost()
 
         with tf.name_scope(&#39;train&#39;):
-            self.train_op = tf.train.AdamOptimizer(LR).minimize(self.cost)
+            self.train_op &#x3D; tf.train.AdamOptimizer(LR).minimize(self.cost)
 
     # 设置 add_input_layer 功能, 添加 input_layer:
     def add_input_layer(self, ):
 
-        l_in_x = tf.reshape(
+        l_in_x &#x3D; tf.reshape(
             self.xs, [-1, self.input_size],
-            name=&#39;2_2D&#39;)  #  (batch*n_step, in_size)
+            name&#x3D;&#39;2_2D&#39;)  #  (batch*n_step, in_size)
         # Ws (in_size, cell_size)
-        Ws_in = self._weight_variable([self.input_size, self.cell_size])
+        Ws_in &#x3D; self._weight_variable([self.input_size, self.cell_size])
         # bs (cell_size, )
-        bs_in = self._bias_variable([self.cell_size])
-        # l_in_y = (batch * n_steps, cell_size)
+        bs_in &#x3D; self._bias_variable([self.cell_size])
+        # l_in_y &#x3D; (batch * n_steps, cell_size)
         with tf.name_scope(&#39;Wx_plus_b&#39;):
-            l_in_y = tf.matmul(l_in_x, Ws_in) + bs_in
-        #reshape l_in_y ==&gt; (batch, n_steps, cell_size)
-        self.l_in_y = tf.reshape(
-            l_in_y, [-1, self.n_steps, self.cell_size], name=&#39;2_3D&#39;)
+            l_in_y &#x3D; tf.matmul(l_in_x, Ws_in) + bs_in
+        #reshape l_in_y &#x3D;&#x3D;&gt; (batch, n_steps, cell_size)
+        self.l_in_y &#x3D; tf.reshape(
+            l_in_y, [-1, self.n_steps, self.cell_size], name&#x3D;&#39;2_3D&#39;)
 
     # 设置 add_cell 功能, 添加 cell,
     # 注意这里的 self.cell_init_state,
     # 因为我们在 training 的时候, 这个地方要特别说明.
     def add_cell(self):
 
-        lstm_cell = tf.contrib.rnn.BasicLSTMCell(
-            self.cell_size, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell &#x3D; tf.contrib.rnn.BasicLSTMCell(
+            self.cell_size, forget_bias&#x3D;1.0, state_is_tuple&#x3D;True)
         with tf.name_scope(&#39;initial_state&#39;):
-            self.cell_init_state = lstm_cell.zero_state(
-                self.batch_size, dtype=tf.float32)
-            self.cell_outputs, self.cell_final_state = tf.nn.dynamic_rnn(
+            self.cell_init_state &#x3D; lstm_cell.zero_state(
+                self.batch_size, dtype&#x3D;tf.float32)
+            self.cell_outputs, self.cell_final_state &#x3D; tf.nn.dynamic_rnn(
                 lstm_cell,
                 self.l_in_y,
-                initial_state=self.cell_init_state,
-                time_major=False)
+                initial_state&#x3D;self.cell_init_state,
+                time_major&#x3D;False)
 
     # 设置 add_output_layer 功能, 添加 output_layer:
     def add_output_layer(self):
-        # shape = (batch * steps, cell_size)
-        l_out_x = tf.reshape(
-            self.cell_outputs, [-1, self.cell_size], name=&#39;2_2D&#39;)
-        Ws_out = self._weight_variable([self.cell_size, self.output_size])
-        bs_out = self._bias_variable([
+        # shape &#x3D; (batch * steps, cell_size)
+        l_out_x &#x3D; tf.reshape(
+            self.cell_outputs, [-1, self.cell_size], name&#x3D;&#39;2_2D&#39;)
+        Ws_out &#x3D; self._weight_variable([self.cell_size, self.output_size])
+        bs_out &#x3D; self._bias_variable([
             self.output_size,
         ])
-        # shape = (batch * steps, out_size)
+        # shape &#x3D; (batch * steps, out_size)
         with tf.name_scope(&#39;Wx_plus_b&#39;):
-            self.pred = tf.matmul(l_out_x, Ws_out) + bs_out
+            self.pred &#x3D; tf.matmul(l_out_x, Ws_out) + bs_out
 
     #添加RNN中剩下的部分：
     def compute_cost(self):
-        losses = tf.contrib.legacy_seq2seq.sequence_loss_by_example(
-            [tf.reshape(self.pred, [-1], name=&#39;reshape_pred&#39;)],
-            [tf.reshape(self.ys, [-1], name=&#39;reshape_target&#39;)],
-            [tf.ones([self.batch_size * self.n_steps], dtype=tf.float32)],
-            average_across_timesteps=True,
-            softmax_loss_function=self.ms_error,
-            name=&#39;losses&#39;)
+        losses &#x3D; tf.contrib.legacy_seq2seq.sequence_loss_by_example(
+            [tf.reshape(self.pred, [-1], name&#x3D;&#39;reshape_pred&#39;)],
+            [tf.reshape(self.ys, [-1], name&#x3D;&#39;reshape_target&#39;)],
+            [tf.ones([self.batch_size * self.n_steps], dtype&#x3D;tf.float32)],
+            average_across_timesteps&#x3D;True,
+            softmax_loss_function&#x3D;self.ms_error,
+            name&#x3D;&#39;losses&#39;)
         with tf.name_scope(&#39;average_cost&#39;):
-            self.cost = tf.div(
-                tf.reduce_sum(losses, name=&#39;losses_sum&#39;),
+            self.cost &#x3D; tf.div(
+                tf.reduce_sum(losses, name&#x3D;&#39;losses_sum&#39;),
                 self.batch_size,
-                name=&#39;average_cost&#39;)
+                name&#x3D;&#39;average_cost&#39;)
             tf.summary.scalar(&#39;cost&#39;, self.cost)
 
     @staticmethod
     def ms_error(labels, logits):
         return tf.square(tf.subtract(labels, logits))
 
-    def _weight_variable(self, shape, name=&#39;weights&#39;):
-        initializer = tf.random_normal_initializer(
-            mean=0.,
-            stddev=1.,
+    def _weight_variable(self, shape, name&#x3D;&#39;weights&#39;):
+        initializer &#x3D; tf.random_normal_initializer(
+            mean&#x3D;0.,
+            stddev&#x3D;1.,
         )
-        return tf.get_variable(shape=shape, initializer=initializer, name=name)
+        return tf.get_variable(shape&#x3D;shape, initializer&#x3D;initializer, name&#x3D;name)
 
-    def _bias_variable(self, shape, name=&#39;biases&#39;):
-        initializer = tf.constant_initializer(0.1)
-        return tf.get_variable(name=name, shape=shape, initializer=initializer)
+    def _bias_variable(self, shape, name&#x3D;&#39;biases&#39;):
+        initializer &#x3D; tf.constant_initializer(0.1)
+        return tf.get_variable(name&#x3D;name, shape&#x3D;shape, initializer&#x3D;initializer)
 
 
 ## 训练 LSTMRNN ##
 
-if __name__ == &#39;__main__&#39;:
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
 
     #搭建 LSTMRNN 模型
-    model = LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
-    sess = tf.Session()
+    model &#x3D; LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
+    sess &#x3D; tf.Session()
     # sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法
     # 替换成下面的写法：
     sess.run(tf.global_variables_initializer())
@@ -249,21 +249,21 @@ if __name__ == &#39;__main__&#39;:
 
     # 训练 200 次
     for i in range(200):
-        seq, res, xs = get_batch()  # 提取 batch data
-        if i == 0:
+        seq, res, xs &#x3D; get_batch()  # 提取 batch data
+        if i &#x3D;&#x3D; 0:
             # 初始化data
-            feed_dict = &#123;model.xs: seq, model.ys: res&#125;
+            feed_dict &#x3D; &#123;model.xs: seq, model.ys: res&#125;
         else:
-            feed_dict = &#123;
+            feed_dict &#x3D; &#123;
                 model.xs: seq,
                 model.ys: res,
                 model.cell_init_state: state  # 保持 state 的连续性
             &#125;
 
         # 训练
-        _, cost, state, pred = sess.run(
+        _, cost, state, pred &#x3D; sess.run(
             [model.train_op, model.cost, model.cell_final_state, model.pred],
-            feed_dict=feed_dict)
+            feed_dict&#x3D;feed_dict)
 
         # plotting
         plt.plot(xs[0, :], res[0].flatten(), &#39;r&#39;, xs[0, :],
@@ -273,10 +273,9 @@ if __name__ == &#39;__main__&#39;:
         plt.pause(0.3)  # 每 0.3 s 刷新一次
 
         # 打印 cost 结构
-        if i % 20 == 0:
+        if i % 20 &#x3D;&#x3D; 0:
             print(&#39;cost:&#39;, round(cost, 4))
 </code></pre>
-
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>
