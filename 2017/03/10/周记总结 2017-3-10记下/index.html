@@ -138,10 +138,10 @@
 <hr>
 <h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
 <p>其实最好可以用代码来查看一下</p>
-<pre class="language-none"><code class="language-none">CGRect rectOfStatusbar &#x3D; [[UIApplication sharedApplication] statusBarFrame];
+<pre class="line-numbers language-none"><code class="language-none">CGRect rectOfStatusbar &#x3D; [[UIApplication sharedApplication] statusBarFrame];
 NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);&#x2F;&#x2F; 高度 
 CGRect rectOfNavigationbar &#x3D; self.navigationController.navigationBar.frame;
-NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); &#x2F;&#x2F; 高度</code></pre>
+NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); &#x2F;&#x2F; 高度<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <hr>

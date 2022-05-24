@@ -86,7 +86,7 @@
 <article class='content md post'>
 <h1 class="article-title"><span>TensorFlow Classification分类学习</span></h1>
 <h4 id="使用MNIST实现的例子"><a href="#使用MNIST实现的例子" class="headerlink" title="使用MNIST实现的例子"></a>使用MNIST实现的例子</h4><p>具体的实现在注释里详细说明了</p>
-<pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
@@ -155,7 +155,7 @@ for i in range(1000):
     sess.run(train_step, feed_dict&#x3D;&#123;xs: batch_xs, ys: batch_ys&#125;)
     if i % 50 &#x3D;&#x3D; 0:
         # print(mnist.test.images, mnist.test.labels)
-        print(compute_accuracy(mnist.test.images, mnist.test.labels))</code></pre>
+        print(compute_accuracy(mnist.test.images, mnist.test.labels))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 

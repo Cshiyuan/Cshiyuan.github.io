@@ -89,7 +89,7 @@
 <p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
 <p>（C++中基类指针只有调用虚函数才会体现出多态性，不然基类指针会被限制）</p>
 <hr>
-<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><pre class="language-none"><code class="language-none">NSLog(@&quot;const int %lx&quot;, &amp;constA);         &#x2F;&#x2F; const int 7fff5fbff6ec
+<h2 id="OC中的内存地址"><a href="#OC中的内存地址" class="headerlink" title="OC中的内存地址"></a>OC中的内存地址</h2><pre class="line-numbers language-none"><code class="language-none">NSLog(@&quot;const int %lx&quot;, &amp;constA);         &#x2F;&#x2F; const int 7fff5fbff6ec
 NSLog(@&quot;int %lx&quot;, &amp;a);                    &#x2F;&#x2F; int 7fff5fbff6e8 
 NSLog(@&quot;int %lx&quot;, &amp;b);                    &#x2F;&#x2F; int 7fff5fbff6e4
 NSLog(@&quot;int %lx&quot;, &amp;c);                    &#x2F;&#x2F; int 7fff5fbff6e0
@@ -111,7 +111,7 @@ NSLog(@&quot;NSString %lx&quot;, str);              &#x2F;&#x2F; NSString 100002
 NSLog(@&quot;NSString %lx&quot;, str1);             &#x2F;&#x2F; NSString 100002080
 NSLog(@&quot;NSString %lx&quot;, str2);             &#x2F;&#x2F; NSString 1000020a0
 NSLog(@&quot;static NSArray %lx&quot;, stArrayA);   &#x2F;&#x2F; static NSArray 1002035f0
-NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   &#x2F;&#x2F; static NSArray 1002013d0</code></pre>
+NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   &#x2F;&#x2F; static NSArray 1002013d0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p>分析一下打印结果，可以得出：</p>
@@ -132,8 +132,8 @@ NSLog(@&quot;static NSArray %lx&quot;, stArrayB);   &#x2F;&#x2F; static NSArray 
 <h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>优点：非对称加密与对称加密相比，其安全性更好：对称加密的通信双方使用相同的秘钥，如果一方的秘钥遭泄露，那么整个通信就会被破解。而非对称加密使用一对秘钥，一个用来加密，一个用来解密，而且公钥是公开的，秘钥是自己保存的，不需要像对称加密那样在通信之前要先同步秘钥；<br>缺点：非对称加密的缺点是加密和解密花费时间长、速度慢，只适合对少量数据进行加密。</p>
 <hr>
 <h2 id="Objective-C中的浅拷贝和深拷贝"><a href="#Objective-C中的浅拷贝和深拷贝" class="headerlink" title="Objective-C中的浅拷贝和深拷贝"></a>Objective-C中的浅拷贝和深拷贝</h2><p>浅拷贝就是对内存地址的复制，让目标对象指针和源对象指向同一片内存空间。如：</p>
-<pre class="language-none"><code class="language-none">char* str &#x3D; (char*)malloc(100);
-char* str2 &#x3D; str;</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">char* str &#x3D; (char*)malloc(100);
+char* str2 &#x3D; str;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>浅拷贝只是对对象的简单拷贝，让几个对象共用一片内存，当内存销毁的时候，指向这片内存的几个指针需要重新定义才可以使用，要不然会成为野指针。</p>
 <p><strong>iOS 里面的浅拷贝：</strong></p>
@@ -144,42 +144,42 @@ char* str2 &#x3D; str;</code></pre>
 <p>copy 是创建一个新对象，retain 是创建一个指针，引用对象计数加一。 copy属性标识两个对象内容相同，新的对象retain count为1, 与旧有对象引用计数无关，旧有对象没有变化。copy减少对象对上下文的依赖。</p>
 <p><strong>iOS里的深拷贝：</strong></p>
 <p>iOS提供了copy和mutableCopy方法，顾名思义，copy就是复制了一个imutable的对象，而mutableCopy就是复制了一个mutable的对象。以下将举几个例子来说明。<br>这里指的是NSString, NSNumber等等一类的对象。</p>
-<pre class="language-none"><code class="language-none">NSString *string &#x3D; @”dddd&quot;;
+<pre class="line-numbers language-none"><code class="language-none">NSString *string &#x3D; @”dddd&quot;;
 NSString *stringCopy &#x3D; [string copy];
 NSMutableString *stringDCopy &#x3D; [string mutableCopy];
 [stringMCopy appendString:@&quot;!!&quot;];
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>查看内存可以发现，string和stringCopy指向的是同一块内存区域(weak reference),引用计数没有发生改变。而stringMCopy则是我们所说的真正意义上的复制，系统为其分配了新内存，是两个独立的字符串内容是一样的。</p>
 <p><strong>拷贝构造：</strong></p>
 <p>当然在 ios 中并不是所有的对象都支持copy，mutableCopy，遵守NSCopying协议的类可以发送copy消息，遵守NSMutableCopying协议的类才可以发送mutableCopy消息。</p>
 <p>假如发送了一个没有遵守上诉两协议而发送copy或者 mutableCopy,那么就会发生异常。但是默认的ios类并没有遵守这两个协议。如果想自定义一下copy 那么就必须遵守NSCopying,并且实现 copyWithZone: 方法，如果想自定义一下mutableCopy 那么就必须遵守NSMutableCopying,并且实现 mutableCopyWithZone: 方法。</p>
 <p>如果是我们定义的对象，那么我们自己要实现NSCopying , NSMutableCopying这样就能调用copy和mutablecopy了。举个例子：</p>
-<pre class="language-none"><code class="language-none">@interface MyObj : NSObject&lt;NSCopying, NSMutableCopying&gt; &#123;
+<pre class="line-numbers language-none"><code class="language-none">@interface MyObj : NSObject&lt;NSCopying, NSMutableCopying&gt; &#123;
     NSMutableString *_name;
     NSString * _imutableStr ;
     int _age;
 &#125;     
 @property (nonatomic, retain) NSMutableString *name;
 @property (nonatomic, retain) NSString *imutableStr;
-@property (nonatomic) int age;</code></pre>
+@property (nonatomic) int age;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>copy拷贝构造：</p>
-<pre class="language-none"><code class="language-none">- (id)copyWithZone:(NSZone *)zone &#123;
+<pre class="line-numbers language-none"><code class="language-none">- (id)copyWithZone:(NSZone *)zone &#123;
     MyObj *copy &#x3D; [[[self class] allocWithZone :zone] init];
     copy-&gt;name &#x3D; [_name copy];
     copy-&gt;imutableStr &#x3D; [_imutableStr copy];
     copy-&gt;age &#x3D; age;
     return copy;
-&#125;</code></pre>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>mutableCopy拷贝构造：</p>
-<pre class="language-none"><code class="language-none">- (id)mutableCopyWithZone:(NSZone *)zone&#123;
+<pre class="line-numbers language-none"><code class="language-none">- (id)mutableCopyWithZone:(NSZone *)zone&#123;
     MyObj *copy &#x3D; NSCopyObject(self, 0, zone);
     copy-&gt;name &#x3D; [_name mutableCopy];
     copy-&gt;age &#x3D; age;
     return copy;
-&#125;</code></pre>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

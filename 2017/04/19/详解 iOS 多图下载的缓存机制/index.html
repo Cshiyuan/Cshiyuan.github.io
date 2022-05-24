@@ -98,10 +98,10 @@
 <p>这里所说的<strong>多图下载</strong>，就是要在tableview的每一个cell里显示一张图片,而且这些图片都需要从网上下载。</p>
 <h1 id="2-容易遇到的问题"><a href="#2-容易遇到的问题" class="headerlink" title="2. 容易遇到的问题"></a>2. 容易遇到的问题</h1><hr>
 <p>如果不知道或不使用<strong>异步操作</strong>和<strong>缓存机制</strong>，那么写出来的代码很可能会是这样：</p>
-<pre class="language-none"><code class="language-none">cell.textLabel.text &#x3D; app.name;
+<pre class="line-numbers language-none"><code class="language-none">cell.textLabel.text &#x3D; app.name;
 cell.detailTextLabel.text &#x3D; app.download;
 NSData *imageData &#x3D; [NSData dataWithContentsOfURL:app.url];
-cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
+cell.imageView.image &#x3D; [UIImage imageWithData:imageData];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这样写有什么后果呢？</p>
 <h4 id="后果1：不可避免的卡顿（因为没有异步下载操作）"><a href="#后果1：不可避免的卡顿（因为没有异步下载操作）" class="headerlink" title="后果1：不可避免的卡顿（因为没有异步下载操作）"></a>后果1：不可避免的卡顿（因为没有异步下载操作）</h4><blockquote>
@@ -118,7 +118,7 @@ cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
 <p> <strong>2. 图片缓存（字典）</strong>：存放于内存中；键为图片的URL，值为UIImage对象。作用：读取速度快，直接使用UIImage对象。  </p>
 <p><strong>3. 下载操作缓存（字典）</strong>：存放与内存中，键为图片的URL，值为NSBlockOperation对象。作用：用来避免对于同一张图片还要开启多个下载线程。  </p>
 <p>**4. 沙盒缓存(文件路径对应NSData)**：存放于磁盘中，位于Cache文件夹内，路径为“Cache&#x2F;图片URL的最后的部分”，值为NSData对象（将UIImage转化为NSData才能写入磁盘里）。作用：程序断网，再次启动也可以直接在磁盘中拿到图片。</p>
-<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><pre class="language-none"><code class="language-none">&#x2F;**
+<h4 id="2-再看一下解决方案的代码"><a href="#2-再看一下解决方案的代码" class="headerlink" title="2. 再看一下解决方案的代码"></a>2. 再看一下解决方案的代码</h4><pre class="line-numbers language-none"><code class="language-none">&#x2F;**
  *  存放所有下载完的图片
  *&#x2F;
 @property (nonatomic, strong) NSMutableDictionary *images;
@@ -131,10 +131,10 @@ cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
 &#x2F;**
  *  拼接Cache文件夹的路径与url最后的部分，合并成唯一约定好的缓存路径
  *&#x2F;
-#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]</code></pre>
+#define CachedImageFile(url) [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:[url lastPathComponent]]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>2.2 图片下载之前的查询缓存部分</strong>：</p>
-<pre class="language-none"><code class="language-none">&#x2F;&#x2F; 先从images缓存中取出图片url对应的UIImage
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 先从images缓存中取出图片url对应的UIImage
     UIImage *image &#x3D; self.images[app.icon];
     if (image) &#123; 
 
@@ -165,10 +165,10 @@ cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
             &#x2F;&#x2F; 下载图片
             [self download:app.icon indexPath:indexPath];
         &#125;
-    &#125;</code></pre>
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>2.3 图片的下载部分</strong>：</p>
-<pre class="language-none"><code class="language-none">&#x2F;**
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
  *  下载图片
  *
  *  @param imageUrl 图片的url
@@ -214,7 +214,7 @@ cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
 
     &#x2F;&#x2F; 将当前下载操作添加到下载操作缓存中 (为了解决重复下载)
     self.operations[imageUrl] &#x3D; operation;
-&#125;</code></pre>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-有哪些点是值得注意的？"><a href="#3-有哪些点是值得注意的？" class="headerlink" title="3. 有哪些点是值得注意的？"></a>3. 有哪些点是值得注意的？</h4><p>要说值得注意的地方，还是离不开对于缓存内容的添加和删除操作。</p>
 <p><strong>3.1 关于图片缓存</strong>：<br>很简单，成功下载，拿到了图片，就将图片添加到图片缓存中；下载失败，什么都不做，反正没有图。在这种机制下，就没有删除缓存里某个图片项的情况，因为图片缓存永远不会出现重复添加多个相同图片的情况，缓存中只要有一张对应的图，就直接拿去用了，不会去再下载了。</p>
@@ -227,8 +227,8 @@ cell.imageView.image &#x3D; [UIImage imageWithData:imageData];</code></pre>
 <li>如果未来下载成功了，那么我们就不会来到判断当前下载操作是否在下载操作缓存这一步，在这之前直接就可以拿图去用了，下载操作是否存在下载操作缓存里并没有什么影响。</li>
 <li>但是！如果未来下载失败了，那就肯定不会有对应的图片缓存和沙盒缓存，也就肯定会来到判断当前的下载操作是否在下载操作缓存里这一步。不幸的是，因为没有被删去，它是存在的。存在的话就不做任何其他操作，放任自流，导致曾经下载失败的图片永远不会再次下载。<br>忘了那段代码了么？回看一下代码（看我多好）：</li>
 </ul>
-<pre class="language-none"><code class="language-none">NSBlockOperation *operation &#x3D; self.operations[imageUrl];
- if (operation) return;&#x2F;&#x2F;转身就走，毫不留情</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">NSBlockOperation *operation &#x3D; self.operations[imageUrl];
+ if (operation) return;&#x2F;&#x2F;转身就走，毫不留情<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
 <p>因此，无论下载成功或是失败，在图片下载的回调里都要将当前的下载操作从下载操作队列中移走：用来保证如果下载失败了，就可以重新开启对应的下载操作进行下载，逻辑上更加严谨。</p>

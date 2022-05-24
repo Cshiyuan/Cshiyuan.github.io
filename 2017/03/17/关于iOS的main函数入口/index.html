@@ -88,13 +88,13 @@
 <article class='content md post'>
 <h1 class="article-title"><span>关于iOS的main函数入口</span></h1>
 <p>所有基于C编写的App的入口都是main函数，但iOS应用程序有点不同。不同就是你不需要为iOS应用程序而自己编写main函数，当你使用Xcode创建工程的时候就已经提供了。</p>
-<pre class="language-none"><code class="language-none">#import UIKit&#x2F;UIKit.h
+<pre class="line-numbers language-none"><code class="language-none">#import UIKit&#x2F;UIKit.h
 int main(int argc, char *argv[])  
 &#123;  
     @autoreleasepool &#123;       
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([MyAppDelegate class]));  
     &#125;  
-&#125;</code></pre>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p>UIApplicationMain函数有四个参数，你不需要改变这些参数值，不过我们也需要理解这些参数和程序是如何开始的。argc和argv参数包含了系统带过来的启动时间。第三个参数确定了主要应用程序类的名称，这个参数指定为nil，这样UIKit就会使用默认的程序类UIApplication。第四个参数是程序自定义的代理类名，这个类负责系统和代码之间的交互。它一般在Xcode新建项目时会自动生成。</p>

@@ -121,7 +121,7 @@ ar: creating archive libTest.a`</pre>
 <li><p>2.下面把其中一个demo.m换成汇编语言再参与编译:用下面的命令把demo.m的C代码转换为ARM64汇编语言格式demo.s:</p>
 </li>
 </ul>
-<pre class="language-none"><code class="language-none">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m
+<pre class="line-numbers language-none"><code class="language-none">wuqiong:~ apple$ xcrun -sdk iphoneos clang -arch arm64 -S demo.m
 wuqiong:~ apple$ cat demo.s
     .section    __TEXT,__text,regular,pure_instructions
     .ios_version_min 9, 2
@@ -184,7 +184,7 @@ __.SYMDEF SORTED
 test.o
 demo.o
 wuqiong:~ apple$ otool -l libTest.a | grep bitcode
-  sectname __bitcode</code></pre>
+  sectname __bitcode<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p>很意外,这一次,只有一行<code>sectname __bitcode</code>输出,这就说明这两个目标文件,有一个不带有bitcode段,哪怕我们在编译的时候指定了参数<code>-fembed-bitcode</code>也没有用.至于具体是哪一个不带bitcode段,我们肯定知道就是那个从ARM64汇编语言编译过来的目标文件不带.</p>

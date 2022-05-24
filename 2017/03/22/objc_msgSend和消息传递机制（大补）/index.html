@@ -126,7 +126,7 @@
 
 <h2 id="完整的消息转发"><a href="#完整的消息转发" class="headerlink" title="完整的消息转发"></a>完整的消息转发</h2><p>如果转发<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure" title="算法与数据结构知识库">算法</a>已经来到这一步，那么唯一能做的就是启动完整的消息转发机制了。首先创建NSInvacaton对象，把与尚未处理的那条消息有关的全部细节都封于其中，此对象包含选择子、目标（target）及参数。在触发NSInvocation对象时，“消息派发系统”将亲自出马，把消息指派给目标对象。</p>
 <p>此步骤会调用下列方法转发消息：</p>
-<pre class="language-none"><code class="language-none">-(void)forwardInvocation:(NSInvocation*)invocation</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">-(void)forwardInvocation:(NSInvocation*)invocation<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这个方法可以实现得很简单：只需要改变调用目标，使消息在新目标上得以调用即可。然而这样实现出来的方法与“备援接收者”方案所实现的方法等效，所以很少有人采用这么简单的实现方式。比较有用的实现方式为：在触发消息前，先以某种方式改变消息内容，比如追加另外一个参数，或是该换选择子，等等。</p>
 <p>实现此方法时，若发现某调用操作不应本类处理，则需要调用超类的同名方法。这样的话，继承体系中的每个类都有机会处理此调用请求，直至NSObject。如果最后调用了NSObject类的方法，那么该方法还会继而调用“doesNotRecognizeSelector:”以抛出异常，次异常表示选择子最终未能得到处理。</p>

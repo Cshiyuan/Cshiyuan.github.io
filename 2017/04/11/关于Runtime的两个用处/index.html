@@ -98,16 +98,16 @@
 <h4 id="1-类与对象的存储结构"><a href="#1-类与对象的存储结构" class="headerlink" title="1.类与对象的存储结构"></a>1.类与对象的存储结构</h4><ul>
 <li>对象的结构：首先了解一点，OC中对象、类、Block这些在运行的时候最终都是已结构体的形式存储的，其中对象的结构体如下：</li>
 </ul>
-<pre class="language-none"><code class="language-none">struct objc_object &#123;
+<pre class="line-numbers language-none"><code class="language-none">struct objc_object &#123;
   Class isa  OBJC_ISA_AVAILABILITY;
 &#125;;
-typedef struct objc_object *id;</code></pre>
+typedef struct objc_object *id;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><em>isa指针：对象的isa指针是一个指向该对象类（Class）的指针，翻译过来就是“是一个”，这个对象“是一个”Class的对象。在代码执行过程中，通过isa指针找到对象的类，在类中存储着许多的信息，包括属性列表和方法列表以及其他信息。</em></p>
 <ul>
 <li>类的结构：在代码执行过程中通过对象的isa指针找到类的地址后，会在类的结构体中寻找执行函数所需要的信息，类的结构体如下:</li>
 </ul>
-<pre class="language-none"><code class="language-none">struct objc_class &#123;
+<pre class="line-numbers language-none"><code class="language-none">struct objc_class &#123;
       Class isa  OBJC_ISA_AVAILABILITY;
 
   #if !__OBJC2__
@@ -122,7 +122,7 @@ typedef struct objc_object *id;</code></pre>
       struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  &#x2F;&#x2F; 协议列表
   #endif
 
-  &#125; OBJC2_UNAVAILABLE;</code></pre>
+  &#125; OBJC2_UNAVAILABLE;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p><em>isa指针：类的isa指针指向该类的元类，也就是说我们使用的类其实也是一个对象，在类的结构体中存储实例方法，在元类的结构体中存储类方法。</em><br>    <em>objc_ivar_list：成员变量列表，存储类的成员变量，可以通过操作这个成员变量列表来添加属性。</em><br>    <em>objc_method_list：实例方法列表，存储类的实例方法，可以用过实例方法列表来交换方法的实现，自定义方法的实现。</em><br>    <em>cache：方法缓存，这个缓存的主要作用是将该类使用过的方法缓存起来，我们平时使用xCode编程的方法提示就是缓存在这个cache中。</em></p>

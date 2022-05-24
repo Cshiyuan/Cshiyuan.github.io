@@ -86,71 +86,71 @@
 <article class='content md post'>
 <h1 class="article-title"><span>Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</span></h1>
 <h2 id="MySql安装"><a href="#MySql安装" class="headerlink" title="MySql安装"></a>MySql安装</h2><h4 id="下载-mysql-源安装包"><a href="#下载-mysql-源安装包" class="headerlink" title="下载 mysql 源安装包"></a>下载 mysql 源安装包</h4><p>下载到本地</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ curl -LO http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql57-community-release-el7-11.noarch.rpm</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ curl -LO http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql57-community-release-el7-11.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="安装-mysql-源"><a href="#安装-mysql-源" class="headerlink" title="安装 mysql 源"></a>安装 mysql 源</h4><p>本地安装源</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="检查-yum-源是否安装成功"><a href="#检查-yum-源是否安装成功" class="headerlink" title="检查 yum 源是否安装成功"></a>检查 yum 源是否安装成功</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum repolist enabled | grep &quot;mysql.*-community.*&quot;
+<h4 id="检查-yum-源是否安装成功"><a href="#检查-yum-源是否安装成功" class="headerlink" title="检查 yum 源是否安装成功"></a>检查 yum 源是否安装成功</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum repolist enabled | grep &quot;mysql.*-community.*&quot;
 mysql-connectors-community           MySQL Connectors Community              21
 mysql-tools-community                MySQL Tools Community                   38
-mysql57-community                    MySQL 5.7 Community Server             130</code></pre>
+mysql57-community                    MySQL 5.7 Community Server             130<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum install mysql-community-server</code></pre>
+<h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo yum install mysql-community-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><ul>
-<li>安装服务<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl enable mysqld</code></pre></li>
-<li>启动服务<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl start mysqld</code></pre></li>
-<li>查看服务状态<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl status mysqld</code></pre></li>
+<li>安装服务<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl enable mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>启动服务<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl start mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>查看服务状态<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl status mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h4 id="修改-root-默认密码"><a href="#修改-root-默认密码" class="headerlink" title="修改 root 默认密码"></a>修改 root 默认密码</h4><p>MySQL 5.7 启动后，在 &#x2F;var&#x2F;log&#x2F;mysqld.log 文件中给 root 生成了一个默认密码。通过下面的方式找到 root 默认密码，然后登录 mysql 进行修改：</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ grep &#39;temporary password&#39; &#x2F;var&#x2F;log&#x2F;mysqld.log
-[Note] A temporary password is generated for root@localhost: **********</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ grep &#39;temporary password&#39; &#x2F;var&#x2F;log&#x2F;mysqld.log
+[Note] A temporary password is generated for root@localhost: **********<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>登录 MySQL 并修改密码</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ mysql -u root -p
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ mysql -u root -p
 Enter password: 
-mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;;</code></pre>
+mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h4><p>MySQL 默认只允许 root 帐户在本地登录，如果要在其它机器上连接 MySQL，必须修改 root 允许远程连接，或者添加一个允许远程连接的帐户，为了安全起见，本例添加一个新的帐户：</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;admin&#39;@&#39;%&#39; IDENTIFIED BY &#39;secret&#39; WITH GRANT OPTION;</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;admin&#39;@&#39;%&#39; IDENTIFIED BY &#39;secret&#39; WITH GRANT OPTION;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 <h4 id="配置默认编码为-utf8"><a href="#配置默认编码为-utf8" class="headerlink" title="配置默认编码为 utf8"></a>配置默认编码为 utf8</h4><p>MySQL 默认为 latin1, 一般修改为 UTF-8</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ vi &#x2F;etc&#x2F;my.cnf
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ vi &#x2F;etc&#x2F;my.cnf
 [mysqld]
 
 &#x2F;&#x2F; 在myslqd下添加如下键值对
 
 character_set_server&#x3D;utf8
-init_connect&#x3D;&#39;SET NAMES utf8&#39;</code></pre>
-<h4 id="重启-MySQL-服务，使配置生效"><a href="#重启-MySQL-服务，使配置生效" class="headerlink" title="重启 MySQL 服务，使配置生效"></a>重启 MySQL 服务，使配置生效</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl restart mysqld</code></pre>
+init_connect&#x3D;&#39;SET NAMES utf8&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="重启-MySQL-服务，使配置生效"><a href="#重启-MySQL-服务，使配置生效" class="headerlink" title="重启 MySQL 服务，使配置生效"></a>重启 MySQL 服务，使配置生效</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h4><p>还要检查一下防火墙， 检查一下腾讯云的安全组</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ sudo firewall-cmd --zone&#x3D;public --add-port&#x3D;3306&#x2F;tcp --permanent
-$ sudo firewall-cmd --reload</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ sudo firewall-cmd --zone&#x3D;public --add-port&#x3D;3306&#x2F;tcp --permanent
+$ sudo firewall-cmd --reload<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>使用 yum 命令来安装 Nginx</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">sudo yum install -y nginx</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">sudo yum install -y nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装完成的 Nginx 并不会立刻启动，需要我们手动执行命令来开启它:</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">sudo systemctl start nginx.service</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">sudo systemctl start nginx.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>还可以输入以下命令，让 Nginx 可以随系统自动启动：</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">sudo systemctl enable nginx</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">sudo systemctl enable nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="相关补充"><a href="#相关补充" class="headerlink" title="相关补充"></a>相关补充</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash"># 开启 Nginx
+<h4 id="相关补充"><a href="#相关补充" class="headerlink" title="相关补充"></a>相关补充</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 开启 Nginx
 service nginx start
 # 停止 Nginx
 service nginx stop
 # 重启 Nginx
 service nginx restart
 # 查看 Nginx 状态
-service nginx status</code></pre>
+service nginx status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Nginx 的默认站点根目录为</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>默认站点配置在</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Nginx 主配置如下</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;etc&#x2F;nginx&#x2F;nginx.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="防火墙指令"><a href="#防火墙指令" class="headerlink" title="防火墙指令"></a>防火墙指令</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash">systemctl start firewalld.service  #启动firewall
+<h4 id="防火墙指令"><a href="#防火墙指令" class="headerlink" title="防火墙指令"></a>防火墙指令</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">systemctl start firewalld.service  #启动firewall
 systemctl stop firewalld.service  #停止firewall
 systemctl disable firewalld.service  #禁止firewall开机启动,enable
 firewall-cmd --state  #防火墙状态
@@ -161,9 +161,9 @@ firewall-cmd --query-service nginx #查看服务启动的状态
 
 firewall-cmd --add-service&#x3D;ftp --permanent  #永久开放ftp服务
 firewall-cmd --remove-service&#x3D;ftp --permanent  #永久关闭ftp服务
-firewall-cmd --get-service  #查看服务名称   </code></pre>
+firewall-cmd --get-service  #查看服务名称   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="ssh免登陆"><a href="#ssh免登陆" class="headerlink" title="ssh免登陆"></a>ssh免登陆</h2><h4 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h4><pre class="language-Bash" data-language="Bash"><code class="language-Bash">ssh-keygen -t rsa</code></pre>
+<h2 id="ssh免登陆"><a href="#ssh免登陆" class="headerlink" title="ssh免登陆"></a>ssh免登陆</h2><h4 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">ssh-keygen -t rsa<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="将公钥拷贝到目标主机"><a href="#将公钥拷贝到目标主机" class="headerlink" title="将公钥拷贝到目标主机"></a>将公钥拷贝到目标主机</h4><p>用ssh登录到目标主机，然后cd <del>&#x2F;.ssh目录，如果目录不存在，那么要自己创建mkdir -p ~&#x2F;.ssh。你今后要用哪个帐户登录主机，就在哪个帐户的home目录下操作，如果要免登陆root，就要去&#x2F;root下操作。使用</del>比较好，不用多想了。</p>
 <p>有了.ssh目录后，进去，然后把id_rsa.pub传过去，可以用scp命令，这里要做的一个主要操作，就是将id_rsa.pub，的文件内容，写到一个叫authorized_keys的文件中去，如果目标主机的相应用户名下已经有了.ssh目录和authorized_keys文件，那你操作要小心一点，可能别人也做过免登陆的设置，这个时候你要小心不要把别人的设置给覆盖了。如果没有的话，就创建文件touch ~&#x2F;.ssh&#x2F;authorized_keys，然后执行cat id_rsa.pub &gt;&gt; authorized_keys，将你的公钥写入到authorized_keys中，公钥文件.pub里面只有一行信息，上面的命令相当于把那一行信息追加到authorized_keys文件最后一行。</p>
@@ -174,7 +174,7 @@ firewall-cmd --get-service  #查看服务名称   </code></pre>
 <li>本地环境：就是你开发用的PC，就叫它Local吧。</li>
 </ul>
 <h4 id="服务器端（Server）"><a href="#服务器端（Server）" class="headerlink" title="服务器端（Server）"></a>服务器端（Server）</h4><p>服务端和本地需要安装node.js、pm2、git</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash"># 更新 yum
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 更新 yum
 $ yum update -y
 
 # 1. 安装node.js
@@ -184,18 +184,18 @@ $ yum install nodejs -y
 $ yum install git -y
 
 # 3. 安装pm2
-$ npm install -g pm2</code></pre>
+$ npm install -g pm2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="在Github上添加Deploy-Keys"><a href="#在Github上添加Deploy-Keys" class="headerlink" title="在Github上添加Deploy Keys"></a>在Github上添加Deploy Keys</h4><p>在服务器（Server）上执行：</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash"># 生成ssh key，一路回车即可
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 生成ssh key，一路回车即可
 $ ssh-keygen -t rsa
 
 # 查看公钥内容
 $ cat ~&#x2F;.ssh&#x2F;id_rsa.pub
-# 然后复制整个内容，并添加到Github上对应的项目仓库Settings下的Deploy keys中。</code></pre>
+# 然后复制整个内容，并添加到Github上对应的项目仓库Settings下的Deploy keys中。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="pm2部署"><a href="#pm2部署" class="headerlink" title="pm2部署"></a>pm2部署</h2><p>在项目的根目录下，执行：</p>
-<pre class="language-Bash" data-language="Bash"><code class="language-Bash">$ pm2 ecosystem</code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">$ pm2 ecosystem<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>接下来就看官方文档更好</p>
 <p><a target="_blank" rel="noopener" href="http://pm2.keymetrics.io/docs/usage/deployment/">http://pm2.keymetrics.io/docs/usage/deployment/</a></p>

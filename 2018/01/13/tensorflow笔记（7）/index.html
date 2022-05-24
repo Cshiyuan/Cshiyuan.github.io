@@ -89,193 +89,193 @@
 <h1 class="article-title"><span>tensorflow笔记（7）</span></h1>
 <p>###RNN LSTM（回归例子）</p>
 <p>这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. </p>
-<pre class="language-python" data-language="python"><code class="language-python"># 这次我们会使用 RNN 来进行回归的训练 (Regression).
-# 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.
-# 接下来我们先确定 RNN 的各种参数(super-parameters):
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 这次我们会使用 RNN 来进行回归的训练 (Regression).</span>
+<span class="token comment"># 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.</span>
+<span class="token comment"># 接下来我们先确定 RNN 的各种参数(super-parameters):</span>
 
-import tensorflow as tf
-import numpy as np
-import matplotlib.pyplot as plt
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
-BATCH_START &#x3D; 0  # 建立 batch data 时候的 index
-TIME_STEPS &#x3D; 20  # backpropagation through time 的 time_steps
-BATCH_SIZE &#x3D; 50
-INPUT_SIZE &#x3D; 1  # sin数据输入 size
-OUTPUT_SIZE &#x3D; 1  # cos数据输出 size
-CELL_SIZE &#x3D; 10  # RNN的 hidden unit size
-LR &#x3D; 0.006  # learning rate
-
-
-## 数据生成 ##
-# 定义一个生成数据的 get_batch function：
-def get_batch():
-    global BATCH_START, TIME_STEPS
-    # xs shape (50 batch, 20 steps)
-    xs &#x3D; np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
-        (BATCH_SIZE, TIME_STEPS)) &#x2F; (10 * np.pi)
-    seq &#x3D; np.sin(xs)
-    res &#x3D; np.cos(xs)
-    BATCH_START +&#x3D; TIME_STEPS
-    # returned seq, res and xs: shape (batch, step, input)
-    return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
+BATCH_START <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 建立 batch data 时候的 index</span>
+TIME_STEPS <span class="token operator">=</span> <span class="token number">20</span>  <span class="token comment"># backpropagation through time 的 time_steps</span>
+BATCH_SIZE <span class="token operator">=</span> <span class="token number">50</span>
+INPUT_SIZE <span class="token operator">=</span> <span class="token number">1</span>  <span class="token comment"># sin数据输入 size</span>
+OUTPUT_SIZE <span class="token operator">=</span> <span class="token number">1</span>  <span class="token comment"># cos数据输出 size</span>
+CELL_SIZE <span class="token operator">=</span> <span class="token number">10</span>  <span class="token comment"># RNN的 hidden unit size</span>
+LR <span class="token operator">=</span> <span class="token number">0.006</span>  <span class="token comment"># learning rate</span>
 
 
-## 定义LSTMRNN 的主体结构 ##
+<span class="token comment">## 数据生成 ##</span>
+<span class="token comment"># 定义一个生成数据的 get_batch function：</span>
+<span class="token keyword">def</span> <span class="token function">get_batch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> BATCH_START<span class="token punctuation">,</span> TIME_STEPS
+    <span class="token comment"># xs shape (50 batch, 20 steps)</span>
+    xs <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>BATCH_START<span class="token punctuation">,</span> BATCH_START <span class="token operator">+</span> TIME_STEPS <span class="token operator">*</span> BATCH_SIZE<span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>BATCH_SIZE<span class="token punctuation">,</span> TIME_STEPS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi<span class="token punctuation">)</span>
+    seq <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>xs<span class="token punctuation">)</span>
+    res <span class="token operator">=</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>xs<span class="token punctuation">)</span>
+    BATCH_START <span class="token operator">+=</span> TIME_STEPS
+    <span class="token comment"># returned seq, res and xs: shape (batch, step, input)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>seq<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>newaxis<span class="token punctuation">]</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>newaxis<span class="token punctuation">]</span><span class="token punctuation">,</span> xs<span class="token punctuation">]</span>
 
 
-class LSTMRNN(object):
-    def __init__(self, n_steps, input_size, output_size, cell_size,
-                 batch_size):
-
-        self.n_steps &#x3D; n_steps
-        self.input_size &#x3D; input_size
-        self.output_size &#x3D; output_size
-        self.cell_size &#x3D; cell_size
-        self.batch_size &#x3D; batch_size
-
-        with tf.name_scope(&#39;inputs&#39;):
-            self.xs &#x3D; tf.placeholder(
-                tf.float32, [None, n_steps, input_size], name&#x3D;&#39;xs&#39;)
-            self.ys &#x3D; tf.placeholder(
-                tf.float32, [None, n_steps, output_size], name&#x3D;&#39;ys&#39;)
-
-        with tf.variable_scope(&#39;in_hidden&#39;):
-            self.add_input_layer()
-
-        with tf.variable_scope(&#39;LSTM_cell&#39;):
-            self.add_cell()
-
-        with tf.variable_scope(&#39;out_hidden&#39;):
-            self.add_output_layer()
-
-        with tf.name_scope(&#39;cost&#39;):
-            self.compute_cost()
-
-        with tf.name_scope(&#39;train&#39;):
-            self.train_op &#x3D; tf.train.AdamOptimizer(LR).minimize(self.cost)
-
-    # 设置 add_input_layer 功能, 添加 input_layer:
-    def add_input_layer(self, ):
-
-        l_in_x &#x3D; tf.reshape(
-            self.xs, [-1, self.input_size],
-            name&#x3D;&#39;2_2D&#39;)  #  (batch*n_step, in_size)
-        # Ws (in_size, cell_size)
-        Ws_in &#x3D; self._weight_variable([self.input_size, self.cell_size])
-        # bs (cell_size, )
-        bs_in &#x3D; self._bias_variable([self.cell_size])
-        # l_in_y &#x3D; (batch * n_steps, cell_size)
-        with tf.name_scope(&#39;Wx_plus_b&#39;):
-            l_in_y &#x3D; tf.matmul(l_in_x, Ws_in) + bs_in
-        #reshape l_in_y &#x3D;&#x3D;&gt; (batch, n_steps, cell_size)
-        self.l_in_y &#x3D; tf.reshape(
-            l_in_y, [-1, self.n_steps, self.cell_size], name&#x3D;&#39;2_3D&#39;)
-
-    # 设置 add_cell 功能, 添加 cell,
-    # 注意这里的 self.cell_init_state,
-    # 因为我们在 training 的时候, 这个地方要特别说明.
-    def add_cell(self):
-
-        lstm_cell &#x3D; tf.contrib.rnn.BasicLSTMCell(
-            self.cell_size, forget_bias&#x3D;1.0, state_is_tuple&#x3D;True)
-        with tf.name_scope(&#39;initial_state&#39;):
-            self.cell_init_state &#x3D; lstm_cell.zero_state(
-                self.batch_size, dtype&#x3D;tf.float32)
-            self.cell_outputs, self.cell_final_state &#x3D; tf.nn.dynamic_rnn(
-                lstm_cell,
-                self.l_in_y,
-                initial_state&#x3D;self.cell_init_state,
-                time_major&#x3D;False)
-
-    # 设置 add_output_layer 功能, 添加 output_layer:
-    def add_output_layer(self):
-        # shape &#x3D; (batch * steps, cell_size)
-        l_out_x &#x3D; tf.reshape(
-            self.cell_outputs, [-1, self.cell_size], name&#x3D;&#39;2_2D&#39;)
-        Ws_out &#x3D; self._weight_variable([self.cell_size, self.output_size])
-        bs_out &#x3D; self._bias_variable([
-            self.output_size,
-        ])
-        # shape &#x3D; (batch * steps, out_size)
-        with tf.name_scope(&#39;Wx_plus_b&#39;):
-            self.pred &#x3D; tf.matmul(l_out_x, Ws_out) + bs_out
-
-    #添加RNN中剩下的部分：
-    def compute_cost(self):
-        losses &#x3D; tf.contrib.legacy_seq2seq.sequence_loss_by_example(
-            [tf.reshape(self.pred, [-1], name&#x3D;&#39;reshape_pred&#39;)],
-            [tf.reshape(self.ys, [-1], name&#x3D;&#39;reshape_target&#39;)],
-            [tf.ones([self.batch_size * self.n_steps], dtype&#x3D;tf.float32)],
-            average_across_timesteps&#x3D;True,
-            softmax_loss_function&#x3D;self.ms_error,
-            name&#x3D;&#39;losses&#39;)
-        with tf.name_scope(&#39;average_cost&#39;):
-            self.cost &#x3D; tf.div(
-                tf.reduce_sum(losses, name&#x3D;&#39;losses_sum&#39;),
-                self.batch_size,
-                name&#x3D;&#39;average_cost&#39;)
-            tf.summary.scalar(&#39;cost&#39;, self.cost)
-
-    @staticmethod
-    def ms_error(labels, logits):
-        return tf.square(tf.subtract(labels, logits))
-
-    def _weight_variable(self, shape, name&#x3D;&#39;weights&#39;):
-        initializer &#x3D; tf.random_normal_initializer(
-            mean&#x3D;0.,
-            stddev&#x3D;1.,
-        )
-        return tf.get_variable(shape&#x3D;shape, initializer&#x3D;initializer, name&#x3D;name)
-
-    def _bias_variable(self, shape, name&#x3D;&#39;biases&#39;):
-        initializer &#x3D; tf.constant_initializer(0.1)
-        return tf.get_variable(name&#x3D;name, shape&#x3D;shape, initializer&#x3D;initializer)
+<span class="token comment">## 定义LSTMRNN 的主体结构 ##</span>
 
 
-## 训练 LSTMRNN ##
+<span class="token keyword">class</span> <span class="token class-name">LSTMRNN</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n_steps<span class="token punctuation">,</span> input_size<span class="token punctuation">,</span> output_size<span class="token punctuation">,</span> cell_size<span class="token punctuation">,</span>
+                 batch_size<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+        self<span class="token punctuation">.</span>n_steps <span class="token operator">=</span> n_steps
+        self<span class="token punctuation">.</span>input_size <span class="token operator">=</span> input_size
+        self<span class="token punctuation">.</span>output_size <span class="token operator">=</span> output_size
+        self<span class="token punctuation">.</span>cell_size <span class="token operator">=</span> cell_size
+        self<span class="token punctuation">.</span>batch_size <span class="token operator">=</span> batch_size
 
-    #搭建 LSTMRNN 模型
-    model &#x3D; LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
-    sess &#x3D; tf.Session()
-    # sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法
-    # 替换成下面的写法：
-    sess.run(tf.global_variables_initializer())
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'inputs'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>xs <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>
+                tf<span class="token punctuation">.</span>float32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> n_steps<span class="token punctuation">,</span> input_size<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'xs'</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>ys <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>
+                tf<span class="token punctuation">.</span>float32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> n_steps<span class="token punctuation">,</span> output_size<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'ys'</span><span class="token punctuation">)</span>
 
-    # matplotlib 可视化
-    plt.ion()  # 设置连续 plot
-    plt.show()
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'in_hidden'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>add_input_layer<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    # 训练 200 次
-    for i in range(200):
-        seq, res, xs &#x3D; get_batch()  # 提取 batch data
-        if i &#x3D;&#x3D; 0:
-            # 初始化data
-            feed_dict &#x3D; &#123;model.xs: seq, model.ys: res&#125;
-        else:
-            feed_dict &#x3D; &#123;
-                model.xs: seq,
-                model.ys: res,
-                model.cell_init_state: state  # 保持 state 的连续性
-            &#125;
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'LSTM_cell'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>add_cell<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        # 训练
-        _, cost, state, pred &#x3D; sess.run(
-            [model.train_op, model.cost, model.cell_final_state, model.pred],
-            feed_dict&#x3D;feed_dict)
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'out_hidden'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>add_output_layer<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        # plotting
-        plt.plot(xs[0, :], res[0].flatten(), &#39;r&#39;, xs[0, :],
-                 pred.flatten()[:TIME_STEPS], &#39;b--&#39;)
-        plt.ylim((-1.2, 1.2))
-        plt.draw()
-        plt.pause(0.3)  # 每 0.3 s 刷新一次
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>compute_cost<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        # 打印 cost 结构
-        if i % 20 &#x3D;&#x3D; 0:
-            print(&#39;cost:&#39;, round(cost, 4))
-</code></pre>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'train'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>train_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>AdamOptimizer<span class="token punctuation">(</span>LR<span class="token punctuation">)</span><span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>self<span class="token punctuation">.</span>cost<span class="token punctuation">)</span>
+
+    <span class="token comment"># 设置 add_input_layer 功能, 添加 input_layer:</span>
+    <span class="token keyword">def</span> <span class="token function">add_input_layer</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        l_in_x <span class="token operator">=</span> tf<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>xs<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>input_size<span class="token punctuation">]</span><span class="token punctuation">,</span>
+            name<span class="token operator">=</span><span class="token string">'2_2D'</span><span class="token punctuation">)</span>  <span class="token comment">#  (batch*n_step, in_size)</span>
+        <span class="token comment"># Ws (in_size, cell_size)</span>
+        Ws_in <span class="token operator">=</span> self<span class="token punctuation">.</span>_weight_variable<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>input_size<span class="token punctuation">,</span> self<span class="token punctuation">.</span>cell_size<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token comment"># bs (cell_size, )</span>
+        bs_in <span class="token operator">=</span> self<span class="token punctuation">.</span>_bias_variable<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>cell_size<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token comment"># l_in_y = (batch * n_steps, cell_size)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'Wx_plus_b'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            l_in_y <span class="token operator">=</span> tf<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>l_in_x<span class="token punctuation">,</span> Ws_in<span class="token punctuation">)</span> <span class="token operator">+</span> bs_in
+        <span class="token comment">#reshape l_in_y ==> (batch, n_steps, cell_size)</span>
+        self<span class="token punctuation">.</span>l_in_y <span class="token operator">=</span> tf<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>
+            l_in_y<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_steps<span class="token punctuation">,</span> self<span class="token punctuation">.</span>cell_size<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'2_3D'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 设置 add_cell 功能, 添加 cell,</span>
+    <span class="token comment"># 注意这里的 self.cell_init_state,</span>
+    <span class="token comment"># 因为我们在 training 的时候, 这个地方要特别说明.</span>
+    <span class="token keyword">def</span> <span class="token function">add_cell</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        lstm_cell <span class="token operator">=</span> tf<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>rnn<span class="token punctuation">.</span>BasicLSTMCell<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>cell_size<span class="token punctuation">,</span> forget_bias<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span> state_is_tuple<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'initial_state'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>cell_init_state <span class="token operator">=</span> lstm_cell<span class="token punctuation">.</span>zero_state<span class="token punctuation">(</span>
+                self<span class="token punctuation">.</span>batch_size<span class="token punctuation">,</span> dtype<span class="token operator">=</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>cell_outputs<span class="token punctuation">,</span> self<span class="token punctuation">.</span>cell_final_state <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>dynamic_rnn<span class="token punctuation">(</span>
+                lstm_cell<span class="token punctuation">,</span>
+                self<span class="token punctuation">.</span>l_in_y<span class="token punctuation">,</span>
+                initial_state<span class="token operator">=</span>self<span class="token punctuation">.</span>cell_init_state<span class="token punctuation">,</span>
+                time_major<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 设置 add_output_layer 功能, 添加 output_layer:</span>
+    <span class="token keyword">def</span> <span class="token function">add_output_layer</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># shape = (batch * steps, cell_size)</span>
+        l_out_x <span class="token operator">=</span> tf<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>cell_outputs<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>cell_size<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'2_2D'</span><span class="token punctuation">)</span>
+        Ws_out <span class="token operator">=</span> self<span class="token punctuation">.</span>_weight_variable<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>cell_size<span class="token punctuation">,</span> self<span class="token punctuation">.</span>output_size<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        bs_out <span class="token operator">=</span> self<span class="token punctuation">.</span>_bias_variable<span class="token punctuation">(</span><span class="token punctuation">[</span>
+            self<span class="token punctuation">.</span>output_size<span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token comment"># shape = (batch * steps, out_size)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'Wx_plus_b'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>pred <span class="token operator">=</span> tf<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>l_out_x<span class="token punctuation">,</span> Ws_out<span class="token punctuation">)</span> <span class="token operator">+</span> bs_out
+
+    <span class="token comment">#添加RNN中剩下的部分：</span>
+    <span class="token keyword">def</span> <span class="token function">compute_cost</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        losses <span class="token operator">=</span> tf<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>legacy_seq2seq<span class="token punctuation">.</span>sequence_loss_by_example<span class="token punctuation">(</span>
+            <span class="token punctuation">[</span>tf<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pred<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'reshape_pred'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span>tf<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>self<span class="token punctuation">.</span>ys<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'reshape_target'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span>tf<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>batch_size <span class="token operator">*</span> self<span class="token punctuation">.</span>n_steps<span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            average_across_timesteps<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+            softmax_loss_function<span class="token operator">=</span>self<span class="token punctuation">.</span>ms_error<span class="token punctuation">,</span>
+            name<span class="token operator">=</span><span class="token string">'losses'</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>name_scope<span class="token punctuation">(</span><span class="token string">'average_cost'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>cost <span class="token operator">=</span> tf<span class="token punctuation">.</span>div<span class="token punctuation">(</span>
+                tf<span class="token punctuation">.</span>reduce_sum<span class="token punctuation">(</span>losses<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'losses_sum'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                self<span class="token punctuation">.</span>batch_size<span class="token punctuation">,</span>
+                name<span class="token operator">=</span><span class="token string">'average_cost'</span><span class="token punctuation">)</span>
+            tf<span class="token punctuation">.</span>summary<span class="token punctuation">.</span>scalar<span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>cost<span class="token punctuation">)</span>
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">ms_error</span><span class="token punctuation">(</span>labels<span class="token punctuation">,</span> logits<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> tf<span class="token punctuation">.</span>square<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>subtract<span class="token punctuation">(</span>labels<span class="token punctuation">,</span> logits<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">_weight_variable</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> shape<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'weights'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        initializer <span class="token operator">=</span> tf<span class="token punctuation">.</span>random_normal_initializer<span class="token punctuation">(</span>
+            mean<span class="token operator">=</span><span class="token number">0.</span><span class="token punctuation">,</span>
+            stddev<span class="token operator">=</span><span class="token number">1.</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span>shape<span class="token operator">=</span>shape<span class="token punctuation">,</span> initializer<span class="token operator">=</span>initializer<span class="token punctuation">,</span> name<span class="token operator">=</span>name<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">_bias_variable</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> shape<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'biases'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        initializer <span class="token operator">=</span> tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> tf<span class="token punctuation">.</span>get_variable<span class="token punctuation">(</span>name<span class="token operator">=</span>name<span class="token punctuation">,</span> shape<span class="token operator">=</span>shape<span class="token punctuation">,</span> initializer<span class="token operator">=</span>initializer<span class="token punctuation">)</span>
+
+
+<span class="token comment">## 训练 LSTMRNN ##</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+
+    <span class="token comment">#搭建 LSTMRNN 模型</span>
+    model <span class="token operator">=</span> LSTMRNN<span class="token punctuation">(</span>TIME_STEPS<span class="token punctuation">,</span> INPUT_SIZE<span class="token punctuation">,</span> OUTPUT_SIZE<span class="token punctuation">,</span> CELL_SIZE<span class="token punctuation">,</span> BATCH_SIZE<span class="token punctuation">)</span>
+    sess <span class="token operator">=</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法</span>
+    <span class="token comment"># 替换成下面的写法：</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>global_variables_initializer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># matplotlib 可视化</span>
+    plt<span class="token punctuation">.</span>ion<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 设置连续 plot</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 训练 200 次</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        seq<span class="token punctuation">,</span> res<span class="token punctuation">,</span> xs <span class="token operator">=</span> get_batch<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 提取 batch data</span>
+        <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token comment"># 初始化data</span>
+            feed_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span>model<span class="token punctuation">.</span>xs<span class="token punctuation">:</span> seq<span class="token punctuation">,</span> model<span class="token punctuation">.</span>ys<span class="token punctuation">:</span> res<span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            feed_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+                model<span class="token punctuation">.</span>xs<span class="token punctuation">:</span> seq<span class="token punctuation">,</span>
+                model<span class="token punctuation">.</span>ys<span class="token punctuation">:</span> res<span class="token punctuation">,</span>
+                model<span class="token punctuation">.</span>cell_init_state<span class="token punctuation">:</span> state  <span class="token comment"># 保持 state 的连续性</span>
+            <span class="token punctuation">&#125;</span>
+
+        <span class="token comment"># 训练</span>
+        _<span class="token punctuation">,</span> cost<span class="token punctuation">,</span> state<span class="token punctuation">,</span> pred <span class="token operator">=</span> sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>
+            <span class="token punctuation">[</span>model<span class="token punctuation">.</span>train_op<span class="token punctuation">,</span> model<span class="token punctuation">.</span>cost<span class="token punctuation">,</span> model<span class="token punctuation">.</span>cell_final_state<span class="token punctuation">,</span> model<span class="token punctuation">.</span>pred<span class="token punctuation">]</span><span class="token punctuation">,</span>
+            feed_dict<span class="token operator">=</span>feed_dict<span class="token punctuation">)</span>
+
+        <span class="token comment"># plotting</span>
+        plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>xs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> xs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                 pred<span class="token punctuation">.</span>flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span>TIME_STEPS<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'b--'</span><span class="token punctuation">)</span>
+        plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.2</span><span class="token punctuation">,</span> <span class="token number">1.2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        plt<span class="token punctuation">.</span>draw<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        plt<span class="token punctuation">.</span>pause<span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">)</span>  <span class="token comment"># 每 0.3 s 刷新一次</span>
+
+        <span class="token comment"># 打印 cost 结构</span>
+        <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">20</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'cost:'</span><span class="token punctuation">,</span> <span class="token builtin">round</span><span class="token punctuation">(</span>cost<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

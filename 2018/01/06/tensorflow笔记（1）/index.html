@@ -91,7 +91,7 @@
 <li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu. </li>
 <li>在循环神经网络中(recurrent neural networks), 推荐的是 tanh 或者是 relu</li>
 </ul>
-<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 import numpy as np
 
 #create data
@@ -118,8 +118,8 @@ sess.run(init)
 for step in range(201):
     sess.run(train)
     if step % 20 &#x3D;&#x3D; 0:
-        print(step, sess.run(Weights), sess.run(biases))</code></pre>
-<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+        print(step, sess.run(Weights), sess.run(biases))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 
 #在tensorflow 中需要定义placeholder的type，yi ban
 input1 &#x3D; tf.placeholder(tf.float32)
@@ -131,10 +131,10 @@ output &#x3D; tf.multiply(input1, input2)
 #传值的工作交给了sess.run()
 
 with tf.Session() as sess:
-    print(sess.run(output, feed_dict&#x3D;&#123;input1: [7.], input2: [2.]&#125;))</code></pre>
+    print(sess.run(output, feed_dict&#x3D;&#123;input1: [7.], input2: [2.]&#125;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>####session使用例子</p>
-<pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 
 martrix1 &#x3D; tf.constant([[3, 3]])
 martrix2 &#x3D; tf.constant([[2], [2]])
@@ -151,8 +151,8 @@ sess.close()
 # method 2
 with tf.Session() as sess:
     result2 &#x3D; sess.run(product)
-    print(result2)</code></pre>
-<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre class="language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
+    print(result2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import tensorflow as tf
 
 state &#x3D; tf.Variable(0, name&#x3D;&quot;counter&quot;)
 
@@ -173,7 +173,7 @@ with tf.Session() as sess:
     sess.run(init)
     for _ in range(3):
         sess.run(update)
-        print(sess.run(state))</code></pre>
+        print(sess.run(state))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
 </div></section></div>

@@ -88,7 +88,7 @@
 <p>我个人理解就是：weak比assign多了一个功能就是当属性所指向的对象消失的时候（也就是内存引用计数为0）会自动赋值为nil，这样再向weak修饰的属性发送消息就不会导致野指针操作crash。</p>
 <p>可能不太好理解下面我写了一个演示程序。</p>
 <p>OC：</p>
-<pre class="language-none"><code class="language-none">&#x2F;&#x2F;
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;
 
 &#x2F;&#x2F;  ViewController.m
 
@@ -136,7 +136,7 @@ NSLog(@”weak属性：%@”,self.weakPoint);
 
 &#125;
 
-@end</code></pre>
+@end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p>当程序中的注释被打开时，运行程序有可能会崩溃（有时候不崩溃，你可能需要多运行几次），这是因为当assign指针所指向的内存被释放（释放并不等于抹除，只是引用计数为0），不会自动赋值nil，这样再引用self.assignPoint就会导致野指针操作，如果这个操作发生时内存还没有改变内容，依旧可以输出正确的结果，而如果发生时内存内容被改变了，就会crash。</p>
