@@ -1,844 +1,365 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
+  <meta name="generator" content="Hexo 6.2.0">
   <meta charset="utf-8">
   
 
-  
-  <title>C&#39;s Notebook</title>
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>C's Notebook</title>
+
+  
+
+  
+    <meta property="og:type" content="website">
 <meta property="og:title" content="C&#39;s Notebook">
 <meta property="og:url" content="https://cshiyuan.github.io/page/9/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
-  <!-- highlight.js代码高亮主题 css 引入-->
-  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">C&#39;s Notebook</a>
-      </h1>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout=''>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/11845557?s=96&v=4" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">C's Notebook</div><div class="sub cap">Hi! This is my technical notebook.</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div><div class="more-item"><a class="title" href="/2016/04/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%88%E5%B0%8F%E7%9F%A5%E8%AF%86%E6%91%98%E6%8A%84%EF%BC%89/">计算机小知识（小知识摘抄）</a></div><div class="more-item"><a class="title" href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main list'>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
-      </div>
-    </div>
-  </div>
+  
+
+<header class="header mobile-only">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/11845557?s=96&v=4" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">C's Notebook</div><div class="sub cap">Hi! This is my technical notebook.</div></a></div>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-眼睛是个筛子" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/06/%E7%9C%BC%E7%9D%9B%E6%98%AF%E4%B8%AA%E7%AD%9B%E5%AD%90/" class="article-date">
-  <time datetime="2016-09-05T16:30:55.000Z" itemprop="datePublished">2016-09-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/06/%E7%9C%BC%E7%9D%9B%E6%98%AF%E4%B8%AA%E7%AD%9B%E5%AD%90/">眼睛是个筛子</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span style="line-height: 1.5;">其实我经常，</span><span class="s1" style="line-height: 1.5;">发现身边某个阶级的年轻人真的对其他阶级一无所知，可能是精英主义教育让他们失去了对社会的观察和接触的机会吧。</span></p>
-<p><span class="s1">我挺失望的。因为年轻人往往站在某个高度去评价别的阶级。缺少同理心和包容心。让人很难过。</span></p>
-<p><span class="s1"><strong>其实「眼睛是个筛子，经历得越多，筛孔越大，能入眼的就越多」</strong>。</span></p>
-<p><span class="s1">当越来越多的个体能够悲悯，后人的书中大概就不会再出现这种句子了——</span></p>
-<p><strong><span class="s1">「呼兰河城里凡是一有跳井投河的，或是上吊的，那看热闹的人就特别多，我不知道中国别的地方是否这样，但在我的家乡确是这样的。」</span></strong></p>
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/06/%E7%9C%BC%E7%9D%9B%E6%98%AF%E4%B8%AA%E7%AD%9B%E5%AD%90/" data-id="cl3jmy3t5007xtxv317g49uij" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
 
 
-  
-    <article id="post-我最好的作品是我的生活－杜尚" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/05/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BD%9C%E5%93%81%E6%98%AF%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB%EF%BC%8D%E6%9D%9C%E5%B0%9A/" class="article-date">
-  <time datetime="2016-09-05T14:47:13.000Z" itemprop="datePublished">2016-09-05</time>
-</a>
+  <div class='nav-wrap'>
+  <nav class='sub post cap'>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
+      <a class='active' href='/'>近期发布</a>
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BD%9C%E5%93%81%E6%98%AF%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB%EF%BC%8D%E6%9D%9C%E5%B0%9A/">我最好的作品是我的生活－杜尚</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p><span class="s1">又遇到了书里的句子——</span></p>
-<p><span class="s1">「一个彻底的怀疑者、叛逆者，不必是个剑拔弩张的人，不必是一个处处起争执的人，他完全可以把他的对立表现得不动声色，乃至温润如玉，但同时却在最细微的方面都不对流俗作妥协。」</span></p>
-<p>&amp;nbsp;</p>
-<p><span class="s1">涉身时能看到的鲜活世界当然是我选择躲避时所看不到的。<strong>这个时代迅速地就让我感到困惑和疲惫</strong>。</span></p>
-<p><span class="s1">这个时代仿佛越来越钝感了，什么都得加大剂量。你拍别人肩膀人家已经懒得搭理你了，非得抽人一巴掌人家才会有反应。只吃得下浓油赤酱丰腴味，却品不出清淡薄盐本蔬香。现在追求的都是即时的性滚烫，一抹若有似无的微笑已经勾不起心跳。</span></p>
-<p><span class="s1">疲惫，是因为我在跟着什么东西跑，我们以前从来不喜欢跑，更不喜欢跟着谁跑，但我这样一跑起来，好像就自动背负上了某种竞争的期望——除了跑赢前面一个人、再前面一个人，仿佛没别的选择了似的。</span></p>
-<p>&amp;nbsp;</p>
-<p><span class="s1">当你旗帜鲜明地反对某个概念的时候，其实恰恰说明你被它束缚之深。「挣脱」不是自由，不必卷入外物的纷争才是自由。他们在吵吵嚷嚷「jump out of the box」，但其实他们要 jump out 的那个 box 你还根本没进去过啊。要对自己有点自信，不要轻易地就被带跑偏了。</span></p>
-
+        <a href='/categories'>分类</a>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/09/05/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BD%9C%E5%93%81%E6%98%AF%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB%EF%BC%8D%E6%9D%9C%E5%B0%9A/" data-id="cl3jmy3t2007htxv37qhw5yn8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-orm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/31/orm/" class="article-date">
-  <time datetime="2016-08-31T05:25:03.000Z" itemprop="datePublished">2016-08-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/31/orm/">ORM</a>
-    </h1>
-  
-
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>一、ORM简介<br>对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>这种方案存在以下不足：<br>1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。</p>
-<p>ORM提供了实现持久化层的另一种模式，它采用映射元数据来描述对象关系的映射，使得ORM中间件能在任何一个应用的业务逻辑层和数据库层之间充当桥梁。Java典型的ORM中间件有:Hibernate,ibatis,speedframework。<br>ORM的方法论基于三个核心原则：<br>· 简单：以最基本的形式建模数据。<br>· 传达性：数据库结构被任何人都能理解的语言文档化。<br>· 精确性：基于数据模型创建正确标准化了的结构。</p>
-<p>二、ORM的概念<br>让我们从O&#x2F;R开始。字母O起源于”对象”(Object),而R则来自于”关系”(Relational)。几乎所有的程序里面，都存在对象和关系数据库。在业务逻辑层和用户界面层中，我们是面向对象的。当对象信息发生变化的时候，我们需要把对象的信息保存在关系数据库中。<br>当你开发一个应用程序的时候(不使用O&#x2F;R Mapping),你可能会写不少数据访问层的代码，用来从数据库保存，删除，读取对象信息，等等。你在DAL中写了很多的方法来读取对象数据，改变状态对象等等任务。而这些代码写起来总是重复的。</p>
-<p>ORM解决的主要问题是对象关系的映射。域模型和关系模型分别是建立在概念模型的基础上的。域模型是面向对象的，而关系模型是面向关系的。一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录，类的每个属性对应表的每个字段。<br>ORM技术特点：<br>1.提高了开发效率。由于ORM可以自动对Entity对象与数据库中的Table进行字段与属性的映射，所以我们实际可能已经不需要一个专用的、庞大的数据访问层。<br>2.ORM提供了对数据库的映射，不用sql直接编码，能够像操作对象一样从数据库获取数据。</p>
-<p>三、ORM的优缺点<br>ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。</p>
-<p>在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
-
+        <a href='/archives'>归档</a>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/31/orm/" data-id="cl3jmy3sb004gtxv3b9hhekpt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-闲谈" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/28/%E9%97%B2%E8%B0%88/" class="article-date">
-  <time datetime="2016-08-27T16:37:56.000Z" itemprop="datePublished">2016-08-28</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/28/%E9%97%B2%E8%B0%88/">闲谈</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我觉得嘛。一个闲云野鹤的年轻人，你要拿什么去哄骗他的未来。</p>
-<p>这么多年，思考很多。从对于自身，从不控制，到控制，再到不控制。</p>
-<p>从年轻的偏激，再到追求对所有认知的深刻，可最后发现深刻到最后。</p>
-<p>还是回到原点，深刻是不必须的。深刻的根本仍旧是浅显。</p>
-<p>认识到这点，大概是从辩证法在生活中的极其平庸性开始发现的。</p>
-<p>因为辩证法对于一切的东西，总是动不动就有利有弊的。</p>
-<p>但是如果一个人对于东西的看法总是尝试用辩证法去看待。</p>
-<p>那么看法就会变得很平面化和无趣。或者说，你会发现，辩证法是垃圾，最不出彩的看法了。</p>
-<p>所以我病态的爱着我的病态。那些我不合理，不理性的部分。</p>
-<ul>
-<li><p>恋爱就是一边decode彼此，一边encode一个只有彼此能懂的世界吧</p>
-</li>
-<li><p>我们永远无法了解一个人经历了什么，因为每个人生来都是孤独的，所以不恶意揣测，尊重个人选择。</p>
-</li>
-<li><p>允许自己有错，承认自身的人性缺点，才更容易控制自己的本身缺点，比如嫉妒，愤怒，偏见，懒惰。</p>
-</li>
-<li><p>不要去听什么乱七八糟的人生谏言。要有自己的东西。鸡汤都是垃圾。</p>
-</li>
-<li><p>只有当你接受你将孤独终老这一事实后，你才能找到另一个孤独的灵魂一起携手前行。</p>
-</li>
-<li><p>有些事情，不是你都明白了，什么都懂了。而是说你不明白的事情你不想明白了。之前你每件事你都想明白，每个人你都想仔细把他看透，到底怎么回事。甚至你想去理解这个时代，这个社会。但其实我们明白不了，我们连自己最爱的人坐对面，你都不可能全明白。有些事情不明白就是生活的慌张，后来等老了才发现，那慌张就是青春。不慌张，青春就没了。</p>
-</li>
-<li><p>我自身对梦的认识：做梦是人的记忆整理，就如我们不会记得一个星期前的你现在在干什么。我想象我们的记忆是梦境和现实经历的结合。不过我们大脑会将与现实不符合，光怪陆离的记忆归为梦，而正常符合猜想的记忆归为现实经历。也就是说，其实我们每个人的记忆早就是不干不净的了。</p>
-</li>
-<li><p>外人看来，情侣间总爱做一些以为感动了自己就能感动对方的事情，但当事人浑然不知，只怪陷入爱里面</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/28/%E9%97%B2%E8%B0%88/" data-id="cl3jmy3t9008ftxv3emivebdc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-理解RESTful架构" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/27/%E7%90%86%E8%A7%A3RESTful%E6%9E%B6%E6%9E%84/" class="article-date">
-  <time datetime="2016-08-27T06:33:01.000Z" itemprop="datePublished">2016-08-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/27/%E7%90%86%E8%A7%A3RESTful%E6%9E%B6%E6%9E%84/">理解RESTful架构</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Representational State Transfer的缩写。我对这个词组的翻译是”表现层状态转化”。</p>
-<p>如果一个架构符合REST原则，就称它为RESTful架构。</p>
-<p><strong>要理解RESTful架构，最好的方法就是去理解Representational State Transfer这个词组到底是什么意思，它的每一个词代表了什么涵义。</strong>如果你把这个名称搞懂了，也就不难体会REST是一种什么样的设计。</p>
-<p><strong>三、资源（Resources）</strong></p>
-<p>REST的名称”表现层状态转化”中，省略了主语。”表现层”其实指的是”资源”（Resources）的”表现层”。</p>
-<p><strong>所谓”资源”，就是网络上的一个实体，或者说是网络上的一个具体信息。</strong>它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
-<p>所谓”上网”，就是与互联网上一系列的”资源”互动，调用它的URI。</p>
-<p><strong>四、表现层（Representation）</strong></p>
-<p>“资源”是一种信息实体，它可以有多种外在表现形式。<strong>我们把”资源”具体呈现出来的形式，叫做它的”表现层”（Representation）。</strong></p>
-<p>比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</p>
-<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的”.html”后缀名是不必要的，因为这个后缀名表示格式，属于”表现层”范畴，而URI应该只代表”资源”的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对”表现层”的描述。</p>
-<p><strong>五、状态转化（State Transfer）</strong></p>
-<p>访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。</p>
-<p>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，<strong>如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</strong></p>
-<p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：<strong>GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</strong></p>
-<p><strong>六、综述</strong></p>
-<p>综合上面的解释，我们总结一下什么是RESTful架构：</p>
-<p>（1）每一个URI代表一种资源；</p>
-<p>（2）客户端和服务器之间，传递这种资源的某种表现层；</p>
-<p>（3）客户端通过四个HTTP动词，对服务器端资源进行操作，实现”表现层状态转化”。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/27/%E7%90%86%E8%A7%A3RESTful%E6%9E%B6%E6%9E%84/" data-id="cl3jmy3t5007vtxv3f8jpg330" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-我的坏习惯" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/20/%E6%88%91%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/" class="article-date">
-  <time datetime="2016-08-20T14:50:17.000Z" itemprop="datePublished">2016-08-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/20/%E6%88%91%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/">我的坏习惯</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近老是被人叫早睡觉，早睡觉。我也深知这有多不好。唉。我想我不吸烟，不喝酒，不赌博。或许倒是有个不过凌晨不睡觉的习惯。。。我是典型不能在soical中获得能量的类型。</p>
-<p>我给大家讲一个最莫名奇妙的一次熬夜吧。那一次大概是九点多，十点多的时候开始看一部电影。看到12点左右，看完了，挺好看的。然后心情就久久不能平息。然后就想着，哎呀，这个隐上来了就再看一部吧。再看完就两点左右嘛，但是关键那是部烂片。看部烂片怎么能睡着呢。那就再找一部口碑好一点的老电影来洗洗眼再睡吧吧。那看完就四点多了，那就想，天都快亮了。那就再看一部再睡吧。结果就一晚上看了几部电影。。。就莫名熬了个夜，就去海边看了个日出。再回来床上睡了。。。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/20/%E6%88%91%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/" data-id="cl3jmy3t2007jtxv3cces2ylo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-各种快捷键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/13/%E5%90%84%E7%A7%8D%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
-  <time datetime="2016-08-13T07:15:00.000Z" itemprop="datePublished">2016-08-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/13/%E5%90%84%E7%A7%8D%E5%BF%AB%E6%8D%B7%E9%94%AE/">各种快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="VS-："><a href="#VS-：" class="headerlink" title="VS ："></a>VS ：</h1><p><strong>15. 格式化：</strong></p>
-<p>**Ctrl+K，Ctrl+F **</p>
-<p><strong>16.注释&#x2F;取消注释</strong>  </p>
-<ol>
-<li>注释：组合键“Ctrl+K+C”；  </li>
-<li>取消注释：组合键“Ctrl+K+U”。</li>
-</ol>
-<p><strong>17.全屏显示&#x2F;退出全屏显示</strong>    </p>
-<ol>
-<li>使用组合键“ SHIFT + ALT + ENTER ”。</li>
-</ol>
-<p><strong>18.定义与引用</strong>   </p>
-<p>转跳到定义：F12;<br>查找所有引用：使用组合键“Shift+F12”。  </p>
-<p><strong>19.查找和替换</strong></p>
-<ol>
-<li>查找：使用组合键“Ctrl+F”；</li>
-<li>替换：使用组合键“Ctrl+H”。</li>
-</ol>
-<p><strong>20.大小写转换</strong>  </p>
-<ol>
-<li>转小写：使用组合键“Ctrl+ U”；  </li>
-<li>转大写：使用组合键“CTRL + SHIFT + U”。</li>
-</ol>
-<p><strong>21.调试相关</strong></p>
-<ol>
-<li>调试（启动）：F5；</li>
-<li>调试（重新启动）：使用组合键“Ctrl+Shift+F5”；</li>
-<li>调试（开始执行不调试）：使用组合键“Ctrl+F5”；</li>
-<li>调试（逐语句）：F11；</li>
-<li>调试（逐过程）：F10；</li>
-<li>设置断点：F9。</li>
-</ol>
-<h1 id="vscode"><a href="#vscode" class="headerlink" title="vscode:"></a>vscode:</h1><p>1 .shift+alt+f 格式化</p>
-<h1 id="PhpStorm"><a href="#PhpStorm" class="headerlink" title="PhpStorm:"></a>PhpStorm:</h1><p>1.control+alt+L 格式化</p>
-<p>2.Mac版：</p>
-<p>全局搜索（command + shift + F）</p>
-<p>显示类中的方法 （command + 7）</p>
-<p>函数追踪 （command +鼠标点击）</p>
-<p>单行注释&#x2F;取消（command + &#x2F;）</p>
-<p>输入行号跳到某一行（command + l）</p>
-<p>列出打开的文件（command + e）</p>
-<p>删除当前行（command + x）</p>
-<p>复制当前行（command + d）</p>
-<p>跳到变量申明处（command + b）</p>
-<p>格式化代码（command + option + l）</p>
-<p>关闭当前窗口 （command + w）</p>
-<p>项目刷新 （command + option + y）</p>
-<p>多行注释（command + option + &#x2F;）</p>
-<p>查找&#x2F;&#x2F;@todo标签（command + 6）</p>
-<p>列出左侧文件（command + 1）</p>
-<p>切换大小写（command + shift + u）</p>
-<p>复制（command + c）</p>
-<p>粘贴（command + v）</p>
-<p>撤销（command + z）</p>
-<p><strong>显示行号</strong></p>
-<p>IDE settings-&gt;Editor-&gt;General-&gt;Appearance-&gt;Show Line Number</p>
-<p><strong>换肤</strong></p>
-<p>IDE settings-&gt;Editor-&gt;Colors &amp; Fonts 下拉框选择即可。</p>
-<p><strong>设置字体大小</strong></p>
-<p>IDE settings-&gt;Editor-&gt;Colors &amp; Fonts-&gt;font 设置即可。</p>
-<p><strong>配置文件头默认注释</strong></p>
-<p>IDE settings-&gt;Editor-&gt;File and Code Templates-&gt;PHP File Header。</p>
-<p><strong>设置注释不顶格</strong></p>
-<p>IDE settings-&gt;Editor-&gt;Code Style-&gt;PHP 去掉勾 Line comment at first column。</p>
-<p><strong>去掉右上角游览器</strong></p>
-<p>IDE settings-&gt;tools -&gt;WebBrowsers  去掉选中即可。</p>
-<p>PHPStorm + CodeSniffer</p>
-<p><strong>设置</strong></p>
-<p>IDE settings-&gt;Languages &amp; Frameworks-&gt;PHP-&gt;CodeSniffer-&gt; 配置即可。</p>
-<p><strong>选择编码规范</strong></p>
-<p>IDE settings-&gt;Editor-&gt;Inspections-&gt;PHP-&gt;PHP Code Sniffer validation(打钩) -&gt;Coding Standard 选择规范（PEAR）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/13/%E5%90%84%E7%A7%8D%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="cl3jmy3sw006otxv38lz8etaz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/" class="article-date">
-  <time datetime="2016-08-11T17:27:57.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/">windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>关闭onedrive，不赘言</li>
-<li>关闭自动更新，选择提醒和延迟</li>
-<li>锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片</li>
-<li>设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了</li>
-<li>开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭</li>
-<li>运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBroker,改变”Start”的值:00000003 为 值:00000004.</li>
-<li>放一张全新的图片到我的电脑-图片里，然后把这张图片设置成桌面。——关于这点，我怀疑我就是昨晚这个操作之后，进程才回复正常的，前半部分操作是有人提到的，后半部分操作是我心血来潮的，有兴趣大家可以试试，只放图片，不改桌面。不过我个人心里也是担心，使用windows的主题图片群是否对此有影响。</li>
-</ol>
-<p>&amp;nbsp;</p>
-<p>上面是我找到的有关方法，但是其实最重要的是！！</p>
-<p><strong>设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”</strong></p>
-<p>这点是最TM重要的了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/" data-id="cl3jmy3sl005mtxv3dpcvb736" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-A summary of recent work" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/07/A%20summary%20of%20recent%20work/" class="article-date">
-  <time datetime="2016-08-06T17:28:06.000Z" itemprop="datePublished">2016-08-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/07/A%20summary%20of%20recent%20work/">A summary of recent work</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&amp;nbsp;</p>
-<h2 id="字符集和校对规则"><a href="#字符集和校对规则" class="headerlink" title="字符集和校对规则"></a><strong>字符集</strong>和<strong>校对规则</strong></h2><p>如果跟数据库打交道，初期会很好奇，为什么大部分的数据库都设置utf8_general_ci为校对规则。</p>
-<p>我们都知道一般这样子设置比较好，但这到底是啥。</p>
-<p>其实主要是两个概念</p>
-<p><strong>字符集</strong>和<strong>校对规则</strong><br><strong>字符集是一套符号和编码。校对规则是在字符集内用于比较字符的一套规则。</strong></p>
-<p><strong>详细说明</strong></p>
-<p>字符集(charset)：是一套符号和编码。<br>校对规则(collation)：是在字符集内用于比较字符的一套规则，比如定义’A’&lt;’B’这样的关系的规则。不同collation可以实现不同的比较规则，如’A’&#x3D;’a’在有的规则中成立，而有的不成立；进而说，就是有的规则区分大小写，而有的无视。 每个字符集有一个或多个校对规则，并且每个校对规则只能属于一个字符集。</p>
-<h2 id="Mac查看附近WiFi信道及路由器信道的选择"><a href="#Mac查看附近WiFi信道及路由器信道的选择" class="headerlink" title="Mac查看附近WiFi信道及路由器信道的选择"></a>Mac查看附近WiFi信道及路由器信道的选择</h2><p>首先打开终端，输入</p>
-<p>sudo ln -s &#x2F;System&#x2F;Library&#x2F;PrivateFrameworks&#x2F;Apple80211.framework&#x2F;Versions&#x2F;Current&#x2F;Resources&#x2F;airport &#x2F;usr&#x2F;sbin&#x2F;airport</p>
-<p>创建一个象征链接。</p>
-<p>之后提示输入管理员密码，直接输入你的密码。</p>
-<p>&amp;nbsp;</p>
-<p>再输入 <wbr /></p>
-<p>airport -s</p>
-<p>回车确定后便可查看到周边无线网络状况。</p>
-<p>然后根据你周边无线设备的信道情况，调整你的无线信道。</p>
-<p>这里注意，不要过分的依赖路由器的自动选择，路由器没有那么智能。还有如果你也使用的是MacBook Air，那么不要将信道设置为13，你的本本会搜索不到的！</p>
-<p>&amp;nbsp;</p>
-<h2 id="javascript怎么清空一个div里面的内容"><a href="#javascript怎么清空一个div里面的内容" class="headerlink" title="javascript怎么清空一个div里面的内容"></a>javascript怎么清空一个div里面的内容</h2><ol>
-<li>document.getElementById(‘examplediv’).innerHTML &#x3D; “”;<br>2. $(‘#examplediv’).html(“”);</li>
-</ol>
-<p>&amp;nbsp;</p>
-<h2 id="软件版本号规范与命名原则"><a href="#软件版本号规范与命名原则" class="headerlink" title="软件版本号规范与命名原则"></a>软件版本号规范与命名原则</h2><p><strong>1. 软件版本阶段说明</strong></p>
-<ul>
-<li>Alpha版: 此版本表示该软件在此阶段主要是以实现软件功能为主，通常只在软件开发者内部交流，一般而言，该版本软件的Bug较多，需要继续修改。</li>
-<li>Beta版: 该版本相对于α版已有了很大的改进，消除了严重的错误，但还是存在着一些缺陷，需要经过多次测试来进一步消除，此版本主要的修改对像是软件的UI。</li>
-<li>RC版: 该版本已经相当成熟了，基本上不存在导致错误的BUG，与即将发行的正式版相差无几。</li>
-<li>Release版: 该版本意味“最终版本”，在前面版本的一系列测试版之后，终归会有一个正式版本，是最终交付用户使用的一个版本。该版本有时也称为标准版。一般情况下，Release不会以单词形式出现在软件封面上，取而代之的是符号(R)。</li>
-</ul>
-<p><strong>2. 版本命名规范</strong></p>
-<p><strong>软件版本号由四部分组成：</strong></p>
-<p><strong>第一个1为主版本号</strong></p>
-<p><strong>第二个1为子版本号</strong></p>
-<p><strong>第三个1为阶段版本号</strong></p>
-<p><strong>第四部分为日期版本号加希腊字母版本号</strong></p>
-<p><strong>希腊字母版本号共有5种，分别为：base、alpha、beta、RC、release。例如：1.1.1.051021_beta</strong></p>
-<p>常规：完全的版本号定义，分三项：：&lt;主版本号&gt;.&lt;次版本号&gt;.&lt;修订版本号&gt;，如 1.0.0</p>
-<p><strong>3. 版本号定修改规则</strong></p>
-<ul>
-<li>主版本号(1)：当功能模块有较大的变动，比如增加多个模块或者整体架构发生变化。此版本号由项目决定是否修改。</li>
-<li>子版本号(1)：当功能有一定的增加或变化，比如增加了对权限控制、增加自定义视图等功能。此版本号由项目决定是否修改。</li>
-<li>阶段版本号(1)：一般是 Bug 修复或是一些小的变动，要经常发布修订版，时间间隔不限，修复一个严重的bug即可发布一个修订版。此版本号由项目经理决定是否修改。</li>
-<li>日期版本号(051021):用于记录修改项目的当前日期，每天对项目的修改都需要更改日期版本号。此版本号由开发人员决定是否修改。</li>
-<li>希腊字母版本号(beta):此版本号用于标注当前版本的软件处于哪个开发阶段，当软件进入到另一个阶段时需要修改此版本号。此版本号由项目决定是否修改。</li>
-</ul>
-<p><strong>4. 文件命名规范</strong></p>
-<p>文件名称由四部分组成：第一部分为项目名称，第二部分为文件的描述，第三部分为当前软件的版本号，第四部分为文件阶段标识加文件后缀，例如：项目外 包平台测试报告1.1.1.051021_beta_b.xls，此文件为项目外包平台的测试报告文档，版本号为：1.1.1.051021_beta。</p>
-<p>如果是同一版本同一阶段的文件修改过两次以上，则在阶段标识后面加以数字标识，每次修改数字加1，项目外包平台测试报告1.1.1.051021_beta_b1.xls。</p>
-<p>当有多人同时提交同一份文件时，可以在阶段标识的后面加入人名或缩写来区别，例如：项目外包平台测试报告 1.1.1.051021_beta_b_LiuQi.xls。当此文件再次提交时也可以在人名或人名缩写的后面加入序号来区别，例如：项目外包平台测试 报告1.1.1.051021_beta_b_LiuQi2.xls。</p>
-<p><strong>5. 版本号的阶段标识</strong></p>
-<p>软件的每个版本中包括11个阶段，详细阶段描述如下：</p>
-<p>阶段名称                            阶段标识<br>需求控制                               a<br>设计阶段                               b<br>编码阶段                               c<br>单元测试                               d<br>单元测试修改                       e<br>集成测试                               f<br>集成测试修改                       g<br>系统测试                               h<br>系统测试修改                       i<br>验收测试                               j<br>验收测试修改                       k</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/07/A%20summary%20of%20recent%20work/" data-id="cl3jmy3r70006txv30vqd2ws1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-a-summary-of-recent-work" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/05/a-summary-of-recent-work/" class="article-date">
-  <time datetime="2016-08-05T09:31:01.000Z" itemprop="datePublished">2016-08-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/a-summary-of-recent-work/">A summary of recent work</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CDN（Content-Delivery-Network，内容分发网络）"><a href="#CDN（Content-Delivery-Network，内容分发网络）" class="headerlink" title="CDN（Content Delivery Network，内容分发网络）"></a><strong>CDN（Content Delivery Network，内容分发网络）</strong></h2><p>通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。<br>解决目前互联网业务在网络层面可能存在的问题：</p>
-<ol>
-<li>业务服务器接入互联网的带宽有限。</li>
-<li>不同运营商之间的互联问题使得业务要考虑多运营商分布问题。</li>
-<li>地域问题导致用户到服务器的物理距离会比较远，传输时延非常高。<br>CDN帮助用户解决互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，业务只需简单接入即可完成访问加速，无需关注复杂多变的网络状况。</li>
-</ol>
-<p>使用CDN后的http请求处理流程如下图：</p>
-<p><img src="https://mccdn.qcloud.com/static/img/0a742e14f50c6c131502462c1c5360d6/image.png"></p>
-<p><strong>总结：需要通过DNS解析，将域名CNAME到CDN服务商的提供的CNAME域名。放弃原来的A记录解析，全部交由CNAME域名的CDN节点来处理。CDN节点会主动或者被动的从源拉取资源。****当节点存储所请求资源就将资源返回，否则返回源服务器请求。</strong></p>
-<p><strong>吐槽：腾讯的CDN和阿里的CDN差太大，阿里把腾讯甩好几条街。</strong></p>
-<h2 id="MYSQL5-6内存占用过高"><a href="#MYSQL5-6内存占用过高" class="headerlink" title="MYSQL5.6内存占用过高"></a><strong>MYSQL5.6内存占用过高</strong></h2><p>距离MySQL 5.6正式发布已经有比较长的时间了，目前Oracle官网上的最新GA版本MySQL server也为5.6。但reizhi在安装配置后却发现其内存占用居高不下，无论如何调整cache甚至禁用InnoDB都不能解决。由于VPS仅有1GB内存，在开启常用的Web服务之后，无力再为MySQL提供400MB以上的物理内存。</p>
-<p>通过网络爬文，MySQL 5.6相比于前代GA版本性能提升显著，但默认缓存设置对于小型站点并不合理。通过修改my.ini文件中的performance_schema_max_table_instances参数，能够有效降低内存占用。</p>
-<p>修改参数：</p>
-<pre class="prettyprint">performance_schema_max_table_instances=400
-table_definition_cache=400
-table_open_cache=256</pre>
-<p>保存之后重新启动MySQL服务，其内存占用即可从400MB以上降低至40MB左右。</p>
-<p><img src="http://roov.org/wp-content/uploads/2013/12/20131225225414_75247.jpg"></p>
-<h2 id="PHP-FPM内存占用过大的优化方法。"><a href="#PHP-FPM内存占用过大的优化方法。" class="headerlink" title="PHP-FPM内存占用过大的优化方法。"></a><strong>PHP-FPM内存占用过大的优化方法。</strong></h2><p><strong>总结或多或少都有内存泄漏的问题</strong></p>
-<div>
-
-<p>php-fpm优化方法</p>
-<p>php-fpm存在两种方式，一种是直接开启指定数量的php-fpm进程，不再增加或者减少；<br>另一种则是开始时开启一定数量的php-fpm进程，当请求量变大时，动态的增加php-fpm进程数到上限，当空闲时自动释放空闲的进程数到一个下限。<br>这两种不同的执行方式，可以根据服务器的实际需求来进行调整。</p>
-<p>要用到的一些参数，分别是pm、pm.max_children、pm.start_servers、pm.min_spare_servers和pm.max_spare_servers。</p>
-<p>pm表示使用那种方式，有两个值可以选择，就是static（静态）或者dynamic（动态）。</p>
-<p>下面4个参数的意思分别为：</p>
-<div>**pm.max_children：**静态方式下开启的php-fpm进程数量，在动态方式下他限定php-fpm的最大进程数（这里要注意pm.max_spare_servers的值只能小于等于pm.max_children）
-**pm.start_servers：**动态方式下的起始php-fpm进程数量。
-**pm.min_spare_servers：**动态方式空闲状态下的最小php-fpm进程数量。
-**pm.max_spare_servers：**动态方式空闲状态下的最大php-fpm进程数量。</div>
-**如果dm设置为static，那么其实只有pm.max_children这个参数生效。**系统会开启设置的数量个php-fpm进程。
-
-<p><strong>如果dm设置为dynamic，4个参数都生效。</strong>系统会在php-fpm运行开始时启动pm.start_servers个php-fpm进程，然后根据系统的需求动态在pm.min_spare_servers和pm.max_spare_servers之间调整php-fpm进程数。</p>
-<p>那么，对于服务器，选择哪种执行方式比较好呢？事实上，跟Apache一样，运行的PHP程序在执行完成后，或多或少会有内存泄露的问题。这也是为什么开始时一个php-fpm进程只占用3M左右内存，运行一段时间后就会上升到20-30M的原因了。</p>
-<p>所以，动态方式因为会结束掉多余的进程，可以回收释放一些内存，所以推荐在内存较少的服务器或者VPS上使用。具体最大数量根据 内存&#x2F;20M 得到。<br>比如说512M的VPS，建议pm.max_spare_servers设置为20（512*0.8&#x2F;20）。至于pm.min_spare_servers，则建议根据服务器的负载情况来设置，比较合适的值在5~10之间。</p>
-<p>然后对于比较大内存的服务器来说，设置为静态的话会提高效率。<br>因为频繁开关php-fpm进程也会有时滞，所以内存够大的情况下开静态效果会更好。数量也可以根据 内存&#x2F;30M 得到。<br>比如说2GB内存的服务器，可以设置为50；4GB内存可以设置为100等。</p>
-<p>比如，如果是512M的vps，设置的参数如下：</p>
-<div>代码示例:</div>
-<div id="c_VPKcKpCW">pm=dynamic
-pm.max_children=20
-pm.start_servers=5
-pm.min_spare_servers=5
-pm.max_spare_servers=20</div>
-可以最大的节省内存并提高执行效率。
-<div>
-
-<p>&amp;nbsp;</p>
-</div>
-
-<h2 id="Nginx设置alias别名目录访问phpmyadmin"><a href="#Nginx设置alias别名目录访问phpmyadmin" class="headerlink" title="Nginx设置alias别名目录访问phpmyadmin"></a><strong>Nginx设置alias别名目录访问phpmyadmin</strong></h2><h3 id="1-修改nginx配置文件"><a href="#1-修改nginx配置文件" class="headerlink" title="1.修改nginx配置文件"></a>1.修改nginx配置文件</h3><p><strong>cp &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.confbak</strong>  #备份配置文件</p>
-<p><strong>vi &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</strong>  #修改配置文件，在 ** （推荐使用nano 命令，反正我是比较习惯用nano来修改。）**</p>
-<p>server {<br>listen       80;<br>server_name  localhost;</p>
-<p>#charset koi8-r;</p>
-<p>#access_log  logs&#x2F;host.access.log  main;</p>
-<p>location &#x2F; {<br>root   html;<br>index index.php  index.html index.htm;<br>}</p>
-<p>下面添加以下内容：(见粗体字，可以仿造改用）</p>
-<p>location <strong>&#x2F;phpmyadmin</strong> {<br>alias <strong>&#x2F;home&#x2F;phpmyadmin;</strong><br>index index.php;<br>}</p>
-<p>location ~** &#x2F;phpmyadmin&#x2F;.<strong>+.php$ {<br>if ($fastcgi_script_name ~</strong> &#x2F;phpmyadmin&#x2F;**(.+.php.*)$) {<br>set $valid_fastcgi_script_name $1;<br>}<br>include fastcgi_params;<br>fastcgi_pass   127.0.0.1:9000;<br>fastcgi_index  index.php;<br>fastcgi_param SCRIPT_FILENAME <strong>&#x2F;home&#x2F;phpmyadmin&#x2F;</strong>$valid_fastcgi_script_name;<br>}</p>
-<p>:wq!   #保存，退出</p>
-<h3 id="2、设置-x2F-home-x2F-phpmyadmin目录权限"><a href="#2、设置-x2F-home-x2F-phpmyadmin目录权限" class="headerlink" title="2、设置&#x2F;home&#x2F;phpmyadmin目录权限"></a><strong>2、设置&#x2F;home&#x2F;phpmyadmin目录权限</strong></h3><p><strong>chown <a target="_blank" rel="noopener" href="http://www.www/">www.www</a> &#x2F;home&#x2F;phpmyadmin -R  #修改目录所有者为www账号</strong></p>
-<p><strong>service nginx restart   #重启nginx</strong></p>
-<p><strong>service php-fpm restart    #重启php-fpm</strong></p>
-<p>&amp;nbsp;</p>
-</div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2016/08/05/a-summary-of-recent-work/" data-id="cl3jmy3s6003stxv36mfj91qn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
   </nav>
+</div>
 
-</section>
-        
-          <aside id="sidebar">
+  <div class="post-list post"><a class="post-card post " href="/2016/09/05/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BD%9C%E5%93%81%E6%98%AF%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB%EF%BC%8D%E6%9D%9C%E5%B0%9A/">
+<article class="md"><h2 class="post-title">我最好的作品是我的生活－杜尚</h2><div class="excerpt"><p>又遇到了书里的句子——
+「一个彻底的怀疑者、叛逆者，不必是个剑拔弩张的人，不必是一个处处起争执的人，他完全可以把他的对立表现得不动声色，乃至温润如玉，但同时却在最细微的方面都不对流俗作妥协。」
+&amp;nbsp;
+涉身时能看到的鲜活世界当然是我选择躲避时所看不到的。这个时代迅速地就让我感到困惑和疲惫。
+这个时代仿佛越来越钝感了，什么都得加大剂量。你拍别人肩膀人家已经懒得搭理你了，非得抽人一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-09-05T14:47:13.000Z">2016-09-05</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
+</a><a class="post-card post " href="/2016/08/31/orm/">
+<article class="md"><h2 class="post-title">ORM</h2><div class="excerpt"><p>一、ORM简介对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。这种方案存在以下不足：1.持久化...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-31T05:25:03.000Z">2016-08-31</time></span><span class="cap breadcrumb">未分类</span></div></article>
+</a><a class="post-card post " href="/2016/08/28/%E9%97%B2%E8%B0%88/">
+<article class="md"><h2 class="post-title">闲谈</h2><div class="excerpt"><p>我觉得嘛。一个闲云野鹤的年轻人，你要拿什么去哄骗他的未来。
+这么多年，思考很多。从对于自身，从不控制，到控制，再到不控制。
+从年轻的偏激，再到追求对所有认知的深刻，可最后发现深刻到最后。
+还是回到原点，深刻是不必须的。深刻的根本仍旧是浅显。
+认识到这点，大概是从辩证法在生活中的极其平庸性开始发现的。
+因为辩证法对于一切的东西，总是动不动就有利有弊的。
+但是如果一个人对于东西的看法总是尝试用辩...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-27T16:37:56.000Z">2016-08-28</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
+</a><a class="post-card post " href="/2016/08/27/%E7%90%86%E8%A7%A3RESTful%E6%9E%B6%E6%9E%84/">
+<article class="md"><h2 class="post-title">理解RESTful架构</h2><div class="excerpt"><p>Representational State Transfer的缩写。我对这个词组的翻译是”表现层状态转化”。
+如果一个架构符合REST原则，就称它为RESTful架构。
+要理解RESTful架构，最好的方法就是去理解Representational State Transfer这个词组到底是什么意思，它的每一个词代表了什么涵义。如果你把这个名称搞懂了，也就不难体会REST是一种什么样的设计...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-27T06:33:01.000Z">2016-08-27</time></span><span class="cap breadcrumb">计算机科普级别</span></div></article>
+</a><a class="post-card post " href="/2016/08/20/%E6%88%91%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/">
+<article class="md"><h2 class="post-title">我的坏习惯</h2><div class="excerpt"><p>最近老是被人叫早睡觉，早睡觉。我也深知这有多不好。唉。我想我不吸烟，不喝酒，不赌博。或许倒是有个不过凌晨不睡觉的习惯。。。我是典型不能在soical中获得能量的类型。
+我给大家讲一个最莫名奇妙的一次熬夜吧。那一次大概是九点多，十点多的时候开始看一部电影。看到12点左右，看完了，挺好看的。然后心情就久久不能平息。然后就想着，哎呀，这个隐上来了就再看一部吧。再看完就两点左右嘛，但是关键那是部烂片...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-20T14:50:17.000Z">2016-08-20</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
+</a><a class="post-card post " href="/2016/08/13/%E5%90%84%E7%A7%8D%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+<article class="md"><h2 class="post-title">各种快捷键</h2><div class="excerpt"><p>VS ：15. 格式化：
+**Ctrl+K，Ctrl+F **
+16.注释&#x2F;取消注释  
+
+注释：组合键“Ctrl+K+C”；  
+取消注释：组合键“Ctrl+K+U”。
+
+17.全屏显示&#x2F;退出全屏显示    
+
+使用组合键“ SHIFT + ALT + ENTER ”。
+
+18.定义与引用   
+转跳到定义：F12;查找所有引用：使用组合键“Shift+F12”。  
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-13T07:15:00.000Z">2016-08-13</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
+</a><a class="post-card post " href="/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/">
+<article class="md"><h2 class="post-title">windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）</h2><div class="excerpt"><p>
+关闭onedrive，不赘言
+关闭自动更新，选择提醒和延迟
+锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片
+设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了
+开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭
+运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-11T17:27:57.000Z">2016-08-12</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
+</a><a class="post-card post " href="/2016/08/07/A%20summary%20of%20recent%20work/">
+<article class="md"><h2 class="post-title">A summary of recent work</h2><div class="excerpt"><p>&amp;nbsp;
+字符集和校对规则如果跟数据库打交道，初期会很好奇，为什么大部分的数据库都设置utf8_general_ci为校对规则。
+我们都知道一般这样子设置比较好，但这到底是啥。
+其实主要是两个概念
+字符集和校对规则字符集是一套符号和编码。校对规则是在字符集内用于比较字符的一套规则。
+详细说明
+字符集(charset)：是一套符号和编码。校对规则(collation)：是在字符集内...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-06T17:28:06.000Z">2016-08-07</time></span><span class="cap breadcrumb">未分类</span></div></article>
+</a><a class="post-card post " href="/2016/08/05/a-summary-of-recent-work/">
+<article class="md"><h2 class="post-title">A summary of recent work</h2><div class="excerpt"><p>CDN（Content Delivery Network，内容分发网络）通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络”边缘”，并将用户请求导向最近的服务节点，解决Internet网络拥塞状况，提高用户访问网站的响应速度。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等原因，解决用户访问网站的响应速度慢的根本原因。解决目前互联网业务在网络层...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-05T09:31:01.000Z">2016-08-05</time></span><span class="cap breadcrumb">未分类</span></div></article>
+</a><a class="post-card post " href="/2016/08/05/perfect-is-the-enemy-of-good/">
+<article class="md"><h2 class="post-title">Perfect is the enemy of good</h2><div class="excerpt"><p>The meaning of “The perfect is the enemyof the good” is that one might never complete a task if one has decided not to stop until it is perfect: completing the project well is made impossible by st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-08-05T05:57:37.000Z">2016-08-05</time></span><span class="cap breadcrumb">未分类</span></div></article>
+</a></div>
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
+  <div class='paginator-wrap dis-select'>
+    <a class='paginator prev' href='/page/8/'>
+      <img src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/arrow/f049bbd4e88ec.svg'/>
+    </a>
+    <div class='paginator current'>
+      9<span class='sep'></span>11
     </div>
+    <a class='paginator next' href='/page/10/'>
+      <img src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/arrow/064b95430caf4.svg'/>
+    </a>
   </div>
 
 
-  
-    
 
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="https://cshiyuan.github.io/">@shyiuanchen</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.7.0" title="v1.7.0">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
   </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.7.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/05/25/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 shyiuanchen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-  <!-- highlight.js代码高亮主题 script 引入-->
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <!-- highlight.js代码高亮主题 script 引入-->
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/main.js" async></script>
 
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<!-- optional -->
+
+  <script>
+  function loadBeaudar() {
+    const els = document.querySelectorAll("#comments #beaudar");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://beaudar.lipk.org/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadBeaudar();
+  });
+</script>
 
 
 
 
-<script src="/js/script.js"></script>
-
-
+<!-- inject -->
 
 
   </div>

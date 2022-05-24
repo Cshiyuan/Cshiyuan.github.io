@@ -1,1418 +1,367 @@
 <!DOCTYPE html>
-<html>
+<html lang='zh-CN'>
+
 <head>
+  <meta name="generator" content="Hexo 6.2.0">
   <meta charset="utf-8">
   
 
-  
-  <title>C&#39;s Notebook</title>
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>C's Notebook</title>
+
+  
+
+  
+    <meta property="og:type" content="website">
 <meta property="og:title" content="C&#39;s Notebook">
 <meta property="og:url" content="https://cshiyuan.github.io/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
-  <!-- highlight.js代码高亮主题 css 引入-->
-  <link rel="stylesheet" href="/plugins/highlight/styles/monokai.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">C&#39;s Notebook</a>
-      </h1>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout=''>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/11845557?s=96&v=4" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">C's Notebook</div><div class="sub cap">Hi! This is my technical notebook.</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div><div class="more-item"><a class="title" href="/2016/04/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%88%E5%B0%8F%E7%9F%A5%E8%AF%86%E6%91%98%E6%8A%84%EF%BC%89/">计算机小知识（小知识摘抄）</a></div><div class="more-item"><a class="title" href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main list'>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
-      </div>
-    </div>
-  </div>
+  
+
+<header class="header mobile-only">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/11845557?s=96&v=4" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">C's Notebook</div><div class="sub cap">Hi! This is my technical notebook.</div></a></div>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/25/hello-world/" class="article-date">
-  <time datetime="2022-05-25T13:52:27.000Z" itemprop="datePublished">2022-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/25/hello-world/">Hello World</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2022/05/25/hello-world/" data-id="cl3jmy3s8003ytxv33092457n" class="article-share-link">Share</a>
+
+
+  <div class='nav-wrap'>
+  <nav class='sub post cap'>
+    
+      <a class='active' href='/'>近期发布</a>
+    
+    
       
+        <a href='/categories'>分类</a>
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hexo快速搭建" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/" class="article-date">
-  <time datetime="2022-05-24T02:45:43.000Z" itemprop="datePublished">2022-05-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
-    </h1>
-  
-
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="快速简单搭建Hexo"><a href="#快速简单搭建Hexo" class="headerlink" title="快速简单搭建Hexo"></a>快速简单搭建Hexo</h2><h4 id="Homebrew-安装-node-js"><a href="#Homebrew-安装-node-js" class="headerlink" title="Homebrew 安装 node.js"></a>Homebrew 安装 node.js</h4><pre><code class="bash">brew install node    
-</code></pre>
-<h4 id="安装后可以使用命令来检查是否安装成功"><a href="#安装后可以使用命令来检查是否安装成功" class="headerlink" title="安装后可以使用命令来检查是否安装成功"></a>安装后可以使用命令来检查是否安装成功</h4><pre><code class="bash">node -v
-</code></pre>
-<h4 id="使用-npm-安装-hexo"><a href="#使用-npm-安装-hexo" class="headerlink" title="使用 npm 安装 hexo"></a>使用 npm 安装 hexo</h4><pre><code class="bash">sudo npm install -g hexo-cli
-</code></pre>
-<h4 id="附-hexo常用命令"><a href="#附-hexo常用命令" class="headerlink" title="附 hexo常用命令"></a>附 hexo常用命令</h4><pre><code class="bash">hexo n &quot;博客名称&quot;  =&gt; hexo new &quot;博客名称&quot;   #这两个都是创建新文章，前者是简写模式
-hexo p  =&gt; hexo publish
-hexo g  =&gt; hexo generate  #生成
-hexo s  =&gt; hexo server  #启动服务预览
-hexo d  =&gt; hexo deploy  #部署
-
-hexo server   #Hexo 会监视文件变动并自动更新，无须重启服务器。
-hexo server -s   #静态模式
-hexo server -p 5000   #更改端口
-hexo server -i 192.168.1.1   #自定义IP
-hexo clean   #清除缓存，网页正常情况下可以忽略此条命令
-hexo g   #生成静态网页
-hexo d   #开始部署
-</code></pre>
-
+        <a href='/archives'>归档</a>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/" data-id="cl3jmy3rg000rtxv386swdtxx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Nginx-Mysql-PM2-NODE-GIT-HTTPS开发日记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/" class="article-date">
-  <time datetime="2018-02-13T15:10:28.000Z" itemprop="datePublished">2018-02-13</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
-    </h1>
-  
+  </nav>
+</div>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MySql安装"><a href="#MySql安装" class="headerlink" title="MySql安装"></a>MySql安装</h2><h4 id="下载-mysql-源安装包"><a href="#下载-mysql-源安装包" class="headerlink" title="下载 mysql 源安装包"></a>下载 mysql 源安装包</h4><p>下载到本地</p>
-<pre><code class="Bash">$ curl -LO http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-</code></pre>
-<h4 id="安装-mysql-源"><a href="#安装-mysql-源" class="headerlink" title="安装 mysql 源"></a>安装 mysql 源</h4><p>本地安装源</p>
-<pre><code class="Bash">$ sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm
-</code></pre>
-<h4 id="检查-yum-源是否安装成功"><a href="#检查-yum-源是否安装成功" class="headerlink" title="检查 yum 源是否安装成功"></a>检查 yum 源是否安装成功</h4><pre><code class="Bash">$ sudo yum repolist enabled | grep &quot;mysql.*-community.*&quot;
-mysql-connectors-community           MySQL Connectors Community              21
-mysql-tools-community                MySQL Tools Community                   38
-mysql57-community                    MySQL 5.7 Community Server             130
-</code></pre>
-<h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><pre><code class="Bash">$ sudo yum install mysql-community-server
-</code></pre>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><ul>
-<li>安装服务<pre><code class="Bash">$ sudo systemctl enable mysqld
-</code></pre>
-</li>
-<li>启动服务<pre><code class="Bash">$ sudo systemctl start mysqld
-</code></pre>
-</li>
-<li>查看服务状态<pre><code class="Bash">$ sudo systemctl status mysqld
-</code></pre>
-</li>
-</ul>
-<h4 id="修改-root-默认密码"><a href="#修改-root-默认密码" class="headerlink" title="修改 root 默认密码"></a>修改 root 默认密码</h4><p>MySQL 5.7 启动后，在 &#x2F;var&#x2F;log&#x2F;mysqld.log 文件中给 root 生成了一个默认密码。通过下面的方式找到 root 默认密码，然后登录 mysql 进行修改：</p>
-<pre><code class="Bash">$ grep &#39;temporary password&#39; /var/log/mysqld.log
-[Note] A temporary password is generated for root@localhost: **********
-</code></pre>
-<p>登录 MySQL 并修改密码</p>
-<pre><code class="Bash">$ mysql -u root -p
-Enter password: 
-mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;;
-</code></pre>
-<h4 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h4><p>MySQL 默认只允许 root 帐户在本地登录，如果要在其它机器上连接 MySQL，必须修改 root 允许远程连接，或者添加一个允许远程连接的帐户，为了安全起见，本例添加一个新的帐户：</p>
-<pre><code class="Bash">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;admin&#39;@&#39;%&#39; IDENTIFIED BY &#39;secret&#39; WITH GRANT OPTION;
-</code></pre>
-<h4 id="配置默认编码为-utf8"><a href="#配置默认编码为-utf8" class="headerlink" title="配置默认编码为 utf8"></a>配置默认编码为 utf8</h4><p>MySQL 默认为 latin1, 一般修改为 UTF-8</p>
-<pre><code class="Bash">$ vi /etc/my.cnf
-[mysqld]
+  <div class="post-list post"><a class="post-card post " href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">
+<article class="md"><h2 class="post-title">Hexo快速搭建</h2><div class="excerpt"><p>快速简单搭建HexoHomebrew 安装 node.jsbrew install node    
 
-// 在myslqd下添加如下键值对
+安装后可以使用命令来检查是否安装成功node -v
 
-character_set_server=utf8
-init_connect=&#39;SET NAMES utf8&#39;
-</code></pre>
-<h4 id="重启-MySQL-服务，使配置生效"><a href="#重启-MySQL-服务，使配置生效" class="headerlink" title="重启 MySQL 服务，使配置生效"></a>重启 MySQL 服务，使配置生效</h4><pre><code class="Bash">$ sudo systemctl restart mysqld
-</code></pre>
-<h4 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h4><p>还要检查一下防火墙， 检查一下腾讯云的安全组</p>
-<pre><code class="Bash">$ sudo firewall-cmd --zone=public --add-port=3306/tcp --permanent
-$ sudo firewall-cmd --reload
-</code></pre>
-<h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>使用 yum 命令来安装 Nginx</p>
-<pre><code class="Bash">sudo yum install -y nginx
-</code></pre>
-<p>安装完成的 Nginx 并不会立刻启动，需要我们手动执行命令来开启它:</p>
-<pre><code class="Bash">sudo systemctl start nginx.service
-</code></pre>
-<p>还可以输入以下命令，让 Nginx 可以随系统自动启动：</p>
-<pre><code class="Bash">sudo systemctl enable nginx
-</code></pre>
-<h4 id="相关补充"><a href="#相关补充" class="headerlink" title="相关补充"></a>相关补充</h4><pre><code class="Bash"># 开启 Nginx
-service nginx start
-# 停止 Nginx
-service nginx stop
-# 重启 Nginx
-service nginx restart
-# 查看 Nginx 状态
-service nginx status
-</code></pre>
-<p>Nginx 的默认站点根目录为</p>
-<pre><code class="Bash">/usr/share/nginx/html/
-</code></pre>
-<p>默认站点配置在</p>
-<pre><code class="Bash">/etc/nginx/conf.d/default.conf
-</code></pre>
-<p>Nginx 主配置如下</p>
-<pre><code class="Bash">/etc/nginx/nginx.conf
-</code></pre>
-<h4 id="防火墙指令"><a href="#防火墙指令" class="headerlink" title="防火墙指令"></a>防火墙指令</h4><pre><code class="Bash">systemctl start firewalld.service  #启动firewall
-systemctl stop firewalld.service  #停止firewall
-systemctl disable firewalld.service  #禁止firewall开机启动,enable
-firewall-cmd --state  #防火墙状态
+使用 npm 安装 hexosudo npm install -g hexo-cli
 
-firewall-cmd --permanent --zone=public --add-port=80/tcp  #http协议基于TCP传输协议，放行80端口
-firewall-cmd --list-all  #查看防火墙规则
-firewall-cmd --query-service nginx #查看服务启动的状态
+附 hexo常用命令hexo n &quot;博客名称&quot;  =&gt; hexo new &quot;博客名称&quot;   #这两个都...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-05-24T02:45:43.000Z">2022-05-24</time></span></div></article>
+</a><a class="post-card post " href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">
+<article class="md"><h2 class="post-title">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</h2><div class="excerpt"><p>MySql安装下载 mysql 源安装包下载到本地
+$ curl -LO http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
 
-firewall-cmd --add-service=ftp --permanent  #永久开放ftp服务
-firewall-cmd --remove-service=ftp --permanent  #永久关闭ftp服务
-firewall-cmd --get-service  #查看服务名称   
-</code></pre>
-<h2 id="ssh免登陆"><a href="#ssh免登陆" class="headerlink" title="ssh免登陆"></a>ssh免登陆</h2><h4 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h4><pre><code class="Bash">ssh-keygen -t rsa
-</code></pre>
-<h4 id="将公钥拷贝到目标主机"><a href="#将公钥拷贝到目标主机" class="headerlink" title="将公钥拷贝到目标主机"></a>将公钥拷贝到目标主机</h4><p>用ssh登录到目标主机，然后cd <del>&#x2F;.ssh目录，如果目录不存在，那么要自己创建mkdir -p ~&#x2F;.ssh。你今后要用哪个帐户登录主机，就在哪个帐户的home目录下操作，如果要免登陆root，就要去&#x2F;root下操作。使用</del>比较好，不用多想了。</p>
-<p>有了.ssh目录后，进去，然后把id_rsa.pub传过去，可以用scp命令，这里要做的一个主要操作，就是将id_rsa.pub，的文件内容，写到一个叫authorized_keys的文件中去，如果目标主机的相应用户名下已经有了.ssh目录和authorized_keys文件，那你操作要小心一点，可能别人也做过免登陆的设置，这个时候你要小心不要把别人的设置给覆盖了。如果没有的话，就创建文件touch ~&#x2F;.ssh&#x2F;authorized_keys，然后执行cat id_rsa.pub &gt;&gt; authorized_keys，将你的公钥写入到authorized_keys中，公钥文件.pub里面只有一行信息，上面的命令相当于把那一行信息追加到authorized_keys文件最后一行。</p>
-<p>如果.ssh目录是你主机刚刚创建的，那么可能还需要改变一下这个目录的权限，将权限放低，chmod -R 0600 ~&#x2F;.ssh，到此，所有设置就算做完了，你可以退出登录，在自己的主机上试一下了，现在再敲入ssh命令后，不用密码就可以登录主机了。</p>
-<h2 id="pm2部署node应用到服务器"><a href="#pm2部署node应用到服务器" class="headerlink" title="pm2部署node应用到服务器"></a>pm2部署node应用到服务器</h2><h4 id="三个概念"><a href="#三个概念" class="headerlink" title="三个概念"></a>三个概念</h4><ul>
-<li>Git服务器：用来保存你代码的仓库，比如：Github。也可以是你自己搭建的Git服务器。为了统一，后面全部都叫Github。</li>
-<li>目标服务器：就是你要将你的项目部署到的那个服务器，以下统一都叫服务器（Server）。</li>
-<li>本地环境：就是你开发用的PC，就叫它Local吧。</li>
-</ul>
-<h4 id="服务器端（Server）"><a href="#服务器端（Server）" class="headerlink" title="服务器端（Server）"></a>服务器端（Server）</h4><p>服务端和本地需要安装node.js、pm2、git</p>
-<pre><code class="Bash"># 更新 yum
-$ yum update -y
+安装 mysql 源本地安装源
+$ sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm
 
-# 1. 安装node.js
-$ yum install nodejs -y
-
-# 2. 安装git
-$ yum install git -y
-
-# 3. 安装pm2
-$ npm install -g pm2
-</code></pre>
-<h4 id="在Github上添加Deploy-Keys"><a href="#在Github上添加Deploy-Keys" class="headerlink" title="在Github上添加Deploy Keys"></a>在Github上添加Deploy Keys</h4><p>在服务器（Server）上执行：</p>
-<pre><code class="Bash"># 生成ssh key，一路回车即可
-$ ssh-keygen -t rsa
-
-# 查看公钥内容
-$ cat ~/.ssh/id_rsa.pub
-# 然后复制整个内容，并添加到Github上对应的项目仓库Settings下的Deploy keys中。
-</code></pre>
-<h2 id="pm2部署"><a href="#pm2部署" class="headerlink" title="pm2部署"></a>pm2部署</h2><p>在项目的根目录下，执行：</p>
-<pre><code class="Bash">$ pm2 ecosystem
-</code></pre>
-<p>接下来就看官方文档更好</p>
-<p><a target="_blank" rel="noopener" href="http://pm2.keymetrics.io/docs/usage/deployment/">http://pm2.keymetrics.io/docs/usage/deployment/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/" data-id="cl3jmy3rn001htxv3guv1dtvl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（9）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-21T07:03:02.000Z" itemprop="datePublished">2018-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/" data-id="cl3jmy3sj005gtxv33vgtba5d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（8）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-19T04:07:05.000Z" itemprop="datePublished">2018-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>####非监督学习  Autoencoder</p>
-<p>今天我们会来聊聊用神经网络如何进行非监督形式的学习. 也就是 autoencoder, 自编码.</p>
-<p>自编码 autoencoder 是一种什么码呢. 他是不是 条形码? 二维码? 打码? 其中的一种呢? NONONONO. 和他们统统没有关系. 自编码是一种神经网络的形式.如果你一定要把他们扯上关系, 我想也只能这样解释啦.</p>
-<p>原来有时神经网络要接受大量的输入信息, 比如输入信息是高清图片时, 输入信息量可能达到上千万, 让神经网络直接从上千万个信息源中学习是一件很吃力的工作. 所以, 何不压缩一下, 提取出原图片中的最具代表性的信息, 缩减输入信息量, 再把缩减过后的信息放进神经网络学习. 这样学习起来就简单轻松了. 所以, 自编码就能在这时发挥作用. 通过将原数据白色的X 压缩, 解压 成黑色的X, 然后通过对比黑白 X ,求出预测误差, 进行反向传递, 逐步提升自编码的准确性. 训练好的自编码中间这一部分就是能总结原数据的精髓. 可以看出, 从头到尾, 我们只用到了输入数据 X, 并没有用到 X 对应的数据标签, 所以也可以说自编码是一种非监督学习. 到了真正使用自编码的时候. 通常只会用到自编码前半部分.</p>
-<h4 id="编码器-Encoder"><a href="#编码器-Encoder" class="headerlink" title="编码器 Encoder"></a>编码器 Encoder</h4><p>编码器能得到原数据的精髓, 然后我们只需要再创建一个小的神经网络学习这个精髓的数据,不仅减少了神经网络的负担, 而且同样能达到很好的效果.</p>
-<p>他能从原数据中总结出每种类型数据的特征, 如果把这些特征类型都放在一张二维的图片上, 每种类型都已经被很好的用原数据的精髓区分开来. 如果你了解 PCA 主成分分析, 再提取主要特征时, 自编码和它一样,甚至超越了 PCA. 换句话说, 自编码 可以像 PCA 一样 给特征属性降维.</p>
-<h4 id="解码器-Decoder"><a href="#解码器-Decoder" class="headerlink" title="解码器 Decoder"></a>解码器 Decoder</h4><p>至于解码器 Decoder, 我们也能那它来做点事情. 我们知道, 解码器在训练的时候是要将精髓信息解压成原始信息, 那么这就提供了一个解压器的作用, 甚至我们可以认为是一个生成器 (类似于GAN). 那做这件事的一种特殊自编码叫做 variational autoencoders, 你能在这里找到他的具体说明.</p>
-<h4 id="Autoencoder"><a href="#Autoencoder" class="headerlink" title="Autoencoder"></a>Autoencoder</h4><p>Autoencoder 简单来说就是将有很多Feature的数据进行压缩，之后再进行解压的过程。 本质上来说，它也是一个对数据的非监督学习，如果大家知道 PCA (Principal component analysis)， 与 Autoencoder 相类似，它的主要功能即对数据进行非监督学习，并将压缩之后得到的“特征值”，这一中间结果正类似于PCA的结果。 之后再将压缩过的“特征值”进行解压，得到的最终结果与原始数据进行比较，对此进行非监督学习。如果大家还不是非常了解，请观看机器学习简介系列里的 Autoencoder 那一集； 如果对它已经有了一定的了解，那么便可以进行代码阶段的学习了。大概过程如下图所示：</p>
-<pre><code class="python">import tensorflow as tf
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets(&quot;tmp/data/&quot;, one_hot=False)
-
-learning_rate = 0.01
-training_epochs = 5  #五组训练
-batch_size = 256
-display_step = 1
-examples_to_show = 10
-
-# 我们的MNIST数据，每张图片大小是28x28 pix，即 784 Feature
-# Network Parameters
-n_input = 784  # MNIST data input (img shape: 28*28)
-# tf Graph input (only pictures)
-X = tf.placeholder(&quot;float&quot;, [None, n_input])
-
-# 在压缩环节：我们要把这个Features不断压缩，
-# 经过第一个隐藏层压缩至256个 Features，再经过第二个隐藏层压缩至128个。
-# 在解压环节：我们将128个Features还原至256个，再经过一步还原至784个。
-# 在对比环节：比较原始数据与还原后的拥有 784 Features 的数据进行 cost 的对比，
-# 根据 cost 来提升我的 Autoencoder 的准确率，下图是两个隐藏层的 weights 和 biases 的定义：
-
-# hidden layer settings
-n_hidden_1 = 256  # 1sr layer num features
-n_hidden_2 = 128  # 2nd layer num features
-weights = &#123;
-    &#39;encoder_h1&#39;: tf.Variable(tf.random_normal([n_input, n_hidden_1])),
-    &#39;encoder_h2&#39;: tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-    &#39;decoder_h1&#39;: tf.Variable(tf.random_normal([n_hidden_2, n_hidden_1])),
-    &#39;decoder_h2&#39;: tf.Variable(tf.random_normal([n_hidden_1, n_input])),
-&#125;
-biases = &#123;
-    &#39;encoder_b1&#39;: tf.Variable(tf.random_normal([n_hidden_1])),
-    &#39;encoder_b2&#39;: tf.Variable(tf.random_normal([n_hidden_2])),
-    &#39;decoder_b1&#39;: tf.Variable(tf.random_normal([n_hidden_1])),
-    &#39;decoder_b2&#39;: tf.Variable(tf.random_normal([n_input])),
-&#125;
-
-# 下面来定义Encoder和Decoder，使用的Activiation function是
-# sigmoid, 压缩之后的值应该在[0,1]这个范围内。
-# 在decoder过程中，通常使用对应与encoder的Activation function:
-
-
-# Building the encoder
-def encoder(x):
-    # Encoder Hidden layer with sigmoid activation #1
-    layer_1 = tf.nn.sigmoid(
-        tf.add(tf.matmul(x, weights[&#39;encoder_h1&#39;]), biases[&#39;encoder_b1&#39;]))
-    # Decoder Hidden layer with sigmoid activation #2
-    layer_2 = tf.nn.sigmoid(
-        tf.add(
-            tf.matmul(layer_1, weights[&#39;encoder_h2&#39;]), biases[&#39;encoder_b2&#39;]))
-    return layer_2
-
-
-# Building the decoder
-def decoder(x):
-    # Encoder Hidden layer with sigmoid activation #1
-    layer_1 = tf.nn.sigmoid(
-        tf.add(tf.matmul(x, weights[&#39;decoder_h1&#39;]), biases[&#39;decoder_b1&#39;]))
-    # Decoder Hidden layer with sigmoid activation #2
-    layer_2 = tf.nn.sigmoid(
-        tf.add(
-            tf.matmul(layer_1, weights[&#39;decoder_h2&#39;]), biases[&#39;decoder_b2&#39;]))
-    return layer_2
-
-
-# 来实现 Encoder 和 Decoder 输出的结果：
-# Construct model
-encoder_op = encoder(X)  # 128 Features
-decoder_op = decoder(encoder_op)  # 784 Features
-
-# Prediction
-y_pred = decoder_op  # After
-# Targets (Labels) are the input data.
-y_true = X  # Before
-
-#再通过我们非监督学习进行对照，
-# 即对 “原始的有 784 Features 的数据集” 和 “通过 ‘Prediction’
-# 得出的有 784 Features 的数据集” 进行最小二乘法的计算，
-# 并且使 cost 最小化:
-
-# Define loss and optimizer, minimize the squared error
-cost = tf.reduce_mean(tf.pow(y_true - y_pred, 2))
-optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
-
-# 最后，通过Matplotlib的pyplot模块将结果显示出来，
-# 注意在输出时MNIST数据集经过压缩之后x的最大值是1，而非255
-
-# Launch the graph
-with tf.Session() as sess:
-
-    sess.run(tf.global_variables_initializer())
-    total_batch = int(mnist.train.num_examples / batch_size)
-    # Training cycle
-    for epoch in range(training_epochs):
-        # Loop over all batches
-        for i in range(total_batch):
-            batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-            # Run optimization op (backprop) and cost op (to get loss value)
-            _, c = sess.run([optimizer, cost], feed_dict=&#123;X: batch_xs&#125;)
-            # Display logs per epoch step
-            if epoch % display_step == 0:
-                print(&#39;Epoch:&#39;, &#39;%04d&#39; % (epoch + 1), &#39;cost=&#39;,
-                      &#39;&#123;:.9f&#125;&#39;.format(c))
-
-    print(&#39;Optimization Finished!&#39;)
-
-    # # Applyinh encode and decode over test set
-    encode_decode = sess.run(
-        y_pred, feed_dict=&#123;
-            X: mnist.test.images[:examples_to_show]
-        &#125;)
-    # Compare original imamges with their reconstructions
-    f, a = plt.subplots(2, 10, figsize=(10, 2))
-    for i in range(examples_to_show):
-        a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
-        a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
-    plt.show()
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/" data-id="cl3jmy3sj005dtxv3bez2dykz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（7）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-13T13:47:35.000Z" itemprop="datePublished">2018-01-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/">tensorflow笔记（7）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###RNN LSTM（回归例子）</p>
-<p>这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. </p>
-<pre><code class="python"># 这次我们会使用 RNN 来进行回归的训练 (Regression).
+检查 yu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-02-13T15:10:28.000Z">2018-02-13</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（9）</h2><div class="excerpt"><p></p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-21T07:03:02.000Z">2018-01-21</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（8）</h2><div class="excerpt"><p>####非监督学习  Autoencoder
+今天我们会来聊聊用神经网络如何进行非监督形式的学习. 也就是 autoencoder, 自编码.
+自编码 autoencoder 是一种什么码呢. 他是不是 条形码? 二维码? 打码? 其中的一种呢? NONONONO. 和他们统统没有关系. 自编码是一种神经网络的形式.如果你一定要把他们扯上关系, 我想也只能这样解释啦.
+原来有时神经网络要接受...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-19T04:07:05.000Z">2018-01-19</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（7）</h2><div class="excerpt"><p>###RNN LSTM（回归例子）
+这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. 
+# 这次我们会使用 RNN 来进行回归的训练 (Regression).
 # 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.
 # 接下来我们先确定 RNN 的各种参数(super-parameters):
 
-import tensorflow as tf
-import numpy as np
-import matplotlib.pyplot as plt
+i...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-13T13:47:35.000Z">2018-01-13</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（6）</h2><div class="excerpt"><p>序列数据我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.
+处理序列...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-12T05:54:58.000Z">2018-01-12</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（5）</h2><div class="excerpt"><p>Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.
 
-BATCH_START = 0  # 建立 batch data 时候的 index
-TIME_STEPS = 20  # backpropagation through time 的 time_steps
-BATCH_SIZE = 50
-INPUT_SIZE = 1  # sin数据输入 size
-OUTPUT_SIZE = 1  # cos数据输出 size
-CELL_SIZE = 10  # RNN的 hidden unit size
-LR = 0.006  # learning rate
-
-
-## 数据生成 ##
-# 定义一个生成数据的 get_batch function：
-def get_batch():
-    global BATCH_START, TIME_STEPS
-    # xs shape (50 batch, 20 steps)
-    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
-        (BATCH_SIZE, TIME_STEPS)) / (10 * np.pi)
-    seq = np.sin(xs)
-    res = np.cos(xs)
-    BATCH_START += TIME_STEPS
-    # returned seq, res and xs: shape (batch, step, input)
-    return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
-
-
-## 定义LSTMRNN 的主体结构 ##
-
-
-class LSTMRNN(object):
-    def __init__(self, n_steps, input_size, output_size, cell_size,
-                 batch_size):
-
-        self.n_steps = n_steps
-        self.input_size = input_size
-        self.output_size = output_size
-        self.cell_size = cell_size
-        self.batch_size = batch_size
-
-        with tf.name_scope(&#39;inputs&#39;):
-            self.xs = tf.placeholder(
-                tf.float32, [None, n_steps, input_size], name=&#39;xs&#39;)
-            self.ys = tf.placeholder(
-                tf.float32, [None, n_steps, output_size], name=&#39;ys&#39;)
-
-        with tf.variable_scope(&#39;in_hidden&#39;):
-            self.add_input_layer()
-
-        with tf.variable_scope(&#39;LSTM_cell&#39;):
-            self.add_cell()
-
-        with tf.variable_scope(&#39;out_hidden&#39;):
-            self.add_output_layer()
-
-        with tf.name_scope(&#39;cost&#39;):
-            self.compute_cost()
-
-        with tf.name_scope(&#39;train&#39;):
-            self.train_op = tf.train.AdamOptimizer(LR).minimize(self.cost)
-
-    # 设置 add_input_layer 功能, 添加 input_layer:
-    def add_input_layer(self, ):
-
-        l_in_x = tf.reshape(
-            self.xs, [-1, self.input_size],
-            name=&#39;2_2D&#39;)  #  (batch*n_step, in_size)
-        # Ws (in_size, cell_size)
-        Ws_in = self._weight_variable([self.input_size, self.cell_size])
-        # bs (cell_size, )
-        bs_in = self._bias_variable([self.cell_size])
-        # l_in_y = (batch * n_steps, cell_size)
-        with tf.name_scope(&#39;Wx_plus_b&#39;):
-            l_in_y = tf.matmul(l_in_x, Ws_in) + bs_in
-        #reshape l_in_y ==&gt; (batch, n_steps, cell_size)
-        self.l_in_y = tf.reshape(
-            l_in_y, [-1, self.n_steps, self.cell_size], name=&#39;2_3D&#39;)
-
-    # 设置 add_cell 功能, 添加 cell,
-    # 注意这里的 self.cell_init_state,
-    # 因为我们在 training 的时候, 这个地方要特别说明.
-    def add_cell(self):
-
-        lstm_cell = tf.contrib.rnn.BasicLSTMCell(
-            self.cell_size, forget_bias=1.0, state_is_tuple=True)
-        with tf.name_scope(&#39;initial_state&#39;):
-            self.cell_init_state = lstm_cell.zero_state(
-                self.batch_size, dtype=tf.float32)
-            self.cell_outputs, self.cell_final_state = tf.nn.dynamic_rnn(
-                lstm_cell,
-                self.l_in_y,
-                initial_state=self.cell_init_state,
-                time_major=False)
-
-    # 设置 add_output_layer 功能, 添加 output_layer:
-    def add_output_layer(self):
-        # shape = (batch * steps, cell_size)
-        l_out_x = tf.reshape(
-            self.cell_outputs, [-1, self.cell_size], name=&#39;2_2D&#39;)
-        Ws_out = self._weight_variable([self.cell_size, self.output_size])
-        bs_out = self._bias_variable([
-            self.output_size,
-        ])
-        # shape = (batch * steps, out_size)
-        with tf.name_scope(&#39;Wx_plus_b&#39;):
-            self.pred = tf.matmul(l_out_x, Ws_out) + bs_out
-
-    #添加RNN中剩下的部分：
-    def compute_cost(self):
-        losses = tf.contrib.legacy_seq2seq.sequence_loss_by_example(
-            [tf.reshape(self.pred, [-1], name=&#39;reshape_pred&#39;)],
-            [tf.reshape(self.ys, [-1], name=&#39;reshape_target&#39;)],
-            [tf.ones([self.batch_size * self.n_steps], dtype=tf.float32)],
-            average_across_timesteps=True,
-            softmax_loss_function=self.ms_error,
-            name=&#39;losses&#39;)
-        with tf.name_scope(&#39;average_cost&#39;):
-            self.cost = tf.div(
-                tf.reduce_sum(losses, name=&#39;losses_sum&#39;),
-                self.batch_size,
-                name=&#39;average_cost&#39;)
-            tf.summary.scalar(&#39;cost&#39;, self.cost)
-
-    @staticmethod
-    def ms_error(labels, logits):
-        return tf.square(tf.subtract(labels, logits))
-
-    def _weight_variable(self, shape, name=&#39;weights&#39;):
-        initializer = tf.random_normal_initializer(
-            mean=0.,
-            stddev=1.,
-        )
-        return tf.get_variable(shape=shape, initializer=initializer, name=name)
-
-    def _bias_variable(self, shape, name=&#39;biases&#39;):
-        initializer = tf.constant_initializer(0.1)
-        return tf.get_variable(name=name, shape=shape, initializer=initializer)
-
-
-## 训练 LSTMRNN ##
-
-if __name__ == &#39;__main__&#39;:
-
-    #搭建 LSTMRNN 模型
-    model = LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
-    sess = tf.Session()
-    # sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法
-    # 替换成下面的写法：
-    sess.run(tf.global_variables_initializer())
-
-    # matplotlib 可视化
-    plt.ion()  # 设置连续 plot
-    plt.show()
-
-    # 训练 200 次
-    for i in range(200):
-        seq, res, xs = get_batch()  # 提取 batch data
-        if i == 0:
-            # 初始化data
-            feed_dict = &#123;model.xs: seq, model.ys: res&#125;
-        else:
-            feed_dict = &#123;
-                model.xs: seq,
-                model.ys: res,
-                model.cell_init_state: state  # 保持 state 的连续性
-            &#125;
-
-        # 训练
-        _, cost, state, pred = sess.run(
-            [model.train_op, model.cost, model.cell_final_state, model.pred],
-            feed_dict=feed_dict)
-
-        # plotting
-        plt.plot(xs[0, :], res[0].flatten(), &#39;r&#39;, xs[0, :],
-                 pred.flatten()[:TIME_STEPS], &#39;b--&#39;)
-        plt.ylim((-1.2, 1.2))
-        plt.draw()
-        plt.pause(0.3)  # 每 0.3 s 刷新一次
-
-        # 打印 cost 结构
-        if i % 20 == 0:
-            print(&#39;cost:&#39;, round(cost, 4))
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" data-id="cl3jmy3si005atxv32gg84oga" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（6）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-12T05:54:58.000Z" itemprop="datePublished">2018-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/">tensorflow笔记（6）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="序列数据"><a href="#序列数据" class="headerlink" title="序列数据"></a>序列数据</h3><p>我们想象现在有一组序列数据 data 0,1,2,3. 在当预测 result0 的时候,我们基于的是 data0, 同样在预测其他数据的时候, 我们也都只单单基于单个的数据. 每次使用的神经网络都是同一个 NN. 不过这些数据是有关联 顺序的 , 就像在厨房做菜, 酱料 A要比酱料 B 早放, 不然就串味了. 所以普通的神经网络结构并不能让 NN 了解这些数据之间的关联.</p>
-<h3 id="处理序列数据的神经网络"><a href="#处理序列数据的神经网络" class="headerlink" title="处理序列数据的神经网络"></a>处理序列数据的神经网络</h3><p>那我们如何让数据间的关联也被 NN 加以分析呢? 想想我们人类是怎么分析各种事物的关联吧, 最基本的方式,就是记住之前发生的事情. 那我们让神经网络也具备这种记住之前发生的事的能力. 再分析 Data0 的时候, 我们把分析结果存入记忆. 然后当分析 data1的时候, NN会产生新的记忆, 但是新记忆和老记忆是没有联系的. 我们就简单的把老记忆调用过来, 一起分析. 如果继续分析更多的有序数据 , RNN就会把之前的记忆都累积起来, 一起分析.</p>
-<p>我们再重复一遍刚才的流程, 不过这次是以加入一些数学方面的东西. 每次 RNN 运算完之后都会产生一个对于当前状态的描述 , state. 我们用简写 S( t) 代替, 然后这个 RNN开始分析 x(t+1) , 他会根据 x(t+1)产生s(t+1), 不过此时 y(t+1) 是由 s(t) 和 s(t+1) 共同创造的. 所以我们通常看到的 RNN 也可以表达成这种样子.</p>
-<h3 id="RNN的弊端"><a href="#RNN的弊端" class="headerlink" title="RNN的弊端"></a>RNN的弊端</h3><p>之前我们说过, RNN 是在有顺序的数据上进行学习的. 为了记住这些数据, RNN 会像人一样产生对先前发生事件的记忆. 不过一般形式的 RNN 就像一个老爷爷, 有时候比较健忘. 为什么会这样呢?</p>
-<p>想像现在有这样一个 RNN, 他的输入值是一句话: ‘我今天要做红烧排骨, 首先要准备排骨, 然后…., 最后美味的一道菜就出锅了’, shua ~ 说着说着就流口水了. 现在请 RNN 来分析, 我今天做的到底是什么菜呢. RNN可能会给出“辣子鸡”这个答案. 由于判断失误, RNN就要开始学习 这个长序列 X 和 ‘红烧排骨’ 的关系 , 而RNN需要的关键信息 ”红烧排骨”却出现在句子开头,</p>
-<p>再来看看 RNN是怎样学习的吧. 红烧排骨这个信息原的记忆要进过长途跋涉才能抵达最后一个时间点. 然后我们得到误差, 而且在 反向传递 得到的误差的时候, 他在每一步都会 乘以一个自己的参数 W. 如果这个 W 是一个小于1 的数, 比如0.9. 这个0.9 不断乘以误差, 误差传到初始时间点也会是一个接近于零的数, 所以对于初始时刻, 误差相当于就消失了. 我们把这个问题叫做梯度消失或者梯度弥散 Gradient vanishing. 反之如果 W 是一个大于1 的数, 比如1.1 不断累乘, 则到最后变成了无穷大的数, RNN被这无穷大的数撑死了, 这种情况我们叫做剃度爆炸, Gradient exploding. 这就是普通 RNN 没有办法回忆起久远记忆的原因.</p>
-<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM 就是为了解决这个问题而诞生的. LSTM 和普通 RNN 相比, 多出了三个控制器. (输入控制, 输出控制, 忘记控制). 现在, LSTM RNN 内部的情况是这样.</p>
-<p>他多了一个 控制全局的记忆, 我们用粗线代替. 为了方便理解, 我们把粗线想象成电影或游戏当中的 主线剧情. 而原本的 RNN 体系就是 分线剧情. 三个控制器都是在原始的 RNN 体系上, 我们先看 输入方面 , 如果此时的分线剧情对于剧终结果十分重要, 输入控制就会将这个分线剧情按重要程度 写入主线剧情 进行分析. 再看 忘记方面, 如果此时的分线剧情更改了我们对之前剧情的想法, 那么忘记控制就会将之前的某些主线剧情忘记, 按比例替换成现在的新剧情. 所以 主线剧情的更新就取决于输入 和忘记 控制. 最后的输出方面, 输出控制会基于目前的主线剧情和分线剧情判断要输出的到底是什么.基于这些控制机制, LSTM 就像延缓记忆衰退的良药, 可以带来更好的结果.</p>
-<h3 id="实现例子"><a href="#实现例子" class="headerlink" title="实现例子"></a>实现例子</h3><pre><code class="Python"># 这次我们会使用 RNN 来进行分类的训练 (Classification).
-# 会继续使用到手写数字 MNIST 数据集.
-# 让 RNN 从每张图片的第一行像素读到最后一行, 然后再进行分类判断.
-# 接下来我们导入 MNIST 数据并确定 RNN 的各种参数(hyper-parameters):
-import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-tf.set_random_seed(1)  #set random seed
-
-# 导入数据
-mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True)
-
-# hyperparameters
-lr = 0.001  # learning rate
-training_iters = 100000  # train step 上限
-batch_size = 128
-
-n_inputs = 28  # MNIST data input(img shape: 28*28)
-n_steps = 28  # time step
-n_hidden_units = 128  # neurons in hidden layer
-n_classes = 10  # MNIST classes (0-9 digits)
-
-# 接着定义x，y的placeholder和weights，biases的初始状况
-# x y placeholder
-x = tf.placeholder(tf.float32, [None, n_steps, n_inputs])
-y = tf.placeholder(tf.float32, [None, n_classes])
-
-# 对 weights biases 初始值对定义
-
-weights = &#123;
-    # shape (28, 128)
-    &#39;in&#39;: tf.Variable(tf.random_normal([n_inputs, n_hidden_units])),
-    # shape(128 , 10)
-    &#39;out&#39;: tf.Variable(tf.random_normal([n_hidden_units, n_classes]))
-&#125;
-
-biases = &#123;
-    # shape (128, )
-    &#39;in&#39;: tf.Variable(tf.constant(0.1, shape=[
-        n_hidden_units,
-    ])),
-    # shape (10, )
-    &#39;out&#39;: tf.Variable(tf.constant(0.1, shape=[
-        n_classes,
-    ]))
-&#125;
-
-
-# 定义 RNN 的主体结构
-# 接着开始定义RNN主体结构， 这个RNN总共有3个组成部分（input_layer, cell, output_layer)
-# 首先我们线定义input——layer
-def RNN(X, weights, biases):
-
-    # 原始对 X 是 3 维数据，我们需要把它变成 2 维数据才能使用weights对矩阵乘法
-    # X ==&gt; (128 batch * 28 steps, 28 inputs)
-    X = tf.reshape(X, [-1, n_inputs])
-
-    # X_in = W * X + b
-    # X_in = (128 batch * 28 steps, 128 hidden)
-    X_in = tf.matmul(X, weights[&#39;in&#39;]) + biases[&#39;in&#39;]
-
-    # X_in ==&gt; (128 batch, 28 steps, 128 hidden) 换回3维
-    X_in = tf.reshape(X_in, [-1, n_steps, n_hidden_units])
-
-    # 接着是 cell 中的计算, 有两种途径:
-    # 使用 tf.nn.rnn(cell, inputs) (不推荐原因). 但是如果使用这种方法, 可以参考原因;
-    # 使用 tf.nn.dynamic_rnn(cell, inputs) (推荐). 这次的练习将使用这种方式.
-    # 因 Tensorflow 版本升级原因, state_is_tuple=True 将在之后的版本中变为默认.
-    # 对于 lstm 来说, state可被分为(c_state, h_state).
-
-    # 使用 basic LSTM Cell。
-    lstm_cell = tf.contrib.rnn.BasicLSTMCell(n_hidden_units)
-    init_state = lstm_cell.zero_state(
-        batch_size, dtype=tf.float32)  # 初始化全零 state
-
-    # 如果使用tf.nn.dynamic_rnn(cell, inputs), 我们要确定 inputs 的格式.
-    # tf.nn.dynamic_rnn 中的 time_major 参数会针对不同 inputs 格式有不同的值.
-    # 如果 inputs 为 (batches, steps, inputs) ==&gt; time_major=False;
-    # 如果 inputs 为 (steps, batches, inputs) ==&gt; time_major=True;
-
-    outputs, final_state = tf.nn.dynamic_rnn(
-        lstm_cell, X_in, initial_state=init_state, time_major=False)
-
-    # 方式一: 直接调用final_state 中的 h_state (final_state[1]) 来进行运算:
-    # results = tf.matmul(final_state[1], weights[&#39;out&#39;]) + biases[&#39;out&#39;]
-
-    # 方式二: 调用最后一个outputs（在这个例子中，和上面的final_state[1]是一样的）
-    # outputs 变成列表 [(batch, outputs) ..] * steps
-    outputs = tf.unstack(tf.transpose(outputs, [1, 0, 2]))
-
-    results = tf.matmul(outputs[-1],
-                        weights[&#39;out&#39;]) + biases[&#39;out&#39;]  #选取最后一个output
-
-    #最后输出result
-    return results
-
-
-# 定义好了RNN主体结构后，我们就可以来计算cost和train_op
-pred = RNN(x, weights, biases)
-cost = tf.reduce_mean(
-    tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
-train_op = tf.train.AdamOptimizer(lr).minimize(cost)
-
-#训练时，不断输出accuract，观看结果：
-
-correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
-
-with tf.Session() as sess:
-
-    init = tf.global_variables_initializer()
-    sess.run(init)
-    step = 0
-    while step * batch_size &lt; training_iters:
-
-        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-        batch_xs = batch_xs.reshape([batch_size, n_steps, n_inputs])
-        sess.run([train_op], feed_dict=&#123;x: batch_xs, y: batch_ys&#125;)
-
-        if step % 20 == 0:
-            print(sess.run(accuracy, feed_dict=&#123;x: batch_xs, y: batch_ys&#125;))
-        step += 1
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/12/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89/" data-id="cl3jmy3sh0057txv3cldk4qxg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（5）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-11T15:52:54.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/">tensorflow笔记（5）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Saver-保存读取"><a href="#Saver-保存读取" class="headerlink" title="Saver 保存读取"></a>Saver 保存读取</h4><p>我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.</p>
-<pre><code class="Python">
 # 保存神经网络的方法
 import tensorflow as tf
 import numpy as np
 
 ## Save to file
-# remember to define the same dtype and shape when restore
-# W = tf.Variable([[1, 2, 3], [3, 4, 5]], dtype=tf.float32, name=&#39;weights&#39;)
-# b = tf.Variable([[1, 2, 3]], dtype=tf.float32, name=&#39;biases&#39;)
-
-# init = tf.global_variables_initializer()
-
-# # 保存时，首先要先建立一个tf.train.Saver()用来保存，提取变量
-# # 再创建一个名为my_net的文件夹，用这个saver来保存变量道这个目录
-
-# saver = tf.train.Saver()
-
-# with tf.Session() as sess:
-#     sess.run(init)
-#     save_path = saver.save(sess, &quot;my_net/save_net.ckpt&quot;)
-#     print(&quot;Save to path:&quot;, save_path)
-
-# # 提取
-# # 先建立W，b道容器
-W = tf.Variable(np.arange(6).reshape((2, 3)), dtype=tf.float32, name=&quot;weights&quot;)
-b = tf.Variable(np.arange(3).reshape((1, 3)), dtype=tf.float32, name=&quot;biases&quot;)
-
-# 这里不需要初始化步骤 init=tf.initialize_all_variables()
-
-saver = tf.train.Saver()
-with tf.Session() as sess:
-    # 提取变量
-    saver.restore(sess, &quot;my_net/save_net.ckpt&quot;)
-    print(&quot;weights:&quot;, sess.run(W))
-    print(&quot;biases:&quot;, sess.run(b))
-
-
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/" data-id="cl3jmy3sh0054txv372g8c4ar" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tensorflow笔记（4）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" class="article-date">
-  <time datetime="2018-01-10T05:16:59.000Z" itemprop="datePublished">2018-01-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/">tensorflow笔记（4）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一个简单的基于MNIST训练的CNN模型"><a href="#一个简单的基于MNIST训练的CNN模型" class="headerlink" title="一个简单的基于MNIST训练的CNN模型"></a>一个简单的基于MNIST训练的CNN模型</h3><p>卷积神经网络包含输入层、隐藏层和输出层，隐藏层又包含卷积层和pooling层，图像输入到卷积神经网络后通过卷积来不断的提取特征，每提取一个特征就会增加一个feature map，pooling层也就是下采样，通常采用的是最大值pooling和平均值pooling，因为参数太多喽，所以通过pooling来稀疏参数，使我们的网络不至于太复杂。</p>
-<p>好啦，既然你对卷积神经网络已经有了大概的了解，下次课我们将通过代码来实现一个基于MNIST数据集的简单卷积神经网络。</p>
-<pre><code class="Python">import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-
-
-def compute_accuracy(v_xs, v_ys):
-    global prediction
-    y_pre = sess.run(prediction, feed_dict=&#123;xs: v_xs, keep_prob: 1&#125;)
-    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    result = sess.run(accuracy, feed_dict=&#123;xs: v_xs, ys: v_ys, keep_prob: 1&#125;)
-    return result
-
-
-# 我们定义Weight变量，输入shape，返回变量的参数。其中我们使用tf.truncted_normal产生随机变量来进行初始化
-def weight_variable(shape):
-    initial = tf.truncated_normal(shape, stddev=0.1)
-    return tf.Variable(initial)
-
-
-# 同样的定义biase变量
-# 输入shape ，返回变量的一些参数。其中我们使用tf.constant常量函数来进行初始化
-def bias_variable(shape):
-    initial = tf.constant(0.1, shape=shape)
-    return tf.Variable(initial)
-
-
-# 定义卷积，tf.nn.conv2d函数是tensorflow里面的二维卷积函数
-# x是图片的所有参数，W是次卷积层的权重，然后定义步长strides=[1,1,1,1]的值
-# strides[0]和strides[3]的两个1是默认值
-# 中间两个1代表padding时在x方向运动一步
-# x方向运动一步，y方向运动一步，padding采用的方式是SAME
-def conv2d(x, W):
-    return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=&#39;SAME&#39;)
-
-
-# 定义池化pooling
-# padding时，我们选的是一次一步，这样得到的图片尺寸没有变化
-# 而我们希望压缩一下图片也就是参数能少一些从而减少系统复杂度
-# 因此我们采用pooling来稀疏化参数，也就是卷积神经网络中所谓的下采样层。
-# pooling 有两种，一种是最大值池化，一种是平均值池化，
-# 本例采用的是最大值池化tf.max_pool()。
-# 池化的核函数大小为2x2，因此ksize=[1,2,2,1]，步长为2，因此strides=[1,2,2,1]:
-def max_pool_2x2(x):
-    return tf.nn.max_pool(
-        x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding=&#39;SAME&#39;)
-
-
-# 数据来源
-mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=False)
-
-# 定义输入的placeholder
-xs = tf.placeholder(tf.float32, [None, 784]) / 255  # 28x28
-ys = tf.placeholder(tf.float32, [None, 10])
-
-# -1代表先不考虑输入的图片例子多少这个维度
-# 后面的1是channel的数量，因为我们输入的图片是黑白的，因此channel是1，例如如果是RGB图像，那么channel就是3。
-x_image = tf.reshape(xs, [-1, 28, 28, 1])
-
-## conv1 layer --- start ##
-# 建立卷积层
-# 定义第一层卷积，先定义本层的Weight，本层我们的卷积层核patch的大小是5x5
-# 因为channel是1，所有输入是1， 输出是32个featuremap
-W_conv1 = weight_variable([5, 5, 1, 32])
-
-# 接着定义bias，它的大小是32个长度，因此我们传入它的shape为[32]
-b_conv1 = bias_variable([32])
-# 第一个卷积层
-# h_conv1=conv2d(x_image,W_conv1)+b_conv1
-# 同时我们对h_conv1进行非线性处理，也就是激活函数来处理喽，
-# 这里我们用的是tf.nn.relu（修正线性单元）来处理，
-# 要注意的是，因为采用了SAME的padding方式，
-# 输出图片的大小没有变化依然是28x28，只是厚度变厚了，
-# 因此现在的输出大小就变成了28x28x32
-h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
-
-#最后我们再进行pooling的处理就ok啦，经过pooling的处理，输出大小就变为了14x14x32
-h_pool1 = max_pool_2x2(h_conv1)
-
-## conv1 layer --- end ##
-
-## conv2 layer --- start ##
-
-# 接着呢，同样的形式我们定义第二层卷积，
-# 本层我们的输入就是上一层的输出，本层我们的卷积核patch的大小是5x5，
-# 有32个featuremap所以输入就是32，输出呢我们定为64
-W_conv2 = weight_variable([5, 5, 32, 64])
-b_conv2 = bias_variable([64])
-# 接着我们就可以定义卷积神经网络的第二个卷积层，这时的输出的大小就是14x14x64
-h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
-# 最后也是一个pooling处理，输出大小为7x7x64
-h_pool2 = max_pool_2x2(h_conv2)
-# 建立全连接层
-# 进入全连接层时，我们通过tf.reshape()将h_pool2的输出值从一个三维的变为一维的数据
-# 表示先不考虑输入图片例子纬度，将上一个输出结果展平
-
-## conv1 layer --- end ##
-
-## fc1 layer --- start ##
-
-# 此时weight_variable的shape输入就是第二个卷积层展平的输出大小7*7*64
-# 后面输出的size我们继续扩大，定为1024
-W_fc1 = weight_variable([7 * 7 * 64, 1024])
-b_fc1 = bias_variable([1024])
-#[n_sample, 7,7,64] -&gt;&gt; [n_samples. 7*6*64]
-h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
-# 然后将展平后的h_pool2_flat与本层的W_fc1相乘（注意这个时候不是卷积了）
-h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
-# 定义dropout的placeholder，它是解决过拟合的有效手段
-keep_prob = tf.placeholder(tf.float32)
-# 如果我们考虑过拟合的问题，可以加一个dropout的处理
-h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
-
-## fc1 layer --- end ##
-
-## fc2 layer --- start ##
-
-# 接下来我们就可以进行最后一层的构建了，好激动啊，输入是1024
-W_fc2 = weight_variable([1024, 10])
-b_fc2 = bias_variable([10])
-# 然后呢，我们用softmax分类器（多分类，输出的是各个类的概率），对我们的输出进行分类
-prediction = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
-
-## fc2 layer --- end ##
-
-# 选优化方法
-cross_entropy = tf.reduce_mean(
-    -tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[1]))  # loss
-
-# 我们用tf.train.AdamOptimizer()作为我们的优化器进行优化，使我们的cross_entropy最小
-train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
-
-# 接着呢就是和之前视频讲的一样喽， 定义Session
-sess = tf.Session()
-
-# 初始化变量
-sess.run(tf.global_variables_initializer())
-
-for i in range(1000):
-    batch_xs, batch_ys = mnist.train.next_batch(100)
-    sess.run(
-        train_step, feed_dict=&#123;
-            xs: batch_xs,
-            ys: batch_ys,
-            keep_prob: 0.5
-        &#125;)
-    if i % 50 == 0:
-        print(
-            compute_accuracy(mnist.test.images[:1000],
-                             mnist.test.labels[:1000]))
-
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" data-id="cl3jmy3sg0051txv32st24wig" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TensorFlow-Classification分类学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2018-01-08T12:43:40.000Z" itemprop="datePublished">2018-01-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tensorflow/">Tensorflow</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/">TensorFlow Classification分类学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="使用MNIST实现的例子"><a href="#使用MNIST实现的例子" class="headerlink" title="使用MNIST实现的例子"></a>使用MNIST实现的例子</h4><p>具体的实现在注释里详细说明了</p>
-<pre><code class="Python">import tensorflow as tf
+# remember to define the same dtype...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-11T15:52:54.000Z">2018-01-11</time></span></div></article>
+</a><a class="post-card post " href="/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（4）</h2><div class="excerpt"><p>一个简单的基于MNIST训练的CNN模型卷积神经网络包含输入层、隐藏层和输出层，隐藏层又包含卷积层和pooling层，图像输入到卷积神经网络后通过卷积来不断的提取特征，每提取一个特征就会增加一个feature map，pooling层也就是下采样，通常采用的是最大值pooling和平均值pooling，因为参数太多喽，所以通过pooling来稀疏参数，使我们的网络不至于太复杂。
+好啦，既然你...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-10T05:16:59.000Z">2018-01-10</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a><a class="post-card post " href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/">
+<article class="md"><h2 class="post-title">TensorFlow Classification分类学习</h2><div class="excerpt"><p>使用MNIST实现的例子具体的实现在注释里详细说明了
+import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
 
 #添加神经层的函数，有四个参数
 #输入值，输入的大小，输出的大小和激励函数
-def add_layer(inputs, in_size, out_size, activation_function=None):
-
-    #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
-    #这里的weights为一个in_size行，out_size列的随机变量矩阵
-    Weights = tf.Variable(tf.random_normal([in_size, out_size]))
-
-    #在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1
-    biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
-
-    #下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法
-    #矩阵乘法是列与行的乘法
-    Wx_plus_b = tf.matmul(inputs, Weights) + biases
-
-    if activation_function is None:
-        outputs = Wx_plus_b
-    else:
-        outputs = activation_function(Wx_plus_b)
-
-    return outputs
-
-
-def compute_accuracy(v_xs, v_ys):
-    global prediction
-    y_pre = sess.run(prediction, feed_dict=&#123;xs: v_xs&#125;)
-    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    result = sess.run(accuracy, feed_dict=&#123;xs: v_xs, ys: v_ys&#125;)
-    return result
+def add_layer(inputs, in_siz...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-08T12:43:40.000Z">2018-01-08</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a><a class="post-card post " href="/2018/01/07/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（3）</h2><div class="excerpt"><p>加速神经网络训练（Speed Up Training）越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.
+####Stochastic Gradient Descent (SGD)
+ 最...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-07T09:32:40.000Z">2018-01-07</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a></div>
+  
+  <div class='paginator-wrap dis-select'>
+    <a class='paginator prev disable' href='/'>
+      <img src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/arrow/f049bbd4e88ec.svg'/>
+    </a>
+    <div class='paginator current'>
+      1<span class='sep'></span>11
+    </div>
+    <a class='paginator next' href='/page/2/'>
+      <img src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/arrow/064b95430caf4.svg'/>
+    </a>
+  </div>
 
 
-#导入数据（MNIST库)
-#图片为28 * 28 = 784
-mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True)
 
-#每张图片都表示一个数字，所以我们的输出是数字0到9，共10类
-xs = tf.placeholder(tf.float32, [None, 784])  # 28x28
-ys = tf.placeholder(tf.float32, [None, 10])
-
-#调用add_layer函数搭建一个最简单的训练网络结构，只有输入层和输出层。
-#其中输入数据是784个特征，输出数据是10个特征，激励采用softmax函数，网络结构图是这样子的
-prediction = add_layer(xs, 784, 10, activation_function=tf.nn.softmax)
-
-#Cross entropy loss
-
-#loss函数（即最优化目标函数）选用交叉熵函数。
-#交叉熵用来衡量预测值和真实值的相似程度，如果完全相同，它们的交叉熵等于零
-
-cross_entropy = tf.reduce_mean(
-    -tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[1]))
-
-train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
-sess = tf.Session()
-
-# 替换成下面的写法:
-sess.run(tf.global_variables_initializer())
-
-#现在开始train，每次只取100张图片，免得数据太多训练太慢。
-for i in range(1000):
-    batch_xs, batch_ys = mnist.train.next_batch(100)
-    sess.run(train_step, feed_dict=&#123;xs: batch_xs, ys: batch_ys&#125;)
-    if i % 50 == 0:
-        # print(mnist.test.images, mnist.test.labels)
-        print(compute_accuracy(mnist.test.images, mnist.test.labels))
-</code></pre>
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cshiyuan.github.io/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/" data-id="cl3jmy3s3003btxv33n157pag" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="https://cshiyuan.github.io/">@shyiuanchen</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.7.0" title="v1.7.0">Stellar</a> 作为主题。</p>
+</div></footer>
 
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
 
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/">生活杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E6%99%AE%E7%BA%A7%E5%88%AB/">计算机科普级别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95%E9%97%AE%E9%A2%98%E5%92%8C%E5%BF%83%E5%BE%97/">记录问题和心得</a></li></ul>
     </div>
   </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.7.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
 
   
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
-    </div>
-  </div>
+<script src="/js/main.js" async></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/05/25/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2018/02/13/Nginx-Mysql-PM2-NODE-GIT-HTTPS%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/">Nginx+Mysql+PM2+NODE+GIT+HTTPS开发日记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/21/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89/">tensorflow笔记（9）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89/">tensorflow笔记（8）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 shyiuanchen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-  <!-- highlight.js代码高亮主题 script 引入-->
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <!-- highlight.js代码高亮主题 script 引入-->
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+<!-- optional -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+  <script>
+  function loadBeaudar() {
+    const els = document.querySelectorAll("#comments #beaudar");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://beaudar.lipk.org/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadBeaudar();
+  });
+</script>
 
 
 
 
-<script src="/js/script.js"></script>
-
-
+<!-- inject -->
 
 
   </div>
