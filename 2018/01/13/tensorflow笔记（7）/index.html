@@ -5,27 +5,25 @@
   
 
   
-  <title>tensorflow笔记（7） | CShyiuan博客</title>
+  <title>tensorflow笔记（7） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###RNN LSTM（回归例子） 这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. Copy Code 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575">
+  <meta name="description" content="###RNN LSTM（回归例子） 这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.  # 这次我们会使用 RNN 来进行回归的训练 (Regression). # 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. # 接下来我们先确定 RNN 的各种参数(super-parameters):  impo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow笔记（7）">
-<meta property="og:url" content="http://example.com/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="###RNN LSTM（回归例子） 这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. Copy Code 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="###RNN LSTM（回归例子） 这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.  # 这次我们会使用 RNN 来进行回归的训练 (Regression). # 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. # 接下来我们先确定 RNN 的各种参数(super-parameters):  impo">
+<meta property="og:locale">
 <meta property="article:published_time" content="2018-01-13T13:47:35.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.083Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -91,13 +89,199 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>###RNN LSTM（回归例子）</p>
-<p>这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这次我们会使用 RNN 来进行回归的训练 (Regression).</span></span><br><span class="line"><span class="comment"># 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.</span></span><br><span class="line"><span class="comment"># 接下来我们先确定 RNN 的各种参数(super-parameters):</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">BATCH_START = <span class="number">0</span>  <span class="comment"># 建立 batch data 时候的 index</span></span><br><span class="line">TIME_STEPS = <span class="number">20</span>  <span class="comment"># backpropagation through time 的 time_steps</span></span><br><span class="line">BATCH_SIZE = <span class="number">50</span></span><br><span class="line">INPUT_SIZE = <span class="number">1</span>  <span class="comment"># sin数据输入 size</span></span><br><span class="line">OUTPUT_SIZE = <span class="number">1</span>  <span class="comment"># cos数据输出 size</span></span><br><span class="line">CELL_SIZE = <span class="number">10</span>  <span class="comment"># RNN的 hidden unit size</span></span><br><span class="line">LR = <span class="number">0.006</span>  <span class="comment"># learning rate</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数据生成 ##</span></span><br><span class="line"><span class="comment"># 定义一个生成数据的 get_batch function：</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_batch</span>():</span><br><span class="line">    <span class="keyword">global</span> BATCH_START, TIME_STEPS</span><br><span class="line">    <span class="comment"># xs shape (50 batch, 20 steps)</span></span><br><span class="line">    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(</span><br><span class="line">        (BATCH_SIZE, TIME_STEPS)) / (<span class="number">10</span> * np.pi)</span><br><span class="line">    seq = np.sin(xs)</span><br><span class="line">    res = np.cos(xs)</span><br><span class="line">    BATCH_START += TIME_STEPS</span><br><span class="line">    <span class="comment"># returned seq, res and xs: shape (batch, step, input)</span></span><br><span class="line">    <span class="keyword">return</span> [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义LSTMRNN 的主体结构 ##</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LSTMRNN</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n_steps, input_size, output_size, cell_size,</span></span><br><span class="line"><span class="params">                 batch_size</span>):</span><br><span class="line"></span><br><span class="line">        self.n_steps = n_steps</span><br><span class="line">        self.input_size = input_size</span><br><span class="line">        self.output_size = output_size</span><br><span class="line">        self.cell_size = cell_size</span><br><span class="line">        self.batch_size = batch_size</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;inputs&#x27;</span>):</span><br><span class="line">            self.xs = tf.placeholder(</span><br><span class="line">                tf.float32, [<span class="literal">None</span>, n_steps, input_size], name=<span class="string">&#x27;xs&#x27;</span>)</span><br><span class="line">            self.ys = tf.placeholder(</span><br><span class="line">                tf.float32, [<span class="literal">None</span>, n_steps, output_size], name=<span class="string">&#x27;ys&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">&#x27;in_hidden&#x27;</span>):</span><br><span class="line">            self.add_input_layer()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">&#x27;LSTM_cell&#x27;</span>):</span><br><span class="line">            self.add_cell()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">&#x27;out_hidden&#x27;</span>):</span><br><span class="line">            self.add_output_layer()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;cost&#x27;</span>):</span><br><span class="line">            self.compute_cost()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;train&#x27;</span>):</span><br><span class="line">            self.train_op = tf.train.AdamOptimizer(LR).minimize(self.cost)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置 add_input_layer 功能, 添加 input_layer:</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_input_layer</span>(<span class="params">self, </span>):</span><br><span class="line"></span><br><span class="line">        l_in_x = tf.reshape(</span><br><span class="line">            self.xs, [-<span class="number">1</span>, self.input_size],</span><br><span class="line">            name=<span class="string">&#x27;2_2D&#x27;</span>)  <span class="comment">#  (batch*n_step, in_size)</span></span><br><span class="line">        <span class="comment"># Ws (in_size, cell_size)</span></span><br><span class="line">        Ws_in = self._weight_variable([self.input_size, self.cell_size])</span><br><span class="line">        <span class="comment"># bs (cell_size, )</span></span><br><span class="line">        bs_in = self._bias_variable([self.cell_size])</span><br><span class="line">        <span class="comment"># l_in_y = (batch * n_steps, cell_size)</span></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;Wx_plus_b&#x27;</span>):</span><br><span class="line">            l_in_y = tf.matmul(l_in_x, Ws_in) + bs_in</span><br><span class="line">        <span class="comment">#reshape l_in_y ==&gt; (batch, n_steps, cell_size)</span></span><br><span class="line">        self.l_in_y = tf.reshape(</span><br><span class="line">            l_in_y, [-<span class="number">1</span>, self.n_steps, self.cell_size], name=<span class="string">&#x27;2_3D&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置 add_cell 功能, 添加 cell,</span></span><br><span class="line">    <span class="comment"># 注意这里的 self.cell_init_state,</span></span><br><span class="line">    <span class="comment"># 因为我们在 training 的时候, 这个地方要特别说明.</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_cell</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">        lstm_cell = tf.contrib.rnn.BasicLSTMCell(</span><br><span class="line">            self.cell_size, forget_bias=<span class="number">1.0</span>, state_is_tuple=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;initial_state&#x27;</span>):</span><br><span class="line">            self.cell_init_state = lstm_cell.zero_state(</span><br><span class="line">                self.batch_size, dtype=tf.float32)</span><br><span class="line">            self.cell_outputs, self.cell_final_state = tf.nn.dynamic_rnn(</span><br><span class="line">                lstm_cell,</span><br><span class="line">                self.l_in_y,</span><br><span class="line">                initial_state=self.cell_init_state,</span><br><span class="line">                time_major=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置 add_output_layer 功能, 添加 output_layer:</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_output_layer</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># shape = (batch * steps, cell_size)</span></span><br><span class="line">        l_out_x = tf.reshape(</span><br><span class="line">            self.cell_outputs, [-<span class="number">1</span>, self.cell_size], name=<span class="string">&#x27;2_2D&#x27;</span>)</span><br><span class="line">        Ws_out = self._weight_variable([self.cell_size, self.output_size])</span><br><span class="line">        bs_out = self._bias_variable([</span><br><span class="line">            self.output_size,</span><br><span class="line">        ])</span><br><span class="line">        <span class="comment"># shape = (batch * steps, out_size)</span></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;Wx_plus_b&#x27;</span>):</span><br><span class="line">            self.pred = tf.matmul(l_out_x, Ws_out) + bs_out</span><br><span class="line"></span><br><span class="line">    <span class="comment">#添加RNN中剩下的部分：</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute_cost</span>(<span class="params">self</span>):</span><br><span class="line">        losses = tf.contrib.legacy_seq2seq.sequence_loss_by_example(</span><br><span class="line">            [tf.reshape(self.pred, [-<span class="number">1</span>], name=<span class="string">&#x27;reshape_pred&#x27;</span>)],</span><br><span class="line">            [tf.reshape(self.ys, [-<span class="number">1</span>], name=<span class="string">&#x27;reshape_target&#x27;</span>)],</span><br><span class="line">            [tf.ones([self.batch_size * self.n_steps], dtype=tf.float32)],</span><br><span class="line">            average_across_timesteps=<span class="literal">True</span>,</span><br><span class="line">            softmax_loss_function=self.ms_error,</span><br><span class="line">            name=<span class="string">&#x27;losses&#x27;</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;average_cost&#x27;</span>):</span><br><span class="line">            self.cost = tf.div(</span><br><span class="line">                tf.reduce_sum(losses, name=<span class="string">&#x27;losses_sum&#x27;</span>),</span><br><span class="line">                self.batch_size,</span><br><span class="line">                name=<span class="string">&#x27;average_cost&#x27;</span>)</span><br><span class="line">            tf.summary.scalar(<span class="string">&#x27;cost&#x27;</span>, self.cost)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">ms_error</span>(<span class="params">labels, logits</span>):</span><br><span class="line">        <span class="keyword">return</span> tf.square(tf.subtract(labels, logits))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_weight_variable</span>(<span class="params">self, shape, name=<span class="string">&#x27;weights&#x27;</span></span>):</span><br><span class="line">        initializer = tf.random_normal_initializer(</span><br><span class="line">            mean=<span class="number">0.</span>,</span><br><span class="line">            stddev=<span class="number">1.</span>,</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> tf.get_variable(shape=shape, initializer=initializer, name=name)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_bias_variable</span>(<span class="params">self, shape, name=<span class="string">&#x27;biases&#x27;</span></span>):</span><br><span class="line">        initializer = tf.constant_initializer(<span class="number">0.1</span>)</span><br><span class="line">        <span class="keyword">return</span> tf.get_variable(name=name, shape=shape, initializer=initializer)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 训练 LSTMRNN ##</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#搭建 LSTMRNN 模型</span></span><br><span class="line">    model = LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)</span><br><span class="line">    sess = tf.Session()</span><br><span class="line">    <span class="comment"># sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法</span></span><br><span class="line">    <span class="comment"># 替换成下面的写法：</span></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># matplotlib 可视化</span></span><br><span class="line">    plt.ion()  <span class="comment"># 设置连续 plot</span></span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 训练 200 次</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">        seq, res, xs = get_batch()  <span class="comment"># 提取 batch data</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 初始化data</span></span><br><span class="line">            feed_dict = &#123;model.xs: seq, model.ys: res&#125;</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            feed_dict = &#123;</span><br><span class="line">                model.xs: seq,</span><br><span class="line">                model.ys: res,</span><br><span class="line">                model.cell_init_state: state  <span class="comment"># 保持 state 的连续性</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 训练</span></span><br><span class="line">        _, cost, state, pred = sess.run(</span><br><span class="line">            [model.train_op, model.cost, model.cell_final_state, model.pred],</span><br><span class="line">            feed_dict=feed_dict)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># plotting</span></span><br><span class="line">        plt.plot(xs[<span class="number">0</span>, :], res[<span class="number">0</span>].flatten(), <span class="string">&#x27;r&#x27;</span>, xs[<span class="number">0</span>, :],</span><br><span class="line">                 pred.flatten()[:TIME_STEPS], <span class="string">&#x27;b--&#x27;</span>)</span><br><span class="line">        plt.ylim((-<span class="number">1.2</span>, <span class="number">1.2</span>))</span><br><span class="line">        plt.draw()</span><br><span class="line">        plt.pause(<span class="number">0.3</span>)  <span class="comment"># 每 0.3 s 刷新一次</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 打印 cost 结构</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;cost:&#x27;</span>, <span class="built_in">round</span>(cost, <span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>这次我们会使用 RNN 来进行回归的训练 (Regression). 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线. </p>
+<pre><code class="python"># 这次我们会使用 RNN 来进行回归的训练 (Regression).
+# 会继续使用到自己创建的 sin 曲线预测一条 cos 曲线.
+# 接下来我们先确定 RNN 的各种参数(super-parameters):
+
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+
+BATCH_START = 0  # 建立 batch data 时候的 index
+TIME_STEPS = 20  # backpropagation through time 的 time_steps
+BATCH_SIZE = 50
+INPUT_SIZE = 1  # sin数据输入 size
+OUTPUT_SIZE = 1  # cos数据输出 size
+CELL_SIZE = 10  # RNN的 hidden unit size
+LR = 0.006  # learning rate
+
+
+## 数据生成 ##
+# 定义一个生成数据的 get_batch function：
+def get_batch():
+    global BATCH_START, TIME_STEPS
+    # xs shape (50 batch, 20 steps)
+    xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape(
+        (BATCH_SIZE, TIME_STEPS)) / (10 * np.pi)
+    seq = np.sin(xs)
+    res = np.cos(xs)
+    BATCH_START += TIME_STEPS
+    # returned seq, res and xs: shape (batch, step, input)
+    return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
+
+
+## 定义LSTMRNN 的主体结构 ##
+
+
+class LSTMRNN(object):
+    def __init__(self, n_steps, input_size, output_size, cell_size,
+                 batch_size):
+
+        self.n_steps = n_steps
+        self.input_size = input_size
+        self.output_size = output_size
+        self.cell_size = cell_size
+        self.batch_size = batch_size
+
+        with tf.name_scope(&#39;inputs&#39;):
+            self.xs = tf.placeholder(
+                tf.float32, [None, n_steps, input_size], name=&#39;xs&#39;)
+            self.ys = tf.placeholder(
+                tf.float32, [None, n_steps, output_size], name=&#39;ys&#39;)
+
+        with tf.variable_scope(&#39;in_hidden&#39;):
+            self.add_input_layer()
+
+        with tf.variable_scope(&#39;LSTM_cell&#39;):
+            self.add_cell()
+
+        with tf.variable_scope(&#39;out_hidden&#39;):
+            self.add_output_layer()
+
+        with tf.name_scope(&#39;cost&#39;):
+            self.compute_cost()
+
+        with tf.name_scope(&#39;train&#39;):
+            self.train_op = tf.train.AdamOptimizer(LR).minimize(self.cost)
+
+    # 设置 add_input_layer 功能, 添加 input_layer:
+    def add_input_layer(self, ):
+
+        l_in_x = tf.reshape(
+            self.xs, [-1, self.input_size],
+            name=&#39;2_2D&#39;)  #  (batch*n_step, in_size)
+        # Ws (in_size, cell_size)
+        Ws_in = self._weight_variable([self.input_size, self.cell_size])
+        # bs (cell_size, )
+        bs_in = self._bias_variable([self.cell_size])
+        # l_in_y = (batch * n_steps, cell_size)
+        with tf.name_scope(&#39;Wx_plus_b&#39;):
+            l_in_y = tf.matmul(l_in_x, Ws_in) + bs_in
+        #reshape l_in_y ==&gt; (batch, n_steps, cell_size)
+        self.l_in_y = tf.reshape(
+            l_in_y, [-1, self.n_steps, self.cell_size], name=&#39;2_3D&#39;)
+
+    # 设置 add_cell 功能, 添加 cell,
+    # 注意这里的 self.cell_init_state,
+    # 因为我们在 training 的时候, 这个地方要特别说明.
+    def add_cell(self):
+
+        lstm_cell = tf.contrib.rnn.BasicLSTMCell(
+            self.cell_size, forget_bias=1.0, state_is_tuple=True)
+        with tf.name_scope(&#39;initial_state&#39;):
+            self.cell_init_state = lstm_cell.zero_state(
+                self.batch_size, dtype=tf.float32)
+            self.cell_outputs, self.cell_final_state = tf.nn.dynamic_rnn(
+                lstm_cell,
+                self.l_in_y,
+                initial_state=self.cell_init_state,
+                time_major=False)
+
+    # 设置 add_output_layer 功能, 添加 output_layer:
+    def add_output_layer(self):
+        # shape = (batch * steps, cell_size)
+        l_out_x = tf.reshape(
+            self.cell_outputs, [-1, self.cell_size], name=&#39;2_2D&#39;)
+        Ws_out = self._weight_variable([self.cell_size, self.output_size])
+        bs_out = self._bias_variable([
+            self.output_size,
+        ])
+        # shape = (batch * steps, out_size)
+        with tf.name_scope(&#39;Wx_plus_b&#39;):
+            self.pred = tf.matmul(l_out_x, Ws_out) + bs_out
+
+    #添加RNN中剩下的部分：
+    def compute_cost(self):
+        losses = tf.contrib.legacy_seq2seq.sequence_loss_by_example(
+            [tf.reshape(self.pred, [-1], name=&#39;reshape_pred&#39;)],
+            [tf.reshape(self.ys, [-1], name=&#39;reshape_target&#39;)],
+            [tf.ones([self.batch_size * self.n_steps], dtype=tf.float32)],
+            average_across_timesteps=True,
+            softmax_loss_function=self.ms_error,
+            name=&#39;losses&#39;)
+        with tf.name_scope(&#39;average_cost&#39;):
+            self.cost = tf.div(
+                tf.reduce_sum(losses, name=&#39;losses_sum&#39;),
+                self.batch_size,
+                name=&#39;average_cost&#39;)
+            tf.summary.scalar(&#39;cost&#39;, self.cost)
+
+    @staticmethod
+    def ms_error(labels, logits):
+        return tf.square(tf.subtract(labels, logits))
+
+    def _weight_variable(self, shape, name=&#39;weights&#39;):
+        initializer = tf.random_normal_initializer(
+            mean=0.,
+            stddev=1.,
+        )
+        return tf.get_variable(shape=shape, initializer=initializer, name=name)
+
+    def _bias_variable(self, shape, name=&#39;biases&#39;):
+        initializer = tf.constant_initializer(0.1)
+        return tf.get_variable(name=name, shape=shape, initializer=initializer)
+
+
+## 训练 LSTMRNN ##
+
+if __name__ == &#39;__main__&#39;:
+
+    #搭建 LSTMRNN 模型
+    model = LSTMRNN(TIME_STEPS, INPUT_SIZE, OUTPUT_SIZE, CELL_SIZE, BATCH_SIZE)
+    sess = tf.Session()
+    # sess.run(tf.initialize_all_variables()) # tf 马上就要废弃这种写法
+    # 替换成下面的写法：
+    sess.run(tf.global_variables_initializer())
+
+    # matplotlib 可视化
+    plt.ion()  # 设置连续 plot
+    plt.show()
+
+    # 训练 200 次
+    for i in range(200):
+        seq, res, xs = get_batch()  # 提取 batch data
+        if i == 0:
+            # 初始化data
+            feed_dict = &#123;model.xs: seq, model.ys: res&#125;
+        else:
+            feed_dict = &#123;
+                model.xs: seq,
+                model.ys: res,
+                model.cell_init_state: state  # 保持 state 的连续性
+            &#125;
+
+        # 训练
+        _, cost, state, pred = sess.run(
+            [model.train_op, model.cost, model.cell_final_state, model.pred],
+            feed_dict=feed_dict)
+
+        # plotting
+        plt.plot(xs[0, :], res[0].flatten(), &#39;r&#39;, xs[0, :],
+                 pred.flatten()[:TIME_STEPS], &#39;b--&#39;)
+        plt.ylim((-1.2, 1.2))
+        plt.draw()
+        plt.pause(0.3)  # 每 0.3 s 刷新一次
+
+        # 打印 cost 结构
+        if i % 20 == 0:
+            print(&#39;cost:&#39;, round(cost, 4))
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" data-id="cl3jmf7nj00619jv35f9ahij2" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/13/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89/" data-id="cl3jmy3si005atxv32gg84oga" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +333,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -193,7 +377,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -5,27 +5,25 @@
   
 
   
-  <title>node.js express框架笔记（1） | CShyiuan博客</title>
+  <title>node.js express框架笔记（1） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="请求和响应 Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。 app.get(&#39;&#x2F;&#39;, function (req, res) {    &#x2F;&#x2F; -- }) request 和 response 对象的具体介绍： Request 对象 - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见">
+  <meta name="description" content="请求和响应Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。 app.get(&#39;&#x2F;&#39;, function (req, res) {    &#x2F;&#x2F; -- }) request 和 response 对象的具体介绍： Request 对象 - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属">
 <meta property="og:type" content="article">
 <meta property="og:title" content="node.js express框架笔记（1）">
-<meta property="og:url" content="http://example.com/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="请求和响应 Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。 app.get(&#39;&#x2F;&#39;, function (req, res) {    &#x2F;&#x2F; -- }) request 和 response 对象的具体介绍： Request 对象 - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="请求和响应Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。 app.get(&#39;&#x2F;&#39;, function (req, res) {    &#x2F;&#x2F; -- }) request 和 response 对象的具体介绍： Request 对象 - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-04-06T09:37:31.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.081Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,120 +92,85 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="请求和响应">请求和响应</h2>
-<p>Express 应用使用回调函数的参数： <strong>request</strong> 和 <strong>response</strong> 对象来处理请求和响应的数据。</p>
+        <h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><p>Express 应用使用回调函数的参数： <strong>request</strong> 和 <strong>response</strong> 对象来处理请求和响应的数据。</p>
 <pre class="prettyprint prettyprinted"><span class="pln">app</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="str">'/'</span><span class="pun">,</span> <span class="kwd">function</span> <span class="pun">(</span><span class="pln">req</span><span class="pun">,</span><span class="pln"> res</span><span class="pun">)</span> <span class="pun">{</span>
    <span class="com">// --</span>
 <span class="pun">})</span></pre>
 <p><strong>request</strong> 和 <strong>response</strong> 对象的具体介绍：</p>
 <p><strong>Request 对象</strong> - request 对象表示 HTTP 请求，包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属性有：</p>
 <ol>
-<li>
-<p>req.app：当callback为外部文件时，用req.app访问express的实例</p>
+<li><p>req.app：当callback为外部文件时，用req.app访问express的实例</p>
 </li>
-<li>
-<p>req.baseUrl：获取路由当前安装的URL路径</p>
+<li><p>req.baseUrl：获取路由当前安装的URL路径</p>
 </li>
-<li>
-<p>req.body / req.cookies：获得「请求主体」/ Cookies</p>
+<li><p>req.body &#x2F; req.cookies：获得「请求主体」&#x2F; Cookies</p>
 </li>
-<li>
-<p>req.fresh / req.stale：判断请求是否还「新鲜」</p>
+<li><p>req.fresh &#x2F; req.stale：判断请求是否还「新鲜」</p>
 </li>
-<li>
-<p>req.hostname / req.ip：获取主机名和IP地址</p>
+<li><p>req.hostname &#x2F; req.ip：获取主机名和IP地址</p>
 </li>
-<li>
-<p>req.originalUrl：获取原始请求URL</p>
+<li><p>req.originalUrl：获取原始请求URL</p>
 </li>
-<li>
-<p>req.params：获取路由的parameters</p>
+<li><p>req.params：获取路由的parameters</p>
 </li>
-<li>
-<p>req.path：获取请求路径</p>
+<li><p>req.path：获取请求路径</p>
 </li>
-<li>
-<p>req.protocol：获取协议类型</p>
+<li><p>req.protocol：获取协议类型</p>
 </li>
-<li>
-<p>req.query：获取URL的查询参数串</p>
+<li><p>req.query：获取URL的查询参数串</p>
 </li>
-<li>
-<p>req.route：获取当前匹配的路由</p>
+<li><p>req.route：获取当前匹配的路由</p>
 </li>
-<li>
-<p>req.subdomains：获取子域名</p>
+<li><p>req.subdomains：获取子域名</p>
 </li>
-<li>
-<p>req.accepts()：检查可接受的请求的文档类型</p>
+<li><p>req.accepts()：检查可接受的请求的文档类型</p>
 </li>
-<li>
-<p>req.acceptsCharsets / req.acceptsEncodings / req.acceptsLanguages：返回指定字符集的第一个可接受字符编码</p>
+<li><p>req.acceptsCharsets &#x2F; req.acceptsEncodings &#x2F; req.acceptsLanguages：返回指定字符集的第一个可接受字符编码</p>
 </li>
-<li>
-<p>req.get()：获取指定的HTTP请求头</p>
+<li><p>req.get()：获取指定的HTTP请求头</p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://req.is">req.is</a>()：判断请求头Content-Type的MIME类型<br>
-<strong>Response 对象</strong> - response 对象表示 HTTP 响应，即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：</p>
+<li><p>req.is()：判断请求头Content-Type的MIME类型<br><strong>Response 对象</strong> - response 对象表示 HTTP 响应，即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：</p>
 </li>
-<li>
-<p>res.app：同req.app一样</p>
+<li><p>res.app：同req.app一样</p>
 </li>
-<li>
-<p>res.append()：追加指定HTTP头</p>
+<li><p>res.append()：追加指定HTTP头</p>
 </li>
-<li>
-<p>res.set()在res.append()后将重置之前设置的头</p>
+<li><p>res.set()在res.append()后将重置之前设置的头</p>
 </li>
-<li>
-<p>res.cookie(name，value [，option])：设置Cookie</p>
+<li><p>res.cookie(name，value [，option])：设置Cookie</p>
 </li>
-<li>
-<p>opition: domain / expires / httpOnly / maxAge / path / secure / signed</p>
+<li><p>opition: domain &#x2F; expires &#x2F; httpOnly &#x2F; maxAge &#x2F; path &#x2F; secure &#x2F; signed</p>
 </li>
-<li>
-<p>res.clearCookie()：清除Cookie</p>
+<li><p>res.clearCookie()：清除Cookie</p>
 </li>
-<li>
-<p>res.download()：传送指定路径的文件</p>
+<li><p>res.download()：传送指定路径的文件</p>
 </li>
-<li>
-<p>res.get()：返回指定的HTTP头</p>
+<li><p>res.get()：返回指定的HTTP头</p>
 </li>
-<li>
-<p>res.json()：传送JSON响应</p>
+<li><p>res.json()：传送JSON响应</p>
 </li>
-<li>
-<p>res.jsonp()：传送JSONP响应</p>
+<li><p>res.jsonp()：传送JSONP响应</p>
 </li>
-<li>
-<p>res.location()：只设置响应的Location HTTP头，不设置状态码或者close response</p>
+<li><p>res.location()：只设置响应的Location HTTP头，不设置状态码或者close response</p>
 </li>
-<li>
-<p>res.redirect()：设置响应的Location HTTP头，并且设置状态码302</p>
+<li><p>res.redirect()：设置响应的Location HTTP头，并且设置状态码302</p>
 </li>
-<li>
-<p>res.send()：传送HTTP响应</p>
+<li><p>res.send()：传送HTTP响应</p>
 </li>
-<li>
-<p>res.sendFile(path [，options] [，fn])：传送指定路径的文件 -会自动根据文件extension设定Content-Type</p>
+<li><p>res.sendFile(path [，options] [，fn])：传送指定路径的文件 -会自动根据文件extension设定Content-Type</p>
 </li>
-<li>
-<p>res.set()：设置HTTP头，传入object可以一次设置多个头</p>
+<li><p>res.set()：设置HTTP头，传入object可以一次设置多个头</p>
 </li>
-<li>
-<p>res.status()：设置HTTP状态码</p>
+<li><p>res.status()：设置HTTP状态码</p>
 </li>
-<li>
-<p>res.type()：设置Content-Type的MIME类型</p>
+<li><p>res.type()：设置Content-Type的MIME类型</p>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" data-id="cl3jmf7n8004y9jv3brx086vn" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/06/node.js%20express%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" data-id="cl3jmy3sa0047txv31965cflo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +222,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -303,7 +266,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -5,27 +5,25 @@
   
 
   
-  <title>rpm和yum详解 | CShyiuan博客</title>
+  <title>rpm和yum详解 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux中软件的安装 Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。 不论是通过那种途径安装软件都具有一下4个特点： 1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征 2.都具有二进制的程序主体 3.都自带库文件，供程序主体进行调用 4.都带有帮助文件，对程序的使用方法进行说明 软件的安装路径： 除了自行下载源码编译安">
+  <meta name="description" content="Linux中软件的安装Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。 不论是通过那种途径安装软件都具有一下4个特点： 1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征 2.都具有二进制的程序主体 3.都自带库文件，供程序主体进行调用 4.都带有帮助文件，对程序的使用方法进行说明 软件的安装路径： 除了自行下载源码编译安装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rpm和yum详解">
-<meta property="og:url" content="http://example.com/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="Linux中软件的安装 Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。 不论是通过那种途径安装软件都具有一下4个特点： 1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征 2.都具有二进制的程序主体 3.都自带库文件，供程序主体进行调用 4.都带有帮助文件，对程序的使用方法进行说明 软件的安装路径： 除了自行下载源码编译安">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Linux中软件的安装Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。 不论是通过那种途径安装软件都具有一下4个特点： 1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征 2.都具有二进制的程序主体 3.都自带库文件，供程序主体进行调用 4.都带有帮助文件，对程序的使用方法进行说明 软件的安装路径： 除了自行下载源码编译安装">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-30T06:19:59.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.082Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,8 +92,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Linux中软件的安装"><strong>Linux中软件的安装</strong></h2>
-<p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
+        <h2 id="Linux中软件的安装"><a href="#Linux中软件的安装" class="headerlink" title="Linux中软件的安装"></a><strong>Linux中软件的安装</strong></h2><p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
 <p>不论是通过那种途径安装软件都具有一下4个特点：</p>
 <p>1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征</p>
 <p>2.都具有二进制的程序主体</p>
@@ -103,37 +100,36 @@
 <p>4.都带有帮助文件，对程序的使用方法进行说明</p>
 <p>软件的安装路径：</p>
 <p>除了自行下载源码编译安装的软件可以自定义安装路径之外，rpm包的安装都是按照自身预设的安装路径进行安装。主要有以下几类：</p>
-<p>1./：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
-<p>2./usr：此目录下一般情况下是提供基本服务的软件</p>
-<p>3./usr/local：此目录下一般情况下是用户自行安装的第三方软件</p>
+<p>1.&#x2F;：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
+<p>2.&#x2F;usr：此目录下一般情况下是提供基本服务的软件</p>
+<p>3.&#x2F;usr&#x2F;local：此目录下一般情况下是用户自行安装的第三方软件</p>
 <p>系统相关：</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/bin 、/sbin</p>
-<p>库文件路径：/lib</p>
+<p>配置文件路径：&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;bin 、&#x2F;sbin</p>
+<p>库文件路径：&#x2F;lib</p>
 <p>系统提供功能服务相关</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/usr/bin   /usr/sbin</p>
-<p>库文件：/usr/lib</p>
+<p>配置文件路径：&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;usr&#x2F;bin   &#x2F;usr&#x2F;sbin</p>
+<p>库文件：&#x2F;usr&#x2F;lib</p>
 <p>第三方软件：</p>
-<p>配置文件路径/usr/local/etc</p>
-<p>二进制文件路径：/usr/local/bin  /usr/local/sbin</p>
-<p>库文件：/usr/local/lib</p>
-<p>说明文件主要都存放在/usr/share/man和/usr/local/share/man</p>
+<p>配置文件路径&#x2F;usr&#x2F;local&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;usr&#x2F;local&#x2F;bin  &#x2F;usr&#x2F;local&#x2F;sbin</p>
+<p>库文件：&#x2F;usr&#x2F;local&#x2F;lib</p>
+<p>说明文件主要都存放在&#x2F;usr&#x2F;share&#x2F;man和&#x2F;usr&#x2F;local&#x2F;share&#x2F;man</p>
 <p>RPM(RedhatPackage Manager)是由redhat公司提供的软件包管理器 ,可以实现软件包的安装、查询、卸载、升级以及校验等但是rpm不能很好的解决软件之间的依赖关系</p>
-<p> </p>
+<p>&amp;nbsp;</p>
 <hr>
 <hr>
-<h2 id="使用yum软件升级器进行安装"><strong>使用yum软件升级器进行安装</strong></h2>
-<p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp://   http:// file:///在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
+<h2 id="使用yum软件升级器进行安装"><a href="#使用yum软件升级器进行安装" class="headerlink" title="使用yum软件升级器进行安装"></a><strong>使用yum软件升级器进行安装</strong></h2><p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp:&#x2F;&#x2F;   http:&#x2F;&#x2F; file:&#x2F;&#x2F;&#x2F;在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
 <p>yum库文件的配置:</p>
-<p>通过/etc/yum.conf 和 /etc/yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
-<p>yum的配置文件 /etc/yum.conf</p>
-<p>yumrepository仓库的配置文件/etc/yum.repos.d/*.repo</p>
+<p>通过&#x2F;etc&#x2F;yum.conf 和 &#x2F;etc&#x2F;yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
+<p>yum的配置文件 &#x2F;etc&#x2F;yum.conf</p>
+<p>yumrepository仓库的配置文件&#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/" data-id="cl3jmf7nd005d9jv3amna29oa" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/" data-id="cl3jmy3sd004mtxv3gz8nhriv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -185,7 +181,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -229,7 +225,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -5,27 +5,25 @@
   
 
   
-  <title>Java和C++的区别（转载） | CShyiuan博客</title>
+  <title>Java和C++的区别（转载） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能">
+  <meta name="description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java和C++的区别（转载）">
-<meta property="og:url" content="http://example.com/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="1.Java没有显式指针，而在C++中却可以用。 2.Java是主动多态的，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。 3.Java是隐式继承的，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-02-11T14:40:32.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.076Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -96,7 +94,8 @@
       
         <div id="article_content" class="article_content">
 <div>
-<p>1.<u><a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>没有显式指针</u>，而在C++中却可以用。</p>
+
+<p>　　1.<u><a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>没有显式指针</u>，而在C++中却可以用。</p>
 <p>2.Java是<u>主动多态的</u>，你不用关心具有继承关系的多个类之间的同名成员函数会调用哪个，Java会主动地从祖父类、祖祖父类……追溯至最高一级父类，然后从上至下开始寻找并调用。C++不会主动使用多态，要使用多态，就要用虚函数。</p>
 <p>3.Java是<u>隐式继承的</u>，你不说你是谁的子类，那么你就是Object的子类，甚至你说你不是类都不可以，你必须是类，然后才能谈到实例化的对象。这时，Java看上去是强制面向对象。C++却把话都说明白了，你继承谁就继承谁，继承多个都可以，你什么都不说那么就不继承。但是C++当中，不继承不代表不能被继承，实际上C++禁止这么做。原因前面已经说过了，C++是被动多态的。你不用virtual去修饰基类的成员函数，程序执行时函数调用就不会自动调到派生类。</p>
 <p>4.Java<u>有接口</u>，C++中却没有。这不是说C++不好，只是C++没有明确提出这样一个概念。C++中定义一个抽象类，把成员函数设为常量，并改成纯虚函数，数据域也设成常量，那么<u>在C++中这样的抽象类就是接口</u>。你可以说它不是，因为C++中没有接口，但是我要说明的是，C++可以做出一个接口来。</p>
@@ -112,14 +111,14 @@
 <span id="more"></span>
 <div id="digg">
 <dl id="btnDigg" class="digg digg_disable">
- 	<dt>转自百度文库[http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html](http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html)</dt>
+     <dt>转自百度文库[http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html](http://wenku.baidu.com/view/71b04eebe009581b6bd9ebfc.html)</dt>
 </dl>
 <dl id="btnBury" class="digg digg_disable"></dl>
 </div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" data-id="cl3jmf7mk00269jv34xx494yl" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/02/11/Java%E5%92%8CC%20%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" data-id="cl3jmy3rl001btxv3cjobc9ne" class="article-share-link">Share</a>
       
       
     </footer>
@@ -171,7 +170,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -215,7 +214,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

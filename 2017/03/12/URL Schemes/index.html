@@ -5,30 +5,28 @@
   
 
   
-  <title>URL Schemes | CShyiuan博客</title>
+  <title>URL Schemes | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="URL Schemes 是什么 通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。 URL Schemes 有两个单词：  URL，我们都很清楚，http:&#x2F;&#x2F;www.apple.com 就是个 URL，我们也叫它链接或网址； Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 :&#x2F;&#x2F;之前的那段字符。比如 http:&#x2F;&#x2F;www.apple.com 这">
+  <meta name="description" content="URL Schemes 是什么通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。 URL Schemes 有两个单词：  URL，我们都很清楚，http:&#x2F;&#x2F;www.apple.com 就是个 URL，我们也叫它链接或网址； Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 :&#x2F;&#x2F;之前的那段字符。比如 http:&#x2F;&#x2F;www.apple.com 这个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="URL Schemes">
-<meta property="og:url" content="http://example.com/2017/03/12/URL%20Schemes/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="URL Schemes 是什么 通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。 URL Schemes 有两个单词：  URL，我们都很清楚，http:&#x2F;&#x2F;www.apple.com 就是个 URL，我们也叫它链接或网址； Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 :&#x2F;&#x2F;之前的那段字符。比如 http:&#x2F;&#x2F;www.apple.com 这">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/12/URL%20Schemes/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="URL Schemes 是什么通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。 URL Schemes 有两个单词：  URL，我们都很清楚，http:&#x2F;&#x2F;www.apple.com 就是个 URL，我们也叫它链接或网址； Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 :&#x2F;&#x2F;之前的那段字符。比如 http:&#x2F;&#x2F;www.apple.com 这个">
+<meta property="og:locale">
 <meta property="og:image" content="https://cdn.sspai.com/attachment/origin/2015/10/10/286106.png?origin">
 <meta property="og:image" content="https://cdn.sspai.com/attachment/origin/2015/10/10/286108.jpeg?origin">
 <meta property="article:published_time" content="2017-03-12T09:30:55.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.080Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.sspai.com/attachment/origin/2015/10/10/286106.png?origin">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -45,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -65,7 +63,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -97,13 +95,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="URL-Schemes-是什么">URL Schemes 是什么</h2>
-<p><em>通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。</em></p>
+        <h2 id="URL-Schemes-是什么"><a href="#URL-Schemes-是什么" class="headerlink" title="URL Schemes 是什么"></a>URL Schemes 是什么</h2><p><em>通过对比网页链接来理解 iOS 上的 URL Schemes，应该就容易多了。</em></p>
 <p>URL Schemes 有两个单词：</p>
 <ul>
 <li>URL，我们都很清楚，<code>http://www.apple.com</code> 就是个 URL，我们也叫它链接或网址；</li>
-<li>Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 <code>://</code>之前的那段字符。比如 <code>http://www.apple.com</code> 这个网址的 <code>Schemes</code> 是 <strong>http</strong>。<br>
-根据我们上面对 URL Schemes 的使用，我们可以很轻易地理解，在以本地应用为主的 iOS 上，我们可以像定位一个网页一样，用一种特殊的 URL 来定位一个应用甚至应用里某个具体的功能。而定位这个应用的，就应该这个应用的 URL 的 Schemes 部分，也就是开头儿那部分。比如短信，就是 <code>sms:</code></li>
+<li>Schemes，表示的是一个 URL 中的一个位置——最初始的位置，即 <code>://</code>之前的那段字符。比如 <code>http://www.apple.com</code> 这个网址的 <code>Schemes</code> 是 <strong>http</strong>。<br>根据我们上面对 URL Schemes 的使用，我们可以很轻易地理解，在以本地应用为主的 iOS 上，我们可以像定位一个网页一样，用一种特殊的 URL 来定位一个应用甚至应用里某个具体的功能。而定位这个应用的，就应该这个应用的 URL 的 Schemes 部分，也就是开头儿那部分。比如短信，就是 <code>sms:</code></li>
 </ul>
 <p>你可以完全按照理解一个网页的 URL ——也就是它的网址——的方式来理解一个 iOS 应用的 URL，拿苹果的网站和 iOS 上的微信来做个简单对比：</p>
 <div class="table-responsive">
@@ -130,44 +126,43 @@
 </table>
 </div>
 在这里，`http://www.apple.com` 和 `weixin://` 都声明了这是谁的地盘。然后在 `http://www.apple.com` 后面加上 `/mac` 就跳转到从属于 `http://www.apple.com` 的一个网页（Mac 页）上；同样，在 `weixin://` 后面加上 `dl/moments` 就进入了微信的一个具体的功能——朋友圈。
+
 <p><strong>但是，两者还有几个重要的区别：</strong></p>
 <ol>
 <li>所有网页都一定有网址，不管是首页还是子页。但未必所有的应用都有自己的 URL Schemes，更不是每个应用的每个功能都有相应的 URL Schemes。实际上，现状是，大多数的应用只有用于打开应用的 URL Schemes，而有一些应用甚至没有用于打开应用的 URL Schemes。几乎没有所有功能都有对应 URL 的应用。<strong>所以，不要说某某应用烂，不支持国内应用。一个 App 是否支持 URL Schemes 要看那个 App 的作者是否在自己的作品里添加了 URL Schemes 相关的代码。</strong></li>
 <li>一个网址只对应一个网页，但并非每个 URL Schemes 都只对应一款应用。这点是因为苹果没有对 URL Schemes 有不允许重复的硬性要求，所以曾经出现过<a target="_blank" rel="noopener" href="http://jbguide.me/2015/03/26/url-scheme-is-vulnerable/">有 App 使用支付宝的 URL Schemes 拦截支付帐号和密码的事件</a>。</li>
 <li>一般网页的 URL 比较好预测，而 iOS 上的 URL Schemes 因为没有统一标准，所以非常难猜，通过猜来获取 iOS 应用的 URL Schemes 是不现实的。</li>
 </ol>
-<h2 id="URL-Schemes-的发展">URL Schemes 的发展</h2>
-<p><em>URL Schemes 的发展过程可以说就是 iOS 效率工具类 App 的发展过程。</em></p>
+<h2 id="URL-Schemes-的发展"><a href="#URL-Schemes-的发展" class="headerlink" title="URL Schemes 的发展"></a>URL Schemes 的发展</h2><p><em>URL Schemes 的发展过程可以说就是 iOS 效率工具类 App 的发展过程。</em></p>
 <p>起初的苹果建立的 <a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007899">Apple URL Schemes</a> 只是用于自用，里面只有邮件、电话、iTunes 搜索、Youtube 视频等一些内置服务的 URL。</p>
 <p>个人认为 URL Schemes 第一次大火是在 2011 年末（如有异议欢迎指正），那个时期也是越狱的鼎盛时期，那个时期越狱后大家都会装的一个插件是 SBSettings<a target="_blank" rel="noopener" href="https://sspai.com/post/31500#fn:1" title="see footnote">[1]</a>。越狱的人都知道每当新系统发布的时候，等待新系统的越狱发布是最撩人的，而这段时期那些「不越狱就能做到某种越狱功能」的应用经常一时间风头无两。</p>
 <p>2011年 iOS 5 发布带来了通知中心，没过多久，出现了一大批使用 iOS 系统设置的 URL Schemes 的 App 神奇地完成了接近 SBSettings 的功能——它们可以让我们从通知中心直接跳转到某些 App 的特定界面，比如 Twitter 的发推界面。它们甚至还可以直接跳转到系统设置里的 Wi-Fi 选项。在这一批 App 中，就有如今效率软件霸主之一 <a target="_blank" rel="noopener" href="https://sspai.com/tag/Launch%20Center%20Pro">Launch Center Pro</a> 的前身——Launch Center。</p>
-<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286106.png?origin" alt=""></p>
+<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286106.png?origin"></p>
 <p>但很快，这一批 App 被苹果火速下架，原因是「对通知中心的误用」。模糊的解释让开发者们摸不到头脑，这种不满一直延续到 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/Launcher">Launcher</a> 在 iOS 8 之后的下架事件。</p>
 <p>总之，在这一批 App 被下架之后，玩票的都离开了，只留下了一个 Launch Center。作者似乎觉得 URL Schemes 大有可为，所以在不触碰红线（当时的红线是一不许动通知中心，二不许调用系统设置的界面）的基础上继续发力，在几个月（2012年7月）之后推出了 Launch Center Pro v1.0。</p>
-<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286108.jpeg?origin" alt=""></p>
+<p><img src="https://cdn.sspai.com/attachment/origin/2015/10/10/286108.jpeg?origin"></p>
 <p>另一个注意到 iOS 上的 URL Schemes 的作用的是 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/drafts/">Drafts</a> 的作者 <a target="_blank" rel="noopener" href="https://twitter.com/agiletortoise/">Greg Pierce</a>。不同于 Launch Center Pro，Greg Pierce 打造的是一个以输入文字为主的效率应用，它以一个笔记本的面目示人，所以被媒体称为「Launch Center for text」。</p>
 <p>两者大的区别在于先选动作还是先输入。Launch Center Pro 的使用方法是：先打开动作，如果需要输入的话，你可以让它跳出来一个输入框，你来输入，输入完成后跳转到相应应用。Drafts 则是先在笔记本里把东西输入了，然后再选择动作，跳转到相应应用。</p>
 <p>好像没什么大不了的嘛……吗？这里至少有两个重要的区别：</p>
 <ol>
 <li>Drafts 中输入过的内容会储存在笔记本中以留作备份，而 Launch Center Pro 里的则是动作运行完了就没了。</li>
 <li>Drafts 中输入过的内容可以通过 URL Schemes 进行多次使用或一次性发给多个应用或服务，而 Launch Center Pro 只能将输入内容发送到一个服务或应用。即除了剪切版外， Launch Center Pro 没有其它变量的概念。</li>
-<li>第三个区别不太重要：Launch Center Pro 里的输入框和 Drafts 的笔记本界面来比较很明显不是一个好的写作环境。<br>
-细节上的区别还有很多，两者适用的范围随着各自的发展扩大，因此重合的那部分功能也愈发的不起眼。Launch Center Pro 和 Drafts 从那以后成为效率类应用中的双雄，不断提出更多更灵活使用 iOS 上 URL Schemes 的办法。</li>
+<li>第三个区别不太重要：Launch Center Pro 里的输入框和 Drafts 的笔记本界面来比较很明显不是一个好的写作环境。<br>细节上的区别还有很多，两者适用的范围随着各自的发展扩大，因此重合的那部分功能也愈发的不起眼。Launch Center Pro 和 Drafts 从那以后成为效率类应用中的双雄，不断提出更多更灵活使用 iOS 上 URL Schemes 的办法。</li>
 </ol>
 <p>比如 Launch Center Pro 提出了 List 的概念，将列表的想法融入到了 URL Schemes 中，列表的每一项可以是简单的字符，又可以是一串新的复杂的 URL。使用列表可以让我们每次的输入变为更轻松的选择，对于那些重复的任务更为高效。</p>
 <p>而 Drafts 的作者直接不满 URL Schemes 只能跳出不能跳回的问题，和 <a target="_blank" rel="noopener" href="http://www.marco.org/">Marco Arment</a>、<a target="_blank" rel="noopener" href="https://twitter.com/justin">Justin Williams</a> 等人开发了 x-callback-URL 来做到跳出，并跳回这样的动作。</p>
 <p>可以说这两款 App 对 URL Schemes 的推广和使用构思上的贡献是最突出的，现在 URL Schemes 越来越被 iOS 用户和开发者所重视，在我眼里，一款 App 是否完整系统地支持 URL Schemes 已经是判断它是否优秀的标志之一。</p>
 <p>故事讲到这里，更重要的还是如何使用 URL Schemes。</p>
 <p><em>故事里没有提到 <a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/pythonista/id528579881?ls=1&amp;mt=8">Pythonista</a>、<a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/editorial/id673907758?mt=8">Editorial</a> 跟 <a target="_blank" rel="noopener" href="https://sspai.com/post/tag/workflow">Workflow</a>，绝不是我认为这些 App 不够腕儿，而是它们做的事情重点已经不在于 URL Schemes 了。</em></p>
-<p> </p>
+<p>&amp;nbsp;</p>
 <hr>
 <hr>
-<p> </p>
+<p>&amp;nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/12/URL%20Schemes/" data-id="cl3jmf7n100469jv363lr1zqk" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/URL%20Schemes/" data-id="cl3jmy3s4003ftxv340ia4y6j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,7 +214,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -263,7 +258,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

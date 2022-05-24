@@ -5,27 +5,25 @@
   
 
   
-  <title>SSH——Secure SHell（安全外壳协议） | CShyiuan博客</title>
+  <title>SSH——Secure SHell（安全外壳协议） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。 SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH——Secure SHell（安全外壳协议）">
-<meta property="og:url" content="http://example.com/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
 <meta property="og:description" content="SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。 SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-12T07:56:04.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.078Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -95,21 +93,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>SSH是建立在应用层和传输层基础上，默认端口是22，为远程登录会话和其他网络服务提供安全性的协议。SSH是替代Telnet（默认端口是23）和其他远程控制台管理应用程序的行业标准。</p>
-<p>SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多人开始转用开源免费的<a target="_blank" rel="noopener" href="http://www.openssh.com/">openSSH</a>（Linux/Mac OS X标配）。</p>
-<p>SSH提供基于密钥的认证机制，你必须为自己创建一对非对称密钥（public/private key pair），并把公钥放到需要访问的服务器上进行授权。SSH1使用RSA（Ron_<strong>R</strong><em>ivest、Adi</em><strong>S</strong>_hamir、Leonard**<em>A</em>**dleman）加密密钥，SSH2使用DSA（Digital Signature Algorithm，<a target="_blank" rel="noopener" href="http://blog.csdn.net/phunxm/article/details/16344837">数字签名算法</a>)密钥保护连接和认证。RSA和DSA这两种加密算法都是<a target="_blank" rel="noopener" href="http://blog.csdn.net/wzzvictory/article/details/9015155">非对称加密算法</a>。</p>
+<p>SSH服务最早是由芬兰的一家公司开发的UNIX系统上的一个程序，后来迅速扩展到其他操作平台，现在已经发展到SSH2版本。SSH只是一种协议，存在多种实现，既有商业实现，也有开源实现。由于版权和加密算法等因素的影响，很多人开始转用开源免费的<a target="_blank" rel="noopener" href="http://www.openssh.com/">openSSH</a>（Linux&#x2F;Mac OS X标配）。</p>
+<p>SSH提供基于密钥的认证机制，你必须为自己创建一对非对称密钥（public&#x2F;private key pair），并把公钥放到需要访问的服务器上进行授权。SSH1使用RSA（Ron_<strong>R</strong><em>ivest、Adi</em><strong>S</strong>_hamir、Leonard**<em>A</em>**dleman）加密密钥，SSH2使用DSA（Digital Signature Algorithm，<a target="_blank" rel="noopener" href="http://blog.csdn.net/phunxm/article/details/16344837">数字签名算法</a>)密钥保护连接和认证。RSA和DSA这两种加密算法都是<a target="_blank" rel="noopener" href="http://blog.csdn.net/wzzvictory/article/details/9015155">非对称加密算法</a>。</p>
 <p>所谓“<strong>SSH公钥认证免密码登录认证机制</strong>”，原理如下：</p>
 <blockquote>
 <p>（1）SSH客户端提前将SSH公钥储存在远程SSH服务器上，然后SSH客户端携带公钥向远程SSH服务器（known_hosts）发起登录请求。</p>
 <p>（2）远程SSH服务器收到该请求之后，先在该服务器上的authorized_keys寻找你上传授权过的公钥，然后把它和你发送过来的公钥进行比较。</p>
 <p>（3）如果两个公钥一致（Key Exchange Success），远程SSH服务器会向用户发送一段使用SSH公钥加密过的随机字符串进行身份质询（Challenge）。</p>
-<p>（4）SSH客户端用自己的私钥解密后再发回给远程SSH服务器，远程SSH服务器对比回包中解密出来的随机字符串是否一致。如果一致，则证明用户（公钥或身份）是可信的，直接允许登录shell，不再要求密码。<br>
- </p>
+<p>（4）SSH客户端用自己的私钥解密后再发回给远程SSH服务器，远程SSH服务器对比回包中解密出来的随机字符串是否一致。如果一致，则证明用户（公钥或身份）是可信的，直接允许登录shell，不再要求密码。<br>&amp;nbsp;</p>
 </blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/" data-id="cl3jmf7mw003k9jv3gaqbgonk" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/12/SSH%E2%80%94%E2%80%94Secure%20SHell%EF%BC%88%E5%AE%89%E5%85%A8%E5%A4%96%E5%A3%B3%E5%8D%8F%E8%AE%AE%EF%BC%89/" data-id="cl3jmy3ry002qtxv315tee60k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +158,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -205,7 +202,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

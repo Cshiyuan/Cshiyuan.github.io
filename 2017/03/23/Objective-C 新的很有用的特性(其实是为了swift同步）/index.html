@@ -5,27 +5,25 @@
   
 
   
-  <title>Objective-C 新的很有用的特性(其实是为了swift同步） | CShyiuan博客</title>
+  <title>Objective-C 新的很有用的特性(其实是为了swift同步） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Nullability 常规用法 Copy Code 123@property (nonatomic, strong, nonnull) Sark *sark;@property (nonatomic, copy, readonly, nullable) NSArray *friends;+ (nullable NSString *)friendWithName:(nonnull NSString">
+  <meta name="description" content="Nullability常规用法 @property (nonatomic, strong, nonnull) Sark *sark; @property (nonatomic, copy, readonly, nullable) NSArray *friends; + (nullable NSString *)friendWithName:(nonnull NSString *)name;  修饰">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C 新的很有用的特性(其实是为了swift同步）">
-<meta property="og:url" content="http://example.com/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="Nullability 常规用法 Copy Code 123@property (nonatomic, strong, nonnull) Sark *sark;@property (nonatomic, copy, readonly, nullable) NSArray *friends;+ (nullable NSString *)friendWithName:(nonnull NSString">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Nullability常规用法 @property (nonatomic, strong, nonnull) Sark *sark; @property (nonatomic, copy, readonly, nullable) NSArray *friends; + (nullable NSString *)friendWithName:(nonnull NSString *)name;  修饰">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-23T03:13:14.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.077Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,52 +92,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Nullability">Nullability</h2>
-<p>常规用法</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, strong, nonnull) Sark *sark;</span><br><span class="line">@property (nonatomic, copy, readonly, nullable) NSArray *friends;</span><br><span class="line">+ (nullable NSString *)friendWithName:(nonnull NSString *)name;</span><br></pre></td></tr></table></figure>
+        <h2 id="Nullability"><a href="#Nullability" class="headerlink" title="Nullability"></a>Nullability</h2><p>常规用法</p>
+<pre><code>@property (nonatomic, strong, nonnull) Sark *sark;
+@property (nonatomic, copy, readonly, nullable) NSArray *friends;
++ (nullable NSString *)friendWithName:(nonnull NSString *)name;
+</code></pre>
 <p>修饰变量，前面需要加双下划线，比如 block 内用法：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;</span><br></pre></td></tr></table></figure>
+<pre><code>- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;
+</code></pre>
 <p>setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (null_resettable, nonatomic, strong) UIView *view;</span><br></pre></td></tr></table></figure>
+<pre><code>@property (null_resettable, nonatomic, strong) UIView *view;
+</code></pre>
 <p>宏的用法（包在宏里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行）：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">@interface Sark : NSObject</span><br><span class="line">@property (nonatomic, copy, nullable) NSString *workingCompany;</span><br><span class="line">@property (nonatomic, copy) NSArray *friends;</span><br><span class="line">- (nullable NSString *)gayFriend;</span><br><span class="line">@end</span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<pre><code>NS_ASSUME_NONNULL_BEGIN
+@interface Sark : NSObject
+@property (nonatomic, copy, nullable) NSString *workingCompany;
+@property (nonatomic, copy) NSArray *friends;
+- (nullable NSString *)gayFriend;
+@end
+NS_ASSUME_NONNULL_END
+</code></pre>
 <p>Nullability 主要作用是在编译器层面提供了空值的类型检查，在类型不符时给出 warning，方便开发者第一时间发现潜在问题。</p>
 <hr>
-<h2 id="kindof">__kindof</h2>
-<p>主要作用还是编译器层面的类型检查</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//UIView 的写法</span><br><span class="line">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;</span><br><span class="line">// UITableView 的写法</span><br><span class="line">- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;</span><br></pre></td></tr></table></figure>
-<p>参考:<br>
-<a target="_blank" rel="noopener" href="http://blog.csdn.net/lizhongfu2013/article/details/47375649">iOS开发~Objective-C新特性</a><br>
-<a target="_blank" rel="noopener" href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/">2015 Objective-C 新特性</a></p>
-<h2 id="轻量级的泛型">轻量级的泛型</h2>
-<h3 id="带泛型的容器">带泛型的容器</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];</span><br><span class="line">NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @&#123;@&quot;a&quot;: @1, @&quot;b&quot;: @2&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="自定义泛型">自定义泛型</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface Stack&lt;ObjectType&gt; : NSObject</span><br><span class="line">- (void)pushObject:(ObjectType)object;</span><br><span class="line">- (ObjectType)popObject;</span><br><span class="line">@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h2 id="kindof"><a href="#kindof" class="headerlink" title="__kindof"></a>__kindof</h2><p>主要作用还是编译器层面的类型检查</p>
+<pre><code>//UIView 的写法
+@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+// UITableView 的写法
+- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre>
+<p>参考:<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/lizhongfu2013/article/details/47375649">iOS开发~Objective-C新特性</a><br><a target="_blank" rel="noopener" href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/">2015 Objective-C 新特性</a></p>
+<h2 id="轻量级的泛型"><a href="#轻量级的泛型" class="headerlink" title="轻量级的泛型"></a>轻量级的泛型</h2><h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><pre><code>NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];
+NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @&#123;@&quot;a&quot;: @1, @&quot;b&quot;: @2&#125;;
+</code></pre>
+<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><pre><code>@interface Stack&lt;ObjectType&gt; : NSObject
+- (void)pushObject:(ObjectType)object;
+- (ObjectType)popObject;
+@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
+@end
+</code></pre>
 <p>还可以增加限制</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 只接受 NSNumber * 的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject</span><br><span class="line">// 只接受满足 NSCopying 协议的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject</span><br></pre></td></tr></table></figure>
-<h3 id="covariant-contravariant">covariant &amp;&amp; contravariant</h3>
-<ul>
+<pre><code>// 只接受 NSNumber * 的泛型
+@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
+// 只接受满足 NSCopying 协议的泛型
+@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject
+</code></pre>
+<h3 id="covariant-amp-amp-contravariant"><a href="#covariant-amp-amp-contravariant" class="headerlink" title="covariant &amp;&amp; contravariant"></a>covariant &amp;&amp; contravariant</h3><ul>
 <li>__covariant : 子类型可以强转到父类型（里氏替换原则）</li>
-<li>__contravariant : 父类型可以强转到子类型（WTF?）<br>
-参考 NSArray 和 NSMutableArray 的定义</li>
+<li>__contravariant : 父类型可以强转到子类型（WTF?）<br>参考 NSArray 和 NSMutableArray 的定义</li>
 </ul>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// NSArray</span><br><span class="line">@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;</span><br><span class="line">@property (readonly) NSUInteger count;</span><br><span class="line">- (ObjectType)objectAtIndex:(NSUInteger)index;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// NSMutableArray</span><br><span class="line">@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)addObject:(ObjectType)anObject;</span><br><span class="line">- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;</span><br><span class="line">- (void)removeLastObject;</span><br><span class="line">- (void)removeObjectAtIndex:(NSUInteger)index;</span><br><span class="line">- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p> </p>
+<pre><code>// NSArray
+@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;
+@property (readonly) NSUInteger count;
+- (ObjectType)objectAtIndex:(NSUInteger)index;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+
+
+// NSMutableArray
+@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;
+
+
+- (void)addObject:(ObjectType)anObject;
+- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
+- (void)removeLastObject;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+</code></pre>
+<p>&amp;nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/" data-id="cl3jmf7mp002q9jv3evni5jwd" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/" data-id="cl3jmy3rr001vtxv32bzdhxkd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,7 +225,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -235,7 +269,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

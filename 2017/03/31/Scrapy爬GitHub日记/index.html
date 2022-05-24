@@ -5,29 +5,27 @@
   
 
   
-  <title>Scrapy爬GitHub日记 | CShyiuan博客</title>
+  <title>Scrapy爬GitHub日记 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay; Copy Code 12345download_delay &#x3D; 1headers &#x3D; &amp;#123;    &amp;#x27;User-Agent&amp;#x27;: &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_4) App">
+  <meta name="description" content="今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay; download_delay &#x3D; 1  headers &#x3D; &amp;#123;     &#39;User-Agent&#39;: &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit&#x2F;537.3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scrapy爬GitHub日记">
-<meta property="og:url" content="http://example.com/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay; Copy Code 12345download_delay &#x3D; 1headers &#x3D; &amp;#123;    &amp;#x27;User-Agent&amp;#x27;: &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_4) App">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay; download_delay &#x3D; 1  headers &#x3D; &amp;#123;     &#39;User-Agent&#39;: &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit&#x2F;537.3">
+<meta property="og:locale">
 <meta property="og:image" content="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png">
 <meta property="article:published_time" content="2017-03-31T12:19:32.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.078Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -44,7 +42,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -64,7 +62,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -97,65 +95,63 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">download_delay = 1</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &#x27;User-Agent&#x27;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>download_delay = 1
+
+headers = &#123;
+    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;
+ &#125;
+</code></pre>
 <hr>
 <p>scrapy的输出有时候太多了，挡住了视线。</p>
 <p>可以在setting中设置LOG_LEVEL</p>
 <hr>
 <p>突然发现，原来GitHub的API有访问限制。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">403 reponse</span><br><span class="line">&#123;</span><br><span class="line">&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. </span><br><span class="line">(But here&#x27;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,</span><br><span class="line">&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>403 reponse
+&#123;
+&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. 
+(But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,
+&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;
+&#125;
+</code></pre>
 <p>详情：<a target="_blank" rel="noopener" href="https://developer.github.com/v3/#rate-limiting">https://developer.github.com/v3/#rate-limiting</a></p>
-<h2 id="Rate-Limiting">Rate Limiting</h2>
-<blockquote>
-<p>For requests using Basic Authentication or OAuth,<br>
-you can make up to 5,000 requests per hour.<br>
-For unauthenticated requests,<br>
-the rate limit allows you to make up to 60 requests per hour.<br>
-Unauthenticated requests are associated with your IP address,<br>
-and not the user making requests.<br>
-Note that the Search API has custom rate limit rules.</p>
+<h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><blockquote>
+<p>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that the Search API has custom rate limit rules.</p>
 </blockquote>
 <p>认证的可以一个小时5000 requests。非认证的一个小时60 requests，差远了。。。</p>
 <hr>
-<h2 id="PyCharm调试Scrapy">PyCharm调试Scrapy</h2>
-<p>scrapy指令其实就是一个python的运行脚本</p>
+<h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
 <p>pyCharm是一个强大的pythonIDE</p>
 <p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line">execute()</span><br></pre></td></tr></table></figure>
+<pre><code>#!/usr/bin/python
+
+from scrapy.cmdline import execute
+execute()
+</code></pre>
 <p>所以当运行scrapy crawler spider时，其实与指令：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider</span><br></pre></td></tr></table></figure>
+<pre><code>python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider
+</code></pre>
 <p>的效果是一样的</p>
 <p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
-<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
+<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png"></p>
 <p>Name可以随便填</p>
 <p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
 <hr>
-<h2 id="如何让scrapy处理403的状态码">如何让scrapy处理403的状态码</h2>
-<p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>
-CloseSpider的异常。<br>
-2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>
-3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MySpider(CrawlSpider):</span><br><span class="line">    handle_httpstatus_list = [403]</span><br></pre></td></tr></table></figure>
+<h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status &#x3D;&#x3D; 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
+<pre><code>class MySpider(CrawlSpider):
+    handle_httpstatus_list = [403]
+</code></pre>
 <blockquote>
-<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>
-即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br>
-<a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
+<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES &#x3D; [403]， HTTPERROR_ALLOWED_CODES默认是[]<br> <a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
 </blockquote>
-<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
+<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status &#x3D;&#x3D; 403抛出CloseSpider异常，结束抓取。</p>
 <hr>
-<h2 id="split-函数和GitHub-API中的API调用限制">split()函数和GitHub API中的API调用限制</h2>
-<p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
+<h2 id="split-函数和GitHub-API中的API调用限制"><a href="#split-函数和GitHub-API中的API调用限制" class="headerlink" title="split()函数和GitHub API中的API调用限制"></a>split()函数和GitHub API中的API调用限制</h2><p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
 <p>不是单单查看client_id和client_secret决定的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/" data-id="cl3jmf7mx003n9jv33kvoe3jx" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/" data-id="cl3jmy3rz002utxv38a2c9231" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +203,7 @@ CloseSpider的异常。<br>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -251,7 +247,7 @@ CloseSpider的异常。<br>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

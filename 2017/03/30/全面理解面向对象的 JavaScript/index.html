@@ -5,29 +5,27 @@
   
 
   
-  <title>全面理解面向对象的 JavaScript (转载整理） | CShyiuan博客</title>
+  <title>全面理解面向对象的 JavaScript (转载整理） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重新认识面向对象 为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：  一切事物皆对象 对象具有封装和继承特性 对象与对象之间使用消息通信，各自存在信息隐藏 以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，">
+  <meta name="description" content="重新认识面向对象为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：  一切事物皆对象 对象具有封装和继承特性 对象与对象之间使用消息通信，各自存在信息隐藏以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全面理解面向对象的 JavaScript (转载整理）">
-<meta property="og:url" content="http://example.com/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="重新认识面向对象 为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：  一切事物皆对象 对象具有封装和继承特性 对象与对象之间使用消息通信，各自存在信息隐藏 以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="重新认识面向对象为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：  一切事物皆对象 对象具有封装和继承特性 对象与对象之间使用消息通信，各自存在信息隐藏以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们">
+<meta property="og:locale">
 <meta property="og:image" content="http://img.caibaojian.com/uploads/2014/05/image001.png">
 <meta property="article:published_time" content="2017-03-30T02:23:16.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.085Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://img.caibaojian.com/uploads/2014/05/image001.png">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -44,7 +42,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -64,7 +62,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -96,48 +94,82 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="重新认识面向对象">重新认识面向对象</h2>
-<p>为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：</p>
+        <h2 id="重新认识面向对象"><a href="#重新认识面向对象" class="headerlink" title="重新认识面向对象"></a>重新认识面向对象</h2><p>为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：</p>
 <ul>
 <li>一切事物皆对象</li>
 <li>对象具有封装和继承特性</li>
-<li>对象与对象之间使用消息通信，各自存在信息隐藏<br>
-以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们通过类的形式组织函数和变量，使之不能脱离对象存在。但这里函数本身是一个过程，只是依附在某个类上。</li>
+<li>对象与对象之间使用消息通信，各自存在信息隐藏<br>以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们通过类的形式组织函数和变量，使之不能脱离对象存在。但这里函数本身是一个过程，只是依附在某个类上。</li>
 </ul>
 <p>然而，面向对象仅仅是一个概念或者编程思想而已，它不应该依赖于某个语言存在。比如 Java 采用面向对象思想构造其语言，它实现了类、继承、派生、多态、接口等机制。但是这些机制，只是实现面向对象编程的一种手段，而非必须。换言之，一门语言可以根据其自身特性选择合适的方式来实现面向对象。所以，由于大多数程序员首先学习或者使用的是类似 Java、C++ 等高级编译型语言（Java 虽然是半编译半解释，但一般做为编译型来讲解），因而先入为主地接受了“类”这个面向对象实现方式，从而在学习脚本语言的时候，习惯性地用类式面向对象语言中的概念来判断该语言是否是面向对象语言，或者是否具备面向对象特性。这也是阻碍程序员深入学习并掌握 JavaScript 的重要原因之一。</p>
-<p>实际上，JavaScript 语言是通过一种叫做<strong>原型（<strong><strong>prototype</strong></strong>）<strong>的方式来实现面向对象编程的。下面就来讨论</strong>基于类的（<strong><strong>class-based</strong></strong>）面向对象</strong>和<strong>基于原型的 (<strong><strong>prototype-based</strong></strong>) 面向对象</strong>这两种方式在构造客观世界的方式上的差别。</p>
+<p>实际上，JavaScript 语言是通过一种叫做<strong>原型（<strong><strong>prototype</strong></strong>）</strong>的方式来实现面向对象编程的。下面就来讨论<strong>基于类的（<strong><strong>class-based</strong></strong>）面向对象</strong>和<strong>基于原型的 (<strong><strong>prototype-based</strong></strong>) 面向对象</strong>这两种方式在构造客观世界的方式上的差别。</p>
 <hr>
 <hr>
-<p> </p>
-<h3 id="基于类的面向对象和基于原型的面向对象方式比较">基于类的面向对象和基于原型的面向对象方式比较</h3>
-<p>在基于类的面向对象方式中，**对象（<strong><strong>object</strong></strong>）<strong>依靠</strong>类（<strong><strong>class</strong></strong>）**来产生。而在基于原型的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）<strong>则是依靠</strong>构造器（<strong><strong>constructor</strong></strong>）<strong>利用</strong>原型（<strong><strong>prototype</strong></strong>）<strong>构造出来的。举个客观世界的例子来说明二种方式认知的差异。例如工厂造一辆车，一方面，工人必须参照一张工程图纸，设计规定这辆车应该如何制造。这里的工程图纸就好比是语言中的</strong>类 (<strong><strong>class</strong></strong>)，而车就是按照这个</strong>类（<strong><strong>class</strong></strong>）制造出来的；另一方面，工人和机器 ( 相当于 constructor) 利用各种零部件如发动机，轮胎，方向盘 ( 相当于 prototype 的各个属性 ) 将汽车构造出来。<a target="_blank" rel="noopener" href="http://caibaojian.com/javascript-object-2.html">·</a></p>
+<p>&amp;nbsp;</p>
+<h3 id="基于类的面向对象和基于原型的面向对象方式比较"><a href="#基于类的面向对象和基于原型的面向对象方式比较" class="headerlink" title="基于类的面向对象和基于原型的面向对象方式比较"></a>基于类的面向对象和基于原型的面向对象方式比较</h3><p>在基于类的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）</strong>依靠<strong>类（<strong><strong>class</strong></strong>）</strong>来产生。而在基于原型的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）</strong>则是依靠<strong>构造器（<strong><strong>constructor</strong></strong>）</strong>利用<strong>原型（<strong><strong>prototype</strong></strong>）</strong>构造出来的。举个客观世界的例子来说明二种方式认知的差异。例如工厂造一辆车，一方面，工人必须参照一张工程图纸，设计规定这辆车应该如何制造。这里的工程图纸就好比是语言中的<strong>类 (<strong><strong>class</strong></strong>)，而车就是按照这个</strong>类（<strong><strong>class</strong></strong>）制造出来的；另一方面，工人和机器 ( 相当于 constructor) 利用各种零部件如发动机，轮胎，方向盘 ( 相当于 prototype 的各个属性 ) 将汽车构造出来。<a target="_blank" rel="noopener" href="http://caibaojian.com/javascript-object-2.html">·</a></p>
 <p>事实上关于这两种方式谁更为彻底地表达了面向对象的思想，目前尚有争论。但笔者认为原型式面向对象是一种更为彻底的面向对象方式，理由如下：</p>
 <p>首先，客观世界中的对象的产生都是其它实物对象构造的结果，而抽象的“图纸”是不能产生“汽车”的，也就是说，类是一个抽象概念而并非实体，而对象的产生是一个实体的产生；</p>
 <p>其次，按照一切事物皆对象这个最基本的面向对象的法则来看，类 (class) 本身并不是一个对象，然而原型方式中的构造器 (constructor) 和原型 (prototype) 本身也是其他对象通过原型方式构造出来的对象。</p>
 <p>再次，在类式面向对象语言中，对象的状态 (state) 由对象实例 (instance) 所持有，对象的行为方法 (method) 则由声明该对象的类所持有，并且只有对象的结构和方法能够被继承；而在原型式面向对象语言中，对象的行为、状态都属于对象本身，并且能够一起被继承（参考资源），这也更贴近客观实际。</p>
 <p>最后，类式面向对象语言比如 Java，为了弥补无法使用面向过程语言中全局函数和变量的不便，允许在类中声明静态 (static) 属性和静态方法。而实际上，客观世界不存在所谓静态概念，因为一切事物皆对象！而在原型式面向对象语言中，除内建对象 (build-in object) 外，不允许全局对象、方法或者属性的存在，也没有静态概念。所有语言元素 (primitive) 必须依赖对象存在。但由于函数式语言的特点，语言元素所依赖的对象是随着运行时 (runtime) 上下文 (context) 变化而变化的，具体体现在 this 指针的变化。正是这种特点更贴近 “万物皆有所属，宇宙乃万物生存之根本”的自然观点。在程序清单 1中<strong>window</strong>便类似与宇宙的概念。</p>
 <hr>
-<h3 id="彻底理解原型链-prototype-chain">彻底理解原型链 (prototype chain)</h3>
-<p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（<strong><strong>implicit reference</strong></strong>）</strong>，这个引用称之为<strong>原型（<strong><strong>prototype</strong></strong>）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（<strong><strong>prototype chain</strong></strong>）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个**<strong>proto</strong> 属性<strong>来实现对原型的</strong>隐式引用**。  程序清单4说明了这一点。</p>
+<h3 id="彻底理解原型链-prototype-chain"><a href="#彻底理解原型链-prototype-chain" class="headerlink" title="彻底理解原型链 (prototype chain)"></a>彻底理解原型链 (prototype chain)</h3><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（<strong><strong>implicit reference</strong></strong>）</strong>，这个引用称之为<strong>原型（<strong><strong>prototype</strong></strong>）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（<strong><strong>prototype chain</strong></strong>）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个**<strong>proto</strong> 属性<strong>来实现对原型的</strong>隐式引用**。  程序清单4说明了这一点。  </p>
 <p><strong>清单 4. 对象的 <strong>proto</strong> 属性和隐式引用</strong></p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person( name ) &#123; this.name = name; &#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( p.__proto__ === Person.prototype );</span><br><span class="line"></span><br><span class="line">// 原型本身是一个 Object 对象，所以他的隐式引用指向了</span><br><span class="line"></span><br><span class="line">// Object 构造器的 prototype 属性 , 故而打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.prototype.__proto__ === Object.prototype );</span><br><span class="line"></span><br><span class="line">// 构造器 Person 本身是一个函数对象，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.__proto__ === Function.prototype );</span><br></pre></td></tr></table></figure>
-<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。</p>
-<p><strong>图 1. 原型链中的属性隐藏机制</strong><br>
-<img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
-<p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，</p>
-<p>程序清单5.是利用原型链实现继承的简单例子。<br>
-<strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 声明 Animal 对象构造器 </span><br><span class="line">function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，</span><br><span class="line">// 亦可直接理解为指定 Animal 对象的原型 </span><br><span class="line">Animal.prototype = &#123;</span><br><span class="line">    name: &quot;animal&quot;,</span><br><span class="line">    weight: 0, eat:</span><br><span class="line">    function () &#123; </span><br><span class="line">        alert(&quot;Animal is eating!&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 声明 Mammal 对象构造器 </span><br><span class="line">function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 </span><br><span class="line">    this.name = &quot;mammal&quot;;</span><br><span class="line">&#125; </span><br><span class="line">// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 </span><br><span class="line">Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 </span><br><span class="line">function Horse(height, weight) &#123;</span><br><span class="line">    this.name = &quot;horse&quot;;</span><br><span class="line">    this.height = height;</span><br><span class="line">    this.weight = weight;</span><br><span class="line">&#125;</span><br><span class="line">// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 </span><br><span class="line">Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 </span><br><span class="line">Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 </span><br><span class="line">var horse = new Horse(100, 300);</span><br><span class="line">console.log(horse.__proto__ === Horse.prototype);</span><br><span class="line">console.log(Horse.prototype.__proto__ === Mammal.prototype);</span><br><span class="line">console.log(Mammal.prototype.__proto__ === Animal.prototype);</span><br></pre></td></tr></table></figure>
-<p>理解清单 5中对象原型继承逻辑实现的关键在于<br>
-<strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>
-首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
+<pre><code>function Person( name ) &#123; this.name = name; &#125;
+
+var p = new Person();
+
+// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
+
+console.log( p.__proto__ === Person.prototype );
+
+// 原型本身是一个 Object 对象，所以他的隐式引用指向了
+
+// Object 构造器的 prototype 属性 , 故而打印 true
+
+console.log( Person.prototype.__proto__ === Object.prototype );
+
+// 构造器 Person 本身是一个函数对象，所以此处打印 true
+
+console.log( Person.__proto__ === Function.prototype );
+</code></pre>
+<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
+<p><strong>图 1. 原型链中的属性隐藏机制</strong><br><img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
+<p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，  </p>
+<p>程序清单5.是利用原型链实现继承的简单例子。<br><strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
+<pre><code>// 声明 Animal 对象构造器 
+function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，
+// 亦可直接理解为指定 Animal 对象的原型 
+Animal.prototype = &#123;
+    name: &quot;animal&quot;,
+    weight: 0, eat:
+    function () &#123; 
+        alert(&quot;Animal is eating!&quot;); 
+    &#125;
+&#125; // 声明 Mammal 对象构造器 
+function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 
+    this.name = &quot;mammal&quot;;
+&#125; 
+// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
+Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 
+function Horse(height, weight) &#123;
+    this.name = &quot;horse&quot;;
+    this.height = height;
+    this.weight = weight;
+&#125;
+// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
+Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
+Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 
+var horse = new Horse(100, 300);
+console.log(horse.__proto__ === Horse.prototype);
+console.log(Horse.prototype.__proto__ === Mammal.prototype);
+console.log(Mammal.prototype.__proto__ === Animal.prototype);
+</code></pre>
+<p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype &#x3D; new Mammal()</strong> 和 <strong>Mammal.prototype &#x3D; new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/" data-id="cl3jmf7no006p9jv3hsgp9ne0" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/" data-id="cl3jmy3so0060txv34gvj6npo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +221,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -233,7 +265,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -5,30 +5,28 @@
   
 
   
-  <title>因为好奇手游的同步策略，查询的帧同步相关内容。 | CShyiuan博客</title>
+  <title>因为好奇手游的同步策略，查询的帧同步相关内容。 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该是一致">
 <meta property="og:type" content="article">
 <meta property="og:title" content="因为好奇手游的同步策略，查询的帧同步相关内容。">
-<meta property="og:url" content="http://example.com/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
 <meta property="og:description" content="大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该是一致">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale">
 <meta property="og:image" content="http://s9.sinaimg.cn/mw690/001Tiuj0gy6DHBRS7hu98&amp;690">
 <meta property="og:image" content="http://s2.sinaimg.cn/mw690/001Tiuj0gy6DHBTfDXza1&amp;690">
 <meta property="article:published_time" content="2017-05-08T13:34:45.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.087Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://s9.sinaimg.cn/mw690/001Tiuj0gy6DHBRS7hu98&amp;690">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -45,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -65,7 +63,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -103,14 +101,14 @@
 <hr>
 <p>游戏应该优先保证正常用户的体验，所以当有玩家出现卡帧情况的时候，不应选择暂停其他玩家，而是让他慢慢的追赶上来，设计上，服务器即可以采用客户端的正常速度，按帧驱动客户端，但当网络都出现突发状况的时候，如<strong>图****9</strong>，通讯异常时，2个客户端都对帧数2缺失，如果服务器照常运行，到恢复网络状况时，会出现情况是，每个客户端都卡了几帧之后，加速拉了几帧。所以，针对这种情况，增加客户端的对帧操作，即客户端执行第1帧时，跟服务器说可以播放第二帧了，然后服务器开始驱动第二帧动作，考虑网络延迟情况，可以提前对帧第n帧的,效果如<strong>图****9</strong>，左边客户端第二个对帧操作使服务器开始推动第二帧进行，而右边客户端的第二个对帧动作其实不起任何作用</p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /><a target="_blank" rel="noopener" href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBRS7hu98"><img src="http://s9.sinaimg.cn/mw690/001Tiuj0gy6DHBRS7hu98&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
-<p> </p>
+<p>&amp;nbsp;</p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <strong>图8</strong></p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /><a target="_blank" rel="noopener" href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBTfDXza1"><img src="http://s2.sinaimg.cn/mw690/001Tiuj0gy6DHBTfDXza1&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" data-id="cl3jmf7nv007j9jv3hpxr5nyl" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" data-id="cl3jmy3sy0070txv37lj22p6t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +160,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -206,7 +204,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -5,27 +5,25 @@
   
 
   
-  <title>Python3 学习笔记（2） | CShyiuan博客</title>
+  <title>Python3 学习笔记（2） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="尾递归优化解决递归调用栈溢出 解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
+  <meta name="description" content="尾递归优化解决递归调用栈溢出解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python3 学习笔记（2）">
-<meta property="og:url" content="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="尾递归优化解决递归调用栈溢出 解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="尾递归优化解决递归调用栈溢出解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。 上面的fact(n)函数由于return n *">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-04-01T15:25:04.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.078Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,48 +92,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="尾递归优化解决递归调用栈溢出"><strong>尾递归</strong>优化解决递归调用栈溢出</h2>
-<p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
+        <h2 id="尾递归优化解决递归调用栈溢出"><a href="#尾递归优化解决递归调用栈溢出" class="headerlink" title="尾递归优化解决递归调用栈溢出"></a><strong>尾递归</strong>优化解决递归调用栈溢出</h2><p>解决递归调用栈溢出的方法是通过<strong>尾递归</strong>优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。</p>
 <p>尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。</p>
 <p>上面的<code>fact(n)</code>函数由于<code>return n * fact(n - 1)</code>引入了乘法表达式，所以就不是尾递归了。要改成尾递归方式，需要多一点代码，主要是要把每一步的乘积传入到递归函数中：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fact(n):</span><br><span class="line">    return fact_iter(n, 1)</span><br><span class="line"></span><br><span class="line">def fact_iter(num, product):</span><br><span class="line">    if num == 1:</span><br><span class="line">        return product</span><br><span class="line">    return fact_iter(num - 1, num * product)</span><br></pre></td></tr></table></figure>
+<pre><code>def fact(n):
+    return fact_iter(n, 1)
+
+def fact_iter(num, product):
+    if num == 1:
+        return product
+    return fact_iter(num - 1, num * product)
+</code></pre>
 <p>可以看到，<code>return fact_iter(num - 1, num * product)</code>仅返回递归函数本身，<code>num - 1</code>和<code>num * product</code>在函数调用前就会被计算，不影响函数调用。</p>
 <p><code>fact(5)</code>对应的<code>fact_iter(5, 1)</code>的调用如下：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">===&gt; fact_iter(5, 1)</span><br><span class="line">===&gt; fact_iter(4, 5)</span><br><span class="line">===&gt; fact_iter(3, 20)</span><br><span class="line">===&gt; fact_iter(2, 60)</span><br><span class="line">===&gt; fact_iter(1, 120)</span><br><span class="line">===&gt; 120</span><br></pre></td></tr></table></figure>
+<pre><code>===&gt; fact_iter(5, 1)
+===&gt; fact_iter(4, 5)
+===&gt; fact_iter(3, 20)
+===&gt; fact_iter(2, 60)
+===&gt; fact_iter(1, 120)
+===&gt; 120
+</code></pre>
 <p>尾递归调用时，如果做了优化，栈不会增长，因此，无论多少次调用也不会导致栈溢出。</p>
 <p>遗憾的是，大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的<code>fact(n)</code>函数改成尾递归方式，也会导致栈溢出。</p>
 <p>使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。</p>
 <p>针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，没有循环语句的编程语言只能通过尾递归实现循环。</p>
 <p>Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。</p>
 <hr>
-<h2 id="切片">切片</h2>
-<p>取前3个元素，应该怎么做？</p>
+<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>取前3个元素，应该怎么做？</p>
 <p>笨办法：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [L[0], L[1], L[2]]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; [L[0], L[1], L[2]]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre>
 <p>之所以是笨办法是因为扩展一下，取前N个元素就没辙了。</p>
 <p>取前N个元素，也就是索引为0-(N-1)的元素，可以用循环：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = []</span><br><span class="line">&gt;&gt;&gt; n = 3</span><br><span class="line">&gt;&gt;&gt; for i in range(n):</span><br><span class="line">...     r.append(L[i])</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; r = []
+&gt;&gt;&gt; n = 3
+&gt;&gt;&gt; for i in range(n):
+...     r.append(L[i])
+... 
+&gt;&gt;&gt; r
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre>
 <p>对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python提供了切片（Slice）操作符，能大大简化这种操作。</p>
 <p>对应上面的问题，取前3个元素，用一行代码就可以完成切片：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[0:3]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L[0:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre>
 <p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。</p>
 <p>如果第一个索引是<code>0</code>，还可以省略：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[:3]</span><br><span class="line">[&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L[:3]
+[&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre>
 <p>也可以从索引1开始，取出2个元素出来：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[1:3]</span><br><span class="line">[&#x27;Sarah&#x27;, &#x27;Tracy&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L[1:3]
+[&#39;Sarah&#39;, &#39;Tracy&#39;]
+</code></pre>
 <p>类似的，既然Python支持<code>L[-1]</code>取倒数第一个元素，那么它同样支持倒数切片，试试：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L[-2:]</span><br><span class="line">[&#x27;Bob&#x27;, &#x27;Jack&#x27;]</span><br><span class="line">&gt;&gt;&gt; L[-2:-1]</span><br><span class="line">[&#x27;Bob&#x27;]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L[-2:]
+[&#39;Bob&#39;, &#39;Jack&#39;]
+&gt;&gt;&gt; L[-2:-1]
+[&#39;Bob&#39;]
+</code></pre>
 <hr>
-<h2 id="函数式编程">函数式编程</h2>
-<p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。</p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，这种分解可以称之为面向过程的程序设计。函数就是面向过程的程序设计的基本单元。</p>
 <p>而函数式编程（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。</p>
 <p>我们首先要搞明白计算机（Computer）和计算（Compute）的概念。</p>
 <p>在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。</p>
@@ -145,42 +164,51 @@
 <p>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！</p>
 <p>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</p>
 <hr>
-<h2 id="函数名也是变量">函数名也是变量</h2>
-<h3 id="变量可以指向函数">变量可以指向函数</h3>
-<p>以Python内置的求绝对值的函数<code>abs()</code>为例，调用该函数用以下代码：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<h2 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h2><h3 id="变量可以指向函数"><a href="#变量可以指向函数" class="headerlink" title="变量可以指向函数"></a>变量可以指向函数</h3><p>以Python内置的求绝对值的函数<code>abs()</code>为例，调用该函数用以下代码：</p>
+<pre><code>&gt;&gt;&gt; abs(-10)
+10
+</code></pre>
 <p>但是，如果只写<code>abs</code>呢？</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; abs
+&lt;built-in function abs&gt;
+</code></pre>
 <p>可见，<code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。</p>
 <hr>
-<h2 id="map-reduce">map/reduce</h2>
-<p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
-<p>举例说明，比如我们有一个函数f(x)=x<sup>2</sup>，要把这个函数作用在一个list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code>上，就可以用<code>map()</code>实现如下：</p>
+<h2 id="map-x2F-reduce"><a href="#map-x2F-reduce" class="headerlink" title="map&#x2F;reduce"></a>map&#x2F;reduce</h2><p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
+<p>举例说明，比如我们有一个函数f(x)&#x3D;x<sup>2</sup>，要把这个函数作用在一个list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code>上，就可以用<code>map()</code>实现如下：</p>
 <p><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</span><br></pre></td></tr></table></figure>
+<pre><code>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+</code></pre>
 <p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def add(x, y):</span><br><span class="line">...     return x + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def add(x, y):
+...     return x + y
+...
+&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])
+25
+</code></pre>
 <p>当然求和运算可以直接用Python内建函数<code>sum()</code>，没必要动用<code>reduce</code>。</p>
 <p>但是如果要把序列<code>[1, 3, 5, 7, 9]</code>变换成整数<code>13579</code>，<code>reduce</code>就可以派上用场：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def fn(x, y):</span><br><span class="line">...     return x * 10 + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])</span><br><span class="line">13579</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; from functools import reduce
+&gt;&gt;&gt; def fn(x, y):
+...     return x * 10 + y
+...
+&gt;&gt;&gt; reduce(fn, [1, 3, 5, 7, 9])
+13579
+</code></pre>
 <p>这个例子本身没多大用处，但是，如果考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
 <hr>
-<h2 id="列表生成式">列表生成式</h2>
-<p>】列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
+<h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><p>】列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
 <p>举个例子，要生成list <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>可以用<code>range(1, 11)</code>：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; range(1, 11)</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; range(1, 11)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
 <hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" data-id="cl3jmf7mt00369jv37j7ef8od" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" data-id="cl3jmy3rv002dtxv3hyytbt0t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -232,7 +260,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -276,7 +304,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

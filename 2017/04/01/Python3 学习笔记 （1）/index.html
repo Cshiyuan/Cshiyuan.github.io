@@ -5,27 +5,25 @@
   
 
   
-  <title>Python3 学习笔记 （1） | CShyiuan博客</title>
+  <title>Python3 学习笔记 （1） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="bytes类型数据和utf-8编码和各种字符串编码 Python对bytes类型的数据用带b前缀的单引号或双引号表示： Copy Code 1x &#x3D; b&amp;#x27;ABC&amp;#x27;  字符串格式化 Copy Code 1234&gt;&gt;&gt; &amp;#x27;Hello, %s&amp;#x27; % &amp;#x27;world&amp;#x27;&amp;#x27;Hello, world&amp;#x27;&gt;&amp;g">
+  <meta name="description" content="&amp;nbsp; bytes类型数据和utf-8编码和各种字符串编码Python对bytes类型的数据用带b前缀的单引号或双引号表示： x &#x3D; b&#39;ABC&#39;   字符串格式化&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39; &#39;Hello, world&#39; &gt;&gt;&gt; &#39;Hi, %s, you">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python3 学习笔记 （1）">
-<meta property="og:url" content="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="bytes类型数据和utf-8编码和各种字符串编码 Python对bytes类型的数据用带b前缀的单引号或双引号表示： Copy Code 1x &#x3D; b&amp;#x27;ABC&amp;#x27;  字符串格式化 Copy Code 1234&gt;&gt;&gt; &amp;#x27;Hello, %s&amp;#x27; % &amp;#x27;world&amp;#x27;&amp;#x27;Hello, world&amp;#x27;&gt;&amp;g">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="&amp;nbsp; bytes类型数据和utf-8编码和各种字符串编码Python对bytes类型的数据用带b前缀的单引号或双引号表示： x &#x3D; b&#39;ABC&#39;   字符串格式化&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39; &#39;Hello, world&#39; &gt;&gt;&gt; &#39;Hi, %s, you">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-04-01T07:06:15.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.077Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,162 +92,218 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> </p>
-<h2 id="bytes类型数据和utf-8编码和各种字符串编码">bytes类型数据和utf-8编码和各种字符串编码</h2>
-<p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = b&#x27;ABC&#x27;</span><br></pre></td></tr></table></figure>
+        <p>&amp;nbsp;</p>
+<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
+<pre><code>x = b&#39;ABC&#39;
+</code></pre>
 <hr>
-<h2 id="字符串格式化">字符串格式化</h2>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Hello, %s&#x27; % &#x27;world&#x27;</span><br><span class="line">&#x27;Hello, world&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Hi, %s, you have $%d.&#x27; % (&#x27;Michael&#x27;, 1000000)</span><br><span class="line">&#x27;Hi, Michael, you have $1000000.&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39;
+&#39;Hello, world&#39;
+&gt;&gt;&gt; &#39;Hi, %s, you have $%d.&#39; % (&#39;Michael&#39;, 1000000)
+&#39;Hi, Michael, you have $1000000.&#39;
+</code></pre>
 <hr>
-<h2 id="条件判断">条件判断</h2>
-<p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
 <p>比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用<code>if</code>语句实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">age = 20</span><br><span class="line">if age &gt;= 18:</span><br><span class="line">    print(&#x27;your age is&#x27;, age)</span><br><span class="line">    print(&#x27;adult&#x27;)</span><br></pre></td></tr></table></figure>
+<pre><code>age = 20
+if age &gt;= 18:
+    print(&#39;your age is&#39;, age)
+    print(&#39;adult&#39;)
+</code></pre>
 <p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
 <hr>
-<h2 id="elif于else-if">elif于else if</h2>
-<p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if &lt;条件判断1&gt;:</span><br><span class="line">    &lt;执行1&gt;</span><br><span class="line">elif &lt;条件判断2&gt;:</span><br><span class="line">    &lt;执行2&gt;</span><br><span class="line">elif &lt;条件判断3&gt;:</span><br><span class="line">    &lt;执行3&gt;</span><br><span class="line">else:</span><br><span class="line">    &lt;执行4&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="elif于else-if"><a href="#elif于else-if" class="headerlink" title="elif于else if"></a>elif于else if</h2><p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
+<pre><code>if &lt;条件判断1&gt;:
+    &lt;执行1&gt;
+elif &lt;条件判断2&gt;:
+    &lt;执行2&gt;
+elif &lt;条件判断3&gt;:
+    &lt;执行3&gt;
+else:
+    &lt;执行4&gt;
+</code></pre>
 <hr>
-<h2 id="int-将string转为整数">int()将string转为整数</h2>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()</span><br></pre></td></tr></table></figure>
+<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><pre><code>Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()
+</code></pre>
 <p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
 <hr>
-<h2 id="循环的两种方式-老样子的break和continue">循环的两种方式 老样子的break和continue</h2>
-<h3 id="for…in循环">for…in循环</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Michael&#x27;, &#x27;Bob&#x27;, &#x27;Tracy&#x27;]</span><br><span class="line">for name in names: </span><br><span class="line">     print(name)</span><br></pre></td></tr></table></figure>
+<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><pre><code>names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
+for name in names: 
+     print(name)
+</code></pre>
 <p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(5))</span><br><span class="line">[0, 1, 2, 3, 4]</span><br></pre></td></tr></table></figure>
-<h3 id="while循环">while循环</h3>
-<p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum = 0</span><br><span class="line">n = 99</span><br><span class="line">while n &gt; 0:</span><br><span class="line">    sum = sum + n</span><br><span class="line">    n = n - 2</span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; list(range(5))
+[0, 1, 2, 3, 4]
+</code></pre>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
+<pre><code>sum = 0
+n = 99
+while n &gt; 0:
+    sum = sum + n
+    n = n - 2
+print(sum)
+</code></pre>
 <p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
-<h3 id="break">break</h3>
-<p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&#x27;END&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre>
 <p>上面的代码可以打印出1~100。</p>
 <p>如果要提前结束循环，可以用<code>break</code>语句：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    if n &gt; 10: # 当n = 11时，条件满足，执行break语句</span><br><span class="line">        break # break语句会结束当前循环</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&#x27;END&#x27;)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>
-可见<code>break</code>的作用是提前结束循环。</p>
-<h3 id="continue">continue</h3>
-<p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
+<pre><code>n = 1
+while n &lt;= 100:
+    if n &gt; 10: # 当n = 11时，条件满足，执行break语句
+        break # break语句会结束当前循环
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre>
+<p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    print(n)
+</code></pre>
 <p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    if n % 2 == 0: # 如果n是偶数，执行continue语句</span><br><span class="line">        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>
-可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    if n % 2 == 0: # 如果n是偶数，执行continue语句
+        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
+    print(n)
+</code></pre>
+<p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
 <hr>
-<h2 id="使用dict和set">使用dict和set</h2>
-<h3 id="dict">dict</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&#x27;Michael&#x27;: 95, &#x27;Bob&#x27;: 75, &#x27;Tracy&#x27;: 85&#125;</span><br><span class="line">&gt;&gt;&gt; d[&#x27;Michael&#x27;]</span><br><span class="line">95</span><br></pre></td></tr></table></figure>
+<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><pre><code>&gt;&gt;&gt; d = &#123;&#39;Michael&#39;: 95, &#39;Bob&#39;: 75, &#39;Tracy&#39;: 85&#125;
+&gt;&gt;&gt; d[&#39;Michael&#39;]
+95
+</code></pre>
 <p>和list比较，dict有以下几个特点：</p>
 <ol>
-<li>
-<p>查找和插入的速度极快，不会随着key的增加而变慢；</p>
+<li><p>查找和插入的速度极快，不会随着key的增加而变慢；</p>
 </li>
-<li>
-<p>需要占用大量的内存，内存浪费多。<br>
-而list相反：</p>
+<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
 </li>
-<li>
-<p>查找和插入的时间随着元素的增加而增加；</p>
+<li><p>查找和插入的时间随着元素的增加而增加；</p>
 </li>
-<li>
-<p>占用空间小，浪费内存很少。<br>
-所以，dict是用空间来换取时间的一种方法。</p>
+<li><p>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</p>
 </li>
 </ol>
-<h3 id="set">set</h3>
-<p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s
+&#123;1, 2, 3&#125;
+</code></pre>
 <hr>
-<h2 id="函数">函数</h2>
-<h3 id="定义函数">定义函数</h3>
-<p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
 <p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def my_abs(x):</span><br><span class="line">    if x &gt;= 0:</span><br><span class="line">        return x</span><br><span class="line">    else:</span><br><span class="line">        return -x</span><br></pre></td></tr></table></figure>
+<pre><code>def my_abs(x):
+    if x &gt;= 0:
+        return x
+    else:
+        return -x
+</code></pre>
 <p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
 <p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
 <p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
 <p><code>return None</code>可以简写为<code>return</code></p>
-<h3 id="空函数">空函数</h3>
-<p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def nop():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
+<pre><code>def nop():
+    pass
+</code></pre>
 <p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
 <p><code>pass</code>还可以用在其他语句里，比如：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if age &gt;= 18:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<pre><code>if age &gt;= 18:
+    pass
+</code></pre>
 <p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
-<h3 id="默认参数">默认参数</h3>
-<p>设置默认参数时，有几点要注意：</p>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>设置默认参数时，有几点要注意：</p>
 <p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
 <p>二是如何设置默认参数。</p>
 <p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
 <p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
 <p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def add_end(L=None):</span><br><span class="line">    if L is None:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(&#x27;END&#x27;)</span><br><span class="line">    return L</span><br></pre></td></tr></table></figure>
-<h3 id="可变参数">可变参数</h3>
-<p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<pre><code>def add_end(L=None):
+    if L is None:
+        L = []
+    L.append(&#39;END&#39;)
+    return L
+</code></pre>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
 <p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
 <p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<pre><code>def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre>
 <p>但是调用的时候，需要先组装出一个list或tuple：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc([1, 2, 3])</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc((1, 3, 5, 7))</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc([1, 2, 3])
+14
+&gt;&gt;&gt; calc((1, 3, 5, 7))
+84
+</code></pre>
 <p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2, 3)</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc(1, 3, 5, 7)</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc(1, 2, 3)
+14
+&gt;&gt;&gt; calc(1, 3, 5, 7)
+84
+</code></pre>
 <p>所以，我们把函数的参数改为可变参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(*numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<pre><code>def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre>
 <p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2)</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; calc()</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc(1, 2)
+5
+&gt;&gt;&gt; calc()
+0
+</code></pre>
 <p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])
+14
+</code></pre>
 <p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(*nums)</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
+</code></pre>
 <p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
-<h3 id="关键字参数">关键字参数</h3>
-<p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, **kw):</span><br><span class="line">    print(&#x27;name:&#x27;, name, &#x27;age:&#x27;, age, &#x27;other:&#x27;, kw)</span><br></pre></td></tr></table></figure>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
+<pre><code>def person(name, age, **kw):
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
+</code></pre>
 <p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&#x27;Michael&#x27;, 30)</span><br><span class="line">name: Michael age: 30 other: &#123;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
+name: Michael age: 30 other: &#123;&#125;
+</code></pre>
 <p>也可以传入任意个数的关键字参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&#x27;Bob&#x27;, 35, city=&#x27;Beijing&#x27;)</span><br><span class="line">name: Bob age: 35 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Adam&#x27;, 45, gender=&#x27;M&#x27;, job=&#x27;Engineer&#x27;)</span><br><span class="line">name: Adam age: 45 other: &#123;&#x27;gender&#x27;: &#x27;M&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+name: Bob age: 35 other: &#123;&#39;city&#39;: &#39;Beijing&#39;&#125;
+&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
+name: Adam age: 45 other: &#123;&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
 <p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Jack&#x27;, 24, city=extra[&#x27;city&#x27;], job=extra[&#x27;job&#x27;])</span><br><span class="line">name: Jack age: 24 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; extra = &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
+name: Jack age: 24 other: &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p>当然，上面复杂的调用可以用简化的写法：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Jack&#x27;, 24, **extra)</span><br><span class="line">name: Jack age: 24 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; extra = &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
+name: Jack age: 24 other: &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
 <p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。</p>
 <p>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！</p>
@@ -258,7 +312,7 @@
 <p><code>**kw</code>是关键字参数，kw接收的是一个dict。</p>
 <p>以及调用函数时如何传入可变参数和关键字参数的语法：</p>
 <p>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；</p>
-<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**&#123;'a': 1, 'b': 2&#125;)</code>。</p>
+<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**&#123;&#39;a&#39;: 1, &#39;b&#39;: 2&#125;)</code>。</p>
 <p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
 <p>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。</p>
 <p>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。</p>
@@ -266,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/" data-id="cl3jmf7ms00339jv3evuh5jnn" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/" data-id="cl3jmy3ru0029txv353c1hc9v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +372,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -362,7 +416,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

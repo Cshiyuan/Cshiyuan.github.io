@@ -5,27 +5,25 @@
   
 
   
-  <title>git rebase和merge 区别和应用场景 | CShyiuan博客</title>
+  <title>git rebase和merge 区别和应用场景 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git rebase和merge 区别和应用场景">
-<meta property="og:url" content="http://example.com/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:url" content="https://cshiyuan.github.io/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
 <meta property="og:description" content="几乎所有的版本控制工具都有branch功能，branch主要用于以下几个场景： 1，控制产品OEM。 基本上做产品，不同的客户都会提出多种不同特性需求，最简单的例子就是LOGO和标题完全不一样。但是可能产品自身的大部分功能和模块的代码一样的，这个时候如何管理多个客户定制的功能特性，并且不会干扰其他OEM版本的功能呢？ 如果你一开始就用if加N多变量定义的话，早晚会累死你，如果你把代码拷贝很多份，每">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-09-06T13:52:27.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.080Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -105,18 +103,13 @@
 <p>在场景1的情况下，如果修改了某个公用代码的BUG，这个时候就应该是把所有的OEM版本分支rebase到这个修复BUG的分支上来，在rebase过程中，Git会要你手动解决代码上的冲突，你需要做的就是把修复BUG的代码放到目标分支代码里面去。rebase的结果是：所有的分支依然存在</p>
 <p>在场景2的情况下，因为成员的代码开发工作已经完成了，也不需要再保留这个分支了，所以我们可以把这个成员分支merge到主分支上，当然冲突在所难免，手工解决的工作肯定逃不掉，但是利大于弊不是吗。merge以后，分支就不存在了，但是在Git的所有分支历史中还能看到身影。</p>
 <p>根据适用场景不同，采用不同的分支合并策略，让你团队的代码保持生命力吧。</p>
-<p> </p>
-<h1><span class="link_title">git stash和git stash pop</span></h1>
-<p>git stash 可用来暂存当前正在进行的工作， 比如想pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。<br>
-基础命令：<br>
-<strong>$git stash<br>
-$do some work<br>
-$git stash pop</strong></p>
+<p>&amp;nbsp;</p>
+<h1 id="git-stash和git-stash-pop"><a href="#git-stash和git-stash-pop" class="headerlink" title="git stash和git stash pop"></a><span class="link_title">git stash和git stash pop</span></h1><p>git stash 可用来暂存当前正在进行的工作， 比如想pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。<br>基础命令：<br><strong>$git stash<br>$do some work<br>$git stash pop</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-id="cl3jmf7n4004j9jv34mrs1az4" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2016/09/06/git%20rebase%E5%92%8Cmerge%20%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" data-id="cl3jmy3s7003vtxv3acawd180" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +161,7 @@ $git stash pop</strong></p>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -212,7 +205,7 @@ $git stash pop</strong></p>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

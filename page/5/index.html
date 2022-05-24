@@ -5,25 +5,21 @@
   
 
   
-  <title>CShyiuan博客</title>
+  <title>C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="miehaha">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CShyiuan博客">
-<meta property="og:url" content="http://example.com/page/5/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="miehaha">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="[object Object]">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="C&#39;s Notebook">
+<meta property="og:url" content="https://cshiyuan.github.io/page/5/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:locale">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -40,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -60,7 +56,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,162 +90,218 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> </p>
-<h2 id="bytes类型数据和utf-8编码和各种字符串编码">bytes类型数据和utf-8编码和各种字符串编码</h2>
-<p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = b&#x27;ABC&#x27;</span><br></pre></td></tr></table></figure>
+        <p>&amp;nbsp;</p>
+<h2 id="bytes类型数据和utf-8编码和各种字符串编码"><a href="#bytes类型数据和utf-8编码和各种字符串编码" class="headerlink" title="bytes类型数据和utf-8编码和各种字符串编码"></a>bytes类型数据和utf-8编码和各种字符串编码</h2><p>Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示：</p>
+<pre><code>x = b&#39;ABC&#39;
+</code></pre>
 <hr>
-<h2 id="字符串格式化">字符串格式化</h2>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Hello, %s&#x27; % &#x27;world&#x27;</span><br><span class="line">&#x27;Hello, world&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Hi, %s, you have $%d.&#x27; % (&#x27;Michael&#x27;, 1000000)</span><br><span class="line">&#x27;Hi, Michael, you have $1000000.&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>&gt;&gt;&gt; &#39;Hello, %s&#39; % &#39;world&#39;
+&#39;Hello, world&#39;
+&gt;&gt;&gt; &#39;Hi, %s, you have $%d.&#39; % (&#39;Michael&#39;, 1000000)
+&#39;Hi, Michael, you have $1000000.&#39;
+</code></pre>
 <hr>
-<h2 id="条件判断">条件判断</h2>
-<p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>计算机之所以能做很多自动化的任务，因为它可以自己做条件判断。</p>
 <p>比如，输入用户年龄，根据年龄打印不同的内容，在Python程序中，用<code>if</code>语句实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">age = 20</span><br><span class="line">if age &gt;= 18:</span><br><span class="line">    print(&#x27;your age is&#x27;, age)</span><br><span class="line">    print(&#x27;adult&#x27;)</span><br></pre></td></tr></table></figure>
+<pre><code>age = 20
+if age &gt;= 18:
+    print(&#39;your age is&#39;, age)
+    print(&#39;adult&#39;)
+</code></pre>
 <p>根据Python的缩进规则，如果<code>if</code>语句判断是<code>True</code>，就把缩进的两行print语句执行了，否则，什么也不做。</p>
 <hr>
-<h2 id="elif于else-if">elif于else if</h2>
-<p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if &lt;条件判断1&gt;:</span><br><span class="line">    &lt;执行1&gt;</span><br><span class="line">elif &lt;条件判断2&gt;:</span><br><span class="line">    &lt;执行2&gt;</span><br><span class="line">elif &lt;条件判断3&gt;:</span><br><span class="line">    &lt;执行3&gt;</span><br><span class="line">else:</span><br><span class="line">    &lt;执行4&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="elif于else-if"><a href="#elif于else-if" class="headerlink" title="elif于else if"></a>elif于else if</h2><p><code>elif</code>是<code>else if</code>的缩写，完全可以有多个<code>elif</code>，所以<code>if</code>语句的完整形式就是：</p>
+<pre><code>if &lt;条件判断1&gt;:
+    &lt;执行1&gt;
+elif &lt;条件判断2&gt;:
+    &lt;执行2&gt;
+elif &lt;条件判断3&gt;:
+    &lt;执行3&gt;
+else:
+    &lt;执行4&gt;
+</code></pre>
 <hr>
-<h2 id="int-将string转为整数">int()将string转为整数</h2>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()</span><br></pre></td></tr></table></figure>
+<h2 id="int-将string转为整数"><a href="#int-将string转为整数" class="headerlink" title="int()将string转为整数"></a>int()将string转为整数</h2><pre><code>Traceback (most recent call last): File “&lt;stdin&gt;“, line 1, in &lt;module&gt; TypeError: unorderable types: str() &gt; int()
+</code></pre>
 <p>这是因为<code>input()</code>返回的数据类型是<code>str</code>，<code>str</code>不能直接和整数比较，必须先把<code>str</code>转换成整数。Python提供了<code>int()</code>函数来完成这件事情</p>
 <hr>
-<h2 id="循环的两种方式-老样子的break和continue">循环的两种方式 老样子的break和continue</h2>
-<h3 id="for…in循环">for…in循环</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Michael&#x27;, &#x27;Bob&#x27;, &#x27;Tracy&#x27;]</span><br><span class="line">for name in names: </span><br><span class="line">     print(name)</span><br></pre></td></tr></table></figure>
+<h2 id="循环的两种方式-老样子的break和continue"><a href="#循环的两种方式-老样子的break和continue" class="headerlink" title="循环的两种方式 老样子的break和continue"></a>循环的两种方式 老样子的break和continue</h2><h3 id="for…in循环"><a href="#for…in循环" class="headerlink" title="for…in循环"></a>for…in循环</h3><pre><code>names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
+for name in names: 
+     print(name)
+</code></pre>
 <p>如果要计算1-100的整数之和，从1写到100有点困难，幸好Python提供一个range()函数，可以生成一个整数序列，再通过list()函数可以转换为list。比如range(5)生成的序列是从0开始小于5的整数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(5))</span><br><span class="line">[0, 1, 2, 3, 4]</span><br></pre></td></tr></table></figure>
-<h3 id="while循环">while循环</h3>
-<p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum = 0</span><br><span class="line">n = 99</span><br><span class="line">while n &gt; 0:</span><br><span class="line">    sum = sum + n</span><br><span class="line">    n = n - 2</span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; list(range(5))
+[0, 1, 2, 3, 4]
+</code></pre>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：</p>
+<pre><code>sum = 0
+n = 99
+while n &gt; 0:
+    sum = sum + n
+    n = n - 2
+print(sum)
+</code></pre>
 <p>在循环内部变量<code>n</code>不断自减，直到变为<code>-1</code>时，不再满足while条件，循环退出。</p>
-<h3 id="break">break</h3>
-<p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&#x27;END&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>在循环中，<code>break</code>语句可以提前退出循环。例如，本来要循环打印1～100的数字：</p>
+<pre><code>n = 1
+while n &lt;= 100:
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre>
 <p>上面的代码可以打印出1~100。</p>
 <p>如果要提前结束循环，可以用<code>break</code>语句：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = 1</span><br><span class="line">while n &lt;= 100:</span><br><span class="line">    if n &gt; 10: # 当n = 11时，条件满足，执行break语句</span><br><span class="line">        break # break语句会结束当前循环</span><br><span class="line">    print(n)</span><br><span class="line">    n = n + 1</span><br><span class="line">print(&#x27;END&#x27;)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>
-可见<code>break</code>的作用是提前结束循环。</p>
-<h3 id="continue">continue</h3>
-<p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
+<pre><code>n = 1
+while n &lt;= 100:
+    if n &gt; 10: # 当n = 11时，条件满足，执行break语句
+        break # break语句会结束当前循环
+    print(n)
+    n = n + 1
+print(&#39;END&#39;)
+</code></pre>
+<p>执行上面的代码可以看到，打印出1~10后，紧接着打印<code>END</code>，程序结束。<br>可见<code>break</code>的作用是提前结束循环。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>在循环过程中，也可以通过<code>continue</code>语句，跳过当前的这次循环，直接开始下一次循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    print(n)
+</code></pre>
 <p>上面的程序可以打印出1～10。但是，如果我们想只打印奇数，可以用<code>continue</code>语句跳过某些循环：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = 0</span><br><span class="line">while n &lt; 10:</span><br><span class="line">    n = n + 1</span><br><span class="line">    if n % 2 == 0: # 如果n是偶数，执行continue语句</span><br><span class="line">        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
-<p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>
-可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
+<pre><code>n = 0
+while n &lt; 10:
+    n = n + 1
+    if n % 2 == 0: # 如果n是偶数，执行continue语句
+        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
+    print(n)
+</code></pre>
+<p>执行上面的代码可以看到，打印的不再是1～10，而是1，3，5，7，9。<br>可见<code>continue</code>的作用是提前结束本轮循环，并直接开始下一轮循环。</p>
 <hr>
-<h2 id="使用dict和set">使用dict和set</h2>
-<h3 id="dict">dict</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&#x27;Michael&#x27;: 95, &#x27;Bob&#x27;: 75, &#x27;Tracy&#x27;: 85&#125;</span><br><span class="line">&gt;&gt;&gt; d[&#x27;Michael&#x27;]</span><br><span class="line">95</span><br></pre></td></tr></table></figure>
+<h2 id="使用dict和set"><a href="#使用dict和set" class="headerlink" title="使用dict和set"></a>使用dict和set</h2><h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><pre><code>&gt;&gt;&gt; d = &#123;&#39;Michael&#39;: 95, &#39;Bob&#39;: 75, &#39;Tracy&#39;: 85&#125;
+&gt;&gt;&gt; d[&#39;Michael&#39;]
+95
+</code></pre>
 <p>和list比较，dict有以下几个特点：</p>
 <ol>
-<li>
-<p>查找和插入的速度极快，不会随着key的增加而变慢；</p>
+<li><p>查找和插入的速度极快，不会随着key的增加而变慢；</p>
 </li>
-<li>
-<p>需要占用大量的内存，内存浪费多。<br>
-而list相反：</p>
+<li><p>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
 </li>
-<li>
-<p>查找和插入的时间随着元素的增加而增加；</p>
+<li><p>查找和插入的时间随着元素的增加而增加；</p>
 </li>
-<li>
-<p>占用空间小，浪费内存很少。<br>
-所以，dict是用空间来换取时间的一种方法。</p>
+<li><p>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</p>
 </li>
 </ol>
-<h3 id="set">set</h3>
-<p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s
+&#123;1, 2, 3&#125;
+</code></pre>
 <hr>
-<h2 id="函数">函数</h2>
-<h3 id="定义函数">定义函数</h3>
-<p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在Python中，定义一个函数要使用<code>def</code>语句，依次写出函数名、括号、括号中的参数和冒号<code>:</code>，然后，在缩进块中编写函数体，函数的返回值用<code>return</code>语句返回。</p>
 <p>我们以自定义一个求绝对值的<code>my_abs</code>函数为例：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def my_abs(x):</span><br><span class="line">    if x &gt;= 0:</span><br><span class="line">        return x</span><br><span class="line">    else:</span><br><span class="line">        return -x</span><br></pre></td></tr></table></figure>
+<pre><code>def my_abs(x):
+    if x &gt;= 0:
+        return x
+    else:
+        return -x
+</code></pre>
 <p>请自行测试并调用<code>my_abs</code>看看返回结果是否正确。</p>
 <p>请注意，函数体内部的语句在执行时，一旦执行到<code>return</code>时，函数就执行完毕，并将结果返回。因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。</p>
 <p>如果没有<code>return</code>语句，函数执行完毕后也会返回结果，只是结果为<code>None</code>。</p>
 <p><code>return None</code>可以简写为<code>return</code></p>
-<h3 id="空函数">空函数</h3>
-<p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def nop():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<h3 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h3><p>如果想定义一个什么事也不做的空函数，可以用<code>pass</code>语句：</p>
+<pre><code>def nop():
+    pass
+</code></pre>
 <p><code>pass</code>语句什么都不做，那有什么用？实际上<code>pass</code>可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个<code>pass</code>，让代码能运行起来。</p>
 <p><code>pass</code>还可以用在其他语句里，比如：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if age &gt;= 18:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<pre><code>if age &gt;= 18:
+    pass
+</code></pre>
 <p>缺少了<code>pass</code>，代码运行就会有语法错误。</p>
-<h3 id="默认参数">默认参数</h3>
-<p>设置默认参数时，有几点要注意：</p>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>设置默认参数时，有几点要注意：</p>
 <p>一是必选参数在前，默认参数在后，否则Python的解释器会报错（思考一下为什么默认参数不能放在必选参数前面）；</p>
 <p>二是如何设置默认参数。</p>
 <p>当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。</p>
 <p>定义默认参数要牢记一点：默认参数必须指向不变对象！</p>
 <p>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def add_end(L=None):</span><br><span class="line">    if L is None:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(&#x27;END&#x27;)</span><br><span class="line">    return L</span><br></pre></td></tr></table></figure>
-<h3 id="可变参数">可变参数</h3>
-<p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
+<pre><code>def add_end(L=None):
+    if L is None:
+        L = []
+    L.append(&#39;END&#39;)
+    return L
+</code></pre>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
 <p>我们以数学题为例子，给定一组数字a，b，c……，请计算a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> + ……。</p>
 <p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<pre><code>def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre>
 <p>但是调用的时候，需要先组装出一个list或tuple：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc([1, 2, 3])</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc((1, 3, 5, 7))</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc([1, 2, 3])
+14
+&gt;&gt;&gt; calc((1, 3, 5, 7))
+84
+</code></pre>
 <p>如果利用可变参数，调用函数的方式可以简化成这样：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2, 3)</span><br><span class="line">14</span><br><span class="line">&gt;&gt;&gt; calc(1, 3, 5, 7)</span><br><span class="line">84</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc(1, 2, 3)
+14
+&gt;&gt;&gt; calc(1, 3, 5, 7)
+84
+</code></pre>
 <p>所以，我们把函数的参数改为可变参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(*numbers):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum = sum + n * n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<pre><code>def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre>
 <p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个tuple，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括0个参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; calc(1, 2)</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; calc()</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; calc(1, 2)
+5
+&gt;&gt;&gt; calc()
+0
+</code></pre>
 <p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？可以这样做：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(nums[0], nums[1], nums[2])
+14
+</code></pre>
 <p>这种写法当然是可行的，问题是太繁琐，所以Python允许你在list或tuple前面加一个<code>*</code>号，把list或tuple的元素变成可变参数传进去：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; calc(*nums)</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
+</code></pre>
 <p><code>*nums</code>表示把<code>nums</code>这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见。</p>
-<h3 id="关键字参数">关键字参数</h3>
-<p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, **kw):</span><br><span class="line">    print(&#x27;name:&#x27;, name, &#x27;age:&#x27;, age, &#x27;other:&#x27;, kw)</span><br></pre></td></tr></table></figure>
+<h3 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h3><p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
+<pre><code>def person(name, age, **kw):
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
+</code></pre>
 <p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&#x27;Michael&#x27;, 30)</span><br><span class="line">name: Michael age: 30 other: &#123;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
+name: Michael age: 30 other: &#123;&#125;
+</code></pre>
 <p>也可以传入任意个数的关键字参数：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&#x27;Bob&#x27;, 35, city=&#x27;Beijing&#x27;)</span><br><span class="line">name: Bob age: 35 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Adam&#x27;, 45, gender=&#x27;M&#x27;, job=&#x27;Engineer&#x27;)</span><br><span class="line">name: Adam age: 45 other: &#123;&#x27;gender&#x27;: &#x27;M&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+name: Bob age: 35 other: &#123;&#39;city&#39;: &#39;Beijing&#39;&#125;
+&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
+name: Adam age: 45 other: &#123;&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
 <p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Jack&#x27;, 24, city=extra[&#x27;city&#x27;], job=extra[&#x27;job&#x27;])</span><br><span class="line">name: Jack age: 24 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; extra = &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
+name: Jack age: 24 other: &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p>当然，上面复杂的调用可以用简化的写法：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&#x27;Jack&#x27;, 24, **extra)</span><br><span class="line">name: Jack age: 24 other: &#123;&#x27;city&#x27;: &#x27;Beijing&#x27;, &#x27;job&#x27;: &#x27;Engineer&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; extra = &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
+name: Jack age: 24 other: &#123;&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;&#125;
+</code></pre>
 <p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
 <p>Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。</p>
 <p>默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！</p>
@@ -258,7 +310,7 @@
 <p><code>**kw</code>是关键字参数，kw接收的是一个dict。</p>
 <p>以及调用函数时如何传入可变参数和关键字参数的语法：</p>
 <p>可变参数既可以直接传入：<code>func(1, 2, 3)</code>，又可以先组装list或tuple，再通过<code>*args</code>传入：<code>func(*(1, 2, 3))</code>；</p>
-<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**&#123;'a': 1, 'b': 2&#125;)</code>。</p>
+<p>关键字参数既可以直接传入：<code>func(a=1, b=2)</code>，又可以先组装dict，再通过<code>**kw</code>传入：<code>func(**&#123;&#39;a&#39;: 1, &#39;b&#39;: 2&#125;)</code>。</p>
 <p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
 <p>命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。</p>
 <p>定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符<code>*</code>，否则定义的将是位置参数。</p>
@@ -266,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/" data-id="cl3jmf7ms00339jv3evuh5jnn" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/01/Python3%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%881%EF%BC%89/" data-id="cl3jmy3ru0029txv353c1hc9v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,65 +355,63 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>今天在爬GitHub的时候，发现spider后来很容易就被ban了。后来主要就是要设置header和download_delay;</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">download_delay = 1</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &#x27;User-Agent&#x27;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>download_delay = 1
+
+headers = &#123;
+    &#39;User-Agent&#39;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&quot;
+ &#125;
+</code></pre>
 <hr>
 <p>scrapy的输出有时候太多了，挡住了视线。</p>
 <p>可以在setting中设置LOG_LEVEL</p>
 <hr>
 <p>突然发现，原来GitHub的API有访问限制。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">403 reponse</span><br><span class="line">&#123;</span><br><span class="line">&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. </span><br><span class="line">(But here&#x27;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,</span><br><span class="line">&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>403 reponse
+&#123;
+&quot;message&quot;:&quot;API rate limit exceeded for 58.248.16.36. 
+(But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,
+&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;
+&#125;
+</code></pre>
 <p>详情：<a target="_blank" rel="noopener" href="https://developer.github.com/v3/#rate-limiting">https://developer.github.com/v3/#rate-limiting</a></p>
-<h2 id="Rate-Limiting">Rate Limiting</h2>
-<blockquote>
-<p>For requests using Basic Authentication or OAuth,<br>
-you can make up to 5,000 requests per hour.<br>
-For unauthenticated requests,<br>
-the rate limit allows you to make up to 60 requests per hour.<br>
-Unauthenticated requests are associated with your IP address,<br>
-and not the user making requests.<br>
-Note that the Search API has custom rate limit rules.</p>
+<h2 id="Rate-Limiting"><a href="#Rate-Limiting" class="headerlink" title="Rate Limiting"></a>Rate Limiting</h2><blockquote>
+<p>For requests using Basic Authentication or OAuth,<br>you can make up to 5,000 requests per hour.<br>For unauthenticated requests,<br>the rate limit allows you to make up to 60 requests per hour.<br>Unauthenticated requests are associated with your IP address,<br>and not the user making requests.<br>Note that the Search API has custom rate limit rules.</p>
 </blockquote>
 <p>认证的可以一个小时5000 requests。非认证的一个小时60 requests，差远了。。。</p>
 <hr>
-<h2 id="PyCharm调试Scrapy">PyCharm调试Scrapy</h2>
-<p>scrapy指令其实就是一个python的运行脚本</p>
+<h2 id="PyCharm调试Scrapy"><a href="#PyCharm调试Scrapy" class="headerlink" title="PyCharm调试Scrapy"></a>PyCharm调试Scrapy</h2><p>scrapy指令其实就是一个python的运行脚本</p>
 <p>pyCharm是一个强大的pythonIDE</p>
 <p>在运行scrapy库时，其实是相当于运行一个python脚本：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line">execute()</span><br></pre></td></tr></table></figure>
+<pre><code>#!/usr/bin/python
+
+from scrapy.cmdline import execute
+execute()
+</code></pre>
 <p>所以当运行scrapy crawler spider时，其实与指令：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider</span><br></pre></td></tr></table></figure>
+<pre><code>python /Library/Python/2.7/site-packages/scrapy/cmdline.py crawl spider
+</code></pre>
 <p>的效果是一样的</p>
 <p>这样只需要在pycharm中的Run下Edit Configurations…中做运行配置即可：</p>
-<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png" alt=""></p>
+<p><img src="http://static.oschina.net/uploads/space/2015/0815/164932_K55V_2381011.png"></p>
 <p>Name可以随便填</p>
 <p>点击ok后，在你的项目中设置断点或者直接运行，即可调试该项目了</p>
 <hr>
-<h2 id="如何让scrapy处理403的状态码">如何让scrapy处理403的状态码</h2>
-<p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>
-CloseSpider的异常。<br>
-2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status == 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>
-3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MySpider(CrawlSpider):</span><br><span class="line">    handle_httpstatus_list = [403]</span><br></pre></td></tr></table></figure>
+<h2 id="如何让scrapy处理403的状态码"><a href="#如何让scrapy处理403的状态码" class="headerlink" title="如何让scrapy处理403的状态码"></a>如何让scrapy处理403的状态码</h2><p>1、爬数据的时候，有时会遇到被该网站封IP等情况，response的状态码为403，那么这时候我们希望能够抛出<br>CloseSpider的异常。<br>2、但是如scrapy官网提到的，Scrapy默认的设置是过滤掉有问题的HTTP response(即response状态码不在200-300之间)。因此403的情况会被ignore掉，意思就是我们不是处理这个url 请求的response，直接就忽略，也就是及时我们用response.status &#x3D;&#x3D; 400判断没有作用，因为只有status处于200-300的请求才会被处理。<br>3. 如果我们想捕获或者处理403，或者其它如404或者500，这种请求时，我们在spider的类中把403放在handle_httpstatus_list中。如下就行。</p>
+<pre><code>class MySpider(CrawlSpider):
+    handle_httpstatus_list = [403]
+</code></pre>
 <blockquote>
-<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>
-即在settings中增加HTTPERROR_ALLOWED_CODES = [403]， HTTPERROR_ALLOWED_CODES默认是[]<br>
-<a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
+<p>或者将403放在HTTPERROR_ALLOWED_CODES设置中<br>即在settings中增加HTTPERROR_ALLOWED_CODES &#x3D; [403]， HTTPERROR_ALLOWED_CODES默认是[]<br> <a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes">http://doc.scrapy.org/en/1.0/topics/spider-middleware.html#httperror-allowed-codes</a></p>
 </blockquote>
-<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status == 403抛出CloseSpider异常，结束抓取。</p>
+<p>4. 设置完handle_httpstatus_list或者HTTPERROR_ALLOWED_CODES之后，就可以通过判断response.status &#x3D;&#x3D; 403抛出CloseSpider异常，结束抓取。</p>
 <hr>
-<h2 id="split-函数和GitHub-API中的API调用限制">split()函数和GitHub API中的API调用限制</h2>
-<p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
+<h2 id="split-函数和GitHub-API中的API调用限制"><a href="#split-函数和GitHub-API中的API调用限制" class="headerlink" title="split()函数和GitHub API中的API调用限制"></a>split()函数和GitHub API中的API调用限制</h2><p>split函数相见恨晚。还有就是GitHub API 的调用限制，是结合了ip和client_id来看的。</p>
 <p>不是单单查看client_id和client_secret决定的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/" data-id="cl3jmf7mx003n9jv33kvoe3jx" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy%E7%88%ACGitHub%E6%97%A5%E8%AE%B0/" data-id="cl3jmy3rz002utxv38a2c9231" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,166 +448,120 @@ CloseSpider的异常。<br>
     <div class="article-entry" itemprop="articleBody">
       
         <p>网络爬虫，是在网上进行数据抓取的程序，使用它能够抓取特定网页的HTML数据。虽然我们利用一些库开发一个爬虫程序，但是使用框架可以大大提高效率，缩短开发时间。Scrapy是一个使用<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/python" title="Python知识库">Python</a>编写的，轻量级的，简单轻巧，并且使用起来非常的方便。使用Scrapy可以很方便的完成网上数据的采集工作，它为我们完成了大量的工作，而不需要自己费大力气去开发。</p>
-<p>首先先要回答一个问题。<br>
-问：把网站装进爬虫里，总共分几步？<br>
-答案很简单，四步：<br>
-新建项目 (Project)：新建一个新的爬虫项目<br>
-明确目标（Items）：明确你想要抓取的目标<br>
-制作爬虫（Spider）：制作爬虫开始爬取网页<br>
-存储内容（Pipeline）：设计管道存储爬取内容</p>
+<p>首先先要回答一个问题。<br>问：把网站装进爬虫里，总共分几步？<br>答案很简单，四步：<br>新建项目 (Project)：新建一个新的爬虫项目<br>明确目标（Items）：明确你想要抓取的目标<br>制作爬虫（Spider）：制作爬虫开始爬取网页<br>存储内容（Pipeline）：设计管道存储爬取内容</p>
 <p>好的，基本流程既然确定了，那接下来就一步一步的完成就可以了。</p>
-<p><strong>1.新建项目（Project）</strong><br>
-在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
+<p><strong>1.新建项目（Project）</strong><br>在空目录下按住Shift键右击，选择“在此处打开命令窗口”，输入一下命令：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code37356" class="codebody">
 scrapy startproject tutorial</div>
 其中，tutorial为项目名称。
 可以看到将会创建一个tutorial文件夹，目录结构如下：
 代码如下:
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tutorial/</span><br><span class="line">scrapy.cfg</span><br><span class="line">tutorial/</span><br><span class="line">__init__.py</span><br><span class="line">items.py</span><br><span class="line">pipelines.py</span><br><span class="line">settings.py</span><br><span class="line">spiders/</span><br><span class="line">__init__.py</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<pre><code>tutorial/
+scrapy.cfg
+tutorial/
+__init__.py
+items.py
+pipelines.py
+settings.py
+spiders/
+__init__.py
+...
+</code></pre>
 <p>下面来简单介绍一下各个文件的作用：</p>
 <ul>
 <li>scrapy.cfg：项目的配置文件</li>
-<li>tutorial/：项目的Python模块，将会从这里引用代码</li>
-<li>tutorial/items.py：项目的items文件</li>
-<li>tutorial/pipelines.py：项目的pipelines文件</li>
-<li>tutorial/settings.py：项目的设置文件</li>
-<li>tutorial/spiders/：存储爬虫的目录</li>
+<li>tutorial&#x2F;：项目的Python模块，将会从这里引用代码</li>
+<li>tutorial&#x2F;items.py：项目的items文件</li>
+<li>tutorial&#x2F;pipelines.py：项目的pipelines文件</li>
+<li>tutorial&#x2F;settings.py：项目的设置文件</li>
+<li>tutorial&#x2F;spiders&#x2F;：存储爬虫的目录</li>
 </ul>
-<p><strong>2.明确目标（Item）</strong><br>
-在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>
-一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>
-接下来，我们开始来构建item模型（model）。<br>
-首先，我们想要的内容有：<br>
-名称（name）<br>
-链接（url）<br>
-描述（description）</p>
-<p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>
-因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>
-代码如下:</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Define here the models for your scraped items</span><br><span class="line">#</span><br><span class="line"># See documentation in:</span><br><span class="line"># http://doc.scrapy.org/en/latest/topics/items.html</span><br><span class="line">from scrapy.item import Item, Field</span><br><span class="line"></span><br><span class="line">class TutorialItem(Item):</span><br><span class="line"># define the fields for your item here like:</span><br><span class="line"># name = Field()</span><br><span class="line">pass</span><br><span class="line"></span><br><span class="line">class DmozItem(Item):</span><br><span class="line">title = Field()</span><br><span class="line">link = Field()</span><br><span class="line">desc = Field()</span><br></pre></td></tr></table></figure>
+<p><strong>2.明确目标（Item）</strong><br>在Scrapy中，items是用来加载抓取内容的容器，有点像Python中的Dic，也就是字典，但是提供了一些额外的保护减少错误。<br>一般来说，item可以用scrapy.item.Item类来创建，并且用scrapy.item.Field对象来定义属性（可以理解成类似于ORM的映射关系）。<br>接下来，我们开始来构建item模型（model）。<br>首先，我们想要的内容有：<br>名称（name）<br>链接（url）<br>描述（description）</p>
+<p>修改tutorial目录下的items.py文件，在原本的class后面添加我们自己的class。<br>因为要抓dmoz.org网站的内容，所以我们可以将其命名为DmozItem：<br>代码如下:</p>
+<pre><code># Define here the models for your scraped items
+#
+# See documentation in:
+# http://doc.scrapy.org/en/latest/topics/items.html
+from scrapy.item import Item, Field
+
+class TutorialItem(Item):
+# define the fields for your item here like:
+# name = Field()
+pass
+
+class DmozItem(Item):
+title = Field()
+link = Field()
+desc = Field()
+</code></pre>
 <p><strong>3.制作爬虫（Spider）</strong></p>
-<p>制作爬虫，总体分两步：先爬再取。<br>
-也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br>
-**3.1爬<br>
-**Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>
-他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>
-要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>
-name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>
-start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>
-parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
-<p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>
-也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
-<p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>
-dmoz_spider.py代码如下：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from scrapy.spider import Spider</span><br><span class="line">class DmozSpider(Spider):</span><br><span class="line">name = “dmoz”</span><br><span class="line">allowed_domains = [“dmoz.org”]</span><br><span class="line">start_urls = [</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">def parse(self, response):</span><br><span class="line">filename = response.url.split(“/”)[-2]</span><br><span class="line">open(filename, ‘wb’).write(response.body)</span><br></pre></td></tr></table></figure>
-<p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>
-从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>
-然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>
-代码如下:</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl dmoz</span><br></pre></td></tr></table></figure>
+<p>制作爬虫，总体分两步：先爬再取。<br>也就是说，首先你要获取整个网页的所有内容，然后再取出其中对你有用的部分。<br>**3.1爬<br>**Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。<br>他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。<br>要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：<br>name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。<br>start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。<br>parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。</p>
+<p>这里可以参考宽度爬虫教程中提及的思想来帮助理解，教程传送：[<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase" title="Java SE知识库">Java</a>] 知乎下巴第5集：使用HttpClient工具包和宽度爬虫。<br>也就是把Url存储下来并依此为起点逐步扩散开去，抓取所有符合条件的网页Url存储起来继续爬取。</p>
+<p>下面我们来写第一只爬虫，命名为dmoz_spider.py，保存在tutorial\spiders目录下。<br>dmoz_spider.py代码如下：</p>
+<pre><code>from scrapy.spider import Spider
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+filename = response.url.split(“/”)[-2]
+open(filename, ‘wb’).write(response.body)
+</code></pre>
+<p>allow_domains是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页。<br>从parse函数可以看出，将链接的最后两个地址取出作为文件名进行存储。<br>然后运行一下看看，在tutorial目录下按住shift右击，在此处打开命令窗口，输入：<br>代码如下:</p>
+<pre><code>scrapy crawl dmoz
+</code></pre>
 <p>运行结果如图：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg" alt=""></p>
-<p>报错了：<br>
-UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>
-运行第一个Scrapy项目就报错，真是命运多舛。<br>
-应该是出了编码问题，谷歌了一下找到了解决方案：<br>
-在python的Lib\<a target="_blank" rel="noopener" href="http://xn--site-packagessitecustomize-sk15b1i44a18o106g1qvbcg7b6eb.py">site-packages文件夹下新建一个sitecustomize.py</a>：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943L01-0.jpg"></p>
+<p>报错了：<br>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xb0 in position 1: ordinal not in range(128)<br>运行第一个Scrapy项目就报错，真是命运多舛。<br>应该是出了编码问题，谷歌了一下找到了解决方案：<br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code10248" class="codebody">
 import sys
 sys.setdefaultencoding('gb2312')</div>
 再次运行，OK，问题解决了，看一下结果：
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119434W5-1.jpg" alt=""></p>
-<p>最后一句INFO: Closing spider (finished)表明爬虫已经成功运行并且自行关闭了。<br>
-包含 [dmoz]的行 ，那对应着我们的爬虫运行的结果。<br>
-可以看到start_urls中定义的每个URL都有日志行。<br>
-还记得我们的start_urls吗？<br>
-<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books">http://www.dmoz.org/Computers/Programming/Languages/Python/Books</a><br>
-<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources</a><br>
-因为这些URL是起始页面，所以他们没有引用(referrers)，所以在它们的每行末尾你会看到 (referer: &lt;None&gt;)。<br>
-在parse 方法的作用下，两个文件被创建：分别是 Books 和 Resources，这两个文件中有URL的页面内容。</p>
-<p>那么在刚刚的电闪雷鸣之中到底发生了什么呢？<br>
-首先，Scrapy为爬虫的 start_urls属性中的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数。<br>
-然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。</p>
-<p><strong>3.2取</strong><br>
-爬取整个网页完毕，接下来的就是的取过程了。<br>
-光存储一整个网页还是不够用的。<br>
-在基础的爬虫里，这一步可以用正则表达式来抓。<br>
-在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。<br>
-如果你想了解更多selectors和其他机制你可以查阅资料：点我点我</p>
-<p>这是一些XPath表达式的例子和他们的含义<br>
-/html/head/title: 选择HTML文档&lt;head&gt;元素下面的&lt;title&gt; 标签。<br>
-/html/head/title/text(): 选择前面提到的&lt;title&gt; 元素下面的文本内容<br>
-//td: 选择所有 &lt;td&gt; 元素<br>
-//div[@class=“mine”]: 选择所有包含 class=“mine” 属性的div 标签元素<br>
-以上只是几个使用XPath的简单例子，但是实际上XPath非常强大。<br>
-可以参照W3C教程：点我点我。</p>
-<p>为了方便使用XPaths，Scrapy提供XPathSelector 类，有两种可以选择，HtmlXPathSelector(HTML数据解析)和XmlXPathSelector(XML数据解析)。<br>
-必须通过一个 Response 对象对他们进行实例化操作。<br>
-你会发现Selector对象展示了文档的节点结构。因此，第一个实例化的selector必与根节点或者是整个目录有关 。<br>
-在Scrapy里面，Selectors 有四种基础的方法（点击查看API文档）：<br>
-xpath()：返回一系列的selectors，每一个select表示一个xpath参数表达式选择的节点<br>
-css()：返回一系列的selectors，每一个select表示一个css参数表达式选择的节点<br>
-extract()：返回一个unicode字符串，为选中的数据<br>
-re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</p>
-<p>3.3xpath实验<br>
-下面我们在Shell里面尝试一下Selector的用法。<br>
-实验的网址：<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></p>
-<p>熟悉完了实验的小白鼠，接下来就是用Shell爬取网页了。<br>
-进入到项目的顶层目录，也就是第一层tutorial文件夹下，在cmd中输入：</p>
+
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119434W5-1.jpg"></p>
+<p>最后一句INFO: Closing spider (finished)表明爬虫已经成功运行并且自行关闭了。<br>包含 [dmoz]的行 ，那对应着我们的爬虫运行的结果。<br>可以看到start_urls中定义的每个URL都有日志行。<br>还记得我们的start_urls吗？<br><a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books">http://www.dmoz.org/Computers/Programming/Languages/Python/Books</a><br><a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources</a><br>因为这些URL是起始页面，所以他们没有引用(referrers)，所以在它们的每行末尾你会看到 (referer: &lt;None&gt;)。<br>在parse 方法的作用下，两个文件被创建：分别是 Books 和 Resources，这两个文件中有URL的页面内容。</p>
+<p>那么在刚刚的电闪雷鸣之中到底发生了什么呢？<br>首先，Scrapy为爬虫的 start_urls属性中的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数。<br>然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。</p>
+<p><strong>3.2取</strong><br>爬取整个网页完毕，接下来的就是的取过程了。<br>光存储一整个网页还是不够用的。<br>在基础的爬虫里，这一步可以用正则表达式来抓。<br>在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。<br>如果你想了解更多selectors和其他机制你可以查阅资料：点我点我</p>
+<p>这是一些XPath表达式的例子和他们的含义<br>&#x2F;html&#x2F;head&#x2F;title: 选择HTML文档&lt;head&gt;元素下面的&lt;title&gt; 标签。<br>&#x2F;html&#x2F;head&#x2F;title&#x2F;text(): 选择前面提到的&lt;title&gt; 元素下面的文本内容<br>&#x2F;&#x2F;td: 选择所有 &lt;td&gt; 元素<br>&#x2F;&#x2F;div[@class&#x3D;”mine”]: 选择所有包含 class&#x3D;”mine” 属性的div 标签元素<br>以上只是几个使用XPath的简单例子，但是实际上XPath非常强大。<br>可以参照W3C教程：点我点我。</p>
+<p>为了方便使用XPaths，Scrapy提供XPathSelector 类，有两种可以选择，HtmlXPathSelector(HTML数据解析)和XmlXPathSelector(XML数据解析)。<br>必须通过一个 Response 对象对他们进行实例化操作。<br>你会发现Selector对象展示了文档的节点结构。因此，第一个实例化的selector必与根节点或者是整个目录有关 。<br>在Scrapy里面，Selectors 有四种基础的方法（点击查看API文档）：<br>xpath()：返回一系列的selectors，每一个select表示一个xpath参数表达式选择的节点<br>css()：返回一系列的selectors，每一个select表示一个css参数表达式选择的节点<br>extract()：返回一个unicode字符串，为选中的数据<br>re()：返回一串一个unicode字符串，为使用正则表达式抓取出来的内容</p>
+<p>3.3xpath实验<br>下面我们在Shell里面尝试一下Selector的用法。<br>实验的网址：<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a></p>
+<p>熟悉完了实验的小白鼠，接下来就是用Shell爬取网页了。<br>进入到项目的顶层目录，也就是第一层tutorial文件夹下，在cmd中输入：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code36951" class="codebody">
 scrapy shell [http://www.dmoz.org/Computers/Programming/Languages/Python/Books/](http://www.dmoz.org/Computers/Programming/Languages/Python/Books/)</div>
 回车后可以看到如下的内容：
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/21194340K-3.jpg" alt=""></p>
-<p>在Shell载入后，你将获得response回应，存储在本地变量 response中。<br>
-所以如果你输入response.body，你将会看到response的body部分，也就是抓取到的页面内容：</p>
+
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/21194340K-3.jpg"></p>
+<p>在Shell载入后，你将获得response回应，存储在本地变量 response中。<br>所以如果你输入response.body，你将会看到response的body部分，也就是抓取到的页面内容：</p>
 <p>或者输入response.headers 来查看它的 header部分：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943GH-5.jpg" alt=""></p>
-<p>现在就像是一大堆沙子握在手里，里面藏着我们想要的金子，所以下一步，就是用筛子摇两下，把杂质出去，选出关键的内容。<br>
-selector就是这样一个筛子。<br>
-在旧的版本中，Shell实例化两种selectors，一个是解析HTML的 hxs 变量，一个是解析XML 的 xxs 变量。<br>
-而现在的Shell为我们准备好的selector对象，sel，可以根据返回的数据类型自动选择最佳的解析方案(XML or HTML)。<br>
-然后我们来捣弄一下！~<br>
-要彻底搞清楚这个问题，首先先要知道，抓到的页面到底是个什么样子。<br>
-比如，我们要抓取网页的标题，也就是&lt;title&gt;这个标签：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432L4-6.png" alt=""></p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943GH-5.jpg"></p>
+<p>现在就像是一大堆沙子握在手里，里面藏着我们想要的金子，所以下一步，就是用筛子摇两下，把杂质出去，选出关键的内容。<br>selector就是这样一个筛子。<br>在旧的版本中，Shell实例化两种selectors，一个是解析HTML的 hxs 变量，一个是解析XML 的 xxs 变量。<br>而现在的Shell为我们准备好的selector对象，sel，可以根据返回的数据类型自动选择最佳的解析方案(XML or HTML)。<br>然后我们来捣弄一下！~<br>要彻底搞清楚这个问题，首先先要知道，抓到的页面到底是个什么样子。<br>比如，我们要抓取网页的标题，也就是&lt;title&gt;这个标签：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432L4-6.png"></p>
 <p>可以输入：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code56841" class="codebody">
 sel.xpath('//title')</div>
 结果就是：
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119435a0-7.png" alt=""></p>
-<p>这样就能把这个标签取出来了，用extract()和text()还可以进一步做处理。<br>
-备注：简单的罗列一下有用的xpath路径表达式：<br>
-表达式 描述<br>
-nodename 选取此节点的所有子节点。<br>
-/ 从根节点选取。<br>
-// 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。<br>
-. 选取当前节点。<br>
-… 选取当前节点的父节点。<br>
-@ 选取属性。<br>
-全部的实验结果如下，In[i]表示第i次实验的输入，Out[i]表示第i次结果的输出（建议大家参照：W3C教程）：</p>
+
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119435a0-7.png"></p>
+<p>这样就能把这个标签取出来了，用extract()和text()还可以进一步做处理。<br>备注：简单的罗列一下有用的xpath路径表达式：<br>表达式 描述<br>nodename 选取此节点的所有子节点。<br>&#x2F; 从根节点选取。<br>&#x2F;&#x2F; 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。<br>. 选取当前节点。<br>.. 选取当前节点的父节点。<br>@ 选取属性。<br>全部的实验结果如下，In[i]表示第i次实验的输入，Out[i]表示第i次结果的输出（建议大家参照：W3C教程）：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code23729" class="codebody">
 In [1]: sel.xpath('//title')
 Out[1]: [&lt;Selector xpath='//title' data=u'&lt;title&gt;Open Directory - Computers: Progr'&gt;]
-<p>In [2]: sel.xpath(‘//title’).extract()<br>
-Out[2]: [u’&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;/title&gt;']</p>
-<p>In [3]: sel.xpath(‘//title/text()’)<br>
-Out[3]: [&lt;Selector xpath=‘//title/text()’ data=u’Open Directory - Computers: Programming:'&gt;]</p>
-<p>In [4]: sel.xpath(‘//title/text()’).extract()<br>
-Out[4]: [u’Open Directory - Computers: Programming: Languages: Python: Books’]</p>
-<p>In [5]: sel.xpath(‘//title/text()’).re(‘(\w+):’)<br>
-Out[5]: [u’Computers’, u’Programming’, u’Languages’, u’Python’]</div><br>
-当然title这个标签对我们来说没有太多的价值，下面我们就来真正抓取一些有意义的东西。<br>
-使用火狐的审查元素我们可以清楚地看到，我们需要的东西如下：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432254-8.png" alt=""></p>
+
+<p>In [2]: sel.xpath(‘&#x2F;&#x2F;title’).extract()<br>Out[2]: [u’&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;&#x2F;title&gt;’]</p>
+<p>In [3]: sel.xpath(‘&#x2F;&#x2F;title&#x2F;text()’)<br>Out[3]: [&lt;Selector xpath&#x3D;’&#x2F;&#x2F;title&#x2F;text()’ data&#x3D;u’Open Directory - Computers: Programming:’&gt;]</p>
+<p>In [4]: sel.xpath(‘&#x2F;&#x2F;title&#x2F;text()’).extract()<br>Out[4]: [u’Open Directory - Computers: Programming: Languages: Python: Books’]</p>
+<p>In [5]: sel.xpath(‘&#x2F;&#x2F;title&#x2F;text()’).re(‘(\w+):’)<br>Out[5]: [u’Computers’, u’Programming’, u’Languages’, u’Python’]</div><br>当然title这个标签对我们来说没有太多的价值，下面我们就来真正抓取一些有意义的东西。<br>使用火狐的审查元素我们可以清楚地看到，我们需要的东西如下：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432254-8.png"></p>
 <p>我们可以用如下代码来抓取这个&lt;li&gt;标签：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code23065" class="codebody">
@@ -584,66 +588,33 @@ title = site.xpath('a/text()').extract()
 link = site.xpath(<a>'a/@href').extract</a>()
 desc = site.xpath('text()').extract()
 print title, link, desc
-<p>3.4xpath实战<br>
-我们用shell做了这么久的实战，最后我们可以把前面学习到的内容应用到dmoz_spider这个爬虫中。<br>
-在原爬虫的parse函数中做如下修改：</p>
+
+<p>3.4xpath实战<br>我们用shell做了这么久的实战，最后我们可以把前面学习到的内容应用到dmoz_spider这个爬虫中。<br>在原爬虫的parse函数中做如下修改：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code67523" class="codebody">
 from scrapy.spider import Spider
 from scrapy.selector import Selector
-<p>class DmozSpider(Spider):<br>
-name = “dmoz”<br>
-allowed_domains = [“<a target="_blank" rel="noopener" href="http://dmoz.org">dmoz.org</a>”]<br>
-start_urls = [<br>
-“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>”,<br>
-“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>”<br>
-]</p>
-<p>def parse(self, response):<br>
-sel = Selector(response)<br>
-sites = sel.xpath(‘//ul/li’)<br>
-for site in sites:<br>
-title = site.xpath(‘a/text()’).extract()<br>
-link = site.xpath(<a>‘a/@href’).extract</a>()<br>
-desc = site.xpath(‘text()’).extract()<br>
-print title</div><br>
-注意，我们从scrapy.selector中导入了Selector类，并且实例化了一个新的Selector对象。这样我们就可以像Shell中一样操作xpath了。<br>
-我们来试着输入一下命令运行爬虫（在tutorial根目录里面）：</p>
+
+<p>class DmozSpider(Spider):<br>name &#x3D; “dmoz”<br>allowed_domains &#x3D; [“dmoz.org”]<br>start_urls &#x3D; [<br>“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel &#x3D; Selector(response)<br>sites &#x3D; sel.xpath(‘&#x2F;&#x2F;ul&#x2F;li’)<br>for site in sites:<br>title &#x3D; site.xpath(‘a&#x2F;text()’).extract()<br>link &#x3D; site.xpath(<a>‘a&#x2F;@href’).extract</a>()<br>desc &#x3D; site.xpath(‘text()’).extract()<br>print title</div><br>注意，我们从scrapy.selector中导入了Selector类，并且实例化了一个新的Selector对象。这样我们就可以像Shell中一样操作xpath了。<br>我们来试着输入一下命令运行爬虫（在tutorial根目录里面）：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code91685" class="codebody">
 scrapy crawl dmoz</div>
 运行结果如下：
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119431b3-9.jpg" alt=""></p>
-<p>果然，成功的抓到了所有的标题。但是好像不太对啊，怎么Top，Python这种导航栏也抓取出来了呢？<br>
-我们只需要红圈中的内容：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943H08-10.jpg" alt=""></p>
-<p>看来是我们的xpath语句有点问题，没有仅仅把我们需要的项目名称抓取出来，也抓了一些无辜的但是xpath语法相同的元素。<br>
-审查元素我们发现我们需要的&lt;ul&gt;具有class=‘directory-url’的属性，<br>
-那么只要把xpath语句改成sel.xpath(’//ul[@class=“directory-url”]/li’)即可<br>
-将xpath语句做如下调整：</p>
+
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119431b3-9.jpg"></p>
+<p>果然，成功的抓到了所有的标题。但是好像不太对啊，怎么Top，Python这种导航栏也抓取出来了呢？<br>我们只需要红圈中的内容：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943H08-10.jpg"></p>
+<p>看来是我们的xpath语句有点问题，没有仅仅把我们需要的项目名称抓取出来，也抓了一些无辜的但是xpath语法相同的元素。<br>审查元素我们发现我们需要的&lt;ul&gt;具有class&#x3D;’directory-url’的属性，<br>那么只要把xpath语句改成sel.xpath(‘&#x2F;&#x2F;ul[@class&#x3D;”directory-url”]&#x2F;li’)即可<br>将xpath语句做如下调整：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code19197" class="codebody">
 from scrapy.spider import Spider
 from scrapy.selector import Selector
-<p>class DmozSpider(Spider):<br>
-name = “dmoz”<br>
-allowed_domains = [“<a target="_blank" rel="noopener" href="http://dmoz.org">dmoz.org</a>”]<br>
-start_urls = [<br>
-“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>”,<br>
-“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>”<br>
-]</p>
-<p>def parse(self, response):<br>
-sel = Selector(response)<br>
-sites = sel.xpath(‘//ul[@class=“directory-url”]/li’)<br>
-for site in sites:<br>
-title = site.xpath(‘a/text()’).extract()<br>
-link = site.xpath(<a>‘a/@href’).extract</a>()<br>
-desc = site.xpath(‘text()’).extract()<br>
-print title</div><br>
-成功抓出了所有的标题，绝对没有滥杀无辜：</p>
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943C96-11.jpg" alt=""></p>
-<p>3.5使用Item<br>
-接下来我们来看一看如何使用Item。<br>
-前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
+
+<p>class DmozSpider(Spider):<br>name &#x3D; “dmoz”<br>allowed_domains &#x3D; [“dmoz.org”]<br>start_urls &#x3D; [<br>“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Books/">http://www.dmoz.org/Computers/Programming/Languages/Python/Books/</a>“,<br>“<a target="_blank" rel="noopener" href="http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/">http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/</a>“<br>]</p>
+<p>def parse(self, response):<br>sel &#x3D; Selector(response)<br>sites &#x3D; sel.xpath(‘&#x2F;&#x2F;ul[@class&#x3D;”directory-url”]&#x2F;li’)<br>for site in sites:<br>title &#x3D; site.xpath(‘a&#x2F;text()’).extract()<br>link &#x3D; site.xpath(<a>‘a&#x2F;@href’).extract</a>()<br>desc &#x3D; site.xpath(‘text()’).extract()<br>print title</div><br>成功抓出了所有的标题，绝对没有滥杀无辜：</p>
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/211943C96-11.jpg"></p>
+<p>3.5使用Item<br>接下来我们来看一看如何使用Item。<br>前面我们说过，Item 对象是自定义的python字典，可以使用标准字典语法获取某个属性的值：</p>
 <div class="codetitle">代码如下:</div>
 <div id="code83545" class="codebody">
 &gt;&gt;&gt; item = DmozItem()
@@ -652,26 +623,45 @@ print title</div><br>
 'Example title'</div>
 作为一只爬虫，Spiders希望能将其抓取的数据存放到Item对象中。为了返回我们抓取数据，spider的最终代码应当是这样:
 代码如下:
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from scrapy.spider import Spider</span><br><span class="line">from scrapy.selector import Selector</span><br><span class="line">from tutorial.items import DmozItem</span><br><span class="line"></span><br><span class="line">class DmozSpider(Spider):</span><br><span class="line">name = “dmoz”</span><br><span class="line">allowed_domains = [“dmoz.org”]</span><br><span class="line">start_urls = [</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,</span><br><span class="line">“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">def parse(self, response):</span><br><span class="line">sel = Selector(response)</span><br><span class="line">sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)</span><br><span class="line">items = []</span><br><span class="line">for site in sites:</span><br><span class="line">item = DmozItem()</span><br><span class="line">item[‘title’] = site.xpath(‘a/text()’).extract()</span><br><span class="line">item[‘link’] = site.xpath(‘a/@href’).extract()</span><br><span class="line">item[‘desc’] = site.xpath(‘text()’).extract()</span><br><span class="line">items.append(item)</span><br><span class="line">return items</span><br></pre></td></tr></table></figure>
-<p>4.存储内容（Pipeline）<br>
-保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>
-我们将结果用最常用的JSON导出，命令如下：<br>
-代码如下:</p>
+
+<pre><code>from scrapy.spider import Spider
+from scrapy.selector import Selector
+from tutorial.items import DmozItem
+
+class DmozSpider(Spider):
+name = “dmoz”
+allowed_domains = [“dmoz.org”]
+start_urls = [
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Books/“,
+“http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/”
+]
+
+def parse(self, response):
+sel = Selector(response)
+sites = sel.xpath(‘//ul[@class=”directory-url”]/li’)
+items = []
+for site in sites:
+item = DmozItem()
+item[‘title’] = site.xpath(‘a/text()’).extract()
+item[‘link’] = site.xpath(‘a/@href’).extract()
+item[‘desc’] = site.xpath(‘text()’).extract()
+items.append(item)
+return items
+</code></pre>
+<p>4.存储内容（Pipeline）<br>保存信息的最简单的方法是通过Feed exports，主要有四种：JSON，JSON lines，CSV，XML。<br>我们将结果用最常用的JSON导出，命令如下：<br>代码如下:</p>
 <div id="code89953" class="codebody">
 scrapy crawl dmoz -o items.json -t json</div>
 -o 后面是导出文件名，-t 后面是导出类型。
 然后来看一下导出的结果，用文本编辑器打开json文件即可（为了方便显示，在item中删去了除了title之外的属性）：
-<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg" alt=""></p>
-<p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>
-如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>
-这个我们以后再慢慢玩^_^</p>
+
+<p><img src="http://img.xker.com/xkerfiles/allimg/1411/2119432348-12.jpg"></p>
+<p>因为这个只是一个小型的例子，所以这样简单的处理就可以了。<br>如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。<br>这个我们以后再慢慢玩^_^</p>
 <p>以上便是python爬虫框架Scrapy制作爬虫抓取网站内容的全部过程了，非常的详尽吧，希望能够对大家有所帮助，有需要的话也可以和我联系，一起进步</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/31/Scrapy%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95/" data-id="cl3jmf7my003r9jv38ou33isj" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/31/Scrapy%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95/" data-id="cl3jmy3s0002xtxv3h1kt2pux" class="article-share-link">Share</a>
       
       
     </footer>
@@ -707,36 +697,25 @@ scrapy crawl dmoz -o items.json -t json</div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为最新的OSX有SIP机制，安装的时候命令加上user<br>
-pip install --user 命令<br>
-即可！</p>
+        <p>因为最新的OSX有SIP机制，安装的时候命令加上user<br>pip install –user 命令<br>即可！</p>
 <div id="article_content" class="article_content">
 <div class="markdown_views">
-<h3 id="关闭SIP">关闭SIP</h3>
-<ul>
-<li>
-<p>重启电脑，按住Command+R(直到出现苹果标志)进入Recovery Mode(恢复模式)</p>
+
+<h3 id="关闭SIP"><a href="#关闭SIP" class="headerlink" title="关闭SIP"></a>关闭SIP</h3><ul>
+<li><p>重启电脑，按住Command+R(直到出现苹果标志)进入Recovery Mode(恢复模式)</p>
 </li>
-<li>
-<p>左上角菜单里找到实用工具 -&gt; 终端</p>
+<li><p>左上角菜单里找到实用工具 -&gt; 终端</p>
 </li>
-<li>
-<p>输入<code>$ csrutil disable</code>回车</p>
+<li><p>输入<code>$ csrutil disable</code>回车</p>
 </li>
-<li>
-<p>重启Mac即可</p>
+<li><p>重启Mac即可</p>
 </li>
-<li>
-<p>如果想重新启动SIP机制重复上述步骤改用<code>$ csrutil enable</code>即可<br>
-查看SIP状态：</p>
+<li><p>如果想重新启动SIP机制重复上述步骤改用<code>$ csrutil enable</code>即可<br>查看SIP状态：</p>
 <p><span class="hljs-variable">$ </span>csrutil status</p>
 </li>
-<li>
-<p>1</p>
+<li><p>1</p>
 </li>
-<li>
-<p>1<br>
-<code>System Integrity Protection status: enabled.</code></p>
+<li><p>1<br><code>System Integrity Protection status: enabled.</code></p>
 </li>
 </ul>
 </div>
@@ -744,32 +723,30 @@ pip install --user 命令<br>
 <div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1490859913277"></div>
 <div id="digg"></div>
 &nbsp;
-<h2 id="二、初识SIP">二、初识SIP</h2>
-<p>刚升级完系统之后，我在进行一个操作的时候，遇到了一些问题，主要就是提示系统权限不足，但当我提升到sudo以后，还是提示：Operation not permitted，当时我就挺郁闷，啥情况，我sudo失败了？后面google了一下，才发现，原来OSX EI Capitan中增加了一个SIP功能，不管你是不是su，都会阻止你在系统目录下进行操作……</p>
+
+<h2 id="二、初识SIP"><a href="#二、初识SIP" class="headerlink" title="二、初识SIP"></a>二、初识SIP</h2><p>刚升级完系统之后，我在进行一个操作的时候，遇到了一些问题，主要就是提示系统权限不足，但当我提升到sudo以后，还是提示：Operation not permitted，当时我就挺郁闷，啥情况，我sudo失败了？后面google了一下，才发现，原来OSX EI Capitan中增加了一个SIP功能，不管你是不是su，都会阻止你在系统目录下进行操作……</p>
 <p><strong>当时唯一的想法就是，这个东西能关不？怎么关？还是Google……找到了如下的方法：</strong></p>
 <blockquote>
 <p>(1)重启OSX系统，然后按住Command+R</p>
 <p>(2)出现界面之后，选择Utilities menu中Terminal</p>
 <p>(3)在Terminal中输入csrutil disable关闭SIP(csrutil enable打开SIP)</p>
-<p>(4)重启reboot OSX<br>
-这个方法在我之前介绍《OSX内核调试技术分享》这篇文章中也提到过（<a target="_blank" rel="noopener" href="http://www.freebuf.com/articles/system/90049.html">链接</a>），其实网上关闭SIP也都是这个，千篇一律吧（网上的文章一大抄，呵呵），如果大家对OSX安全不感兴趣，只想解结这个问题，那到这里就可以了，但作为一个安全研究员，对各种安全系统研究是我们的兴趣和职责所在，如果你对SIP感兴趣，可以继续望下看！</p>
+<p>(4)重启reboot OSX<br>这个方法在我之前介绍《OSX内核调试技术分享》这篇文章中也提到过（<a target="_blank" rel="noopener" href="http://www.freebuf.com/articles/system/90049.html">链接</a>），其实网上关闭SIP也都是这个，千篇一律吧（网上的文章一大抄，呵呵），如果大家对OSX安全不感兴趣，只想解结这个问题，那到这里就可以了，但作为一个安全研究员，对各种安全系统研究是我们的兴趣和职责所在，如果你对SIP感兴趣，可以继续望下看！</p>
 </blockquote>
-<h2 id="三、SIP工作原理">三、SIP工作原理</h2>
-<p>SIP全名System Integrity Protection（系统完整性保护），它是为了保护系统进程，文件，文档不被其它进程修改，不管是否为root user，SIP技术主要分为文件系统保护，运行时保护，内核扩展签名,文件系统保护主要是通过沙盒机制限制root权限，运行时保护，主要就是保护关键进程无法被进程代码注入，挂调试器以及内核调试等，内核扩展签名，所有的第三方kext必须被安装到/Library/Extensions，并强制使用签名。</p>
+<h2 id="三、SIP工作原理"><a href="#三、SIP工作原理" class="headerlink" title="三、SIP工作原理"></a>三、SIP工作原理</h2><p>SIP全名System Integrity Protection（系统完整性保护），它是为了保护系统进程，文件，文档不被其它进程修改，不管是否为root user，SIP技术主要分为文件系统保护，运行时保护，内核扩展签名,文件系统保护主要是通过沙盒机制限制root权限，运行时保护，主要就是保护关键进程无法被进程代码注入，挂调试器以及内核调试等，内核扩展签名，所有的第三方kext必须被安装到&#x2F;Library&#x2F;Extensions，并强制使用签名。</p>
 <p>Apple提供的官方文档中，我们可以找到OSX SIP的工作原理（<a target="_blank" rel="noopener" href="http://devstreaming.apple.com/videos/wwdc/2015/706nu20qkag/706/706_security_and_your_apps.pdf">下载地址</a>）。文档中说明了苹果的新OSX系统，采用了如下的OSX Security Model：</p>
 <p><a target="_blank" rel="noopener" href="http://image.3001.net/images/20160229/14567401573597.png"><img src="http://image.3001.net/images/20160229/14567401573597.png!small" alt="sip1.png"></a></p>
 <p>这种安全模式削减了之前root权限，同时通过沙箱默认保护系统，提供不能被根自动入侵的配置机制，我们可以通过命令行工具，查看被保护的目录，如图：</p>
 <p><a target="_blank" rel="noopener" href="http://image.3001.net/images/20160229/14567401708438.jpg"><img src="http://image.3001.net/images/20160229/14567401708438.jpg!small" alt="sip2.jpg"></a></p>
 <p>从图中可以看出标志有restricted的为系统限制目录，这些目录是在系统启动的时候，通过OSX新的安全模型被定义的，之后不管用户是否使用root权限都无法对这些目录进行操作，查看目录中的文件信息，也可以看到文件同样被标记为restricted，如下图：</p>
 <p><a target="_blank" rel="noopener" href="http://image.3001.net/images/20160229/14567402442881.jpg"><img src="http://image.3001.net/images/20160229/14567402442881.jpg!small" alt="sip2.5.jpg"></a></p>
-<p>SIP同时也保护驱动程序，我们之前使用第三方驱动的时候，可以通过kext-dev-mode=1来加载第三方驱动程序，SIP强制要求我们把第三方驱动程序放到/Library/Extensions目录下，并且停用了kext-dev-modeboot-arg这个启动项，我们可以查看这个目录下的kext，发现没有restricted，但是系统目录下的kext是被restricted的，具体有哪些目录和文件或驱动被保护，从/System/Library/Sandbox目录中，我们可以看到rootless.conf，这是rootless的配置文件，主要用于说明哪些目录，程序，以及符号链接被保护，如下图所示：</p>
+<p>SIP同时也保护驱动程序，我们之前使用第三方驱动的时候，可以通过kext-dev-mode&#x3D;1来加载第三方驱动程序，SIP强制要求我们把第三方驱动程序放到&#x2F;Library&#x2F;Extensions目录下，并且停用了kext-dev-modeboot-arg这个启动项，我们可以查看这个目录下的kext，发现没有restricted，但是系统目录下的kext是被restricted的，具体有哪些目录和文件或驱动被保护，从&#x2F;System&#x2F;Library&#x2F;Sandbox目录中，我们可以看到rootless.conf，这是rootless的配置文件，主要用于说明哪些目录，程序，以及符号链接被保护，如下图所示：</p>
 <p><a target="_blank" rel="noopener" href="http://image.3001.net/images/20160229/14567402045169.jpg"><img src="http://image.3001.net/images/20160229/14567402045169.jpg!small" alt="sip3.jpg"></a></p>
 <p>这个文件说明了OSX系统中被SIP保护的整体配置信息，其实SIP机制就是苹果通过分层的安全机制，在底层设置一个rootless配置文件，然后在系统中，对配置文件中的信息增加一个限制标志项，这种标志信息不可复制，系统默认配置的，存在这个标志的信息，苹果统一通过底层沙箱进行保护，不用去额外权限大小，这样也削减了root在OSX中的权限大小</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/30/SIP%E6%9C%BA%E5%88%B6/" data-id="cl3jmf7mv003g9jv3d9jr2d1v" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/SIP%E6%9C%BA%E5%88%B6/" data-id="cl3jmy3rx002ntxv34vzt0y42" class="article-share-link">Share</a>
       
       
     </footer>
@@ -805,8 +782,7 @@ pip install --user 命令<br>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Linux中软件的安装"><strong>Linux中软件的安装</strong></h2>
-<p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
+        <h2 id="Linux中软件的安装"><a href="#Linux中软件的安装" class="headerlink" title="Linux中软件的安装"></a><strong>Linux中软件的安装</strong></h2><p>Linux中软件的安装主要有两种形式：一种是直接下载源代码包自行编译后安装，另一种直接获取rpm软件包进行安装。</p>
 <p>不论是通过那种途径安装软件都具有一下4个特点：</p>
 <p>1.都有配置文件，通过设置配置文件来改变程序启动时的运行特征</p>
 <p>2.都具有二进制的程序主体</p>
@@ -814,37 +790,36 @@ pip install --user 命令<br>
 <p>4.都带有帮助文件，对程序的使用方法进行说明</p>
 <p>软件的安装路径：</p>
 <p>除了自行下载源码编译安装的软件可以自定义安装路径之外，rpm包的安装都是按照自身预设的安装路径进行安装。主要有以下几类：</p>
-<p>1./：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
-<p>2./usr：此目录下一般情况下是提供基本服务的软件</p>
-<p>3./usr/local：此目录下一般情况下是用户自行安装的第三方软件</p>
+<p>1.&#x2F;：系统根目录，在此安装的文件通常是os在运行时需要调用到的程序</p>
+<p>2.&#x2F;usr：此目录下一般情况下是提供基本服务的软件</p>
+<p>3.&#x2F;usr&#x2F;local：此目录下一般情况下是用户自行安装的第三方软件</p>
 <p>系统相关：</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/bin 、/sbin</p>
-<p>库文件路径：/lib</p>
+<p>配置文件路径：&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;bin 、&#x2F;sbin</p>
+<p>库文件路径：&#x2F;lib</p>
 <p>系统提供功能服务相关</p>
-<p>配置文件路径：/etc</p>
-<p>二进制文件路径：/usr/bin   /usr/sbin</p>
-<p>库文件：/usr/lib</p>
+<p>配置文件路径：&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;usr&#x2F;bin   &#x2F;usr&#x2F;sbin</p>
+<p>库文件：&#x2F;usr&#x2F;lib</p>
 <p>第三方软件：</p>
-<p>配置文件路径/usr/local/etc</p>
-<p>二进制文件路径：/usr/local/bin  /usr/local/sbin</p>
-<p>库文件：/usr/local/lib</p>
-<p>说明文件主要都存放在/usr/share/man和/usr/local/share/man</p>
+<p>配置文件路径&#x2F;usr&#x2F;local&#x2F;etc</p>
+<p>二进制文件路径：&#x2F;usr&#x2F;local&#x2F;bin  &#x2F;usr&#x2F;local&#x2F;sbin</p>
+<p>库文件：&#x2F;usr&#x2F;local&#x2F;lib</p>
+<p>说明文件主要都存放在&#x2F;usr&#x2F;share&#x2F;man和&#x2F;usr&#x2F;local&#x2F;share&#x2F;man</p>
 <p>RPM(RedhatPackage Manager)是由redhat公司提供的软件包管理器 ,可以实现软件包的安装、查询、卸载、升级以及校验等但是rpm不能很好的解决软件之间的依赖关系</p>
-<p> </p>
+<p>&amp;nbsp;</p>
 <hr>
 <hr>
-<h2 id="使用yum软件升级器进行安装"><strong>使用yum软件升级器进行安装</strong></h2>
-<p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp://   http:// file:///在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
+<h2 id="使用yum软件升级器进行安装"><a href="#使用yum软件升级器进行安装" class="headerlink" title="使用yum软件升级器进行安装"></a><strong>使用yum软件升级器进行安装</strong></h2><p>yum是YellowdogUpdater Modified的缩写，它是一种基于自身软件库的安装，它可以通过查询软件库的连接ftp:&#x2F;&#x2F;   http:&#x2F;&#x2F; file:&#x2F;&#x2F;&#x2F;在远程服务器或者指定的本地文件库中获取要安装的软件包，可见软件库的配置在yum的使用中是非常重要的一环。并且yum是基于rpm的一个管理工具，它能自动解决安装rpm包产生的依赖关系</p>
 <p>yum库文件的配置:</p>
-<p>通过/etc/yum.conf 和 /etc/yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
-<p>yum的配置文件 /etc/yum.conf</p>
-<p>yumrepository仓库的配置文件/etc/yum.repos.d/*.repo</p>
+<p>通过&#x2F;etc&#x2F;yum.conf 和 &#x2F;etc&#x2F;yum.repos.d目录下的且以.repo结尾的文件进行对yum软件库的设置</p>
+<p>yum的配置文件 &#x2F;etc&#x2F;yum.conf</p>
+<p>yumrepository仓库的配置文件&#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/" data-id="cl3jmf7nd005d9jv3amna29oa" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/rpm%E5%92%8Cyum%E8%AF%A6%E8%A7%A3/" data-id="cl3jmy3sd004mtxv3gz8nhriv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -880,48 +855,82 @@ pip install --user 命令<br>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="重新认识面向对象">重新认识面向对象</h2>
-<p>为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：</p>
+        <h2 id="重新认识面向对象"><a href="#重新认识面向对象" class="headerlink" title="重新认识面向对象"></a>重新认识面向对象</h2><p>为了说明 JavaScript 是一门彻底的面向对象的语言，首先有必要从面向对象的概念着手 , 探讨一下面向对象中的几个概念：</p>
 <ul>
 <li>一切事物皆对象</li>
 <li>对象具有封装和继承特性</li>
-<li>对象与对象之间使用消息通信，各自存在信息隐藏<br>
-以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们通过类的形式组织函数和变量，使之不能脱离对象存在。但这里函数本身是一个过程，只是依附在某个类上。</li>
+<li>对象与对象之间使用消息通信，各自存在信息隐藏<br>以这三点做为依据，C++ 是半面向对象半面向过程语言，因为，虽然他实现了类的封装、继承和多态，但存在非对象性质的全局函数和变量。Java、C# 是完全的面向对象语言，它们通过类的形式组织函数和变量，使之不能脱离对象存在。但这里函数本身是一个过程，只是依附在某个类上。</li>
 </ul>
 <p>然而，面向对象仅仅是一个概念或者编程思想而已，它不应该依赖于某个语言存在。比如 Java 采用面向对象思想构造其语言，它实现了类、继承、派生、多态、接口等机制。但是这些机制，只是实现面向对象编程的一种手段，而非必须。换言之，一门语言可以根据其自身特性选择合适的方式来实现面向对象。所以，由于大多数程序员首先学习或者使用的是类似 Java、C++ 等高级编译型语言（Java 虽然是半编译半解释，但一般做为编译型来讲解），因而先入为主地接受了“类”这个面向对象实现方式，从而在学习脚本语言的时候，习惯性地用类式面向对象语言中的概念来判断该语言是否是面向对象语言，或者是否具备面向对象特性。这也是阻碍程序员深入学习并掌握 JavaScript 的重要原因之一。</p>
-<p>实际上，JavaScript 语言是通过一种叫做<strong>原型（<strong><strong>prototype</strong></strong>）<strong>的方式来实现面向对象编程的。下面就来讨论</strong>基于类的（<strong><strong>class-based</strong></strong>）面向对象</strong>和<strong>基于原型的 (<strong><strong>prototype-based</strong></strong>) 面向对象</strong>这两种方式在构造客观世界的方式上的差别。</p>
+<p>实际上，JavaScript 语言是通过一种叫做<strong>原型（<strong><strong>prototype</strong></strong>）</strong>的方式来实现面向对象编程的。下面就来讨论<strong>基于类的（<strong><strong>class-based</strong></strong>）面向对象</strong>和<strong>基于原型的 (<strong><strong>prototype-based</strong></strong>) 面向对象</strong>这两种方式在构造客观世界的方式上的差别。</p>
 <hr>
 <hr>
-<p> </p>
-<h3 id="基于类的面向对象和基于原型的面向对象方式比较">基于类的面向对象和基于原型的面向对象方式比较</h3>
-<p>在基于类的面向对象方式中，**对象（<strong><strong>object</strong></strong>）<strong>依靠</strong>类（<strong><strong>class</strong></strong>）**来产生。而在基于原型的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）<strong>则是依靠</strong>构造器（<strong><strong>constructor</strong></strong>）<strong>利用</strong>原型（<strong><strong>prototype</strong></strong>）<strong>构造出来的。举个客观世界的例子来说明二种方式认知的差异。例如工厂造一辆车，一方面，工人必须参照一张工程图纸，设计规定这辆车应该如何制造。这里的工程图纸就好比是语言中的</strong>类 (<strong><strong>class</strong></strong>)，而车就是按照这个</strong>类（<strong><strong>class</strong></strong>）制造出来的；另一方面，工人和机器 ( 相当于 constructor) 利用各种零部件如发动机，轮胎，方向盘 ( 相当于 prototype 的各个属性 ) 将汽车构造出来。<a target="_blank" rel="noopener" href="http://caibaojian.com/javascript-object-2.html">·</a></p>
+<p>&amp;nbsp;</p>
+<h3 id="基于类的面向对象和基于原型的面向对象方式比较"><a href="#基于类的面向对象和基于原型的面向对象方式比较" class="headerlink" title="基于类的面向对象和基于原型的面向对象方式比较"></a>基于类的面向对象和基于原型的面向对象方式比较</h3><p>在基于类的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）</strong>依靠<strong>类（<strong><strong>class</strong></strong>）</strong>来产生。而在基于原型的面向对象方式中，<strong>对象（<strong><strong>object</strong></strong>）</strong>则是依靠<strong>构造器（<strong><strong>constructor</strong></strong>）</strong>利用<strong>原型（<strong><strong>prototype</strong></strong>）</strong>构造出来的。举个客观世界的例子来说明二种方式认知的差异。例如工厂造一辆车，一方面，工人必须参照一张工程图纸，设计规定这辆车应该如何制造。这里的工程图纸就好比是语言中的<strong>类 (<strong><strong>class</strong></strong>)，而车就是按照这个</strong>类（<strong><strong>class</strong></strong>）制造出来的；另一方面，工人和机器 ( 相当于 constructor) 利用各种零部件如发动机，轮胎，方向盘 ( 相当于 prototype 的各个属性 ) 将汽车构造出来。<a target="_blank" rel="noopener" href="http://caibaojian.com/javascript-object-2.html">·</a></p>
 <p>事实上关于这两种方式谁更为彻底地表达了面向对象的思想，目前尚有争论。但笔者认为原型式面向对象是一种更为彻底的面向对象方式，理由如下：</p>
 <p>首先，客观世界中的对象的产生都是其它实物对象构造的结果，而抽象的“图纸”是不能产生“汽车”的，也就是说，类是一个抽象概念而并非实体，而对象的产生是一个实体的产生；</p>
 <p>其次，按照一切事物皆对象这个最基本的面向对象的法则来看，类 (class) 本身并不是一个对象，然而原型方式中的构造器 (constructor) 和原型 (prototype) 本身也是其他对象通过原型方式构造出来的对象。</p>
 <p>再次，在类式面向对象语言中，对象的状态 (state) 由对象实例 (instance) 所持有，对象的行为方法 (method) 则由声明该对象的类所持有，并且只有对象的结构和方法能够被继承；而在原型式面向对象语言中，对象的行为、状态都属于对象本身，并且能够一起被继承（参考资源），这也更贴近客观实际。</p>
 <p>最后，类式面向对象语言比如 Java，为了弥补无法使用面向过程语言中全局函数和变量的不便，允许在类中声明静态 (static) 属性和静态方法。而实际上，客观世界不存在所谓静态概念，因为一切事物皆对象！而在原型式面向对象语言中，除内建对象 (build-in object) 外，不允许全局对象、方法或者属性的存在，也没有静态概念。所有语言元素 (primitive) 必须依赖对象存在。但由于函数式语言的特点，语言元素所依赖的对象是随着运行时 (runtime) 上下文 (context) 变化而变化的，具体体现在 this 指针的变化。正是这种特点更贴近 “万物皆有所属，宇宙乃万物生存之根本”的自然观点。在程序清单 1中<strong>window</strong>便类似与宇宙的概念。</p>
 <hr>
-<h3 id="彻底理解原型链-prototype-chain">彻底理解原型链 (prototype chain)</h3>
-<p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（<strong><strong>implicit reference</strong></strong>）</strong>，这个引用称之为<strong>原型（<strong><strong>prototype</strong></strong>）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（<strong><strong>prototype chain</strong></strong>）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个**<strong>proto</strong> 属性<strong>来实现对原型的</strong>隐式引用**。  程序清单4说明了这一点。</p>
+<h3 id="彻底理解原型链-prototype-chain"><a href="#彻底理解原型链-prototype-chain" class="headerlink" title="彻底理解原型链 (prototype chain)"></a>彻底理解原型链 (prototype chain)</h3><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的<strong>隐式引用（<strong><strong>implicit reference</strong></strong>）</strong>，这个引用称之为<strong>原型（<strong><strong>prototype</strong></strong>）</strong>。进一步，每个原型可以拥有指向自己原型的<strong>隐式引用</strong>（即该原型的原型），如此下去，这就是所谓的<strong>原型链（<strong><strong>prototype chain</strong></strong>）</strong>（参考资源）。在具体的语言实现中，每个对象都有一个**<strong>proto</strong> 属性<strong>来实现对原型的</strong>隐式引用**。  程序清单4说明了这一点。  </p>
 <p><strong>清单 4. 对象的 <strong>proto</strong> 属性和隐式引用</strong></p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person( name ) &#123; this.name = name; &#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( p.__proto__ === Person.prototype );</span><br><span class="line"></span><br><span class="line">// 原型本身是一个 Object 对象，所以他的隐式引用指向了</span><br><span class="line"></span><br><span class="line">// Object 构造器的 prototype 属性 , 故而打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.prototype.__proto__ === Object.prototype );</span><br><span class="line"></span><br><span class="line">// 构造器 Person 本身是一个函数对象，所以此处打印 true</span><br><span class="line"></span><br><span class="line">console.log( Person.__proto__ === Function.prototype );</span><br></pre></td></tr></table></figure>
-<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。</p>
-<p><strong>图 1. 原型链中的属性隐藏机制</strong><br>
-<img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
-<p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，</p>
-<p>程序清单5.是利用原型链实现继承的简单例子。<br>
-<strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 声明 Animal 对象构造器 </span><br><span class="line">function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，</span><br><span class="line">// 亦可直接理解为指定 Animal 对象的原型 </span><br><span class="line">Animal.prototype = &#123;</span><br><span class="line">    name: &quot;animal&quot;,</span><br><span class="line">    weight: 0, eat:</span><br><span class="line">    function () &#123; </span><br><span class="line">        alert(&quot;Animal is eating!&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 声明 Mammal 对象构造器 </span><br><span class="line">function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 </span><br><span class="line">    this.name = &quot;mammal&quot;;</span><br><span class="line">&#125; </span><br><span class="line">// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 </span><br><span class="line">Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 </span><br><span class="line">function Horse(height, weight) &#123;</span><br><span class="line">    this.name = &quot;horse&quot;;</span><br><span class="line">    this.height = height;</span><br><span class="line">    this.weight = weight;</span><br><span class="line">&#125;</span><br><span class="line">// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 </span><br><span class="line">Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 </span><br><span class="line">Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 </span><br><span class="line">var horse = new Horse(100, 300);</span><br><span class="line">console.log(horse.__proto__ === Horse.prototype);</span><br><span class="line">console.log(Horse.prototype.__proto__ === Mammal.prototype);</span><br><span class="line">console.log(Mammal.prototype.__proto__ === Animal.prototype);</span><br></pre></td></tr></table></figure>
-<p>理解清单 5中对象原型继承逻辑实现的关键在于<br>
-<strong>Horse.prototype = new Mammal()</strong> 和 <strong>Mammal.prototype = new Animal()</strong> 这两句代码。<br>
-首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
+<pre><code>function Person( name ) &#123; this.name = name; &#125;
+
+var p = new Person();
+
+// 对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true
+
+console.log( p.__proto__ === Person.prototype );
+
+// 原型本身是一个 Object 对象，所以他的隐式引用指向了
+
+// Object 构造器的 prototype 属性 , 故而打印 true
+
+console.log( Person.prototype.__proto__ === Object.prototype );
+
+// 构造器 Person 本身是一个函数对象，所以此处打印 true
+
+console.log( Person.__proto__ === Function.prototype );
+</code></pre>
+<p>有了<strong>原型链</strong>，便可以定义一种所谓的<strong>属性隐藏机制</strong>，并通过这种机制实现继承。ECMAScript 规定，当要给某个对象的属性赋值时，解释器会查找该对象原型链中第一个含有该属性的对象（注：原型本身就是一个对象，那么原型链即为一组对象的链。对象的原型链中的第一个对象是该对象本身）进行赋值。反之，如果要获取某个对象属性的值，解释器自然是返回该对象原型链中首先具有该属性的对象属性值。  </p>
+<p><strong>图 1. 原型链中的属性隐藏机制</strong><br><img src="http://img.caibaojian.com/uploads/2014/05/image001.png" alt="image001"></p>
+<p>在图 1 中，object1-&gt;prototype1-&gt;prototype2 构成了对象object1 的原型链，根据上述属性隐藏机制,可以清楚地看到prototype1 对象中的 property4 属性和 prototype2 对象中的 property3 属性皆被隐藏。理解了原型链，那么将非常容易理解 JS 中基于原型的继承实现原理，  </p>
+<p>程序清单5.是利用原型链实现继承的简单例子。<br><strong>清单 5. 利用原型链 Horse-&gt;Mammal-&gt;Animal 实现继承</strong></p>
+<pre><code>// 声明 Animal 对象构造器 
+function Animal() &#123; &#125; //将 Animal 的 prototype 属性指向一个对象，
+// 亦可直接理解为指定 Animal 对象的原型 
+Animal.prototype = &#123;
+    name: &quot;animal&quot;,
+    weight: 0, eat:
+    function () &#123; 
+        alert(&quot;Animal is eating!&quot;); 
+    &#125;
+&#125; // 声明 Mammal 对象构造器 
+function Mammal() &#123; // 指定 Mammal 对象的原型为一个 Animal 对象。 
+    this.name = &quot;mammal&quot;;
+&#125; 
+// 实际上此处便是在创建 Mammal 对象和 Animal 对象之间的原型链 
+Mammal.prototype = new Animal(); // 声明 Horse 对象构造器 
+function Horse(height, weight) &#123;
+    this.name = &quot;horse&quot;;
+    this.height = height;
+    this.weight = weight;
+&#125;
+// 将 Horse 对象的原型指定为一个 Mamal 对象，继续构建 Horse 与 Mammal 之间的原型链 
+Horse.prototype = new Mammal(); // 重新指定 eat 方法 , 此方法将覆盖从 Animal 原型继承过来的 eat 方法 
+Horse.prototype.eat = function () &#123; alert(&quot;Horse is eating grass!&quot;); &#125; // 验证并理解原型链 
+var horse = new Horse(100, 300);
+console.log(horse.__proto__ === Horse.prototype);
+console.log(Horse.prototype.__proto__ === Mammal.prototype);
+console.log(Mammal.prototype.__proto__ === Animal.prototype);
+</code></pre>
+<p>理解清单 5中对象原型继承逻辑实现的关键在于<br><strong>Horse.prototype &#x3D; new Mammal()</strong> 和 <strong>Mammal.prototype &#x3D; new Animal()</strong> 这两句代码。<br>首先，等式右边的结果是构造出一个临时对象，然后将这个对象赋值给等式左边对象的 prototype 属性。也就是说将右边新建的对象作为左边对象的原型。读者可以将这两个等式替换到相应的程序清单 5 代码最后两行的等式中自行领悟。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/" data-id="cl3jmf7no006p9jv3hsgp9ne0" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/30/%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%20JavaScript/" data-id="cl3jmy3so0060txv34gvj6npo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -957,13 +966,12 @@ pip install --user 命令<br>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/original/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a.png" title="屏幕快照 2015-07-24 下午1.03.32.png"><img src="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/optimized/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a_1_690x300.png" alt=""></a><br>
-如上图，将模拟器的键盘尝试呼起就行。这样按键就能起作用刷新了。</p>
+        <p><a target="_blank" rel="noopener" href="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/original/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a.png" title="屏幕快照 2015-07-24 下午1.03.32.png"><img src="http://7xjtzg.com1.z0.glb.clouddn.com/uploads/default/optimized/1X/7c73778a33f8d488dcab779667f6ae09fa2d845a_1_690x300.png"></a><br>如上图，将模拟器的键盘尝试呼起就行。这样按键就能起作用刷新了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/29/%E4%BD%BF%E7%94%A8react-native%E6%97%B6%E6%8C%89cmd%20r%E4%B8%8D%E8%83%BD%E5%88%B7%E6%96%B0%E6%A8%A1%E6%8B%9F%E5%99%A8/" data-id="cl3jmf7no006n9jv39hiz75j2" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/%E4%BD%BF%E7%94%A8react-native%E6%97%B6%E6%8C%89cmd%20r%E4%B8%8D%E8%83%BD%E5%88%B7%E6%96%B0%E6%A8%A1%E6%8B%9F%E5%99%A8/" data-id="cl3jmy3so005ytxv3g4ij5n8a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1002,21 +1010,20 @@ pip install --user 命令<br>
         <ul>
 <li>用 HTML 创建 DOM，构建整个网页的布局、结构</li>
 <li>用 CSS 控制 DOM 的样式，比如字体、字号、颜色、居中等</li>
-<li>用 JavaScript 接受用户事件，动态的操控 DOM<br>
-在这三者的配合下，几乎所有页面上的功能都能实现。但也有比较不爽地方，比如我想动态修改一个按钮的文字，我需要这样写：</li>
+<li>用 JavaScript 接受用户事件，动态的操控 DOM<br>在这三者的配合下，几乎所有页面上的功能都能实现。但也有比较不爽地方，比如我想动态修改一个按钮的文字，我需要这样写：</li>
 </ul>
-<p>&lt;button type=“button” id=“button” onclick=“onClick()”&gt;old button&lt;/button&gt;</p>
+<p>&lt;button type&#x3D;”button” id&#x3D;”button” onclick&#x3D;”onClick()”&gt;old button&lt;&#x2F;button&gt;</p>
 <p>然后在 JavaScript 中操作 DOM：</p>
-<p>&lt;script&gt; function onClick() { document.getElementById(‘button’).innerHTML=‘new button’; } &lt;/script&gt;</p>
+<p>&lt;script&gt; function onClick() { document.getElementById(‘button’).innerHTML&#x3D;’new button’; } &lt;&#x2F;script&gt;</p>
 <p>可以看到，在 HTML 和 JavaScript 代码中，id 和 onclick 事件触发的函数必须完全对应，否则就无法正确的响应事件。如果想知道一个 HTML 标签会如何被响应，我们还得跑去 JavaScript 代码中查找，这种原始的配置方式让我觉得非常不爽。</p>
 <hr>
 <hr>
-<p> </p>
+<p>&amp;nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/29/%20React%20Native%E7%AC%94%E8%AE%B0/" data-id="cl3jmf7m6000p9jv303gi2ep8" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/29/%20React%20Native%E7%AC%94%E8%AE%B0/" data-id="cl3jmy3r20001txv3blmbhzvh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1063,15 +1070,14 @@ pip install --user 命令<br>
 </ol>
 <hr>
 <hr>
-<h2 id="iOS授权和描述文件">iOS授权和描述文件</h2>
-<p>但是光有证书并不够解决苹果的“后顾之忧”，证书能够证明app的所属以及app的完整性，保证app本身是安全的。但是，却不能细化到app所使用的某些服务是被苹果认可的，比如APN推送服务。而且证书无法限制调试版的app的装机规模。于是，苹果想出了“花式作死”的mobileprovision。你可以使用如下命令查看一个mobileprovision：</p>
+<h2 id="iOS授权和描述文件"><a href="#iOS授权和描述文件" class="headerlink" title="iOS授权和描述文件"></a>iOS授权和描述文件</h2><p>但是光有证书并不够解决苹果的“后顾之忧”，证书能够证明app的所属以及app的完整性，保证app本身是安全的。但是，却不能细化到app所使用的某些服务是被苹果认可的，比如APN推送服务。而且证书无法限制调试版的app的装机规模。于是，苹果想出了“花式作死”的mobileprovision。你可以使用如下命令查看一个mobileprovision：</p>
 <p>苹果通过证书来授权开发者开发iOS应用，不同的证书具有不同的用处，建议申请时使用相同的请求文件（即保证私钥统一）。可以通过共享私钥的方式让团队使用相同的私钥和证书，已方便开发。为了保证app的安全性，app中所有的文件都会被签名，这样，签过名的app除非重新签名，否则无法改动其中的任何东西。</p>
 <p>mobileprovision是一个配置文件，由苹果签名并发布给开发者。配置文件是一组信息的集合，这组信息决定了某一个应用是否能够在某一个特定的设备上运行。配置文件可以用于让应用在你的开发设备上可以被运行和调试，也可以用于内部测试 (ad-hoc) 或者企业级应用的发布。有了配置文件，苹果对开发者的约束就十分稳固了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/28/%20iOS%20%E5%BC%80%E5%8F%91%E8%AF%81%E4%B9%A6%E4%BA%8C%E6%AC%A1%E8%A1%A5%E4%B9%A0%20%EF%BC%88%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="cl3jmf7m7000s9jv335gc6uif" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/28/%20iOS%20%E5%BC%80%E5%8F%91%E8%AF%81%E4%B9%A6%E4%BA%8C%E6%AC%A1%E8%A1%A5%E4%B9%A0%20%EF%BC%88%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="cl3jmy3r50003txv3dfbc66c9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1107,52 +1113,88 @@ pip install --user 命令<br>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Nullability">Nullability</h2>
-<p>常规用法</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, strong, nonnull) Sark *sark;</span><br><span class="line">@property (nonatomic, copy, readonly, nullable) NSArray *friends;</span><br><span class="line">+ (nullable NSString *)friendWithName:(nonnull NSString *)name;</span><br></pre></td></tr></table></figure>
+        <h2 id="Nullability"><a href="#Nullability" class="headerlink" title="Nullability"></a>Nullability</h2><p>常规用法</p>
+<pre><code>@property (nonatomic, strong, nonnull) Sark *sark;
+@property (nonatomic, copy, readonly, nullable) NSArray *friends;
++ (nullable NSString *)friendWithName:(nonnull NSString *)name;
+</code></pre>
 <p>修饰变量，前面需要加双下划线，比如 block 内用法：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;</span><br></pre></td></tr></table></figure>
+<pre><code>- (void)startWithCompletionBlock:(nullable void (^)(NSError * __nullable error))block;
+</code></pre>
 <p>setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (null_resettable, nonatomic, strong) UIView *view;</span><br></pre></td></tr></table></figure>
+<pre><code>@property (null_resettable, nonatomic, strong) UIView *view;
+</code></pre>
 <p>宏的用法（包在宏里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行）：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">@interface Sark : NSObject</span><br><span class="line">@property (nonatomic, copy, nullable) NSString *workingCompany;</span><br><span class="line">@property (nonatomic, copy) NSArray *friends;</span><br><span class="line">- (nullable NSString *)gayFriend;</span><br><span class="line">@end</span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<pre><code>NS_ASSUME_NONNULL_BEGIN
+@interface Sark : NSObject
+@property (nonatomic, copy, nullable) NSString *workingCompany;
+@property (nonatomic, copy) NSArray *friends;
+- (nullable NSString *)gayFriend;
+@end
+NS_ASSUME_NONNULL_END
+</code></pre>
 <p>Nullability 主要作用是在编译器层面提供了空值的类型检查，在类型不符时给出 warning，方便开发者第一时间发现潜在问题。</p>
 <hr>
-<h2 id="kindof">__kindof</h2>
-<p>主要作用还是编译器层面的类型检查</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//UIView 的写法</span><br><span class="line">@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;</span><br><span class="line">// UITableView 的写法</span><br><span class="line">- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;</span><br></pre></td></tr></table></figure>
-<p>参考:<br>
-<a target="_blank" rel="noopener" href="http://blog.csdn.net/lizhongfu2013/article/details/47375649">iOS开发~Objective-C新特性</a><br>
-<a target="_blank" rel="noopener" href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/">2015 Objective-C 新特性</a></p>
-<h2 id="轻量级的泛型">轻量级的泛型</h2>
-<h3 id="带泛型的容器">带泛型的容器</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];</span><br><span class="line">NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @&#123;@&quot;a&quot;: @1, @&quot;b&quot;: @2&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="自定义泛型">自定义泛型</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface Stack&lt;ObjectType&gt; : NSObject</span><br><span class="line">- (void)pushObject:(ObjectType)object;</span><br><span class="line">- (ObjectType)popObject;</span><br><span class="line">@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h2 id="kindof"><a href="#kindof" class="headerlink" title="__kindof"></a>__kindof</h2><p>主要作用还是编译器层面的类型检查</p>
+<pre><code>//UIView 的写法
+@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+// UITableView 的写法
+- (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre>
+<p>参考:<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/lizhongfu2013/article/details/47375649">iOS开发~Objective-C新特性</a><br><a target="_blank" rel="noopener" href="http://blog.sunnyxx.com/2015/06/12/objc-new-features-in-2015/">2015 Objective-C 新特性</a></p>
+<h2 id="轻量级的泛型"><a href="#轻量级的泛型" class="headerlink" title="轻量级的泛型"></a>轻量级的泛型</h2><h3 id="带泛型的容器"><a href="#带泛型的容器" class="headerlink" title="带泛型的容器"></a>带泛型的容器</h3><pre><code>NSArray&lt;NSString *&gt; *strings = @[@&quot;sun&quot;, @&quot;yuan&quot;];
+NSDictionary&lt;NSString *, NSNumber *&gt; *mapping = @&#123;@&quot;a&quot;: @1, @&quot;b&quot;: @2&#125;;
+</code></pre>
+<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><pre><code>@interface Stack&lt;ObjectType&gt; : NSObject
+- (void)pushObject:(ObjectType)object;
+- (ObjectType)popObject;
+@property (nonatomic, readonly) NSArray&lt;ObjectType&gt; *allObjects;
+@end
+</code></pre>
 <p>还可以增加限制</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 只接受 NSNumber * 的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject</span><br><span class="line">// 只接受满足 NSCopying 协议的泛型</span><br><span class="line">@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject</span><br></pre></td></tr></table></figure>
-<h3 id="covariant-contravariant">covariant &amp;&amp; contravariant</h3>
-<ul>
+<pre><code>// 只接受 NSNumber * 的泛型
+@interface Stack&lt;ObjectType: NSNumber *&gt; : NSObject
+// 只接受满足 NSCopying 协议的泛型
+@interface Stack&lt;ObjectType: id&lt;NSCopying&gt;&gt; : NSObject
+</code></pre>
+<h3 id="covariant-amp-amp-contravariant"><a href="#covariant-amp-amp-contravariant" class="headerlink" title="covariant &amp;&amp; contravariant"></a>covariant &amp;&amp; contravariant</h3><ul>
 <li>__covariant : 子类型可以强转到父类型（里氏替换原则）</li>
-<li>__contravariant : 父类型可以强转到子类型（WTF?）<br>
-参考 NSArray 和 NSMutableArray 的定义</li>
+<li>__contravariant : 父类型可以强转到子类型（WTF?）<br>参考 NSArray 和 NSMutableArray 的定义</li>
 </ul>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// NSArray</span><br><span class="line">@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;</span><br><span class="line">@property (readonly) NSUInteger count;</span><br><span class="line">- (ObjectType)objectAtIndex:(NSUInteger)index;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// NSMutableArray</span><br><span class="line">@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)addObject:(ObjectType)anObject;</span><br><span class="line">- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;</span><br><span class="line">- (void)removeLastObject;</span><br><span class="line">- (void)removeObjectAtIndex:(NSUInteger)index;</span><br><span class="line">- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;</span><br><span class="line">- (instancetype)init NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p> </p>
+<pre><code>// NSArray
+@interface NSArray&lt;__covariant ObjectType&gt; : NSObject &lt;NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration&gt;
+@property (readonly) NSUInteger count;
+- (ObjectType)objectAtIndex:(NSUInteger)index;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+
+
+// NSMutableArray
+@interface NSMutableArray&lt;ObjectType&gt; : NSArray&lt;ObjectType&gt;
+
+
+- (void)addObject:(ObjectType)anObject;
+- (void)insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
+- (void)removeLastObject;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+
+@end
+</code></pre>
+<p>&amp;nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/" data-id="cl3jmf7mp002q9jv3evni5jwd" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/23/Objective-C%20%E6%96%B0%E7%9A%84%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7(%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%BA%E4%BA%86swift%E5%90%8C%E6%AD%A5%EF%BC%89/" data-id="cl3jmy3rr001vtxv32bzdhxkd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1192,7 +1234,7 @@ pip install --user 命令<br>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -1236,7 +1278,7 @@ pip install --user 命令<br>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

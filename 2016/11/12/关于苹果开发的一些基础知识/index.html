@@ -5,15 +5,15 @@
   
 
   
-  <title>关于苹果开发的一些基础知识 | CShyiuan博客</title>
+  <title>关于苹果开发的一些基础知识 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="App ID（bundle identifier） 在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。 App ID 字符串通常以反域名（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix&#x2F;Seed），一般不超">
+  <meta name="description" content="App ID（bundle identifier） 在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。 App ID 字符串通常以反域名（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix&#x2F;Seed）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于苹果开发的一些基础知识">
-<meta property="og:url" content="http://example.com/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="App ID（bundle identifier） 在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。 App ID 字符串通常以反域名（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix&#x2F;Seed），一般不超">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="App ID（bundle identifier） 在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。 App ID 字符串通常以反域名（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix&#x2F;Seed）">
+<meta property="og:locale">
 <meta property="og:image" content="http://img.blog.csdn.net/20150126225313444">
 <meta property="og:image" content="http://images.cnitblog.com/blog/431384/201308/16185213-ea355ff0690b497a80ed5fd2dd5e62cf.png">
 <meta property="og:image" content="http://img.blog.csdn.net/20150113233612875">
@@ -23,17 +23,15 @@
 <meta property="og:image" content="http://images.cnitblog.com/blog/431384/201308/19100011-967bd3326acb49db98412f0c70d7fe41.png">
 <meta property="article:published_time" content="2016-11-12T07:50:21.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.085Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20150126225313444">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -50,7 +48,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -70,7 +68,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -104,54 +102,43 @@
       
         <p><strong>App ID（bundle identifier）</strong></p>
 <p>在苹果官方的开发者计划（Apple Developer Member Center）层面，App ID 即 Product ID，用于标识一个或者一组 App。</p>
-<p>App ID 字符串通常以<strong>反域名</strong>（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix/Seed），一般不超过 255 个 ASCII 字符。</p>
+<p>App ID 字符串通常以<strong>反域名</strong>（reverse-domain-name）格式的 Company Identifier（Company ID）作为前缀（Prefix&#x2F;Seed），一般不超过 255 个 ASCII 字符。</p>
 <hr>
-<h3 id="Bundle">Bundle</h3>
-<p><strong>Bundle简单地讲，就是一个内部结构按照标准规则组织的特殊目录。也就是说，Bundle本质上是一个目录。</strong></p>
+<h3 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h3><p><strong>Bundle简单地讲，就是一个内部结构按照标准规则组织的特殊目录。也就是说，Bundle本质上是一个目录。</strong></p>
 <p>我们开发的每一个应用，本质上是遵守着Application类型规则的一个特殊目录。</p>
 <hr>
-<h3 id="UDID">UDID</h3>
-<p>UDID是一种iOS设备的特殊识别码。除序号之外,每台iOS装置都另有一组独一无二的号码,我们就称之为识别码( Unique Device Identifier, UDID )。</p>
+<h3 id="UDID"><a href="#UDID" class="headerlink" title="UDID"></a>UDID</h3><p>UDID是一种iOS设备的特殊识别码。除序号之外,每台iOS装置都另有一组独一无二的号码,我们就称之为识别码( Unique Device Identifier, UDID )。</p>
 <hr>
 <hr>
-<h3 id="开发证书（Certificates）"><strong>开发证书（Certificates）</strong></h3>
-<h4 id="1-证书的概念"><strong>1.证书的概念</strong></h4>
-<p><strong>证书</strong>是由公证处或认证机关开具的证明资格或权力的_证件_，它是表明（或帮助断定）事理的一个_凭证_。证件或凭证的尾部通常会烙印_公章_。</p>
+<h3 id="开发证书（Certificates）"><a href="#开发证书（Certificates）" class="headerlink" title="开发证书（Certificates）"></a><strong>开发证书（Certificates）</strong></h3><h4 id="1-证书的概念"><a href="#1-证书的概念" class="headerlink" title="1.证书的概念"></a><strong>1.证书的概念</strong></h4><p><strong>证书</strong>是由公证处或认证机关开具的证明资格或权力的_证件_，它是表明（或帮助断定）事理的一个_凭证_。证件或凭证的尾部通常会烙印_公章_。</p>
 <p>每个中国人一生可能需要70多个证件，含15种身份证明。证件中“必需的”有30到40个。将这些证件按时间顺序铺开，那就是一个天朝子民的一生——持<strong>准生证</strong>许可落地，以户籍证明入籍，以身份证认证身份，持结婚证以合法同居，最终以<strong>死亡证</strong>明注销。</p>
-<h4 id="2-数字证书的概念">2.数字证书的概念</h4>
-<p><strong><em>数字证书</em><strong>就是互联网通讯中</strong>标志</strong>通讯各方_<strong>身份信息</strong>_的一串数字，提供了一种在 Internet 上验证通信<strong>实体身份</strong>的方式，其作用类似于司机的驾驶执照或日常生活中的身份证。它是由一个由权威机构——<strong>CA机构（CA =_C_ertificate_A_uthority）</strong>，又称为数字证书授权中心（数字证书认证机构）颁发（发行）的，人们可以在网上用它来识别对方的身份。</p>
+<h4 id="2-数字证书的概念"><a href="#2-数字证书的概念" class="headerlink" title="2.数字证书的概念"></a>2.数字证书的概念</h4><p><strong><em>数字证书</em><strong>就是互联网通讯中</strong>标志</strong>通讯各方_<strong>身份信息</strong>_的一串数字，提供了一种在 Internet 上验证通信<strong>实体身份</strong>的方式，其作用类似于司机的驾驶执照或日常生活中的身份证。它是由一个由权威机构——<strong>CA机构（CA &#x3D;_C_ertificate_A_uthority）</strong>，又称为数字证书授权中心（数字证书认证机构）颁发（发行）的，人们可以在网上用它来识别对方的身份。</p>
 <ul>
 <li>数字证书是一个经 CA 数字签名的包含公开密钥拥有者信息以及公开密钥的文件。最简单的证书包含一个公开密钥、名称以及 CA 的数字签名。</li>
-<li>数字证书还有一个重要的特征就是<strong>时效性</strong>：只在特定的时间段内有效。</li>
+<li>数字证书还有一个重要的特征就是<strong>时效性</strong>：只在特定的时间段内有效。<div></li>
 </ul>
-<div>
 <p>数字证书中的<strong>公开密钥</strong>（公钥）相当于公章。</p>
 <p>证书的信任链条是环环相扣的，根证书就是一开始就被信任的证书，是<u>信任链的<strong>起始点</strong>。</p>
 <p>在天朝子民的一生中，户籍证明可理解为等效的<strong>根证书</strong>：有了户籍证明，才能办理身份证；有了上流的身份证，才能办理下游居住证、结婚证、计划生育证、驾驶执照等认证。</p>
 <hr>
-<h4 id="3-iOS（开发）证书">3.iOS（开发）证书</h4>
-<p>iOS 证书是用来证明 iOS App 内容（bundle with executable and resources）的合法性和完整性的<strong>数字证书</strong>。对于想安装到真机或发布到 AppStore 的应用程序（App），只有经过<strong>签名验证</strong>（Signature Validated）才能确保来源可信，并且保证 App 内容是完整、未经篡改的。</p>
+<h4 id="3-iOS（开发）证书"><a href="#3-iOS（开发）证书" class="headerlink" title="3.iOS（开发）证书"></a>3.iOS（开发）证书</h4><p>iOS 证书是用来证明 iOS App 内容（bundle with executable and resources）的合法性和完整性的<strong>数字证书</strong>。对于想安装到真机或发布到 AppStore 的应用程序（App），只有经过<strong>签名验证</strong>（Signature Validated）才能确保来源可信，并且保证 App 内容是完整、未经篡改的。</p>
 <p>iOS 证书分为两类：Development 和 Production（Distribution）。</p>
 <ul>
 <li>Development 证书用来开发和调试应用程序：A <span class="newTerm"><strong><em>development certificate</em></strong></span> identifies you, as a team member, in a development provisioning profile that allows apps signed by you to **_launch _**on devices.</li>
-<li>Production 主要用来分发应用程序（根据证书种类有不同作用）：A <span class="newTerm"><em><strong>distribution certificate</strong></em></span> identifies your team or organization in a distribution provisioning profile and allows you to _**submit  **_your app to the store. Only a team agent or an admin can create a distribution certificate.<br>
-普通个人开发账号最多可注册 iOS Development/Distribution 证书各2个，用户可在网站上删除（Revoke）已注册的 Certificate。</li>
+<li>Production 主要用来分发应用程序（根据证书种类有不同作用）：A <span class="newTerm"><em><strong>distribution certificate</strong></em></span> identifies your team or organization in a distribution provisioning profile and allows you to _**submit  **_your app to the store. Only a team agent or an admin can create a distribution certificate.<br>普通个人开发账号最多可注册 iOS Development&#x2F;Distribution 证书各2个，用户可在网站上删除（Revoke）已注册的 Certificate。</li>
 </ul>
-<h3 id="申请证书（CSR：Certificate-Signing-Request）">申请证书（CSR：Certificate Signing Request）</h3>
-<p>**私钥 private key **始终保存在 Mac OS 的 Keychain Access 中，用于签名（CodeSign）本机对外发布的 App；**公钥 **_**public key **_一般随证书（随Provisioning Profile，随 App 安装）散布出去，对 App 签名进行校验认证。用户必须妥善保存本地 Keychain 中的 private key，以防伪冒。</p>
+<h3 id="申请证书（CSR：Certificate-Signing-Request）"><a href="#申请证书（CSR：Certificate-Signing-Request）" class="headerlink" title="申请证书（CSR：Certificate Signing Request）"></a>申请证书（CSR：Certificate Signing Request）</h3><p>**私钥 private key <strong>始终保存在 Mac OS 的 Keychain Access 中，用于签名（CodeSign）本机对外发布的 App；</strong>公钥 **_**public key **_一般随证书（随Provisioning Profile，随 App 安装）散布出去，对 App 签名进行校验认证。用户必须妥善保存本地 Keychain 中的 private key，以防伪冒。</p>
 <ul>
 <li>Keep a secure backup of your public-private key pair. If the private key is lost, you’ll have to create an <em><strong>entirely new</strong></em> identity to sign code.</li>
-<li>Worse, if someone else has your private key, that person may be able to **_impersonate _**you.<br>
-在 Apple 开发网站上传包含公钥的 CSR 文件作为换取证书的凭证（Upload CSR file to generate your certificate），有点类似为github账号添加SSH公钥到服务器上进行授权。</li>
+<li>Worse, if someone else has your private key, that person may be able to **_impersonate _**you.<br>在 Apple 开发网站上传包含公钥的 CSR 文件作为换取证书的凭证（Upload CSR file to generate your certificate），有点类似为github账号添加SSH公钥到服务器上进行授权。</li>
 </ul>
 <p>Apple Developer 开发证书颁发机构 WWDRCA_ _将使用<strong>其 <strong>private key 对 CSR 中的 public key 和一些身份信息进行加密签名生成</strong>数字证书</strong>（ios_development.cer）并记录在案（Apple Member Center）。</p>
 <hr>
 <hr>
-<h3 id="供应配置文件（Provisioning-Profiles）"><strong>供应配置文件（<strong>Provisioning Profiles</strong>）</strong></h3>
-<p>Provisioning Profile 文件包含了上述的所有内容：<strong>证书、App ID 和 设备 ID</strong>。</p>
-<p><img src="http://img.blog.csdn.net/20150126225313444" alt=""></p>
-<p>一个 Provisioning Profile 对应一个 Explicit App ID 或 Wildcard App ID（一组相同 Prefix/Seed 的 App IDs）。在网站上手动创建一个 Provisioning Profile 时，需要依次指定 App ID（单选）、证书（Certificates，可多选）和设备（Devices，可多选）。用户可在网站上删除（Delete）已注册的 Provisioning Profiles。</p>
-<p>Provisioning Profile 决定 Xcode 用哪个证书（公钥）/私钥组合（Key Pair/Signing Identity）来<strong>签署</strong>应用程序（Signing Product），并将在应用程序打包时嵌入到 .ipa 包里。安装应用程序时，Provisioning Profile 文件被拷贝到 iOS 设备中，运行该 iOS App 的设备通过它来认证安装的程序。</p>
+<h3 id="供应配置文件（Provisioning-Profiles）"><a href="#供应配置文件（Provisioning-Profiles）" class="headerlink" title="供应配置文件（Provisioning Profiles）"></a><strong>供应配置文件（</strong>Provisioning Profiles<strong>）</strong></h3><p>Provisioning Profile 文件包含了上述的所有内容：<strong>证书、App ID 和 设备 ID</strong>。</p>
+<p><img src="http://img.blog.csdn.net/20150126225313444"></p>
+<p>一个 Provisioning Profile 对应一个 Explicit App ID 或 Wildcard App ID（一组相同 Prefix&#x2F;Seed 的 App IDs）。在网站上手动创建一个 Provisioning Profile 时，需要依次指定 App ID（单选）、证书（Certificates，可多选）和设备（Devices，可多选）。用户可在网站上删除（Delete）已注册的 Provisioning Profiles。</p>
+<p>Provisioning Profile 决定 Xcode 用哪个证书（公钥）&#x2F;私钥组合（Key Pair&#x2F;Signing Identity）来<strong>签署</strong>应用程序（Signing Product），并将在应用程序打包时嵌入到 .ipa 包里。安装应用程序时，Provisioning Profile 文件被拷贝到 iOS 设备中，运行该 iOS App 的设备通过它来认证安装的程序。</p>
 <p>如果要打包到真机上运行一个APP，一般要经历以下三步：</p>
 <ul>
 <li>首先，需要指明它的 App ID，并且验证 Bundle ID 是否与其一致；</li>
@@ -160,34 +147,28 @@
 </ul>
 <p>Provisioning Profile 把这些信息全部打包在一起，方便我们在调试和发布程序打包时使用。这样，只要在不同的情况下选择不同的 Provisioning Profile 文件就可以了。</p>
 <p>如上所述，在一台设备上运行应用程序的过程如下：</p>
-<p><img src="http://images.cnitblog.com/blog/431384/201308/16185213-ea355ff0690b497a80ed5fd2dd5e62cf.png" alt=""></p>
-<p> </p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/16185213-ea355ff0690b497a80ed5fd2dd5e62cf.png"></p>
+<p>&amp;nbsp;</p>
 <p>Provisioning Profile 也分为 Development 和 Distribution 两类，有效期同 Certificate 一样。Distribution 版本的 ProvisioningProfile 主要用于提交 App Store 审核，其中不指定开发测试的Devices（0，unlimited）。App ID 为 Wildcard App ID（*）。App Store 审核通过上架后，允许所有 iOS 设备（Deployment Target）上安装运行该App。</p>
-<p>Xcode 将全部供应配置文件（包括用户手动下载安装的和 Xcode 自动创建的 Team Provisioning Profile）放在目录 ~/Library/MobileDevice/Provisioning</p>
+<p>Xcode 将全部供应配置文件（包括用户手动下载安装的和 Xcode 自动创建的 Team Provisioning Profile）放在目录 ~&#x2F;Library&#x2F;MobileDevice&#x2F;Provisioning</p>
 <hr>
 <hr>
-<h3 id="开发组供应配置文件（Team-Provisioning-Profiles）"><strong>开发组供应配置文件（<strong>Team Provisioning Profiles</strong>）</strong></h3>
-<h4 id="1-Team-Provisioning-Profile的概念">1.Team Provisioning Profile的概念</h4>
-<p>每个 Apple 开发者账号都对应一个唯一的 **Team ID，**Xcode3.2.3 预发布版本中加入了 Team Provisioning Profile 这项新功能。</p>
+<h3 id="开发组供应配置文件（Team-Provisioning-Profiles）"><a href="#开发组供应配置文件（Team-Provisioning-Profiles）" class="headerlink" title="开发组供应配置文件（Team Provisioning Profiles）"></a><strong>开发组供应配置文件（</strong>Team Provisioning Profiles<strong>）</strong></h3><h4 id="1-Team-Provisioning-Profile的概念"><a href="#1-Team-Provisioning-Profile的概念" class="headerlink" title="1.Team Provisioning Profile的概念"></a>1.Team Provisioning Profile的概念</h4><p>每个 Apple 开发者账号都对应一个唯一的 <strong>Team ID，</strong>Xcode3.2.3 预发布版本中加入了 Team Provisioning Profile 这项新功能。</p>
 <p>在 Xcode 中添加 Apple Developer Account 时，它将与 Apple Member Center 后台勾兑**自动生成 **iOS Team Provisioning Profile（Managed by Xcode）。</p>
-<p><img src="http://img.blog.csdn.net/20150113233612875" alt=""></p>
-<p>Team Provisioning Profile 包含一个为 Xcode iOS Wildcard App ID(<em>) 生成的 iOS Team Provisioning Profile:</em>（匹配所有应用程序），账户里所有的 Development Certificates 和 Devices 都可以使用它在这个 team 注册的所有设备上调试应用程序（不管bundle identifier是什么）。同时，它还会为开发者自己创建的 Wildcard/Explicit App IDs 创建对应的 iOS Team Provisioning Profile。</p>
-<p><img src="http://img.blog.csdn.net/20150126225425594" alt=""></p>
-<h4 id="a-name-t16-a-2-Team-Provisioning-Profile-生成-更新时机"><a name="t16"></a>2.Team Provisioning Profile 生成/更新时机</h4>
-<ul>
+<p><img src="http://img.blog.csdn.net/20150113233612875"></p>
+<p>Team Provisioning Profile 包含一个为 Xcode iOS Wildcard App ID(*) 生成的 iOS Team Provisioning Profile:*（匹配所有应用程序），账户里所有的 Development Certificates 和 Devices 都可以使用它在这个 team 注册的所有设备上调试应用程序（不管bundle identifier是什么）。同时，它还会为开发者自己创建的 Wildcard&#x2F;Explicit App IDs 创建对应的 iOS Team Provisioning Profile。</p>
+<p><img src="http://img.blog.csdn.net/20150126225425594"></p>
+<h4 id="2-Team-Provisioning-Profile-生成-x2F-更新时机"><a href="#2-Team-Provisioning-Profile-生成-x2F-更新时机" class="headerlink" title="2.Team Provisioning Profile 生成&#x2F;更新时机"></a><a name="t16"></a>2.Team Provisioning Profile 生成&#x2F;更新时机</h4><ul>
 <li>Add an Apple ID account to Xcode</li>
 <li>Fix issue “No Provisioning Profiles with a valid signing identity” in Xcode</li>
 <li>Assign Your App to a Team in Xcode project settings of General|Identity</li>
-<li>Register new device on the apple development website or Xcode detected new device connected<br>
-利用 Xcode 生成和管理的 iOS Team Provisioning Profile 来进行开发非常方便，可以不需要上网站手动生成下载 Provisioning Profile。</li>
+<li>Register new device on the apple development website or Xcode detected new device connected<br>利用 Xcode 生成和管理的 iOS Team Provisioning Profile 来进行开发非常方便，可以不需要上网站手动生成下载 Provisioning Profile。</li>
 </ul>
 <p>Team Provisioning Profile 同 Provisioning Profile，只不过是由 Xcode 自动生成的，也<strong>被配置到</strong>【XcodeTarget|Build Settings|Code Signing|Provisioning Profile】下，同时需要在【XcodeTarget|General|Identity】下指定 Team 账号 ID。</p>
 <hr>
 <hr>
-<h3 id="证书与签名（-Certificate-Signature）">**<a target="_blank" rel="noopener" href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/CodeSigningGuide.pdf">证书与签名</a>（**<strong>Certificate&amp; Signature）</strong></h3>
-<h2 id="1-Code-Signing-Identity">1.Code Signing Identity</h2>
-<p><img src="http://img.blog.csdn.net/20150126225508120" alt=""></p>
-<p><img src="http://img.blog.csdn.net/20150113233322156" alt=""></p>
+<h3 id="证书与签名（-Certificate-amp-Signature）"><a href="#证书与签名（-Certificate-amp-Signature）" class="headerlink" title="证书与签名（****Certificate&amp; Signature）"></a><strong><a target="_blank" rel="noopener" href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/CodeSigningGuide.pdf">证书与签名</a>（****Certificate&amp; Signature）</strong></h3><h2 id="1-Code-Signing-Identity"><a href="#1-Code-Signing-Identity" class="headerlink" title="1.Code Signing Identity"></a>1.Code Signing Identity</h2><p><img src="http://img.blog.csdn.net/20150126225508120"></p>
+<p><img src="http://img.blog.csdn.net/20150113233322156"></p>
 <p><span class="s1">Xcode 中配置的 Code Signing Identity（entitlements、certificate）必须与 Provisioning Profile 匹配，并且配置的 Certificate 必须在本机 Keychain Access 中存在对应 Public／Private Key Pair，否则编译会报错。</span></p>
 <p>Xcode 所在的 Mac 设备（系统）使用 CA 证书（WWDRCA.cer）来判断 Code Signing Identity 中 Certificate 的合法性：</p>
 <ul>
@@ -196,17 +177,15 @@
 </ul>
 <hr>
 <hr>
-<h3 id="开发-真机调试流程"><strong>开发/真机调试流程</strong></h3>
-<p>根据上面的介绍，可以知道进行Development主要有以下几个步骤：</p>
+<h3 id="开发-x2F-真机调试流程"><a href="#开发-x2F-真机调试流程" class="headerlink" title="开发&#x2F;真机调试流程"></a><strong>开发&#x2F;真机调试流程</strong></h3><p>根据上面的介绍，可以知道进行Development主要有以下几个步骤：</p>
 <ul>
 <li>申请证书</li>
 <li>加入设备</li>
 <li>生成Provisioning Profile</li>
-<li>设置Xcode Code Sign Identifer<br>
-事实上第三步通常是不需要的，因为我们通常都是用Xcode生成和管理的iOS Team Provisioning Profile来进行开发，因为它非常方便，所以不需要自己手动生成Provisioning Profile。</li>
+<li>设置Xcode Code Sign Identifer<br>事实上第三步通常是不需要的，因为我们通常都是用Xcode生成和管理的iOS Team Provisioning Profile来进行开发，因为它非常方便，所以不需要自己手动生成Provisioning Profile。</li>
 </ul>
 <p>iOS Team Provisioning Profile是第一次使用Xcode添加设备时，Xcode自动生成的，它包含了Xcode生成的一个Wildcard App ID（*，匹配所有应用程序），账户里面所有的Devices和所有Development Certificates，如下图所示。因此，team中的所有成员都可以使用这个iOS Team Provisioning Profile在team中的所有设备上调试所有的应用程序。并且当有新设备添加进来时，Xcode会更新这个文件。</p>
-<p><img src="http://images.cnitblog.com/blog/431384/201308/19100011-967bd3326acb49db98412f0c70d7fe41.png" alt=""></p>
+<p><img src="http://images.cnitblog.com/blog/431384/201308/19100011-967bd3326acb49db98412f0c70d7fe41.png"></p>
 <p><strong>发布流程</strong></p>
 <p>网上有很多关于发布App Store的流程，我就不缀述了，不过根据上面的概念介绍，不管是App Store、In-House还是Ad-Hoc，打包流程都是差不多的，都包括了以下几个关键步骤：</p>
 <ul>
@@ -214,8 +193,7 @@
 <li>创建App ID</li>
 <li>创建对应的Provisioning Profile文件</li>
 <li>设备Bundle ID和App ID一致</li>
-<li>设置Xcode Code Sign Identifer，选择合适的Profile和证书进行签名，打包<br>
- </li>
+<li>设置Xcode Code Sign Identifer，选择合适的Profile和证书进行签名，打包<br>&amp;nbsp;</li>
 </ul>
 <p>参考网址：</p>
 <p><a target="_blank" rel="noopener" href="http://blog.csdn.net/phunxm/article/details/42685597">http://blog.csdn.net/phunxm/article/details/42685597</a></p>
@@ -224,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="cl3jmf7nq006y9jv38za02xkn" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2016/11/12/%E5%85%B3%E4%BA%8E%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="cl3jmy3sr0069txv3hci919it" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +254,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -320,7 +298,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

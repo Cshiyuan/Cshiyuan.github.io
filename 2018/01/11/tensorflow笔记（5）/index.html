@@ -5,27 +5,25 @@
   
 
   
-  <title>tensorflow笔记（5） | CShyiuan博客</title>
+  <title>tensorflow笔记（5） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Saver 保存读取 我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧. Copy Code 1234567891011121314151617181920212223242526272829303132333435# 保存神经网络的方法import tensorflow as tfimpor">
+  <meta name="description" content="Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.  # 保存神经网络的方法 import tensorflow as tf import numpy as np  ## Save to file # remember to define the same dtype an">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow笔记（5）">
-<meta property="og:url" content="http://example.com/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="Saver 保存读取 我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧. Copy Code 1234567891011121314151617181920212223242526272829303132333435# 保存神经网络的方法import tensorflow as tfimpor">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Saver 保存读取我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.  # 保存神经网络的方法 import tensorflow as tf import numpy as np  ## Save to file # remember to define the same dtype an">
+<meta property="og:locale">
 <meta property="article:published_time" content="2018-01-11T15:52:54.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.083Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -90,14 +88,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Saver-保存读取">Saver 保存读取</h4>
-<p>我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 保存神经网络的方法</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">## Save to file</span></span><br><span class="line"><span class="comment"># remember to define the same dtype and shape when restore</span></span><br><span class="line"><span class="comment"># W = tf.Variable([[1, 2, 3], [3, 4, 5]], dtype=tf.float32, name=&#x27;weights&#x27;)</span></span><br><span class="line"><span class="comment"># b = tf.Variable([[1, 2, 3]], dtype=tf.float32, name=&#x27;biases&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># init = tf.global_variables_initializer()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # 保存时，首先要先建立一个tf.train.Saver()用来保存，提取变量</span></span><br><span class="line"><span class="comment"># # 再创建一个名为my_net的文件夹，用这个saver来保存变量道这个目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># saver = tf.train.Saver()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># with tf.Session() as sess:</span></span><br><span class="line"><span class="comment">#     sess.run(init)</span></span><br><span class="line"><span class="comment">#     save_path = saver.save(sess, &quot;my_net/save_net.ckpt&quot;)</span></span><br><span class="line"><span class="comment">#     print(&quot;Save to path:&quot;, save_path)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # 提取</span></span><br><span class="line"><span class="comment"># # 先建立W，b道容器</span></span><br><span class="line">W = tf.Variable(np.arange(<span class="number">6</span>).reshape((<span class="number">2</span>, <span class="number">3</span>)), dtype=tf.float32, name=<span class="string">&quot;weights&quot;</span>)</span><br><span class="line">b = tf.Variable(np.arange(<span class="number">3</span>).reshape((<span class="number">1</span>, <span class="number">3</span>)), dtype=tf.float32, name=<span class="string">&quot;biases&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里不需要初始化步骤 init=tf.initialize_all_variables()</span></span><br><span class="line"></span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># 提取变量</span></span><br><span class="line">    saver.restore(sess, <span class="string">&quot;my_net/save_net.ckpt&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;weights:&quot;</span>, sess.run(W))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;biases:&quot;</span>, sess.run(b))</span><br></pre></td></tr></table></figure>
+        <h4 id="Saver-保存读取"><a href="#Saver-保存读取" class="headerlink" title="Saver 保存读取"></a>Saver 保存读取</h4><p>我们搭建好了一个神经网络, 训练好了, 肯定也想保存起来, 用于再次加载. 那今天我们就来说说怎样用 Tensorflow 中的 saver 保存和加载吧.</p>
+<pre><code class="Python">
+# 保存神经网络的方法
+import tensorflow as tf
+import numpy as np
+
+## Save to file
+# remember to define the same dtype and shape when restore
+# W = tf.Variable([[1, 2, 3], [3, 4, 5]], dtype=tf.float32, name=&#39;weights&#39;)
+# b = tf.Variable([[1, 2, 3]], dtype=tf.float32, name=&#39;biases&#39;)
+
+# init = tf.global_variables_initializer()
+
+# # 保存时，首先要先建立一个tf.train.Saver()用来保存，提取变量
+# # 再创建一个名为my_net的文件夹，用这个saver来保存变量道这个目录
+
+# saver = tf.train.Saver()
+
+# with tf.Session() as sess:
+#     sess.run(init)
+#     save_path = saver.save(sess, &quot;my_net/save_net.ckpt&quot;)
+#     print(&quot;Save to path:&quot;, save_path)
+
+# # 提取
+# # 先建立W，b道容器
+W = tf.Variable(np.arange(6).reshape((2, 3)), dtype=tf.float32, name=&quot;weights&quot;)
+b = tf.Variable(np.arange(3).reshape((1, 3)), dtype=tf.float32, name=&quot;biases&quot;)
+
+# 这里不需要初始化步骤 init=tf.initialize_all_variables()
+
+saver = tf.train.Saver()
+with tf.Session() as sess:
+    # 提取变量
+    saver.restore(sess, &quot;my_net/save_net.ckpt&quot;)
+    print(&quot;weights:&quot;, sess.run(W))
+    print(&quot;biases:&quot;, sess.run(b))
+
+
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/" data-id="cl3jmf7nh005v9jv37d06ez0n" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/11/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89/" data-id="cl3jmy3sh0054txv372g8c4ar" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +183,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -193,7 +227,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

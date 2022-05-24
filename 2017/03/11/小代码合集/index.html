@@ -5,27 +5,25 @@
   
 
   
-  <title>小代码合集 | CShyiuan博客</title>
+  <title>小代码合集 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解决block中self的引用 Copy Code 1__weak typeof(self) weakSelf &#x3D; self   iOS获得屏幕大小 Copy Code 12345678910&#x2F;&#x2F;宽度:UIScreen mainScreen] bounds].size.width&#x2F;&#x2F;高度:UIScreen mainScreen] bounds].size.height&#x2F;&#x2F;可以将屏幕大小定义成一个宏">
+  <meta name="description" content="解决block中self的引用__weak typeof(self) weakSelf &#x3D; self    iOS获得屏幕大小&#x2F;&#x2F;宽度: UIScreen mainScreen] bounds].size.width  &#x2F;&#x2F;高度: UIScreen mainScreen] bounds].size.height  &#x2F;&#x2F;可以将屏幕大小定义成一个宏: #define SCREEN_WIDTH ([[U">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小代码合集">
-<meta property="og:url" content="http://example.com/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="解决block中self的引用 Copy Code 1__weak typeof(self) weakSelf &#x3D; self   iOS获得屏幕大小 Copy Code 12345678910&#x2F;&#x2F;宽度:UIScreen mainScreen] bounds].size.width&#x2F;&#x2F;高度:UIScreen mainScreen] bounds].size.height&#x2F;&#x2F;可以将屏幕大小定义成一个宏">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="解决block中self的引用__weak typeof(self) weakSelf &#x3D; self    iOS获得屏幕大小&#x2F;&#x2F;宽度: UIScreen mainScreen] bounds].size.width  &#x2F;&#x2F;高度: UIScreen mainScreen] bounds].size.height  &#x2F;&#x2F;可以将屏幕大小定义成一个宏: #define SCREEN_WIDTH ([[U">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-10T17:57:43.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.087Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,43 +92,82 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="解决block中self的引用">解决block中self的引用</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self</span><br></pre></td></tr></table></figure>
+        <h3 id="解决block中self的引用"><a href="#解决block中self的引用" class="headerlink" title="解决block中self的引用"></a>解决block中self的引用</h3><pre><code>__weak typeof(self) weakSelf = self
+</code></pre>
 <hr>
 <hr>
-<h3 id="iOS获得屏幕大小">iOS获得屏幕大小</h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//宽度:</span><br><span class="line">UIScreen mainScreen] bounds].size.width</span><br><span class="line"></span><br><span class="line">//高度:</span><br><span class="line">UIScreen mainScreen] bounds].size.height</span><br><span class="line"></span><br><span class="line">//可以将屏幕大小定义成一个宏:</span><br><span class="line">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span><br><span class="line"></span><br><span class="line">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span><br></pre></td></tr></table></figure>
+<h3 id="iOS获得屏幕大小"><a href="#iOS获得屏幕大小" class="headerlink" title="iOS获得屏幕大小"></a>iOS获得屏幕大小</h3><pre><code>//宽度:
+UIScreen mainScreen] bounds].size.width
+
+//高度:
+UIScreen mainScreen] bounds].size.height
+
+//可以将屏幕大小定义成一个宏:
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+</code></pre>
 <hr>
-<h3 id="延时执行可以尝试NSTimer方法">延时执行可以尝试NSTimer方法</h3>
-<p>例子：UIAlertViewController自动消失</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line"></span><br><span class="line">[self presentViewController:alert animated:NO completion:nil];</span><br><span class="line"></span><br><span class="line">[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];</span><br><span class="line"></span><br><span class="line">- (void)creatAlert:(NSTimer *)timer &#123;</span><br><span class="line"></span><br><span class="line">    UIAlertController *alert = [timer userInfo];</span><br><span class="line"></span><br><span class="line">    [alert dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">    alert = nil;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="延时执行可以尝试NSTimer方法"><a href="#延时执行可以尝试NSTimer方法" class="headerlink" title="延时执行可以尝试NSTimer方法"></a>延时执行可以尝试NSTimer方法</h3><p>例子：UIAlertViewController自动消失</p>
+<pre><code>UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;没有上一部了&quot; preferredStyle:UIAlertControllerStyleAlert];
+
+[self presentViewController:alert animated:NO completion:nil];
+
+[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(creatAlert:) userInfo:alert repeats:NO];
+
+- (void)creatAlert:(NSTimer *)timer &#123;
+
+    UIAlertController *alert = [timer userInfo];
+
+    [alert dismissViewControllerAnimated:YES completion:nil];
+
+    alert = nil;
+
+&#125;
+</code></pre>
 <hr>
-<h3 id="span-class-s2-定制-span-span-class-s1-statusBar-span-span-class-s2-部分-span"><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(UIStatusBarStyle)preferredStatusBarStyle</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    return UIStatusBarStyleLightContent;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="定制statusBar部分"><a href="#定制statusBar部分" class="headerlink" title="定制statusBar部分"></a><span class="s2">定制</span><span class="s1">statusBar</span><span class="s2">部分</span></h3><pre><code>-(UIStatusBarStyle)preferredStatusBarStyle
+
+&#123;
+
+    return UIStatusBarStyleLightContent;
+
+&#125;
+</code></pre>
 <hr>
-<h2 id="span-class-s1-NSString-和-NSNumber-span"><span class="s1">   NSString 和 NSNumber </span></h2>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSString *str = @&quot;120&quot;.</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];</span><br><span class="line"></span><br><span class="line">NSNumber *numTemp = [numberFormatter numberFromString:str];</span><br></pre></td></tr></table></figure>
+<h2 id="NSString-和-NSNumber"><a href="#NSString-和-NSNumber" class="headerlink" title="   NSString 和 NSNumber "></a><span class="s1">   NSString 和 NSNumber </span></h2><pre><code>NSString *str = @&quot;120&quot;.
+
+NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
+NSNumber *numTemp = [numberFormatter numberFromString:str];
+</code></pre>
 <hr>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSNumber *num = [NSNumber numberWithInt:2] ;</span><br><span class="line"></span><br><span class="line">NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];</span><br><span class="line"></span><br><span class="line">NSString* str = [numberFormatter stringFromNumber:num];</span><br></pre></td></tr></table></figure>
+<pre><code>NSNumber *num = [NSNumber numberWithInt:2] ;
+
+NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+NSString* str = [numberFormatter stringFromNumber:num];
+</code></pre>
 <hr>
-<h2 id="UINavigationController-span-class-s1-先-span-pop-span-class-s1-再-span-push-span-class-s1-，-span-push-span-class-s1-操作将无效。-span">UINavigationController<span class="s1">先</span>pop<span class="s1">再</span>push<span class="s1">，</span>push<span class="s1">操作将无效。</span></h2>
-<p>解决方案是：</p>
+<h2 id="UINavigationController先pop再push，push操作将无效。"><a href="#UINavigationController先pop再push，push操作将无效。" class="headerlink" title="UINavigationController先pop再push，push操作将无效。"></a>UINavigationController<span class="s1">先</span>pop<span class="s1">再</span>push<span class="s1">，</span>push<span class="s1">操作将无效。</span></h2><p>解决方案是：</p>
 <p>1. <span class="s1">从</span>self.navigationController.viewControllers<span class="s1">中拿出需要保留的</span>View Controller<span class="s1">放到一个数组中</span></p>
 <p>2. <span class="s1">向数组中添加需要</span>push<span class="s1">的</span>View Controller</p>
 <p>3. <span class="s1">调用</span>[self.navigationController setViewControllers:array animated:YES]</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];</span><br><span class="line">investmentList.hidesBottomBarWhenPushed = YES;</span><br><span class="line">NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];</span><br><span class="line">int index = (int)[arrView indexOfObject:self];</span><br><span class="line">[arrView removeObjectAtIndex:index];</span><br><span class="line">[arrView addObject:investmentList];</span><br><span class="line">[self.navigationController setViewControllers:arrView animated:YES];</span><br></pre></td></tr></table></figure>
+<pre><code>InvestmentViewController *investmentList = [[InvestmentViewController alloc] init];
+investmentList.hidesBottomBarWhenPushed = YES;
+NSMutableArray *arrView = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+int index = (int)[arrView indexOfObject:self];
+[arrView removeObjectAtIndex:index];
+[arrView addObject:investmentList];
+[self.navigationController setViewControllers:arrView animated:YES];
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/" data-id="cl3jmf7nw007n9jv32h7t0n9o" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/11/%E5%B0%8F%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/" data-id="cl3jmy3sz0076txv37q6u332v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +219,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -226,7 +263,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

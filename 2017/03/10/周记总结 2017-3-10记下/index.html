@@ -5,27 +5,25 @@
   
 
   
-  <title>周记总结 2017-3-10记下 | CShyiuan博客</title>
+  <title>周记总结 2017-3-10记下 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面   关于是否要releases dispatch queues： If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispatch_retain and di">
+  <meta name="description" content="熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面   关于是否要releases dispatch queues：If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispatch_retain and dis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="周记总结 2017-3-10记下">
-<meta property="og:url" content="http://example.com/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面   关于是否要releases dispatch queues： If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispatch_retain and di">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="熟悉Socket.IO原理。 看书《Objective-C高级编程：iOS与OS X多线程和内存管理》 了解iOS的方方面面   关于是否要releases dispatch queues：If your deployment target is lower than iOS 6.0 or Mac OS X 10.8 You need to use dispatch_retain and dis">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-10T14:07:52.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.086Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -100,54 +98,43 @@
 <li><span class="s1">了解iOS的方方面面</span></li>
 </ol>
 <hr>
-<h3 id="关于是否要releases-dispatch-queues-span-class-s1-：-span">关于是否要releases dispatch queues<span class="s1">：</span></h3>
-<p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
+<h3 id="关于是否要releases-dispatch-queues："><a href="#关于是否要releases-dispatch-queues：" class="headerlink" title="关于是否要releases dispatch queues："></a>关于是否要releases dispatch queues<span class="s1">：</span></h3><p><strong>If your deployment target is lower than iOS 6.0 or Mac OS X 10.8</strong></p>
 <p>You need to use dispatch_retain and dispatch_release on your queue. ARC does not manage them.</p>
 <p><strong>If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</strong></p>
 <p>ARC will manage your queue for you. You do not need to (and cannot) use dispatch_retain or dispatch_release if ARC is enabled.</p>
 <p>（简单的说就是在iOS6.0之后，ARC会帮忙我们管理线程队列（GCD）不需要我们去retain或者release了。</p>
 <hr>
-<h3 id="数据模型属性采用的基本策略">数据模型属性采用的基本策略</h3>
-<p>除了基本类型需要用assign，字符串需要用copy，其他对象类型都需要用strong<br>
-（考虑到循环引用问题时strong和weak从中选择）</p>
+<h3 id="数据模型属性采用的基本策略"><a href="#数据模型属性采用的基本策略" class="headerlink" title="数据模型属性采用的基本策略"></a>数据模型属性采用的基本策略</h3><p>除了基本类型需要用assign，字符串需要用copy，其他对象类型都需要用strong<br>（考虑到循环引用问题时strong和weak从中选择）</p>
 <hr>
-<h3 id="iOS应用到内部储存结构">iOS应用到内部储存结构</h3>
-<ul>
+<h3 id="iOS应用到内部储存结构"><a href="#iOS应用到内部储存结构" class="headerlink" title="iOS应用到内部储存结构"></a>iOS应用到内部储存结构</h3><ul>
 <li><strong>Documents</strong>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</li>
-<li><strong>Library/Caches</strong> : 保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
-<li><strong>Library/Preference</strong> :保存应用的所有偏好设置，iOS的 Setting(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</li>
+<li><strong>Library&#x2F;Caches</strong> : 保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</li>
+<li><strong>Library&#x2F;Preference</strong> :保存应用的所有偏好设置，iOS的 Setting(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</li>
 <li><strong>tmp</strong> :保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录</li>
 </ul>
 <hr>
-<h3 id="Socket-IO"><a target="_blank" rel="noopener" href="http://Socket.IO">Socket.IO</a></h3>
-<p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时功能,模糊化各种传输机制。</p>
+<h3 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a>Socket.IO</h3><p>实现了实时双向的基于事件的通讯机制。旨在让各种浏览器与移动设备上实现实时功能,模糊化各种传输机制。</p>
 <hr>
-<h3 id="GCD">GCD</h3>
-<p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
+<h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p>Main Dispatch Queue<span class="s1">属于</span>Serial Dispatch Queue</p>
 <p>Global Dispatch Queue<span class="s1">是所有应用程序都能够使用</span>Concurrent Dispatch Queue</p>
 <hr>
-<h3 id="IBOutlet">IBOutlet</h3>
-<p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
+<h3 id="IBOutlet"><a href="#IBOutlet" class="headerlink" title="IBOutlet"></a>IBOutlet</h3><p><span class="s1">IBOutlet</span>对于编译器而言只是一个标记，也就是说，编译器会忽略这个关键字。</p>
 <p>Interface Builder<span class="s2">则是根据</span>IBOutlet<span class="s2">来寻找可以在</span>Builder<span class="s2">里操作的成员变量。</span></p>
 <p>IBAction<span class="s2">也是。。。（相当于</span>void<span class="s2">）</span></p>
 <p><span class="s2">（</span>The type qualifier IBAction<span class="s2">,</span> which is used in place of the void return type<span class="s2">,</span> flags the declared method as an action so that Interface Builder is aware of it.For an action method to appear in Interface Builder<span class="s2">,</span> you first must declare it in a header file of the class whose instance is to receive the action message.<span class="s2">）</span></p>
 <hr>
 <hr>
-<h3 id="关于设置StatusBarStyle的相关方法">关于设置StatusBarStyle的相关方法</h3>
-<p><span class="s1">定制</span>statusBar<span class="s1">的前景部分。</span></p>
+<h3 id="关于设置StatusBarStyle的相关方法"><a href="#关于设置StatusBarStyle的相关方法" class="headerlink" title="关于设置StatusBarStyle的相关方法"></a>关于设置StatusBarStyle的相关方法</h3><p><span class="s1">定制</span>statusBar<span class="s1">的前景部分。</span></p>
 <ul>
-<li>
-<ul>
+<li><ul>
 <li><span class="s1">(</span>UIStatusBarStyle<span class="s1">)</span>preferredStatusBarStyle<span class="s1">;</span></li>
 </ul>
 </li>
-<li>
-<ul>
+<li><ul>
 <li><span class="s1">(</span>UIViewController *<span class="s1">)</span>childViewControllerForStatusBarStyle<span class="s1">;</span></li>
 </ul>
 </li>
-<li>
-<ul>
+<li><ul>
 <li><span class="s1">(</span>void<span class="s1">)</span>setNeedsStatusBarAppearanceUpdate</li>
 </ul>
 </li>
@@ -156,15 +143,16 @@
 </ul>
 <hr>
 <hr>
-<h3 id="状态栏和导航栏高度">状态栏和导航栏高度</h3>
-<p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
+<h3 id="状态栏和导航栏高度"><a href="#状态栏和导航栏高度" class="headerlink" title="状态栏和导航栏高度"></a>状态栏和导航栏高度</h3><p>导航栏的高度为<span class="s1">64</span>，实际上，导航栏的高度包括了自身和<span class="s1">statusBar</span>的高度，导航栏自身高度为<span class="s1">44</span>，<span class="s1">statusBar</span>的高度为<span class="s1">20</span>，加起来的<span class="s1">64</span>就作为导航栏的高度。</p>
 <p>其实最好可以用代码来查看一下</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];</span><br><span class="line">NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 </span><br><span class="line">CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;</span><br><span class="line">NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度</span><br></pre></td></tr></table></figure>
+<pre><code>CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
+NSLog(@&quot;statusbar height: %f&quot;, rectOfStatusbar.size.height);// 高度 
+CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;
+NSLog(@&quot;navigationbar height: %f&quot;, rectOfNavigationbar.size.height); // 高度
+</code></pre>
 <hr>
 <hr>
-<h3 id="instancetype和id的异同"><strong>instancetype</strong>和<strong>id</strong>的异同</h3>
-<p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
+<h3 id="instancetype和id的异同"><a href="#instancetype和id的异同" class="headerlink" title="instancetype和id的异同"></a><strong>instancetype</strong>和<strong>id</strong>的异同</h3><p>instancetype的作用，就是使那些非关联返回类型的方法返回所在类的类型</p>
 <p><strong>1</strong>、相同点</p>
 <p>都可以作为方法的返回类型</p>
 <p><strong>2</strong>、不同点</p>
@@ -175,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/" data-id="cl3jmf7nu007d9jv3cbqpdulg" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/%E5%91%A8%E8%AE%B0%E6%80%BB%E7%BB%93%202017-3-10%E8%AE%B0%E4%B8%8B/" data-id="cl3jmy3sx006utxv3ay885g0i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +215,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -271,7 +259,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

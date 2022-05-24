@@ -5,27 +5,25 @@
   
 
   
-  <title>Interface Builde（nib和xib的深究） | CShyiuan博客</title>
+  <title>Interface Builde（nib和xib的深究） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。 xib和nib都是Interface Builder的图形界面设计文档。  nib和xib的历史 nib这个名字来自于NeXTSTEP系统，在NeXTSTEP被Apple收购之前，一直使用nib作为Interface Builder的图形文档，nib的发展经过了nib2.0, nib3.0，到NeXTSTEP被Apple收购之后，带有Ne">
+  <meta name="description" content="iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。 xib和nib都是Interface Builder的图形界面设计文档。  nib和xib的历史nib这个名字来自于NeXTSTEP系统，在NeXTSTEP被Apple收购之前，一直使用nib作为Interface Builder的图形文档，nib的发展经过了nib2.0, nib3.0，到NeXTSTEP被Apple收购之后，带有NeX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Interface Builde（nib和xib的深究）">
-<meta property="og:url" content="http://example.com/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。 xib和nib都是Interface Builder的图形界面设计文档。  nib和xib的历史 nib这个名字来自于NeXTSTEP系统，在NeXTSTEP被Apple收购之前，一直使用nib作为Interface Builder的图形文档，nib的发展经过了nib2.0, nib3.0，到NeXTSTEP被Apple收购之后，带有Ne">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。 xib和nib都是Interface Builder的图形界面设计文档。  nib和xib的历史nib这个名字来自于NeXTSTEP系统，在NeXTSTEP被Apple收购之前，一直使用nib作为Interface Builder的图形文档，nib的发展经过了nib2.0, nib3.0，到NeXTSTEP被Apple收购之后，带有NeX">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-03-10T14:31:10.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.075Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -97,35 +95,31 @@
         <p>iOS开发肯定熟悉xib和nib。以下是我收拾出来的资料。</p>
 <p>xib<span class="s1">和</span>nib<span class="s1">都是</span>Interface Builder<span class="s1">的图形界面设计文档。</span></p>
 <hr>
-<h3 id="nib和xib的历史">nib和xib的历史</h3>
-<p>nib<span class="s1">这个名字来自于</span>NeXTSTEP<span class="s1">系统，在</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之前，一直使用</span>nib<span class="s1">作为</span>Interface Builder<span class="s1">的图形文档，</span>nib<span class="s1">的发展经过了</span>nib2.0<span class="s1">, </span>nib3.0<span class="s1">，到</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之后，带有</span>NeXTSTEP<span class="s1">标志的</span>nib<span class="s1">被换成了</span>xib</p>
+<h3 id="nib和xib的历史"><a href="#nib和xib的历史" class="headerlink" title="nib和xib的历史"></a>nib和xib的历史</h3><p>nib<span class="s1">这个名字来自于</span>NeXTSTEP<span class="s1">系统，在</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之前，一直使用</span>nib<span class="s1">作为</span>Interface Builder<span class="s1">的图形文档，</span>nib<span class="s1">的发展经过了</span>nib2.0<span class="s1">, </span>nib3.0<span class="s1">，到</span>NeXTSTEP<span class="s1">被</span>Apple<span class="s1">收购之后，带有</span>NeXTSTEP<span class="s1">标志的</span>nib<span class="s1">被换成了</span>xib</p>
 <hr>
-<h3 id="nib和xib的异同">nib和xib的异同</h3>
-<p>xib是一个XML格式的纯文本文件，nib是一个二进制文件。xib比nib有一个很明显的优势。</p>
+<h3 id="nib和xib的异同"><a href="#nib和xib的异同" class="headerlink" title="nib和xib的异同"></a>nib和xib的异同</h3><p>xib是一个XML格式的纯文本文件，nib是一个二进制文件。xib比nib有一个很明显的优势。</p>
 <p>可以进行diff操作。</p>
 <p>不管是xib还是nib，<span class="s1">Xcode</span>编译后都将得到一个供程序运行时使用的经过编译的二进制<span class="s1">nib</span>文件。现在最新版本的<span class="s1">Xcode</span>在创建项目时，已经默认使用<span class="s1">xib</span>格式的文档了。</p>
 <span id="more"></span>
+
 <p>我这里简单的说一下diff算法，就是即给定任意两棵树，找到最少的转换步骤。为什么又扯到了树呢，熟悉XML的可能知道，XML 文档形成了一种树结构,它从“根部”开始,然后扩展到“枝叶”。xib中可以认为，每一个节点是一个UI控价，diff算法可以高速的找到两颗树的区别，就是说可以高速的找到两个界面的区别，然后对两个界面进行部分的刷新就可以转换了。（React的虚拟DOM技术也用到了这个思想）想知道更多可以去百度或Google diff算法。</p>
 <hr>
-<h3 id="nib和xib编译生成二进制nib文件过程">nib和xib编译生成二进制nib文件过程</h3>
-<p><span class="s1">IB</span>所用的文档的序列化，序列化的结果就是这个<span class="s1">XML</span>文件。它保存的是所有界面的资源信息和各个对象之间的关系。编译时对这个<span class="s1">xml</span>文件进行的序列化，序列化的结果是二进制的<span class="s1">nib</span>文件。</p>
+<h3 id="nib和xib编译生成二进制nib文件过程"><a href="#nib和xib编译生成二进制nib文件过程" class="headerlink" title="nib和xib编译生成二进制nib文件过程"></a>nib和xib编译生成二进制nib文件过程</h3><p><span class="s1">IB</span>所用的文档的序列化，序列化的结果就是这个<span class="s1">XML</span>文件。它保存的是所有界面的资源信息和各个对象之间的关系。编译时对这个<span class="s1">xml</span>文件进行的序列化，序列化的结果是二进制的<span class="s1">nib</span>文件。</p>
 <p>编译时对<span class="s1">xml</span>文件做了如下操作：</p>
-<p>1.  <span class="s2">读取</span>xml<span class="s2">文件，生成所有界面对象，生成所有</span>object<span class="s2">（即自定义的</span>controller<span class="s2">类等），设置好各个</span>obejct<span class="s2">之间的联系（</span>IBAction<span class="s2">，</span>IBOutlet<span class="s2">）</span></p>
+<p>        1.  <span class="s2">读取</span>xml<span class="s2">文件，生成所有界面对象，生成所有</span>object<span class="s2">（即自定义的</span>controller<span class="s2">类等），设置好各个</span>obejct<span class="s2">之间的联系（</span>IBAction<span class="s2">，</span>IBOutlet<span class="s2">）</span></p>
 <p><span class="s1">        2.  </span>对这一坨对象进行序列化，即调用<span class="s1">encodeWithCoder</span>方法来序列化，生成二进制<span class="s1">nib</span>文件为什么要生成二进制文件，因为从二进制文件生成类实例更快一些。</p>
 <p><span class="s1">而在程序运行时，对</span>nib<span class="s1">文件进行反序列化的过程</span></p>
-<p><span class="s1">运行时对</span>nib<span class="s1">的操作</span> ：</p>
-<p>1.  <span class="s1">反序列化，调用所有对象的</span>initWithCoder<span class="s1">方法</span><br>
-2.  <span class="s1">某些类的</span>initWithFrame<span class="s1">，</span>init<span class="s1">之类的方法被调用，生成所有类实例</span></p>
-<p>3.  <span class="s1">发送</span>awakeFromNib<span class="s1">消息，每个类实例的</span>awakeFromNib<span class="s1">被调用</span></p>
+<p> <span class="s1">运行时对</span>nib<span class="s1">的操作</span> ：</p>
+<p>        1.  <span class="s1">反序列化，调用所有对象的</span>initWithCoder<span class="s1">方法</span><br>2.  <span class="s1">某些类的</span>initWithFrame<span class="s1">，</span>init<span class="s1">之类的方法被调用，生成所有类实例</span></p>
+<p>        3.  <span class="s1">发送</span>awakeFromNib<span class="s1">消息，每个类实例的</span>awakeFromNib<span class="s1">被调用</span></p>
 <hr>
 <p>引用《<span class="s1">Cocoa Programming for Mac OSX</span>》一书的说法，<span class="s1">Interface Builder </span>把窗口、菜单栏以及窗口上的各种控件的对象都“冻结”在了一个<span class="s1"> NIB</span>文档里面了；程序运行时，这些对象将会“苏醒”。</p>
-<p><span class="s1">        </span>猜测<span class="s1">nib2.0/3.0</span>时代的多出来的二进制文件应该就是被编译序列化之后的文件，即<span class="s1">nib2.0/3.0</span>的<span class="s1">nib</span>文件由界面信息文件和运行时二进制文件组成。<span class="s1"><br>
-</span>由以上的可以看出，凡是被拖到<span class="s1">nib</span>里面的对象都会被自动创建实例，无需你代码手动创建（扫盲了。。。），需要用到的话，添加一个<span class="s1">IBOutlet</span>即可。</p>
+<p><span class="s1">        </span>猜测<span class="s1">nib2.0&#x2F;3.0</span>时代的多出来的二进制文件应该就是被编译序列化之后的文件，即<span class="s1">nib2.0&#x2F;3.0</span>的<span class="s1">nib</span>文件由界面信息文件和运行时二进制文件组成。<span class="s1"><br></span>由以上的可以看出，凡是被拖到<span class="s1">nib</span>里面的对象都会被自动创建实例，无需你代码手动创建（扫盲了。。。），需要用到的话，添加一个<span class="s1">IBOutlet</span>即可。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/" data-id="cl3jmf7mg001t9jv3b3oeh319" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/03/10/Interface%20Builde%EF%BC%88nib%E5%92%8Cxib%E7%9A%84%E6%B7%B1%E7%A9%B6%EF%BC%89/" data-id="cl3jmy3ri000ytxv34hsjdzwa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -177,7 +171,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -221,7 +215,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

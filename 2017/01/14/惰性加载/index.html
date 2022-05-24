@@ -5,27 +5,25 @@
   
 
   
-  <title>惰性加载（lazyload） | CShyiuan博客</title>
+  <title>惰性加载（lazyload） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="维基百科的解释 惰性加载（英语：Lazy loading、Infinite Scroll，又称延迟加载[1]、懒加载[2][3]、无限滚动[4]、瀑布流[4]），是一种设计模式，被运用在软件设计和网页设计当中[5]，对于网页界面，其特征为用户通过鼠标，滚动浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如Google图片搜索、Google+、Facebook、Twit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="惰性加载（lazyload）">
-<meta property="og:url" content="http://example.com/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
 <meta property="og:description" content="维基百科的解释 惰性加载（英语：Lazy loading、Infinite Scroll，又称延迟加载[1]、懒加载[2][3]、无限滚动[4]、瀑布流[4]），是一种设计模式，被运用在软件设计和网页设计当中[5]，对于网页界面，其特征为用户通过鼠标，滚动浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如Google图片搜索、Google+、Facebook、Twit">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-01-14T03:56:00.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.088Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -97,13 +95,13 @@
         <p>维基百科的解释</p>
 <p><strong>惰性加载</strong>（<span class="LangWithName">英语：<span lang="en" xml:lang="en">Lazy loading、Infinite Scroll</span></span>，又称<strong>延迟加载</strong><sup id="cite_ref-1" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-1">[1]</a></sup>、<strong>懒加载</strong><sup id="cite_ref-2" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-2">[2]</a></sup><sup id="cite_ref-3" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-3">[3]</a></sup>、<strong>无限滚动</strong><sup id="cite_ref-TechOrange_4-0" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4">[4]</a></sup>、<strong>瀑布流</strong><sup id="cite_ref-TechOrange_4-1" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-TechOrange-4">[4]</a></sup>），是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)" title="设计模式 (计算机)">设计模式</a>，被运用在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E8%A8%AD%E8%A8%88" title="软件设计">软件设计</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88" title="网页设计">网页设计</a>当中<sup id="cite_ref-5" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-5">[5]</a></sup>，对于网页界面，其特征为用户通过鼠标，<span class="ilh-all" data-orig-title="捲動" data-lang-code="en" data-lang-name="英语" data-foreign-title="Scrolling"><span class="ilh-page"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1" title="%E6%8D%B2%E5%8B%95&amp;action=edit&amp;redlink=1">滚动</a></span></span>浏览页面，直到页面下方时，就会自动加载更多内容；有多数网站采用这项网页设计，例如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2" title="Google图片搜索">Google图片搜索</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google%2B" title="Google+">Google+</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Facebook" title="Facebook">Facebook</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Twitter" title="Twitter">Twitter</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Pinterest" title="Pinterest">Pinterest</a><sup id="cite_ref-6" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-6">[6]</a></sup>和维基百科的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Wikipedia:Flow" title="Wikipedia:Flow">Flow</a>讨论系统。也有结合无限滚动和多<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A0%81" title="页">页</a>，两著特性的网页设计<sup id="cite_ref-7" class="reference"><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E8%BC%89%E5%85%A5#cite_note-7">[7]</a></sup>。</p>
 <p>而对于数据结构而言，惰性加载是指从一个数据对象通过方法获得里面的一个属性对象时，这个对应对象实际并没有随其父数据对象创建时一起保存在运行空间中，而是在其读取方法第一次被调用时才从其他数据源中加载到运行空间中，这样可以避免过早地导入过大的数据对象但并没有使用的空间占用浪费。</p>
-<p> </p>
-<p> </p>
+<p>&amp;nbsp;</p>
+<p>&amp;nbsp;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/" data-id="cl3jmf7ny007t9jv34bq76ekq" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/01/14/%E6%83%B0%E6%80%A7%E5%8A%A0%E8%BD%BD/" data-id="cl3jmy3t1007dtxv31oj99ozt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +153,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -199,7 +197,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

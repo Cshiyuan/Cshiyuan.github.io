@@ -5,27 +5,25 @@
   
 
   
-  <title>windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决） | CShyiuan博客</title>
+  <title>windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决） | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关闭onedrive，不赘言 关闭自动更新，选择提醒和延迟 锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片 设置-&gt;系统-&gt;通知和操作-&gt;禁用&quot;显示有关windows的提示&quot;——关于这点，我把所有的通知都关闭了 开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭 运行 regedit.exe, 逐次打开HKEY_LOCAL_M">
+  <meta name="description" content="关闭onedrive，不赘言 关闭自动更新，选择提醒和延迟 锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片 设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了 开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭 运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows10 runtime broker进程的CPU占用过高解决方法。（亲测成功解决）">
-<meta property="og:url" content="http://example.com/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="关闭onedrive，不赘言 关闭自动更新，选择提醒和延迟 锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片 设置-&gt;系统-&gt;通知和操作-&gt;禁用&quot;显示有关windows的提示&quot;——关于这点，我把所有的通知都关闭了 开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭 运行 regedit.exe, 逐次打开HKEY_LOCAL_M">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="关闭onedrive，不赘言 关闭自动更新，选择提醒和延迟 锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片 设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了 开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭 运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYS">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-08-11T17:27:57.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.084Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -98,20 +96,20 @@
 <li>关闭onedrive，不赘言</li>
 <li>关闭自动更新，选择提醒和延迟</li>
 <li>锁屏界面不用windows聚焦——关于这点，我直接选择了某张图片</li>
-<li>设置-&gt;系统-&gt;通知和操作-&gt;禁用&quot;显示有关windows的提示&quot;——关于这点，我把所有的通知都关闭了</li>
+<li>设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”——关于这点，我把所有的通知都关闭了</li>
 <li>开始菜单-照片-设置，关闭选项——关于这点，我是把所有选项都关闭</li>
-<li>运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBroker,改变&quot;Start&quot;的值:00000003 为 值:00000004.</li>
+<li>运行 regedit.exe, 逐次打开HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBroker,改变”Start”的值:00000003 为 值:00000004.</li>
 <li>放一张全新的图片到我的电脑-图片里，然后把这张图片设置成桌面。——关于这点，我怀疑我就是昨晚这个操作之后，进程才回复正常的，前半部分操作是有人提到的，后半部分操作是我心血来潮的，有兴趣大家可以试试，只放图片，不改桌面。不过我个人心里也是担心，使用windows的主题图片群是否对此有影响。</li>
 </ol>
-<p> </p>
+<p>&amp;nbsp;</p>
 <p>上面是我找到的有关方法，但是其实最重要的是！！</p>
-<p><strong>设置-&gt;系统-&gt;通知和操作-&gt;禁用&quot;显示有关windows的提示&quot;</strong></p>
+<p><strong>设置-&gt;系统-&gt;通知和操作-&gt;禁用”显示有关windows的提示”</strong></p>
 <p>这点是最TM重要的了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/" data-id="cl3jmf7nl006c9jv3bwei55wj" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2016/08/12/windows10%20runtime%20broker%E8%BF%9B%E7%A8%8B%E7%9A%84CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82%EF%BC%88%E4%BA%B2%E6%B5%8B%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%EF%BC%89/" data-id="cl3jmy3sl005mtxv3dpcvb736" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +161,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -207,7 +205,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

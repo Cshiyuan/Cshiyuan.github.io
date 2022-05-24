@@ -5,27 +5,25 @@
   
 
   
-  <title>CShyiuan博客</title>
+  <title>C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Highlight.js Highlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работает и в браузере, и на сервере. Он работает с практически любой HTML разметкой, не зависит от как">
+  <meta name="description" content="Highlight.jsHighlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работаети в браузере, и на сервере. Он работает с практически любой HTML разметкой, независит от каких-">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CShyiuan博客">
-<meta property="og:url" content="http://example.com/plugins/highlight/README.ru.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="Highlight.js Highlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работает и в браузере, и на сервере. Он работает с практически любой HTML разметкой, не зависит от как">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="C&#39;s Notebook">
+<meta property="og:url" content="https://cshiyuan.github.io/plugins/highlight/README.ru.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Highlight.jsHighlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работаети в браузере, и на сервере. Он работает с практически любой HTML разметкой, независит от каких-">
+<meta property="og:locale">
 <meta property="article:published_time" content="2022-05-24T02:36:16.125Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.093Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -80,76 +78,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>Highlight.js</h1>
-<p>Highlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работает<br>
-и в браузере, и на сервере. Он работает с практически любой HTML разметкой, не<br>
-зависит от каких-либо фреймворков и умеет автоматически определять язык.</p>
-<h2 id="Начало-работы">Начало работы</h2>
-<p>Минимум, что нужно сделать для использования highlight.js на веб-странице — это<br>
-подключить библиотеку, CSS-стили и вызывать <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
-<p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/path/to/styles/default.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/path/to/highlight.pack.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span>hljs.initHighlightingOnLoad();<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Библиотека найдёт и раскрасит код внутри тегов <code>&lt;pre&gt;&lt;code&gt;</code>, попытавшись<br>
-автоматически определить язык. Когда автоопределение не срабатывает, можно явно<br>
-указать язык в атрибуте class:</p>
-<p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">&quot;html&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Список поддерживаемых классов языков доступен в <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html">справочнике по классам</a>.<br>
-Класс также можно предварить префиксами <code>language-</code> или <code>lang-</code>.</p>
+        <h1 id="Highlight-js"><a href="#Highlight-js" class="headerlink" title="Highlight.js"></a>Highlight.js</h1><p>Highlight.js — это инструмент для подсветки синтаксиса, написанный на JavaScript. Он работает<br>и в браузере, и на сервере. Он работает с практически любой HTML разметкой, не<br>зависит от каких-либо фреймворков и умеет автоматически определять язык.</p>
+<h2 id="Начало-работы"><a href="#Начало-работы" class="headerlink" title="Начало работы"></a>Начало работы</h2><p>Минимум, что нужно сделать для использования highlight.js на веб-странице — это<br>подключить библиотеку, CSS-стили и вызывать <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/styles/default.css&quot;&gt;
+&lt;script src=&quot;/path/to/highlight.pack.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
+</code></pre>
+<p>Библиотека найдёт и раскрасит код внутри тегов <code>&lt;pre&gt;&lt;code&gt;</code>, попытавшись<br>автоматически определить язык. Когда автоопределение не срабатывает, можно явно<br>указать язык в атрибуте class:</p>
+<pre><code class="html">&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;...&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+<p>Список поддерживаемых классов языков доступен в <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html">справочнике по классам</a>.<br>Класс также можно предварить префиксами <code>language-</code> или <code>lang-</code>.</p>
 <p>Чтобы отключить подсветку для какого-то блока, используйте класс <code>nohighlight</code>:</p>
-<p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">&quot;nohighlight&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Инициализация-вручную">Инициализация вручную</h2>
-<p>Чтобы иметь чуть больше контроля за инициализацией подсветки, вы можете<br>
-использовать функции <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> и <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#configure-options"><code>configure</code></a>. Таким образом<br>
-можно управлять тем, <em>что</em> и <em>когда</em> подсвечивать.</p>
-<p>Вот пример инициализации, эквивалентной вызову <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>, но<br>
-с использованием jQuery:</p>
-<p class="code-caption" data-lang="javascript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  $(<span class="string">&#x27;pre code&#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params">i, block</span>) &#123;</span><br><span class="line">    hljs.<span class="title function_">highlightBlock</span>(block);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>Вы можете использовать любые теги разметки вместо <code>&lt;pre&gt;&lt;code&gt;</code>. Если<br>
-используете контейнер, не сохраняющий переводы строк, вам нужно сказать<br>
-highlight.js использовать для них тег <code>&lt;br&gt;</code>:</p>
-<p class="code-caption" data-lang="javascript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hljs.<span class="title function_">configure</span>(&#123;<span class="attr">useBR</span>: <span class="literal">true</span>&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;div.code&#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params">i, block</span>) &#123;</span><br><span class="line">  hljs.<span class="title function_">highlightBlock</span>(block);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;pre&gt;&lt;code class=&quot;nohighlight&quot;&gt;...&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+<h2 id="Инициализация-вручную"><a href="#Инициализация-вручную" class="headerlink" title="Инициализация вручную"></a>Инициализация вручную</h2><p>Чтобы иметь чуть больше контроля за инициализацией подсветки, вы можете<br>использовать функции <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> и <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#configure-options"><code>configure</code></a>. Таким образом<br>можно управлять тем, <em>что</em> и <em>когда</em> подсвечивать.</p>
+<p>Вот пример инициализации, эквивалентной вызову <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>, но<br>с использованием jQuery:</p>
+<pre><code class="javascript">$(document).ready(function() &#123;
+  $(&#39;pre code&#39;).each(function(i, block) &#123;
+    hljs.highlightBlock(block);
+  &#125;);
+&#125;);
+</code></pre>
+<p>Вы можете использовать любые теги разметки вместо <code>&lt;pre&gt;&lt;code&gt;</code>. Если<br>используете контейнер, не сохраняющий переводы строк, вам нужно сказать<br>highlight.js использовать для них тег <code>&lt;br&gt;</code>:</p>
+<pre><code class="javascript">hljs.configure(&#123;useBR: true&#125;);
+
+$(&#39;div.code&#39;).each(function(i, block) &#123;
+  hljs.highlightBlock(block);
+&#125;);
+</code></pre>
 <p>Другие опции можно найти в документации функции <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/api.html#configure-options"><code>configure</code></a>.</p>
-<h2 id="Web-Workers-2">Web Workers</h2>
-<p>Подсветку можно запустить внутри web worker’а, чтобы окно<br>
-браузера не подтормаживало при работе с большими кусками кода.</p>
+<h2 id="Web-Workers"><a href="#Web-Workers" class="headerlink" title="Web Workers"></a>Web Workers</h2><p>Подсветку можно запустить внутри web worker’а, чтобы окно<br>браузера не подтормаживало при работе с большими кусками кода.</p>
 <p>В основном скрипте:</p>
-<p class="code-caption" data-lang="javascript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> code = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#code&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> worker = <span class="keyword">new</span> <span class="title class_">Worker</span>(<span class="string">&#x27;worker.js&#x27;</span>);</span><br><span class="line">  worker.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123; code.<span class="property">innerHTML</span> = event.<span class="property">data</span>; &#125;</span><br><span class="line">  worker.<span class="title function_">postMessage</span>(code.<span class="property">textContent</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">addEventListener(&#39;load&#39;, function() &#123;
+  var code = document.querySelector(&#39;#code&#39;);
+  var worker = new Worker(&#39;worker.js&#39;);
+  worker.onmessage = function(event) &#123; code.innerHTML = event.data; &#125;
+  worker.postMessage(code.textContent);
+&#125;)
+</code></pre>
 <p>В worker.js:</p>
-<p class="code-caption" data-lang="javascript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onmessage = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="title function_">importScripts</span>(<span class="string">&#x27;&lt;path&gt;/highlight.pack.js&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> result = self.<span class="property">hljs</span>.<span class="title function_">highlightAuto</span>(event.<span class="property">data</span>);</span><br><span class="line">  <span class="title function_">postMessage</span>(result.<span class="property">value</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Установка-библиотеки">Установка библиотеки</h2>
-<p>Highlight.js можно использовать в браузере прямо с CDN хостинга или скачать<br>
-индивидуальную сборку, а также установив модуль на сервере. На<br>
-<a target="_blank" rel="noopener" href="https://highlightjs.org/download/">странице загрузки</a> подробно описаны все варианты.</p>
-<p><strong>Не подключайте GitHub напрямую.</strong> Библиотека не предназначена для<br>
-использования в виде исходного кода, а требует отдельной сборки. Если вам не<br>
-подходит ни один из готовых вариантов, читайте <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/building-testing.html">документацию по сборке</a>.</p>
-<p><strong>Файл на CDN содержит не все языки.</strong> Иначе он будет слишком большого размера.<br>
-Если нужного вам языка нет в <a target="_blank" rel="noopener" href="https://highlightjs.org/download/">категории “Common”</a>, можно дообавить его<br>
-вручную:</p>
-<p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">onmessage = function(event) &#123;
+  importScripts(&#39;&lt;path&gt;/highlight.pack.js&#39;);
+  var result = self.hljs.highlightAuto(event.data);
+  postMessage(result.value);
+&#125;
+</code></pre>
+<h2 id="Установка-библиотеки"><a href="#Установка-библиотеки" class="headerlink" title="Установка библиотеки"></a>Установка библиотеки</h2><p>Highlight.js можно использовать в браузере прямо с CDN хостинга или скачать<br>индивидуальную сборку, а также установив модуль на сервере. На<br><a target="_blank" rel="noopener" href="https://highlightjs.org/download/">странице загрузки</a> подробно описаны все варианты.</p>
+<p><strong>Не подключайте GitHub напрямую.</strong> Библиотека не предназначена для<br>использования в виде исходного кода, а требует отдельной сборки. Если вам не<br>подходит ни один из готовых вариантов, читайте <a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/en/latest/building-testing.html">документацию по сборке</a>.</p>
+<p><strong>Файл на CDN содержит не все языки.</strong> Иначе он будет слишком большого размера.<br>Если нужного вам языка нет в <a target="_blank" rel="noopener" href="https://highlightjs.org/download/">категории “Common”</a>, можно дообавить его<br>вручную:</p>
+<pre><code class="html">&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 <p><strong>Про Almond.</strong> Нужно задать имя модуля в оптимизаторе, например:</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r.js -o name=hljs paths.hljs=/path/to/highlight out=highlight.js</span><br></pre></td></tr></table></figure>
-<h2 id="Лицензия">Лицензия</h2>
-<p>Highlight.js распространяется под лицензией BSD. Подробнее читайте файл<br>
-<a target="_blank" rel="noopener" href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">LICENSE</a>.</p>
-<h2 id="Ссылки">Ссылки</h2>
-<p>Официальный сайт билиотеки расположен по адресу <a target="_blank" rel="noopener" href="https://highlightjs.org/">https://highlightjs.org/</a>.</p>
-<p>Более подробная документация по API и другим темам расположена на<br>
-<a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/">http://highlightjs.readthedocs.io/</a>.</p>
+<pre><code>r.js -o name=hljs paths.hljs=/path/to/highlight out=highlight.js
+</code></pre>
+<h2 id="Лицензия"><a href="#Лицензия" class="headerlink" title="Лицензия"></a>Лицензия</h2><p>Highlight.js распространяется под лицензией BSD. Подробнее читайте файл<br><a target="_blank" rel="noopener" href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">LICENSE</a>.</p>
+<h2 id="Ссылки"><a href="#Ссылки" class="headerlink" title="Ссылки"></a>Ссылки</h2><p>Официальный сайт билиотеки расположен по адресу <a target="_blank" rel="noopener" href="https://highlightjs.org/">https://highlightjs.org/</a>.</p>
+<p>Более подробная документация по API и другим темам расположена на<br><a target="_blank" rel="noopener" href="http://highlightjs.readthedocs.io/">http://highlightjs.readthedocs.io/</a>.</p>
 <p>Авторы и контрибьюторы перечислены в файле <a target="_blank" rel="noopener" href="https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.ru.txt">AUTHORS.ru.txt</a> file.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/plugins/highlight/README.ru.html" data-id="cl3jmf7lz00099jv34uvjcne1" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/plugins/highlight/README.ru.html" data-id="cl3jmy3r80007txv35hc65a5y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +172,7 @@ highlight.js использовать для них тег <code>&lt;br&gt;</cod
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -226,7 +216,7 @@ highlight.js использовать для них тег <code>&lt;br&gt;</cod
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

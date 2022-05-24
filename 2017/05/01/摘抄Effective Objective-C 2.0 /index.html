@@ -5,27 +5,25 @@
   
 
   
-  <title>摘抄Effective Objective-C 2.0 (1) | CShyiuan博客</title>
+  <title>摘抄Effective Objective-C 2.0 (1) | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Objective-C的对象总是使用指针的原因 因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： Copy Code 123NSString stackString;&#x2F;&#x2F; error: interface type cannot be statically allocated Objective">
+  <meta name="description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： NSString stackString;  &#x2F;&#x2F; error: interface type cannot be statically allocated  Objective-C将堆内存管理抽象出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="摘抄Effective Objective-C 2.0 (1)">
-<meta property="og:url" content="http://example.com/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="Objective-C的对象总是使用指针的原因 因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： Copy Code 123NSString stackString;&#x2F;&#x2F; error: interface type cannot be statically allocated Objective">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象： NSString stackString;  &#x2F;&#x2F; error: interface type cannot be statically allocated  Objective-C将堆内存管理抽象出">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-05-01T06:25:49.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.089Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,14 +92,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="span-class-s1-Objective-C-span-的对象总是使用指针的原因"><span class="s1">Objective-C</span>的对象总是使用指针的原因</h3>
-<p>因为对象所占用的内存总是分配在“堆空间 (<span class="s1">heap space</span>) ”中，而绝对不会分配在“栈(<span class="s1">stack</span>)上。不能在栈中分配<span class="s1">Objective-C</span>对象：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString stackString;</span><br><span class="line"></span><br><span class="line">// error: interface type cannot be statically allocated</span><br></pre></td></tr></table></figure>
+        <h3 id="Objective-C的对象总是使用指针的原因"><a href="#Objective-C的对象总是使用指针的原因" class="headerlink" title="Objective-C的对象总是使用指针的原因"></a><span class="s1">Objective-C</span>的对象总是使用指针的原因</h3><p>因为对象所占用的内存总是分配在“堆空间 (<span class="s1">heap space</span>) ”中，而绝对不会分配在“栈(<span class="s1">stack</span>)上。不能在栈中分配<span class="s1">Objective-C</span>对象：</p>
+<pre><code>NSString stackString;
+
+// error: interface type cannot be statically allocated
+</code></pre>
 <p><span class="s1">Objective-C</span>将堆内存管理抽象出来了。不需要用<span class="s1">malloc</span>及<span class="s1">free</span>来分配或释放对象所占内存。<span class="s1">Objective-C</span>运行期环境把这部分工作抽象为一套内存管理架构，名叫“引用计数”</p>
 <p>在<span class="s1">Objective-C</span>代码中，有时会遇到定义里不含<span class="s1">*</span>的变量，它们可能会使用“栈空间”这些变量所保存的不是<span class="s1">Objective</span>对象。比如<span class="s1">CoreGraphics</span>框架中的<span class="s1">CGRect</span>。这是一个结构体。与创建结构体相比，创建对象还需要额外开销，例如分配以及释放堆内存等。</p>
 <hr>
-<p><span class="s2">“<strong>向前声明(</strong></span><strong>forward declaring</strong><span class="s2"><strong>)</strong>”</span> <span class="s2">在编译一个使用了</span>EOCPerson<span class="s2">类等文件时，不需要知道</span>EOCEmployer<span class="s2">类等全部细节，只需要知道有一个类名叫</span>EOCEmployer<span class="s2">就好。</span></p>
+<p><span class="s2">“<strong>向前声明(</strong></span><strong>forward declaring</strong><span class="s2">**)**”</span> <span class="s2">在编译一个使用了</span>EOCPerson<span class="s2">类等文件时，不需要知道</span>EOCEmployer<span class="s2">类等全部细节，只需要知道有一个类名叫</span>EOCEmployer<span class="s2">就好。</span></p>
 <hr>
 <p><strong>委托协议就不用单独写一个头文件了</strong>在那种情况下，协议只有与接受协议委托等类放在一起定义才有意义。此时最好能在实现文件中声明此类实现了该委托协议，并把这段实现代码放在“<span class="s1">class-continuation</span>分类)(<span class="s1">class-continuation category</span>)</p>
 <hr>
@@ -109,28 +108,53 @@
 <p>其中：</p>
 <p>“<span class="s1">arrayWIthObjects:</span>”方法会依次处理各个参数，直到发现<span class="s1">nil</span>为止。如果在插入数组的时候，存在<span class="s1">nil</span>。方法会提前终止。</p>
 <p>多用类型常量，少用<span class="s1">#define</span>预处理指令</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static const NSTimeInterval kAnimationDuration = 0.3;</span><br></pre></td></tr></table></figure>
+<pre><code>static const NSTimeInterval kAnimationDuration = 0.3;
+</code></pre>
 <p>常用的命名方法是：若常量局限于某“编译单元”（<span class="s1">translation unit</span>，也就是“实现文件”，<span class="s1">implementation file</span>）之内，则在前面加字母<span class="s1">k</span>；</p>
 <p>若常量在类之外可见，则通常以类名为前缀。变量一定要同时用<span class="s1">static </span>与<span class="s1">const</span>来声明。</p>
 <hr>
-<p>**编译器每收到一个编译单元，就会输出一份“目标文件”（<span class="s1">object file</span>）。**在<span class="s1">Objective-C</span>的语境下，“编译单元”一词通常指每个类的实现文件（以<span class="s1">.m</span>为后缀名）。假若声明此变量时不加<span class="s1">static</span>，则编译器会为它创建一个“外部符号”（<span class="s1">external symbol</span>）。</p>
+<p><strong>编译器每收到一个编译单元，就会输出一份“目标文件”（<span class="s1">object file</span>）。</strong>在<span class="s1">Objective-C</span>的语境下，“编译单元”一词通常指每个类的实现文件（以<span class="s1">.m</span>为后缀名）。假若声明此变量时不加<span class="s1">static</span>，则编译器会为它创建一个“外部符号”（<span class="s1">external symbol</span>）。</p>
 <hr>
 <p><span class="Apple-converted-space">  </span>全局符号表（<span class="s1">global symbol table</span>）中，以便可以在定义该常量的编译单元外使用。因此，其定义方式与上例演示的<span class="s1">static const</span>有所不同。应该这样子定义</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// In the header file</span><br><span class="line"></span><br><span class="line">extern NSString *const EOCStringConstant;</span><br><span class="line"></span><br><span class="line">// In the implementation file</span><br><span class="line"></span><br><span class="line">NSString *const EOCStringConstant = @“VALUE”;</span><br></pre></td></tr></table></figure>
+<pre><code>// In the header file
+
+extern NSString *const EOCStringConstant;
+
+// In the implementation file
+
+NSString *const EOCStringConstant = @“VALUE”;
+</code></pre>
 <p>编译器看到头文件中的<span class="s1">extern</span>关键字，就能明白如何在引入此头文件的代码中处理该常量了。这个关键字是要告诉编译器，在全局符号表中将会有一个名叫<span class="s1">EOCStringConstant</span>的符号。也就是说，编译器无须查看其定义，即允许代码使用此常量。因为它真的，当链接成二进制文件之后，肯定能找到这个常量。</p>
 <p>注意<span class="s1">const</span>修饰符在常量类型中的位置。常量定义应从右至左解读，所以在本例中，<span class="s1">EOCStringConstant</span>就是“一个常量，而这个常量是指针，指向<span class="s1">NSString</span>对象”。</p>
 <hr>
 <p><span class="s1">Foundation</span>框架中定义了一些辅助的宏，用这些宏来定义枚举类型时，也可以指定用于保存枚举值的底层数据类型。</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, EOCConnectionState) &#123;</span><br><span class="line"></span><br><span class="line">   EOCConectionStateDisconnected,</span><br><span class="line"></span><br><span class="line">   EOCConectionStateConnecting,</span><br><span class="line"></span><br><span class="line">   EOCConnectionStateConnected,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) &#123;</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,</span><br><span class="line"></span><br><span class="line">  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code>typedef NS_ENUM(NSUInteger, EOCConnectionState) &#123;
+
+   EOCConectionStateDisconnected,
+
+   EOCConectionStateConnecting,
+
+   EOCConnectionStateConnected,
+
+&#125;;
+</code></pre>
+<pre><code>typedf NS_OPTIONS(NSUInteger, EOCPermittedDirection) &#123;
+
+  EOCPermittedDirectionUp       = 1 &lt;&lt; 0,
+
+  EOCPermittedDirectionDown  = 1 &lt;&lt; 1,
+
+  EOCPermittedDirectionLeft     = 1 &lt;&lt; 2,
+
+  EOCPermittedDirectionRight   = 1 &lt;&lt; 3,
+
+&#125;;
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/" data-id="cl3jmf7nz00819jv366fs8e4a" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/" data-id="cl3jmy3t3007ltxv33p1i4drj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +206,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -226,7 +250,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

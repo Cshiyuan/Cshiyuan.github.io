@@ -5,27 +5,25 @@
   
 
   
-  <title>内部排序和外部排序 | CShyiuan博客</title>
+  <title>内部排序和外部排序 | C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="外排序 外排序（External sorting）是指能够处理极大量数据的排序算法。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。">
+  <meta name="description" content="外排序外排序（External sorting）是指能够处理极大量数据的排序算法。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。外排">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内部排序和外部排序">
-<meta property="og:url" content="http://example.com/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="外排序 外排序（External sorting）是指能够处理极大量数据的排序算法。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://cshiyuan.github.io/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="外排序外排序（External sorting）是指能够处理极大量数据的排序算法。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。外排">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-04-14T08:22:10.000Z">
 <meta property="article:modified_time" content="2022-05-23T08:43:39.085Z">
-<meta property="article:author" content="[object Object]">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -42,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -62,7 +60,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,12 +92,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="外排序"><strong>外排序</strong></h2>
-<p><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。<br>
-外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</p>
+        <h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a><strong>外排序</strong></h2><p><strong>外排序</strong>（External sorting）是指能够处理极大量数据的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">排序算法</a>。通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%A4%96%E5%AD%98%E5%82%A8%E5%99%A8">外存储器</a>（通常是硬盘）上。外排序通常采用的是一种“排序-<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BD%92%E5%B9%B6">归并</a>”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。尔后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。<br>外排序是指在排序期间全部对象个数太多，不能同时存放在内存，必须根据排序过程的要求，不断在内、外存之间移动的排序。比如常见的有外归并排序。</p>
 <hr>
-<h2 id="内部排序">内部排序</h2>
-<p>内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</p>
+<h2 id="内部排序"><a href="#内部排序" class="headerlink" title="内部排序"></a>内部排序</h2><p>内部排序是指待排序列完全存放在内存中所进行的排序过程，适合不太大的元素序列。</p>
 <p>排序是计算机程序设计中的一种重要操作，其功能是对一个<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0">数据元素</a>集合或序列重新排列成一个按数据元素某个相知有序的序列。排序分为两类：内排序和外排序。</p>
 <p>其中<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>的是目前排序方法中被认为是最好的方法</p>
 <p><a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95">内部排序方法</a>：</p>
@@ -117,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/" data-id="cl3jmf7nr00719jv319wq0755" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/04/14/%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/" data-id="cl3jmy3sr006ctxv31ruyawz0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +164,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -213,7 +208,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

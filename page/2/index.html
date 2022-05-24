@@ -5,25 +5,21 @@
   
 
   
-  <title>CShyiuan博客</title>
+  <title>C&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="miehaha">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CShyiuan博客">
-<meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="CShyiuan博客">
-<meta property="og:description" content="miehaha">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="[object Object]">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="C&#39;s Notebook">
+<meta property="og:url" content="https://cshiyuan.github.io/page/2/index.html">
+<meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:locale">
+<meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="CShyiuan博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="C&#39;s Notebook" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -40,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">CShyiuan博客</a>
+        <a href="/" id="logo">C&#39;s Notebook</a>
       </h1>
       
     </div>
@@ -60,7 +56,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cshiyuan.github.io"></form>
       </div>
     </div>
   </div>
@@ -94,44 +90,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="加速神经网络训练（Speed-Up-Training）">加速神经网络训练（Speed Up Training）</h3>
-<p>越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.</p>
+        <h3 id="加速神经网络训练（Speed-Up-Training）"><a href="#加速神经网络训练（Speed-Up-Training）" class="headerlink" title="加速神经网络训练（Speed Up Training）"></a>加速神经网络训练（Speed Up Training）</h3><p>越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.</p>
 <p>####Stochastic Gradient Descent (SGD)</p>
-<p>最基础的方法就是 SGD 啦, 如果用普通的训练方法, 就需要重复不断的把整套数据放入神经网络 NN训练, 这样消耗的计算资源会很大.</p>
+<p> 最基础的方法就是 SGD 啦, 如果用普通的训练方法, 就需要重复不断的把整套数据放入神经网络 NN训练, 这样消耗的计算资源会很大.</p>
 <p>我们换一种思路, 如果把这些数据拆分成小批小批的, 然后再分批不断放入 NN 中计算, 这就是我们常说的 SGD 的正确打开方式了. 每次使用批数据, 虽然不能反映整体数据的情况, 不过却很大程度上加速了 NN 的训练过程, 而且也不会丢失太多准确率.如果运用上了 SGD, 你还是嫌训练速度慢, 那怎么办?</p>
 <p>####Momentum 更新方法</p>
 <p>大多数其他途径是在更新神经网络参数那一步上动动手脚. 传统的参数 W 的更新是把原始的 W 累加上一个负的学习率(learning rate) 乘以校正值 (dx). 这种方法可能会让学习过程曲折无比, 看起来像 喝醉的人回家时, 摇摇晃晃走了很多弯路.</p>
-<p>所以我们把这个人从平地上放到了一个斜坡上, 只要他往下坡的方向走一点点, 由于向下的惯性, 他不自觉地就一直往下走, 走的弯路也变少了.</p>
-<p>$ W += -(Learning Rate) * dx $</p>
+<p>所以我们把这个人从平地上放到了一个斜坡上, 只要他往下坡的方向走一点点, 由于向下的惯性, 他不自觉地就一直往下走, 走的弯路也变少了. </p>
+<p>$ W +&#x3D; -(Learning Rate) * dx $</p>
 <p>更改为</p>
-<p>$ m = b1 * m - (Learning Rate) * dx$<br>
-$W += m$<br>
-这就是 Momentum 参数更新. 另外一种加速方法叫AdaGrad.</p>
-<h4 id="AdaGrad-更新方法">AdaGrad 更新方法</h4>
-<p>这种方法是在学习率上面动手脚, 使得每一个参数更新都会有自己与众不同的学习率, 他的作用和 momentum 类似, 不过不是给喝醉酒的人安排另一个下坡, 而是给他一双不好走路的鞋子, 使得他一摇晃着走路就脚疼, 鞋子成为了走弯路的阻力, 逼着他往前直着走. 他的数学形式是这样的.</p>
-<p>$ W += -(Learning Rate) * dx $</p>
+<p>$ m &#x3D; b1 * m - (Learning Rate) * dx$<br>$W +&#x3D; m$<br>这就是 Momentum 参数更新. 另外一种加速方法叫AdaGrad.</p>
+<h4 id="AdaGrad-更新方法"><a href="#AdaGrad-更新方法" class="headerlink" title="AdaGrad 更新方法"></a>AdaGrad 更新方法</h4><p>这种方法是在学习率上面动手脚, 使得每一个参数更新都会有自己与众不同的学习率, 他的作用和 momentum 类似, 不过不是给喝醉酒的人安排另一个下坡, 而是给他一双不好走路的鞋子, 使得他一摇晃着走路就脚疼, 鞋子成为了走弯路的阻力, 逼着他往前直着走. 他的数学形式是这样的. </p>
+<p>$ W +&#x3D; -(Learning Rate) * dx $</p>
 <p>更改为</p>
-<p>$ v += (dx)^2 $<br>
-$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>$ v +&#x3D; (dx)^2 $<br>$W +&#x3D; \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
 <p>接下来又有什么方法呢? 如果把下坡和不好走路的鞋子合并起来, 是不是更好呢? 没错, 这样我们就有了 RMSProp 更新方法.</p>
-<h4 id="RMSProp-更新方法">RMSProp 更新方法</h4>
-<p>有了 momentum 的惯性原则 , 加上 adagrad 的对错误方向的阻力, 我们就能合并成这样. 让 RMSProp同时具备他们两种方法的优势. 不过细心的同学们肯定看出来了, 似乎在 RMSProp 中少了些什么. 原来是我们还没把 Momentum合并完全, RMSProp 还缺少了 momentum 中的 这一部分. 所以, 我们在 Adam 方法中补上了这种想法.</p>
-<p>$ W += - (Learning Rate * dx)$</p>
+<h4 id="RMSProp-更新方法"><a href="#RMSProp-更新方法" class="headerlink" title="RMSProp 更新方法"></a>RMSProp 更新方法</h4><p>有了 momentum 的惯性原则 , 加上 adagrad 的对错误方向的阻力, 我们就能合并成这样. 让 RMSProp同时具备他们两种方法的优势. 不过细心的同学们肯定看出来了, 似乎在 RMSProp 中少了些什么. 原来是我们还没把 Momentum合并完全, RMSProp 还缺少了 momentum 中的 这一部分. 所以, 我们在 Adam 方法中补上了这种想法.</p>
+<p>$ W +&#x3D; - (Learning Rate * dx)$</p>
 <p>更改为：</p>
-<p>$v = b1 * v + (1-b1) * dx^2$<br>
-$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
-<p>####Adam更新方法<br>
-计算m 时有 momentum 下坡的属性, 计算 v 时有 adagrad 阻力的属性, 然后再更新参数时 把 m 和 V 都考虑进去. 实验证明, 大多数时候, 使用 adam 都能又快又好的达到目标, 迅速收敛. 所以说, 在加速神经网络训练的时候, 一个下坡, 一双破鞋子, 功不可没.</p>
-<p>$ W += - (Learning Rate * dx)$</p>
+<p>$v &#x3D; b1 * v + (1-b1) * dx^2$<br>$W +&#x3D; \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>####Adam更新方法<br>计算m 时有 momentum 下坡的属性, 计算 v 时有 adagrad 阻力的属性, 然后再更新参数时 把 m 和 V 都考虑进去. 实验证明, 大多数时候, 使用 adam 都能又快又好的达到目标, 迅速收敛. 所以说, 在加速神经网络训练的时候, 一个下坡, 一双破鞋子, 功不可没.</p>
+<p>$ W +&#x3D; - (Learning Rate * dx)$</p>
 <p>更改为：</p>
-<p>$m = b1 * m + (1-b1) * dx \rightarrow  Momentum$<br>
-$v = b2 * v + ( 1-b2) * dx^2 \rightarrow  AdaGrad$<br>
-$W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
+<p>$m &#x3D; b1 * m + (1-b1) * dx \rightarrow  Momentum$<br>$v &#x3D; b2 * v + ( 1-b2) * dx^2 \rightarrow  AdaGrad$<br>$W +&#x3D; \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/07/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" data-id="cl3jmf7ng005p9jv397gu3sxv" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/07/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" data-id="cl3jmy3sf004ytxv300vr7dbh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,56 +153,53 @@ $W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="什么是-Anaconda？">什么是 Anaconda？</h4>
-<p>Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？</p>
-<h4 id="什么是-conda-？">什么是 conda ？</h4>
-<p>conda 是开源包（packages）和虚拟环境（environment）的管理系统。</p>
+        <h4 id="什么是-Anaconda？"><a href="#什么是-Anaconda？" class="headerlink" title="什么是 Anaconda？"></a>什么是 Anaconda？</h4><p>Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？</p>
+<h4 id="什么是-conda-？"><a href="#什么是-conda-？" class="headerlink" title="什么是 conda ？"></a>什么是 conda ？</h4><p>conda 是开源包（packages）和虚拟环境（environment）的管理系统。</p>
 <ul>
-<li>packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。</li>
+<li>packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。  </li>
 <li>虚拟环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。对纠结于 Python 版本的同学们，我们也可以建立 Python2 和 Python3 两个环境，来分别运行不同版本的 Python 代码。</li>
 </ul>
 <p>知道 是什么（what） 的同时，我们也需要问一问 为什么（why）。那么，为什么要选择用Anaconda呢？</p>
-<h4 id="Anaconda指令">Anaconda指令</h4>
-<p>进入名为 env_name 的环境：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> activate env_name</span><br></pre></td></tr></table></figure>
+<h4 id="Anaconda指令"><a href="#Anaconda指令" class="headerlink" title="Anaconda指令"></a>Anaconda指令</h4><p>进入名为 env_name 的环境：</p>
+<pre><code class="bash">source activate env_name
+</code></pre>
 <hr>
 <p>退出当前环境：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> deactivate</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">source deactivate
+</code></pre>
 <hr>
-<h4 id="conda指令">conda指令</h4>
-<p>安装一个 package：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install package_name</span><br></pre></td></tr></table></figure>
+<h4 id="conda指令"><a href="#conda指令" class="headerlink" title="conda指令"></a>conda指令</h4><p>安装一个 package：</p>
+<pre><code class="bash">conda install package_name
+</code></pre>
 <hr>
 <p>这里 package_name 是需要安装包的名称。你也可以同时安装多个包，比如同时安装numpy 、scipy 和 pandas，则执行如下命令：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy scipy pandas</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda install numpy scipy pandas
+</code></pre>
 <hr>
 <p>你也可以指定安装的版本，比如安装 1.1 版本的 numpy ：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy=1.10</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda install numpy=1.10
+</code></pre>
 <hr>
 <p>移除一个 package：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove package_name</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda remove package_name
+</code></pre>
 <hr>
 <p>升级 package 版本：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update package_name</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda update package_name
+</code></pre>
 <hr>
 <p>查看所有的 packages：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda list
+</code></pre>
 <hr>
 <p>如果你记不清 package 的具体名称，也可以进行模糊查询：</p>
-<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda  search search_term</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">conda  search search_term
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/07/Anaconda%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="cl3jmf7ma00139jv3alz4hb03" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/07/Anaconda%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="cl3jmy3r9000atxv39oo8cv5e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,18 +235,89 @@ $W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="添加一个神经层">添加一个神经层</h3>
-<p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
-<p>神经层里常见的参数通常有weights、biases和激励函数。</p>
-<h3 id="实现一个训练模型">实现一个训练模型</h3>
-<p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加神经层的函数，有四个参数</span></span><br><span class="line"><span class="comment">#输入值，输入的大小，输出的大小和激励函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_layer</span>(<span class="params">inputs, insize, out_size, activation_function=<span class="literal">None</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment">#在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多</span></span><br><span class="line">    <span class="comment">#这里的weights为一个in_size行，out_size列的随机变量矩阵</span></span><br><span class="line">    Weights = tf.Variable(tf.random_normal([insize, out_size]))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1</span></span><br><span class="line">    biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法</span></span><br><span class="line">    <span class="comment">#矩阵乘法是列与行的乘法</span></span><br><span class="line">    Wx_plus_b = tf.matmul(inputs, Weights) + biases</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        outputs = Wx_plus_b</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        outputs = activation_function(Wx_plus_b)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#导入数据</span></span><br><span class="line"><span class="comment">#构建所需的数据。这里的x_data和y_data并不是一元二次函数的关系，多加一个躁点</span></span><br><span class="line">x_data = np.linspace(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">300</span>, dtype=np.float32)[:, np.newaxis]</span><br><span class="line"><span class="comment">#增加躁点 </span></span><br><span class="line">noise = np.random.normal(<span class="number">0</span>, <span class="number">0.05</span>, x_data.shape).astype(np.float32)</span><br><span class="line">y_data = np.square(x_data) - <span class="number">0.5</span> + noise</span><br><span class="line"></span><br><span class="line">xs = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">1</span>])</span><br><span class="line">ys = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接下来，我们可以开始定义神经层了。</span></span><br><span class="line"><span class="comment">#通常神经层都包括输入层、隐藏层和输出层。</span></span><br><span class="line"><span class="comment">#这里输入层只有一个属性，所以我们就只有一个输入</span></span><br><span class="line"><span class="comment">#隐藏层我们可以自己假设，这里我们假设隐藏层有10个神经元；</span></span><br><span class="line"><span class="comment">#输出层和输入层的结构是一样的，所以我们的输出层也是只有一层。</span></span><br><span class="line"><span class="comment">#所以，我们构建的是——输入层1个、隐藏层10个、输出层1个的神经网络。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -- 搭建网络</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#这里使用Tensorflow自带的激励函数relu</span></span><br><span class="line"><span class="comment">#隐藏层</span></span><br><span class="line">l1 = add_layer(xs, <span class="number">1</span>, <span class="number">10</span>, activation_function=tf.nn.relu)</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出层</span></span><br><span class="line">prediction = add_layer(l1, <span class="number">10</span> ,<span class="number">1</span>,activation_function=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算预测值prediction和真实值的误差，对二者差的平方求和再平均</span></span><br><span class="line"></span><br><span class="line">loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#接下来，是很关键的一步，如何让机器学习提升它的准确率。</span></span><br><span class="line"><span class="comment">#tf.train.GradientDescentOptimizer()中的值通常都小于1，这里取的是0.1，代表以0.1的效率来最小化误差loss。</span></span><br><span class="line"></span><br><span class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.1</span>).minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用变量的时候都要对它进行初始化，这是必不可少的</span></span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#训练一千次</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">    <span class="comment"># training</span></span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: x_data, ys: y_data&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#每50步我们输出一下机器学习的误差。</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># to see the step improvement</span></span><br><span class="line">        <span class="built_in">print</span>(sess.run(loss, feed_dict=&#123;xs: x_data, ys: y_data&#125;))</span><br></pre></td></tr></table></figure>
+        <h3 id="添加一个神经层"><a href="#添加一个神经层" class="headerlink" title="添加一个神经层"></a>添加一个神经层</h3><p>在 Tensorflow 里定义一个添加层的函数可以很容易的添加神经层,为之后的添加省下不少时间.</p>
+<p> 神经层里常见的参数通常有weights、biases和激励函数。</p>
+<h3 id="实现一个训练模型"><a href="#实现一个训练模型" class="headerlink" title="实现一个训练模型"></a>实现一个训练模型</h3><p>我会尽力在注释中详细说明，一个最简单的模型怎么训练的完整代码</p>
+<pre><code class="Python">#添加神经层的函数，有四个参数
+#输入值，输入的大小，输出的大小和激励函数
+def add_layer(inputs, insize, out_size, activation_function=None):
+
+    #在生成初始参数的时候，使用随机变量（normal distribution）会比全部为0要好很多
+    #这里的weights为一个in_size行，out_size列的随机变量矩阵
+    Weights = tf.Variable(tf.random_normal([insize, out_size]))
+
+    #在机器学习中，biases的推荐值不为0，所以我们这里是在0向量的基础上又加了0.1
+    biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
+
+    #下面，我们定义Wx_plus_b，即神经网络未激活的值。其中，tf.matmul()是矩阵乘法
+    #矩阵乘法是列与行的乘法
+    Wx_plus_b = tf.matmul(inputs, Weights) + biases
+
+    if activation_function is None:
+        outputs = Wx_plus_b
+    else:
+        outputs = activation_function(Wx_plus_b)
+
+    return outputs
+
+
+#导入数据
+#构建所需的数据。这里的x_data和y_data并不是一元二次函数的关系，多加一个躁点
+x_data = np.linspace(-1, 1, 300, dtype=np.float32)[:, np.newaxis]
+#增加躁点 
+noise = np.random.normal(0, 0.05, x_data.shape).astype(np.float32)
+y_data = np.square(x_data) - 0.5 + noise
+
+xs = tf.placeholder(tf.float32, [None, 1])
+ys = tf.placeholder(tf.float32, [None, 1])
+
+#接下来，我们可以开始定义神经层了。
+#通常神经层都包括输入层、隐藏层和输出层。
+#这里输入层只有一个属性，所以我们就只有一个输入
+#隐藏层我们可以自己假设，这里我们假设隐藏层有10个神经元；
+#输出层和输入层的结构是一样的，所以我们的输出层也是只有一层。
+#所以，我们构建的是——输入层1个、隐藏层10个、输出层1个的神经网络。
+
+# -- 搭建网络
+
+#这里使用Tensorflow自带的激励函数relu
+#隐藏层
+l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
+
+#输出层
+prediction = add_layer(l1, 10 ,1,activation_function=None)
+
+#计算预测值prediction和真实值的误差，对二者差的平方求和再平均
+
+loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[1]))
+
+#接下来，是很关键的一步，如何让机器学习提升它的准确率。
+#tf.train.GradientDescentOptimizer()中的值通常都小于1，这里取的是0.1，代表以0.1的效率来最小化误差loss。
+
+train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
+
+#使用变量的时候都要对它进行初始化，这是必不可少的
+
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+
+#训练一千次
+for i in range(10000):
+    # training
+    sess.run(train_step, feed_dict=&#123;xs: x_data, ys: y_data&#125;)
+
+    #每50步我们输出一下机器学习的误差。
+    if i % 50 == 0:
+        # to see the step improvement
+        print(sess.run(loss, feed_dict=&#123;xs: x_data, ys: y_data&#125;))
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/06/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" data-id="cl3jmf7nf005m9jv336do70pi" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" data-id="cl3jmy3sf004vtxv3ckrggcw1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,31 +353,103 @@ $W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="激励函数（激活函数）">激励函数（激活函数）</h4>
-<p>为了神经网络实现非线性的任务，所引入的方式。<br>
-激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。<br>
-不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。</p>
+        <h4 id="激励函数（激活函数）"><a href="#激励函数（激活函数）" class="headerlink" title="激励函数（激活函数）"></a>激励函数（激活函数）</h4><p>为了神经网络实现非线性的任务，所引入的方式。<br>激活函数并没有什么特别要选定的，只要可以「掰弯」线性函数就行。<br>不过要确保这些激励函数必须是可以微分的，因为在 backpropagation 误差反向传递的时候，只有这些可微分的激励函数才能把误差传递回去。</p>
 <p>** 不过如果随便使用激励函数，在两三层的时候无所谓，但是在特别多层的时候。容易出现梯度爆炸和梯度消失的问题。**</p>
 <ul>
-<li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu.</li>
+<li>在卷积神经网络(Convolutional neural networks) 的卷积层中, 推荐的激励函数是 relu. </li>
 <li>在循环神经网络中(recurrent neural networks), 推荐的是 tanh 或者是 relu</li>
 </ul>
-<h4 id="简单的tensorflow训练模型（Hello-World）">简单的tensorflow训练模型（Hello World）</h4>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#create data</span></span><br><span class="line">x_data = np.random.rand(<span class="number">100</span>).astype(np.float32)</span><br><span class="line">y_data = x_data * <span class="number">0.1</span> + <span class="number">0.3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#搭建模型</span></span><br><span class="line">Weights = tf.Variable(tf.random_uniform([<span class="number">1</span>], -<span class="number">1.0</span>, <span class="number">1.0</span>))</span><br><span class="line">biases = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line">y = Weights * x_data + biases</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算误差</span></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data))</span><br><span class="line"></span><br><span class="line"><span class="comment">#传播误差  使用的误差传递方法是梯度下降法</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)</span><br><span class="line">train = optimizer.minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练</span></span><br><span class="line">init = tf.global_variables_initializer()  <span class="comment">#初始化</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">201</span>):</span><br><span class="line">    sess.run(train)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(step, sess.run(Weights), sess.run(biases))</span><br></pre></td></tr></table></figure>
-<h4 id="placeholder使用例子">placeholder使用例子</h4>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment">#在tensorflow 中需要定义placeholder的type，yi ban</span></span><br><span class="line">input1 = tf.placeholder(tf.float32)</span><br><span class="line">input2 = tf.placeholder(tf.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># mul = multiply 是将input1和input2 做乘法运算</span></span><br><span class="line">output = tf.multiply(input1, input2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#传值的工作交给了sess.run()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="built_in">print</span>(sess.run(output, feed_dict=&#123;input1: [<span class="number">7.</span>], input2: [<span class="number">2.</span>]&#125;))</span><br></pre></td></tr></table></figure>
+<h4 id="简单的tensorflow训练模型（Hello-World）"><a href="#简单的tensorflow训练模型（Hello-World）" class="headerlink" title="简单的tensorflow训练模型（Hello World）"></a>简单的tensorflow训练模型（Hello World）</h4><pre><code class="Python">import tensorflow as tf
+import numpy as np
+
+#create data
+x_data = np.random.rand(100).astype(np.float32)
+y_data = x_data * 0.1 + 0.3
+
+#搭建模型
+Weights = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+biases = tf.Variable(tf.zeros([1]))
+y = Weights * x_data + biases
+
+#计算误差
+loss = tf.reduce_mean(tf.square(y - y_data))
+
+#传播误差  使用的误差传递方法是梯度下降法
+optimizer = tf.train.GradientDescentOptimizer(0.5)
+train = optimizer.minimize(loss)
+
+#训练
+init = tf.global_variables_initializer()  #初始化
+sess = tf.Session()
+sess.run(init)
+
+for step in range(201):
+    sess.run(train)
+    if step % 20 == 0:
+        print(step, sess.run(Weights), sess.run(biases))
+</code></pre>
+<h4 id="placeholder使用例子"><a href="#placeholder使用例子" class="headerlink" title="placeholder使用例子"></a>placeholder使用例子</h4><pre><code class="Python">import tensorflow as tf
+
+#在tensorflow 中需要定义placeholder的type，yi ban
+input1 = tf.placeholder(tf.float32)
+input2 = tf.placeholder(tf.float32)
+
+# mul = multiply 是将input1和input2 做乘法运算
+output = tf.multiply(input1, input2)
+
+#传值的工作交给了sess.run()
+
+with tf.Session() as sess:
+    print(sess.run(output, feed_dict=&#123;input1: [7.], input2: [2.]&#125;))
+</code></pre>
 <p>####session使用例子</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">martrix1 = tf.constant([[<span class="number">3</span>, <span class="number">3</span>]])</span><br><span class="line">martrix2 = tf.constant([[<span class="number">2</span>], [<span class="number">2</span>]])</span><br><span class="line">product = tf.matmul(martrix1, martrix2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># product</span></span><br><span class="line"><span class="comment"># method 1</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line">result = sess.run(product)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line">sess.close()</span><br><span class="line"><span class="comment">#[[12]]d</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># method 2</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    result2 = sess.run(product)</span><br><span class="line">    <span class="built_in">print</span>(result2)</span><br></pre></td></tr></table></figure>
-<h4 id="variable使用例子">variable使用例子</h4>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">state = tf.Variable(<span class="number">0</span>, name=<span class="string">&quot;counter&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义常量one</span></span><br><span class="line">one = tf.constant(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义加法步骤(注：此步并没有直接计算)</span></span><br><span class="line">new_value = tf.add(state, one)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将State更新成new_value</span></span><br><span class="line">update = tf.assign(state, new_value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果定义Variable，就一定要initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        sess.run(update)</span><br><span class="line">        <span class="built_in">print</span>(sess.run(state))</span><br></pre></td></tr></table></figure>
+<pre><code class="Python">import tensorflow as tf
+
+martrix1 = tf.constant([[3, 3]])
+martrix2 = tf.constant([[2], [2]])
+product = tf.matmul(martrix1, martrix2)
+
+# product
+# method 1
+sess = tf.Session()
+result = sess.run(product)
+print(result)
+sess.close()
+#[[12]]d
+
+# method 2
+with tf.Session() as sess:
+    result2 = sess.run(product)
+    print(result2)
+</code></pre>
+<h4 id="variable使用例子"><a href="#variable使用例子" class="headerlink" title="variable使用例子"></a>variable使用例子</h4><pre><code class="Python">import tensorflow as tf
+
+state = tf.Variable(0, name=&quot;counter&quot;)
+
+#定义常量one
+one = tf.constant(1)
+
+#定义加法步骤(注：此步并没有直接计算)
+new_value = tf.add(state, one)
+
+#将State更新成new_value
+update = tf.assign(state, new_value)
+
+# 如果定义Variable，就一定要initialize
+init = tf.global_variables_initializer()
+# 
+#
+with tf.Session() as sess:
+    sess.run(init)
+    for _ in range(3):
+        sess.run(update)
+        print(sess.run(state))
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/06/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" data-id="cl3jmf7nf005j9jv306bk5c7r" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" data-id="cl3jmy3se004stxv3cl026pj3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,30 +485,21 @@ $W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Bash是什么？">Bash是什么？</h2>
-<p>bash是shell的一种<br>
-是被采用的最多的shell版本。</p>
+        <h2 id="Bash是什么？"><a href="#Bash是什么？" class="headerlink" title="Bash是什么？"></a>Bash是什么？</h2><p>bash是shell的一种<br>是被采用的最多的shell版本。</p>
 <p>##Shell 是什么？</p>
 <p>shell在翻译来看：</p>
 <blockquote>
-<p>n.	外壳; 炮弹; （贝、卵、坚果等的） 壳; （人的） 表面性格;</p>
+<p> n.	外壳; 炮弹; （贝、卵、坚果等的） 壳; （人的） 表面性格;</p>
 </blockquote>
-<h3 id="那它到底是什么呢？">那它到底是什么呢？</h3>
-<p>我们可以理解为shell是Linux内核的“外壳”程序？的确，shell是Linux内核和操作系统的「桥梁」，我们在操作系统的所有任务都可以通过shell来与Linux内核进行交互。shell是一个用C编写而成的程序。</p>
+<h3 id="那它到底是什么呢？"><a href="#那它到底是什么呢？" class="headerlink" title="那它到底是什么呢？"></a>那它到底是什么呢？</h3><p>我们可以理解为shell是Linux内核的“外壳”程序？的确，shell是Linux内核和操作系统的「桥梁」，我们在操作系统的所有任务都可以通过shell来与Linux内核进行交互。shell是一个用C编写而成的程序。</p>
 <p>Linux下有许多Shell版本，有Bourne again shell(bash)、C shell(csh)、Korn shell(ksh)、Tenex C shell(tcsh)等等。</p>
 <p>虽然有这么多版本，但是shell的功能基本相同，现在许多默认的发行版本用的是默认的bash版本。</p>
-<h3 id="shell是一种解释型程序的设计语言">shell是一种解释型程序的设计语言</h3>
-<p>shell有定义了各种变量各种函数以及函数结构等，利用它可以编写出shell脚本程序，有点想windows的dos下的批处理文件。</p>
-<h3 id="shell又是一种命令解释程序">shell又是一种命令解释程序</h3>
-<p>我们接下来要经常使用shell是因为它是命令解释程序，shell会解释用户输入的命令，然后提交给Linux内核，最后会把结果返回给用户。</p>
-<h3 id="内置命令">内置命令</h3>
-<p>shell定义了一些内置命令，比如cd，pwd,exit等等，当用户登录到系统的时候，shell就会和这些内置命令一起加载到内存中，直到用户退出系统才停止运行。</p>
-<h3 id="可执行文件">可执行文件</h3>
-<p>除了内置命令外，Linux上还有可执行文件，这些可执行文件可以作为shell命令来执行，比如存放在/lib/ls 的 ls 就是可执行文件，它和shell内置命令的不同在于：可执行文件的命令只有在被调用的时候哦才会加载到内存中去。</p>
-<h3 id="shell命令提示符的用户区别">shell命令提示符的用户区别</h3>
-<p>当用户登录进入系统的时候，如果用的是普通用户，那么shell会以“$”表示，如果是超级用户，那么shell就会以“#”表示!</p>
-<h3 id="Shell命令行的格式">Shell命令行的格式</h3>
-<blockquote>
+<h3 id="shell是一种解释型程序的设计语言"><a href="#shell是一种解释型程序的设计语言" class="headerlink" title="shell是一种解释型程序的设计语言"></a>shell是一种解释型程序的设计语言</h3><p>shell有定义了各种变量各种函数以及函数结构等，利用它可以编写出shell脚本程序，有点想windows的dos下的批处理文件。</p>
+<h3 id="shell又是一种命令解释程序"><a href="#shell又是一种命令解释程序" class="headerlink" title="shell又是一种命令解释程序"></a>shell又是一种命令解释程序</h3><p>我们接下来要经常使用shell是因为它是命令解释程序，shell会解释用户输入的命令，然后提交给Linux内核，最后会把结果返回给用户。</p>
+<h3 id="内置命令"><a href="#内置命令" class="headerlink" title="内置命令"></a>内置命令</h3><p>shell定义了一些内置命令，比如cd，pwd,exit等等，当用户登录到系统的时候，shell就会和这些内置命令一起加载到内存中，直到用户退出系统才停止运行。</p>
+<h3 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h3><p>除了内置命令外，Linux上还有可执行文件，这些可执行文件可以作为shell命令来执行，比如存放在&#x2F;lib&#x2F;ls 的 ls 就是可执行文件，它和shell内置命令的不同在于：可执行文件的命令只有在被调用的时候哦才会加载到内存中去。</p>
+<h3 id="shell命令提示符的用户区别"><a href="#shell命令提示符的用户区别" class="headerlink" title="shell命令提示符的用户区别"></a>shell命令提示符的用户区别</h3><p>当用户登录进入系统的时候，如果用的是普通用户，那么shell会以“$”表示，如果是超级用户，那么shell就会以“#”表示!  </p>
+<h3 id="Shell命令行的格式"><a href="#Shell命令行的格式" class="headerlink" title="Shell命令行的格式"></a>Shell命令行的格式</h3><blockquote>
 <p>command [options] [argument]</p>
 </blockquote>
 <p>其中：</p>
@@ -392,94 +509,98 @@ $W += \frac{-(Learning Rate) * dx}{\sqrt{v}} $</p>
 <li>argument： 参数，指定操作的对象</li>
 </ul>
 <p>例如：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ls -l /etc</span><br></pre></td></tr></table></figure>
-<p>其中ls就是命令的名字， -l 就是指定要这个命令执行的方式，比如这里是列出目录， /etc就是参数，我们这里是对 /etc的目录进行操作。</p>
-<p>所以这句命令行的意思就是 ： 使用ls命令列出 /etc 下的所有目录。</p>
-<p>###shell命令行的用法<br>
-命令选项合并使用<br>
-比如我们要列出etc目录下的所有文件，包含隐藏文件，那么我们就会这样输入：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -a -l /etc</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;ls -l /etc
+</code></pre>
+<p>其中ls就是命令的名字， -l 就是指定要这个命令执行的方式，比如这里是列出目录， &#x2F;etc就是参数，我们这里是对 &#x2F;etc的目录进行操作。</p>
+<p>所以这句命令行的意思就是 ： 使用ls命令列出 &#x2F;etc 下的所有目录。</p>
+<p>###shell命令行的用法<br>命令选项合并使用<br>比如我们要列出etc目录下的所有文件，包含隐藏文件，那么我们就会这样输入：</p>
+<pre><code>ls -a -l /etc
+</code></pre>
 <p>然后选项合并之后可以变成成这样：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ls -al /etc</span><br></pre></td></tr></table></figure>
-<p>###命令参数通配符的使用<br>
-shell命令的通配符的存在是为了我们在使用命令参数的时候对文件目录进行描述，比如我要查询以.sh结尾的所有文件，那么这个时候通配符就会让我们很方便的使用了。</p>
+<pre><code>&gt;ls -al /etc
+</code></pre>
+<p>###命令参数通配符的使用<br>shell命令的通配符的存在是为了我们在使用命令参数的时候对文件目录进行描述，比如我要查询以.sh结尾的所有文件，那么这个时候通配符就会让我们很方便的使用了。</p>
 <p>常用的通配符有以下几个：</p>
 <ul>
 <li>*　 一个或任意多个</li>
 <li>？　 任意单一字符</li>
-<li>[] 　包含在[]内的单字符<br>
-例如：</li>
+<li>[] 　包含在[]内的单字符<br>例如：</li>
 </ul>
 <p>列出etc下的 子目录 的所有以 .conf 结尾的文件</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al /etc/*/*.conf</span><br></pre></td></tr></table></figure>
+<pre><code>ls -al /etc/*/*.conf　
+</code></pre>
 <p>列出当前目录下以a开头，随后一个为随意字母的txt文件：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls a?.txt</span><br></pre></td></tr></table></figure>
+<pre><code>ls a?.txt
+</code></pre>
 <p>列出当前目录下以a开头，随后三个为随意字母的txt文件：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls a??.txt</span><br></pre></td></tr></table></figure>
+<pre><code>ls a??.txt
+</code></pre>
 <p>列出当前目录下，以a开头，随后含有1，2，3，4的txt文件：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls a[1,2,3,4].txt //这里也可以写成 ls a[1-4].txt</span><br></pre></td></tr></table></figure>
-<h3 id="shell重定向操作">shell重定向操作</h3>
-<p>有时候我们在字符窗口输入命令行的时候，可能输入源不只是我们敲入的命令行，也可能来源于某个文件，在结果输出的时候有时候数据太多，我们可能需要将它的输出定向到指定的文件，然后我们去文件里面看输出结果，还有的就是一些错误信息，我们也可以将它重定向输出，而不仅仅是在屏幕输出。</p>
+<pre><code>ls a[1,2,3,4].txt //这里也可以写成 ls a[1-4].txt
+</code></pre>
+<h3 id="shell重定向操作"><a href="#shell重定向操作" class="headerlink" title="shell重定向操作"></a>shell重定向操作</h3><p>有时候我们在字符窗口输入命令行的时候，可能输入源不只是我们敲入的命令行，也可能来源于某个文件，在结果输出的时候有时候数据太多，我们可能需要将它的输出定向到指定的文件，然后我们去文件里面看输出结果，还有的就是一些错误信息，我们也可以将它重定向输出，而不仅仅是在屏幕输出。</p>
 <p>所以有这三个：</p>
 <ul>
 <li>标准输入 对应的重定向操作符为 “&lt;” , “«”;</li>
 <li>标准输出 对应的重定向操作符为 “&gt;” , “»”;</li>
 <li>标准错误输出 对应的重定向操作符为 “2&gt;” , “2»“。</li>
 </ul>
-<h4 id="标准输入">标准输入</h4>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wc &lt;&lt;/etc/shadow</span><br><span class="line">       42       42      1236</span><br><span class="line">wc &lt;&lt; b b</span><br><span class="line">&gt; hsdufhi</span><br><span class="line">&gt; wfhieurhf</span><br><span class="line">&gt; eirfuberigvber</span><br><span class="line">&gt; weifuwheifu</span><br><span class="line">&gt; huief  ieufh iu erfih</span><br><span class="line">&gt; bb</span><br><span class="line">       5       8      67</span><br></pre></td></tr></table></figure>
-<p>我们看到第一个命令： wc &lt; /etc/shadow</p>
-<p>这个命令的意思就是：wc是统计命令，来源是/etc/shadow，统计的行数，单词数，字符数输出结果。</p>
+<h4 id="标准输入"><a href="#标准输入" class="headerlink" title="标准输入"></a>标准输入</h4><pre><code>wc &lt;&lt;/etc/shadow
+       42       42      1236
+wc &lt;&lt; b b
+&gt; hsdufhi
+&gt; wfhieurhf
+&gt; eirfuberigvber
+&gt; weifuwheifu
+&gt; huief  ieufh iu erfih
+&gt; bb
+       5       8      67
+</code></pre>
+<p>我们看到第一个命令： wc &lt; &#x2F;etc&#x2F;shadow</p>
+<p>这个命令的意思就是：wc是统计命令，来源是&#x2F;etc&#x2F;shadow，统计的行数，单词数，字符数输出结果。</p>
 <p>第二个命令 ：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wc &lt;&lt; bb</span><br><span class="line">&gt; ...</span><br><span class="line">&gt; ...</span><br><span class="line">&gt; ...</span><br><span class="line">&gt; bb</span><br></pre></td></tr></table></figure>
+<pre><code>wc &lt;&lt; bb
+&gt; ...
+&gt; ...
+&gt; ...
+&gt; bb
+</code></pre>
 <p>这里的 « 就是告诉命令输入源来源于 bb 和 bb之间，这个bb就是内容的分隔符，可以使任意字符，然后我们就统计到我们在bb之间的行数，单词数，字符数。</p>
-<h4 id="标准输出">标准输出</h4>
-<p>比如我们将结果输出放到 ls.txt 就可以这样：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /etc &gt;ls.txt</span><br></pre></td></tr></table></figure>
+<h4 id="标准输出"><a href="#标准输出" class="headerlink" title="标准输出"></a>标准输出</h4><p>比如我们将结果输出放到 ls.txt 就可以这样：</p>
+<pre><code>ls /etc &gt;ls.txt
+</code></pre>
 <p>如果这时候ls.txt文件不存在，那么系统会自动创建一个，如果系统已经存在了ls.txt,那么系统会将ls.txt原有的内容覆盖掉。如果不想被覆盖，那么这时候就可以用到 “»”:</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /etx &gt;&gt;ls.txt</span><br></pre></td></tr></table></figure>
+<pre><code>ls /etx &gt;&gt;ls.txt
+</code></pre>
 <p>这个时候将输出的内容追加到ls.txt。</p>
-<p>标准错误输出<br>
-标准错误输出和标准输出差不多，只不过在输出的时候是 ：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2&gt; error.txt;</span><br></pre></td></tr></table></figure>
-<h3 id="shell管道">shell管道</h3>
-<p>管道，顾名思义，就是将第一个命令的输出当做第二个命令的输入，管道的符号为”	“,比如：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc |more</span><br></pre></td></tr></table></figure>
-<p>将 /etc 下的目录输出，然后用more的进行分屏显示。</p>
-<h3 id="shell的转义">shell的转义</h3>
-<p>shell的命令有一些特殊的字符是有含义的，我们在使用它们的时候要进行转义才可以使用。比如刚才我们已经知道 ？ 是一个通配符，代表一个任意字符， 但是如果我们真的有一个文件叫做 abc？呢，我们就不能把？当做通配符来使用，这时候就对它进行转义，让系统知道这是真正文件名。</p>
+<p>标准错误输出<br>标准错误输出和标准输出差不多，只不过在输出的时候是 ： </p>
+<pre><code>2&gt; error.txt;
+</code></pre>
+<h3 id="shell管道"><a href="#shell管道" class="headerlink" title="shell管道"></a>shell管道</h3><p>管道，顾名思义，就是将第一个命令的输出当做第二个命令的输入，管道的符号为”	“,比如：</p>
+<pre><code>ls -l /etc |more
+</code></pre>
+<p>将 &#x2F;etc 下的目录输出，然后用more的进行分屏显示。</p>
+<h3 id="shell的转义"><a href="#shell的转义" class="headerlink" title="shell的转义"></a>shell的转义</h3><p>shell的命令有一些特殊的字符是有含义的，我们在使用它们的时候要进行转义才可以使用。比如刚才我们已经知道 ？ 是一个通配符，代表一个任意字符， 但是如果我们真的有一个文件叫做 abc？呢，我们就不能把？当做通配符来使用，这时候就对它进行转义，让系统知道这是真正文件名。</p>
 <p>那么转义字符有： 反斜杠（\） 、双引号（”“）、单引号（’‘）。</p>
 <p>比如我要列出abc？这个文件下的所有目录：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l abc/?/*</span><br></pre></td></tr></table></figure>
+<pre><code>ls -l abc/?/*
+</code></pre>
 <p>也可以这样写：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l &#x27;abc?/*</span><br></pre></td></tr></table></figure>
+<pre><code>ls -l &#39;abc?/*
+</code></pre>
 <p>也可以这样写：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l &quot;abc?/*&quot;</span><br></pre></td></tr></table></figure>
-<p>当然了对于一些更特殊的字符即使我们使用了转义字符，它也会保留自己，比如 “$” ,”`” ,”&quot;</p>
-<p>比如这里我用 “” 对 ` 进行转义是无效的：</p>
-<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo this is &quot;`hostname`&quot;</span><br><span class="line">this is mymacbook.local</span><br></pre></td></tr></table></figure>
+<pre><code>ls -l &quot;abc?/*&quot;
+</code></pre>
+<p>当然了对于一些更特殊的字符即使我们使用了转义字符，它也会保留自己，比如 “$” ,”&#96;” ,””</p>
+<p>比如这里我用 “” 对 &#96; 进行转义是无效的：</p>
+<pre><code>echo this is &quot;`hostname`&quot;
+this is mymacbook.local
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/06/Shell-And-Base/" data-id="cl3jmf7mz003x9jv39cuxdybp" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/06/Shell-And-Base/" data-id="cl3jmy3s10034txv31lyrcgwk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -515,17 +636,12 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>阿里云那边的服务器老是过期不稳定。<br>
-感觉超级烦。<br>
-忍不住就想试一下GitHub Page。<br>
-毕竟github.io这个域名还是很有范的。<br>
-但是wordpress转markdown还是很不稳定。让我很难受啊。<br>
-改了大半天。想自暴自弃了。</p>
+        <p>阿里云那边的服务器老是过期不稳定。<br>感觉超级烦。<br>忍不住就想试一下GitHub Page。<br>毕竟github.io这个域名还是很有范的。<br>但是wordpress转markdown还是很不稳定。让我很难受啊。<br>改了大半天。想自暴自弃了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2018/01/04/%E5%88%B0%E5%A4%B4%E6%9D%A5%E8%BF%98%E6%98%AF%E4%BB%8E%E8%87%AA%E5%BB%BAwordpress%E8%BD%AC%E7%A7%BB%E5%88%B0%E4%BA%86github.io/" data-id="cl3jmf7ns00749jv3a899bb3t" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2018/01/04/%E5%88%B0%E5%A4%B4%E6%9D%A5%E8%BF%98%E6%98%AF%E4%BB%8E%E8%87%AA%E5%BB%BAwordpress%E8%BD%AC%E7%A7%BB%E5%88%B0%E4%BA%86github.io/" data-id="cl3jmy3ss006ftxv37g9p2qum" class="article-share-link">Share</a>
       
       
     </footer>
@@ -562,14 +678,14 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li><strong><span lang="EN-US">JavaScript</span>中的<span lang="EN-US">this</span>指针是一个动态变化的变量</strong>，它表明了当前运行该函数的对象。由<span lang="EN-US">this</span>指针的性质，也可以更好的理解<span lang="EN-US">JavaScript</span>中对象的本质：**一个对象就是由一个或多个属性（方法）组成的集合。每个集合元素不是仅能属于一个集合，而是可以动态的属于多个集合。**这样，一个方法（集合元素）由谁调用，<span lang="EN-US">this</span>指针就指向谁。实际上，<span lang="EN-US">js</span>的<span lang="EN-US">apply</span>方法和<span lang="EN-US">call</span>方法都是通过强制改变<span lang="EN-US">this</span>指针的值来实现的，使<span lang="EN-US">this</span>指针指向参数所指定的对象，从而达到将一个对象的方法作为另一个对象的方法运行。</li>
+<li><strong><span lang="EN-US">JavaScript</span>中的<span lang="EN-US">this</span>指针是一个动态变化的变量</strong>，它表明了当前运行该函数的对象。由<span lang="EN-US">this</span>指针的性质，也可以更好的理解<span lang="EN-US">JavaScript</span>中对象的本质：<strong>一个对象就是由一个或多个属性（方法）组成的集合。每个集合元素不是仅能属于一个集合，而是可以动态的属于多个集合。</strong>这样，一个方法（集合元素）由谁调用，<span lang="EN-US">this</span>指针就指向谁。实际上，<span lang="EN-US">js</span>的<span lang="EN-US">apply</span>方法和<span lang="EN-US">call</span>方法都是通过强制改变<span lang="EN-US">this</span>指针的值来实现的，使<span lang="EN-US">this</span>指针指向参数所指定的对象，从而达到将一个对象的方法作为另一个对象的方法运行。</li>
 <li></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/09/14/Javascript%E6%B7%B1%E5%85%A5%E7%AC%94%E8%AE%B0/" data-id="cl3jmf7mj00239jv3czkb08hk" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/09/14/Javascript%E6%B7%B1%E5%85%A5%E7%AC%94%E8%AE%B0/" data-id="cl3jmy3rk0014txv3fhyl4z0o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -607,12 +723,9 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
       
         <p>最近因为需要，开始大量接触JS和Css相关知识。</p>
 <p>所以在这里做个记录。</p>
-<h3 id="webPack">webPack</h3>
-<p> </p>
-<p>Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个浏览器可识别的JavaScript文件。<br>
-<img src="http://upload-images.jianshu.io/upload_images/1031000-160bc667d3b6093a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h3 id="CommonJS">CommonJS</h3>
-<div class="image-package"></div>
+<h3 id="webPack"><a href="#webPack" class="headerlink" title="webPack"></a>webPack</h3><p>&amp;nbsp;</p>
+<p>Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个浏览器可识别的JavaScript文件。<br><img src="http://upload-images.jianshu.io/upload_images/1031000-160bc667d3b6093a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><div class="image-package"></div>
 <div class="image-package">
 <div class="para">CommonJS API定义很多普通应用程序（主要指非浏览器的应用）使用的API，从而填补了这个空白。它的终极目标是提供一个类似Python，Ruby和Java标 准库。这样的话，开发者可以使用CommonJS API编写应用程序，然后这些应用可以运行在不同的JavaScript解释器和不同的主机环境中。在兼容CommonJS的系统中，你可以使用 JavaScript程序开发：</div>
 <div class="para">服务器端JavaScript应用程序</div>
@@ -622,7 +735,7 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/06/15/webpack%20commonJS/" data-id="cl3jmf7nk006a9jv3hwgjbu4d" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/06/15/webpack%20commonJS/" data-id="cl3jmy3sk005jtxv3cdouagk8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -664,14 +777,14 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
 <hr>
 <p>游戏应该优先保证正常用户的体验，所以当有玩家出现卡帧情况的时候，不应选择暂停其他玩家，而是让他慢慢的追赶上来，设计上，服务器即可以采用客户端的正常速度，按帧驱动客户端，但当网络都出现突发状况的时候，如<strong>图****9</strong>，通讯异常时，2个客户端都对帧数2缺失，如果服务器照常运行，到恢复网络状况时，会出现情况是，每个客户端都卡了几帧之后，加速拉了几帧。所以，针对这种情况，增加客户端的对帧操作，即客户端执行第1帧时，跟服务器说可以播放第二帧了，然后服务器开始驱动第二帧动作，考虑网络延迟情况，可以提前对帧第n帧的,效果如<strong>图****9</strong>，左边客户端第二个对帧操作使服务器开始推动第二帧进行，而右边客户端的第二个对帧动作其实不起任何作用</p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /><a target="_blank" rel="noopener" href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBRS7hu98"><img src="http://s9.sinaimg.cn/mw690/001Tiuj0gy6DHBRS7hu98&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
-<p> </p>
+<p>&amp;nbsp;</p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <wbr /> <strong>图8</strong></p>
 <p><wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr />  <wbr /> <wbr /><a target="_blank" rel="noopener" href="http://photo.blog.sina.com.cn/showpic.html#blogid=674f1bd20101omv7&amp;url=http://album.sina.com.cn/pic/001Tiuj0gy6DHBTfDXza1"><img src="http://s2.sinaimg.cn/mw690/001Tiuj0gy6DHBTfDXza1&amp;690" alt="帧同步在竞技类网络游戏中的应用" title="帧同步在竞技类网络游戏中的应用"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" data-id="cl3jmf7nv007j9jv3hpxr5nyl" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" data-id="cl3jmy3sy0070txv37lj22p6t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -708,23 +821,17 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
     <div class="article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3">应用程序二进制接口</a> 描述了应用程序和操作系统之间，一个应用和它的库之间，或者应用的组成部分之间的低接口。</p>
-<h5 id="ABI涵盖了各种细节，如：">ABI涵盖了各种细节，如：</h5>
-<p><strong>数据类型的大小、布局和对齐</strong>;</p>
-<p><strong>调用约定</strong>（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；<br>
-系统调用的编码和一个应用如何向操作系统进行系统调用;</p>
-<p>以及在一个完整的操作系统ABI中，<strong>目标文件</strong>的<strong>二进制格式</strong>、程序库等等ABI不同于API ，API定义了源代码和库之间的接口，因此同样的代码可以在支持这个API的任何系统中编译，然而ABI允许编译好的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81">目标代码</a>在使用兼容ABI的系统中无需改动就能运行。</p>
-<p>ABI掩盖了各种细节，例如:调用约定控制着函数的参数如何传送以及如何接受返回值；<br>
-系统调用的编码和一个应用如何向操作系统进行系统调用；<br>
-以及在一个完整的操作系统ABI中，对象文件的二进制格式、程序库等等。<br>
-一个完整的ABI，像 Intel二进制兼容标准 (iBCS) ，允许支持它的操作系统上的程序不经修改在其他支持此ABI的操作系统上运行。</p>
-<p>其他的 ABI 标准化细节包括C++ name decoration和同一个平台上的编译器之间的调用约定，但是不包括跨平台的兼容性。在Unix的操作系统中，存在很多运行在同一件平台上互相相关但是不兼容的操作系统（尤其是80386兼容系统）。有一些努力尝试标准化AI，以减少销售商将程序移植到其他系统时所需的工作。然而，直到现在还没有很成功的例子，虽然LSB正在为Linux做这方面的努力。</p>
-<p>它描述了应用程序与OS之间的底层接口。ABI涉及了程序的各个方面，比如：目标文件格式、数据类型、数据对齐、函数调用约定以及函数如何传递参数、如何返回值、系统调用号、如何实现系统调用等。<br>
-一套完整的ABI（比如：Intel(iBCS)），可以让程序在所有支持该ABI的系统上运行，而无需对程序进行修改。</p>
+<h5 id="ABI涵盖了各种细节，如："><a href="#ABI涵盖了各种细节，如：" class="headerlink" title="ABI涵盖了各种细节，如："></a>ABI涵盖了各种细节，如：</h5><p><strong>数据类型的大小、布局和对齐</strong>;  </p>
+<p><strong>调用约定</strong>（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；<br>系统调用的编码和一个应用如何向操作系统进行系统调用;</p>
+<p>以及在一个完整的操作系统ABI中，<strong>目标文件</strong>的<strong>二进制格式</strong>、程序库等等ABI不同于API ，API定义了源代码和库之间的接口，因此同样的代码可以在支持这个API的任何系统中编译，然而ABI允许编译好的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81">目标代码</a>在使用兼容ABI的系统中无需改动就能运行。  </p>
+<p>ABI掩盖了各种细节，例如:调用约定控制着函数的参数如何传送以及如何接受返回值；<br>系统调用的编码和一个应用如何向操作系统进行系统调用；<br>以及在一个完整的操作系统ABI中，对象文件的二进制格式、程序库等等。<br>一个完整的ABI，像 Intel二进制兼容标准 (iBCS) ，允许支持它的操作系统上的程序不经修改在其他支持此ABI的操作系统上运行。  </p>
+<p>其他的 ABI 标准化细节包括C++ name decoration和同一个平台上的编译器之间的调用约定，但是不包括跨平台的兼容性。在Unix的操作系统中，存在很多运行在同一件平台上互相相关但是不兼容的操作系统（尤其是80386兼容系统）。有一些努力尝试标准化AI，以减少销售商将程序移植到其他系统时所需的工作。然而，直到现在还没有很成功的例子，虽然LSB正在为Linux做这方面的努力。  </p>
+<p>它描述了应用程序与OS之间的底层接口。ABI涉及了程序的各个方面，比如：目标文件格式、数据类型、数据对齐、函数调用约定以及函数如何传递参数、如何返回值、系统调用号、如何实现系统调用等。<br>一套完整的ABI（比如：Intel(iBCS)），可以让程序在所有支持该ABI的系统上运行，而无需对程序进行修改。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/" data-id="cl3jmf7m9000z9jv314fe3fwe" class="article-share-link">Share</a>
+      <a data-url="https://cshiyuan.github.io/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/" data-id="cl3jmy3r80008txv3bznygewe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -764,7 +871,7 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -808,7 +915,7 @@ shell命令的通配符的存在是为了我们在使用命令参数的时候对
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 [object Object]<br>
+      &copy; 2022 shyiuanchen<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
