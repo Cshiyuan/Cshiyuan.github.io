@@ -62,7 +62,7 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div></div></div>
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/">延迟队列</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div></div></div>
 </div>
 
 
@@ -100,7 +100,19 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">
+  <div class="post-list post"><a class="post-card post " href="/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/">
+<article class="md"><h2 class="post-title">延迟队列</h2><div class="excerpt"><p>延迟队列定义
+队列：
+它是一种先进先出的数据结构。普通队列中的元素是有序的，先进入队列中的元素会被优先取出进行消费
+
+
+延迟队列
+普通队列的元素是先进先出，按入队顺序进行处理，而延时队列中的元素在入队时会指定一个延迟时间，表示其希望能够在经过该指定时间后处理。从某种意义上来讲，延迟队列的结构并不像一个队列，而更像是一种以时间为权重的有序堆结构。
+
+
+
+实现方案我们知道Redis有一个有序集合...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2022-05-25T08:25:32.000Z">2022-05-25</time></span></div></article>
+</a><a class="post-card post " href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">
 <article class="md"><h2 class="post-title">linux排查命令</h2><div class="excerpt"><p>
 一、CPU和内存类top
 第一行后面的三个值是系统在之前 1、5、15 的平均负载，也可以看出系统负载是上升、平稳、下降的趋势，当这个值超过 CPU 可执行单元的数目，则表示 CPU 的性能已经饱和成为瓶颈了。
@@ -151,9 +163,6 @@ import numpy as np
 
 ## Save to file
 # remember to define the same dtype...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-11T15:52:54.000Z">2018-01-11</time></span></div></article>
-</a><a class="post-card post " href="/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/">
-<article class="md"><h2 class="post-title">tensorflow笔记（4）</h2><div class="excerpt"><p>一个简单的基于MNIST训练的CNN模型卷积神经网络包含输入层、隐藏层和输出层，隐藏层又包含卷积层和pooling层，图像输入到卷积神经网络后通过卷积来不断的提取特征，每提取一个特征就会增加一个feature map，pooling层也就是下采样，通常采用的是最大值pooling和平均值pooling，因为参数太多喽，所以通过pooling来稀疏参数，使我们的网络不至于太复杂。
-好啦，既然你...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-10T05:16:59.000Z">2018-01-10</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

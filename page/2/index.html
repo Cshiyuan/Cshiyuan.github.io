@@ -62,7 +62,7 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div></div></div>
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/">延迟队列</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div></div></div>
 </div>
 
 
@@ -100,7 +100,10 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/">
+  <div class="post-list post"><a class="post-card post " href="/2018/01/10/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（4）</h2><div class="excerpt"><p>一个简单的基于MNIST训练的CNN模型卷积神经网络包含输入层、隐藏层和输出层，隐藏层又包含卷积层和pooling层，图像输入到卷积神经网络后通过卷积来不断的提取特征，每提取一个特征就会增加一个feature map，pooling层也就是下采样，通常采用的是最大值pooling和平均值pooling，因为参数太多喽，所以通过pooling来稀疏参数，使我们的网络不至于太复杂。
+好啦，既然你...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-10T05:16:59.000Z">2018-01-10</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a><a class="post-card post " href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/">
 <article class="md"><h2 class="post-title">TensorFlow Classification分类学习</h2><div class="excerpt"><p>使用MNIST实现的例子具体的实现在注释里详细说明了
 import tensorflow as tf
 import numpy as np
@@ -153,8 +156,6 @@ Webpack的工作方式是：把你的项目当做一个整体，通过一个给�
 CommonJS
 
 CommonJS API定...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-06-15T11:12:35.000Z">2017-06-15</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
-</a><a class="post-card post " href="/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">
-<article class="md"><h2 class="post-title">因为好奇手游的同步策略，查询的帧同步相关内容。</h2><div class="excerpt"><p>大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-08T13:34:45.000Z">2017-05-08</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

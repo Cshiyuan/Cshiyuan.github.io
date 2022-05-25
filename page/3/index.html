@@ -62,7 +62,7 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div></div></div>
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/">延迟队列</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div></div></div>
 </div>
 
 
@@ -100,7 +100,9 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">
+  <div class="post-list post"><a class="post-card post " href="/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">
+<article class="md"><h2 class="post-title">因为好奇手游的同步策略，查询的帧同步相关内容。</h2><div class="excerpt"><p>大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-08T13:34:45.000Z">2017-05-08</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
+</a><a class="post-card post " href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">
 <article class="md"><h2 class="post-title">ABI （应用程序二进制接口）</h2><div class="excerpt"><p>应用程序二进制接口 描述了应用程序和操作系统之间，一个应用和它的库之间，或者应用的组成部分之间的低接口。
 ABI涵盖了各种细节，如：数据类型的大小、布局和对齐;  
 调用约定（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；系统调用的编码和一个应用如何...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T07:28:20.000Z">2017-05-01</time></span><span class="cap breadcrumb">未分类</span></div></article>
@@ -258,12 +260,6 @@ FFmpeg需要依赖libx264.自动编译脚本项目位置放在github:https://git
 &amp;nbsp;
 做iOS开发也有半年多了，想想自己对一些第三方库还只是停留在简单运用的阶段，感觉心慌慌的。于是决定用一个月的时间深入了解一些好的第三方库。
 第一个想到了SDWebImage，这个库很不错，几乎每个iOS项目都会有它的影子，因为它很完美地解决了下载图片并显示的处理逻辑。那么深究它之前，笔...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-19T05:48:13.000Z">2017-04-19</time></span><span class="cap breadcrumb">iOS</span></div></article>
-</a><a class="post-card post " href="/2017/04/19/Prototype%20%E6%91%98%E6%8A%84%E8%87%AA%20Pro.Objective-C.Design.Patterns.for.iOS/">
-<article class="md"><h2 class="post-title">Prototype 摘抄自 Pro.Objective-C.Design.Patterns.for.iOS</h2><div class="excerpt"><p>
-
-
-
-Back in the old days when printing wasn’t common, people used to use some sort of wooden stamps (later they became rubber stamps) to print some commonly used graphics and text on paper. Many ye...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-19T04:03:56.000Z">2017-04-19</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

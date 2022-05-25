@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="Hexo 6.2.0">
   <meta charset="utf-8">
-  <meta name="robots" content="noindex,follow">
+  
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
@@ -18,16 +18,20 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
-  <title>分类：生活杂谈 - C's Notebook</title>
+  <title>延迟队列 - C's Notebook</title>
 
   
 
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="C&#39;s Notebook">
-<meta property="og:url" content="https://cshiyuan.github.io/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%B0%88/page/2/index.html">
+    <meta name="description" content="延迟队列定义 队列： 它是一种先进先出的数据结构。普通队列中的元素是有序的，先进入队列中的元素会被优先取出进行消费   延迟队列 普通队列的元素是先进先出，按入队顺序进行处理，而延时队列中的元素在入队时会指定一个延迟时间，表示其希望能够在经过该指定时间后处理。从某种意义上来讲，延迟队列的结构并不像一个队列，而更像是一种以时间为权重的有序堆结构。    实现方案我们知道Redis有一个有序集合的数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="延迟队列">
+<meta property="og:url" content="https://cshiyuan.github.io/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
+<meta property="og:description" content="延迟队列定义 队列： 它是一种先进先出的数据结构。普通队列中的元素是有序的，先进入队列中的元素会被优先取出进行消费   延迟队列 普通队列的元素是先进先出，按入队顺序进行处理，而延时队列中的元素在入队时会指定一个延迟时间，表示其希望能够在经过该指定时间后处理。从某种意义上来讲，延迟队列的结构并不像一个队列，而更像是一种以时间为权重的有序堆结构。    实现方案我们知道Redis有一个有序集合的数据">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-25T08:25:32.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:32:33.601Z">
 <meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
@@ -51,8 +55,10 @@
   
 
 
+
+
   <div class='l_body' id='start'>
-    <aside class='l_left' layout=''>
+    <aside class='l_left' layout='post'>
     
 
 
@@ -62,88 +68,71 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/25/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/">延迟队列</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div></div></div>
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%EF%BC%9A"><span class="toc-text">队列：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97"><span class="toc-text">延迟队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-text">实现方案</span></a></div></div></div>
+
+
 </div>
 
 
     </aside>
-    <div class='l_main list'>
+    <div class='l_main'>
       
-  
-
-<header class="header mobile-only">
-
-<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/11845557?s=96&v=4" onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main">C's Notebook</div><div class="sub cap">Hi! This is my technical notebook.</div></a></div>
-</header>
-
-
 
       
 
-  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-05-25T08:25:32.000Z">2022-05-25</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>延迟队列</span></h1>
+<h1 id="延迟队列定义"><a href="#延迟队列定义" class="headerlink" title="延迟队列定义"></a>延迟队列定义</h1><ul>
+<li><h3 id="队列："><a href="#队列：" class="headerlink" title="队列："></a>队列：</h3><blockquote>
+<p>它是一种先进先出的数据结构。普通队列中的元素是有序的，先进入队列中的元素会被优先取出进行消费</p>
+</blockquote>
+</li>
+<li><h3 id="延迟队列"><a href="#延迟队列" class="headerlink" title="延迟队列"></a>延迟队列</h3><blockquote>
+<p>普通队列的元素是先进先出，按入队顺序进行处理，而延时队列中的元素在入队时会指定一个延迟时间，表示其希望能够在经过该指定时间后处理。从某种意义上来讲，延迟队列的结构并不像一个队列，而更像是一种以时间为权重的有序堆结构。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><p>我们知道Redis有一个有序集合的数据结构ZSet，ZSet中每个元素都有一个对应Score，ZSet中所有元素是按照其Score进行排序的。</p>
+<p>那么我们可以通过以下这几个操作使用Redis的ZSet来实现一个延迟队列：</p>
+<p>入队操作：ZADD KEY timestamp task, 我们将需要处理的任务，按其需要延迟处理时间作为Score加入到ZSet中。Redis的ZAdd的时间复杂度是O(logN)，N是ZSet中元素个数，因此我们能相对比较高效的进行入队操作。</p>
+<p>起一个进程定时（比如每隔一秒）通过ZREANGEBYSCORE方法查询ZSet中Score最小的元素，具体操作为：ZRANGEBYSCORE KEY -inf +inf limit 0 1 WITHSCORES。查询结果有两种情况：</p>
+<ul>
+<li><p>a. 查询出的分数小于等于当前时间戳，说明到这个任务需要执行的时间了，则去异步处理该任务；</p>
+</li>
+<li><p>b. 查询出的分数大于当前时间戳，由于刚刚的查询操作取出来的是分数最小的元素，所以说明ZSet中所有的任务都还没有到需要执行的时间，则休眠一秒后继续查询；</p>
+</li>
+</ul>
+<p>同样的，ZRANGEBYSCORE操作的时间复杂度为O(logN + M)，其中N为ZSet中元素个数，M为查询的元素个数，因此我们定时查询操作也是比较高效的。</p>
 
 
-  <div class='nav-wrap'>
-  <nav class='sub post cap'>
-    
-      <a href='/'>近期发布</a>
-    
-    
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令<span class="note">较早</span></a><div class="line"></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md reveal' id="comments">
+    <div class='cmt-title cap theme'>
+      快来参与讨论吧
+    </div>
+    <div class='cmt-body beaudar'>
       
-        <a class='active' href='/categories'>分类：生活杂谈</a>
-      
-    
-    
-    
-      
-        <a href='/archives'>归档</a>
-      
-    
-  </nav>
-</div>
 
-  <div class="post-list post"><a class="post-card post " href="/2016/05/31/%E5%AE%83%E4%B8%80%E5%AE%9A%E6%9C%9F%E5%BE%85%E7%9D%80%E6%88%91%E8%83%BD%E6%87%82%E5%BE%97%E4%BB%80%E4%B9%88%E3%80%82/">
-<article class="md"><h2 class="post-title">它一定期待着我能懂得什么。</h2><div class="excerpt"><p>世界上有好多条路，有些可以用眼睛看见，我们管它们叫“非虚构的”；
-有些是要用心才能看见，我们管它们叫“虚构的”。
-懂得用心找到路的人，眼睛往往也特别尖。所以呀，大人们一致认为，心比眼睛更重要。
-为了让小孩子们有一颗会认路的心，大人们发明了一种叫做“童话”的故事。
-童话们长得像一撮撮小火苗，可以照亮路，还可以取暖，小孩子们都喜欢。
-有些路很不好走，要格外小心。
-聪明的大人们于是就把能照亮这些路...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-05-30T16:56:09.000Z">2016-05-31</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
-</a><a class="post-card post " href="/2016/05/26/%E5%BC%A0%E8%B7%83%E7%84%B6%EF%BC%9A%E7%BE%8E%E5%9B%BD%E9%AB%98%E6%A0%A1%E6%80%8E%E4%B9%88%E6%95%99%E2%80%9C%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E5%8E%9F%E7%90%86%E2%80%9D%EF%BC%9F/">
-<article class="md"><h2 class="post-title">张跃然：美国高校怎么教“马克思主义原理”？</h2><div class="excerpt"><p>
-杜克居然还有这种课？当时一听我就来了精神。虽然阴差阳错地错过了三回，我还是在本科的最后一个学期幸运地坐在了“马克思主义原理”的课堂里。
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
 
+<div id="beaudar" repo="xaoxuu/blog-comments" issue-term="pathname" theme="preferred-color-scheme" input-position="top" comment-order="desc" loading="false" branch="main"></div>
 
-
-&amp;nbsp;
-大一的上学期，我就听好几个人说起过，每年春季学期都有一门叫“马克思主义与社会”的本科生课——这门课的实际内容就是带着学生把马克思的主要经典著作读一遍，让学生对马克思的理论框架有个了解，因此说是“马克思主义原理”也不为过。杜克居然...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-05-26T10:43:30.000Z">2016-05-26</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
-</a><a class="post-card post " href="/2016/05/26/%E3%80%90%E6%91%98%E6%8A%84%E3%80%91%E3%80%8A%E7%8B%AC%E8%A3%81%E8%80%85%E6%89%8B%E5%86%8C%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9D%8F%E8%A1%8C%E4%B8%BA%E5%87%A0%E4%B9%8E%E6%80%BB%E6%98%AF%E5%A5%BD%E6%94%BF%E6%B2%BB%E3%80%8B/">
-<article class="md"><h2 class="post-title">【摘抄】《独裁者手册：为什么坏行为几乎总是好政治》</h2><div class="excerpt"><p>[美] 布鲁斯·布鲁诺·德·梅斯奎塔 [美]阿拉斯泰尔·史密斯 著
-骆伟阳 译
-江苏文艺出版社
-■
-首先，政治就是获得和维持政治权力。它与“我们，人民”的普遍幸福无关。其次，确保政治生存的最好方式是只依靠少数人来上位和在位。这意味着，那些拥有一批同伙可以依靠的独裁者——常常寿终正寝——比民主人士更容易长年掌权。第三，当这个同伙小集团明白外面还有大把人排队等着取而代之大吃公家饭，最高领导层就具...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-05-25T16:48:04.000Z">2016-05-26</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
-</a><a class="post-card post " href="/2016/05/25/%E7%BA%BD%E7%BA%A6%E6%97%A0%E6%88%98%E4%BA%8B/">
-<article class="md"><h2 class="post-title">纽约无战事</h2><div class="excerpt"><p>美国大选马上就要到了。
-前段时间，上帝发了一条推特的说，要是川普当上了总统，我就搬到另一个宇宙去。
-嗯，这是大事。吓得我马上转推了一下，表示跟上帝站在统一战线。
-川普是谁啊？唐纳德川普，本来是纽约州，纽约市，一位高冷的亿万富翁。
-身家40亿，搞房地产的。即便你搞不清政治，更搞不清美国政治。
-也可能在电影里，在电视里看见过。在纽约，芝加哥，拉斯维加斯，等等地方耸立的这个地标性建筑－川普大厦。或...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-05-25T02:24:26.000Z">2016-05-25</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
-</a><a class="post-card post " href="/2016/05/24/%E4%BA%8B%E6%80%81%E9%9D%9E%E5%B8%B8%E4%B8%A5%E9%87%8D/">
-<article class="md"><h2 class="post-title">事态非常严重。</h2><div class="excerpt"><p>如今的我，仿佛是我跟死对头在一个月黑风高的晚上狭路相逢了一般。
-傻起来的时候，我会在写非代码文字的时候。
-在前面打个双斜杠，就当是注释掉。
-而我现在遇到了一个大麻烦，事态非常严重——
-——将近半年了，我没有做出任何东西。
-想知道变成废物是怎样的一种体验吗？
-我电脑资料里有一堆开了头的或是看了一半的资料看不下去。每天鼓起勇气拼凑的看一些，可是杂乱不成章，到末了自己都不知道自己在做些什么。
-我觉...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2016-05-23T16:18:44.000Z">2016-05-24</time></span><span class="cap breadcrumb">生活杂谈</span></div></article>
-</a></div>
-  
-
-
+    </div>
+  </div>
 
 
 
