@@ -23,15 +23,15 @@
   
 
   
-    <meta name="description" content="一、CPU和内存类toppidstat 如果想对某个进程进行全面具体的追踪，没有什么比 pidstat 更合适的了——栈空间、缺页情况、主被动切换等信息尽收眼底。这个命令最有用的参数是-t，可以将进程中各个线程的详细信息罗列出来。">
+    <meta name="description" content="一、CPU和内存类top 第一行后面的三个值是系统在之前 1、5、15 的平均负载，也可以看出系统负载是上升、平稳、下降的趋势，当这个值超过 CPU 可执行单元的数目，则表示 CPU 的性能已经饱和成为瓶颈了。   第二行统计了系统的任务状态信息。running 很自然不必多说，包括正在 CPU 上运行的和将要被调度运行的；sleeping 通常是等待事件(比如 IO 操作)完成的任务，细分可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux排查命令">
 <meta property="og:url" content="https://cshiyuan.github.io/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="C&#39;s Notebook">
-<meta property="og:description" content="一、CPU和内存类toppidstat 如果想对某个进程进行全面具体的追踪，没有什么比 pidstat 更合适的了——栈空间、缺页情况、主被动切换等信息尽收眼底。这个命令最有用的参数是-t，可以将进程中各个线程的详细信息罗列出来。">
+<meta property="og:description" content="一、CPU和内存类top 第一行后面的三个值是系统在之前 1、5、15 的平均负载，也可以看出系统负载是上升、平稳、下降的趋势，当这个值超过 CPU 可执行单元的数目，则表示 CPU 的性能已经饱和成为瓶颈了。   第二行统计了系统的任务状态信息。running 很自然不必多说，包括正在 CPU 上运行的和将要被调度运行的；sleeping 通常是等待事件(比如 IO 操作)完成的任务，细分可以">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-24T08:25:45.000Z">
-<meta property="article:modified_time" content="2022-05-24T08:28:59.660Z">
+<meta property="article:modified_time" content="2022-05-25T06:52:16.079Z">
 <meta property="article:author" content="shyiuanchen">
 <meta name="twitter:card" content="summary">
   
@@ -69,7 +69,7 @@
 
 <div class="widgets">
 
-<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81CPU%E5%92%8C%E5%86%85%E5%AD%98%E7%B1%BB"><span class="toc-text">一、CPU和内存类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#top"><span class="toc-text">top</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pidstat"><span class="toc-text">pidstat</span></a></li></ol></li></ol></div></div></div>
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81CPU%E5%92%8C%E5%86%85%E5%AD%98%E7%B1%BB"><span class="toc-text">一、CPU和内存类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#top"><span class="toc-text">top</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pidstat"><span class="toc-text">pidstat</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%A3%81%E7%9B%98IO%E7%B1%BB"><span class="toc-text">二、磁盘IO类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iotop"><span class="toc-text">iotop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BD%91%E7%BB%9C%E7%B1%BB"><span class="toc-text">三、网络类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tcpdump"><span class="toc-text">tcpdump</span></a></li></ol></li></ol></div></div></div>
 
 
 </div>
@@ -85,8 +85,25 @@
 
 <article class='content md post'>
 <h1 class="article-title"><span>linux排查命令</span></h1>
-<h3 id="一、CPU和内存类"><a href="#一、CPU和内存类" class="headerlink" title="一、CPU和内存类"></a>一、CPU和内存类</h3><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><h4 id="pidstat"><a href="#pidstat" class="headerlink" title="pidstat"></a>pidstat</h4><blockquote>
+<hr>
+<h3 id="一、CPU和内存类"><a href="#一、CPU和内存类" class="headerlink" title="一、CPU和内存类"></a>一、CPU和内存类</h3><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><blockquote>
+<p>第一行后面的三个值是系统在之前 1、5、15 的平均负载，也可以看出系统负载是上升、平稳、下降的趋势，当这个值超过 CPU 可执行单元的数目，则表示 CPU 的性能已经饱和成为瓶颈了。</p>
+</blockquote>
+<blockquote>
+<p>第二行统计了系统的任务状态信息。running 很自然不必多说，包括正在 CPU 上运行的和将要被调度运行的；sleeping 通常是等待事件(比如 IO 操作)完成的任务，细分可以包括 interruptible 和 uninterruptible 的类型；stopped 是一些被暂停的任务，通常发送 SIGSTOP 或者对一个前台任务操作 Ctrl-Z 可以将其暂停；zombie 僵尸任务，虽然进程终止资源会被自动回收，但是含有退出任务的 task descriptor 需要父进程访问后才能释放，这种进程显示为 defunct 状态，无论是因为父进程提前退出还是未 wait 调用，出现这种进程都应该格外注意程序是否设计有误。</p>
+</blockquote>
+<h4 id="pidstat"><a href="#pidstat" class="headerlink" title="pidstat"></a>pidstat</h4><blockquote>
 <p>如果想对某个进程进行全面具体的追踪，没有什么比 pidstat 更合适的了——栈空间、缺页情况、主被动切换等信息尽收眼底。这个命令最有用的参数是-t，可以将进程中各个线程的详细信息罗列出来。</p>
+</blockquote>
+<hr>
+<h3 id="二、磁盘IO类"><a href="#二、磁盘IO类" class="headerlink" title="二、磁盘IO类"></a>二、磁盘IO类</h3><h4 id="iotop"><a href="#iotop" class="headerlink" title="iotop"></a>iotop</h4><blockquote>
+<p>iotop 可以直观的显示各个进程、线程的磁盘读取实时速率；lsof 不仅可以显示普通文件的打开信息(使用者)，还可以操作 &#x2F;dev&#x2F;sda1 这类设备文件的打开信息，那么比如当分区无法 umount 的时候，就可以通过 lsof 找出磁盘该分区的使用状态了，而且添加 +fg 参数还可以额外显示文件打开 flag 标记。</p>
+</blockquote>
+<h3 id="三、网络类"><a href="#三、网络类" class="headerlink" title="三、网络类"></a>三、网络类</h3><h4 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h4><blockquote>
+<p>cpdump 不得不说是个好东西。大家都知道本地调试的时候喜欢使用 wireshark，但是线上服务端出现问题怎么弄呢？</p>
+</blockquote>
+<blockquote>
+<p>附录的参考文献给出了思路：复原环境，使用 tcpdump 进行抓包，当问题复现(比如日志显示或者某个状态显现)的时候，就可以结束抓包了，而且 tcpdump 本身带有 -C&#x2F;-W 参数，可以限制抓取包存储文件的大小，当达到这个这个限制的时候保存的包数据自动 rotate，所以抓包数量总体还是可控的。此后将数据包拿下线来，用 wireshark 想怎么看就怎么看，岂不乐哉！tcpdump 虽然没有 GUI 界面，但是抓包的功能丝毫不弱，可以指定网卡、主机、端口、协议等各项过滤参数，抓下来的包完整又带有时间戳，所以线上程序的数据包分析也可以这么简单。</p>
 </blockquote>
 
 
