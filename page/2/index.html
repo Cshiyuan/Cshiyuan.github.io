@@ -62,7 +62,7 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div><div class="more-item"><a class="title" href="/2016/04/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%88%E5%B0%8F%E7%9F%A5%E8%AF%86%E6%91%98%E6%8A%84%EF%BC%89/">计算机小知识（小知识摘抄）</a></div><div class="more-item"><a class="title" href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></div></div></div>
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div></div></div>
 </div>
 
 
@@ -100,7 +100,21 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2018/01/07/Anaconda%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2018/01/08/TensorFlow-Classification%E5%88%86%E7%B1%BB%E5%AD%A6%E4%B9%A0/">
+<article class="md"><h2 class="post-title">TensorFlow Classification分类学习</h2><div class="excerpt"><p>使用MNIST实现的例子具体的实现在注释里详细说明了
+import tensorflow as tf
+import numpy as np
+from tensorflow.examples.tutorials.mnist import input_data
+
+
+#添加神经层的函数，有四个参数
+#输入值，输入的大小，输出的大小和激励函数
+def add_layer(inputs, in_siz...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-08T12:43:40.000Z">2018-01-08</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a><a class="post-card post " href="/2018/01/07/tensorflow%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/">
+<article class="md"><h2 class="post-title">tensorflow笔记（3）</h2><div class="excerpt"><p>加速神经网络训练（Speed Up Training）越复杂的神经网络 , 越多的数据 , 我们需要在训练神经网络的过程上花费的时间也就越多. 原因很简单, 就是因为计算量太大了. 可是往往有时候为了解决复杂的问题, 复杂的结构和大数据又是不能避免的, 所以我们需要寻找一些方法, 让神经网络聪明起来, 快起来.
+####Stochastic Gradient Descent (SGD)
+ 最...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2018-01-07T09:32:40.000Z">2018-01-07</time></span><span class="cap breadcrumb">Tensorflow</span></div></article>
+</a><a class="post-card post " href="/2018/01/07/Anaconda%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
 <article class="md"><h2 class="post-title">Anaconda使用笔记</h2><div class="excerpt"><p>什么是 Anaconda？Anaconda是专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。作为好奇宝宝的你是不是发现了一个新名词 conda，那么你一定会问 conda 又是什么呢？
 什么是 conda ？conda 是开源包（packages）和虚拟环境（environment）的管理系统。
 
@@ -141,18 +155,6 @@ CommonJS
 CommonJS API定...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-06-15T11:12:35.000Z">2017-06-15</time></span><span class="cap breadcrumb">JavaScript</span></div></article>
 </a><a class="post-card post " href="/2017/05/08/%E5%9B%A0%E4%B8%BA%E5%A5%BD%E5%A5%87%E6%89%8B%E6%B8%B8%E7%9A%84%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B8%A7%E5%90%8C%E6%AD%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">
 <article class="md"><h2 class="post-title">因为好奇手游的同步策略，查询的帧同步相关内容。</h2><div class="excerpt"><p>大意是，游戏运行时以10fps（100毫秒间隔，具体数值可根据实际情况调整）运行一个逻辑帧，逻辑帧负责物理、ai、攻击判定等等。而动画和实际位移由渲染帧负责。这样动画表现是流畅的。而客户端每逻辑帧都会与服务器进行通信同步客户端的操作，当操作同步完成客户端的逻辑帧可以继续向后模拟。比如运行第3帧要确保第一帧的数据是完整的。双方客户端接收的操作内容是一致的，初始状态是一致的，所以运行的结果也应该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-08T13:34:45.000Z">2017-05-08</time></span><span class="cap breadcrumb">记录问题和心得</span></div></article>
-</a><a class="post-card post " href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">
-<article class="md"><h2 class="post-title">ABI （应用程序二进制接口）</h2><div class="excerpt"><p>应用程序二进制接口 描述了应用程序和操作系统之间，一个应用和它的库之间，或者应用的组成部分之间的低接口。
-ABI涵盖了各种细节，如：数据类型的大小、布局和对齐;  
-调用约定（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；系统调用的编码和一个应用如何...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T07:28:20.000Z">2017-05-01</time></span><span class="cap breadcrumb">未分类</span></div></article>
-</a><a class="post-card post " href="/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/">
-<article class="md"><h2 class="post-title">摘抄Effective Objective-C 2.0 (1)</h2><div class="excerpt"><p>Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象：
-NSString stackString;
-
-&#x2F;&#x2F; error: interface type cannot be statically allocated
-
-
-Object...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T06:25:49.000Z">2017-05-01</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

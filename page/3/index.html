@@ -62,7 +62,7 @@
 <nav class="menu dis-select"></nav></header>
 
 <div class="widgets">
-<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div><div class="more-item"><a class="title" href="/2016/04/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%88%E5%B0%8F%E7%9F%A5%E8%AF%86%E6%91%98%E6%8A%84%EF%BC%89/">计算机小知识（小知识摘抄）</a></div><div class="more-item"><a class="title" href="/2016/09/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></div></div></div>
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="more-item"><a class="title" href="/2022/05/24/linux%E6%8E%92%E6%9F%A5%E5%91%BD%E4%BB%A4/">linux排查命令</a></div><div class="more-item"><a class="title" href="/2022/05/24/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a></div><div class="more-item"><a class="title" href="/2022/05/24/Hexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">Hexo快速搭建</a></div><div class="more-item"><a class="title" href="/2016/05/25/hello-world/">Hello World</a></div><div class="more-item"><a class="title" href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">ABI （应用程序二进制接口）</a></div></div></div>
 </div>
 
 
@@ -100,7 +100,19 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/">
+  <div class="post-list post"><a class="post-card post " href="/2017/05/01/ABI%20%EF%BC%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8E%A5%E5%8F%A3)/">
+<article class="md"><h2 class="post-title">ABI （应用程序二进制接口）</h2><div class="excerpt"><p>应用程序二进制接口 描述了应用程序和操作系统之间，一个应用和它的库之间，或者应用的组成部分之间的低接口。
+ABI涵盖了各种细节，如：数据类型的大小、布局和对齐;  
+调用约定（控制着函数的参数如何传送以及如何接受返回值），例如，是所有的参数都通过栈传递，还是部分参数通过寄存器传递；哪个寄存器用于哪个函数参数；通过栈传递的第一个函数参数是最先push到栈上还是最后；系统调用的编码和一个应用如何...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T07:28:20.000Z">2017-05-01</time></span><span class="cap breadcrumb">未分类</span></div></article>
+</a><a class="post-card post " href="/2017/05/01/%E6%91%98%E6%8A%84Effective%20Objective-C%202.0%20/">
+<article class="md"><h2 class="post-title">摘抄Effective Objective-C 2.0 (1)</h2><div class="excerpt"><p>Objective-C的对象总是使用指针的原因因为对象所占用的内存总是分配在“堆空间 (heap space) ”中，而绝对不会分配在“栈(stack)上。不能在栈中分配Objective-C对象：
+NSString stackString;
+
+&#x2F;&#x2F; error: interface type cannot be statically allocated
+
+
+Object...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-05-01T06:25:49.000Z">2017-05-01</time></span><span class="cap breadcrumb">iOS</span></div></article>
+</a><a class="post-card post " href="/2017/04/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(2)(%E5%8E%9F%E5%9E%8Bprototype%E9%83%A8%E5%88%86%EF%BC%89/">
 <article class="md"><h2 class="post-title">JavaScript学习笔记(2)(原型prototype部分）</h2><div class="excerpt"><p>原型是指当我们想要创建xiaoming这个具体的学生时，我们并没有一个Student类型可用。那怎么办？恰好有这么一个现成的对象：
 var robot &#x3D; &#123;
     name: &#39;Robot&#39;,
@@ -252,28 +264,6 @@ FFmpeg需要依赖libx264.自动编译脚本项目位置放在github:https://git
 
 
 Back in the old days when printing wasn’t common, people used to use some sort of wooden stamps (later they became rubber stamps) to print some commonly used graphics and text on paper. Many ye...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-19T04:03:56.000Z">2017-04-19</time></span><span class="cap breadcrumb">iOS</span></div></article>
-</a><a class="post-card post " href="/2017/04/18/Wi-Fi%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/">
-<article class="md"><h2 class="post-title">Wi-Fi定位原理</h2><div class="excerpt"><p>Wi-Fi能够对用户进行定位。因为在Android、iOS和Windows Phone这些手机操作系统中内置了位置服务，由于每一个Wi-Fi热点都有一个独一无二的Mac地址，智能手机开启Wi-Fi后就会自动扫描附近热点并上传其位置信息，这样就建立了一个庞大的热点位置数据库。这个数据库是对用户进行定位的关键。如果你的智能手机连接上了某个Wi-Fi热点，那么就可以调用数据库中附近所有热点的地理位置信息，而服务器会参考每个热点的信号强弱计算出设备的大致地理位置.下面就一起来看看手机是如何通过wifi定位的？
-
-
-一、Wi-Fi定位的原理
-具体来说，Wi-Fi能够定位，原理是这样的：
-1、每一个无线AP（路由器）都有一个全球唯一的MAC地址，并且一般来说无线AP在一段时间内不会移动；
-2、设备在开启Wi-Fi的情况下,即可扫描并收集周围的AP信号，无论是否加密,是否已连接，甚至信号强度不足以显示在无线信号列表中，都可以获取到AP广播出来的MAC地址；
-3、设备将这些能够标示AP的数据发送到位置服务器,服务器检索出每一个AP的地理位置,并结合每个信号的强弱程度,计算出设备的地理位置并返回到用户设备；
-4、位置服务商要不断更新、补充自己的数据库，以保证数据的准确性。
-二、位置服务数据库的搭建
-数据库中的数据主要来自于两个方面，一是用户提交的数据。Android手机用户在开启“使用无线网络定位”时会提示是否允许使用Google的定位服务，如果允许，用户的位置信息就被谷歌收集到。iPhone则会自动收集Wi-Fi的MAC地址、GPS位置信息、运营商基站编码等，并发送给苹果公司的服务器。
-同时谷歌、Skyhook两家位置服务提供商也在主动搜集Wi-Fi等热点的位置信息。Google的街景拍摄车有一个重要的功能就是采集沿途的无线信号,并打上通过GPS定位出的坐标回传至服务器。Skyhook在美国及欧洲一些国家也是直接开着信号采集车采集AP和基站的信号数据。
-三、如何防止被定位？
-最直接的办法是关掉手机系统中的位置服务选项，以避免他人看到你的位置信息。
-如果要杜绝位置服务商获取数据，难度就会比较高。用户需要不连接任何Wi-Fi热点，并且不使用相关的位置服务。也可以使用某些工具。例如谷歌曾发布一款选择退出工具，让无线路由器用户有效阻止谷歌搜集他们的数据。
-&amp;nbsp;</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-18T11:05:51.000Z">2017-04-18</time></span><span class="cap breadcrumb">计算机科普级别</span></div></article>
-</a><a class="post-card post " href="/2017/04/15/Objective-C%E9%99%90%E5%AE%9A%E8%AF%8D%20(%E6%91%98%E6%8A%84%E8%87%AAObjective-C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89/">
-<article class="md"><h2 class="post-title">Objective-C限定词 (摘抄自Objective-C程序设计第六版）</h2><div class="excerpt"><p>long如果直接把限定词long放在int声明之前，那么所声明的整型变量在某些计算机上具有扩展的值域。一个long int声明的例子为：
-     long int factorial;
-     这条语句将变量factorial声明为long的整型变量，也就是长整型。就象float和double变量一样，long变量的具体精度是由具体的计算机系统决定的。
-在许多系统上，int与long i...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2017-04-15T07:18:51.000Z">2017-04-15</time></span><span class="cap breadcrumb">iOS</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>
